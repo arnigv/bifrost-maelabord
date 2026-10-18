@@ -1,0 +1,43 @@
+{
+  "_lysing": "Stærðarmörk og frestir skv. lögum um ársreikninga nr. 3/2006. Staðfestu ALLTAF gildandi lagatexta á althingi.is fyrir notkun. Gildi miðast við 16.10.2026.",
+  "_heimild": "https://www.althingi.is/lagas/nuna/2006003.html",
+  "_fyrirvari": "Frumvörp á 158. löggjafarþingi (þskj. 25 og 77, sept. 2026) um breytingar á stærðarmörkum, endurskoðunarmörkum og skilafresti. Ef þau verða að lögum breytast mörkin hér að neðan.",
+  "staerdarflokkar": {
+    "_grein": "2. gr. 11. tölul. Tvö af þremur viðmiðum á reikningsskiladegi. Flokkur breytist aðeins ef farið er yfir/undir tvö ár í röð.",
+    "orfelag":     {"heiti": "Örfélag",        "heildareignir": 20000000,   "velta": 40000000,   "arsverk": 3},
+    "litid":       {"heiti": "Lítið félag",    "heildareignir": 600000000,  "velta": 1200000000, "arsverk": 50},
+    "medalstort":  {"heiti": "Meðalstórt félag","heildareignir": 3000000000, "velta": 6000000000, "arsverk": 250},
+    "stort":       {"heiti": "Stórt félag",    "_regla": "Fer yfir tvö af þremur mörkum meðalstórs félags, eða einingar tengdar almannahagsmunum óháð stærð."}
+  },
+  "endurskodunarskylda": {
+    "_grein": "98. gr. Undanþága frá endurskoðun ef félag fer ekki yfir tvö af þremur mörkum tvö reikningsár í röð. Þá nægir skoðunarmaður.",
+    "_stada": "staðfesta",
+    "_heimild": "Skatturinn (2019) og 98. gr. laga nr. 3/2006",
+    "heildareignir": 200000000,
+    "velta": 400000000,
+    "arsverk": 50
+  },
+  "sjodstreymi": {
+    "_grein": "28. gr. Sjóðstreymisyfirlit skylt fyrir meðalstór og stór félög (c- og d-liðir). Lítil félög og örfélög undanþegin.",
+    "skylt_fyrir": ["medalstort", "stort"]
+  },
+  "skil": {
+    "_grein": "109. gr. Skila rafrænt til ársreikningaskrár Skattsins innan mánaðar frá samþykkt aðalfundar og eigi síðar en 8 mánuðum eftir lok reikningsárs.",
+    "manudir_eftir_arslok": 8,
+    "sekt_kr": 600000,
+    "_sekt_heimild": "Stjórnvaldssekt vegna vanskila (Skatturinn). Lækkun ef skilað innan tilskilins tíma eftir álagningu.",
+    "slit_manudir_eftir_frest": 6,
+    "_slit": "Ársreikningaskrá getur krafist skipta á búi félags hafi ársreikningi ekki verið skilað 6 mánuðum eftir lok skilafrests.",
+    "slod": "https://www.skatturinn.is/fyrirtaekjaskra/arsreikningaskra/skil-a-arsreikningum/"
+  },
+  "mikilvaegi": {
+    "_lysing": "Viðmið um mikilvægi (ISA 320). Endurskoðandi ákveður endanlega.",
+    "vidmid": [
+      {"grunnur": "tekjur",            "hlutfall_lag": 0.005, "hlutfall_hatt": 0.01},
+      {"grunnur": "hagnadur_fyrir_skatta", "hlutfall_lag": 0.05, "hlutfall_hatt": 0.10},
+      {"grunnur": "heildareignir",     "hlutfall_lag": 0.01, "hlutfall_hatt": 0.02}
+    ],
+    "framkvaemdamikilvaegi": 0.75,
+    "smavaegilegt": 0.05
+  }
+}

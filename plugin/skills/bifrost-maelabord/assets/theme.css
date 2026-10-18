@@ -1,0 +1,304 @@
+/* Bifröst mælaborð · hönnunarkerfi v4 — grunnpalletta (8 flokkalitir, hver með þriggja þrepa gagnaskala) */
+:root{
+  /* Grunnpalletta. Fyrsta þrep = dökkt, annað = miðja, þriðja = ljóst. Notið þessi gildi, ekki nýja liti. */
+  --gold:#d1a730;   --gold-1:#957f41;   --gold-2:#cbaa4c;   --gold-3:#e0ca8d;
+  --maroon:#733c4a; --maroon-1:#6c3d49; --maroon-2:#b07d87; --maroon-3:#e4d3d6;
+  --teal:#33796a;   --teal-1:#487569;   --teal-2:#87baad;   --teal-3:#d4e7e2;
+  --cyan:#048fc2;   --blue-1:#326fa0;   --blue-2:#80afd3;   --blue-3:#ccdfeb;
+  --navy:#00669b;   --sci-1:#316596;    --sci-2:#608bc5;    --sci-3:#c6dbef;
+  --orange:#ea9e2f;
+  --rust:#a35a27;   --rust-1:#a55a28;   --rust-2:#d49971;   --rust-3:#f1decf;
+  --olive:#929c4a;  --olive-1:#6f743f;  --olive-2:#969f55;  --olive-3:#d9deb8;
+  --plum-1:#736a7e; --plum-2:#aba7b3;   --plum-3:#c6c3ce;
+  --grey-1:#6e6e70; --grey-2:#969696;   --grey-3:#dcdcdc;
+  /* Sjálfgefið ljóst: components.js og forskrift í <head> setja data-bf="light"; dökkt með data-bf="dark". */
+  --bg:#0d0d0f; --bg2:#131315; --panel:#17171a; --panel2:#1e1e22; --ink:#f2f0ea; --ink2:#cdc9bf; --muted:#97938a; --line:rgba(224,202,141,.10);
+  --brand:var(--gold); --brand2:var(--teal-2); --brand-soft:rgba(209,167,48,.14); --base:var(--grey-2); --scen:var(--gold);
+  --up:var(--olive-2); --up-soft:rgba(150,159,85,.16); --dn:var(--rust-2); --dn-soft:rgba(212,153,113,.16); --warn:var(--orange); --warn-soft:rgba(234,158,47,.15);
+  --s1:var(--gold-2); --s2:var(--teal-2); --s3:var(--maroon-2); --s4:var(--olive-2); --s5:var(--rust-2); --s6:var(--plum-2); --s7:var(--blue-2);
+  --hero:linear-gradient(135deg,#18352f 0%,#24564b 55%,#33796a 100%);
+  --shadow:0 1px 0 rgba(255,255,255,.035) inset,0 22px 44px -28px rgba(0,0,0,.85);
+  --glow:radial-gradient(900px 420px at 85% -10%,rgba(209,167,48,.10),transparent 60%),radial-gradient(700px 360px at 0% 0%,rgba(51,121,106,.08),transparent 60%);
+  --r:16px; color-scheme:dark;
+  --f-disp:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-bf="light"]{
+  --bg:#f7f6f2; --bg2:#efede7; --panel:#ffffff; --panel2:#f4f2ec; --ink:#1c1b18; --ink2:#46443e; --muted:#6e6e70; --line:#e2dfd6;
+  --brand:var(--gold-1); --brand2:var(--teal); --brand-soft:#f3ecd6; --base:var(--grey-2); --scen:var(--gold-1);
+  --up:var(--olive-1); --up-soft:#eef0e0; --dn:var(--rust); --dn-soft:var(--rust-3); --warn:#b87514; --warn-soft:#fbecd3;
+  --s1:var(--gold-1); --s2:var(--teal-1); --s3:var(--maroon-1); --s4:var(--olive-1); --s5:var(--rust-1); --s6:var(--plum-1); --s7:var(--blue-1);
+  --hero:linear-gradient(135deg,#1f4a41 0%,#2b6659 60%,#33796a 100%);
+  --shadow:0 1px 2px rgba(27,25,21,.04),0 10px 28px -18px rgba(27,25,21,.25);
+  --glow:radial-gradient(900px 420px at 85% -10%,rgba(209,167,48,.08),transparent 60%);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--glow),var(--bg);background-attachment:fixed;color:var(--ink);font-family:var(--f-body);font-size:14.5px;line-height:1.5;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:20px;padding-block:24px 64px;display:grid;gap:18px;overflow-x:clip}
+h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--f-disp)}
+h1{font-size:1.75rem;font-weight:700;letter-spacing:-.02em}
+h2{font-size:1rem;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px}
+.brandmark{display:flex;align-items:center;gap:12px;min-width:0}
+.logo{width:40px;height:40px;border-radius:12px;background:var(--hero);border:1px solid rgba(224,202,141,.35);display:grid;place-items:center;color:#fff;font-weight:800;font-size:1rem;box-shadow:var(--shadow);flex:none}
+.eyebrow{font-size:.74rem;color:var(--muted);font-weight:600;letter-spacing:.02em}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip-lg{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.78rem;color:var(--ink2);box-shadow:var(--shadow);white-space:nowrap}
+.chip-lg b{color:var(--ink)}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--up);margin-right:6px;vertical-align:1px;box-shadow:0 0 0 3px var(--up-soft)}
+/* tabs */
+.tabs{display:inline-flex;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:4px;box-shadow:var(--shadow);overflow-x:auto;max-width:100%}
+.tabs button{font:inherit;font-size:.86rem;font-weight:600;border:none;background:none;color:var(--muted);padding:8px 14px;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{background:var(--brand);color:#17150f;box-shadow:0 6px 16px -10px var(--brand)}
+.tab{display:grid;gap:18px;min-width:0}
+/* cards */
+.card{background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 40%),var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);min-width:0;display:grid;gap:12px;align-content:start}
+.ch{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.sub{font-size:.8rem;color:var(--muted)}
+.g-hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:1000px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){.g-hero,.g2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:480px){.g4{grid-template-columns:minmax(0,1fr)}}
+/* hero */
+.hero{position:relative;overflow:hidden;background:var(--hero);color:#fbf4ea;border:1px solid rgba(224,202,141,.22)}
+.hero::after{content:"";position:absolute;right:-90px;top:-90px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(209,167,48,.25),transparent 65%)}
+.hero .eyebrow{color:rgba(255,255,255,.8)}
+.hero .big{font-size:clamp(2.6rem,6vw,3.6rem);font-weight:600;letter-spacing:-.03em;line-height:1;color:#fff}
+.hero .big small{font-size:1rem;font-weight:600;opacity:.8;letter-spacing:0;margin-left:6px}
+.hero p{color:rgba(255,255,255,.9);max-width:56ch;font-size:.92rem}
+.hero .row{display:flex;gap:22px;flex-wrap:wrap;position:relative;z-index:1}
+.hero .row div{display:grid;gap:2px}
+.hero .row b{font-size:1.25rem;font-weight:700}
+.hero .row span{font-size:.74rem;opacity:.8}
+.ring{display:grid;place-items:center;position:relative}
+.ring svg{width:150px;height:150px;transform:rotate(-90deg)}
+.ring .lbl{position:absolute;text-align:center}
+.ring .lbl b{display:block;font-size:1.7rem;font-weight:800;letter-spacing:-.03em}
+.ring .lbl span{font-size:.72rem;color:var(--muted)}
+/* kpi */
+.kpi{padding:16px 16px 10px;gap:4px}
+.kpi .l{font-size:.76rem;color:var(--muted);font-weight:600;display:flex;justify-content:space-between;gap:6px}
+.kpi .v{font-size:1.65rem;font-weight:600;letter-spacing:-.03em;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .v small{font-size:.8rem;color:var(--muted);font-weight:600;margin-left:4px}
+.kpi .d{font-size:.74rem;color:var(--muted);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.kpi canvas{width:100%;height:42px;display:block;margin-top:4px}
+.delta{font-weight:700;font-size:.72rem;padding:2px 8px;border-radius:999px}
+.delta.up{background:var(--up-soft);color:var(--up)} .delta.dn{background:var(--dn-soft);color:var(--dn)} .delta.eq{background:var(--panel2);color:var(--muted)}
+/* charts */
+.cv{position:relative;width:100%;min-width:0}
+canvas{max-width:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.78rem;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.seg{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px}
+.seg button{font:inherit;font-size:.78rem;font-weight:600;border:none;background:none;color:var(--muted);padding:5px 10px;border-radius:7px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--panel);color:var(--ink);box-shadow:var(--shadow)}
+button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+/* decisions */
+.dec{display:grid;gap:10px}
+.d-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px;border-radius:14px;background:var(--panel2);border:1px solid var(--line)}
+.d-ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:800;font-size:.9rem}
+.d-ico.h{background:var(--dn-soft);color:var(--dn)} .d-ico.m{background:var(--warn-soft);color:var(--warn)} .d-ico.l{background:var(--up-soft);color:var(--up)}
+.d-item b{font-weight:700;font-size:.9rem}
+.d-item p{font-size:.8rem;color:var(--muted);margin-top:2px}
+.amt{font-family:var(--f-mono);font-size:.82rem;font-weight:600;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:3px 8px;white-space:nowrap}
+/* stacked bar */
+.stack{display:flex;height:16px;border-radius:999px;overflow:hidden;background:var(--panel2);gap:2px}
+.stack span{display:block;height:100%}
+.slegend{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.slegend div{display:grid;gap:1px;font-size:.76rem;color:var(--muted)}
+.slegend b{font-size:.95rem;color:var(--ink)}
+.slegend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+/* list w/ avatars */
+.plist{display:grid;gap:12px}
+.prow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center}
+.av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:.72rem;font-weight:600;color:var(--brand);background:var(--brand-soft);border:1px solid rgba(209,167,48,.3)}
+.prow .nm{font-size:.86rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar{height:6px;border-radius:999px;background:var(--panel2);overflow:hidden;margin-top:6px}
+.bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--brand),var(--brand2))}
+.prow .n{font-family:var(--f-mono);font-size:.82rem;font-weight:600;text-align:right;white-space:nowrap}
+.prow .n small{display:block;color:var(--muted);font-weight:500}
+/* table */
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:.84rem}
+th{text-align:left;font-size:.7rem;color:var(--muted);font-weight:700;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;letter-spacing:.02em}
+td{padding:9px 10px;border-bottom:1px solid var(--line)}
+td.n,th.n{text-align:right;font-family:var(--f-mono);font-size:.8rem;white-space:nowrap}
+tr.sum td{font-weight:800;background:var(--panel2)}
+tbody tr:hover td{background:var(--panel2)}
+.insight{display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow);font-size:.92rem}
+.insight .spark{flex:none;width:28px;height:28px;border-radius:8px;background:var(--brand);display:grid;place-items:center;color:#fff;font-weight:800}
+footer{font-size:.76rem;color:var(--muted);display:grid;gap:4px;padding-top:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.mode{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px;box-shadow:var(--shadow)}
+.mode button{font:inherit;font-size:.78rem;font-weight:700;border:none;background:none;color:var(--muted);padding:6px 12px;border-radius:999px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.mode button[aria-pressed="true"]{background:var(--brand);color:#17150f}
+.hero .big{text-shadow:0 8px 30px rgba(0,0,0,.25)}
+
+/* ---- Íhlutir sem components.js notar (samhæft við v1-heiti) ---- */
+.hdr{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px}
+.panel{background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 40%),var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);min-width:0;display:grid;gap:12px;align-content:start}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:1000px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.kpis{grid-template-columns:minmax(0,1fr)}}
+.kpis>.kpi{background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 40%),var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);display:grid;min-width:0}
+.chip{padding:2px 8px;border-radius:999px;font-weight:700;font-size:.72rem}
+.chip.up{background:var(--up-soft);color:var(--up)} .chip.dn{background:var(--dn-soft);color:var(--dn)} .chip.eq{background:var(--panel2);color:var(--muted)} .chip.warn{background:var(--warn-soft);color:var(--warn)}
+.pill{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.pill.h{background:var(--dn-soft);color:var(--dn)} .pill.m{background:var(--warn-soft);color:var(--warn)} .pill.l{background:var(--up-soft);color:var(--up)} .pill.i{background:var(--panel2);color:var(--muted)}
+.hb{display:grid;gap:10px}
+.hb .r{display:grid;grid-template-columns:minmax(0,10rem) minmax(0,1fr) auto;gap:12px;align-items:center;font-size:.84rem}
+.hb .r>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hb .t{height:10px;background:var(--panel2);border-radius:999px;overflow:hidden;position:relative}
+.hb .t>span{position:absolute;top:0;bottom:0;border-radius:999px}
+.hb .t .z{position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--muted)}
+.hb .n{font-family:var(--f-mono);font-size:.8rem;font-weight:600;text-align:right;white-space:nowrap}
+.items{display:grid;gap:10px}
+.item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px;border-radius:14px;background:var(--panel2);border:1px solid var(--line)}
+.item p{font-size:.8rem;color:var(--muted)}
+.item .n{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.sl{display:grid;gap:4px}
+.sl .top{display:flex;justify-content:space-between;gap:8px;font-size:.86rem;font-weight:600}
+.sl output{font-family:var(--f-mono);font-weight:600;font-size:.82rem;min-width:70px;text-align:right}
+.sl output.pos{color:var(--up)} .sl output.neg{color:var(--dn)}
+.sl small{font-size:.74rem;color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--brand)}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.presets button{font:inherit;font-size:.8rem;font-weight:600;border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:10px;padding:5px 11px;cursor:pointer}
+.note{font-size:.82rem;color:var(--muted);border-left:3px solid var(--line);padding-left:10px}
+
+:root[data-bf="light"] .tabs button[aria-selected="true"],:root[data-bf="light"] .mode button[aria-pressed="true"]{color:#fff}
+
+/* v4.1 þéttara yfirlitskort (hero) */
+.g-hero,.g2,.g4,.kpis{gap:18px}
+.g-hero{grid-template-columns:minmax(0,1fr)}
+.hero{display:flex;flex-direction:column;gap:6px}
+.hero .row{margin-top:auto;padding-top:8px}
+.hero p{max-width:110ch}
+@media (max-width:860px){.g-hero{grid-template-columns:minmax(0,1fr)}}
+.hero{padding:14px 18px;gap:6px}
+.hero .big{font-size:clamp(1.8rem,3.6vw,2.4rem)}
+.hero .big small{font-size:.85rem}
+.hero p{font-size:.84rem;line-height:1.45}
+.hero .row{gap:8px 18px}
+.hero .row b{font-size:1rem}
+.hero .row span{font-size:.68rem}
+.hero::after{width:160px;height:160px;right:-50px;top:-50px}
+.hero .row{display:flex;flex-wrap:wrap;gap:8px 36px}
+
+/* Leiðarstika: aftur á miðstöð */
+.crumb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.8rem;color:var(--muted)}
+.crumb a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink);font-weight:600;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 10px;box-shadow:var(--shadow)}
+.crumb a:hover{border-color:var(--brand);color:var(--brand)}
+.crumb a:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.crumb .sep{opacity:.6}
+
+[hidden]{display:none!important}
+#bu-body{display:grid;gap:18px}
+
+/* Litaþemu Blátt og Jörð (ljós grunnur, aðrar áherslur úr grunnpallettu) */
+:root[data-bf="light"][data-pal="blue"]{--bg:#f4f6f8;--bg2:#eceff3;--panel2:#f1f4f7;--line:#dde3ea;--brand:var(--blue-1);--brand2:var(--navy);--brand-soft:var(--blue-3);--scen:var(--blue-1);--s1:var(--blue-1);--s2:var(--olive-1);--s3:var(--sci-2);--s4:var(--olive-2);--s5:var(--rust-1);--s6:var(--grey-1);--s7:var(--gold-1);--hero:linear-gradient(135deg,#17324f 0%,#24507a 55%,#326fa0 100%);--glow:radial-gradient(900px 420px at 85% -10%,rgba(50,111,160,.08),transparent 60%)}
+:root[data-bf="light"][data-pal="earth"]{--bg:#f7f6f1;--bg2:#efeee6;--panel2:#f3f2ea;--line:#e1dfd2;--brand:var(--olive-1);--brand2:var(--rust);--brand-soft:var(--olive-3);--scen:var(--olive-1);--up:var(--teal-1);--up-soft:var(--teal-3);--s1:var(--olive-1);--s2:var(--rust-1);--s3:var(--gold-1);--s4:var(--teal-1);--s5:var(--rust-2);--s6:var(--plum-1);--s7:var(--blue-1);--hero:linear-gradient(135deg,#3b4021 0%,#565c30 55%,#6f743f 100%);--glow:radial-gradient(900px 420px at 85% -10%,rgba(111,116,63,.09),transparent 60%)}
+.mode .th-dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+.mode button{gap:6px}
+@media (max-width:520px){.mode button{padding:6px 9px}}
+
+/* ===================== Farsímar (útgáfa 1.0, mobile) =====================
+   Sama mælaborð, sama slóð; útlitið lagar sig að skjánum. Prófað á 375px.
+   Brotpunktur: 640px (sími). Snertiskjár: (pointer:coarse).                */
+.t-s{display:none}
+.m-only{display:none}
+dialog{max-height:calc(100vh - 48px);overflow:auto}
+@media (pointer:coarse){
+  .tabs button,.seg button,.mode button,.presets button,.crumb a,.chips button,dialog button{min-height:44px}
+  input[type=range]{height:32px}
+  input,select,textarea{font-size:16px}           /* engin sjálfvirk stækkun í iOS */
+  tbody tr:hover td{background:none}
+}
+@media (max-width:640px){
+  body{font-size:15px;background-attachment:scroll}
+  .wrap{padding-inline:14px;padding-block:14px calc(92px + env(safe-area-inset-bottom));gap:14px}
+  h1{font-size:1.35rem}
+  .m-hide{display:none!important}
+  .m-only{display:revert}
+  /* Haus: þema sem litaðir punktar, staða í einni línu */
+  .hdr,.top{gap:10px}
+  .chips{gap:6px}
+  .chip-lg{padding:5px 10px;font-size:.72rem}
+  .mode{padding:3px;gap:2px}
+  .mode button{padding:0;width:38px;justify-content:center}
+  .mode .th-l{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .mode .th-dot{width:16px;height:16px}
+  .mode button[aria-pressed="true"]{background:none;box-shadow:inset 0 0 0 2px var(--brand)}
+  /* Leiðarstika: aðeins „← Miðstöð“ */
+  .crumb .sep,.crumb>span{display:none}
+  .crumb a .c-l{display:none}
+  /* Flipar: stika neðst á skjánum, þumalvæn */
+  .tabs{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:2px;
+        border-radius:16px 16px 0 0;border-bottom:0;padding:6px 6px calc(6px + env(safe-area-inset-bottom));max-width:none;overflow:visible;
+        background:color-mix(in srgb,var(--panel) 94%,transparent);backdrop-filter:blur(10px);box-shadow:0 -10px 30px -18px rgba(0,0,0,.45)}
+  .tabs button{white-space:normal;line-height:1.15;font-size:.72rem;padding:8px 4px;text-align:center;min-height:48px;border-radius:10px}
+  .tabs .t-s{display:inline}.tabs .t-l{display:none}
+  /* Yfirlitskort: ein tala og stutt setning */
+  .hero{padding:14px}
+  .hero .big{font-size:2rem}
+  .hero p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .hero .row{gap:8px 20px}
+  /* Lykilmælar 2×2 */
+  .kpis,.g4{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .kpi{padding:12px 12px 8px}
+  .kpi .v{font-size:1.25rem}
+  .kpi .l{font-size:.7rem}
+  .kpi .d{font-size:.68rem}
+  .kpi canvas{height:30px}
+  .g-hero,.g2{gap:14px}
+  .card,.panel{padding:14px;border-radius:14px;gap:10px}
+  /* Gröf lægri */
+  .cv[style*="height"]{height:220px!important}
+  .cv.cv-tall[style*="height"]{height:300px!important}
+  .legend{font-size:.72rem;gap:4px 10px}
+  /* Val (tímabil, félag): flett til hliðar í stað þess að brotna */
+  .seg{max-width:100%;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}
+  .seg::-webkit-scrollbar{display:none}
+  .seg button{white-space:nowrap;flex:none}
+  .ph,.ch{gap:8px}
+  /* Töflur: fastur fyrsti dálkur; .m-cards breytir línum í spjöld */
+  .scroll{margin-inline:-14px;padding-inline:14px}
+  .scroll table td:first-child,.scroll table th:first-child{position:sticky;left:0;z-index:1;background:var(--panel)}
+  .scroll table tr.sum td:first-child{background:var(--panel2)}
+  table{font-size:.8rem}
+  th,td{padding:8px}
+  table.m-cards thead{display:none}
+  table.m-cards,table.m-cards tbody,table.m-cards tr,table.m-cards td{display:block;width:100%}
+  table.m-cards tr{border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin-bottom:8px;background:var(--panel2)}
+  table.m-cards td{border:0;padding:3px 0;display:flex;justify-content:space-between;gap:12px;text-align:right;position:static}
+  table.m-cards td::before{content:attr(data-label);color:var(--muted);font-size:.72rem;font-weight:600;text-align:left;font-family:var(--f-body)}
+  table.m-cards td:first-child{font-weight:700;font-size:.9rem;text-align:left;background:none}
+  table.m-cards td:first-child::before{content:none}
+  /* Súlur og listar: heiti fyrir ofan súlu, fjárhæð undir texta */
+  .hb .r{grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}
+  .hb .t{grid-column:1/-1;grid-row:2}
+  .item,.d-item{grid-template-columns:auto minmax(0,1fr);gap:10px}
+  .item>.n,.d-item>.amt,.item>:last-child:not(:nth-child(2)),.d-item>:last-child:not(:nth-child(2)){grid-column:2;justify-self:start}
+  .prow{gap:10px}
+  .slegend{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .insight{font-size:.86rem;padding:12px}
+  /* Gluggar (drill-down, „Fleiri mælaborð“): neðri gluggi (bottom sheet) */
+  :root dialog,:root dialog.sheet{margin:auto 0 0;width:100%;max-width:100%;max-height:88vh;border-radius:20px 20px 0 0;border-bottom:0;padding-bottom:env(safe-area-inset-bottom)}
+  dialog[open]{animation:bf-up .22s ease-out}
+  footer{font-size:.7rem}
+}
+@keyframes bf-up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+/* Neðri gluggi úr BF.sheet() */
+dialog.sheet{border:1px solid var(--line);border-radius:18px;padding:0;background:var(--panel);color:var(--ink);width:min(680px,calc(100vw - 32px));box-shadow:0 30px 80px -20px rgba(0,0,0,.45)}
+dialog.sheet::backdrop{background:rgba(20,18,14,.45)}
+dialog.sheet .sh-h{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--panel);z-index:2}
+dialog.sheet .sh-h::before{content:"";position:absolute;left:50%;top:6px;width:36px;height:4px;border-radius:4px;background:var(--line);transform:translateX(-50%)}
+dialog.sheet .sh-b{padding:14px 16px;display:grid;gap:12px}
+dialog.sheet .sh-x{font:inherit;font-weight:700;border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:10px;padding:6px 12px;cursor:pointer;min-width:44px}

@@ -1,0 +1,78 @@
+---
+name: manadarlok
+description: Mælaborðið „Mánaðarlok og afstemmingar“ úr Business Central — gátlisti fyrir lokun mánaðar (tekjur, laun, vörunotkun, afskriftir, VSK-uppgjörsfærsla, gengismunur, áfallið og fyrirframgreitt, tímabil lokað í BC) með stöðu, fjárhæð og ábyrgðarhlutverki, yfirlit um hvaða mánuðir eru fullbókaðir, afstemmingar banka, korta, viðskiptamanna, lánardrottna og VSK við fjárhag og jöfnuður færslna innan mánaðar, og samandreginn listi opinna atriða eftir alvarleika með næsta skrefi. Notaðu þegar beðið er um mánaðarlok, lokun mánaðar, „er mánuðurinn lokaður“, afstemmingar, „stemmir bókhaldið“, bankaafstemmingu, undirbækur á móti fjárhag, opin atriði í bókhaldi eða hvað bókari á eftir að gera.
+---
+
+# Mánaðarlok og afstemmingar
+
+Svarar: **Er síðasti mánuður lokaður, stemmir bókhaldið og hvað á eftir að gera, af hverjum?**
+
+Fylgdu `bifrost-maelabord` (hönnun, ljóst sjálfgefið, leiðarstika, fótur) og `bifrost-gogn` (`dataset.json`). **Aðeins lesið.** Mælaborðið bókar ekkert, stemmir ekkert af, keyrir hvorki afskriftir né gengisendurmat og lokar engu tímabili í BC. Næstu skref eru tillögur til fólks. Ef notandi biður um aðgerð, staðfestu fyrst í spjalli.
+
+## 1. Gögn
+
+| Þörf | Heimild í BC / Bifröst |
+|---|---|
+| Hreyfingar á mánuð og lykil, fullbókaðir mánuðir | `dataset.json`: `months[].complete`, `incomplete_reason`, `accounts[].months` |
+| Efnahagslyklar á mánaðarlokum, jöfnuður innan mánaðar | `dataset.json`: `balance.accounts[].levels`, `balance.stemming` |
+| Bankareikningar, staða í dag, síðasta yfirlit | `Bank Account` (staða, „Last Statement No.“, „Balance Last Statement“), `Bank Account Statement`, `Bank Acc. Reconciliation` |
+| Útistandandi færslur við síðustu afstemmingu | `Bank Account Ledger Entry` (opnar, óafstemmdar) |
+| Greiðslukort | Bankareikningar af tegundinni greiðslukort á móti kortalykli í fjárhag |
+| Viðskiptamenn og lánardrottnar á móti fjárhag | `aging` (eða `Cust./Vendor Ledger Entry`, opnar) á móti stöðu safnlykla (bókunarflokkar) sama dag |
+| VSK | Útskattur, innskattur og uppgjörsreikningur VSK úr efnahag; tveggja mánaða tímabil, gjalddagi 5. annars mánaðar eftir tímabil |
+| Gengismunur | `Cust./Vendor Ledger Entry` með `Currency Code`, `Currency Exchange Rate` (gengi á mánaðarlokum), `Exch. Rate Adjmt. Reg.` (hvort endurmat hefur verið keyrt) |
+| Afskriftir | Afskriftalyklar í `dataset.json`; ef eignaskrá er notuð, `FA Ledger Entry` |
+| Tímabil lokað | `General Ledger Setup` og `User Setup` („Allow Posting From/To“), `Accounting Period` (`Closed`, `New Fiscal Year`) |
+| Ósamþykktir reikningar | `kostnadur` (innkaupareikningar í samþykkt, gjalddagar) |
+| Óbókaðar greiðslur | `sjodstreymi` (`unbooked`: laun, staðgreiðsla, VSK, afborganir sem vantar í bankabók) |
+| Færsluprófanir (handfærðar tekjur, tvíreikningsfærsla, helgarfærslur) | `endurskodun` |
+
+Lesköll fara í gegnum Bifröst (`data_batch_records`, `data_record_count`, `aging`). Áætlaðar fjárhæðir (t.d. laun sem vantar) miðast við síðasta fullbókaða mánuð og eru merktar ≈.
+
+## 2. Flipar (hámark 4 lykilmælar á flipa, engar tvítekningar)
+
+**Lokun mánaðar**
+- Hero í fullri breidd: „X af Y atriðum lokið fyrir <mánuð>“, ein setning um stöðuna og fjórar tölur (atriði sem vantar, ≈ óbókaður rekstrarkostnaður, síðasti fullbókaði mánuður, dagar frá mánaðarlokum).
+- Mánaðaval: síðustu 6 mánuðir sem spjöld með *Fullbókaður / Ófullbókaður / Stendur yfir* og lítilli stiku (lokið · vantar · á ekki við). Sjálfgefið er síðasti mánuður sem á að vera lokaður (fyrri mánuður ef dagurinn í dag er í næsta mánuði).
+- Gátlisti, hvert atriði með stöðu (*Lokið · Vantar · Á ekki við*), fjárhæð og ábyrgð (*Bókari / Fjármálastjóri*):
+  1. Tekjur bókaðar (athuga ef langt undir meðaltali).
+  2. Laun bókuð.
+  3. Vörunotkun bókuð.
+  4. Afskriftir keyrðar.
+  5. VSK-uppgjörsfærsla (aðeins í lok tveggja mánaða tímabils; annars *á ekki við*). Uppgjörsreikningur með stöðu sem hækkar sífellt bendir á að uppgjörsfærslur vanti.
+  6. Gengismunur endurmetinn (*á ekki við* ef engar opnar færslur í erlendri mynt). Áætla áhrif með gengi mánaðarloka.
+  7. Áfallið og fyrirframgreitt (fastur kostnaður eins og húsnæði og vextir kominn inn).
+  8. Tímabil lokað í BC („Allow Posting From“ eftir mánuðinum, ekki tómt).
+
+**Afstemmingar** — stöðuspjald grænt/gult/rautt með mismun í kr.:
+
+| Athugun | Grænt þegar |
+|---|---|
+| Bankabók á móti bankalykli | Summa bankareikninga = fjárhagslykill |
+| Kort á móti kortalykli | Summa korta = fjárhagslykill |
+| Bankayfirlit á móti bankabók | Yfirlit + útistandandi = bankabók á síðasta afstemmingardegi |
+| Bankafærslur eftir síðustu afstemmingu | Engar þekktar greiðslur vantar (laun, staðgreiðsla, VSK, lán) |
+| Viðskiptamenn / lánardrottnar á móti fjárhag | `aging`-samtala = safnlyklar |
+| VSK | Útskattur − innskattur stemmir við skilagreinar, uppgjörsreikningur hreinsast |
+| Jöfnuður innan mánaðar | `balance.stemming` er 0 í hverjum mánuði (sýnt sem frávikssúlur) |
+| Langtímalán | Staða = lánayfirlit (afborganir bókaðar) |
+
+Tafla yfir banka og kort: staða í BC í dag, síðasta yfirlit (dags. og nr.), yfirlitsstaða, bankabók þá, óafstemmt og staða. Kort með númeri, aldrei nafn korthafa.
+
+**Opin atriði** — samandreginn verkefnalisti úr hinum flipunum og úr `endurskodun`, `kostnadur` og `sjodstreymi`: óbókaðar greiðslur, VSK, ársuppgjör fyrra árs ólokað, ófullbókaður mánuður, möguleg tvíreikningsfærsla, handfærðar tekjur, ósamþykktir reikningar komnir á gjalddaga, gengismunur, lán, innbyrðis staða, opin tímabil. Hvert atriði: alvarleiki (rautt/gult), lýsing, **næsta skref**, ábyrgðarhlutverk og fjárhæð. Raðað eftir alvarleika og svo fjárhæð. Síur fyrir alvarleika og hlutverk.
+
+## 3. Sannreyning
+
+- Fullbókaðir mánuðir í mælaborði = `months[].complete` í `dataset.json`.
+- Bankabók stemmir við bankalykil og kort við kortalykil upp á krónu (eða mismunurinn er sýndur rauður).
+- `aging`-samtölur á móti safnlyklum sama dag; mismunur sýndur í kr.
+- VSK-skuld á tímabil = breyting á útskatti − innskatti á tímabilinu; á að stemma við skilagrein (t.d. júl–ágú).
+- Summa óbókaðra greiðslna = summa liða í `unbooked`.
+- Keyrðu útreikningana með node áður en birt er og berðu lykiltölur saman við fjárhaginn.
+
+## Samstæða
+
+- Félagsval efst; gátlisti og afstemmingar eru á hvert félag. Mánuður er lokaður í samstæðu aðeins ef hann er lokaður í öllum félögum; segðu hjá hvaða félagi hann er opinn.
+- Lína **Innbyrðis staða stemmir**: krafa félags A á B = skuld B við A og innbyrðis viðskipti mánaðarins (t.d. umsýslugjöld) eru eins bókuð hjá báðum, úr `eliminations.json` (tegund `stada` og `rekstur`). Mismunur rauður.
+- Opin atriði sýna dálk *Félag*.
+- Eitt félag: sýndu innbyrðis stöðu við tengd félög sem gula línu „ekki staðfest við gagnaðila“ nema bækur gagnaðila séu líka lesnar.

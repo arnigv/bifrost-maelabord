@@ -1,0 +1,9 @@
+{
+  "_athugasemd": "Sniðmát. Þegar slóð Bifröst MCP-þjónsins er staðfest má endurnefna skrána í .mcp.json svo tengingin fylgi pluginu. Hver notandi skráir sig inn með sínum eigin BC-aðgangi.",
+  "mcpServers": {
+    "bifrost": {
+      "type": "http",
+      "url": "https://<bifrost-mcp-slod>/mcp"
+    }
+  }
+}

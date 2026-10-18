@@ -1,0 +1,105 @@
+<div class="wrap">
+  <nav class="crumb" aria-label="Leiðarstika"><a href="{{HUB_URL}}" data-nav>← Miðstöð mælaborða</a><span class="sep">/</span><span>Sjálfvirknivæðing</span></nav>
+  <header class="top">
+    <div class="brandmark">
+      <div class="logo" aria-hidden="true">{{INITIALS}}</div>
+      <div style="min-width:0"><span class="eyebrow">Sjálfvirknivæðing · erindrekar og handverk bókhalds</span><h1>{{COMPANY}}</h1></div>
+    </div>
+    <div class="chips"><div id="mode"></div><span class="chip-lg"><span class="dot"></span>Bifröst · aðeins lestur</span><span class="chip-lg" id="save-state">Hleð…</span><span class="chip-lg"><b>Frumgerð</b></span></div>
+  </header>
+
+  <div class="gate" role="note"><span class="gate-ico" aria-hidden="true">🔒</span><div><b>Áður en keyrsla er framkvæmd þarf að virkja aðgerðina og tala við ráðgjafa.</b><p>Ráðgjafi Origo fer yfir aðgang að Business Central, hvaða erindrekar og handverk henta félaginu, hver samþykkir niðurstöður, og vinnslusamning um gögnin. Þangað til eru keyrsluhnappar óvirkir. Þú getur samt skoðað og skipulagt áætlanir.</p></div></div>
+
+  <div class="tabs" role="tablist" aria-label="Flipar">
+    <button role="tab" aria-controls="t-yfir">Yfirlit</button>
+    <button role="tab" aria-controls="t-agent">Erindrekar</button>
+    <button role="tab" aria-controls="t-hand">Handverk</button>
+    <button role="tab" aria-controls="t-dag">Dagatal og saga</button>
+  </div>
+
+  <section class="tab" id="t-yfir" role="tabpanel">
+    <div class="g-hero">
+      <section class="card hero">
+        <span class="eyebrow">Sjálfvirkni í dag</span>
+        <div class="big" id="h-big"></div>
+        <p id="h-txt"></p>
+        <div class="row" id="h-row"></div>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Næstu keyrslur</h2><span class="sub">næstu 7 dagar</span></div>
+        <div class="dec" id="next"></div>
+      </section>
+    </div>
+    <section class="g4" id="kpis"></section>
+    <div class="g2">
+      <section class="card"><div class="ch"><h2>Nýjustu ábendingar</h2><span class="sub">úr síðustu keyrslu</span></div><div class="dec" id="finds"></div></section>
+      <section class="card"><div class="ch"><h2>Sjálfvirkni eftir ferli</h2><span class="sub">virkt af mögulegu</span></div><div class="hb" id="byflow"></div>
+        <p class="note">Erindrekar lesa úr BC og skila tilkynningu, tillögu eða drögum. <b>Ekkert er bókað án samþykkis bókara.</b></p></section>
+    </div>
+  </section>
+
+  <section class="tab" id="t-agent" role="tabpanel" hidden>
+    <div class="insight"><span class="spark" aria-hidden="true">i</span><p>Vöktunarerindrekar fylgjast með bókhaldinu og láta vita. Veldu hvaða erindrekar eiga að vera á áætlun og hvenær þeir keyra.</p></div>
+    <div class="agrid" id="agents"></div>
+  </section>
+
+  <section class="tab" id="t-hand" role="tabpanel" hidden>
+    <div class="insight"><span class="spark" aria-hidden="true">✎</span><p>Handverk sem bókarar vinna í dag. Hvert verk getur keyrt sem <b>tilkynning</b>, <b>tillaga til samþykktar</b> eða <b>drög í BC</b> sem bókari samþykkir.</p></div>
+    <div class="seg" role="group" aria-label="Sía eftir ferli" id="flowf"></div>
+    <div id="hand"></div>
+  </section>
+
+  <section class="tab" id="t-dag" role="tabpanel" hidden>
+    <section class="card"><div class="ch"><h2>Næstu 14 dagar</h2><span class="sub" id="cal-sub"></span></div><div class="cal" id="cal"></div>
+      <p class="note">Virkir dagar miðast við mánudag–föstudag. Almennir frídagar eru ekki dregnir frá í þessari frumgerð.</p></section>
+    <section class="card"><div class="ch"><h2>Keyrir við atburð í BC</h2><span class="sub">um leið og atburður verður</span></div><div class="dec" id="events"></div></section>
+  
+    <div class="g2">
+      <section class="card"><div class="ch"><h2>Biðröð</h2><button class="btn ghost" id="q-clear" type="button">Tæma biðröð</button></div><div class="dec" id="queue"></div></section>
+      <section class="card"><div class="ch"><h2>Hvernig keyrsla virkar</h2></div>
+        <ol class="howto">
+          <li><b>Áætlanir eru geymdar í þessari síðu</b> og gilda fyrir alla sem hafa aðgang.</li>
+          <li><b>Sjálfvirknivélin</b> (áætlað verkefni í Claude) les síðuna, keyrir erindreka á réttum tíma með Bifröst og skráir niðurstöðu í söguna.</li>
+          <li><b>Keyra núna</b> setur erindreka í biðröð; vélin tekur hann í næstu umferð. Keyrsluhnappar eru óvirkir þar til aðgerðin hefur verið virkjuð með ráðgjafa.</li>
+          <li><b>Drög í BC</b> eru aldrei bókuð. Bókari fer yfir og bókar sjálfur.</li>
+        </ol></section>
+    </div>
+    <section class="card"><div class="ch"><h2>Keyrslusaga</h2><span class="sub">nýjast fyrst</span></div><div class="scroll"><table id="log" style="min-width:560px"></table></div></section>
+  </section>
+
+  <footer>
+    <span>Heimild: Business Central (Bifröst), {{COMPANY}}. Niðurstöður síðustu keyrslu eru úr greiningu {{SOURCE_DATE}}.–17.10.2026. Erindrekar lesa aðeins; skrif í BC krefjast samþykkis notanda. Viðtakendur eru hlutverk, ekki nöfn.</span>
+    <span>Frumgerð: sjálfvirknivélin sem keyrir áætlanirnar er ekki enn sett upp.</span>
+    <span>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</span>
+  </footer>
+</div>
+
+<dialog id="dlg" aria-labelledby="dlg-t">
+  <form method="dialog" id="dlg-f">
+    <div class="ch"><h2 id="dlg-t">Stilla keyrslu</h2><button class="btn ghost" value="cancel" type="submit" aria-label="Loka">✕</button></div>
+    <p class="sub" id="dlg-d"></p>
+    <label class="fld"><span>Tíðni</span><select id="f-freq">
+      <option value="daily">Daglega (virka daga)</option><option value="weekly">Vikulega</option><option value="monthly">Mánaðarlega, dagur mánaðar</option>
+      <option value="workday">Mánaðarlega, X. virki dagur</option><option value="bimonthly">Á tveggja mánaða fresti (VSK-tímabil)</option>
+      <option value="quarterly">Ársfjórðungslega</option><option value="yearly">Árlega</option><option value="event">Við atburð í BC</option><option value="manual">Aðeins handvirkt</option></select></label>
+    <div class="frow">
+      <label class="fld" id="w-wd"><span>Vikudagur</span><select id="f-wd"><option value="1">mánudagur</option><option value="2">þriðjudagur</option><option value="3">miðvikudagur</option><option value="4">fimmtudagur</option><option value="5">föstudagur</option></select></label>
+      <label class="fld" id="w-md"><span>Dagur</span><select id="f-md"></select></label>
+      <label class="fld" id="w-mo"><span>Mánuður</span><select id="f-mo"></select></label>
+      <label class="fld" id="w-ev"><span>Atburður</span><select id="f-ev"><option>Bókun í fjárhag</option><option>Nýtt innkomið skjal</option><option>Breyting á lánardrottni</option><option>Ný bankafærsla</option><option>Nýr lánardrottinn</option></select></label>
+      <label class="fld" id="w-tm"><span>Klukkan</span><input type="time" id="f-tm" step="900"></label>
+    </div>
+    <fieldset class="fld"><legend>Hvað gerist</legend>
+      <label class="rad"><input type="radio" name="f-mode" value="notify"> <span><b>Tilkynning</b> · samantekt send, ekkert annað</span></label>
+      <label class="rad"><input type="radio" name="f-mode" value="propose"> <span><b>Tillaga til samþykktar</b> · bókari samþykkir eða hafnar</span></label>
+      <label class="rad" id="r-draft"><input type="radio" name="f-mode" value="draft"> <span><b>Drög í BC</b> · stofnuð í BC en aldrei bókuð</span></label>
+    </fieldset>
+    <div class="frow">
+      <label class="fld"><span>Félag</span><select id="f-sc">{{COMPANY_OPTIONS}}</select></label>
+      <label class="fld"><span>Viðtakandi</span><select id="f-rc"><option>Fjármálastjóri</option><option>Bókari</option><option>Framkvæmdastjóri</option><option>Stjórn</option></select></label>
+    </div>
+    <p class="note" id="dlg-next"></p>
+    <p class="note">Áætlunin keyrir ekki fyrr en aðgerðin hefur verið virkjuð með ráðgjafa.</p>
+    <div class="dlg-a"><button class="btn ghost" value="cancel" type="submit">Hætta við</button><button class="btn" id="f-save" value="save" type="submit">Vista áætlun</button></div>
+  </form>
+</dialog>

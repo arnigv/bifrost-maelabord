@@ -1,0 +1,396 @@
+[
+ {
+  "id": "verktakar",
+  "flokkur": "Verktakar og mannvirkjagerð",
+  "daemi": "Byggingaverktakar, jarðvinna, rafverktakar, vélsmiðjur í verkum",
+  "heiti": "Verk og útboð",
+  "flipar": [
+   "Yfirsýn",
+   "Tilboð",
+   "Verk og framvinda",
+   "Tryggingar og verðbætur"
+  ],
+  "kpi": [
+   "Vinningshlutfall tilboða",
+   "Framlegð í tilboði á móti raun",
+   "Framvinda á móti kostnaði",
+   "Óreikningsfært (WIP)",
+   "Aukaverk",
+   "Geymslufé og verktryggingar",
+   "Verðbætur skv. byggingavísitölu",
+   "Nýting tækja"
+  ],
+  "gogn": [
+   "Job",
+   "Job Task",
+   "Job Planning Line",
+   "Job Ledger Entry",
+   "Resource",
+   "Sales Quote (tilboð)"
+  ],
+  "isat": [
+   "41",
+   "42",
+   "43"
+  ],
+  "isat_ef_verk": [
+   "25",
+   "28",
+   "33"
+  ]
+ },
+ {
+  "id": "serfraedi",
+  "flokkur": "Sérfræðiþjónusta",
+  "daemi": "Verkfræðistofur, lögmenn, endurskoðun, ráðgjöf, auglýsingastofur",
+  "heiti": "Nýting og reikningsfærsla",
+  "flipar": [
+   "Yfirsýn",
+   "Nýting",
+   "Reikningsfærsla",
+   "Viðskiptavinir"
+  ],
+  "kpi": [
+   "Reikningshæft hlutfall tíma",
+   "Raunverð á tíma á móti gjaldskrá",
+   "Óreikningsfærðir tímar",
+   "Afskrifaðir tímar",
+   "Tekjur á starfsmann",
+   "Framlegð eftir viðskiptavini"
+  ],
+  "gogn": [
+   "Resource",
+   "Time Sheet Header/Line",
+   "Job",
+   "Job Ledger Entry"
+  ],
+  "isat": [
+   "69",
+   "70.2",
+   "71",
+   "72",
+   "73",
+   "74"
+  ]
+ },
+ {
+  "id": "saas",
+  "flokkur": "SaaS og hugbúnaður",
+  "daemi": "Áskriftarhugbúnaður, hýsing, rekstrarþjónusta",
+  "heiti": "Áskriftartekjur",
+  "flipar": [
+   "Yfirsýn",
+   "MRR og brottfall",
+   "Endurnýjanir",
+   "Frestaðar tekjur"
+  ],
+  "kpi": [
+   "MRR/ARR",
+   "Brottfall (churn)",
+   "NRR",
+   "Endurnýjanir næstu 90 daga",
+   "Frestaðar tekjur",
+   "Tekjur í erlendri mynt",
+   "Eignfærður þróunarkostnaður"
+  ],
+  "gogn": [
+   "Standard Customer Sales Code / endurteknir sölureikningar",
+   "Áskriftir",
+   "Fyrirframinnheimtar tekjur (lyklar)"
+  ],
+  "isat": [
+   "58.2",
+   "62.01",
+   "63.1"
+  ]
+ },
+ {
+  "id": "heildsala",
+  "flokkur": "Heildsala og innflutningur",
+  "daemi": "Matvara, byggingavörur, tæknivörur, lyf",
+  "heiti": "Birgðir og lager",
+  "flipar": [
+   "Yfirsýn",
+   "Birgðir",
+   "Framlegð eftir vöruflokki",
+   "Innkaup og gengi"
+  ],
+  "kpi": [
+   "Veltuhraði og birgðadagar",
+   "Hægfara og útrunnar vörur",
+   "Framlegð eftir vöruflokki og birgi",
+   "Gengisáhrif á innkaupsverð",
+   "Vörur í hafi",
+   "Afhendingarhlutfall",
+   "Verðlistar sem þarf að uppfæra"
+  ],
+  "gogn": [
+   "Item",
+   "Item Ledger Entry",
+   "Value Entry",
+   "Purchase Header/Line",
+   "Vendor",
+   "Currency Exchange Rate"
+  ],
+  "isat": [
+   "46"
+  ]
+ },
+ {
+  "id": "smasala",
+  "flokkur": "Smásala",
+  "daemi": "Verslanir, netverslun, apótek",
+  "heiti": "Verslanir og karfa",
+  "flipar": [
+   "Yfirsýn",
+   "Verslanir",
+   "Karfa og vörur",
+   "Rýrnun og laun"
+  ],
+  "kpi": [
+   "Sala á m² og eftir verslun",
+   "Meðalkarfa",
+   "Rýrnun",
+   "Launahlutfall",
+   "Árstíðasveifla",
+   "Sala á korti á móti reikningi"
+  ],
+  "gogn": [
+   "Item",
+   "Location",
+   "Víddir",
+   "Kassakerfi"
+  ],
+  "isat": [
+   "47"
+  ]
+ },
+ {
+  "id": "ferda",
+  "flokkur": "Ferðaþjónusta og veitingar",
+  "daemi": "Hótel, gistiheimili, afþreying, veitingastaðir",
+  "heiti": "Nýting og bókanir",
+  "flipar": [
+   "Yfirsýn",
+   "Nýting og verð",
+   "Bókunarstaða",
+   "Kostnaðarhlutföll"
+  ],
+  "kpi": [
+   "Nýting",
+   "ADR",
+   "RevPAR",
+   "Bókunarstaða fram í tímann",
+   "Fyrirframgreiðslur",
+   "Hráefnis- og launahlutfall",
+   "Gistináttaskattur",
+   "Tekjur í EUR"
+  ],
+  "gogn": [
+   "Fyrirframinnheimtar tekjur",
+   "Víddir",
+   "Bókunarkerfi (oft utan BC)"
+  ],
+  "isat": [
+   "55",
+   "56",
+   "79",
+   "93"
+  ]
+ },
+ {
+  "id": "sjavarutvegur",
+  "flokkur": "Sjávarútvegur og fiskvinnsla",
+  "daemi": "Útgerðir, vinnslur, fiskeldi",
+  "heiti": "Afli, afurðir og gengi",
+  "flipar": [
+   "Yfirsýn",
+   "Afli og nýting",
+   "Afurðir og verð",
+   "Gengisnæmni"
+  ],
+  "kpi": [
+   "Aflaverðmæti",
+   "Nýting hráefnis",
+   "Afurðaverð í EUR/USD",
+   "Veiðigjöld",
+   "Olíukostnaður",
+   "Afurðabirgðir",
+   "Gengisnæmni EBITDA"
+  ],
+  "gogn": [
+   "Item (afurðir)",
+   "Item Ledger Entry",
+   "Víddir á skip eða vinnslu",
+   "Currency Exchange Rate"
+  ],
+  "isat": [
+   "03",
+   "10.2"
+  ]
+ },
+ {
+  "id": "framleidsla",
+  "flokkur": "Framleiðsla og iðnaður",
+  "daemi": "Matvælaframleiðsla, málmiðnaður, plast, prentun",
+  "heiti": "Framleiðsla og kostnaðarverð",
+  "flipar": [
+   "Yfirsýn",
+   "Kostnaðarverð",
+   "Frávik og sóun",
+   "Orka og hráefni"
+  ],
+  "kpi": [
+   "Kostnaðarverð á einingu",
+   "Frávik frá uppskrift",
+   "Sóun",
+   "Orkukostnaður",
+   "Hráefnisverð",
+   "Nýting véla"
+  ],
+  "gogn": [
+   "Production BOM",
+   "Production Order",
+   "Item Ledger Entry",
+   "Capacity Ledger Entry"
+  ],
+  "isat": [
+   "10",
+   "11",
+   "13",
+   "16",
+   "17",
+   "18",
+   "20",
+   "22",
+   "23",
+   "24",
+   "25",
+   "26",
+   "27",
+   "28",
+   "29",
+   "31",
+   "32"
+  ]
+ },
+ {
+  "id": "fasteignir",
+  "flokkur": "Fasteignir og leiga",
+  "daemi": "Fasteignafélög, leigusalar",
+  "heiti": "Leigusafn",
+  "flipar": [
+   "Yfirsýn",
+   "Eignir",
+   "Samningar",
+   "Fjármögnun"
+  ],
+  "kpi": [
+   "Útleiguhlutfall",
+   "Leigutekjur eftir eign",
+   "Vísitölutenging samninga",
+   "Vanskil leigutaka",
+   "Samningar sem renna út",
+   "Rekstrarkostnaður á m²",
+   "Veðsetningarhlutfall og vaxtaþekja"
+  ],
+  "gogn": [
+   "Customer",
+   "Endurteknir reikningar",
+   "Fixed Asset",
+   "Langtímalán"
+  ],
+  "isat": [
+   "68"
+  ]
+ },
+ {
+  "id": "samstaeda",
+  "flokkur": "Eignarhald og samstæður",
+  "daemi": "Móðurfélög, fjárfestingarfélög",
+  "heiti": "Samstæða",
+  "flipar": [
+   "Yfirsýn",
+   "Félög",
+   "Innbyrðis viðskipti",
+   "Eignarhlutir og lán"
+  ],
+  "kpi": [
+   "Innbyrðis viðskipti og jöfnun",
+   "Arður",
+   "Eignarhlutir",
+   "Eignir á gangvirði",
+   "Lán milli félaga"
+  ],
+  "gogn": [
+   "Mörg félög í tenant",
+   "Tengdir viðskiptamenn og lánardrottnar"
+  ],
+  "isat": [
+   "64.2",
+   "64.3",
+   "70.1"
+  ]
+ },
+ {
+  "id": "flutningar",
+  "flokkur": "Flutningar og dreifing",
+  "daemi": "Vöruflutningar, sendlar, rútur",
+  "heiti": "Floti og leiðir",
+  "flipar": [
+   "Yfirsýn",
+   "Floti",
+   "Kostnaður á einingu",
+   "Viðhald og tjón"
+  ],
+  "kpi": [
+   "Kostnaður á km eða sendingu",
+   "Eldsneyti",
+   "Nýting bíla",
+   "Viðhald",
+   "Tjón"
+  ],
+  "gogn": [
+   "Fixed Asset",
+   "Víddir á bíla",
+   "Resource"
+  ],
+  "isat": [
+   "49",
+   "50",
+   "51",
+   "52",
+   "53"
+  ]
+ },
+ {
+  "id": "opinbert",
+  "flokkur": "Félagasamtök og opinber rekstur",
+  "daemi": "Sjálfseignarstofnanir, sveitarfélagafyrirtæki, heilbrigðisþjónusta",
+  "heiti": "Fjárheimildir",
+  "flipar": [
+   "Yfirsýn",
+   "Raun á móti fjárheimild",
+   "Samningar og styrkir",
+   "Kostnaður á þjónustuþega"
+  ],
+  "kpi": [
+   "Raun á móti fjárheimild",
+   "Samningar (t.d. við SÍ)",
+   "Kostnaður á þjónustuþega",
+   "Styrkir"
+  ],
+  "gogn": [
+   "G/L Budget",
+   "Víddir"
+  ],
+  "isat": [
+   "84",
+   "85",
+   "86",
+   "87",
+   "88",
+   "94"
+  ]
+ }
+]

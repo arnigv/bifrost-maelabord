@@ -1,0 +1,17 @@
+{
+  "name": "bifrost-maelabord",
+  "displayName": "Bifröst mælaborð",
+  "version": "1.0.0",
+  "description": "Bifröst mælaborð 1.0: miðstöð og sex sjálfgefin mælaborð úr Business Central — Stjórn (með spá), Sjóðstreymi og bankar, Tekjur (með tekjuleka) og Kostnaður (báðir niður í færslur), Mánaðarlok og afstemmingar, og Sjálfvirknivæðing — tillögur að sérmælaborðum eftir atvinnugrein (ÍSAT) og „+“ til að bæta við Framlegð og verk, Spágerð, Endurskoðun eða 12 atvinnugreinapökkum. Fyrir eitt félag eða samstæðu. Aðeins lesið úr BC.",
+  "author": {
+    "name": "Origo ehf."
+  },
+  "homepage": "https://www.origo.is",
+  "keywords": [
+    "business-central",
+    "bifrost",
+    "dashboard",
+    "finance",
+    "iceland"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "_lysing": "Sjálfgefnar forsendur. Uppfæra ALLTAF fyrir keyrslu (sjá SKILL.md, kafli 2). Gildi og heimildir miðast við 16.10.2026.",
+  "verdbolga": 0.059,
+  "_verdbolga_heimild": "Hagstofa Íslands, 12 mánaða breyting VNV í september 2026 (5,9%). Staðfesta nýjustu mælingu og verðbólguspá Seðlabankans.",
+  "styrivextir": 0.08,
+  "styrivextir_grunnur": 0.08,
+  "_styrivextir_heimild": "Seðlabanki Íslands, ákvörðun peningastefnunefndar 7.10.2026: meginvextir 8,0%. Næsta ákvörðun 18.11.2026.",
+  "kjarasamningar": [
+    {
+      "fra": "2027-01-01",
+      "haekkun": 0.035,
+      "_heimild": "Kjarasamningar á almennum markaði 2024–2028: 3,5% eða að lágmarki 23.750 kr. 1.1.2027. Staðfesta hjá SA/ASÍ eða viðkomandi stéttarfélagi."
+    }
+  ],
+  "stodugildi_breyting": 0.0,
+  "verdskra": [],
+  "adfangaverd": [],
+  "yfirfaersla_efnis": 0.5,
+  "magnbreyting_arleg": 0.0,
+  "demping_leitni": 0.85,
+  "eldsneyti_hlutur": 0.05,
+  "eldsneyti_breyting": 0.0,
+  "thekktar_pantanir": []
+}
