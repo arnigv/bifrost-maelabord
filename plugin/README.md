@@ -44,7 +44,7 @@ Plugin frá Origo sem býr til vönduð, gagnvirk mælaborð úr Business Centra
 ## Uppsetning (ZIP)
 
 1. Stjórnandi fer í *Organization settings › Plugins & skills* og velur *Add › Upload a plugin*.
-2. Hleður upp `bifrost-maelabord.zip`.
+2. Hleður upp `bifrost-maelabord-1.0.0.zip`.
 3. Stillir á *Installed by default*.
 
 ## Grundvallarreglur
@@ -53,4 +53,8 @@ Plugin frá Origo sem býr til vönduð, gagnvirk mælaborð úr Business Centra
 - **Gögn haldast hjá viðskiptavini.** Mælaborð eru birt í Claude-aðgangi viðskiptavinarins og eru lokuð þar til hann deilir þeim.
 - **Gervigreind.** Hvert mælaborð er merkt þannig að það sé unnið með aðstoð gervigreindar og þurfi yfirferð áður en byggt er á því.
 
-Origo ehf. · innra prufueintak, ekki til dreifingar fyrr en samþykki upplýsingatæknistjóra liggur fyrir.
+## Fyrirvari
+
+Þetta er ekki opinber vara eða þjónusta Origo. Pluginið og leiðbeiningarnar eru birt til stuðnings og eru dæmi um hvernig nýta má Bifröst og Claude með Business Central. Sýnidæmin byggja á tilbúnum prófunargögnum úr Bifröst-sandkassa.
+
+Origo ehf.

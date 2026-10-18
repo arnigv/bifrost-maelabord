@@ -18,4 +18,8 @@ Plugin frá Origo sem býr til gagnvirk mælaborð úr Business Central í gegnu
 
 Bifröst-tengingin þarf að vera tengd í Claude og notandi þarf lesaðgang að félaginu í Business Central. Nánar í [plugin/README.md](plugin/README.md).
 
+## Fyrirvari
+
+Þetta er ekki opinber vara eða þjónusta Origo. Efnið er birt til stuðnings og eru mælaborðin, gögnin og leiðbeiningarnar dæmi. Sýnidæmin byggja á tilbúnum prófunargögnum.
+
 Origo ehf. · Unnið með aðstoð gervigreindar.
