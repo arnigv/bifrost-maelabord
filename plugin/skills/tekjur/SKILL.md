@@ -11,10 +11,13 @@ Spegilmynd Kostnaðar-mælaborðsins (sama hliðarspjald og drill-down). Fylgdu 
 
 ## 1. Gögn
 
+**Gögn: samtölur fyrst** (`bifrost-gogn`, kafli 0). Upphæðir á viðskiptavin, birgi, lykil, verk og vöru koma sem samtölur úr BC (`Data.Totals.Get`, `period_breakdown`, `aging`); færslur eru aðeins sóttar fyrir drill-down á stærstu liðina og athuganir sem þurfa færsluna sjálfa.
+
 - `dataset.json` (`bifrost-gogn`): tekjulyklar á mánuði (`cat = tekjur`), fyrra ár, ófullbókaðir mánuðir, einskiptisliðir.
-- `G/L Entry` á tekjulyklum (reitir 1, 3, 4, 6, 7, 17, 28, 58: færsla, lykill, dags., fylgiskjal, lýsing, fjárhæð, upprunakóði, upprunanr.). Lyklasía `WHERE(G/L Account No.=FILTER(1000..1999))` (bilið eftir bókhaldslyklum félagsins). Tekjur eru með mínus í BC; snúðu formerki.
-- `Cust. Ledger Entry` (1, 3, 4, 5, 6, 7, 13, 14, 15, 18, 36): reikningar á viðskiptavin, `Sales (LCY)` án VSK, `Original Amt. (LCY)` með VSK, opið/greitt.
-- `Sales Invoice Line` (2, 3, 4, 5, 6, 11, 15, 22, 27, 28, 29, 45): línur á reikning — tegund (vara, forði, fjárhagslykill), magn, einingarverð, afsláttur %, upphæð, verk. Reikningur í erlendri mynt: línur í mynt; umreiknaðu í kr. með hlutfalli `Sales (LCY)` / summa lína.
+- **Samtölur:** sala á viðskiptavin = `Data.Totals.Get` á `Cust. Ledger Entry` (`[18]` Sales (LCY), `groupBy` `Customer No.`, dagsetningarsía; eitt kall á tímabil og eitt fyrir sama tímabil í fyrra). Tekjur á vöru, þjónustu eða verk = `Data.Totals.Get` á `Sales Invoice Line` (`groupBy` `No.` eða `Job No.`). Tekjur utan viðskiptamannabókar = tekjulyklar í `dataset.json` mínus summa viðskiptamannabókar.
+- **Færslur, aðeins fyrir drill-down og stoðaflokkun:** `G/L Entry` á tekjulyklum (reitir 1, 3, 4, 6, 7, 17, 28, 58: færsla, lykill, dags., fylgiskjal, lýsing, fjárhæð, upprunakóði, upprunanr.). Allar ef ≤ 5.000; hjá stærra félagi færslur stærstu stoða og lykla (80% af upphæð). Lyklasía `WHERE(G/L Account No.=FILTER(1000..1999))` (bilið eftir bókhaldslyklum félagsins). Tekjur eru með mínus í BC; snúðu formerki.
+- `Cust. Ledger Entry` (1, 3, 4, 5, 6, 7, 13, 14, 15, 18, 36) fyrir drill-down, **sama drill-down og áður** (sjá `bifrost-gogn`, kafli 0: allar færslur ef þær eru ≤ 5.000 á tímabilinu, annars færslur stærstu liðanna): reikningar á viðskiptavin, `Sales (LCY)` án VSK, `Original Amt. (LCY)` með VSK, opið/greitt.
+- `Sales Invoice Line` (2, 3, 4, 5, 6, 11, 15, 22, 27, 28, 29, 45), línur þeirra reikninga sem fylgja drill-down: línur á reikning — tegund (vara, forði, fjárhagslykill), magn, einingarverð, afsláttur %, upphæð, verk. Reikningur í erlendri mynt: línur í mynt; umreiknaðu í kr. með hlutfalli `Sales (LCY)` / summa lína.
 - Verk og verðskrá: `Job`, `Job Planning Line`, `Resource` (verð og kostnaður á klst.) — sömu gögn og `framlegd`.
 - Áætlun: `G/L Budget Entry` ef til; annars drög úr Stjórn (merkt **drög** alls staðar þar sem hún birtist).
 
@@ -49,7 +52,7 @@ Sama hliðarspjald og í Kostnaði (leit, röðun, samtala neðst, Esc lokar):
 - **Viðskiptavinur → reikningar** (dags., reikningur, lýsing, lykill, án VSK, með VSK, opið/greitt) → **reikningslínur** (lína, lykill, lýsing, magn, einingarverð, afsláttur, upphæð, verk) með „← Til baka“.
 - **Stoð eða lykill → færslur** (dags., fylgiskjal, lýsing, lykill, viðskiptavinur eða *dagbók*, fjárhæð).
 - **Óskráð á viðskiptavin → dagbókarfærslur.**
-Drill-down fylgir völdu tímabili.
+Drill-down fylgir völdu tímabili. Allir liðir eru smellanlegir eins og áður; hjá félagi með fleiri en 5.000 færslur á tímabilinu sýna minnstu liðirnir samtölu og „spurðu gervigreindina um færslurnar“ (`bifrost-gogn`, kafli 0).
 
 ## 4. Gagnagæði: tekjur utan viðskiptamannabókar
 

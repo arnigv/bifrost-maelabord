@@ -12,7 +12,8 @@ Fylgdu `bifrost-maelabord` og `bifrost-gogn`. Aðeins lesið.
 ## 1. Gögn
 
 - **Upphafsstaða:** staða bankareikninga í dag (`Bank Account` + `Bank Account Ledger Entry`, eða handbært fé úr efnahag í `dataset.json` ef engir bankareikningar eru í BC).
-- **Innborganir:** opnar færslur í `Cust. Ledger Entry` með gjalddaga og eftirstöðvum. `aging` fyrir viðskiptamenn.
+- **Innborganir:** opnar færslur í `Cust. Ledger Entry` með gjalddaga og eftirstöðvum (færslur þarf hér, því spáin raðar á gjalddaga; aðeins `Open=CONST(true)` og reitir sem þarf). `aging` fyrir viðskiptamenn og sem stemming.
+- **Söguleg innheimta og greiðsluhraði:** samtölur á mánuð (`Data.Totals.Get`), ekki allar greiddar færslur.
 - **Útgreiðslur:** opnar færslur í `Vendor Ledger Entry` með gjalddaga og eftirstöðvum. `aging` fyrir lánardrottna.
 - **Reikningar í samþykkt:** innkaupareikningar sem bíða samþykkis (sjá `kostnadur`) eru ekki enn í lánardrottnabók en eru væntanlegar greiðslur á gjalddaga. Taktu þá með í spánni sem sér lið.
 - **Laun og fast:** meðaltal síðustu þriggja fullbókaðra mánaða af launum, launatengdum gjöldum (staðgreiðsla, lífeyrir, tryggingargjald), húsaleigu og afborgunum lána úr `dataset.json`. Laun greidd síðasta virka dag mánaðar, launatengd gjöld 15. næsta mánaðar.

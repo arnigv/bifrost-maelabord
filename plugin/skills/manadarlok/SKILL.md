@@ -27,7 +27,7 @@ Fylgdu `bifrost-maelabord` (hönnun, ljóst sjálfgefið, leiðarstika, fótur) 
 | Óbókaðar greiðslur | `sjodstreymi` (`unbooked`: laun, staðgreiðsla, VSK, afborganir sem vantar í bankabók) |
 | Færsluprófanir (handfærðar tekjur, tvíreikningsfærsla, helgarfærslur) | `endurskodun` |
 
-Lesköll fara í gegnum Bifröst (`data_batch_records`, `data_record_count`, `aging`). Áætlaðar fjárhæðir (t.d. laun sem vantar) miðast við síðasta fullbókaða mánuð og eru merktar ≈.
+Lesköll fara í gegnum Bifröst. Samtölur fyrst (`bifrost-gogn`, kafli 0): hvort mánuður er bókaður og hreyfing á lykil úr `period_breakdown` eða `Data.Totals.Get` (`G/L Entry`, `groupBy` `G/L Account No.`, sía á mánuðinn); summa bankahreyfinga á reikning úr `Data.Totals.Get` á `Bank Account Ledger Entry`; undirbækur með `aging`. Færslur (`data_batch_records`) aðeins fyrir opnar bankafærslur eftir síðustu afstemmingu og atriði sem þarf að sýna stök. Áætlaðar fjárhæðir (t.d. laun sem vantar) miðast við síðasta fullbókaða mánuð og eru merktar ≈.
 
 ## 2. Flipar (hámark 4 lykilmælar á flipa, engar tvítekningar)
 

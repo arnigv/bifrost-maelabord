@@ -22,7 +22,7 @@ Markmiðið er að viðskiptavinur sjái **sínar eigin tölur í vönduðu, gag
 - **Hámark fjórir flipar** á mælaborð og **hámark fjórir lykilmælar** á flipa. **Engin tala tvisvar** á sama flipa.
 - **Hero í fullri breidd**, ein setning og fjórar tölur; næsta kort fyrir neðan, líka í fullri breidd.
 - **Eitt tímabilsval** sem öll gröf og töflur á flipanum fylgja; „Bera saman við“ sem einn veljari frekar en sér flipar.
-- **Drill-down:** frá lið í lykla og frá lykli í færslur (dagsetning, fylgiskjal, lýsing, mótaðili, fjárhæð) þar sem það á við.
+- **Drill-down:** frá lið í lykla og frá lykli í færslur (dagsetning, fylgiskjal, lýsing, mótaðili, fjárhæð) þar sem það á við. Tölurnar koma sem **samtölur úr BC** (`bifrost-gogn`, kafli 0), en drill-down helst óbreytt: allir liðir opnast niður í lykla og færslur. Ef færslur á tímabilinu eru fleiri en 5.000 fylgja færslur stærstu liðanna (80% af upphæð) með, og aðrir liðir sýna samtölu og línuna „Spurðu gervigreindina: *sýndu færslurnar á bak við <liður>*“, svo síðan vaxi ekki endalaust með stærð félagsins.
 - **Stjórnarmál í Stjórn**, bókhaldsmál í Mánaðarlokum. Engir rofar sem breyta tölum hljóðlega (t.d. með/án einskiptis): merktu frekar í töflu.
 - Efnahagur og sjóðstreymi sem **töflur**, ekki gröf; lykilmælikvarðar ofan á.
 - Leiðarstika á miðstöð efst; tengill á annað mælaborð þegar efni á heima þar (t.d. „Afstemmingar: sjá Mánaðarlok“).

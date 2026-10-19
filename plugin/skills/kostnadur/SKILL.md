@@ -11,6 +11,8 @@ Fylgdu `bifrost-maelabord` og `bifrost-gogn`. **Aðeins lesið** — þetta skil
 
 ## 1. Gögn
 
+**Gögn: samtölur fyrst** (`bifrost-gogn`, kafli 0). Upphæðir á viðskiptavin, birgi, lykil, verk og vöru koma sem samtölur úr BC (`Data.Totals.Get`, `period_breakdown`, `aging`); færslur eru aðeins sóttar fyrir drill-down á stærstu liðina og athuganir sem þurfa færsluna sjálfa.
+
 **Samþykkt reikninga**
 - `Approval Entry` (fields 1–5, 8–10, 15–17: tafla, tegund, skjal nr., röð, samþykktarkóði, samþykkjandi, staða, sent dags., upphæð, upphæð ISK, gjaldmiðill). Opnar = staða *Opið* (eða *Búið til* ef röð er í gangi).
 - `Purchase Header` með `Status = Pending Approval` (*Bíður samþykkis*): lánardrottinn, gjalddagi, skjaldagur. Tengdu við `Approval Entry` á skjalanúmeri.
@@ -19,12 +21,12 @@ Fylgdu `bifrost-maelabord` og `bifrost-gogn`. **Aðeins lesið** — þetta skil
 - Ef engar samþykktarfærslur eru til: segðu að samþykktarferli sé ekki virkt í BC og sýndu í staðinn óbókaða innkaupareikninga.
 
 **Birgjar**
-- Innkaup síðustu 12 mánuði á birgja úr `Vendor Ledger Entry` (reikningar, upphæð í ISK) eða `Purch. Inv. Header`/`Value Entry` ef til.
+- Innkaup síðustu 12 mánuði á birgja: `Data.Totals.Get` á `Vendor Ledger Entry` (`[18]` Purchase (LCY), formerki í mínus, `groupBy` `Vendor No.`). Berðu summuna saman við kostnaðarlyklana: innkaup í erlendri mynt eða úr almennri dagbók geta verið 0 í Purchase (LCY).
 - Opnar skuldir með `aging` (entity `vendor`).
 - Ef innkaup eru bókuð beint í fjárhag (ekki á birgja): segðu það og notaðu kostnaðarlykla í staðinn.
 
 **Kostnaðarliðir**
-- `dataset.json`: kostnaðarlyklar á mánuði (vörunotkun, laun, húsnæði, annar rekstur), sama tímabil í fyrra.
+- `dataset.json`: kostnaðarlyklar á mánuði (vörunotkun, laun, húsnæði, annar rekstur), sama tímabil í fyrra. Kostnaður á lykil fyrir annað tímabil: `Data.Totals.Get` á `G/L Entry` (`[17]`, `groupBy` `G/L Account No.`).
 
 ## 2. Flipar (tveir)
 
@@ -34,7 +36,7 @@ Fylgdu `bifrost-maelabord` og `bifrost-gogn`. **Aðeins lesið** — þetta skil
 
 **Birgjar og kostnaðarliðir**
 - Stærstu kostnaðarliðir og birgjar, liðir sem vaxa hraðar en tekjur.
-- **Drill-down:** kostnaðarflokkur → bókhaldslyklar → **færslur** (dagsetning, fylgiskjal, lýsing, birgir, fjárhæð) með leit og röðun; birgir → reikningar hans og lyklar. Færslur úr `G/L Entry` (reitir 3, 4, 6, 7, 17, 58) og `Vendor Ledger Entry`; ef margar, efstu 50 á lykil og „aðrar færslur“.
+- **Drill-down:** kostnaðarflokkur → bókhaldslyklar → **færslur** (dagsetning, fylgiskjal, lýsing, birgir, fjárhæð) með leit og röðun; birgir → reikningar hans og lyklar. Færslur úr `G/L Entry` (reitir 3, 4, 6, 7, 17, 58) og `Vendor Ledger Entry` **sama drill-down og áður** (sjá `bifrost-gogn`, kafli 0: allar færslur ef þær eru ≤ 5.000 á tímabilinu, annars færslur stærstu liðanna). Sótt með síu á tímabil og kostnaðarlykla, ekki öll taflan.
 - **Sparnaður** er eitt kort neðst (fjöldi tækifæra og áætluð áhrif á ári, merkt *mat*), ekki sér flipi. Reglurnar um tækifæri: innkaupasamningar 2–3%, flutningur ~10%, orka ~10%, bílar, staðgreiðsluafslættir, tvíteknar áskriftir.
 
 ## 3. Persónuupplýsingar

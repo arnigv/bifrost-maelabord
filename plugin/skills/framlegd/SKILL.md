@@ -15,13 +15,15 @@ Sameinar fyrri mælaborðin *Framlegð* og *Vörur og þjónusta*. **Óreiknings
 
 ## 1. Gögn og sýn eftir starfsemi
 
+**Gögn: samtölur fyrst** (`bifrost-gogn`, kafli 0). Upphæðir á viðskiptavin, birgi, lykil, verk og vöru koma sem samtölur úr BC (`Data.Totals.Get`, `period_breakdown`, `aging`); færslur eru aðeins sóttar fyrir drill-down á stærstu liðina og athuganir sem þurfa færsluna sjálfa.
+
 `dataset.json` úr `bifrost-gogn` (tekjur og vörunotkun á mánuði, `profile`). Veldu sýn:
 
 | Starfsemi | Gögn |
 |---|---|
-| Verk (`jobs` > 0) | `Job`, `Job Task`, `Job Planning Line`, `Job Ledger Entry` (notkun og sala). Framlegð á verk = reikningsfært/reikningshæft − kostnaður; framlegð við verklok = samningur − áætlaður heildarkostnaður |
-| Vörur (`items` > 0) | `Item`, `Item Ledger Entry`, `Value Entry` síðustu 12–24 mánuði: sala, kostnaður, magn, afsláttur, birgðir |
-| Hvorugt | Tekjur eftir tekjulykli, víddum og viðskiptamanni (`Cust. Ledger Entry`); framlegð á tekjustoð |
+| Verk (`jobs` > 0) | `Job`, `Job Task`, `Job Planning Line` sem færslur; **notkun og sala á verk sem samtölur**: `Data.Totals.Get` á `Job Ledger Entry` (`[9,13,15]`, `groupBy` `Job No.`, eitt kall með `Entry Type=CONST(Usage)` og eitt með `Sale`); tímar á forða með `groupBy` `No.` og `Type=CONST(Resource)`. Framlegð á verk = reikningsfært/reikningshæft − kostnaður; framlegð við verklok = samningur − áætlaður heildarkostnaður |
+| Vörur (`items` > 0) | `Item`; sala, kostnaður og magn á vöru sem samtölur úr `Value Entry` (`groupBy` `Item No.`, eitt kall á tímabil); birgðir á vöru úr `Item Ledger Entry` (`Remaining Quantity`, `groupBy` `Item No.`) |
+| Hvorugt | Tekjur eftir tekjulykli og viðskiptamanni (samtölur úr `Cust. Ledger Entry`); framlegð á tekjustoð |
 
 Félag með bæði verk og vörur fær báða flipana. Segðu í haus hvaða sýn er notuð. Ef sölu- og kostnaðarlínur vantar á einingastigi: segðu það og sýndu framlegð á heildarstigi.
 

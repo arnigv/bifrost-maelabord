@@ -33,6 +33,10 @@ Plugin frá Origo sem býr til vönduð, gagnvirk mælaborð úr Business Centra
 
 **Litaþemu:** Ljóst, Dökkt, Blátt og Jörð — valið efst á hverju mælaborði og gildir á þeim öllum.
 
+**Samtölur fyrst:** Business Central leggur saman (`Data.Totals.Get`, `period_breakdown`, `aging`); færslur eru aðeins sóttar þar sem færslan sjálf skiptir máli (sjóðspá, færsluprófanir, drill-down á stærstu liðina). Mælaborðin virka því jafnt hjá stórum sem litlum félögum. Sjá `bifrost-gogn`, kafla 0.
+
+**Í síma:** sama mælaborð lagar sig að skjánum (flipar neðst, lykiltölur 2×2, töflur sem spjöld).
+
 **Tími:** fyrsta mælaborð eftir um 5–10 mín., öll sex eftir um 20–25 mín. Veldu **Always allow** fyrir Bifröst í leyfisglugga; aðeins er lesið.
 
 ## Kröfur

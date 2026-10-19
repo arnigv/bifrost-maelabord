@@ -1,13 +1,61 @@
 ---
 name: bifrost-gogn
-description: Sækir og undirbýr gögn úr Business Central í gegnum Bifröst fyrir mælaborð — flokkar bókhaldslykla, greinir tímabil, ófullbókaða mánuði, einskiptisliði og hvaða starfsemi félagið notar (vörur, verk, þjónusta, bankar) og skilar dataset.json. Notaðu á undan hverju Bifröst-mælaborði, eða þegar beðið er um rekstrartölur, mánaðaryfirlit eða samanburð við fyrra ár úr BC.
+description: Sækir og undirbýr gögn úr Business Central í gegnum Bifröst fyrir mælaborð — samtölur fyrst (Data.Totals.Get, period_breakdown, aging), færslur aðeins þar sem þarf; flokkar bókhaldslykla, greinir tímabil, ófullbókaða mánuði, einskiptisliði og hvaða starfsemi félagið notar (vörur, verk, þjónusta, bankar) og skilar dataset.json. Notaðu á undan hverju Bifröst-mælaborði, eða þegar beðið er um rekstrartölur, mánaðaryfirlit eða samanburð við fyrra ár úr BC.
 ---
 
 # Bifröst gagnalag
 
 Öll mælaborð byggja á sömu gögnum svo tölurnar stemmi á milli þeirra. Þetta skill sækir þau **einu sinni í lotu** og skilar `dataset.json`.
 
-**Aðeins lesið.** Notaðu aðeins lesaðgerðir Bifrastar (`data_batch_records`, `period_breakdown`, `aging`, `data_record_count`, `find_records`). Aldrei `inbound_invoke`, `inbound_queue` eða `set_records`.
+**Aðeins lesið.** Notaðu aðeins lesaðgerðir Bifrastar (`outbound_invoke` með `Data.Totals.Get`, `period_breakdown`, `aging`, `data_record_count`, `data_batch_records`, `find_records`). Aldrei `inbound_invoke`, `inbound_queue` eða `set_records`.
+
+**Samtölur fyrst, færslur aðeins þar sem þarf** (kafli 0). Það heldur keyrslunni hraðri og tölunum réttum upp á krónu, líka hjá félögum með hundruð þúsunda færslna á ári.
+
+## 0. Samtölur fyrst (regla fyrir öll mælaborð)
+
+BC leggur saman sjálft. Sæktu **aldrei færslur til að leggja þær saman** í skriftu eða í samhenginu.
+
+| Spurning | Tól | Dæmi |
+|---|---|---|
+| Hreyfing eða staða lykla á mánuði / ári | `period_breakdown` á `G/L Account` (`net_change` eða `balance`, allt að 12 bil) | Rekstrarreikningur, efnahagur í lok mánaðar |
+| Summa eftir einum flokki á tímabili | `outbound_invoke` → `Data.Totals.Get` (`subject` = tafla, `data`: `fieldNumbers`, `groupBy`, `tableView`) | Tekjur á viðskiptavin, kostnaður á lykil eða birgi, kostnaður og verð á verk, tímar á forða |
+| Kröfur og skuldir eftir aldri | `aging` | Aldursgreining, gjaldfallið |
+| Fjöldi | `data_record_count` | Starfsemisgreining, fjöldi reikninga í samþykkt |
+| Einstakar færslur | `data_batch_records` | Aðeins þar sem færslan sjálf skiptir máli (sjá neðst) |
+
+**Uppskriftir fyrir `Data.Totals.Get`** (staðlaðir BC-reitir; prófað á DT 19.10.2026, stemmdi upp á krónu við færslusummur):
+
+| Þörf | `subject` | `fieldNumbers` | `groupBy` | `tableView` (dæmi) |
+|---|---|---|---|---|
+| Hreyfing á fjárhagslykil á tímabili | `G/L Entry` | `[17]` Amount | `G/L Account No.` | `WHERE(Posting Date=FILTER(2026-01-01..2026-08-31),G/L Account No.=FILTER(1000..4999))` |
+| Sala á viðskiptavin | `Cust. Ledger Entry` | `[18]` Sales (LCY) | `Customer No.` | `WHERE(Posting Date=FILTER(…))` |
+| Innkaup á lánardrottin | `Vendor Ledger Entry` | `[18]` Purchase (LCY), formerki í mínus | `Vendor No.` | `WHERE(Posting Date=FILTER(…))` |
+| Kostnaður, verð og tímar á verk | `Job Ledger Entry` | `[9,13,15]` Quantity, Total Cost (LCY), Total Price (LCY) | `Job No.` | `WHERE(Entry Type=CONST(Usage))` (eða `Sale` fyrir reikningsfært) |
+| Tímar og kostnaður á forða | `Job Ledger Entry` eða `Res. Ledger Entry` | magn og kostnaður | `No.` / `Resource No.` | `WHERE(Type=CONST(Resource))` |
+| Sala á vöru | `Value Entry` | Sales Amount (Actual), Cost Amount (Actual) | `Item No.` | `WHERE(Item Ledger Entry Type=CONST(Sale),Posting Date=FILTER(…))` |
+| Tekjur á vöru, þjónustu eða verk á reikningum | `Sales Invoice Line` | Amount, Quantity | `No.` eða `Job No.` | `WHERE(Posting Date=FILTER(…))` |
+| Bankahreyfingar á reikning | `Bank Account Ledger Entry` | Amount (LCY) | `Bank Account No.` | `WHERE(Posting Date=FILTER(…))` |
+
+Fáist villan „ekki af gerðinni tugabrot“ eða óþekktur reitur: flettu reitanúmerum upp með `describe_message_type` (`include_fields`) eða `Help.Fields.Get` og reyndu aftur. Reitanúmer geta verið önnur í sérsniðnum töflum.
+
+**Takmarkanir og hvernig er farið í kringum þær**
+
+- **Ein flokkun í kalli.** „Lykill × mánuður“: notaðu `period_breakdown`, eða eitt `Data.Totals.Get`-kall á mánuð með dagsetningarsíu. `groupBy` á `Posting Date` gefur dagsummur sem má leggja saman í mánuði ef þarf.
+- **FlowFields** (t.d. *Amount (LCY)* og *Remaining Amount* í viðskiptamanna- og lánardrottnabók, *Balance* á lyklum) er hvorki hægt að leggja saman né flokka eftir. Notaðu geymda reiti (*Sales (LCY)*, *Purchase (LCY)*), `aging` fyrir opnar stöður og `period_breakdown` fyrir stöður lykla.
+- **Field Access:** hjá notanda með einhverja *Read*- eða *Both*-línu teljast allar FlowFields lokaðar, líka í síum og röðun. Byggðu síur á geymdum reitum svo skillin virki með ráðlagðri öryggisuppsetningu.
+- **Geymdir upphæðarreitir í undirbókum** ná aðeins yfir það sem var bókað sem skjal. *Sales (LCY)* og *Purchase (LCY)* eru 0 fyrir færslur úr almennri dagbók (t.d. tekjur bókaðar með dagbók eða kostnaður í erlendri mynt). Berðu því summu undirbókar saman við fjárhagslykilinn og segðu hve stór hluti er á undirbókinni (t.d. „um 30% tekna eru á viðskiptamannabók“).
+- **Hvert kall telst skilaboð** í kvóta Bifrastar, en eitt samtölukall kemur í stað margra síðna af færslum.
+
+**Færslur eru sóttar aðeins þegar færslan sjálf skiptir máli:**
+
+1. **Opnar kröfur og skuldir með gjalddaga** fyrir sjóðspá (`Cust./Vendor Ledger Entry`, `Open=CONST(true)`, takmarkaðir reitir).
+2. **Færsluprófanir og færsluvakt** (tvíreikningsfærsla, sléttar fjárhæðir, helgarfærslur, handfærðar tekjur): sæktu aðeins færslur sem uppfylla síu, t.d. `Source Code=FILTER(<>SALA)` á tekjulyklum, ekki alla töfluna.
+3. **Drill-down í mælaborði: sama virkni og áður.** Samtölurnar breyta ekki því sem notandinn getur smellt á: allir liðir opnast niður í lykla, birgja, viðskiptavini eða verk (úr samtölum, alltaf heilt), og þaðan niður í færslur. Hvernig færslurnar fylgja með ræðst af fjölda, sem þú telur fyrst með `data_record_count` á sömu síu:
+   - **≤ 5.000 færslur** á tímabili og svæði mælaborðsins (algengt hjá litlum og meðalstórum félögum): sæktu þær allar, eins og áður. Hver liður opnast niður í allar sínar færslur.
+   - **Fleiri:** sæktu allar færslur fyrir stærstu liðina sem saman ná 80% af upphæðinni (mest 50 liðir), með síu á hvern lið. Aðrir liðir opnast niður á samtölustig (t.d. mánuð eða fylgiskjal) og sýna línuna „Spurðu gervigreindina: *sýndu færslurnar á bak við X*“. Segðu í fæti hve stór hluti upphæðarinnar er rekjanlegur niður í færslur í síðunni.
+4. **Sýnishorn** fyrir lýsingar og dæmi (t.d. síðasti reikningur birgis): `take:1`–`5`.
+
+Skráðu í `dataset.json` → `sources` hvaða tól skilaði hverri tölu (`totals`, `period_breakdown`, `aging`, `records`), svo hægt sé að rekja hana.
 
 ## 1. Velja félag
 
@@ -22,9 +70,9 @@ Spyrðu einnar spurningar ef það er ekki ljóst: **„Eitt félag eða samstæ
 - Keyrðu skref 2–5 **fyrir hvert félag** og vistaðu sem `dataset_<félag>.json`.
 - Finndu **innbyrðis viðskipti** (sjá kafla 7) og sameinaðu með `build_consolidated.py`.
 
-## 2. Starfsemisgreining (eitt kall)
+## 2. Starfsemisgreining (eitt kall á töflu)
 
-`data_batch_records` með `take:1` og `field_numbers:[1]` á þessar töflur og lestu `noOfRecords`:
+`data_record_count` á þessar töflur (eða `data_batch_records` með `take:1` og `field_numbers:[1]` og lestu `noOfRecords`):
 
 | Tafla | Merking ef > 0 |
 |---|---|
@@ -72,12 +120,13 @@ Skriftan prentar samantekt. **Berðu tekjur og EBITDA saman við** samtölu peri
 | Þörf | Kall |
 |---|---|
 | Kröfur / skuldir eftir aldri | `aging` með `entity:"customer"` / `"vendor"`, `period_length:"1M"`, `number_of_periods:4` |
-| Opnar kröfur á viðskiptamann | `data_batch_records` á `Cust. Ledger Entry`, `WHERE(Open=CONST(true))` |
-| Verk og staða | `Job` (fields 1,3,5,13,14,19), `Job Ledger Entry` (2,3,4,5,7,8,9,13,15,1000), `Job Planning Line` (1,8,9,12,13,15,1001), `Job Task` (1,2,3,4) |
-| Staða banka | `period_breakdown` á `Bank Account` með balance-svæði, eða `Bank Account Ledger Entry` |
-| Vörur | `Item Ledger Entry` og `Value Entry` eftir vöru og mánuði |
+| Sala á viðskiptavin / innkaup á birgi | `Data.Totals.Get` (kafli 0) |
+| Opnar kröfur með gjalddaga (sjóðspá) | `data_batch_records` á `Cust. Ledger Entry`, `WHERE(Open=CONST(true))`, aðeins reitir sem þarf |
+| Verk og staða | `Job` (fields 1,3,5,13,14,19) og `Job Planning Line` (1,8,9,12,13,15,1001) sem færslur; **notkun og sala á verk sem samtölur** (`Data.Totals.Get` á `Job Ledger Entry`, `groupBy` `Job No.`, eitt kall fyrir `Usage` og eitt fyrir `Sale`) |
+| Staða banka | `period_breakdown` á `Bank Account` með balance-svæði; hreyfingar sem samtölur á `Bank Account Ledger Entry` |
+| Vörur | `Data.Totals.Get` á `Value Entry` eftir vöru; mánaðarþróun með einu kalli á mánuð eða `period_breakdown` á `Item` |
 
-Gefðu `field_numbers` alltaf þegar hægt er (svörin verða minni). Fáist villa um óþekkt svæðisnúmer, sæktu eina færslu án `field_numbers` til að sjá nöfnin og veldu svo.
+Gefðu `field_numbers` alltaf þegar færslur eru sóttar (svörin verða minni). Fáist villa um óþekkt svæðisnúmer, sæktu eina færslu án `field_numbers` til að sjá nöfnin og veldu svo.
 
 ## 6b. Fjárhagsáætlanir
 
@@ -92,7 +141,7 @@ Finndu og skráðu í `eliminations.json` (sjá snið í skriftunni):
 
 | Tegund | Hvernig fundið | Jöfnun |
 |---|---|---|
-| `rekstur` | Viðskiptamenn í félagi A sem eru önnur félög í samstæðunni: sala á mánuði úr `Cust. Ledger Entry` (tegund reikningur). Staðfestu mótlið hjá kaupanda (oftast annar rekstur eða vörunotkun) með því að bera saman fjárhæðir á mánuði. | Lækkar tekjur seljanda og kostnað kaupanda jafnt. EBITDA samstæðu breytist ekki. |
+| `rekstur` | Viðskiptamenn í félagi A sem eru önnur félög í samstæðunni: sala á mánuði sem samtala (`Data.Totals.Get` á `Cust. Ledger Entry`, `Customer No.` síað á samstæðufélögin, `groupBy` `Posting Date` eða eitt kall á mánuð). Staðfestu mótlið hjá kaupanda (oftast annar rekstur eða vörunotkun) með því að bera saman fjárhæðir á mánuði. | Lækkar tekjur seljanda og kostnað kaupanda jafnt. EBITDA samstæðu breytist ekki. |
 | `ardur` | Lyklar með „arð“ hjá móðurfélagi, og lækkun á óráðstöfuðu eigin fé hjá dótturfélagi sama mánuð. | Fellur út úr fjármunatekjum. Hagnaður samstæðu lækkar. |
 | `fjarmagn` | Vaxtatekjur „frá tengdum aðilum“ á móti vaxtagjöldum hjá öðru félagi í samstæðunni. | Fellur út báðum megin. |
 | `stada` | Opnar kröfur og skuldir milli samstæðufélaga (`aging` með `entity_filter` á viðkomandi viðskiptamann/lánardrottinn). | Lækkar kröfur og skammtímaskuldir samstæðu. |

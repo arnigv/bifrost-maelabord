@@ -299,14 +299,14 @@ ul.hl{list-style:none;margin:0;padding:0;display:grid;gap:9px}ul.hl li{display:g
     <h1>Bifröst mælaborð fyrir Business Central</h1>
     <p>Gervigreind les bókhaldið í Business Central í gegnum Bifröst og býr til gagnvirk mælaborð fyrir stjórn, fjármál og rekstur, á íslensku og með tölum sem rekja má niður í færslur. Hér er allt ferlið, með myndrænum dæmum úr Vélsmiðjusamstæðunni.</p>
     <div class="row"><div><b>6</b><span>sjálfgefin mælaborð</span></div><div><b>+15</b><span>að vali, þar af 12 eftir atvinnugrein</span></div><div><b>9 + 23</b><span>erindrekar og handverk</span></div><div><b>~20–25 mín.</b><span>fyrsta keyrsla</span></div></div>
-    <div class="cta"><a class="btn or" href="bifrost-maelabord-1.0.0.zip" download>⬇ Sækja pluginið (154 KB)</a><a class="btn gh" href="#uppsetning">Uppsetning</a><a class="btn gh" href="#dt" data-page="dt">Sýnidæmi</a></div>
+    <div class="cta"><a class="btn or" href="bifrost-maelabord-1.0.0.zip" download>⬇ Sækja pluginið (159 KB)</a><a class="btn gh" href="#uppsetning">Uppsetning</a><a class="btn gh" href="#dt" data-page="dt">Sýnidæmi</a></div>
   </section>
 
   <nav class="subnav" aria-label="Kaflar"><a href="#uppsetning">Sækja og setja upp</a><a href="#keyrsla">Fyrsta keyrsla</a><a href="#maelabord">Mælaborðin</a><a href="#fleiri">Fleiri</a><a href="#samstaeda">Samstæður</a><a href="#simi">Í síma</a><a href="#skipanir">Skipanir</a><a href="#skills">Skills og samhengi</a><a href="#sjalfvirkni">Erindrekar</a><a href="#oryggi">Öryggi</a></nav>
   <section class="s" id="uppsetning">
     <div class="kick">Sækja og setja upp</div><h2>Pluginið er ein zip-skrá af vef Origo</h2>
     <p class="lead">Sæktu skrána og veldu svo hvort þú setur hana upp fyrir þig eða fyrir allt fyrirtækið. Bifröst þarf að vera uppsett í Business Central.</p>
-    <div class="dl"><div class="dl-i">⬇</div><div><b>bifrost-maelabord-1.0.0.zip</b><span>Útgáfa 1.0.0 · 154 KB · 14 skills, leiðbeiningar og sniðmát</span></div><a class="btn or" href="bifrost-maelabord-1.0.0.zip" download>Sækja pluginið</a></div>
+    <div class="dl"><div class="dl-i">⬇</div><div><b>bifrost-maelabord-1.0.0.zip</b><span>Útgáfa 1.0.0 · 159 KB · 14 skills, leiðbeiningar og sniðmát</span></div><a class="btn or" href="bifrost-maelabord-1.0.0.zip" download>Sækja pluginið</a></div>
     <div class="grid g2">
       <article class="card opt"><div class="opt-h"><span class="ico">1</span><div><h3>Fyrir þig (handvirkt)</h3><p>Þegar þú vilt prófa sjálf(ur) eða fyrirtækið hefur ekki sett pluginið upp.</p></div></div>
         <ol class="st"><li>Sæktu <code>bifrost-maelabord-1.0.0.zip</code> hér að ofan.</li><li>Opnaðu gervigreindarforritið og farðu í <b>Customize → Plugins</b>.</li><li>Veldu <b>Upload plugin</b> og zip-skrána. Pluginið birtist undir <i>Bifröst mælaborð</i>.</li><li>Tengdu Bifröst og skráðu þig inn með BC-aðganginum.</li></ol>
@@ -412,6 +412,7 @@ ul.hl{list-style:none;margin:0;padding:0;display:grid;gap:9px}ul.hl li{display:g
       <div class="card"><div class="ico">S</div><h3>Skill</h3><p>Pakki af leiðbeiningum, og stundum skriftum og sniðmátum, sem kennir gervigreindinni eitt verk, t.d. „hvernig á að smíða stjórnarmælaborð úr BC“. Hvert skill hefur stutta <b>lýsingu</b>; gervigreindin les lýsingarnar og <b>hleður aðeins því skilli sem á við</b>. Skills geyma engin gögn.</p><p><a href="skills.html" data-skills>Sjá öll 14 skills →</a></p></div>
       <div class="card"><div class="ico or">C</div><h3>Samhengi</h3><p>Það sem gervigreindin hefur fyrir framan sig í samtalinu: skilaboðin, skillin sem voru hlaðin, niðurstöður úr Bifröst og skrár. Það er takmarkað og hverfur þegar samtalinu lýkur. Það sem á að lifa áfram er vistað annars staðar: mælaborðin sem síður og minni í Bifröst.</p></div>
     </div>
+    <div class="card" style="margin-top:16px"><div class="ico">Σ</div><h3>Samtölur fyrst</h3><p>Grunnskillið <code>bifrost-gogn</code> lætur Business Central leggja saman: tekjur á viðskiptavin, kostnað á lykil eða birgi, kostnað og verð á verk og hreyfingar lykla á mánuði. Drill-down er eins og áður: allir liðir opnast niður í lykla og færslur. Hjá félagi með fleiri en 5.000 færslur á tímabilinu fylgja færslur stærstu liðanna (80% af upphæð) með og hinir sýna samtölu. Keyrslan helst hröð hjá stórum félögum og tölurnar stemma upp á krónu.</p></div>
     <div class="flow"><span>Þú: „Í Kostnaði…“</span><i>→</i><span>lýsingar skilla lesnar</span><i>→</i><span><code>kostnadur</code> + <code>bifrost-maelabord</code> hlaðin</span><i>→</i><span>gögn sótt úr BC um Bifröst</span><i>→</i><span>mælaborð birt</span></div>
     <div class="layers">
       <div class="layer"><span class="lv" style="background:#006A77">1</span><div><b>Plugin (Origo)</b><p>Skillin: hönnun, útreikningar, flokkun eftir atvinnugrein, öryggisreglur. Engin gögn viðskiptavina.</p></div><span class="who">Allir notendur pluginsins</span></div>

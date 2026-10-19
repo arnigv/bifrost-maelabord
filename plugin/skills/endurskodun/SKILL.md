@@ -33,6 +33,7 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/classify_size.py --thresholds ${CLAUDE_SKILL
 ## 2. Gögn úr BC
 
 - `dataset.json` (rekstur + efnahagur) úr `bifrost-gogn`, helst líka fyrra ár.
+- **Samtölur fyrst** (`bifrost-gogn`, kafli 0): rekstur, efnahagur og undirbækur koma úr `period_breakdown`, `aging` og `Data.Totals.Get`. Færslur eru aðeins sóttar fyrir færsluprófanirnar hér að neðan.
 - **Fjárhagsfærslur** (`G/L Entry`) fyrir færsluprófanir: reitir 3 lykill, 4 bókunardagur, 5 tegund, 6 fylgiskjal, 7 lýsing, 17 fjárhæð, 27 notandi, 28 upprunakóði. Sæktu í hlutum (tekjulyklar, færslur ≥ framkvæmdamikilvægi, síðustu 2 mánuðir ársins og fyrsti mánuður næsta árs).
 - **Undirbækur:** aldursgreining viðskiptamanna og lánardrottna (`aging`), bankareikningar og afstemmingar (`Bank Acc. Reconciliation`, `Bank Account Ledger Entry`), fastafjármunir (`Fixed Asset`, `FA Ledger Entry`), birgðir (`Item Ledger Entry`), VSK-uppgjör.
 - **Tengdir aðilar:** viðskiptamenn og lánardrottnar merktir sem tengdir, millifélagslyklar.

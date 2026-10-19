@@ -14,6 +14,7 @@ Stjórn þarf að sjá á 30 sekúndum hvort reksturinn er á réttri leið, hva
 - `dataset.json` úr `bifrost-gogn` (í ár og fyrra ár).
 - Efnahagur: `period_breakdown` á `G/L Account` með `field_type:"balance"` og `Income/Balance=CONST(Balance Sheet)`, staða í lok hvers mánaðar. Flokkaðu í handbært fé, kröfur, birgðir, fastafjármuni, skammtímaskuldir, langtímaskuldir og eigið fé eftir undirflokki og nafni.
 - `aging` fyrir viðskiptamenn og lánardrottna.
+- Samþjöppun viðskiptavina og „hvað breyttist mest“ á lykil: samtölur (`Data.Totals.Get`), ekki færslur. Drill-down í Rekstri er óbreytt: liður → lyklar (úr `dataset.json`, alltaf heilt) → færslur, **sama drill-down og áður** (sjá `bifrost-gogn`, kafli 0: allar færslur ef þær eru ≤ 5.000 á tímabilinu, annars færslur stærstu liðanna).
 - Ef verk: fjöldi opinna verka, óreikningsfært (úr `tekjuleki` ef keyrt).
 
 ## 2. Flipar (fjórir)

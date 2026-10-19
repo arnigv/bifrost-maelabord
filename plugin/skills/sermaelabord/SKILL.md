@@ -38,9 +38,10 @@ Fylgdu `bifrost-maelabord` (útlit og reglur 1.0: hámark fjórir flipar og fjó
 ## 3. Smíði sérmælaborðs
 
 1. Lestu pakkann úr `pakkar.json`. Notaðu flipana fjóra og veldu **fjóra lykilmælikvarða** sem gögnin í BC styðja. Mælikvarði sem vantar gögn fyrir (t.d. tilboð sem eru ekki skráð í BC, bókunarkerfi utan BC) fer í kort **„Vantar gögn“** með því hvað þarf að skrá, ekki tilbúin tala.
-2. Endurnýttu gögn og útreikninga annarra skilla þar sem þau skarast (verk úr `framlegd`, birgðir úr `framlegd` vörusýn, samstæða úr `bifrost-gogn` kafla 7, áætlanir úr `stjorn`) svo tölur stemmi milli mælaborða.
-3. Leiðarstika á miðstöðina, fótur með heimild og gervigreindarmerkingu.
-4. Birtu sem nýtt artifact `<Félag> · <Sérmælaborð>` og **uppfærðu miðstöðina**: nýtt spjald í „Mælaborðin þín“, merkt „Þegar bætt við“ í glugganum.
+2. **Samtölur fyrst** (`bifrost-gogn`, kafli 0): t.d. WIP og kostnaður á verk, sala á verslun eða vöruflokk, leigutekjur á eign og kostnaður á bíl sem `Data.Totals.Get` með `groupBy` á viðkomandi reit (verk, vídd, staðsetning, vöruflokkur). Færslur aðeins fyrir drill-down á stærstu liðina.
+3. Endurnýttu gögn og útreikninga annarra skilla þar sem þau skarast (verk úr `framlegd`, birgðir úr `framlegd` vörusýn, samstæða úr `bifrost-gogn` kafla 7, áætlanir úr `stjorn`) svo tölur stemmi milli mælaborða.
+4. Leiðarstika á miðstöðina, fótur með heimild og gervigreindarmerkingu.
+5. Birtu sem nýtt artifact `<Félag> · <Sérmælaborð>` og **uppfærðu miðstöðina**: nýtt spjald í „Mælaborðin þín“, merkt „Þegar bætt við“ í glugganum.
 
 ## 4. Sannreyning
 

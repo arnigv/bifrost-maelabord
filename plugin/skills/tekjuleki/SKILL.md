@@ -13,10 +13,10 @@ Sterkasta „wow“-mælaborðið: það finnur krónur sem viðskiptavinurinn v
 
 1. Keyrðu `bifrost-gogn` (eða notaðu `dataset.json` lotunnar). Lestu `profile` til að vita hvaða athuganir eiga við.
 2. Sæktu eftir þörf (sjá töflu í `bifrost-gogn`, kafla 6):
-   - **Ef verk:** `Job`, `Job Task`, `Job Planning Line`, `Job Ledger Entry`.
+   - **Ef verk:** `Job`, `Job Task`, `Job Planning Line`; notkun og sala á verk sem samtölur (`Data.Totals.Get` á `Job Ledger Entry`, `groupBy` `Job No.`). Notkun á 0 kr.: sæktu aðeins færslur með `Total Price=CONST(0)` og `Entry Type=CONST(Usage)`.
    - **Alltaf:** `aging` fyrir viðskiptamenn (`as_of_date` = í dag), og opnar `Cust. Ledger Entry`.
    - **Ef vörur:** sölufærslur í `Value Entry` (vara, magn, söluupphæð, afsláttur) síðustu 6 mánuði.
-   - Tekjur á viðskiptamann á mánuði síðustu 12 mánuði, úr `Cust. Ledger Entry` (reikningar), til að finna rof.
+   - Tekjur á viðskiptamann á mánuði síðustu 12 mánuði, til að finna rof: `Data.Totals.Get` á `Cust. Ledger Entry` (`groupBy` `Customer No.`), eitt kall á mánuð.
 
 ## 2. Athuganir
 
