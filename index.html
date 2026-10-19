@@ -189,6 +189,24 @@ svg.mini{width:100%;height:auto;display:block;overflow:visible}
 .mleg{display:flex;flex-wrap:wrap;gap:3px 10px;font-size:.58rem;color:#6e6e70}.mleg i{display:inline-block;width:10px;height:3px;margin-right:4px;vertical-align:2px}
 @media (max-width:420px){.mk-k{grid-template-columns:repeat(2,minmax(0,1fr))}.mhb div{grid-template-columns:minmax(0,5.5rem) minmax(0,1fr) auto}}
 
+
+.cmpq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+.cmpq>div{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:6px}
+.cmpq .bad{box-shadow:inset 4px 0 0 var(--bad)}.cmpq .good{box-shadow:inset 4px 0 0 var(--ok)}
+.cmpq h4{margin:0}.cmpq .bad h4{color:var(--bad)}.cmpq .good h4{color:var(--ok)}
+.cmpq p{color:var(--ink2);font-size:.9rem}.cmpq small{color:var(--muted);font-size:.78rem}
+.cmpq .bar{height:10px;border-radius:9px;background:var(--panel2);overflow:hidden}.cmpq .bar span{display:block;height:100%;border-radius:9px}
+.cmpq .bad .bar span{background:var(--bad)}.cmpq .good .bar span{background:var(--ok)}
+@media (max-width:640px){.cmpq{grid-template-columns:minmax(0,1fr)}}
+.dtree{display:grid;gap:8px;margin-top:14px}
+.dtree>div{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1.2fr);gap:10px;align-items:center}
+.dtree .q,.dtree .a{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;gap:2px;font-weight:700;font-size:.9rem}
+.dtree .a{border-left:4px solid var(--brand2)}
+.dtree small{font-weight:500;color:var(--muted);font-size:.8rem}.dtree i{font-style:normal;color:var(--muted)}
+@media (max-width:640px){.dtree>div{grid-template-columns:minmax(0,1fr)}.dtree i{display:none}.dtree .a{margin-left:14px}}
+.tips{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px;margin-top:14px}
+.tips>div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:4px;align-content:start}
+.tips b{font-size:.94rem}.tips p{color:var(--ink2);font-size:.86rem}
 html{scroll-padding-top:136px}
 .ptabs{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px}
 .ptabs button,.ptabs a{display:inline-flex;align-items:center;font:inherit;font-size:.82rem;font-weight:700;border:0;background:none;color:var(--ink2);padding:7px 12px;border-radius:9px;cursor:pointer;text-decoration:none;white-space:nowrap}
@@ -299,14 +317,14 @@ ul.hl{list-style:none;margin:0;padding:0;display:grid;gap:9px}ul.hl li{display:g
     <h1>Bifröst mælaborð fyrir Business Central</h1>
     <p>Gervigreind les bókhaldið í Business Central í gegnum Bifröst og býr til gagnvirk mælaborð fyrir stjórn, fjármál og rekstur, á íslensku og með tölum sem rekja má niður í færslur. Hér er allt ferlið, með myndrænum dæmum úr Vélsmiðjusamstæðunni.</p>
     <div class="row"><div><b>6</b><span>sjálfgefin mælaborð</span></div><div><b>+15</b><span>að vali, þar af 12 eftir atvinnugrein</span></div><div><b>9 + 23</b><span>erindrekar og handverk</span></div><div><b>~20–25 mín.</b><span>fyrsta keyrsla</span></div></div>
-    <div class="cta"><a class="btn or" href="bifrost-maelabord-1.0.0.zip" download>⬇ Sækja pluginið (159 KB)</a><a class="btn gh" href="#uppsetning">Uppsetning</a><a class="btn gh" href="#dt" data-page="dt">Sýnidæmi</a></div>
+    <div class="cta"><a class="btn or" href="bifrost-maelabord-1.0.0.zip" download>⬇ Sækja pluginið (160 KB)</a><a class="btn gh" href="#uppsetning">Uppsetning</a><a class="btn gh" href="#dt" data-page="dt">Sýnidæmi</a></div>
   </section>
 
-  <nav class="subnav" aria-label="Kaflar"><a href="#uppsetning">Sækja og setja upp</a><a href="#keyrsla">Fyrsta keyrsla</a><a href="#maelabord">Mælaborðin</a><a href="#fleiri">Fleiri</a><a href="#samstaeda">Samstæður</a><a href="#simi">Í síma</a><a href="#skipanir">Skipanir</a><a href="#skills">Skills og samhengi</a><a href="#sjalfvirkni">Erindrekar</a><a href="#oryggi">Öryggi</a></nav>
+  <nav class="subnav" aria-label="Kaflar"><a href="#uppsetning">Sækja og setja upp</a><a href="#keyrsla">Fyrsta keyrsla</a><a href="#maelabord">Mælaborðin</a><a href="#fleiri">Fleiri</a><a href="#samstaeda">Samstæður</a><a href="#simi">Í síma</a><a href="#skipanir">Skipanir</a><a href="#fyrirspurnir">Hraðari fyrirspurnir</a><a href="#skills">Skills og samhengi</a><a href="#sjalfvirkni">Erindrekar</a><a href="#oryggi">Öryggi</a></nav>
   <section class="s" id="uppsetning">
     <div class="kick">Sækja og setja upp</div><h2>Pluginið er ein zip-skrá af vef Origo</h2>
     <p class="lead">Sæktu skrána og veldu svo hvort þú setur hana upp fyrir þig eða fyrir allt fyrirtækið. Bifröst þarf að vera uppsett í Business Central.</p>
-    <div class="dl"><div class="dl-i">⬇</div><div><b>bifrost-maelabord-1.0.0.zip</b><span>Útgáfa 1.0.0 · 159 KB · 14 skills, leiðbeiningar og sniðmát</span></div><a class="btn or" href="bifrost-maelabord-1.0.0.zip" download>Sækja pluginið</a></div>
+    <div class="dl"><div class="dl-i">⬇</div><div><b>bifrost-maelabord-1.0.0.zip</b><span>Útgáfa 1.0.0 · 160 KB · 14 skills, leiðbeiningar og sniðmát</span></div><a class="btn or" href="bifrost-maelabord-1.0.0.zip" download>Sækja pluginið</a></div>
     <div class="grid g2">
       <article class="card opt"><div class="opt-h"><span class="ico">1</span><div><h3>Fyrir þig (handvirkt)</h3><p>Þegar þú vilt prófa sjálf(ur) eða fyrirtækið hefur ekki sett pluginið upp.</p></div></div>
         <ol class="st"><li>Sæktu <code>bifrost-maelabord-1.0.0.zip</code> hér að ofan.</li><li>Opnaðu gervigreindarforritið og farðu í <b>Customize → Plugins</b>.</li><li>Veldu <b>Upload plugin</b> og zip-skrána. Pluginið birtist undir <i>Bifröst mælaborð</i>.</li><li>Tengdu Bifröst og skráðu þig inn með BC-aðganginum.</li></ol>
@@ -404,6 +422,41 @@ ul.hl{list-style:none;margin:0;padding:0;display:grid;gap:9px}ul.hl li{display:g
     <div class="vs"><div class="bad"><h4>Óljóst</h4><p>„Lagaðu mælaborðið.“ · „Bættu við meiru um kostnað.“</p></div><div class="good"><h4>Skýrt</h4><p>„Í Kostnaði: bættu við flipa með 10 stærstu birgjum eftir ársfjórðungum, með breytingu frá fyrra ári, og leyfðu að smella niður í reikninga.“</p></div></div>
     <div class="grid g2"><div class="card"><h3>Uppfæra og endurtaka</h3><div class="ex"><div class="pq"><div><q>Uppfærðu tölurnar í öllum mælaborðunum.</q><small>Ný gögn úr BC</small></div><button class="btn sm ln" type="button" data-copy="Uppfærðu tölurnar í öllum mælaborðunum.">Afrita</button></div><div class="pq"><div><q>Keyrðu þetta sjálfkrafa fyrsta virka dag hvers mánaðar og sendu mér samantekt.</q><small>Áætlað verkefni</small></div><button class="btn sm ln" type="button" data-copy="Keyrðu þetta sjálfkrafa fyrsta virka dag hvers mánaðar og sendu mér samantekt.">Afrita</button></div></div></div>
       <div class="card"><h3>Laga og aðlaga</h3><div class="ex"><div class="pq"><div><q>Í Tekjum: taktu Vörur og þjónusta út og settu verkayfirlit í staðinn.</q><small>Breyta flipa</small></div><button class="btn sm ln" type="button" data-copy="Í Tekjum: taktu Vörur og þjónusta út og settu verkayfirlit í staðinn.">Afrita</button></div><div class="pq"><div><q>Gerðu sama mælaborð fyrir Hríseyjarhús.</q><small>Annað félag</small></div><button class="btn sm ln" type="button" data-copy="Gerðu sama mælaborð fyrir Hríseyjarhús.">Afrita</button></div></div></div></div>
+  </section>
+
+  <section class="s" id="fyrirspurnir">
+    <div class="kick">Góð ráð · hraðari fyrirspurnir</div><h2>Láttu Business Central leggja saman</h2>
+    <p class="lead">Mælaborðin eru hröðust og nákvæmust þegar BC reiknar samtölurnar sjálft, í stað þess að gervigreindin sæki allar færslur og leggi þær saman. Pluginið gerir þetta sjálfkrafa, en sömu ráð eiga við þegar þú spyrð sjálf(ur) eða biður um ný mælaborð.</p>
+    <div class="cmpq">
+      <div class="bad"><h4>Hæg leið</h4><b>Sækja færslur og leggja saman</b><p>Allar fjárhagsfærslur tímabilsins sóttar, síðu fyrir síðu, og lagðar saman. Vex með stærð félagsins og getur rofnað hjá félagi með hundruð þúsunda færslna.</p><div class="bar"><span style="width:100%"></span></div><small>DT: 126 tekjufærslur + 4 síður kostnaðarfærslna</small></div>
+      <div class="good"><h4>Hröð leið</h4><b>Eitt kall, BC leggur saman</b><p>Hreyfing allra 114 bókunarlykla jan–ágú í einu kalli, með heiti. Jafn hratt hvort sem færslurnar eru hundrað eða milljón.</p><div class="bar"><span style="width:6%"></span></div><small>DT: 1 kall · stemmdi upp á krónu á öllum 48 lyklum með hreyfingu</small></div>
+    </div>
+    <h3 class="h3s">Hvaða leið hentar spurningunni?</h3>
+    <div class="dtree">
+      <div><span class="q">Ein tala á hvert spjald? <small>lykil, viðskiptavin, birgi, vöru, forða</small></span><i>→</i><span class="a"><b>FlowField á spjaldinu</b><small>Hreyfing, Sala (SGM), Innkaup (SGM), Birgðir, Notkun með <code>Date Filter</code></small></span></div>
+      <div><span class="q">Sama tala á mánuði?</span><i>→</i><span class="a"><b><code>period_breakdown</code></b><small>allt að 12 bil í einu kalli, á hvaða spjaldatöflu sem er</small></span></div>
+      <div><span class="q">Flokkað eftir öðru? <small>dagsetningu, verki, tegund færslu, fylgiskjali</small></span><i>→</i><span class="a"><b><code>Data.Totals.Get</code></b><small>summa á færslutöflu með <code>groupBy</code> og síu</small></span></div>
+      <div><span class="q">Kröfur og skuldir eftir aldri?</span><i>→</i><span class="a"><b><code>aging</code></b><small>reiknað úr undirbók á dagsetningu</small></span></div>
+      <div><span class="q">Þarf færsluna sjálfa?</span><i>→</i><span class="a"><b>Færslur, en takmarkaðar</b><small>telja fyrst, sía þröngt, aðeins reitir sem þarf</small></span></div>
+    </div>
+    <h3 class="h3s">Tíu góð ráð</h3>
+    <div class="tips">
+      <div><b>1. Biddu um samtölur, ekki færslur</b><p>„Hver er hreyfingin á lykil?“ er eitt kall. „Sýndu allar færslur“ getur verið þúsundir.</p></div>
+      <div><b>2. FlowFields á spjöldum fyrst</b><p>Sala á viðskiptavin er reitur á viðskiptamanninum (Sala SGM) með dagsetningarsíu. Sama fyrir innkaup á birgi, sölu og birgðir á vöru og tíma á forða.</p></div>
+      <div><b>3. Síur gefa sundurliðun</b><p>Deild, verk eða rekstrareining fæst með víddasíu á lyklinum (<code>Global Dimension 1 Filter</code>), án þess að sækja eina einustu færslu.</p></div>
+      <div><b>4. Mánuðir í einu kalli</b><p><code>period_breakdown</code> skilar allt að 12 mánuðum í einu, líka fyrir viðskiptamenn og vörur.</p></div>
+      <div><b>5. Teldu áður en þú sækir</b><p><code>data_record_count</code> segir hve margar færslur eru á bak við. Undir 5.000 má sækja allar; yfir því aðeins stærstu liðina.</p></div>
+      <div><b>6. Aðeins reitirnir sem þarf</b><p>Tilgreindu reitanúmer. Ein færsla með öllum reitum getur verið 50 sinnum stærri en með þeim sex sem skipta máli.</p></div>
+      <div><b>7. Dagsetningar sem ÁÁÁÁ-MM-DD</b><p>Í töflusýn og síum: <code>FILTER(2026-01-01..2026-08-31)</code>. Önnur snið geta verið lesin vitlaust af BC.</p></div>
+      <div><b>8. Berðu saman tvær leiðir</b><p>Ný aðferð? Sæktu sömu tölu á tvo vegu, t.d. Hreyfingu og samtölu færslna. Ef þær stemma upp á krónu má treysta henni.</p></div>
+      <div><b>9. Þekktu takmarkanir undirbóka</b><p>Sala og innkaup á spjaldi ná ekki yfir færslur úr almennri dagbók. Berðu alltaf saman við fjárhagslykilinn.</p></div>
+      <div><b>10. Field Access getur lokað FlowFields</b><p>Ef reiturinn er lokaður fyrir notandann: samtala færslna með <code>Data.Totals.Get</code> á geymdum reit, t.d. Amount.</p></div>
+    </div>
+    <h3 class="h3s">Skipanir sem nýta þetta</h3>
+    <div class="grid g2">
+      <div class="card"><div class="ex"><div class="pq"><div><q>Sæktu hreyfingu á alla rekstrarlykla fyrir janúar–september með Date Filter, ekki færslurnar.</q><small>Rekstur á lykil</small></div><button class="btn sm ln" type="button" data-copy="Sæktu hreyfingu á alla rekstrarlykla fyrir janúar–september með Date Filter, ekki færslurnar.">Afrita</button></div><div class="pq"><div><q>Sýndu sölu á viðskiptavin á þessu ári og í fyrra, með Sala (SGM) á viðskiptamanninum.</q><small>Sala á viðskiptavin</small></div><button class="btn sm ln" type="button" data-copy="Sýndu sölu á viðskiptavin á þessu ári og í fyrra, með Sala (SGM) á viðskiptamanninum.">Afrita</button></div><div class="pq"><div><q>Sýndu rekstur deildar UPPSETN fyrir Q3 með víddasíu á lyklunum.</q><small>Sundurliðun á deild</small></div><button class="btn sm ln" type="button" data-copy="Sýndu rekstur deildar UPPSETN fyrir Q3 með víddasíu á lyklunum.">Afrita</button></div></div></div>
+      <div class="card"><div class="ex"><div class="pq"><div><q>Hve margar færslur eru á kostnaðarlyklum í ár? Sæktu aðeins færslur 10 stærstu lyklanna.</q><small>Telja fyrst</small></div><button class="btn sm ln" type="button" data-copy="Hve margar færslur eru á kostnaðarlyklum í ár? Sæktu aðeins færslur 10 stærstu lyklanna.">Afrita</button></div><div class="pq"><div><q>Berðu saman hreyfingu á lykil og samtölu fjárhagsfærslna fyrir ágúst og sýndu mun ef einhver er.</q><small>Sannreyna</small></div><button class="btn sm ln" type="button" data-copy="Berðu saman hreyfingu á lykil og samtölu fjárhagsfærslna fyrir ágúst og sýndu mun ef einhver er.">Afrita</button></div><div class="pq"><div><q>Mundu fyrir þetta félag: deildir eru í vídd 1 og verk í vídd 2.</q><small>Vista í minni félagsins</small></div><button class="btn sm ln" type="button" data-copy="Mundu fyrir þetta félag: deildir eru í vídd 1 og verk í vídd 2.">Afrita</button></div></div></div>
+    </div>
   </section>
 
   <section class="s" id="skills">

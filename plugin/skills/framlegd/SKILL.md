@@ -21,7 +21,7 @@ Sameinar fyrri mælaborðin *Framlegð* og *Vörur og þjónusta*. **Óreiknings
 
 | Starfsemi | Gögn |
 |---|---|
-| Verk (`jobs` > 0) | `Job`, `Job Task`, `Job Planning Line` sem færslur; **notkun og sala á verk sem samtölur**: `Data.Totals.Get` á `Job Ledger Entry` (`[9,13,15]`, `groupBy` `Job No.`, eitt kall með `Entry Type=CONST(Usage)` og eitt með `Sale`); tímar á forða með `groupBy` `No.` og `Type=CONST(Resource)`. Framlegð á verk = reikningsfært/reikningshæft − kostnaður; framlegð við verklok = samningur − áætlaður heildarkostnaður |
+| Verk (`jobs` > 0) | `Job`, `Job Task`, `Job Planning Line` sem færslur; **notkun og sala á verk sem samtölur**: `Data.Totals.Get` á `Job Ledger Entry` (`[9,13,15]`, `groupBy` `Job No.`, eitt kall með `Entry Type=CONST(Usage)` og eitt með `Sale`); tímar, kostnaður og verð á forða sem FlowFields á `Resource` (44–46 með `Date Filter`), sýnt með kóða en ekki nafni. Sala og birgðir á vöru sem FlowFields á `Item` (72, 78, 68). Framlegð á verk = reikningsfært/reikningshæft − kostnaður; framlegð við verklok = samningur − áætlaður heildarkostnaður |
 | Vörur (`items` > 0) | `Item`; sala, kostnaður og magn á vöru sem samtölur úr `Value Entry` (`groupBy` `Item No.`, eitt kall á tímabil); birgðir á vöru úr `Item Ledger Entry` (`Remaining Quantity`, `groupBy` `Item No.`) |
 | Hvorugt | Tekjur eftir tekjulykli og viðskiptamanni (samtölur úr `Cust. Ledger Entry`); framlegð á tekjustoð |
 

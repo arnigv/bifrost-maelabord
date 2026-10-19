@@ -17,17 +17,53 @@ BC leggur saman sjálft. Sæktu **aldrei færslur til að leggja þær saman** �
 
 | Spurning | Tól | Dæmi |
 |---|---|---|
-| Hreyfing eða staða lykla á mánuði / ári | `period_breakdown` á `G/L Account` (`net_change` eða `balance`, allt að 12 bil) | Rekstrarreikningur, efnahagur í lok mánaðar |
+| Ein tala á hvert spjald (lykil, viðskiptavin, birgi, vöru, forða) fyrir tímabil eða á dagsetningu | **FlowField á spjaldinu** með FlowFilter í töflusýninni, t.d. Hreyfing á `G/L Account` eða Sala (SGM) á `Customer` (sjá *FlowFields fyrst* að neðan) | Rekstur á lykil, sala á viðskiptavin, innkaup á birgi, sala og birgðir á vöru, nýting forða |
+| Hreyfing eða staða lykla á mánuði | `period_breakdown` á `G/L Account` (`net_change` eða `balance`, allt að 12 bil) | Rekstrarreikningur á mánuði, efnahagur í lok mánaðar |
 | Summa eftir einum flokki á tímabili | `outbound_invoke` → `Data.Totals.Get` (`subject` = tafla, `data`: `fieldNumbers`, `groupBy`, `tableView`) | Tekjur á viðskiptavin, kostnaður á lykil eða birgi, kostnaður og verð á verk, tímar á forða |
 | Kröfur og skuldir eftir aldri | `aging` | Aldursgreining, gjaldfallið |
 | Fjöldi | `data_record_count` | Starfsemisgreining, fjöldi reikninga í samþykkt |
 | Einstakar færslur | `data_batch_records` | Aðeins þar sem færslan sjálf skiptir máli (sjá neðst) |
 
+**FlowFields fyrst þegar spurningin er „ein tala á hvert spjald“.** Aðaltöflur BC (lyklar, viðskiptamenn, lánardrottnar, vörur, forðar, bankareikningar) hafa reiknaða reiti (FlowFields) sem BC leggur saman eftir FlowFilters (`Date Filter`, víddir, birgðageymsla o.fl.). Notaðu þá **alltaf sem fyrsta val þegar það á við**:
+
+- Svarið er ein tala á hverja færslu í aðaltöflu (lykil, viðskiptavin, birgi, vöru, forða) fyrir eitt tímabil eða á dagsetningu.
+- Eitt kall (`data_batch_records`, `take` allt að 1000) skilar heiti og tölum allra spjaldanna, líka þeirra sem eru með 0.
+- FlowFilters gefa sundurliðun sem `groupBy` á færslum getur ekki: deild, verk, rekstrareining, birgðageymsla.
+- Mánaðarþróun sama reits: `period_breakdown` á sömu töflu (`balance_fields` = reitanúmerið, `field_type:"net_change"`), ekki bara á `G/L Account`.
+
+Notaðu **`Data.Totals.Get`** í staðinn þegar flokkað er eftir einhverju sem er ekki spjald (dagsetning, fylgiskjal, tegund færslu, verk í verkbókarfærslum) eða þegar FlowField er lokaður (Field Access, sjá varaleið).
+
+| Tafla | Reitir (prófaðir á DT 19.10.2026) | FlowFilters í töflusýn |
+|---|---|---|
+| `G/L Account` | 31 Staða á dagsetningu, 32 Hreyfing, 36 Staða | `Date Filter`, `Global Dimension 1 Filter`, `Global Dimension 2 Filter`, `Business Unit Filter` |
+| `Customer` | 58 Staða, 59 Staða (SGM), 60 Hreyfing, 61 Hreyfing (SGM), 62 Sala (SGM), 63 Framlegð (SGM), 66 Gjaldfallið, 67 Gjaldfallið (SGM), 69 Greiðslur | `Date Filter`, víddasíur |
+| `Vendor` | 58 Staða, 59 Staða (SGM), 60 Hreyfing, 61 Hreyfing (SGM), 62 Innkaup (SGM, jákvætt formerki), 66 Gjaldfallið, 67 Gjaldfallið (SGM), 69 Greiðslur | `Date Filter`, víddasíur |
+| `Item` | 68 Birgðir, 70 Hreyfing (magn), 71 Innkaup (magn), 72 Sala (magn), 77 Innkaup (SGM), 78 Sala (SGM) | `Date Filter`, `Location Filter`, `Variant Filter` |
+| `Resource` | 41 Afkastageta, 44 Notkun (magn), 45 Notkun (kostnaður), 46 Notkun (verð), 47 Sala (magn) | `Date Filter` |
+| `Bank Account` | Staða á dagsetningu og Hreyfing (SGM); reitanúmer eru breytileg, flettu upp | `Date Filter` |
+
+Prófun á DT (jan–ágú 2026): Sala (SGM) á K10 = 169.375.000 og Innkaup (SGM) á L10 = 225.856.800, sama og `Data.Totals.Get` á viðskiptamanna- og lánardrottnabók; Notkun (magn) á forða = sömu tímar og í verkbókarfærslum. Sala og innkaup á spjaldi hafa sömu takmörkun og undirbókin: færslur úr almennri dagbók eru ekki með.
+
+Ekki sækja persónugreinanleg heiti með (t.d. `Name` á `Resource` eða bankareikningum korta): sæktu númer og notaðu kóða í mælaborðinu.
+
+**Rekstur á lykil fyrir eitt tímabil (aðalleið).** Eitt kall gefur hreyfingu og heiti allra bókunarlykla:
+
+```
+data_batch_records → table "G/L Account", field_numbers [1,2,32], take 1000,
+table_view "WHERE(No.=FILTER(1000..4999),Account Type=CONST(Posting),Date Filter=FILTER(2026-01-01..2026-08-31))"
+```
+
+- Prófað á DT 19.10.2026: allir 48 lyklar með hreyfingu stemmdu upp á krónu við `Data.Totals.Get` á `G/L Entry`. Lyklar án hreyfingar koma líka (0), sem er gagnlegt í samanburði við fyrra ár.
+- Hreyfing virðir allar FlowFilters lykilsins: bættu `Global Dimension 1 Filter=CONST(<deild>)`, `Global Dimension 2 Filter=…` eða `Business Unit Filter=…` við töflusýnina til að fá tölur á deild, verk eða rekstrareiningu (sem `groupBy` á færslum getur ekki).
+- Fyrra ár: sama kall með dagsetningu ári fyrr. Staða í lok tímabils: reitur 31 (*Balance at Date*) með `Date Filter=FILTER(..<lokadagur>)`.
+- Dagsetningar í töflusýn alltaf `ÁÁÁÁ-MM-DD`.
+- **Varaleið (gildir um alla FlowFields hér að ofan):** Hreyfing er FlowField. Ef notandinn er með *Read*- eða *Both*-línu í Bifröst Field Access getur reiturinn verið lokaður. Þá: `Data.Totals.Get` á `G/L Entry` (`[17]` Amount, `groupBy` `G/L Account No.`, sama dagsetningarsía) og heiti lykla úr `accounts.json`.
+
 **Uppskriftir fyrir `Data.Totals.Get`** (staðlaðir BC-reitir; prófað á DT 19.10.2026, stemmdi upp á krónu við færslusummur):
 
 | Þörf | `subject` | `fieldNumbers` | `groupBy` | `tableView` (dæmi) |
 |---|---|---|---|---|
-| Hreyfing á fjárhagslykil á tímabili | `G/L Entry` | `[17]` Amount | `G/L Account No.` | `WHERE(Posting Date=FILTER(2026-01-01..2026-08-31),G/L Account No.=FILTER(1000..4999))` |
+| Hreyfing á fjárhagslykil á tímabili (varaleið) | `G/L Entry` | `[17]` Amount | `G/L Account No.` | `WHERE(Posting Date=FILTER(2026-01-01..2026-08-31),G/L Account No.=FILTER(1000..4999))` |
 | Sala á viðskiptavin | `Cust. Ledger Entry` | `[18]` Sales (LCY) | `Customer No.` | `WHERE(Posting Date=FILTER(…))` |
 | Innkaup á lánardrottin | `Vendor Ledger Entry` | `[18]` Purchase (LCY), formerki í mínus | `Vendor No.` | `WHERE(Posting Date=FILTER(…))` |
 | Kostnaður, verð og tímar á verk | `Job Ledger Entry` | `[9,13,15]` Quantity, Total Cost (LCY), Total Price (LCY) | `Job No.` | `WHERE(Entry Type=CONST(Usage))` (eða `Sale` fyrir reikningsfært) |
@@ -40,7 +76,7 @@ Fáist villan „ekki af gerðinni tugabrot“ eða óþekktur reitur: flettu re
 
 **Takmarkanir og hvernig er farið í kringum þær**
 
-- **Ein flokkun í kalli.** „Lykill × mánuður“: notaðu `period_breakdown`, eða eitt `Data.Totals.Get`-kall á mánuð með dagsetningarsíu. `groupBy` á `Posting Date` gefur dagsummur sem má leggja saman í mánuði ef þarf.
+- **Ein flokkun í kalli.** „Lykill × mánuður“: notaðu `period_breakdown`, eða Hreyfingu á `G/L Account` með einu kalli á mánuð. `groupBy` á `Posting Date` gefur dagsummur sem má leggja saman í mánuði ef þarf.
 - **FlowFields** (t.d. *Amount (LCY)* og *Remaining Amount* í viðskiptamanna- og lánardrottnabók, *Balance* á lyklum) er hvorki hægt að leggja saman né flokka eftir. Notaðu geymda reiti (*Sales (LCY)*, *Purchase (LCY)*), `aging` fyrir opnar stöður og `period_breakdown` fyrir stöður lykla.
 - **Field Access:** hjá notanda með einhverja *Read*- eða *Both*-línu teljast allar FlowFields lokaðar, líka í síum og röðun. Byggðu síur á geymdum reitum svo skillin virki með ráðlagðri öryggisuppsetningu.
 - **Geymdir upphæðarreitir í undirbókum** ná aðeins yfir það sem var bókað sem skjal. *Sales (LCY)* og *Purchase (LCY)* eru 0 fyrir færslur úr almennri dagbók (t.d. tekjur bókaðar með dagbók eða kostnaður í erlendri mynt). Berðu því summu undirbókar saman við fjárhagslykilinn og segðu hve stór hluti er á undirbókinni (t.d. „um 30% tekna eru á viðskiptamannabók“).

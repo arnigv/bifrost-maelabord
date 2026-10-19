@@ -21,12 +21,12 @@ Fylgdu `bifrost-maelabord` og `bifrost-gogn`. **Aðeins lesið** — þetta skil
 - Ef engar samþykktarfærslur eru til: segðu að samþykktarferli sé ekki virkt í BC og sýndu í staðinn óbókaða innkaupareikninga.
 
 **Birgjar**
-- Innkaup síðustu 12 mánuði á birgja: `Data.Totals.Get` á `Vendor Ledger Entry` (`[18]` Purchase (LCY), formerki í mínus, `groupBy` `Vendor No.`). Berðu summuna saman við kostnaðarlyklana: innkaup í erlendri mynt eða úr almennri dagbók geta verið 0 í Purchase (LCY).
+- Innkaup síðustu 12 mánuði á birgja: Innkaup (SGM), reitur 62 á `Vendor` með `Date Filter` (FlowField, eitt kall með heitum); varaleið `Data.Totals.Get` á `Vendor Ledger Entry` (`[18]` Purchase (LCY), formerki í mínus, `groupBy` `Vendor No.`). Berðu summuna saman við kostnaðarlyklana: innkaup í erlendri mynt eða úr almennri dagbók geta verið 0 í Purchase (LCY).
 - Opnar skuldir með `aging` (entity `vendor`).
 - Ef innkaup eru bókuð beint í fjárhag (ekki á birgja): segðu það og notaðu kostnaðarlykla í staðinn.
 
 **Kostnaðarliðir**
-- `dataset.json`: kostnaðarlyklar á mánuði (vörunotkun, laun, húsnæði, annar rekstur), sama tímabil í fyrra. Kostnaður á lykil fyrir annað tímabil: `Data.Totals.Get` á `G/L Entry` (`[17]`, `groupBy` `G/L Account No.`).
+- `dataset.json`: kostnaðarlyklar á mánuði (vörunotkun, laun, húsnæði, annar rekstur), sama tímabil í fyrra. Kostnaður á lykil fyrir annað tímabil: Hreyfing (reitur 32) á `G/L Account` með `Date Filter` (`bifrost-gogn`, kafli 0); varaleið `Data.Totals.Get` á `G/L Entry`.
 
 ## 2. Flipar (tveir)
 
