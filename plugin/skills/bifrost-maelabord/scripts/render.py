@@ -120,6 +120,13 @@ def render(name, data, subpage=False, strict=True, ext=None):
         block = '\n<!-- viðbót notanda -->\n' + snippet.strip() + '\n<!-- /viðbót notanda -->\n'
         i = out.rfind('<footer')
         out = out[:i] + block + out[i:] if i >= 0 else out + block
+    if subpage and 'class="crumb"' not in out:
+        # Allar undirsíður verða að hafa leið aftur í miðstöðina
+        t = re.search(r'<title>(.*?)</title>', out)
+        crumb = ('<nav class="crumb" aria-label="Leiðarstika"><a href="index.html">← Miðstöð<span class="c-l"> mælaborða</span></a>'
+                 + (f'<span class="sep">/</span><span>{t.group(1)}</span>' if t else '') + '</nav>')
+        i = out.find('<div class="wrap">')
+        out = out[:i + 18] + '\n  ' + crumb + out[i + 18:] if i >= 0 else crumb + out
     if subpage and not out.lstrip().lower().startswith('<!doctype'):
         out = '<!doctype html>\n<html lang="is">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n' + out
     return out

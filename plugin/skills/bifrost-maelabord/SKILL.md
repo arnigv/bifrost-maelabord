@@ -228,6 +228,6 @@ Prófaðu alltaf á **375 px** breidd áður en birt er: ekkert lárétt skrun �
 ## Leiðir milli mælaborða
 
 - Miðstöðin og mælaborðin eru **eitt fjölsíðu-artifact** (sjá `bifrost-skyndiuttekt`, kafli 3): miðstöðin er síðan sjálf, hvert mælaborð sér skrá. Tenglar á milli þeirra eru **afstæðir** (`href="stjorn.html"`, leiðarstika `href="index.html"`) og **án `data-nav`**, svo síminn fer á milli síðna inni í Claude-appinu. Tengill á annað artifact opnast í vafra í síma.
-- Efst er leiðarstika `← Miðstöð / <heiti>` (`.crumb`, sjá `template.html`). Undirsíða byrjar á `<!doctype html>`, `<meta charset="utf-8">` og viewport-meta.
+- **Allar undirsíður** hafa efst leiðarstiku `← Miðstöð / <heiti>` aftur í miðstöðina (hún er með tengla á öll mælaborðin); `render.py` bætir henni við ef hana vantar. Leiðarstika (`.crumb`, sjá `template.html`). Undirsíða byrjar á `<!doctype html>`, `<meta charset="utf-8">` og viewport-meta.
 - `data-nav` er aðeins fyrir tengla á **önnur** artifact (t.d. Sjálfvirknivæðingu, sem vistar sig sjálf): forskriftin neðst í `components.js` opnar þá í sama flipa ef hægt er, annars í nýjum.
 - Röð við smíði: birtu fyrst miðstöðina (tóma eða með bráðabirgðatölum), bættu svo hverju mælaborði við sem skrá á sömu slóð og uppfærðu miðstöðina með lykiltölum í sömu birtingu.
