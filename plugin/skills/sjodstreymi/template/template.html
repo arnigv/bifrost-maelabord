@@ -1,0 +1,348 @@
+<meta charset="utf-8">
+<script>(function(){var m="light";try{m=localStorage.getItem("bf-theme-v5")||"light"}catch(e){}var r=document.documentElement;r.setAttribute("data-bf",m==="dark"?"dark":"light");r.setAttribute("data-pal",(m==="blue"||m==="earth")?m:"bifrost")})()</script>
+<title>Sjóðstreymi og bankar</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&subset=latin,latin-ext&display=swap">
+<style>
+{{THEME_CSS}}
+
+.warnbar{border-color:var(--warn-soft)} .warnbar .spark{background:var(--warn);color:#17150f}
+.legend i.dash{background:none;border-top:2px dashed var(--dn);height:0;width:14px;border-radius:0;vertical-align:3px}
+.mini2{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:1180px){.mini2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mk{display:grid;gap:2px;padding:10px 12px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);min-width:0}
+.mk b{font-size:1.2rem;font-weight:600;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+td.pos{color:var(--up)} td.neg{color:var(--dn)}
+td.mono{font-family:var(--f-mono);font-size:.8rem;white-space:nowrap}
+.chk{display:flex;gap:8px;align-items:flex-start;font-size:.84rem;color:var(--ink2)} .chk input{accent-color:var(--brand);margin-top:3px}
+.presets button[aria-pressed="true"]{background:var(--brand);color:#17150f;border-color:var(--brand)}
+.item b{font-size:.9rem}
+.d-item p,.item p{overflow-wrap:anywhere}
+.hero .row b{white-space:nowrap}
+.wrap{overflow-x:clip}
+.insight a{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:480px){.wrap{padding-inline:16px}.hb .r{grid-template-columns:minmax(0,7rem) minmax(0,1fr) auto}.prow .n small{max-width:9rem;white-space:normal}}
+
+</style>
+<div class="wrap">
+  <nav class="crumb" aria-label="Leiðarstika"><a href="index.html">← Miðstöð<span class="c-l"> mælaborða</span></a><span class="sep">/</span><span>Sjóðstreymi og bankar</span></nav>
+  <header class="top">
+    <div class="brandmark">
+      <div class="logo" aria-hidden="true">{{meta.initials}}</div>
+      <div style="min-width:0"><span class="eyebrow">{{meta.company}} · spá {{meta.fc_from}}–{{meta.fc_to}}</span><h1>Sjóðstreymi og bankar</h1></div>
+    </div>
+    <div class="chips"><div id="mode"></div><span class="chip-lg m-hide"><span class="dot"></span>Tengt BC · Bifröst</span><span class="chip-lg">Staða <b>{{meta.as_of}}</b></span><span class="chip-lg">m.kr.</span></div>
+  </header>
+
+  <div class="insight warnbar"><span class="spark" aria-hidden="true">!</span><p id="warn"></p></div>
+
+  <div class="tabs" role="tablist" aria-label="Flipar">
+    <button role="tab" aria-controls="t-bank">Staða í bönkum</button>
+    <button role="tab" aria-controls="t-spa">13 vikna spá</button>
+    <button role="tab" aria-controls="t-innh">Innheimta</button>
+  </div>
+
+  <!-- STAÐA Í BÖNKUM -->
+  <section class="tab" id="t-bank" role="tabpanel">
+    <section class="card hero">
+      <span class="eyebrow">Handbært fé í bönkum · staða í BC {{meta.as_of}}</span>
+      <div class="big" id="b-big"></div>
+      <p id="b-txt"></p>
+      <div class="row" id="b-row"></div>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Bankareikningar og greiðslukort</h2><span class="sub" id="bank-sub"></span></div>
+      <div class="scroll"><table id="bank-t" style="min-width:640px"></table></div>
+      <p class="note" id="bank-note"></p>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Sjóðstaða í lok mánaðar</h2><div class="legend"><span><i style="background:var(--s1)"></i>Bankainnstæður skv. BC</span></div></div>
+      <div class="cv" style="height:240px"><canvas id="c-hist" role="img" aria-label="Bankainnstæður í lok hvers mánaðar {{text.hist_period}}"></canvas></div>
+      <p class="note" id="hist-note"></p>
+    </section>
+    <p class="insight"><span class="spark" aria-hidden="true">→</span><span>Afstemmingar: sjá <a id="link-manadarlok" href="manadarlok.html">Mánaðarlok</a></span></p>
+  </section>
+
+  <!-- 13 VIKNA SPÁ -->
+  <section class="tab" id="t-spa" role="tabpanel" hidden>
+    <section class="card hero">
+      <span class="eyebrow">Lágpunktur sjóðs næstu 13 vikur · <span id="h-scen">Grunnur</span></span>
+      <div class="big" id="h-big"></div>
+      <p id="h-txt"></p>
+      <div class="row" id="h-row"></div>
+    </section>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Forsendur</h2><div class="presets" id="presets"><button data-s="base">Grunnur</button><button data-s="slow">Hæg innheimta</button><button data-s="push">Átak í innheimtu</button></div></div>
+        <div class="sl"><div class="top"><label for="s-speed">Greiðsluhraði viðskiptavina</label><output id="o-speed"></output></div><input type="range" id="s-speed" min="-14" max="42" step="7" value="0"><small>Dagar fyrr (−) eða seinna (+) en gjalddagi og söguleg töf.</small></div>
+        <div class="sl"><div class="top"><label for="s-od">Innheimtuhlutfall gjaldfallinna krafna</label><output id="o-od"></output></div><input type="range" id="s-od" min="0" max="150" step="10" value="100"><small>100% = 90/70/50/25% eftir aldri (0–30 / 31–60 / 61–90 / &gt; 90 d.).</small></div>
+        <div class="sl"><div class="top"><label for="s-nw">Innheimta nýrra reikninga</label><output id="o-nw"></output></div><input type="range" id="s-nw" min="0" max="100" step="1" value="{{meta.nw_default}}"><small id="nw-note"></small></div>
+        <div class="sl"><div class="top"><label for="s-defer">Frestun greiðslna til lánardrottna</label><output id="o-defer"></output></div><input type="range" id="s-defer" min="0" max="45" step="5" value="0"><small>Á við lánardrottna og reikninga í samþykkt, ekki laun, skatta og VSK.</small></div>
+        <div class="sl"><div class="top"><label for="s-min">Lágmarksstaða sjóðs</label><output id="o-min"></output></div><input type="range" id="s-min" min="0" max="100" step="5" value="30"></div>
+        <label class="chk"><input type="checkbox" id="incinv" checked> Greiða reikninga sem bíða samþykkis á gjalddaga</label>
+        <label class="chk"><input type="checkbox" id="unb" checked> Draga frá gjaldfallnar greiðslur sem vantar í bókhald (sjá viðvörun efst)</label>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Fyrst að gera</h2><span class="sub">áhrif á lágpunkt</span></div>
+        <div class="dec" id="first"></div>
+      </section>
+    </div>
+    <section class="card">
+      <div class="ch"><h2>Sjóðstaða viku fyrir viku</h2><div class="legend"><span><i style="background:var(--s1)"></i>Lokastaða viku (spá)</span><span><i style="background:var(--dn)"></i>Undir lágmarksstöðu</span><span><i class="dash"></i>Lágmarksstaða</span></div></div>
+      <div class="cv" style="height:300px"><canvas id="c-bal" role="img" aria-label="Spáð sjóðstaða í lok hverrar viku næstu 13 vikur, með lágmarksstöðu"></canvas></div>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Útgreiðslur eftir viku</h2><div class="legend" id="out-leg"></div></div>
+      <div class="cv" style="height:260px"><canvas id="c-out" role="img" aria-label="Útgreiðslur á viku eftir flokki, þar með reikningar í samþykkt"></canvas></div>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Vika fyrir viku</h2><span class="sub">m.kr. · spá</span></div>
+      <div class="scroll"><table id="wk" style="min-width:760px"></table></div>
+      <p class="note" id="beyond"></p>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Reikningar sem bíða samþykkis</h2><span class="sub" id="ap-sum"></span></div>
+      <div class="scroll"><table id="ap" style="min-width:680px"><thead><tr><th data-sort="doc">Skjal</th><th data-sort="vendor">Birgir</th><th class="n" data-sort="amt">Fjárhæð</th><th data-sort="due">Gjalddagi</th><th class="n" data-sort="od">Dagar</th><th>Í spá</th></tr></thead><tbody></tbody></table></div>
+      <p class="note">{{{html.ap_note}}}</p>
+    </section>
+  </section>
+
+  <!-- INNHEIMTA -->
+  <section class="tab" id="t-innh" role="tabpanel" hidden>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Aldursgreining krafna</h2><span class="sub" id="ag-sum"></span></div>
+        <div class="stack" id="ag-stack"></div>
+        <div class="slegend" id="ag-leg"></div>
+        <p class="note" id="ag-note"></p>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Ef stærstu skuldarar greiða í næstu viku</h2></div>
+        <div class="sl"><div class="top"><label for="s-topN">Fjöldi stærstu skuldara sem greiða gjaldfallið</label><output id="o-topN"></output></div><input type="range" id="s-topN" min="0" max="6" step="1" value="3"></div>
+        <div class="g4 mini2" id="top-k"></div>
+        <p class="note" id="top-note"></p>
+      </section>
+    </div>
+    <section class="card">
+      <div class="ch"><h2>Stærstu skuldarar</h2><span class="sub">gjaldfallið · elsti gjalddagi · töf greiddra reikninga</span></div>
+      <div class="plist" id="debtors"></div>
+    </section>
+  </section>
+
+  <footer>
+    <span>Heimild: Business Central (Bifröst), {{meta.company}}, gögn sótt {{meta.fetched}}: fjárhagur, banka-, viðskiptamanna- og lánardrottnafærslur, bankareikningar, aldursgreining og innkaupareikningar í samþykkt. Aðeins lesið, ekkert skrifað í BC.</span>
+    <span>Spá, ekki loforð. Forsendur: {{{html.footer_assumptions}}}</span>
+    <span>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</span>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+{{COMPONENTS_JS}}
+/* 13 vikna sjóðspá — hrein fall, keyrir bæði í vafra og node */
+const SJ = (() => {
+  const DAY = 864e5;
+  const iso = s => new Date(s + 'T00:00:00Z');
+  const add = (s, d) => new Date(iso(s).getTime() + d * DAY).toISOString().slice(0, 10);
+  const isoWeek = s => { const d = iso(s); const t = new Date(d); t.setUTCDate(d.getUTCDate() + 3 - (d.getUTCDay() + 6) % 7); const y = new Date(Date.UTC(t.getUTCFullYear(), 0, 4)); return 1 + Math.round(((t - y) / DAY - 3 + (y.getUTCDay() + 6) % 7) / 7); };
+  const PROB = [0.9, 0.7, 0.5, 0.25, 0.25];           // 0–30, 31–60, 61–90, 91–120, >120 d.
+  const SPREAD = [[0, 3], [1, 5], [2, 8], [3, 12], [3, 12]]; // vikur sem innheimta dreifist á
+  const N = 13;
+  function weeks(D) { return Array.from({ length: N }, (_, i) => { const s = add(D.start, 7 * i); return { i, from: s, to: add(s, 6), wk: isoWeek(s) }; }); }
+  function forecast(D, p) {
+    const W = weeks(D).map(w => ({ ...w, inn: 0, laun: 0, lan: 0, ann: 0, innC: {}, outC: { laun: 0, skattar: 0, vsk: 0, lanardr: 0, osamth: 0, lan: 0 } }));
+    let beyondIn = 0, beyondOut = 0;
+    const idx = d => Math.floor((iso(d) - iso(D.start)) / (7 * DAY));
+    const put = (d, amt, col, cat, cust) => {
+      let k = idx(d); if (k < 0) k = 0;
+      if (k >= N) { if (col === 'inn') beyondIn += amt; else beyondOut += amt; return; }
+      const w = W[k]; w[col] += amt;
+      if (cat) w.outC[cat] += amt;
+      if (cust) w.innC[cust] = (w.innC[cust] || 0) + amt;
+    };
+    const sh = Math.round(p.speed / 7), f = p.od / 100;
+    const top = D.custs.map(c => ({ no: c.no, od: c.b.slice(1).reduce((a, b) => a + b, 0) })).sort((a, b) => b.od - a.od).slice(0, p.topN || 0).map(c => c.no);
+    /* innborganir: ógjaldfallnar kröfur á gjalddaga + sögulega töf */
+    D.nyd.forEach(([no, due, amt]) => { const c = D.custs.find(x => x.no === no); put(add(due, (c && c.delay > 0 ? c.delay : 0) + p.speed), amt * Math.min(1, 0.9 * f), 'inn', null, no); });
+    /* gjaldfallnar kröfur eftir aldri */
+    D.custs.forEach(c => c.b.slice(1).forEach((v, j) => {
+      if (!v) return;
+      if (top.includes(c.no)) { put(D.start, v, 'inn', null, c.no); return; }
+      const amt = v * Math.min(1, PROB[j] * f), [a, b] = SPREAD[j], n = b - a + 1;
+      for (let k = a; k <= b; k++) { const kk = k + sh; const share = amt / n; if (kk >= N) beyondIn += share; else { const w = W[Math.max(0, kk)]; w.inn += share; w.innC[c.no] = (w.innC[c.no] || 0) + share; } }
+    }));
+    /* ný sala: okt, nóv, des, gjalddagi 20. næsta mánaðar */
+    {{js.fc_sales_due}}.forEach(d => put(add(d, p.speed), D.sala_vsk_m * p.nw / 100, 'inn', null, 'ny'));
+    /* útgreiðslur */
+    if (p.unb) D.unbooked.forEach(u => put(u.d, u.amt, u.k === 'laun' || u.k === 'skattar' ? 'laun' : u.k === 'vsk' || u.k === 'lan' ? 'ann' : 'lan', u.k));
+    const L = D.laun_m;
+    {{js.fc_salary_dates}}.forEach(d => { put(d, L * D.share_net, 'laun', 'laun'); put(d, D.loan + D.fixed, 'ann', 'lan'); });
+    {{js.fc_wh_dates}}.forEach(d => put(d, L * D.share_wh, 'laun', 'skattar'));
+    /* VSK: [gjalddagi, fjöldi mánaða í uppgjöri] */
+    {{js.fc_vsk}}.forEach(([d, n]) => put(d, (n == null ? 2 : n) * D.vsk_m, 'ann', 'vsk'));
+    const df = p.defer;
+    D.vend_open.forEach(v => put(add(v.due < D.today ? D.today : v.due, df), v.amt, 'lan', 'lanardr'));
+    if (p.inv !== false) D.inv.forEach(v => put(add(v.due < D.today ? D.today : v.due, df), v.amt, 'lan', 'osamth'));  /* reikningar í samþykkt greiddir á gjalddaga */
+    {{js.fc_vendor_dates}}
+      .forEach(([d, k]) => put(add(d, df), D.ven[k] || 0, 'lan', 'lanardr'));
+    let bal = D.cash;
+    W.forEach(w => { w.start = bal; w.out = w.laun + w.lan + w.ann; bal += w.inn - w.out; w.end = bal; });
+    const low = W.reduce((m, w) => (w.end < m.end ? w : m), W[0]);
+    return { W, low, end: bal, beyondIn, beyondOut, top };
+  }
+  return { forecast, weeks, add, isoWeek, PROB };
+})();
+if (typeof module !== 'undefined') module.exports = SJ;
+
+const DATA={{DATA_JSON}};
+const { $, fmt, sg, css, alpha, date, grad, MON, sortable, bindSliders } = BF;
+const m = (v, d = 1) => fmt(v / 1e6, d);
+const CH = {};
+const NAME = Object.fromEntries(DATA.custs.map(c => [c.no, c.name]));
+const BASE_NW = Math.round(DATA.coll_base * 100), SLOW_NW = Math.round(DATA.coll_slow * 100);
+const SCEN = {
+  base: { speed: 0, od: 100, nw: BASE_NW, defer: 0, label: 'Grunnur' },
+  slow: { speed: 14, od: 60, nw: SLOW_NW, defer: 0, label: 'Hæg innheimta' },
+  push: { speed: -7, od: 130, nw: 95, defer: 0, label: 'Átak í innheimtu' },
+};
+let scen = 'base', R = null, P = null;
+const odSum = c => c.b.slice(1).reduce((a, b) => a + b, 0);
+const CUST_OD = DATA.custs.reduce((s, c) => s + odSum(c), 0);
+const UNB = DATA.unbooked.reduce((s, u) => s + u.amt, 0);
+const VEN_OD = DATA.vend_open.filter(v => v.due < DATA.today).reduce((s, v) => s + v.amt, 0);
+const INV_OD = DATA.inv.filter(v => v.due < DATA.today);
+const INV_OD_SUM = INV_OD.reduce((s, v) => s + v.amt, 0);
+const INV_TOT = DATA.inv.reduce((s, v) => s + v.amt, 0);
+const wkLabel = w => `v. ${w.wk}`;
+const run = q => SJ.forecast(DATA, q);
+const params = () => ({ ...P, unb: $('unb').checked, inv: $('incinv').checked, topN: 0 });
+const matches = k => ['speed', 'od', 'nw', 'defer'].every(x => SCEN[k][x] === P[x]);
+
+/* Afstemmingatengill: bráðabirgðaslóð '#' opnar ekkert (rétt slóð á Mánaðarlok kemur síðar) */
+document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('a[data-nav]'); if (a && a.getAttribute('href') === '#') { e.preventDefault(); e.stopImmediatePropagation(); } }, true);
+
+/* ---------- STAÐA Í BÖNKUM ---------- */
+function bank() {
+  const Bk = DATA.banks, sumf = f => Bk.filter(f).reduce((s, b) => s + b.bal, 0);
+  const bk = sumf(b => b.teg !== 'Greiðslukort'), kort = sumf(b => b.teg === 'Greiðslukort'), G = DATA.banks_gl;
+  const ok = Math.abs(bk - G.bankar) < 1 && Math.abs(kort - G.kort) < 1;
+  const H = DATA.cash_hist, mx = Math.max(...H), mi = H.indexOf(mx);
+  $('b-big').innerHTML = `${m(bk)}<small>m.kr.</small>`;
+  $('b-txt').textContent = `${{{js.bank_txt}}}`;
+  $('b-row').innerHTML = [[m(kort) + ' m', 'ógreidd kortaskuld'], [sg((bk - mx) / 1e6) + ' m', `frá hámarki í ${MON[+DATA.months[mi].slice(5) - 1]}`], [({{js.days_since_rec}} + ' d.'), 'frá síðustu afstemmingu'], [ok ? 'Stemmir' : 'Munur ' + m(bk - G.bankar), ('bankar = fjárhagur (' + {{js.bank_gl_accounts}} + ')')]]
+    .map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join('');
+  $('bank-sub').textContent = `${Bk.length} reikningar · staða í BC ${date(DATA.today)}`;
+  $('bank-t').innerHTML = `<thead><tr><th>Reikningur</th><th>Tegund</th><th class="n">Staða í BC</th><th>Síðasta afstemming</th><th class="n">Óafstemmt þá</th><th>Staða</th></tr></thead><tbody>` +
+    Bk.map(b => `<tr><td>${b.name}</td><td class="sub">${b.teg}</td><td class="n">${m(b.bal)}</td><td>${date(b.stmt_date)} · yfirlit ${b.stmt_no}</td><td class="n">${b.outst ? m(b.outst) : '–'}</td><td>${{{js.unrec_period}} ? `<span class="pill m">${{{js.unrec_period}}} óafstemmt</span>` : '<span class="pill l">Afstemmt</span>'}</td></tr>`).join('') +
+    `<tr class="sum"><td>Nettó</td><td class="sub">innstæður − kort</td><td class="n">${m(bk + kort)}</td><td></td><td class="n">${m(Bk.reduce((s, b) => s + b.outst, 0))}</td><td></td></tr></tbody>`;
+  $('bank-note').textContent = {{js.bank_note}};
+  $('hist-note').textContent = `Lok hvers mánaðar skv. bankabók í BC; ${{{js.cur_month}}} er staða ${date(DATA.today)}. ${{{js.hist_inc}}}`;
+}
+
+/* ---------- 13 VIKNA SPÁ ---------- */
+function spa() {
+  const low = R.low, min = P.min * 1e6, under = R.W.filter(w => w.end < min).length;
+  const osamth = R.W.reduce((s, w) => s + w.outC.osamth, 0);
+  $('h-scen').textContent = SCEN[scen] && matches(scen) ? SCEN[scen].label : 'Eigin forsendur';
+  $('h-big').innerHTML = `${m(low.end)}<small>m.kr.</small>`;
+  $('h-txt').textContent = `Sjóður fer lægst í viku ${low.wk} (${date(low.from)}–${date(low.to)}). Spáin tekur með innheimtu krafna, nýja sölu, laun, skatta, VSK, lánardrottna og reikninga sem bíða samþykkis. Breyttu forsendum hér að neðan.`;
+  $('h-row').innerHTML = [[m(R.end) + ' m', ('staða ' + {{js.fc_to}})], [`${under} af 13`, `vikur undir ${m(min, 0)} m lágmarki`], [m(UNB + VEN_OD + INV_OD_SUM) + ' m', 'gjaldfallið ógreitt'], [m(osamth) + ' m', 'reikningar í samþykkt í spánni']]
+    .map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join('');
+  const lift = q => run({ ...params(), ...q }).low.end - low.end;
+  const t3 = run({ ...params(), topN: 3 });
+  const acts = [
+    ['h', 'Innheimta hjá þremur stærstu skuldurunum', `${t3.top.map(n => (NAME[n] || n).replace(' ehf.', '')).join(', ')}: ${m(t3.top.reduce((s, n) => s + odSum(DATA.custs.find(c => c.no === n)), 0))} m.kr. gjaldfallið. Símtal og greiðsluáætlun í þessari viku.`, lift({ topN: 3 })],
+    ['h', {{js.act2_title}}, {{js.act2_text}}, null],
+    ['m', 'Semja um 30 daga greiðslufrest við lánardrottna', {{js.act3_text}}, lift({ defer: 30 })],
+    ['m', 'Samþykkja reikninga á réttum tíma', `${INV_OD.length} reikningar (${m(INV_OD_SUM)} m.kr.) eru komnir fram yfir gjalddaga án samþykkis.`, null],
+  ];
+  $('first').innerHTML = acts.map(([s, t, d, v], i) => `<div class="d-item"><span class="d-ico ${s}">${i + 1}</span><div><b>${t}</b><p>${d}</p></div><span class="amt">${v ? sg(v / 1e6) + ' m' : '–'}</span></div>`).join('');
+  const W = R.W, tr = w => `<tr><td>${wkLabel(w)} <span class="sub">${date(w.from).slice(0, 5)}–${date(w.to).slice(0, 5)}</span></td><td class="n">${m(w.start)}</td><td class="n pos">${m(w.inn)}</td><td class="n">${m(-w.laun)}</td><td class="n">${m(-(w.lan - w.outC.osamth))}</td><td class="n">${m(-w.outC.osamth)}</td><td class="n">${m(-w.ann)}</td><td class="n ${w.end < min ? 'neg' : ''}"><b>${m(w.end)}</b>${w === low ? ' <span class="pill h">lágpunktur</span>' : ''}</td></tr>`;
+  const S = k => W.reduce((s, w) => s + k(w), 0);
+  $('wk').innerHTML = `<thead><tr><th>Vika</th><th class="n">Upphafsstaða</th><th class="n">Innborganir</th><th class="n">Laun og launat.</th><th class="n">Lánardrottnar</th><th class="n">Í samþykkt</th><th class="n">VSK, lán o.fl.</th><th class="n">Lokastaða</th></tr></thead><tbody>${W.map(tr).join('')}
+    <tr class="sum"><td>Samtals 13 vikur</td><td></td><td class="n">${m(S(w => w.inn))}</td><td class="n">${m(-S(w => w.laun))}</td><td class="n">${m(-S(w => w.lan - w.outC.osamth))}</td><td class="n">${m(-S(w => w.outC.osamth))}</td><td class="n">${m(-S(w => w.ann))}</td><td></td></tr></tbody>`;
+  $('beyond').textContent = `Utan 13 vikna: innborganir ${m(R.beyondIn)} m.kr. (m.a. ${{{js.beyond_sale}}}) og útgreiðslur ${m(R.beyondOut)} m.kr. Fyrsta vika tekur við öllu sem þegar er gjaldfallið.`;
+  $('nw-note').textContent = `Hlutfall nýrrar sölu (${m(DATA.sala_vsk_m)} m.kr. á mánuði með VSK) sem greiðist. ${{{js.base_period}}} ${BASE_NW}%, ${{{js.slow_period}}} ${SLOW_NW}%.`;
+  apTable();
+}
+let apK = 'due', apD = 1;
+function apTable(k, d) {
+  if (k) { apK = k; apD = d; }
+  const inc = $('incinv').checked, od = v => Math.round((new Date(DATA.today) - new Date(v.due)) / 864e5);
+  $('ap-sum').textContent = `${DATA.inv.length} reikningar · ${m(INV_TOT)} m.kr. · ${inc ? 'greiddir á gjalddaga í spánni' : 'ekki í spánni'}${P && P.defer ? ` (+${P.defer} d.)` : ''}`;
+  const r = DATA.inv.slice().sort((a, b) => (apK === 'amt' ? a.amt - b.amt : apK === 'od' ? od(a) - od(b) : String(a[apK]).localeCompare(String(b[apK]), 'is')) * apD);
+  const wk = v => { const dd = SJ.add(v.due < DATA.today ? DATA.today : v.due, P ? P.defer : 0), w = R.W.find(w => dd >= w.from && dd <= w.to); return w ? wkLabel(w) : (dd < R.W[0].from ? wkLabel(R.W[0]) : 'eftir 13 v.'); };
+  $('ap').querySelector('tbody').innerHTML = r.map(v => `<tr><td class="mono">${v.doc}</td><td>${v.vendor}${v.ic ? ' <span class="pill i">tengdur aðili</span>' : ''}${v.fx ? ` <span class="pill i">${v.fx}</span>` : ''}</td><td class="n">${fmt(v.amt, 0)}</td><td>${date(v.due)}</td><td class="n ${od(v) > 0 ? 'neg' : ''}">${od(v) > 0 ? od(v) + ' yfir' : -od(v) + ' eftir'}</td><td>${inc ? `<span class="pill ${od(v) > 0 ? 'h' : 'm'}">${wk(v)}</span>` : '<span class="pill i">utan spár</span>'}</td></tr>`).join('');
+}
+
+/* ---------- INNHEIMTA ---------- */
+const AGI = DATA.months.indexOf({{js.ag_ref_ym}});
+function innh() {
+  const LB = ['Ekki gjaldfallið', '0–30 d.', '31–60 d.', '61–90 d.', '91–120 d.', '> 120 d.'], CL = ['--s4', '--s1', '--warn', '--s5', '--s3', '--maroon-1'];
+  const tot = LB.map((_, j) => DATA.custs.reduce((s, c) => s + c.b[j], 0));
+  $('ag-sum').textContent = `${m(DATA.ag_total)} m.kr. · ${fmt(100 * CUST_OD / DATA.ag_total, 0)}% gjaldfallið`;
+  $('ag-stack').innerHTML = tot.map((v, j) => `<span style="flex:${v};background:var(${CL[j]})" title="${LB[j]}: ${m(v)} m"></span>`).join('');
+  $('ag-leg').innerHTML = tot.map((v, j) => `<div><span><i style="background:var(${CL[j]})"></i>${LB[j]}</span><b>${m(v)}</b><span>${fmt(100 * v / DATA.ag_total, 0)}%</span></div>`).join('');
+  $('ag-note').textContent = `Fjárhagur sýnir ${m(DATA.krofur_gl)} m.kr. í kröfum; mismunurinn við viðskiptamannabók er skoðaður í Mánaðarlokum. ${AGI >= 0 ? {{js.ag_trend_pre}} + m(DATA.krofur_hist[AGI]) + {{js.ag_trend_post}} : ''}`;
+  const oldest = c => { const j = c.b.slice(1).map((v, i) => (v ? i : -1)).filter(i => i >= 0).pop(); return j == null ? '–' : LB[j + 1]; };
+  const rows = DATA.custs.filter(c => odSum(c) > 0).sort((a, b) => odSum(b) - odSum(a)), mx = rows.length ? odSum(rows[0]) : 1;
+  $('debtors').innerHTML = rows.map(c => `<div class="prow"><span class="av">${c.name.split(' ').slice(0, 2).map(w => w[0]).join('')}</span><div style="min-width:0"><div class="nm">${c.name}</div><div class="bar"><span style="width:${(100 * odSum(c) / mx).toFixed(1)}%"></span></div></div><div class="n">${m(odSum(c))}<small>elst ${oldest(c)} · töf ${c.delay == null ? 'engin greiðsla' : fmt(c.delay, 0) + ' d.'}</small></div></div>`).join('');
+  topN();
+}
+function topN() {
+  const n = +$('s-topN').value; $('o-topN').value = n ? `${n} stærstu` : 'enginn';
+  const r = run({ ...params(), topN: n }), amt = r.top.reduce((s, k) => s + odSum(DATA.custs.find(c => c.no === k)), 0);
+  $('top-k').innerHTML = [['Greitt í viku ' + R.W[0].wk, m(amt)], ['Lágpunktur verður', m(r.low.end)], ['Breyting á lágpunkti', sg((r.low.end - R.low.end) / 1e6)], ['Breyting á lokastöðu', sg((r.end - R.end) / 1e6)]]
+    .map(([l, v]) => `<div class="mk"><span class="sub">${l}</span><b>${v}</b></div>`).join('');
+  $('top-note').textContent = n ? `${r.top.map(k => NAME[k] || k).join(', ')} greiða allt gjaldfallið í vikunni ${date(R.W[0].from)}–${date(R.W[0].to)}, í stað þess að innheimtast að hluta eftir aldri.` : 'Dragðu stikuna til að sjá áhrif þess að stærstu skuldarar greiði strax.';
+}
+
+/* ---------- GRÖF ---------- */
+const OC = [['laun', 'Laun', '--s1'], ['skattar', 'Staðgr. og launat.', '--s3'], ['vsk', 'VSK', '--s5'], ['lanardr', 'Lánardrottnar', '--s2'], ['osamth', 'Í samþykkt', '--warn'], ['lan', 'Lán og fast', '--s6']];
+function charts() {
+  if (!window.Chart) return;
+  Object.keys(CH).forEach(k => { CH[k].destroy(); delete CH[k]; });
+  Chart.defaults.font.family = css('--f-body'); Chart.defaults.color = css('--muted');
+  const tip = { backgroundColor: css('--panel2'), titleColor: css('--ink'), bodyColor: css('--ink2'), borderColor: css('--line'), borderWidth: 1, padding: 10, callbacks: { label: c => `${c.dataset.label}: ${fmt(c.raw, 1)} m` } };
+  const sc = { x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkip: true } }, y: { grid: { color: css('--line') }, border: { display: false }, ticks: { callback: v => fmt(v, 0) } } };
+  const base = { responsive: true, maintainAspectRatio: false, animation: { duration: 300 }, interaction: { mode: 'index', intersect: false }, plugins: { legend: { display: false }, tooltip: tip } };
+  const W = R.W, labels = ['í dag'].concat(W.map(wkLabel)), bal = [DATA.cash].concat(W.map(w => w.end)).map(v => v / 1e6), min = P.min;
+  const s1 = css('--s1'), dn = css('--dn');
+  if ($('c-bal')) CH.bal = new Chart($('c-bal'), { type: 'line', data: { labels, datasets: [
+    { label: 'Sjóðstaða', data: bal, borderColor: s1, backgroundColor: grad(s1, .28, 0), fill: { target: { value: min }, above: alpha(s1, .16), below: alpha(dn, .30) }, tension: .4, borderWidth: 2.5,
+      pointRadius: bal.map((v, i) => (i && W[i - 1] === R.low ? 6 : 3)), pointBackgroundColor: bal.map(v => (v < min ? dn : s1)), pointBorderColor: css('--panel'), pointBorderWidth: 2 },
+    { label: 'Lágmarksstaða', data: labels.map(() => min), borderColor: dn, borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0, fill: false }] }, options: { ...base, scales: sc } });
+  CH.out = new Chart($('c-out'), { type: 'bar', data: { labels: W.map(wkLabel), datasets: OC.map(([k, l, c]) => ({ label: l, data: W.map(w => w.outC[k] / 1e6), backgroundColor: css(c), borderRadius: 3, barPercentage: .75 })) },
+    options: { ...base, scales: { ...sc, x: { ...sc.x, stacked: true }, y: { ...sc.y, stacked: true } } } });
+  const H = DATA.cash_hist.map(v => v / 1e6), inc = DATA.months.map(ym => !!{{js.first_incomplete}} && ym >= {{js.first_incomplete}});
+  CH.hist = new Chart($('c-hist'), { type: 'line', data: { labels: DATA.months.map(ym => MON[+ym.slice(5) - 1]), datasets: [{ label: 'Bankainnstæður', data: H, borderColor: s1, backgroundColor: grad(s1, .28, 0), fill: true, tension: .4, borderWidth: 2.5,
+    segment: { borderDash: c => (inc[c.p1DataIndex] ? [5, 4] : undefined) }, pointRadius: 3, pointBackgroundColor: H.map((_, i) => (inc[i] ? css('--panel') : s1)), pointBorderColor: s1, pointBorderWidth: 2 }] }, options: { ...base, scales: sc } });
+}
+
+function update() {
+  P = SL.read(); R = run(params());
+  document.querySelectorAll('#presets button').forEach(b => b.setAttribute('aria-pressed', matches(b.dataset.s)));
+  spa(); topN(); charts();
+}
+const SL = bindSliders({
+  speed: { fmt: v => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v) + ' d.', good: -1 },
+  od: { fmt: v => v + '%', good: 1, zero: 100 },
+  nw: { fmt: v => v + '%', good: 1, zero: BASE_NW },
+  defer: { fmt: v => '+' + v + ' d.', good: 1 },
+  min: { fmt: v => v + ' m', good: 1, zero: 30 },
+}, () => update());
+$('s-nw').value = BASE_NW;
+document.querySelectorAll('#presets button').forEach(b => b.onclick = () => { scen = b.dataset.s; SL.set(SCEN[scen]); });
+$('unb').onchange = update; $('incinv').onchange = update;
+$('s-topN').oninput = topN;
+sortable($('ap'), (k, d) => apTable(k, d));
+$('warn').innerHTML = `${{{js.warn_pre}}}${m(UNB)}${{{js.warn_post}}}`;
+$('warn').parentElement.hidden = !DATA.unbooked.length;
+BF.themeToggle($('mode'), () => charts());
+P = SL.read(); R = run(params());
+bank(); innh();
+SL.run();
+BF.tabs(document.querySelector('.tabs'), () => requestAnimationFrame(() => charts()));
+
+</script>

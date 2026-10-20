@@ -1,6 +1,6 @@
 ---
 name: tekjuleki
-description: Tekjulekagreining úr Business Central — flipinn Tekjuleki í mælaborðinu Tekjur (`tekjur`): óreikningsfærð vinna á verkum, notkun á 0 kr. söluverði, kláruð verk sem ekki eru gerð upp, óeðlilegir afslættir og verðfrávik, rof í endurteknum reikningum, og tekjuaðgerðir með áhrifum í krónum. Notaðu þegar beðið er um tekjuleka, „hvar erum við að missa tekjur“, óreikningsfært eða yfirferð á reikningsfærslu; sem sér mælaborð aðeins ef notandi biður sérstaklega um það.
+description: "Athuganir fyrir flipann Tekjuleki í mælaborðinu Tekjur í Bifröst-mælaborðum (óreikningsfært, 0 kr. notkun, verðfrávik, rof í endurteknum reikningum). Innra skill Bifröst-mælaborða: notað af hinum skillum pluginsins við smíði mælaborða. Ekki nota það eitt og sér og ekki fyrir önnur verkefni."
 ---
 
 # Tekjuleki

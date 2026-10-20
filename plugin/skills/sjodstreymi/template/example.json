@@ -1,0 +1,800 @@
+{
+ "today": "2026-10-16",
+ "start": "2026-10-19",
+ "cash": 122179563.0,
+ "cash_hist": [
+  407303503.0,
+  406708263.0,
+  457679467.0,
+  435363241.0,
+  459128985.0,
+  408544494.0,
+  322444897.0,
+  167088388.0,
+  124579563.0,
+  122179563.0
+ ],
+ "months": [
+  "2026-01",
+  "2026-02",
+  "2026-03",
+  "2026-04",
+  "2026-05",
+  "2026-06",
+  "2026-07",
+  "2026-08",
+  "2026-09",
+  "2026-10"
+ ],
+ "krofur_hist": [
+  1488000.0,
+  2976000.0,
+  4464000.0,
+  33232000.0,
+  56525400.0,
+  128408200.0,
+  256506400.0,
+  457848800.0,
+  496328400.0,
+  498443320.0
+ ],
+ "laun_m": 54695125.625,
+ "coll_base": 0.7136861398039256,
+ "coll_slow": 0.21259367880993638,
+ "share_net": 0.51,
+ "share_wh": 0.45,
+ "sala_m": 161950000.0,
+ "sala_vsk_m": 199889380.0,
+ "vsk_m": 21286562.5,
+ "vsk_julagu": 45982312.0,
+ "vsk_net": 56803432.0,
+ "loan": 2039062,
+ "fixed": 895000,
+ "ven": {
+  "20": 79944051.0,
+  "14": 6001863.5,
+  "01": 3351408.5
+ },
+ "innh": {
+  "2026-01": 152520000.0,
+  "2026-02": 163680000.0,
+  "2026-03": 189720000.0,
+  "2026-04": 200880000.0,
+  "2026-05": 186514600.0,
+  "2026-06": 159005200.0,
+  "2026-07": 74269800.0,
+  "2026-08": 11465040.0
+ },
+ "net_sal_share": 0.5124891145178716,
+ "custs": [
+  {
+   "no": "K10",
+   "name": "Svarfaðarver ehf.",
+   "b": [
+    0,
+    142104000,
+    8401000,
+    32240000,
+    0,
+    27280000
+   ],
+   "delay": 0
+  },
+  {
+   "no": "K40",
+   "name": "Eyjafjarðar Kaldhreinsun ehf.",
+   "b": [
+    0,
+    0,
+    0,
+    73699400,
+    9802200,
+    0
+   ],
+   "delay": -1
+  },
+  {
+   "no": "K30",
+   "name": "Útgerðin Boðaföll ehf.",
+   "b": [
+    0,
+    0,
+    24601600,
+    26399600,
+    20503400,
+    0
+   ],
+   "delay": -1
+  },
+  {
+   "no": "K20",
+   "name": "Eyjafjarðar Sjókvíar ehf.",
+   "b": [
+    44875600,
+    9300000,
+    9101600,
+    0,
+    0,
+    0
+   ],
+   "delay": 1
+  },
+  {
+   "no": "K60",
+   "name": "Havstil Marine AS",
+   "b": [
+    0,
+    0,
+    30954000,
+    0,
+    0,
+    0
+   ],
+   "delay": null
+  },
+  {
+   "no": "K70",
+   "name": "Smíðaþjónusta Norðurlands ehf.",
+   "b": [
+    0,
+    14508000,
+    9703000,
+    0,
+    0,
+    0
+   ],
+   "delay": 6
+  },
+  {
+   "no": "K50",
+   "name": "Vélaverk Norðurlands ehf.",
+   "b": [
+    0,
+    1488000,
+    0,
+    0,
+    1953000,
+    1302000
+   ],
+   "delay": 94
+  },
+  {
+   "no": "K80",
+   "name": "Grenivíkurver ehf.",
+   "b": [
+    0,
+    0,
+    4092000,
+    0,
+    0,
+    0
+   ],
+   "delay": null
+  },
+  {
+   "no": "K100",
+   "name": "Hríseyjarhús ehf.",
+   "b": [
+    1992920,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "delay": null
+  },
+  {
+   "no": "K110",
+   "name": "Eyjavör fjárfestingar ehf.",
+   "b": [
+    372000,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "delay": null
+  }
+ ],
+ "nyd": [
+  [
+   "K20",
+   "2026-10-20",
+   32810400
+  ],
+  [
+   "K20",
+   "2026-10-20",
+   12065200
+  ],
+  [
+   "K100",
+   "2026-10-19",
+   566920
+  ],
+  [
+   "K100",
+   "2026-10-21",
+   1426000
+  ],
+  [
+   "K110",
+   "2026-10-19",
+   372000
+  ]
+ ],
+ "ag_total": 494673320,
+ "krofur_gl": 498443320.0,
+ "vend_open": [
+  {
+   "no": "L10",
+   "name": "Stálvogur ehf.",
+   "amt": 31608096,
+   "due": "2026-09-20"
+  },
+  {
+   "no": "L210",
+   "name": "Nordic Steel Supply AB",
+   "amt": 2650000,
+   "due": "2026-09-30"
+  },
+  {
+   "no": "L200",
+   "name": "Starfsmaður, útlagður kostnaður",
+   "amt": 186400,
+   "due": "2026-09-30"
+  },
+  {
+   "no": "L70",
+   "name": "Verkfræðistofan Nyrðra ehf.",
+   "amt": 868000,
+   "due": "2026-10-19"
+  },
+  {
+   "no": "L70",
+   "name": "Verkfræðistofan Nyrðra ehf.",
+   "amt": 682000,
+   "due": "2026-10-20"
+  },
+  {
+   "no": "L150",
+   "name": "Þórunnarverk ehf.",
+   "amt": 12400,
+   "due": "2026-10-23"
+  }
+ ],
+ "ap_gl": 35820896.0,
+ "inv": [
+  {
+   "doc": "R00010",
+   "vno": "L180",
+   "vendor": "Hríseyjarhús ehf.",
+   "amt": 3334360,
+   "due": "2026-10-01",
+   "sent": "2026-10-05",
+   "ic": true,
+   "fx": ""
+  },
+  {
+   "doc": "R00012",
+   "vno": "L90",
+   "vendor": "Fjarskiptaver ehf.",
+   "amt": 1751872,
+   "due": "2026-10-20",
+   "sent": "2026-10-05",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00015",
+   "vno": "L60",
+   "vendor": "Olís",
+   "amt": 845680,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00016",
+   "vno": "L130",
+   "vendor": "Steðjasalan ehf.",
+   "amt": 1488000,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00018",
+   "vno": "L20",
+   "vendor": "Kuldaverið ehf.",
+   "amt": 25048000,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00019",
+   "vno": "L140",
+   "vendor": "Flutningar Eyjafjarðar ehf.",
+   "amt": 4114320,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00020",
+   "vno": "L100",
+   "vendor": "Sundvík ehf.",
+   "amt": 744000,
+   "due": "2026-10-14",
+   "sent": "2026-10-08",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00021",
+   "vno": "L50",
+   "vendor": "Norðurorka",
+   "amt": 2153200,
+   "due": "2026-10-01",
+   "sent": "2026-10-08",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00022",
+   "vno": "L120",
+   "vendor": "Hlíðarmatur ehf.",
+   "amt": 1276500,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00023",
+   "vno": "L120",
+   "vendor": "Hlíðarmatur ehf.",
+   "amt": 1276500,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00024",
+   "vno": "L170",
+   "vendor": "Auglýsingastofa Norðurlands ehf.",
+   "amt": 669600,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00025",
+   "vno": "L150",
+   "vendor": "Þórunnarverk ehf.",
+   "amt": 415400,
+   "due": "2026-10-14",
+   "sent": "2026-10-08",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00026",
+   "vno": "L40",
+   "vendor": "Kustsmide AB",
+   "amt": 2027100,
+   "due": "2026-10-14",
+   "sent": "2026-10-08",
+   "ic": false,
+   "fx": "EUR"
+  },
+  {
+   "doc": "R00027",
+   "vno": "L190",
+   "vendor": "Eyjavör fjárfestingar ehf.",
+   "amt": 2400000,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "ic": true,
+   "fx": ""
+  },
+  {
+   "doc": "R00028",
+   "vno": "L50",
+   "vendor": "Norðurorka",
+   "amt": 2837820,
+   "due": "2026-11-01",
+   "sent": "2026-10-09",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00029",
+   "vno": "L90",
+   "vendor": "Fjarskiptaver ehf.",
+   "amt": 1262320,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00030",
+   "vno": "L80",
+   "vendor": "Fægiver ehf.",
+   "amt": 297600,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00031",
+   "vno": "L160",
+   "vendor": "Krókeyri ehf.",
+   "amt": 558000,
+   "due": "2026-11-01",
+   "sent": "2026-10-09",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00032",
+   "vno": "L150",
+   "vendor": "Þórunnarverk ehf.",
+   "amt": 427800,
+   "due": "2026-10-21",
+   "sent": "2026-10-09",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00033",
+   "vno": "L130",
+   "vendor": "Steðjasalan ehf.",
+   "amt": 1516520,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00035",
+   "vno": "L140",
+   "vendor": "Flutningar Eyjafjarðar ehf.",
+   "amt": 4504920,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00036",
+   "vno": "L30",
+   "vendor": "Rafspennir ehf.",
+   "amt": 13702000,
+   "due": "2026-10-20",
+   "sent": "2026-10-09",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00037",
+   "vno": "L10",
+   "vendor": "Stálvogur ehf.",
+   "amt": 35240800,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00038",
+   "vno": "L60",
+   "vendor": "Olís",
+   "amt": 757640,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00039",
+   "vno": "L110",
+   "vendor": "Krossanesvörn ehf.",
+   "amt": 955000,
+   "due": "2026-11-01",
+   "sent": "2026-10-09",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00034",
+   "vno": "L100",
+   "vendor": "Sundvík ehf.",
+   "amt": 744000,
+   "due": "2026-10-19",
+   "sent": "2026-10-15",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00017",
+   "vno": "L110",
+   "vendor": "Krossanesvörn ehf.",
+   "amt": 955000,
+   "due": "2026-10-01",
+   "sent": "2026-10-16",
+   "ic": false,
+   "fx": ""
+  }
+ ],
+ "unbooked": [
+  {
+   "k": "vsk",
+   "t": "VSK júlí–ágúst",
+   "d": "2026-10-05",
+   "amt": 45982312,
+   "note": "Gjalddagi 05.10.2026. Engin greiðsla bókuð."
+  },
+  {
+   "k": "skattar",
+   "t": "Staðgreiðsla, lífeyrir og tryggingagjald vegna ágúst",
+   "d": "2026-09-15",
+   "amt": 22034482,
+   "note": "Stendur ógreitt á skuldalyklum 9710–9740."
+  },
+  {
+   "k": "laun",
+   "t": "Útborguð laun september (áætlað)",
+   "d": "2026-09-30",
+   "amt": 27894514,
+   "note": "Laun september eru ekki bókuð."
+  },
+  {
+   "k": "skattar",
+   "t": "Staðgreiðsla o.fl. vegna september (áætlað)",
+   "d": "2026-10-15",
+   "amt": 24612807,
+   "note": "Gjalddagi 15.10.2026, ekki bókað."
+  },
+  {
+   "k": "lan",
+   "t": "Afborgun og vextir lána, september (áætlað)",
+   "d": "2026-09-30",
+   "amt": 2934062,
+   "note": "Afborgun ekki bókuð á 9110 í sept.–okt."
+  }
+ ],
+ "rec": {
+  "stmts": [
+   {
+    "acc": "ARION-ISK",
+    "name": "Arion, launareikningur",
+    "stmt": 8308270,
+    "ledger": 8308270,
+    "outst": 0
+   },
+   {
+    "acc": "ISB-ISK",
+    "name": "Íslandsbanki, veltureikningur",
+    "stmt": 15536287,
+    "ledger": 15536287,
+    "outst": 0
+   },
+   {
+    "acc": "LB-ISK",
+    "name": "Landsbankinn, veltureikningur",
+    "stmt": 168552350,
+    "ledger": 143243831,
+    "outst": -25308519
+   },
+   {
+    "acc": "KORT-1",
+    "name": "Fyrirtækjakort 1",
+    "stmt": -10685600,
+    "ledger": -10685600,
+    "outst": 0
+   },
+   {
+    "acc": "KORT-2",
+    "name": "Fyrirtækjakort 2",
+    "stmt": -19630642,
+    "ledger": -19630642,
+    "outst": 0
+   },
+   {
+    "acc": "KORT-3",
+    "name": "Fyrirtækjakort 3",
+    "stmt": -10130800,
+    "ledger": -10130800,
+    "outst": 0
+   }
+  ],
+  "gl6920_aug": 167088388.0,
+  "gl6340_aug": -40447042.0,
+  "gl6920": 122179563.0,
+  "stemming": [
+   {
+    "ym": "2026-01",
+    "mismunur": 2400000.0
+   },
+   {
+    "ym": "2026-10",
+    "mismunur": -2400000.0
+   }
+  ],
+  "loan": [
+   -133750000.0,
+   -132500000.0,
+   -131250000.0,
+   -130000000.0,
+   -128750000.0,
+   -127500000.0,
+   -126250000.0,
+   -125000000.0,
+   -125000000.0,
+   -125000000.0
+  ]
+ },
+ "banks": [
+  {
+   "no": "LB-ISK",
+   "name": "Landsbankinn, veltureikningur",
+   "teg": "Veltureikningur",
+   "bal": 98195601,
+   "stmt_date": "2026-08-31",
+   "stmt_no": "2",
+   "stmt_bal": 168552350,
+   "outst": -25308519
+  },
+  {
+   "no": "ISB-ISK",
+   "name": "Íslandsbanki, veltureikningur",
+   "teg": "Veltureikningur",
+   "bal": 15624758,
+   "stmt_date": "2026-08-31",
+   "stmt_no": "1",
+   "stmt_bal": 15536287,
+   "outst": 0
+  },
+  {
+   "no": "ARION-ISK",
+   "name": "Arion banki, launareikningur",
+   "teg": "Launareikningur",
+   "bal": 8359204,
+   "stmt_date": "2026-08-31",
+   "stmt_no": "1",
+   "stmt_bal": 8308270,
+   "outst": 0
+  },
+  {
+   "no": "KORT-1",
+   "name": "Fyrirtækjakort 1",
+   "teg": "Greiðslukort",
+   "bal": -10685600,
+   "stmt_date": "2026-08-31",
+   "stmt_no": "1",
+   "stmt_bal": -10685600,
+   "outst": 0
+  },
+  {
+   "no": "KORT-2",
+   "name": "Fyrirtækjakort 2",
+   "teg": "Greiðslukort",
+   "bal": -19630642,
+   "stmt_date": "2026-08-31",
+   "stmt_no": "1",
+   "stmt_bal": -19630642,
+   "outst": 0
+  },
+  {
+   "no": "KORT-3",
+   "name": "Fyrirtækjakort 3",
+   "teg": "Greiðslukort",
+   "bal": -10130800,
+   "stmt_date": "2026-08-31",
+   "stmt_no": "1",
+   "stmt_bal": -10130800,
+   "outst": 0
+  }
+ ],
+ "banks_gl": {
+  "bankar": 122179563,
+  "kort": -40447042
+ },
+ "meta": {
+  "initials": "DT",
+  "company": "DT Vélsmiðjan ehf.",
+  "fc_from": "19.10.2026",
+  "fc_to": "17.01.2027",
+  "as_of": "16.10.2026",
+  "nw_default": "71",
+  "fetched": "16.–17.10.2026"
+ },
+ "text": {
+  "hist_period": "janúar til október 2026"
+ },
+ "html": {
+  "ap_note": "Staðgreiðsluafslættir: engir eru skráðir á opnum færslum eða reikningum í samþykkt. Athugið skilmála stærstu birgja.",
+  "footer_assumptions": "laun jan–ágú að meðaltali (51% útborgað síðasta virka dag, 45% 15. næsta mánaðar, hlutföll úr bankafærslum), VSK af meðalveltu, ný sala á meðaltali jan–ágú með gjalddaga 20. næsta mánaðar, regluleg innkaup úr bankafærslum jan–ágú og reikningar í samþykkt á gjalddaga. September er ófullbókaður. Samþykkjendur og korthafar eru sýndir sem hlutverk og númer."
+ },
+ "js": {
+  "act2_text": "Greiðslurnar vantar í bankabók. Ef greitt er raunveruleg bankastaða lægri; ef ógreitt falla dráttarvextir á.",
+  "act2_title": "Staðfesta hvort laun, staðgreiðsla og VSK sept.–okt. voru greidd",
+  "act3_text": "Stálvogur á 31,6 m.kr. gjaldfallið frá 20.09. Frestur á lánardrottnum og reikningum í samþykkt.",
+  "ag_ref_ym": "2026-06",
+  "ag_trend_post": " m.kr. í júní, sem skýrir sjóðsfallið.",
+  "ag_trend_pre": "Kröfur hafa hækkað úr ",
+  "bank_gl_accounts": "6920, 6340",
+  "bank_note": "Óafstemmt 31.08. er útborguð laun 31.08. á Landsbankanum. Greiðslur september og október vantar í bankabók (sjá viðvörun efst), svo raunstaða í banka er líklega lægri en staðan í BC. Korthafar eru ekki nafngreindir.",
+  "bank_txt": "Þrír bankareikningar og þrjú fyrirtækjakort. Innstæður hafa lækkað hratt frá sumri vegna hækkandi krafna og ófullbókaðra greiðslna. Allir reikningar voru síðast afstemmdir við bankayfirlit 31.08.2026.",
+  "base_period": "Jan–ágú",
+  "beyond_sale": "desembersala á gjalddaga 20.01.2027",
+  "cur_month": "október",
+  "days_since_rec": "47",
+  "fc_salary_dates": [
+   "2026-10-30",
+   "2026-11-30",
+   "2026-12-31"
+  ],
+  "fc_sales_due": [
+   "2026-11-20",
+   "2026-12-21",
+   "2027-01-20"
+  ],
+  "fc_to": "17.01.2027",
+  "fc_vendor_dates": [
+   [
+    "2026-11-16",
+    "14"
+   ],
+   [
+    "2026-12-01",
+    "01"
+   ],
+   [
+    "2026-12-14",
+    "14"
+   ],
+   [
+    "2026-12-21",
+    "20"
+   ],
+   [
+    "2027-01-04",
+    "01"
+   ],
+   [
+    "2027-01-14",
+    "14"
+   ]
+  ],
+  "fc_vsk": [
+   [
+    "2026-12-07",
+    2
+   ]
+  ],
+  "fc_wh_dates": [
+   "2026-11-16",
+   "2026-12-15",
+   "2027-01-15"
+  ],
+  "first_incomplete": "2026-09",
+  "hist_inc": "Sep–okt eru ófullbókaðir.",
+  "slow_period": "júl–ágú",
+  "unrec_period": "sep–okt",
+  "warn_post": " m.kr. Hvort sem þetta er greitt eða ógreitt lækkar það sjóðinn, og spáin dregur það frá í fyrstu viku.",
+  "warn_pre": "<b>September og október eru ófullbókaðir.</b> Laun september, staðgreiðsla 15.09. og 15.10., VSK 05.10. og afborganir lána vantar í bankabók, samtals um "
+ }
+}

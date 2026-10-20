@@ -1,0 +1,2264 @@
+{
+ "today": "2026-10-18",
+ "asof": "2026-10-16",
+ "M": [
+  "2026-01",
+  "2026-02",
+  "2026-03",
+  "2026-04",
+  "2026-05",
+  "2026-06",
+  "2026-07",
+  "2026-08",
+  "2026-09",
+  "2026-10"
+ ],
+ "inc": {
+  "2026-09": "söludagbók ekki bókuð, laun og vörunotkun vantar",
+  "2026-10": "yfirstandandi mánuður, söludagbók ekki bókuð"
+ },
+ "py": 1620000000,
+ "py_stream": {
+  "tilbod": 891000000,
+  "thjon": 405000000,
+  "smidi": 162000000,
+  "vara": 162000000
+ },
+ "bud": {
+  "2026-01": 145800000,
+  "2026-02": 145800000,
+  "2026-03": 145800000,
+  "2026-04": 145800000,
+  "2026-05": 145800000,
+  "2026-06": 145800000,
+  "2026-07": 145800000,
+  "2026-08": 145800000,
+  "2026-09": 145800000,
+  "2026-10": 145800000
+ },
+ "bud_name": "DRÖG-2026",
+ "bud_desc": "Drög: 2025 × forsendur (tekjur og vörunotkun +8%, laun +6%, annað +5,9% verðbólga), jöfn dreifing á mánuði",
+ "streams": [
+  [
+   "tilbod",
+   "Tilboðsverk og verkefni"
+  ],
+  [
+   "thjon",
+   "Þjónusta og útköll"
+  ],
+  [
+   "smidi",
+   "Smíði og stálvinna"
+  ],
+  [
+   "vara",
+   "Varahlutir og efni"
+  ],
+  [
+   "einsk",
+   "Einskiptissala"
+  ],
+  [
+   "adrar",
+   "Aðrar tekjur og endurrukkun"
+  ],
+  [
+   "afsl",
+   "Afslættir"
+  ]
+ ],
+ "E": [
+  [
+   "2026-08-06",
+   "1130",
+   "SR00088",
+   "Tankakerfi, smíði og afhending",
+   30954000,
+   "reikn",
+   "K60",
+   "einsk"
+  ],
+  [
+   "2026-04-30",
+   "1110",
+   "SR00108",
+   "Áfangi 1, hönnun og efnispöntun",
+   22000000,
+   "reikn",
+   "K10",
+   "tilbod"
+  ],
+  [
+   "2026-05-05",
+   "1110",
+   "SR00107",
+   "Viðbótarverk",
+   4195000,
+   "reikn",
+   "K30",
+   "tilbod"
+  ],
+  [
+   "2026-05-19",
+   "1110",
+   "SR00106",
+   "Varahlutir og efni",
+   1050000,
+   "reikn",
+   "K50",
+   "vara"
+  ],
+  [
+   "2026-05-26",
+   "1110",
+   "SR00105",
+   "Lagnaverk, undirbúningur",
+   12340000,
+   "reikn",
+   "K30",
+   "tilbod"
+  ],
+  [
+   "2026-06-09",
+   "1110",
+   "SR00104",
+   "Varahlutir og efni",
+   1575000,
+   "reikn",
+   "K50",
+   "vara"
+  ],
+  [
+   "2026-06-18",
+   "1110",
+   "SR00103",
+   "Útköll og viðhald",
+   7905000,
+   "reikn",
+   "K40",
+   "thjon"
+  ],
+  [
+   "2026-06-25",
+   "1110",
+   "SR00102",
+   "Lagnaverk, áfangi 1",
+   21290000,
+   "reikn",
+   "K30",
+   "tilbod"
+  ],
+  [
+   "2026-06-30",
+   "1110",
+   "SR00109",
+   "Áfangi 2, efni afhent á staðinn",
+   26000000,
+   "reikn",
+   "K10",
+   "tilbod"
+  ],
+  [
+   "2026-07-04",
+   "1110",
+   "SR00101",
+   "Efnissala",
+   6775000,
+   "reikn",
+   "K10",
+   "vara"
+  ],
+  [
+   "2026-07-10",
+   "1110",
+   "SR00100",
+   "Undirsmíði, stálvinna",
+   7825000,
+   "reikn",
+   "K70",
+   "smidi"
+  ],
+  [
+   "2026-07-15",
+   "1110",
+   "SR00111",
+   "Útköll og viðbragð, uppgjör samnings",
+   45000000,
+   "reikn",
+   "K40",
+   "thjon"
+  ],
+  [
+   "2026-07-18",
+   "1110",
+   "SR00099",
+   "Útköll og viðhald",
+   14435000,
+   "reikn",
+   "K40",
+   "thjon"
+  ],
+  [
+   "2026-07-21",
+   "1110",
+   "SR00098",
+   "Varahlutir og efni",
+   890000,
+   "reikn",
+   "K50",
+   "vara"
+  ],
+  [
+   "2026-07-24",
+   "1110",
+   "SR00097",
+   "Lagnaverk, áfangi 2",
+   19840000,
+   "reikn",
+   "K30",
+   "tilbod"
+  ],
+  [
+   "2026-07-27",
+   "1110",
+   "SR00096",
+   "Þjónustusamningur, júlí",
+   7340000,
+   "reikn",
+   "K20",
+   "thjon"
+  ],
+  [
+   "2026-08-04",
+   "1110",
+   "SR00095",
+   "Viðbótarverk, tímagjald",
+   14600000,
+   "reikn",
+   "K10",
+   "tilbod"
+  ],
+  [
+   "2026-08-09",
+   "1110",
+   "SR00094",
+   "Varahlutir og efni",
+   700000,
+   "reikn",
+   "K50",
+   "vara"
+  ],
+  [
+   "2026-08-12",
+   "1110",
+   "SR00093",
+   "Undirsmíði, stálvinna",
+   11700000,
+   "reikn",
+   "K70",
+   "smidi"
+  ],
+  [
+   "2026-08-17",
+   "1110",
+   "SR00092",
+   "Þjónustusamningur, ágúst",
+   7500000,
+   "reikn",
+   "K20",
+   "thjon"
+  ],
+  [
+   "2026-08-20",
+   "1110",
+   "SR00091",
+   "Fyrsta verk, lagnavinna",
+   3300000,
+   "reikn",
+   "K80",
+   "tilbod"
+  ],
+  [
+   "2026-08-23",
+   "1110",
+   "SR00089",
+   "Greiðsluáfangi 3, uppsetning á staðnum",
+   50000000,
+   "reikn",
+   "K10",
+   "tilbod"
+  ],
+  [
+   "2026-08-23",
+   "1110",
+   "SR00110",
+   "Áfangi 3, smíði á verkstæði lokið",
+   50000000,
+   "reikn",
+   "K10",
+   "tilbod"
+  ],
+  [
+   "2026-08-25",
+   "1110",
+   "SR00090",
+   "Varahlutir og efni",
+   1000000,
+   "reikn",
+   "K50",
+   "vara"
+  ],
+  [
+   "2026-09-04",
+   "1110",
+   "SR00112",
+   "Reglubundið viðhald, janúar til ágúst 2026, 1.400 klst á 18.900",
+   26460000,
+   "reikn",
+   "K20",
+   "thjon"
+  ],
+  [
+   "2026-09-04",
+   "1110",
+   "SR00113",
+   "Útköll og bilanir, janúar til ágúst 2026, 700 klst á 13.900",
+   9730000,
+   "reikn",
+   "K20",
+   "thjon"
+  ],
+  [
+   "2026-01-31",
+   "1110",
+   "SALA-2601",
+   "Tilboðsverk, fast verð, janúar 2026",
+   67650000,
+   "dagb",
+   "",
+   "tilbod"
+  ],
+  [
+   "2026-01-31",
+   "1110",
+   "SALA-2601",
+   "Þjónusta og útköll, janúar 2026",
+   30750000,
+   "dagb",
+   "",
+   "thjon"
+  ],
+  [
+   "2026-01-31",
+   "1110",
+   "SALA-2601",
+   "Smíði á lager, janúar 2026",
+   12300000,
+   "dagb",
+   "",
+   "smidi"
+  ],
+  [
+   "2026-01-31",
+   "1110",
+   "SALA-2601",
+   "Varahluta- og efnissölu, janúar 2026",
+   12300000,
+   "dagb",
+   "",
+   "vara"
+  ],
+  [
+   "2026-02-28",
+   "1110",
+   "SALA-2602",
+   "Tilboðsverk, fast verð, febrúar 2026",
+   72600000,
+   "dagb",
+   "",
+   "tilbod"
+  ],
+  [
+   "2026-02-28",
+   "1110",
+   "SALA-2602",
+   "Þjónusta og útköll, febrúar 2026",
+   33000000,
+   "dagb",
+   "",
+   "thjon"
+  ],
+  [
+   "2026-02-28",
+   "1110",
+   "SALA-2602",
+   "Smíði á lager, febrúar 2026",
+   13200000,
+   "dagb",
+   "",
+   "smidi"
+  ],
+  [
+   "2026-02-28",
+   "1110",
+   "SALA-2602",
+   "Varahluta- og efnissölu, febrúar 2026",
+   13200000,
+   "dagb",
+   "",
+   "vara"
+  ],
+  [
+   "2026-03-31",
+   "1110",
+   "SALA-2603",
+   "Tilboðsverk, fast verð, mars 2026",
+   84150000,
+   "dagb",
+   "",
+   "tilbod"
+  ],
+  [
+   "2026-03-31",
+   "1110",
+   "SALA-2603",
+   "Þjónusta og útköll, mars 2026",
+   38250000,
+   "dagb",
+   "",
+   "thjon"
+  ],
+  [
+   "2026-03-31",
+   "1110",
+   "SALA-2603",
+   "Smíði á lager, mars 2026",
+   15300000,
+   "dagb",
+   "",
+   "smidi"
+  ],
+  [
+   "2026-03-31",
+   "1110",
+   "SALA-2603",
+   "Varahluta- og efnissölu, mars 2026",
+   15300000,
+   "dagb",
+   "",
+   "vara"
+  ],
+  [
+   "2026-04-30",
+   "1110",
+   "SALA-2604",
+   "Tilboðsverk, fast verð, apríl 2026",
+   89100000,
+   "dagb",
+   "",
+   "tilbod"
+  ],
+  [
+   "2026-04-30",
+   "1110",
+   "SALA-2604",
+   "Þjónusta og útköll, apríl 2026",
+   40500000,
+   "dagb",
+   "",
+   "thjon"
+  ],
+  [
+   "2026-04-30",
+   "1110",
+   "SALA-2604",
+   "Smíði á lager, apríl 2026",
+   16200000,
+   "dagb",
+   "",
+   "smidi"
+  ],
+  [
+   "2026-04-30",
+   "1110",
+   "SALA-2604",
+   "Varahluta- og efnissölu, apríl 2026",
+   16200000,
+   "dagb",
+   "",
+   "vara"
+  ],
+  [
+   "2026-05-31",
+   "1110",
+   "SALA-2605",
+   "Tilboðsverk, fast verð, maí 2026",
+   82728250,
+   "dagb",
+   "",
+   "tilbod"
+  ],
+  [
+   "2026-05-31",
+   "1110",
+   "SALA-2605",
+   "Þjónusta og útköll, maí 2026",
+   37603750,
+   "dagb",
+   "",
+   "thjon"
+  ],
+  [
+   "2026-05-31",
+   "1110",
+   "SALA-2605",
+   "Smíði á lager, maí 2026",
+   15041500,
+   "dagb",
+   "",
+   "smidi"
+  ],
+  [
+   "2026-05-31",
+   "1110",
+   "SALA-2605",
+   "Varahluta- og efnissölu, maí 2026",
+   15041500,
+   "dagb",
+   "",
+   "vara"
+  ],
+  [
+   "2026-06-30",
+   "1110",
+   "SALA-2606",
+   "Tilboðsverk, fast verð, júní 2026",
+   70526500,
+   "dagb",
+   "",
+   "tilbod"
+  ],
+  [
+   "2026-06-30",
+   "1110",
+   "SALA-2606",
+   "Þjónusta og útköll, júní 2026",
+   32057500,
+   "dagb",
+   "",
+   "thjon"
+  ],
+  [
+   "2026-06-30",
+   "1110",
+   "SALA-2606",
+   "Smíði á lager, júní 2026",
+   12823000,
+   "dagb",
+   "",
+   "smidi"
+  ],
+  [
+   "2026-06-30",
+   "1110",
+   "SALA-2606",
+   "Varahluta- og efnissölu, júní 2026",
+   12823000,
+   "dagb",
+   "",
+   "vara"
+  ],
+  [
+   "2026-07-31",
+   "1110",
+   "SALA-2607",
+   "Tilboðsverk, fast verð, júlí 2026",
+   32942250,
+   "dagb",
+   "",
+   "tilbod"
+  ],
+  [
+   "2026-07-31",
+   "1110",
+   "SALA-2607",
+   "Þjónusta og útköll, júlí 2026",
+   14973750,
+   "dagb",
+   "",
+   "thjon"
+  ],
+  [
+   "2026-07-31",
+   "1110",
+   "SALA-2607",
+   "Smíði á lager, júlí 2026",
+   5989500,
+   "dagb",
+   "",
+   "smidi"
+  ],
+  [
+   "2026-07-31",
+   "1110",
+   "SALA-2607",
+   "Varahluta- og efnissölu, júlí 2026",
+   5989500,
+   "dagb",
+   "",
+   "vara"
+  ],
+  [
+   "2026-08-31",
+   "1110",
+   "SALA-2608",
+   "Tilboðsverk, fast verð, ágúst 2026",
+   5085300,
+   "dagb",
+   "",
+   "tilbod"
+  ],
+  [
+   "2026-08-31",
+   "1110",
+   "SALA-2608",
+   "Þjónusta og útköll, ágúst 2026",
+   2311500,
+   "dagb",
+   "",
+   "thjon"
+  ],
+  [
+   "2026-08-31",
+   "1110",
+   "SALA-2608",
+   "Smíði á lager, ágúst 2026",
+   924600,
+   "dagb",
+   "",
+   "smidi"
+  ],
+  [
+   "2026-08-31",
+   "1110",
+   "SALA-2608",
+   "Varahluta- og efnissölu, ágúst 2026",
+   924600,
+   "dagb",
+   "",
+   "vara"
+  ],
+  [
+   "2026-09-30",
+   "1930",
+   "LEIDR-0930",
+   "Leiðrétting viðskiptamanna",
+   1250000,
+   "dagb",
+   "",
+   "adrar"
+  ],
+  [
+   "2026-09-30",
+   "1930",
+   "NOVA-K90-0926",
+   "Viðhaldsþjónusta fasteigna, september",
+   3150000,
+   "dagb",
+   "",
+   "adrar"
+  ],
+  [
+   "2026-01-31",
+   "1110",
+   "SR00114",
+   "Fast mánaðargjald, janúar 2026",
+   1200000,
+   "reikn",
+   "K50",
+   "thjon"
+  ],
+  [
+   "2026-02-28",
+   "1110",
+   "SR00115",
+   "Fast mánaðargjald, febrúar 2026",
+   1200000,
+   "reikn",
+   "K50",
+   "thjon"
+  ],
+  [
+   "2026-03-31",
+   "1110",
+   "SR00116",
+   "Fast mánaðargjald, mars 2026",
+   1200000,
+   "reikn",
+   "K50",
+   "thjon"
+  ],
+  [
+   "2026-04-30",
+   "1110",
+   "SR00117",
+   "Fast mánaðargjald, apríl 2026",
+   1200000,
+   "reikn",
+   "K50",
+   "thjon"
+  ],
+  [
+   "2026-05-31",
+   "1110",
+   "SR00118",
+   "Fast mánaðargjald, maí 2026",
+   1200000,
+   "reikn",
+   "K50",
+   "thjon"
+  ],
+  [
+   "2026-06-30",
+   "1110",
+   "SR00119",
+   "Fast mánaðargjald, júní 2026",
+   1200000,
+   "reikn",
+   "K50",
+   "thjon"
+  ],
+  [
+   "2026-07-31",
+   "1110",
+   "SR00120",
+   "Fast mánaðargjald, júlí 2026",
+   1200000,
+   "reikn",
+   "K50",
+   "thjon"
+  ],
+  [
+   "2026-08-31",
+   "1110",
+   "SR00121",
+   "Fast mánaðargjald, ágúst 2026",
+   1200000,
+   "reikn",
+   "K50",
+   "thjon"
+  ],
+  [
+   "2026-09-30",
+   "1110",
+   "SR00122",
+   "Fast mánaðargjald, september 2026",
+   1200000,
+   "reikn",
+   "K50",
+   "thjon"
+  ],
+  [
+   "2026-09-30",
+   "1930",
+   "LEIDR-0930",
+   "Leiðrétting viðskiptamanna",
+   -1250000,
+   "bakf",
+   "",
+   "adrar"
+  ],
+  [
+   "2026-09-30",
+   "1930",
+   "LEIDR-0930",
+   "Leiðrétting viðskiptamanna",
+   1250000,
+   "dagb",
+   "",
+   "adrar"
+  ],
+  [
+   "2026-09-30",
+   "1930",
+   "LEIDR-0930",
+   "Leiðrétting viðskiptamanna",
+   -1250000,
+   "bakf",
+   "",
+   "adrar"
+  ],
+  [
+   "2026-09-30",
+   "1930",
+   "LEIDR-0930",
+   "Leiðrétting viðskiptamanna",
+   1250000,
+   "dagb",
+   "",
+   "adrar"
+  ],
+  [
+   "2026-10-05",
+   "1930",
+   "SR00123",
+   "Endurrukkun: húsnæðistrygging Norðurvegur 5, september 2026",
+   185000,
+   "reikn",
+   "K100",
+   "adrar"
+  ],
+  [
+   "2026-10-05",
+   "1910",
+   "SR00123",
+   "Endurrukkun: hugbúnaður, 1/3 hlutur, september 2026",
+   308000,
+   "reikn",
+   "K100",
+   "adrar"
+  ],
+  [
+   "2026-10-05",
+   "1910",
+   "SR00124",
+   "Endurrukkun: hugbúnaður, 1/3 hlutur, september 2026",
+   300000,
+   "reikn",
+   "K110",
+   "adrar"
+  ],
+  [
+   "2026-10-07",
+   "1110",
+   "SR00125",
+   "Viðgerð á stiga og handriði, Norðurvegur 5, efni og vinna",
+   1150000,
+   "reikn",
+   "K100",
+   "thjon"
+  ],
+  [
+   "2026-10-14",
+   "1140",
+   "LEIDR-1014",
+   "Afsláttur K10 Svarfaðarver, leiðrétting",
+   -250000,
+   "dagb",
+   "",
+   "afsl"
+  ]
+ ],
+ "inv": [
+  {
+   "doc": "SR00114",
+   "c": "K50",
+   "d": "2026-01-31",
+   "desc": "Fast mánaðargjald, janúar 2026",
+   "net": 1200000,
+   "gross": 1488000,
+   "open": false,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Fast mánaðargjald, janúar 2026",
+     1.0,
+     1200000.0,
+     0.0,
+     1200000,
+     "S-2603"
+    ]
+   ]
+  },
+  {
+   "doc": "SR00115",
+   "c": "K50",
+   "d": "2026-02-28",
+   "desc": "Fast mánaðargjald, febrúar 2026",
+   "net": 1200000,
+   "gross": 1488000,
+   "open": false,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Fast mánaðargjald, febrúar 2026",
+     1.0,
+     1200000.0,
+     0.0,
+     1200000,
+     "S-2603"
+    ]
+   ]
+  },
+  {
+   "doc": "SR00116",
+   "c": "K50",
+   "d": "2026-03-31",
+   "desc": "Fast mánaðargjald, mars 2026",
+   "net": 1200000,
+   "gross": 1488000,
+   "open": false,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Fast mánaðargjald, mars 2026",
+     1.0,
+     1200000.0,
+     0.0,
+     1200000,
+     "S-2603"
+    ]
+   ]
+  },
+  {
+   "doc": "SR00117",
+   "c": "K50",
+   "d": "2026-04-30",
+   "desc": "Fast mánaðargjald, apríl 2026",
+   "net": 1200000,
+   "gross": 1488000,
+   "open": false,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Fast mánaðargjald, apríl 2026",
+     1.0,
+     1200000.0,
+     0.0,
+     1200000,
+     "S-2603"
+    ]
+   ]
+  },
+  {
+   "doc": "SR00108",
+   "c": "K10",
+   "d": "2026-04-30",
+   "desc": "Áfangi 1, hönnun og efnispöntun",
+   "net": 22000000,
+   "gross": 27280000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Áfangi 1, hönnun og efnispöntun",
+     1.0,
+     22000000.0,
+     0.0,
+     22000000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00107",
+   "c": "K30",
+   "d": "2026-05-05",
+   "desc": "Viðbótarverk",
+   "net": 4195000,
+   "gross": 5201800,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Viðbótarverk",
+     1.0,
+     4195000.0,
+     0.0,
+     4195000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00106",
+   "c": "K50",
+   "d": "2026-05-19",
+   "desc": "Varahlutir og efni",
+   "net": 1050000,
+   "gross": 1302000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Varahlutir og efni",
+     1.0,
+     1050000.0,
+     0.0,
+     1050000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00105",
+   "c": "K30",
+   "d": "2026-05-26",
+   "desc": "Lagnaverk, undirbúningur",
+   "net": 12340000,
+   "gross": 15301600,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Lagnaverk, undirbúningur",
+     1.0,
+     12340000.0,
+     0.0,
+     12340000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00118",
+   "c": "K50",
+   "d": "2026-05-31",
+   "desc": "Fast mánaðargjald, maí 2026",
+   "net": 1200000,
+   "gross": 1488000,
+   "open": false,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Fast mánaðargjald, maí 2026",
+     1.0,
+     1200000.0,
+     0.0,
+     1200000,
+     "S-2603"
+    ]
+   ]
+  },
+  {
+   "doc": "SR00104",
+   "c": "K50",
+   "d": "2026-06-09",
+   "desc": "Varahlutir og efni",
+   "net": 1575000,
+   "gross": 1953000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Varahlutir og efni",
+     1.0,
+     1575000.0,
+     0.0,
+     1575000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00103",
+   "c": "K40",
+   "d": "2026-06-18",
+   "desc": "Útköll og viðhald",
+   "net": 7905000,
+   "gross": 9802200,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Útköll og viðhald",
+     1.0,
+     7905000.0,
+     0.0,
+     7905000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00102",
+   "c": "K30",
+   "d": "2026-06-25",
+   "desc": "Lagnaverk, áfangi 1",
+   "net": 21290000,
+   "gross": 26399600,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Lagnaverk, áfangi 1",
+     1.0,
+     21290000.0,
+     0.0,
+     21290000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00119",
+   "c": "K50",
+   "d": "2026-06-30",
+   "desc": "Fast mánaðargjald, júní 2026",
+   "net": 1200000,
+   "gross": 1488000,
+   "open": false,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Fast mánaðargjald, júní 2026",
+     1.0,
+     1200000.0,
+     0.0,
+     1200000,
+     "S-2603"
+    ]
+   ]
+  },
+  {
+   "doc": "SR00109",
+   "c": "K10",
+   "d": "2026-06-30",
+   "desc": "Áfangi 2, efni afhent á staðinn",
+   "net": 26000000,
+   "gross": 32240000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Áfangi 2, efni afhent á staðinn",
+     1.0,
+     26000000.0,
+     0.0,
+     26000000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00101",
+   "c": "K10",
+   "d": "2026-07-04",
+   "desc": "Efnissala",
+   "net": 6775000,
+   "gross": 8401000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Efnissala",
+     1.0,
+     6775000.0,
+     0.0,
+     6775000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00100",
+   "c": "K70",
+   "d": "2026-07-10",
+   "desc": "Undirsmíði, stálvinna",
+   "net": 7825000,
+   "gross": 9703000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Undirsmíði, stálvinna",
+     1.0,
+     7825000.0,
+     0.0,
+     7825000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00111",
+   "c": "K40",
+   "d": "2026-07-15",
+   "desc": "Útköll og viðbragð, uppgjör samnings",
+   "net": 45000000,
+   "gross": 55800000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Útköll og viðbragð, uppgjör samnings",
+     1.0,
+     45000000.0,
+     0.0,
+     45000000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00099",
+   "c": "K40",
+   "d": "2026-07-18",
+   "desc": "Útköll og viðhald",
+   "net": 14435000,
+   "gross": 17899400,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Útköll og viðhald",
+     1.0,
+     14435000.0,
+     0.0,
+     14435000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00098",
+   "c": "K50",
+   "d": "2026-07-21",
+   "desc": "Varahlutir og efni",
+   "net": 890000,
+   "gross": 1103600,
+   "open": false,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Varahlutir og efni",
+     1.0,
+     890000.0,
+     0.0,
+     890000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00097",
+   "c": "K30",
+   "d": "2026-07-24",
+   "desc": "Lagnaverk, áfangi 2",
+   "net": 19840000,
+   "gross": 24601600,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Lagnaverk, áfangi 2",
+     1.0,
+     19840000.0,
+     0.0,
+     19840000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00096",
+   "c": "K20",
+   "d": "2026-07-27",
+   "desc": "Þjónustusamningur, júlí",
+   "net": 7340000,
+   "gross": 9101600,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Þjónustusamningur, júlí",
+     1.0,
+     7340000.0,
+     0.0,
+     7340000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00120",
+   "c": "K50",
+   "d": "2026-07-31",
+   "desc": "Fast mánaðargjald, júlí 2026",
+   "net": 1200000,
+   "gross": 1488000,
+   "open": false,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Fast mánaðargjald, júlí 2026",
+     1.0,
+     1200000.0,
+     0.0,
+     1200000,
+     "S-2603"
+    ]
+   ]
+  },
+  {
+   "doc": "SR00095",
+   "c": "K10",
+   "d": "2026-08-04",
+   "desc": "Viðbótarverk, tímagjald",
+   "net": 14600000,
+   "gross": 18104000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Viðbótarverk, tímagjald",
+     1.0,
+     14600000.0,
+     0.0,
+     14600000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00088",
+   "c": "K60",
+   "d": "2026-08-06",
+   "desc": "Tankakerfi, smíði og afhending",
+   "net": 30954000,
+   "gross": 30954000,
+   "open": true,
+   "fx": "EUR",
+   "lines": [
+    [
+     10000,
+     "1130",
+     "Tankakerfi, smíði og afhending",
+     1.0,
+     210000.0,
+     0.0,
+     30954000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00094",
+   "c": "K50",
+   "d": "2026-08-09",
+   "desc": "Varahlutir og efni",
+   "net": 700000,
+   "gross": 868000,
+   "open": false,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Varahlutir og efni",
+     1.0,
+     700000.0,
+     0.0,
+     700000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00093",
+   "c": "K70",
+   "d": "2026-08-12",
+   "desc": "Undirsmíði, stálvinna",
+   "net": 11700000,
+   "gross": 14508000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Undirsmíði, stálvinna",
+     1.0,
+     11700000.0,
+     0.0,
+     11700000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00092",
+   "c": "K20",
+   "d": "2026-08-17",
+   "desc": "Þjónustusamningur, ágúst",
+   "net": 7500000,
+   "gross": 9300000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Þjónustusamningur, ágúst",
+     1.0,
+     7500000.0,
+     0.0,
+     7500000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00091",
+   "c": "K80",
+   "d": "2026-08-20",
+   "desc": "Fyrsta verk, lagnavinna",
+   "net": 3300000,
+   "gross": 4092000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Fyrsta verk, lagnavinna",
+     1.0,
+     3300000.0,
+     0.0,
+     3300000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00089",
+   "c": "K10",
+   "d": "2026-08-23",
+   "desc": "Greiðsluáfangi 3, uppsetning á staðnum",
+   "net": 50000000,
+   "gross": 62000000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Greiðsluáfangi 3, uppsetning á staðnum",
+     1.0,
+     50000000.0,
+     0.0,
+     50000000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00110",
+   "c": "K10",
+   "d": "2026-08-23",
+   "desc": "Áfangi 3, smíði á verkstæði lokið",
+   "net": 50000000,
+   "gross": 62000000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Áfangi 3, smíði á verkstæði lokið",
+     1.0,
+     50000000.0,
+     0.0,
+     50000000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00090",
+   "c": "K50",
+   "d": "2026-08-25",
+   "desc": "Varahlutir og efni",
+   "net": 1000000,
+   "gross": 1240000,
+   "open": false,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Varahlutir og efni",
+     1.0,
+     1000000.0,
+     0.0,
+     1000000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00121",
+   "c": "K50",
+   "d": "2026-08-31",
+   "desc": "Fast mánaðargjald, ágúst 2026",
+   "net": 1200000,
+   "gross": 1488000,
+   "open": false,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Fast mánaðargjald, ágúst 2026",
+     1.0,
+     1200000.0,
+     0.0,
+     1200000,
+     "S-2603"
+    ]
+   ]
+  },
+  {
+   "doc": "SR00112",
+   "c": "K20",
+   "d": "2026-09-04",
+   "desc": "Reglubundið viðhald, janúar til ágúst 2026, 1.400 klst á 18.900",
+   "net": 26460000,
+   "gross": 32810400,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Reglubundið viðhald, janúar til ágúst 2026, 1.400 klst á 18.900",
+     1400.0,
+     18900.0,
+     0.0,
+     26460000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00113",
+   "c": "K20",
+   "d": "2026-09-04",
+   "desc": "Útköll og bilanir, janúar til ágúst 2026, 700 klst á 13.900",
+   "net": 9730000,
+   "gross": 12065200,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Útköll og bilanir, janúar til ágúst 2026, 700 klst á 13.900",
+     700.0,
+     13900.0,
+     0.0,
+     9730000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00122",
+   "c": "K50",
+   "d": "2026-09-30",
+   "desc": "Fast mánaðargjald, september 2026",
+   "net": 1200000,
+   "gross": 1488000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Fast mánaðargjald, september 2026",
+     1.0,
+     1200000.0,
+     0.0,
+     1200000,
+     "S-2603"
+    ]
+   ]
+  },
+  {
+   "doc": "SR00123",
+   "c": "K100",
+   "d": "2026-10-05",
+   "desc": "Endurrukkun: húsnæðistrygging Norðurvegur 5, september 2026",
+   "net": 493000,
+   "gross": 566920,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1930",
+     "Endurrukkun: húsnæðistrygging Norðurvegur 5, september 2026",
+     1.0,
+     185000.0,
+     0.0,
+     185000,
+     ""
+    ],
+    [
+     20000,
+     "1910",
+     "Endurrukkun: hugbúnaður, 1/3 hlutur, september 2026",
+     1.0,
+     140000.0,
+     0.0,
+     140000,
+     ""
+    ],
+    [
+     30000,
+     "1910",
+     "Endurrukkun: endurskoðun, 1/3 hlutur, september 2026, með 5% umsýsluálagi",
+     1.0,
+     168000.0,
+     0.0,
+     168000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00124",
+   "c": "K110",
+   "d": "2026-10-05",
+   "desc": "Endurrukkun: hugbúnaður, 1/3 hlutur, september 2026",
+   "net": 300000,
+   "gross": 372000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1910",
+     "Endurrukkun: hugbúnaður, 1/3 hlutur, september 2026",
+     1.0,
+     140000.0,
+     0.0,
+     140000,
+     ""
+    ],
+    [
+     20000,
+     "1910",
+     "Endurrukkun: endurskoðun, 1/3 hlutur, september 2026",
+     1.0,
+     160000.0,
+     0.0,
+     160000,
+     ""
+    ]
+   ]
+  },
+  {
+   "doc": "SR00125",
+   "c": "K100",
+   "d": "2026-10-07",
+   "desc": "Viðgerð á stiga og handriði, Norðurvegur 5, efni og vinna",
+   "net": 1150000,
+   "gross": 1426000,
+   "open": true,
+   "fx": "",
+   "lines": [
+    [
+     10000,
+     "1110",
+     "Viðgerð á stiga og handriði, Norðurvegur 5, efni og vinna",
+     1.0,
+     1150000.0,
+     0.0,
+     1150000,
+     ""
+    ]
+   ]
+  }
+ ],
+ "cust": [
+  {
+   "no": "K10",
+   "name": "Svarfaðarver ehf.",
+   "ic": false,
+   "one": false,
+   "new": false,
+   "first": "2026-04-30"
+  },
+  {
+   "no": "K20",
+   "name": "Eyjafjarðar Sjókvíar ehf.",
+   "ic": false,
+   "one": false,
+   "new": false,
+   "first": "2026-07-27"
+  },
+  {
+   "no": "K30",
+   "name": "Útgerðin Boðaföll ehf.",
+   "ic": false,
+   "one": false,
+   "new": false,
+   "first": "2026-05-05"
+  },
+  {
+   "no": "K40",
+   "name": "Eyjafjarðar Kaldhreinsun ehf.",
+   "ic": false,
+   "one": false,
+   "new": false,
+   "first": "2026-06-18"
+  },
+  {
+   "no": "K50",
+   "name": "Vélaverk Norðurlands ehf.",
+   "ic": false,
+   "one": false,
+   "new": false,
+   "first": "2026-01-31"
+  },
+  {
+   "no": "K60",
+   "name": "Havstil Marine AS",
+   "ic": false,
+   "one": true,
+   "new": true,
+   "first": "2026-08-06"
+  },
+  {
+   "no": "K70",
+   "name": "Smíðaþjónusta Norðurlands ehf.",
+   "ic": false,
+   "one": false,
+   "new": false,
+   "first": "2026-07-10"
+  },
+  {
+   "no": "K80",
+   "name": "Grenivíkurver ehf.",
+   "ic": false,
+   "one": false,
+   "new": true,
+   "first": "2026-08-20"
+  },
+  {
+   "no": "K100",
+   "name": "Hríseyjarhús ehf.",
+   "ic": true,
+   "one": false,
+   "new": true,
+   "first": "2026-10-05"
+  },
+  {
+   "no": "K110",
+   "name": "Eyjavör fjárfestingar ehf.",
+   "ic": true,
+   "one": false,
+   "new": true,
+   "first": "2026-10-05"
+  }
+ ],
+ "other_cle": [
+  [
+   "2026-09-30",
+   "K90",
+   "NOVA-K90-0926",
+   "Viðhaldsþjónusta fasteigna, september",
+   3150000
+  ],
+  [
+   "2026-09-30",
+   "K90",
+   "MILLIF-0930",
+   "Millifærsla tengdra aðila",
+   -380000
+  ],
+  [
+   "2026-09-30",
+   "K10",
+   "LEIDR-0930",
+   "Leiðrétting viðskiptamanna",
+   1250000
+  ]
+ ],
+ "jobs": [
+  {
+   "no": "V-2601",
+   "desc": "Lagnaendurnýjun, frystihús",
+   "cust": "Svarfaðarver ehf.",
+   "typ": "Tilboðsverk",
+   "contract": 148000000,
+   "inv": 148000000
+  },
+  {
+   "no": "L-2601",
+   "desc": "Lagnagrindur á lager, staðalstærð",
+   "cust": "Innra verk (lager)",
+   "typ": "Lagersmíði",
+   "contract": 0,
+   "inv": 0
+  },
+  {
+   "no": "S-2601",
+   "desc": "Þjónustusamningur, viðhald og útköll",
+   "cust": "Eyjafjarðar Sjókvíar ehf.",
+   "typ": "Þjónustusamningur",
+   "contract": 112400000,
+   "inv": 36190000
+  },
+  {
+   "no": "S-2602",
+   "desc": "Útköll og bilanaviðgerðir",
+   "cust": "Eyjafjarðar Kaldhreinsun ehf.",
+   "typ": "Þjónustusamningur",
+   "contract": 63475000,
+   "inv": 67340000
+  },
+  {
+   "no": "S-2603",
+   "desc": "Rammasamningur, fast mánaðargjald 1,2 m",
+   "cust": "Vélaverk Norðurlands ehf.",
+   "typ": "Rammasamningur",
+   "contract": 11188800,
+   "inv": 10800000
+  },
+  {
+   "no": "D-01–D-10",
+   "desc": "Tíu tímaverk, ágúst",
+   "cust": "5 viðskiptavinir",
+   "typ": "Tímaverk",
+   "contract": 9853600,
+   "inv": 0
+  }
+ ],
+ "prices": [
+  13900,
+  14600,
+  16200,
+  18900,
+  22500
+ ],
+ "leak": {
+  "items": [
+   {
+    "k": "A",
+    "t": "Tíu verk frá ágúst án reiknings",
+    "job": "D-01–D-10",
+    "cust": "Fimm viðskiptavinir",
+    "amt": 8338400,
+    "v": "S",
+    "yr": 0,
+    "d": "536 klst. unnar í ágúst og enginn reikningur farinn út.",
+    "next": "Senda reikningana í þessari viku"
+   },
+   {
+    "k": "B",
+    "t": "Akstur rukkaður á 0 kr.",
+    "job": "S-2601",
+    "cust": "Eyjafjarðar Sjókvíar ehf.",
+    "amt": 3600000,
+    "v": "S",
+    "yr": 5400000,
+    "d": "Akstur, ferðir og bátsflutningar janúar–ágúst án gjalds. Samningurinn gerir ráð fyrir 50% álagi.",
+    "next": "Rukka aksturinn og setja verð á hann framvegis"
+   },
+   {
+    "k": "G",
+    "t": "Tímar umfram fast mánaðargjald",
+    "job": "S-2603",
+    "cust": "Vélaverk Norðurlands ehf.",
+    "amt": 2286900,
+    "v": "L",
+    "yr": 3049200,
+    "d": "Fasta gjaldið dugar fyrir um 63 klst. á mánuði en unnið var 121 klst. umfram (18.900 kr./klst.). Í september fóru tímarnir í 168% af gjaldinu.",
+    "next": "Endursemja eða rukka tímana umfram"
+   },
+   {
+    "k": "C",
+    "t": "Vinna eftir að samningur rann út",
+    "job": "S-2602",
+    "cust": "Eyjafjarðar Kaldhreinsun ehf.",
+    "amt": 1003000,
+    "v": "L",
+    "yr": 0,
+    "d": "Samningurinn rann út 31.08.2026 en sérfræðivinna var unnin 05.10.2026 án gjalds.",
+    "next": "Rukka vinnuna og semja um framhald"
+   },
+   {
+    "k": "B",
+    "t": "Varahlutir á 0 kr.",
+    "job": "S-2602",
+    "cust": "Eyjafjarðar Kaldhreinsun ehf.",
+    "amt": 16540000,
+    "v": "A",
+    "yr": 0,
+    "d": "Varahlutir og efni í útköll afhent án gjalds. Gæti verið innifalið í föstu samningsverði.",
+    "next": "Lesa samninginn"
+   }
+  ],
+  "src": [
+   {
+    "no": "D-01",
+    "desc": "Þjónustuúttekt og viðhald",
+    "cust": "Eyjafjarðar Sjókvíar ehf.",
+    "kind": "Unnið, ekki rukkað",
+    "g": "verk",
+    "h": 80,
+    "amt": 1296000,
+    "v": "S"
+   },
+   {
+    "no": "D-02",
+    "desc": "Útkallsvinna og bilanaleit",
+    "cust": "Eyjafjarðar Kaldhreinsun ehf.",
+    "kind": "Unnið, ekki rukkað",
+    "g": "verk",
+    "h": 56,
+    "amt": 817600,
+    "v": "S"
+   },
+   {
+    "no": "D-03",
+    "desc": "Suðuvinna og viðgerðir",
+    "cust": "Smíðaþjónusta Norðurlands ehf.",
+    "kind": "Unnið, ekki rukkað",
+    "g": "verk",
+    "h": 40,
+    "amt": 584000,
+    "v": "S"
+   },
+   {
+    "no": "D-04",
+    "desc": "Uppsetning og frágangur",
+    "cust": "Grenivíkurver ehf.",
+    "kind": "Unnið, ekki rukkað",
+    "g": "verk",
+    "h": 96,
+    "amt": 1334400,
+    "v": "S"
+   },
+   {
+    "no": "D-05",
+    "desc": "Uppsetning á búnaði",
+    "cust": "Vélaverk Norðurlands ehf.",
+    "kind": "Unnið, ekki rukkað",
+    "g": "verk",
+    "h": 48,
+    "amt": 777600,
+    "v": "S"
+   },
+   {
+    "no": "D-06",
+    "desc": "Hönnun og tæknileg úttekt",
+    "cust": "Eyjafjarðar Sjókvíar ehf.",
+    "kind": "Unnið, ekki rukkað",
+    "g": "verk",
+    "h": 32,
+    "amt": 604800,
+    "v": "S"
+   },
+   {
+    "no": "D-07",
+    "desc": "Viðgerðir á verkstæði",
+    "cust": "Eyjafjarðar Kaldhreinsun ehf.",
+    "kind": "Unnið, ekki rukkað",
+    "g": "verk",
+    "h": 64,
+    "amt": 934400,
+    "v": "S"
+   },
+   {
+    "no": "D-08",
+    "desc": "Þjónustusamningur, mánaðarleg úttekt",
+    "cust": "Smíðaþjónusta Norðurlands ehf.",
+    "kind": "Unnið, ekki rukkað",
+    "g": "verk",
+    "h": 24,
+    "amt": 333600,
+    "v": "S"
+   },
+   {
+    "no": "D-09",
+    "desc": "Frágangur og prófanir",
+    "cust": "Grenivíkurver ehf.",
+    "kind": "Unnið, ekki rukkað",
+    "g": "verk",
+    "h": 16,
+    "amt": 360000,
+    "v": "S"
+   },
+   {
+    "no": "D-10",
+    "desc": "Uppsetning, síðari áfangi",
+    "cust": "Vélaverk Norðurlands ehf.",
+    "kind": "Unnið, ekki rukkað",
+    "g": "verk",
+    "h": 80,
+    "amt": 1296000,
+    "v": "S"
+   },
+   {
+    "no": "S-2603",
+    "desc": "Rammasamningur, fast mánaðargjald",
+    "cust": "Vélaverk Norðurlands ehf.",
+    "kind": "Umfram fast gjald",
+    "g": "verk",
+    "h": 121,
+    "amt": 2286900,
+    "v": "L"
+   },
+   {
+    "no": "S-2602",
+    "desc": "Sérfræðivinna 05.10.2026",
+    "cust": "Eyjafjarðar Kaldhreinsun ehf.",
+    "kind": "Eftir samningslok",
+    "g": "verk",
+    "h": 0,
+    "amt": 1003000,
+    "v": "L"
+   },
+   {
+    "no": "S-2601",
+    "desc": "Akstur, ferðir og bátsflutningar jan–ágú",
+    "cust": "Eyjafjarðar Sjókvíar ehf.",
+    "kind": "0 kr. notkun",
+    "g": "zero",
+    "h": 0,
+    "amt": 3600000,
+    "v": "S"
+   },
+   {
+    "no": "S-2602",
+    "desc": "Varahlutir og efni í útköll",
+    "cust": "Eyjafjarðar Kaldhreinsun ehf.",
+    "kind": "0 kr. notkun",
+    "g": "zero",
+    "h": 0,
+    "amt": 16540000,
+    "v": "A"
+   }
+  ],
+  "actions": [
+   {
+    "t": "Senda reikninga fyrir tíu verk frá ágúst",
+    "once": 8338400,
+    "yr": 0,
+    "eff": "Lítið",
+    "v": "S",
+    "next": "Reikningar úr verkbókhaldi á D-01–D-10 í þessari viku"
+   },
+   {
+    "t": "Rukka akstur á S-2601 með 50% álagi",
+    "once": 3600000,
+    "yr": 5400000,
+    "eff": "Lítið",
+    "v": "S",
+    "next": "Reikningur fyrir jan–ágú og verð á akstur framvegis"
+   },
+   {
+    "t": "Rukka tíma umfram fast gjald á S-2603",
+    "once": 2286900,
+    "yr": 3049200,
+    "eff": "Miðl.",
+    "v": "L",
+    "next": "Endursemja: fast gjald fyrir 63 klst., tímar umfram á verðskrá"
+   },
+   {
+    "t": "Rukka vinnu eftir lok S-2602 og semja um framhald",
+    "once": 1003000,
+    "yr": 0,
+    "eff": "Lítið",
+    "v": "L",
+    "next": "Nýr samningur við Kaldhreinsun áður en næsta útkall er bókað"
+   },
+   {
+    "t": "Varahlutir utan samnings á S-2602",
+    "once": 16540000,
+    "yr": 0,
+    "eff": "Miðl.",
+    "v": "A",
+    "next": "Lesa samning; ef utan samnings, rukka á kostnaðarverði + álagi"
+   },
+   {
+    "t": "Verðskrá á 0 kr. línum og mánaðarleg yfirferð",
+    "once": 0,
+    "yr": 1200000,
+    "eff": "Lítið",
+    "v": "A",
+    "next": "Mánaðarleg skýrsla um 0 kr. línur á verkum áður en reikningar fara út (forsenda: 1,2 m.kr. á ári)"
+   }
+  ],
+  "method": [
+   [
+    "A Reikningshæft en óreikningsfært",
+    "Gert",
+    "Tíu tímaverk (D-01–D-10) með notkun en engum reikningi. Staðfest 17.10.2026: 536 klst., 8.338.400 kr. á söluverði."
+   ],
+   [
+    "B Notkun á 0 kr. söluverði",
+    "Gert",
+    "Akstur á S-2601 og varahlutir á S-2602. Efni á V-2601 er á föstu verði og ekki talið með."
+   ],
+   [
+    "C Verk búin en opin",
+    "Gert",
+    "S-2602 rann út 31.08. en var notað í október. Öll 15 verk eru enn opin."
+   ],
+   [
+    "D Gjaldfallnar kröfur",
+    "Utan mælaborðs",
+    "Innheimta, ekki tekjuleki. Sýnt í mælaborðinu Sjóðstreymi og bankar og ekki talið með í sækjanlegu."
+   ],
+   [
+    "E Afslættir og verðfrávik",
+    "Á ekki við",
+    "Vörusala er lítil (16 vörur, fáar sölufærslur)."
+   ],
+   [
+    "F Rof í endurteknum reikningum",
+    "Ekki gert",
+    "Sala er að mestu bókuð í dagbók utan verkbókhalds, svo reikningaröð er ekki marktæk. Athuga þegar sala er bókuð á verk."
+   ],
+   [
+    "G Tímar umfram fast verð",
+    "Gert",
+    "S-2603: 688 klst. jan–sep, 168% af gjaldi í september."
+   ],
+   [
+    "H Samkeyrsla við ytri kerfi",
+    "Á ekki við",
+    "Engin ytri kerfi tengd."
+   ]
+  ],
+  "leakJobs": 13,
+  "openJobs": 15,
+  "priceNote": "Engin afsláttar- eða verðfrávik: vörusala er lítil (16 vörur, fáar sölufærslur). Athugað aftur þegar vörusala eykst.",
+  "today": "2026-10-16"
+ },
+ "oneoff": {
+  "no": "1130",
+  "name": "Sala undanþegin VSK",
+  "cat": "tekjur",
+  "ym": "2026-08",
+  "amount": 30954000.0
+ },
+ "meta": {
+  "company_short": "DT Vélsmiðjan",
+  "initials": "DT",
+  "company": "DT Vélsmiðjan ehf.",
+  "as_of": "18.10.2026",
+  "year": "2026",
+  "py": "2025",
+  "leak_as_of": "16.10.2026",
+  "leak_fetched": "16.–17.10.2026",
+  "rev_accounts": "1000–1999",
+  "company_gen": "DT Vélsmiðjunnar ehf.",
+  "bc_env": "Bifrost",
+  "fetched": "16.–18.10.2026"
+ },
+ "text": {},
+ "html": {
+  "footer_notes": "September og október eru ófullbókaðir (mánaðarleg söludagbók ekki bókuð) og sýndir daufir. 2025 er borið saman sem ársheild deilt jafnt á mánuði, eins og í Stjórn. Áætlunin DRÖG-2026 er drög, ekki skráð í BC. Tekjustoðir eru flokkaðar eftir lýsingu færslu eða reikningslínu. Fyrirtækjanöfn viðskiptavina birtast, ekki nöfn einstaklinga."
+ },
+ "_maps": [
+  "py_stream"
+ ],
+ "js": {
+  "acc_names": {
+   "1110": "Sala 24% VSK",
+   "1130": "Sala undanþegin VSK",
+   "1140": "Veittur afsláttur",
+   "1910": "Aðrar tekjur 24% VSK",
+   "1930": "Aðrar tekjur undanþegnar VSK"
+  },
+  "disc_account": "1140",
+  "dq_note": "<b>Gagnagæði:</b> megnið af tekjunum er bókað með mánaðarlegri söludagbók (FHFBOK) á lykil 1110 án viðskiptavinar. Sala á viðskiptavin, þróun og samþjöppun hér eiga því aðeins við um reikningsfærða sölu.",
+  "dq_tail": "Frá september eru tekjur nær eingöngu reikningsfærðar.",
+  "inc_note": "Sep og okt eru ófullbókaðir og sýndir daufir.",
+  "leak_k1": "Varahlutir afhentir án gjalds. Gæti verið innifalið í samningi.",
+  "leak_k2": "Ef akstur og tímar umfram fast gjald verða áfram ekki rukkaðir.",
+  "leak_k3": "Öll verkin eru enn skráð opin.",
+  "leak_txt": "Vinna sem þegar er unnin en hefur ekki verið rukkuð, og þjónusta sem hefur verið látin af hendi án gjalds. Mest munar um tíu verk frá ágúst sem enginn reikningur hefur farið út fyrir.",
+  "non_gl_lines": 0,
+  "non_gl_note": "allar línur á fjárhagslykil, engin vörunúmer",
+  "one_incl": "að meðtalinni einskiptissölu til erlends viðskiptavinar í ágúst (1×)",
+  "onjob_note": "aðeins S-2603 hefur sölulínur á verki",
+  "open_stream": "tilbod",
+  "price_examples": [
+   {
+    "kind": "rate",
+    "label": "Reglubundið viðhald",
+    "match": "Reglubundið viðhald"
+   },
+   {
+    "kind": "rate",
+    "label": "Útköll og bilanir",
+    "match": "Útköll og bilanir"
+   },
+   {
+    "kind": "fixed",
+    "label": "Fast mánaðargjald S-2603",
+    "match": "Fast mánaðargjald"
+   },
+   {
+    "kind": "oneoff",
+    "label": "Tankakerfi",
+    "acc": "1130"
+   }
+  ],
+  "price_note": "Fast verð og tilboð eru bókuð sem ein lína á reikning, svo verðfrávik og afslætti á einingu er ekki hægt að greina.",
+  "py": "2025",
+  "py_share_src": "er úr söludagbók ársins (sömu fjórar stoðir,",
+  "py_share_tail": "Einskiptissala og aðrar tekjur voru engar 2025.",
+  "reg_lost": "Tapaða viðskiptavini er ekki hægt að greina: 2025 er ekki á viðskiptavini (aðeins opin staða í árslok).",
+  "reg_py": "Öll sala 2025 var bókuð með dagbók.",
+  "src_note_zero": "Varahlutir (Athuga) eru ekki taldir með í sækjanlegu strax fyrr en samningur hefur verið lesinn.",
+  "streams_note": "Stoðir eru flokkaðar eftir lýsingu: mánaðarleg söludagbók á 1110 skiptist í fjórar línur (tilboðsverk, þjónusta, smíði, varahlutir) og reikningar eftir lýsingu reikningslínu. Afsláttur er dreginn frá.",
+  "unreg_desc": "söludagbók (FHFBOK) á 1110 og leiðréttingar á 1930 og 1140",
+  "unreg_drawer": "söludagbók (FHFBOK) og leiðréttingar án reiknings.",
+  "year": "2026",
+  "ytd_short": "jan–okt"
+ }
+}

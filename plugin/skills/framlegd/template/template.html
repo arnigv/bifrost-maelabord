@@ -1,0 +1,466 @@
+<meta charset="utf-8">
+<script>(function(){var m="light";try{m=localStorage.getItem("bf-theme-v5")||"light"}catch(e){}var r=document.documentElement;r.setAttribute("data-bf",m==="dark"?"dark":"light");r.setAttribute("data-pal",(m==="blue"||m==="earth")?m:"bifrost")})()</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{meta.company_short}} framlegð og verk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&subset=latin,latin-ext&display=swap">
+<style>
+{{THEME_CSS}}
+
+.seg{flex-wrap:wrap;max-width:100%}
+.legend i.dash{background:none;border-top:2px dashed var(--base);height:0;width:16px;border-radius:0;vertical-align:3px}
+.srch{font:inherit;font-size:.84rem;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:6px 10px;min-width:0;width:min(240px,100%)}
+.mini2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mk{display:grid;gap:4px;padding:12px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);min-width:0;justify-items:start}
+.mk b{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;white-space:nowrap}
+.hb .r{grid-template-columns:minmax(0,11rem) minmax(0,1fr) auto}
+.track{position:relative;height:10px;border-radius:999px;background:var(--panel2);min-width:90px}
+.track .fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px}
+.track .time{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);border-radius:2px}
+.gantt{display:grid;gap:8px}
+.grow{display:grid;grid-template-columns:minmax(0,7rem) minmax(0,1fr);gap:10px;align-items:center;font-size:.82rem}
+.grow .code{font-family:var(--f-mono);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.glane{position:relative;height:18px;background:var(--panel2);border-radius:6px}
+.gbar{position:absolute;top:3px;bottom:3px;border-radius:5px}
+.gover{position:absolute;top:3px;bottom:3px;border-radius:5px;background:repeating-linear-gradient(45deg,var(--dn) 0 4px,transparent 4px 8px);opacity:.8}
+.today{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--gold)}
+.gaxis{display:grid;grid-template-columns:minmax(0,7rem) minmax(0,1fr);gap:10px;font-size:.7rem;color:var(--muted)}
+.gaxis div{position:relative;height:14px}
+.gaxis span{position:absolute;transform:translateX(-50%)}
+.code{font-family:var(--f-mono);font-weight:600}
+.cell-sub{display:block;font-size:.74rem;color:var(--muted)}
+@media (max-width:480px){.mini2{grid-template-columns:minmax(0,1fr)}.hb .r{grid-template-columns:minmax(0,6.5rem) minmax(0,1fr) auto;gap:8px}.grow,.gaxis{grid-template-columns:minmax(0,4.5rem) minmax(0,1fr)}.wrap{padding-inline:16px}}
+
+.ph .sub{white-space:nowrap}
+#t-verk .card > .sub{display:block;margin:-4px 0 10px}
+#u-bars{margin-bottom:14px}
+
+</style>
+<div class="wrap">
+  <nav class="crumb" aria-label="Leiðarstika"><a href="index.html">← Miðstöð<span class="c-l"> mælaborða</span></a><span class="sep">/</span><span>Framlegð og verk</span></nav>
+  <header class="top">
+    <div class="brandmark">
+      <div class="logo" aria-hidden="true">{{meta.logo}}</div>
+      <div style="min-width:0"><span class="eyebrow">Framlegð og verk · {{text.period}} {{meta.year}}</span><h1>{{meta.company}}</h1></div>
+    </div>
+    <div class="chips"><div id="mode"></div><span class="chip-lg m-hide"><span class="dot"></span>Tengt BC · Bifrost</span><span class="chip-lg">Staða <b>{{meta.as_of}}</b></span></div>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Flipar">
+    <button role="tab" aria-controls="t-yfir">Yfirsýn</button>
+    <button role="tab" aria-controls="t-verk">Verk</button>
+    <button role="tab" aria-controls="t-vorur">Vörur og ABC</button>
+    <button role="tab" aria-controls="t-herm">Herming</button>
+    <button role="tab" aria-controls="t-gaedi">Gæði gagna</button>
+  </div>
+
+  <!-- YFIRSÝN -->
+  <section class="tab" id="t-yfir" role="tabpanel">
+    <div class="g-hero">
+      <section class="card hero">
+        <span class="eyebrow">Framlegð {{text.period}} {{meta.year}} · tekjur − vörunotkun og aðföng</span>
+        <div class="big" id="h-big"></div>
+        <p id="h-txt"></p>
+        <div class="row" id="h-row"></div>
+      </section>
+    </div>
+    <div class="ph"><span class="sub">Lykilmælar</span>
+      <div class="seg" role="group" aria-label="Einskiptisliðir" id="oneoff"><button type="button" data-v="1" aria-pressed="true">Með einskiptissölu</button><button type="button" data-v="0" aria-pressed="false">Án einskiptissölu</button></div>
+    </div>
+    <section class="kpis" aria-label="Lykilmælar">
+      <div class="kpi" id="k1"><span class="l">Framlegð</span><span class="v"></span><span class="d"></span><canvas aria-hidden="true"></canvas></div>
+      <div class="kpi" id="k2"><span class="l">Framlegðarhlutfall</span><span class="v"></span><span class="d"></span><canvas aria-hidden="true"></canvas></div>
+      <div class="kpi" id="k3"><span class="l">Framlag eftir laun</span><span class="v"></span><span class="d"></span><canvas aria-hidden="true"></canvas></div>
+      <div class="kpi" id="k4"><span class="l">Samningsvirði opinna verka</span><span class="v"></span><span class="d"></span><canvas aria-hidden="true"></canvas></div>
+    </section>
+    <p class="insight"><span class="spark" aria-hidden="true">!</span><span id="ins-txt"></span></p>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Staða verka</h2><span class="sub">eftir samningsvirði</span></div>
+        <div class="stack" id="st-stack"></div>
+        <div class="slegend" id="st-leg"></div>
+        <p class="note">Óreikningsfært á verkum: sjá Tekjuleka í <a href="tekjur.html">Tekjum</a>. Viðskiptavinir: sjá <a href="tekjur.html">Tekjur</a>.</p>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Helstu áhættur</h2><span class="sub">framlegð og verk</span></div>
+        <div class="dec" id="risks"></div>
+      </section>
+    </div>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Framlegðarhlutfall á mánuði</h2><div class="legend"><span><i class="dash"></i>Meðaltal {{meta.py}}</span><span><i style="background:var(--scen)"></i>{{meta.year}}</span></div></div>
+        <div class="cv" style="height:260px"><canvas id="c-line" role="img" aria-label="Framlegðarhlutfall á mánuði {{meta.year}} á móti meðaltali {{meta.py}}"></canvas></div>
+        <p class="note">{{text.line_note}}</p>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Hvar verður framlegðin til?</h2><span class="sub">{{text.period}}, m.kr.</span></div>
+        <div class="cv" style="height:260px"><canvas id="c-bridge" role="img" aria-label="Brú frá tekjum að framlegð og framlagi eftir laun"></canvas></div>
+      </section>
+    </div>
+    <section class="card">
+      <div class="ch"><h2>Aðföng á móti {{meta.py}}</h2><span class="sub">hlutfall af tekjum</span></div>
+      <div class="scroll"><table id="t-cogs"></table></div>
+      <p class="note">{{text.cogs_note}}</p>
+    </section>
+  </section>
+
+  <!-- VERK -->
+  <section class="tab" id="t-verk" role="tabpanel" hidden>
+    <section class="kpis" aria-label="Lykilmælar verka">
+      <div class="kpi" id="v1"><span class="l">Samningsvirði opinna verka</span><span class="v"></span><span class="d"></span><canvas aria-hidden="true"></canvas></div>
+      <div class="kpi" id="v2"><span class="l">Kostnaður til þessa</span><span class="v"></span><span class="d"></span><canvas aria-hidden="true"></canvas></div>
+      <div class="kpi" id="v3"><span class="l">Tímar á verk</span><span class="v"></span><span class="d"></span><canvas aria-hidden="true"></canvas></div>
+      <div class="kpi" id="v4"><span class="l">Áætluð framlegð við verklok</span><span class="v"></span><span class="d"></span><canvas aria-hidden="true"></canvas></div>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Verk: framvinda og framlegð</h2>
+        <div class="seg" role="group" aria-label="Sía" id="flt"><button type="button" data-f="all" aria-pressed="true">Öll</button><button type="button" data-f="bad" aria-pressed="false">Á eftir</button><button type="button" data-f="warn" aria-pressed="false">Athygli</button><button type="button" data-f="ok" aria-pressed="false">Á áætlun</button></div>
+      </div>
+      <div class="legend"><span><i style="background:var(--up)"></i>Á áætlun</span><span><i style="background:var(--warn)"></i>Þarf athygli</span><span><i style="background:var(--dn)"></i>Á eftir / umfram</span><span><i style="background:var(--ink);width:2px"></i>Liðinn verktími</span></div>
+      <div class="scroll"><table id="f-tbl"></table></div>
+      <p class="note">Súlan sýnir kostnað (eða tíma) sem hlutfall af áætlun; strikið sýnir hve stór hluti verktímans er liðinn. Framlegð er áætluð við verklok (reikningshæft − áætlaður heildarkostnaður); markmið 25%. {{text.verk_note}} Óreikningsfært á verkum: sjá Tekjuleka í <a href="tekjur.html">Tekjum</a>.</p>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Tímalína {{meta.year}}</h2><div class="legend"><span><i style="background:var(--up)"></i>Á áætlun</span><span><i style="background:var(--warn)"></i>Athygli</span><span><i style="background:var(--dn)"></i>Á eftir</span><span><i style="background:var(--gold);width:2px"></i>Í dag {{meta.as_of_dm}}</span></div></div>
+      <div class="gantt" id="gantt"></div>
+      <p class="note">{{text.gantt_note}}</p>
+    </section>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Framlegð við verklok</h2><span class="sub">m.kr. · % af reikningshæfu</span></div>
+        <div id="j-bars"></div>
+        <div class="legend"><span><i style="background:var(--dn)"></i>Undir 0%</span><span><i style="background:var(--warn)"></i>Undir 25% markmiði</span><span><i style="background:var(--up)"></i>Á eða yfir markmiði</span></div>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Þarf athygli</h2><span class="sub">framlegð sem lekur</span></div>
+        <div class="dec" id="j-flags"></div>
+      </section>
+    </div>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Kostnaður á móti áætlun</h2><div class="legend"><span><i style="background:var(--s2)"></i>Til þessa</span><span><i style="background:var(--panel2);border:1px solid var(--line)"></i>Eftir af áætlun</span></div></div>
+        <div class="cv" style="height:280px"><canvas id="c-cost" role="img" aria-label="Kostnaður til þessa og eftirstöðvar áætlunar á hvert verk"></canvas></div>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>{{meta.job_fee}} · tímar á mánuði á móti föstu gjaldi</h2><span class="sub">klst.</span></div>
+        <div class="cv" style="height:280px"><canvas id="c-s2603" role="img" aria-label="Tímar á mánuði á {{meta.job_fee}} á móti þeim tímum sem fasta gjaldið ber"></canvas></div>
+      </section>
+    </div>
+    <section class="card">
+      <div class="ch"><h2 id="u-title">Framlegð vinnu</h2>
+        <div class="seg" role="group" aria-label="Eining" id="unit"><button type="button" data-v="dept" aria-pressed="true">Deild</button><button type="button" data-v="res" aria-pressed="false">Forði</button></div>
+      </div>
+      <span class="sub" id="u-sub"></span>
+      <div id="u-bars"></div>
+      <div class="scroll"><table id="u-tbl"></table></div>
+      <p class="note" id="u-note"></p>
+    </section>
+  </section>
+
+  <!-- VÖRUR OG ABC -->
+  <section class="tab" id="t-vorur" role="tabpanel" hidden>
+    <div class="ph"><h2>ABC-greining</h2>
+      <div class="seg" role="group" aria-label="Vídd" id="abc-dim"><button type="button" data-v="cust" aria-pressed="true">Viðskiptavinir</button><button type="button" data-v="job" aria-pressed="false">Verk</button></div>
+    </div>
+    <p class="insight"><span class="spark" aria-hidden="true">A</span><span id="abc-ins"></span></p>
+    <div class="g2">
+      <section class="card"><div class="ch"><h2>Pareto</h2><div class="legend"><span><i style="background:var(--s1)"></i>Hlutdeild</span><span><i style="background:var(--s2)"></i>Uppsöfnuð</span></div></div><div class="cv" style="height:300px"><canvas id="c-pareto" role="img" aria-label="Pareto-graf: hlutdeild og uppsöfnuð hlutdeild með mörkum við 80% og 95%"></canvas></div></section>
+      <section class="card"><div class="ch"><h2>Flokkar</h2><span class="sub">A ≤ 80% · B ≤ 95% · C restin</span></div><div class="scroll"><table id="abc-tbl"></table></div></section>
+    </div>
+    <div class="ph"><h2>Vörur og álagning</h2><span class="sub">verðskrá, ekki raunsala</span></div>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Álagning í verðskrá vara</h2><span class="sub">einingarverð − kostnaðarverð, kr.</span></div>
+        <div id="it-bars"></div>
+        <div class="legend"><span><i style="background:var(--dn)"></i>Undir 0%</span><span><i style="background:var(--warn)"></i>Undir 25%</span><span><i style="background:var(--up)"></i>25% eða meira</span></div>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Þarf athygli</h2><span class="sub">vörur</span></div>
+        <div class="dec" id="it-flags"></div>
+      </section>
+    </div>
+    <section class="card">
+      <div class="ch"><h2>Vörur</h2><input id="it-q" type="search" placeholder="Leita…" aria-label="Leita í vörutöflu" class="srch"></div>
+      <div class="scroll"><table id="it-tbl"></table></div>
+      <p class="note">{{text.items_note}}</p>
+    </section>
+  </section>
+
+  <!-- HERMING -->
+  <section class="tab" id="t-herm" role="tabpanel" hidden>
+    <p class="insight"><span class="spark" aria-hidden="true">=</span><span id="sim-txt"></span></p>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Stikur</h2><span class="sub">grunnur: {{text.period}} {{meta.year}}</span></div>
+        <div class="presets" id="presets">
+          <button type="button" data-p="0">Grunnur</button><button type="button" data-p="1">Kostnaður +5%</button><button type="button" data-p="2">Verðhækkun +3%</button><button type="button" data-p="3">Afsláttur 2 pp</button>
+        </div>
+        <div class="sl"><div class="top"><label for="s-price">Verð</label><output id="o-price"></output></div><input type="range" id="s-price" min="-10" max="10" step="0.5" value="0"><small>breyting á verðskrá vinnu og efnis</small></div>
+        <div class="sl"><div class="top"><label for="s-disc">Afsláttur</label><output id="o-disc"></output></div><input type="range" id="s-disc" min="0" max="10" step="0.5" value="0"><small>prósentustig af verði (enginn afsláttur skráður í dag)</small></div>
+        <div class="sl"><div class="top"><label for="s-vol">Magn</label><output id="o-vol"></output></div><input type="range" id="s-vol" min="-20" max="20" step="1" value="0"><small>fleiri eða færri verk; aðföng fylgja magni</small></div>
+        <div class="sl"><div class="top"><label for="s-cost">Kostnaðarverð aðfanga</label><output id="o-cost"></output></div><input type="range" id="s-cost" min="-10" max="15" step="0.5" value="0"><small>{{text.cost_examples}}</small></div>
+        <div class="sl"><div class="top"><label for="s-pass">Hækkun aðfanga sem fer út í verð</label><output id="o-pass"></output></div><input type="range" id="s-pass" min="0" max="100" step="5" value="0"><small>hlutfall kostnaðarhækkunar sem veltist í verðið</small></div>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Niðurstaða</h2><span class="pill i">Hermt</span></div>
+        <div class="mini2" id="sim-k"></div>
+        <div class="cv" style="height:220px"><canvas id="c-sim" role="img" aria-label="Framlegð á mánuði, grunnur á móti sviðsmynd"></canvas></div>
+        <div class="legend"><span><i class="dash"></i>Grunnur</span><span><i style="background:var(--scen)"></i>Sviðsmynd</span></div>
+      </section>
+    </div>
+    <p class="note">Forsenda: laun og annar rekstur haldast óbreytt. Magn hefur áhrif á tekjur og aðföng í sama hlutfalli. Grunnur er raun {{text.period}} {{meta.year}} ({{meta.n_full}} fullbókaðir mánuðir), með eða án einskiptissölu eftir vali á Yfirsýn.</p>
+  </section>
+
+  <!-- GÆÐI GAGNA -->
+  <section class="tab" id="t-gaedi" role="tabpanel" hidden>
+    <section class="card">
+      <div class="ch"><h2>Gæði gagna</h2><span class="sub">það sem skekkir framlegð og framvindu</span></div>
+      <div class="dec" id="q-list"></div>
+    </section>
+  </section>
+
+  <footer>
+    <span>{{text.source}}</span>
+    <span>{{text.caveats}}</span>
+    <span>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</span>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+{{COMPONENTS_JS}}
+const DATA={{DATA_JSON}};
+const { $, fmt, sg, mkr, css, alpha, grad, MON } = BF;
+const m1 = v => mkr(v, 1);
+const pct = (v, d = 1) => fmt(v * 100, d) + '%';
+const sum = (a, f) => a.reduce((s, x) => s + f(x), 0);
+const MS = DATA.months.filter(m => m.complete);           // jan–ágú
+const LBL = MS.map(m => BF.monLabel(m.ym));
+const PY = DATA.py, PYM = (PY.rev - PY.cogs) / PY.rev;     // 57,1%
+const TARGET = 0.25;                                        // markmið framlegðar á verk
+const st = { oneoff: true, unit: 'dept', flt: 'all', dim: 'cust', q: '', sortI: null };
+const CH = {};
+function chart(key, cv, cfg) { if (CH[key]) CH[key].destroy(); CH[key] = new Chart(cv, cfg); return CH[key]; }
+function base() { Chart.defaults.color = css('--muted'); Chart.defaults.font.family = css('--f-body'); Chart.defaults.font.size = 12; return css('--line'); }
+const tip0 = () => ({ backgroundColor: css('--panel2'), borderColor: css('--line'), borderWidth: 1, titleColor: css('--ink'), bodyColor: css('--ink2'), padding: 10, cornerRadius: 10 });
+const mvar = m => m == null ? '--base' : m < 0 ? '--dn' : m < TARGET ? '--warn' : '--up';
+const SV = { ok: '--up', warn: '--warn', bad: '--dn' };
+const item = ([s, i, t, d, a]) => `<div class="d-item"><div class="d-ico ${s}">${i}</div><div><b>${t}</b><p>${d}</p></div>${a ? `<span class="amt">${a}</span>` : '<span></span>'}</div>`;
+
+/* ---------- framlegð (fjárhagur) ---------- */
+function series() { return MS.map(m => { const r = m.rev - (st.oneoff ? 0 : m.oneoff); return { r, c: m.cogs, l: m.laun, g: r - m.cogs, p: (r - m.cogs) / r }; }); }
+function totals() { const s = series(), r = sum(s, x => x.r), c = sum(s, x => x.c), l = sum(s, x => x.l); return { r, c, l, g: r - c, p: (r - c) / r, fl: r - c - l }; }
+
+/* ---------- verk: ein heimild fyrir allar tölur á verk ---------- */
+const J = Object.fromEntries(DATA.jobs.map(j => [j.no, j]));
+/* hópar smáverka (js.job_groups: [{prefix, no, desc, cust, start, end, label}]) teljast sem eitt verk */
+const GDEF = {{js.job_groups}};
+const GRPS = GDEF.map(g => { const L = DATA.jobs.filter(j => j.no.startsWith(g.prefix)); return { no: g.no, desc: g.desc, cust: g.cust, start: g.start, end: g.end, tfrac: 1, n: L.length, label: g.label,
+  contract_m: sum(L, j => j.contract_m), budcost: sum(L, j => j.budcost), cost: sum(L, j => j.cost), hrs: sum(L, j => j.hrs), hrs_b: sum(L, j => j.hrs_b), margin: sum(L, j => j.margin) }; }).filter(g => g.n);
+GRPS.forEach(g => { J[g.no] = g; });
+const D = GRPS[0] || null;
+const inGrp = j => GDEF.some(g => j.no.startsWith(g.prefix));
+/* verk með föstu mánaðargjaldi (js.fee_jobs: [{no, fee_month, fee_rate, months, hours}] eða []; fyrsta er sýnt) */
+const FEEJ = {{js.fee_jobs}}.find(f => J[f.no]) || null;
+const FEE_H = FEEJ ? FEEJ.fee_month / FEEJ.fee_rate : null;  // tímar sem fasta gjaldið ber á verðskrá
+const autoS = j => { const mp = j.contract_m ? j.margin / j.contract_m : null; return mp == null ? 'ok' : mp < 0 ? 'bad' : mp < TARGET ? 'warn' : 'ok'; };
+const LBLS = { ok: 'Á áætlun', warn: 'Þarf athygli', bad: 'Á eftir' };
+const progOf = (r, j) => r.prog === 'value' ? +r.pv || 0 : r.prog === 'hrs' ? (j.hrs_b ? j.hrs / j.hrs_b : 0) : (j.budcost ? j.cost / j.budcost : 0);
+/* js.job_rows: [{no, s, lbl, prog: 'cost'|'hrs'|'value' (þá pv = hlutfall), basis, prev, note}]; tómt → öll verk (hópar saman) með sjálfvirkri stöðu */
+const JR = {{js.job_rows}}.length ? {{js.job_rows}} : [...DATA.jobs.filter(j => !inGrp(j)), ...GRPS].map(j => ({ no: j.no, prog: 'cost' }));
+const ROWS = JR.filter(r => J[r.no]).map(r => { const j = J[r.no], s = r.s || autoS(j); return { j, s, lbl: r.lbl || LBLS[s], prog: progOf(r, j), basis: r.basis || (r.prog === 'hrs' ? 'tímar' : 'kostn.'), prev: r.prev == null ? undefined : r.prev, note: r.note || '' }; });
+ROWS.forEach(r => { r.mp = r.j.contract_m ? r.j.margin / r.j.contract_m : null; });
+const hideCard = (id, on) => { const c = $(id) && $(id).closest('.card'); if (c) c.hidden = !!on; };
+const RJ = Object.fromEntries(ROWS.map(r => [r.j.no, r]));
+const CONTRACT = sum(ROWS, r => r.j.contract_m);                    // 344,9 m
+const JM = ROWS.filter(r => r.mp != null), JM_G = sum(JM, r => r.j.margin);
+
+/* ---------- Yfirsýn ---------- */
+function renderYfir() {
+  const T = totals(), s = series(), py = PY.rev - PY.cogs;
+  $('h-big').innerHTML = `${m1(T.g)}<small>m.kr.</small>`;
+  $('h-txt').innerHTML = `Framlegðarhlutfall <b>${pct(T.p)}</b>, ${sg((T.p - PYM) * 100)} pp yfir meðaltali ${{{js.py}}} (${pct(PYM)}). Eftir laun standa <b>${m1(T.fl)} m.kr.</b> eftir (${pct(T.fl / T.r)} af tekjum). Opin verk eru ${m1(CONTRACT)} m.kr. að samningsvirði og ${ROWS.filter(r => r.s === 'bad').length} þeirra á eftir eða umfram.`;
+  $('h-row').innerHTML = [['Tekjur', m1(T.r)], ['Vörunotkun og aðföng', m1(T.c)], ['Laun', m1(T.l)], [('Framlegð ' + {{js.py}} + ' (ár)'), m1(py)], ['Samningsvirði opinna verka', m1(CONTRACT)]].map(([a, b]) => `<div><b>${b}</b><span>${a}</span></div>`).join('');
+  const pser = s.map(x => x.p * 100);
+  BF.kpi($('k1'), { value: m1(T.g) + ' m', delta: 1, deltaText: `${fmt(T.g / T.r * 100, 1)}% af tekjum`, series: s.map(x => x.g / 1e6) });
+  BF.kpi($('k2'), { value: pct(T.p), base: pct(PYM), delta: T.p - PYM, deltaText: sg((T.p - PYM) * 100) + ' pp', series: pser, baseSeries: pser.map(() => PYM * 100) });
+  const flpy = (PY.rev - PY.cogs - PY.laun) / PY.rev;
+  BF.kpi($('k3'), { value: m1(T.fl) + ' m', base: pct(flpy), delta: T.fl / T.r - flpy, deltaText: pct(T.fl / T.r) + ' af tekjum', series: s.map(x => (x.g - x.l) / 1e6) });
+  BF.kpi($('k4'), { value: m1(CONTRACT) + ' m', delta: 0, deltaText: `framlegð við verklok ${pct(JM_G / sum(JM, r => r.j.contract_m))}`, series: ROWS.map(r => r.j.contract_m / 1e6) });
+  const jr = JM.slice().sort((a, b) => b.j.margin - a.j.margin), top = jr.slice(0, 3);
+  $('ins-txt').innerHTML = `${['Ekkert', 'Eitt', 'Tvö', 'Þrjú'][top.length]} verk af ${jr.length}${GRPS.length ? ` (${GRPS.map(g => g.label).join(', ')} talin saman)` : ''}, ${top.map(r => r.j.no).join(', ')}, ${top.length === 1 ? 'skilar' : 'skila'} ${pct(sum(top, r => r.j.margin) / JM_G, 0)} af áætlaðri verkframlegð (${m1(JM_G)} m.kr.). ${{{js.ins_tail}}}`;
+  // staða verka
+  const grp = { ok: 0, warn: 0, bad: 0 }, cnt = { ok: 0, warn: 0, bad: 0 };
+  ROWS.forEach(r => { grp[r.s] += r.j.contract_m; cnt[r.s] += r.j.n || 1; });
+  const names = { ok: 'Á áætlun', warn: 'Þarf athygli', bad: 'Á eftir / umfram' };
+  $('st-stack').innerHTML = ['ok', 'warn', 'bad'].map(k => `<span style="width:${100 * grp[k] / CONTRACT}%;background:var(${SV[k]})" title="${names[k]}"></span>`).join('');
+  $('st-leg').innerHTML = ['ok', 'warn', 'bad'].map(k => `<div><span><i style="background:var(${SV[k]})"></i>${names[k]}</span><b>${m1(grp[k])} m</b><span>${cnt[k]} verk · ${pct(grp[k] / CONTRACT, 0)}</span></div>`).join('');
+  // áhættur
+  $('risks').innerHTML = {{js.risks}}.map(item).join(''); hideCard('risks', !{{js.risks}}.length);
+  // lína
+  const g = base();
+  chart('line', $('c-line'), { type: 'line', data: { labels: LBL, datasets: [
+    { label: ('Meðaltal ' + {{js.py}}), data: LBL.map(() => PYM * 100), borderColor: css('--base'), borderDash: [6, 4], borderWidth: 2, pointRadius: 0 },
+    { label: {{js.year}}, data: pser, borderColor: css('--s1'), backgroundColor: grad(css('--s1')), fill: true, borderWidth: 2.5, tension: .4, pointRadius: 3, pointBackgroundColor: css('--s1'), pointBorderColor: css('--panel'), pointBorderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, plugins: { legend: { display: false }, tooltip: { ...tip0(), callbacks: { label: c => c.dataset.label + ': ' + fmt(c.raw, 1) + '%' } } },
+      scales: { x: { grid: { display: false } }, y: { min: Math.max(0, Math.floor(Math.min(PYM * 100, ...pser) / 10) * 10 - 10), grid: { color: g }, border: { display: false }, ticks: { callback: v => fmt(v, 0) + '%' } } } } });
+  // brú
+  const acc = no => ((DATA.cogs_acc.find(a => a.no === no) || { v: 0 }).v || 0) / 1e6;
+  /* js.cogs_bridge: [{no, label}]; tómt → allir aðfangalyklar með hreyfingu; afgangur sýndur sem „Annað“ */
+  const BRL = {{js.cogs_bridge}}.length ? {{js.cogs_bridge}} : DATA.cogs_acc.filter(a => a.v).map(a => ({ no: a.no, label: a.name.replace(' 24% VSK', '') }));
+  const brRest = T.c / 1e6 - sum(BRL, b => acc(b.no));
+  BF.bridge('bridge', $('c-bridge'), [{ label: 'Tekjur', value: T.r / 1e6, total: true }, ...BRL.map(b => ({ label: b.label, value: -acc(b.no) })), ...(Math.abs(brRest) > 0.05 ? [{ label: 'Annað', value: -brRest }] : []), { label: 'Framlegð', value: T.g / 1e6, total: true }, { label: 'Laun', value: -T.l / 1e6 }, { label: 'Framlag', value: T.fl / 1e6, total: true }]);
+  // aðföng
+  const rows = DATA.cogs_acc.filter(a => a.v);
+  $('t-cogs').innerHTML = `<thead><tr><th>Lykill</th><th class="n">${{{js.year}}} m.kr.</th><th class="n">% tekna</th><th class="n">${{{js.py}}} %</th><th class="n">Breyting</th></tr></thead><tbody>` +
+    rows.map(a => { const p = a.v / T.r, q = a.py ? a.py / PY.rev : null; return `<tr><td>${a.no} ${a.name.replace(' 24% VSK', '')}</td><td class="n">${m1(a.v)}</td><td class="n">${pct(p)}</td><td class="n">${q == null ? '–' : pct(q)}</td><td class="n">${q == null ? '–' : BF.chip(p - q, false, sg((p - q) * 100) + ' pp')}</td></tr>`; }).join('') +
+    `<tr class="sum"><td>Samtals</td><td class="n">${m1(T.c)}</td><td class="n">${pct(T.c / T.r)}</td><td class="n">${pct(PY.cogs / PY.rev)}</td><td class="n">${BF.chip(T.c / T.r - PY.cogs / PY.rev, false, sg((T.c / T.r - PY.cogs / PY.rev) * 100) + ' pp')}</td></tr></tbody>`;
+}
+
+/* ---------- Verk ---------- */
+const H_S3 = FEEJ ? FEEJ.hours : [];
+function renderVerk() {
+  const budget = sum(DATA.jobs, j => j.budcost), cost = sum(DATA.jobs, j => j.cost), hb = sum(DATA.jobs, j => j.hrs_b), h = sum(DATA.jobs, j => j.hrs);
+  const jc = sum(JM, r => r.j.contract_m);
+  BF.kpi($('v1'), { value: m1(CONTRACT) + ' m', delta: 0, deltaText: {{js.v1_note}}, series: ROWS.map(r => r.j.contract_m / 1e6) });
+  BF.kpi($('v2'), { value: m1(cost) + ' m', base: m1(budget) + ' m áætl.', delta: 0, deltaText: pct(cost / budget, 0) + ' af áætlun', series: ROWS.map(r => r.j.cost / 1e6) });
+  BF.kpi($('v3'), { value: fmt(h, 0), base: fmt(hb, 0), delta: 0, deltaText: pct(h / hb, 0) + ' af áætluðum', series: FEEJ ? H_S3 : ROWS.map(r => r.j.hrs) });
+  BF.kpi($('v4'), { value: m1(JM_G) + ' m', base: '25% markmið', delta: JM_G / jc - TARGET, deltaText: pct(JM_G / jc) + ' af reikningshæfu', series: JM.map(r => r.j.margin / 1e6) });
+  // ein tafla: framvinda + framlegð
+  const rows = ROWS.filter(r => st.flt === 'all' || r.s === st.flt);
+  $('f-tbl').innerHTML = `<thead><tr><th>Verk</th><th>Staða</th><th>Framvinda / tími</th><th class="n">Tímar</th><th class="n">Kostn. / áætl. m.kr.</th><th class="n">Samningur</th><th class="n">Framlegð við verklok</th><th class="n">%</th><th>Athugasemd</th></tr></thead><tbody>` +
+    rows.map(r => { const j = r.j; return `<tr><td><span class="code">${j.no}</span><span class="cell-sub">${j.desc}</span></td><td><span class="pill ${{ ok: 'l', warn: 'm', bad: 'h' }[r.s]}">${r.lbl}</span></td>
+      <td style="min-width:130px"><div class="track"><span class="fill" style="width:${Math.min(100, r.prog * 100)}%;background:var(${SV[r.s]})"></span><span class="time" style="left:calc(${Math.min(100, j.tfrac * 100)}% - 1px)"></span></div><span class="cell-sub">${pct(r.prog, 0)} ${r.basis} · ${pct(j.tfrac, 0)} tími</span></td>
+      <td class="n">${fmt(j.hrs, 0)} / ${fmt(j.hrs_b, 0)}</td><td class="n">${fmt(j.cost / 1e6, 1)} / ${fmt(j.budcost / 1e6, 1)}</td><td class="n">${j.contract_m ? m1(j.contract_m) : '–'}</td>
+      <td class="n">${r.mp == null ? '–' : m1(j.margin)}</td><td class="n">${r.mp == null ? '–' : `<span class="pill ${r.mp < 0 ? 'h' : r.mp < TARGET ? 'm' : 'l'}">${pct(r.mp)}</span>`}${r.prev != null ? `<span class="cell-sub">${BF.chip(r.mp - r.prev, true, sg((r.mp - r.prev) * 100) + ' pp')}</span>` : ''}</td>
+      <td style="font-size:.8rem;min-width:220px">${r.note}</td></tr>`; }).join('') +
+    (st.flt === 'all' ? `<tr class="sum"><td>Samtals</td><td></td><td></td><td class="n">${fmt(sum(ROWS, r => r.j.hrs), 0)}</td><td class="n">${fmt(sum(ROWS, r => r.j.cost) / 1e6, 1)} / ${fmt(sum(ROWS, r => r.j.budcost) / 1e6, 1)}</td><td class="n">${m1(CONTRACT)}</td><td class="n">${m1(JM_G)}</td><td class="n">${pct(JM_G / jc)}</td><td></td></tr>` : '') + '</tbody>';
+  // tímalína
+  const y0 = Date.UTC(+{{js.year}}, 0, 1), y1 = Date.UTC(+{{js.year}} + 1, 0, 1), P = d => 100 * (Date.UTC(+d.slice(0, 4), +d.slice(5, 7) - 1, +d.slice(8, 10)) - y0) / (y1 - y0);
+  const today = P(DATA.as_of), over = {{js.overruns}};
+  $('gantt').innerHTML = `<div class="gaxis"><span></span><div>${MON.map((m, i) => i % 2 === 0 ? `<span style="left:${(i + .5) * 100 / 12}%">${m}</span>` : '').join('')}</div></div>` +
+    ROWS.map(r => { const j = r.j, a = P(j.start), b = P(j.end); return `<div class="grow"><span class="code" title="${j.desc}">${j.no}</span><div class="glane"><span class="gbar" style="left:${a}%;width:${b - a}%;background:var(${SV[r.s]})" title="${BF.date(j.start)}–${BF.date(j.end)} · framlegð ${r.mp == null ? '–' : pct(r.mp)}"></span>${over[j.no] ? `<span class="gover" style="left:${b}%;width:${P(over[j.no]) - b}%"></span>` : ''}<span class="today" style="left:${today}%"></span></div></div>`; }).join('');
+  // framlegð á verk
+  BF.hbars($('j-bars'), JM.slice().sort((a, b) => b.j.margin - a.j.margin).map(r => ({ label: r.j.no + ' · ' + r.j.desc, value: r.j.margin, text: m1(r.j.margin) + ' · ' + pct(r.mp, 0), color: mvar(r.mp) })));
+  $('j-flags').innerHTML = {{js.job_flags}}.map(item).join(''); hideCard('j-flags', !{{js.job_flags}}.length);
+  // gröf
+  const g = base(), rs = ROWS.slice().sort((a, b) => b.j.budcost - a.j.budcost);
+  chart('cost', $('c-cost'), { type: 'bar', data: { labels: rs.map(r => r.j.no), datasets: [
+    { label: 'Til þessa', data: rs.map(r => r.j.cost / 1e6), backgroundColor: css('--s2'), borderRadius: 4, stack: 's', maxBarThickness: 22 },
+    { label: 'Eftir af áætlun', data: rs.map(r => Math.max(0, r.j.budcost - r.j.cost) / 1e6), backgroundColor: alpha(css('--s2'), .18), borderRadius: 4, stack: 's', maxBarThickness: 22 }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { ...tip0(), callbacks: { label: c => c.dataset.label + ': ' + fmt(c.raw, 1) + ' m.kr.' } } },
+      scales: { x: { stacked: true, grid: { color: g }, border: { display: false }, ticks: { callback: v => fmt(v, 0) } }, y: { stacked: true, grid: { display: false }, ticks: { font: { family: css('--f-mono') } } } } } });
+  hideCard('c-s2603', !FEEJ);
+  if (FEEJ) chart('s2603', $('c-s2603'), { type: 'bar', data: { labels: FEEJ.months.map(BF.monLabel), datasets: [
+    { type: 'line', label: 'Gjaldið ber', data: H_S3.map(() => FEE_H), borderColor: css('--base'), borderDash: [6, 4], borderWidth: 2, pointRadius: 0 },
+    { label: 'Tímar', data: H_S3, backgroundColor: H_S3.map(x => x > FEE_H ? css('--dn') : css('--s2')), borderRadius: 5, maxBarThickness: 28 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { ...tip0(), callbacks: { label: c => c.dataset.label + ': ' + fmt(c.raw, 0) + ' klst.' } } }, scales: { x: { grid: { display: false } }, y: { min: 0, grid: { color: g }, border: { display: false } } } } });
+  renderUnit();
+}
+const UNITS = {
+  dept: () => ({ title: 'Framlegð vinnu eftir deild', sub: 'bókaðir tímar á verðskrá − kostnaðarverð',
+    rows: DATA.dept.map(d => ({ name: {{js.dept_names}}[d.code] || d.code, hrs: d.hrs, a: d.val, c: d.cost, g: d.val - d.cost, p: (d.val - d.cost) / d.val })),
+    cols: ['Deild', 'Tímar', 'Virði á verðskrá', 'Kostnaðarverð', 'Framlegð', '%'],
+    note: {{js.dept_note}} }),
+  res: () => ({ title: 'Framlegð vinnu eftir forða', sub: 'verðskrá − kostnaðarverð á klst.',
+    rows: DATA.resources.map(r => ({ name: 'Forði ' + r.code, hrs: r.hrs, a: r.price * r.hrs, c: r.cost * r.hrs, g: (r.price - r.cost) * r.hrs, p: (r.price - r.cost) / r.price, unit: [r.price, r.cost] })),
+    cols: ['Forði', 'Tímar', 'Virði á verðskrá', 'Kostnaðarverð', 'Framlegð', '%', 'Verð/klst.', 'Kostn./klst.'],
+    note: ('Forðar sýndir með kóða. Verðskrá og kostnaðarverð úr verkfærslum. ' + {{js.res_note_tail}}) }),
+};
+function renderUnit() {
+  const U = UNITS[st.unit](), rows = U.rows.slice().sort((a, b) => b.g - a.g);
+  $('u-title').textContent = U.title; $('u-sub').textContent = U.sub; $('u-note').textContent = U.note;
+  BF.hbars($('u-bars'), rows.map(r => ({ label: r.name, value: r.g, text: m1(r.g) + ' · ' + pct(r.p, 0), color: mvar(r.p) })));
+  $('u-tbl').innerHTML = `<thead><tr>${U.cols.map((h, i) => `<th${i ? ' class="n"' : ''}>${h}</th>`).join('')}</tr></thead><tbody>` + rows.map(r =>
+    `<tr><td>${r.name}</td><td class="n">${fmt(r.hrs, 0)}</td><td class="n">${m1(r.a)}</td><td class="n">${m1(r.c)}</td><td class="n">${m1(r.g)}</td><td class="n">${pct(r.p)}</td>${r.unit ? `<td class="n">${fmt(r.unit[0], 0)}</td><td class="n">${fmt(r.unit[1], 0)}</td>` : ''}</tr>`).join('') +
+    `<tr class="sum"><td>Samtals</td><td class="n">${fmt(sum(rows, r => r.hrs), 0)}</td><td class="n">${m1(sum(rows, r => r.a))}</td><td class="n">${m1(sum(rows, r => r.c))}</td><td class="n">${m1(sum(rows, r => r.g))}</td><td class="n">${pct(sum(rows, r => r.g) / sum(rows, r => r.a))}</td>${st.unit === 'res' ? '<td></td><td></td>' : ''}</tr></tbody>`;
+}
+
+/* ---------- Vörur og ABC ---------- */
+function renderVorur() {
+  // ABC
+  let items = st.dim === 'cust' ? DATA.cust.map(c => ({ k: c.no, n: c.name, v: c.sales }))
+    : ROWS.filter(r => r.j.contract_m > 0).map(r => ({ k: r.j.no, n: r.j.desc, v: r.j.contract_m }));
+  items.sort((a, b) => b.v - a.v);
+  const tot = sum(items, x => x.v); let cum = 0;
+  items.forEach(x => { x.s = x.v / tot; const before = cum; cum += x.s; x.c = cum; x.cls = before < 0.8 - 1e-9 ? 'A' : before < 0.95 - 1e-9 ? 'B' : 'C'; });
+  const A = items.filter(x => x.cls === 'A');
+  $('abc-ins').innerHTML = st.dim === 'cust'
+    ? !items.length ? 'Engin sala á viðskiptamann á tímabilinu.' : `${A.length} af ${items.length} viðskiptavinum standa undir ${pct(A.at(-1).c, 0)} af reikningsfærðri sölu (${m1(tot)} m.kr.). ${{{js.abc_cust_mid}}} ${pct(items[0].s, 0)}. Athugið: aðeins ${pct(tot / DATA.gl_rev, 0)} tekna eru á viðskiptamann.`
+    : !items.length ? 'Engin verk með samningsvirði.' : `${A.length} af ${items.length} verkum${GRPS.length ? ` (${GRPS.map(g => g.label).join(', ')} saman)` : ''} eru ${pct(A.at(-1).c, 0)} af samningsvirði (${m1(tot)} m.kr.). ${{{js.abc_job_tail}}}${D ? ' ' + pct(D.contract_m / tot) : ''}.`;
+  const g = base();
+  chart('pareto', $('c-pareto'), { type: 'bar', data: { labels: items.map(x => x.k), datasets: [
+    { type: 'line', label: 'Uppsöfnuð', data: items.map(x => x.c * 100), borderColor: css('--s2'), borderWidth: 2.5, tension: .4, pointRadius: 3, pointBackgroundColor: css('--s2'), pointBorderColor: css('--panel'), pointBorderWidth: 2 },
+    { type: 'line', label: '80%', data: items.map(() => 80), borderColor: css('--base'), borderDash: [4, 4], borderWidth: 1.5, pointRadius: 0 },
+    { type: 'line', label: '95%', data: items.map(() => 95), borderColor: css('--base'), borderDash: [2, 4], borderWidth: 1.5, pointRadius: 0 },
+    { label: 'Hlutdeild', data: items.map(x => x.s * 100), backgroundColor: items.map(x => x.cls === 'A' ? css('--s1') : x.cls === 'B' ? alpha(css('--s1'), .55) : alpha(css('--s1'), .25)), borderRadius: 5, maxBarThickness: 34 }] },
+    options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, plugins: { legend: { display: false }, tooltip: { ...tip0(), filter: c => c.datasetIndex === 0 || c.datasetIndex === 3, callbacks: { label: c => c.dataset.label + ': ' + fmt(c.raw, 1) + '%' } } },
+      scales: { x: { grid: { display: false }, ticks: { autoSkip: false, maxRotation: 60, font: { family: css('--f-mono'), size: 10 } } }, y: { min: 0, max: 100, grid: { color: g }, border: { display: false }, ticks: { callback: v => v + '%' } } } } });
+  $('abc-tbl').innerHTML = `<thead><tr><th>Fl.</th><th>${st.dim === 'cust' ? 'Viðskiptavinur' : 'Verk'}</th><th class="n">m.kr.</th><th class="n">Hlutdeild</th><th class="n">Uppsafnað</th></tr></thead><tbody>` +
+    items.map(x => `<tr><td><span class="pill ${x.cls === 'A' ? 'l' : x.cls === 'B' ? 'm' : 'i'}">${x.cls}</span></td><td>${x.k} · ${x.n}</td><td class="n">${m1(x.v)}</td><td class="n">${pct(x.s)}</td><td class="n">${pct(x.c)}</td></tr>`).join('') +
+    `<tr class="sum"><td></td><td>Samtals</td><td class="n">${m1(tot)}</td><td class="n">100,0%</td><td></td></tr></tbody>`;
+  // vörur
+  let it = DATA.items.map(i => ({ no: i.no, name: i.no + ' ' + i.name, inv: i.inv, a: i.price, c: i.cost, g: i.price - i.cost, p: (i.price - i.cost) / i.price, bind: i.inv * i.cost }));
+  BF.hbars($('it-bars'), it.slice().sort((a, b) => b.p - a.p).map(r => ({ label: r.name, value: r.p, text: fmt(r.g, 0) + ' kr. · ' + pct(r.p, 0), color: mvar(r.p) })), { diverging: true });
+  $('it-flags').innerHTML = {{js.item_flags}}.map(item).join(''); hideCard('it-flags', !{{js.item_flags}}.length);
+  const q = st.q.toLowerCase(); if (q) it = it.filter(r => r.name.toLowerCase().includes(q));
+  if (st.sortI) { const [k, d] = st.sortI; it.sort((a, b) => (a[k] > b[k] ? 1 : -1) * d); } else it.sort((a, b) => a.p - b.p);
+  $('it-tbl').innerHTML = `<thead><tr><th data-sort="name">Vara</th><th class="n" data-sort="inv">Birgðir</th><th class="n" data-sort="a">Verð (kr.)</th><th class="n" data-sort="c">Kostnaður (kr.)</th><th class="n" data-sort="g">Framlegð (kr.)</th><th class="n" data-sort="p">%</th><th class="n" data-sort="bind">Bundið fé (kr.)</th></tr></thead><tbody>` +
+    it.map(r => `<tr><td>${r.name}</td><td class="n">${fmt(r.inv, 0)}</td><td class="n">${fmt(r.a, 0)}</td><td class="n">${fmt(r.c, 0)}</td><td class="n">${fmt(r.g, 0)}</td><td class="n"><span class="pill ${r.p < 0 ? 'h' : r.p < TARGET ? 'm' : 'l'}">${pct(r.p)}</span></td><td class="n">${fmt(r.bind, 0)}</td></tr>`).join('') + '</tbody>';
+  BF.sortable($('it-tbl'), (k, d) => { st.sortI = [k, d]; renderVorur(); });
+}
+
+/* ---------- Herming ---------- */
+const PRE = [{ price: 0, disc: 0, vol: 0, cost: 0, pass: 0 }, { price: 0, disc: 0, vol: 0, cost: 5, pass: 0 }, { price: 3, disc: 0, vol: 0, cost: 0, pass: 0 }, { price: 0, disc: 2, vol: 0, cost: 0, pass: 0 }];
+const pp = v => (v > 0 ? '+' : '') + fmt(v, 1);
+const sliders = BF.bindSliders({ price: { fmt: v => pp(v) + '%', good: 1 }, disc: { fmt: v => fmt(v, 1) + ' pp', good: -1 }, vol: { fmt: v => pp(v) + '%', good: 1 }, cost: { fmt: v => pp(v) + '%', good: -1 }, pass: { fmt: v => fmt(v, 0) + '%', good: 1 } }, p => { if (cur === 't-herm') renderSim(p); });
+function sim(p) {
+  return series().map(x => {
+    const pass = p.pass / 100 * (p.cost / 100) * (x.c / x.r);
+    const r = x.r * (1 + p.price / 100 + pass) * (1 - p.disc / 100) * (1 + p.vol / 100), c = x.c * (1 + p.cost / 100) * (1 + p.vol / 100);
+    return { r, c, g: r - c };
+  });
+}
+function renderSim(p) {
+  p = p || sliders.read();
+  const b = series(), s = sim(p);
+  const B = { r: sum(b, x => x.r), c: sum(b, x => x.c) }; B.g = B.r - B.c; B.p = B.g / B.r;
+  const S = { r: sum(s, x => x.r), c: sum(s, x => x.c) }; S.g = S.r - S.c; S.p = S.g / S.r;
+  const dG = S.g - B.g;
+  const need = (B.c * (1 + p.cost / 100)) / (B.r * (1 - p.disc / 100) * (1 - B.p)) - 1;
+  const extra = need - p.price / 100 - p.pass / 100 * (p.cost / 100) * (B.c / B.r);
+  $('sim-txt').innerHTML = Math.abs(dG) < 5e4 ? `Grunnur: framlegð ${m1(B.g)} m.kr. (${pct(B.p)}) ${{{js.period}}}. Hreyfðu stikurnar eða veldu sviðsmynd.` :
+    `Framlegð ${dG < 0 ? 'lækkar' : 'hækkar'} um <b>${m1(Math.abs(dG))} m.kr.</b> á ${MS.length} mánuðum (um ${m1(Math.abs(dG) * 12 / MS.length)} m.kr. á ári) og verður ${pct(S.p)}. ` +
+    (Math.abs(extra) < 0.0005 ? `Framlegðarhlutfall helst í ${pct(B.p)}.` : `Til að halda ${pct(B.p)} framlegð þarf verð að ${extra > 0 ? 'hækka' : 'mega lækka'} um <b>${fmt(Math.abs(extra) * 100, 1)}%</b> til viðbótar.`);
+  $('sim-k').innerHTML = [['Framlegð', m1(S.g) + ' m', BF.chip(dG, true, (dG >= 0 ? '+' : '−') + m1(Math.abs(dG)) + ' m')], ['Hlutfall', pct(S.p), BF.chip(S.p - B.p, true, sg((S.p - B.p) * 100) + ' pp')], ['Tekjur', m1(S.r) + ' m', BF.chip(S.r - B.r, true, sg((S.r / B.r - 1) * 100) + '%')], ['Aðföng', m1(S.c) + ' m', BF.chip(S.c - B.c, false, sg((S.c / B.c - 1) * 100) + '%')]]
+    .map(([l, v, c]) => `<div class="mk"><span class="sub">${l}</span><b>${v}</b>${c}</div>`).join('');
+  const g = base();
+  chart('sim', $('c-sim'), { type: 'line', data: { labels: LBL, datasets: [
+    { label: 'Grunnur', data: b.map(x => x.g / 1e6), borderColor: css('--base'), borderDash: [6, 4], borderWidth: 2, pointRadius: 0, tension: .4 },
+    { label: 'Sviðsmynd', data: s.map(x => x.g / 1e6), borderColor: css('--scen'), borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: css('--scen'), pointBorderColor: css('--panel'), pointBorderWidth: 2, tension: .4,
+      fill: { target: 0, above: alpha(css('--up'), .18), below: alpha(css('--dn'), .18) } }] },
+    options: { responsive: true, maintainAspectRatio: false, animation: { duration: 200 }, interaction: { mode: 'index', intersect: false }, plugins: { legend: { display: false }, tooltip: { ...tip0(), callbacks: { label: c => c.dataset.label + ': ' + fmt(c.raw, 1) + ' m.kr.' } } },
+      scales: { x: { grid: { display: false } }, y: { grid: { color: g }, border: { display: false }, ticks: { callback: v => fmt(v, 0) } } } } });
+}
+$('presets').querySelectorAll('button').forEach(b => b.onclick = () => sliders.set(PRE[+b.dataset.p]));
+
+/* ---------- Gæði gagna ---------- */
+function renderGaedi() {
+  $('q-list').innerHTML = {{js.quality}}.map(item).join('') || '<p class="note">Engar athugasemdir um gæði gagna.</p>';
+}
+
+/* ---------- stjórn ---------- */
+function seg(id, fn) { $(id).querySelectorAll('button').forEach(b => b.onclick = () => { $(id).querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); fn(b); }); }
+seg('oneoff', b => { st.oneoff = b.dataset.v === '1'; renderAll(); });
+seg('flt', b => { st.flt = b.dataset.f; renderVerk(); });
+seg('unit', b => { st.unit = b.dataset.v; renderUnit(); });
+seg('abc-dim', b => { st.dim = b.dataset.v; renderVorur(); });
+$('it-q').addEventListener('input', e => { st.q = e.target.value; renderVorur(); });
+let cur = 't-yfir';
+const R = { 't-yfir': renderYfir, 't-verk': renderVerk, 't-vorur': renderVorur, 't-herm': () => renderSim(), 't-gaedi': renderGaedi };
+function renderAll() { Object.keys(CH).forEach(k => { CH[k].destroy(); delete CH[k]; }); (R[cur] || renderYfir)(); }
+BF.themeToggle($('mode'), renderAll);
+BF.tabs(document.querySelector('.tabs'), id => { cur = id; renderAll(); });
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (cur === 't-yfir' || cur === 't-verk') R[cur](); }, 200); });
+
+</script>

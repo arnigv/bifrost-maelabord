@@ -1,13 +1,62 @@
 ---
 name: bifrost-maelabord
-description: Hönnunarkerfi og gæðareglur fyrir öll Bifröst-mælaborð úr Business Central: grunnpalletta, letur, ljóst og dökkt útlit, farsímaútlit, flipar, gröf, stikur, leiðarstika aftur á miðstöð og „ekkert út fyrir“. Notaðu ALLTAF þegar búið er til eða breytt mælaborði, skýrslu, hermi eða myndrænni framsetningu á BC-gögnum sem artifact, hvort sem það er stjórn, tekjuleki, sjóðstreymi, kostnaður, framlegð og verk, mánaðarlok, spágerð, endurskoðun, sjálfvirknivæðing eða miðstöð. Önnur skill í þessu plugini vísa hingað.
+description: "Hönnunarkerfi, föst sniðmát og smíðaskriftur Bifröst-mælaborða (render.py, bundle.py), reglur um útlit, farsíma og umfang breytinga. Innra skill Bifröst-mælaborða: notað af hinum skillum pluginsins við smíði mælaborða. Ekki nota það eitt og sér og ekki fyrir önnur verkefni. Gildir ekki um önnur artifacts, skýrslur eða myndir notandans."
 ---
 
 # Bifröst mælaborð: hönnunarkerfi og gæðareglur
 
 Markmiðið er að viðskiptavinur sjái **sínar eigin tölur í vönduðu, gagnvirku mælaborði** og fái „wow“ frá fyrstu sýn. Hvert mælaborð á að líta út eins og hluti af einni vöru, svara raunverulegum spurningum stjórnanda og stemma við bókhaldið upp á krónu.
 
-## Vinnuröð (fylgdu henni alltaf)
+## Gildissvið pluginsins (skylda)
+
+Allt í þessu plugini (hönnunarkerfi, gagnareglur, sniðmát, orðalag, íslenskt snið, reglur um persónuupplýsingar og umfang) gildir **aðeins um Bifröst-mælaborðin**: miðstöðina, mælaborðin í henni, sérmælaborð og Sjálfvirknivæðingu.
+
+- Notaðu ekki skill pluginsins, stíl þess eða reglur í öðrum verkefnum notandans: almennum spurningum um rekstur eða BC, öðrum skýrslum, skjölum, kynningum eða artifacts. Þar gilda venjulegar stillingar og skill notandans.
+- Breyttu ekki stillingum, minni, skillum, áætluðum verkefnum eða skrám notandans utan mælaborðanna, nema hann biðji um það berum orðum.
+- Ef notandi sem er að vinna í mælaborði biður um eitthvað óskylt: svaraðu því utan pluginsins.
+
+## Föst sniðmát (skylda): sama útlit og virkni hjá öllum
+
+Níu sjálfgefnu mælaborðin og miðstöðin eru **föst sniðmát**. Þú skrifar **aldrei** HTML, CSS eða JavaScript fyrir þau. Þú safnar aðeins gögnunum og skriftan smíðar síðuna, svo hver notandi fær nákvæmlega sömu útgáfu.
+
+| Síða | Sniðmát | Gögn |
+|---|---|---|
+| Miðstöð (`index.html`) | `bifrost-skyndiuttekt/template/` | `hub.json` → `scripts/render_hub.py` |
+| Stjórn, Sjóðstreymi og bankar, Tekjur, Kostnaður, Mánaðarlok, Framlegð og verk, Spágerð, Endurskoðun | `<skill>/template/` (`template.html`, `example.json`, `schema.md`) | `<skill>.json` → `scripts/render.py` |
+| Sjálfvirknivæðing | `sjalfvirkni/assets/` | `config.json` → `sjalfvirkni/scripts/build.py` |
+
+**Vinnuröð fyrir föst mælaborð:**
+1. Lestu `<skill>/template/schema.md` og `example.json` (sýnidæmi = gullútgáfan). Skilaðu JSON með **nákvæmlega sömu lykla og sömu lögun**; aðeins gildin breytast. Gögn sótt eftir `bifrost-gogn` (samtölur fyrst).
+2. Textar í `meta`, `text`, `html` og `js` (setningar, innsýn, áhættur) skrifar þú eftir reglunum í `schema.md`: stutt, staðreyndir, íslenskt talnasnið, aðeins `<b>` og `<a href="x.html">`.
+3. Smíðaðu: `python3 ${CLAUDE_SKILL_DIR}/scripts/bundle.py --hub hub.json --data stjorn=stjorn.json --data … --out build/` (eða `render.py --dashboard <skill> --data <skill>.json --subpage --out build/<skill>.html` fyrir eina síðu). Skriftan stöðvar ef lykil vantar eða lögun er röng: lagaðu gögnin, ekki sniðmátið.
+4. Prófaðu hverja síðu: `node ${CLAUDE_SKILL_DIR}/scripts/test/runtest.js build/<skill>.html` verður að skila „í lagi“ (keyrir alla flipa og hnappa).
+5. Birtu (`bifrost-skyndiuttekt`, kafli 3): `file_path=build/index.html`, `root=build`, `files` = undirsíðurnar sem `bundle.py` prentar.
+
+Breyting á útliti eða virkni föstu mælaborðanna sjálfra er gerð **í sniðmátinu í pluginu** (ný útgáfa), aldrei í einni keyrslu. Viðbætur notanda fara í `ext/` (sjá *Umfang breytinga*).
+
+## Umfang breytinga (skylda)
+
+**Breyttu aðeins því sem beðið er um.** Sjálfgefið umfang er **mælaborðið sem notandinn nefnir** (eða er að skoða, eða var síðast rætt) **og viðbætur og breytingar innan þess**. Allt annað hjá notandanum er látið óhreyft.
+
+1. **Endurheimtu stöðuna, ekki sækja allt aftur.** Lestu `manifest.json` og `data/<síða>.json` (og `data/hub.json` ef þarf) úr miðstöðvar-artifactinu með `Artifact` → `read` og `path`. Þar eru gögnin sem hver síða var smíðuð úr.
+2. **Sæktu úr BC aðeins það sem sú síða þarf** (eftir `template/schema.md` hennar), og uppfærðu aðeins þá lykla.
+3. **Smíðaðu aðeins þá síðu:** `bundle.py --data <síða>=<síða>.json --out build/` í möppu með gögnunum úr skrefi 1. Bættu `--hub hub.json` við **aðeins** ef lykiltala eða spjald þeirrar síðu í miðstöðinni breytist (breyttu þá bara því spjaldi í `hub.json`).
+4. **Birtu aðeins það sem breyttist:** `files` = það sem `bundle.py` prentar. Skrár sem ekki eru sendar haldast óbreyttar í artifactinu.
+5. **Viðbætur innan mælaborðs** (nýtt graf, tafla, kort eða útreikningur): skrifaðu þær sem `ext/<síða>.html`, HTML-bút með `<section class="card">…</section>` og, ef þarf, eigin `<script>` sem les `DATA` og notar `BF` (tákn og íhluti hönnunarkerfisins, engir nýir litir). `render.py`/`bundle.py` setja bútinn inn á undan fæti við **hverja** smíð, svo hann lifir af uppfærslur á tölum. Prófaðu með `test/runtest.js`.
+6. **Breyting á því sem sniðmátið sjálft sýnir** (fjarlægja eða endurraða flipum, breyta grafi): ekki í keyrslu. Bjóddu viðbót í `ext/` í staðinn, eða skráðu óskina fyrir næstu útgáfu pluginsins.
+
+**Aldrei, nema notandi biðji um það berum orðum:**
+- endurgera eða endurbirta önnur mælaborð, miðstöðina í heild eða keyra uppsetninguna aftur;
+- breyta Sjálfvirknivæðingu (hún geymir stillingar notandans) eða öðrum artifacts, skrám, áætluðum verkefnum eða stillingum notandans;
+- breyta sniðmátum eða skillum pluginsins.
+
+**Víðara umfang** aðeins við skýra ósk: „uppfærðu **öll** mælaborðin“, „settu upp aftur“, „allt“. „Uppfærðu tölurnar“ án þess að nefna mælaborð: spurðu einu sinni hvort átt sé við þetta mælaborð eða öll (sjálfgefið: það sem er til umræðu).
+
+Segðu í lokin í einni línu **hvað var uppfært og að annað sé óbreytt**, t.d. „Tekjur uppfærðar til 31.10.; önnur mælaborð og miðstöðin óbreytt.“
+
+Reglurnar hér að neðan gilda um **sérmælaborð** (`sermaelabord`) og **eigin mælaborð**, sem eru smíðuð frá `assets/template.html`, og eru lýsing á því hvernig föstu sniðmátin eru gerð.
+
+## Vinnuröð (sérmælaborð og eigin mælaborð)
 
 1. **Gögn fyrst.** Keyrðu `bifrost-gogn` (eða notaðu `dataset.json` sem þegar er til í lotunni). Aldrei teikna áður en tölurnar eru komnar og stemmdar.
 2. **Spurningin.** Skrifaðu fyrir þig, í einni línu, hvaða ákvörðun mælaborðið á að styðja og hver aðalniðurstaðan er í krónum.
@@ -172,10 +221,13 @@ Prófaðu alltaf á **375 px** breidd áður en birt er: ekkert lárétt skrun �
 
 - `assets/theme.css`: tákn, letur, útlit hluta.
 - `assets/components.js`: `fmt`, `sg`, `tabs`, `kpi`, `spark`, `hbars`, `lineCompare`, `bridge`, `sortable`, `bindSliders`, `entityPicker` (félagsval í samstæðu), `themeToggle` (fjögur þemu), `grad` (hallalitur í gröfum), `mobile()` (sími?), `sheet()` (drill-down sem neðri gluggi í síma), `cardify()` (töflur sem spjöld; keyrt sjálfkrafa fyrir `table.m-cards`).
-- `assets/template.html`: grunnsíða með haus, flipum, lykilmælum, grafi, töflu og fæti.
+- `assets/template.html`: grunnsíða fyrir sérmælaborð og eigin mælaborð.
+- `scripts/render.py`, `scripts/render_hub.py`, `scripts/bundle.py`: smíða föstu mælaborðin og miðstöðina úr gögnum (`--example` sýnir gullútgáfuna, `--check-golden` ber saman).
+- `scripts/test/runtest.js`: keyrir síðu án vafra og tilkynnir JS-villur.
 
 ## Leiðir milli mælaborða
 
-- Þegar mælaborð tilheyrir miðstöð: efst er leiðarstika `← Miðstöð mælaborða / <heiti>` (`.crumb`, sjá `template.html`) með slóð miðstöðvarinnar.
-- Spjöld í miðstöðinni og leiðarstikan nota `data-nav` og litla forskrift neðst á síðunni sem opnar í sama flipa ef hægt er, annars í nýjum (sjá `components.js`, neðst).
-- Röð við smíði: búðu fyrst til miðstöðina (tóma eða með bráðabirgðatölum) til að fá slóðina, smíðaðu svo mælaborðin með leiðarstiku og uppfærðu loks miðstöðina með lykiltölum og slóðum.
+- Miðstöðin og mælaborðin eru **eitt fjölsíðu-artifact** (sjá `bifrost-skyndiuttekt`, kafli 3): miðstöðin er síðan sjálf, hvert mælaborð sér skrá. Tenglar á milli þeirra eru **afstæðir** (`href="stjorn.html"`, leiðarstika `href="index.html"`) og **án `data-nav`**, svo síminn fer á milli síðna inni í Claude-appinu. Tengill á annað artifact opnast í vafra í síma.
+- Efst er leiðarstika `← Miðstöð / <heiti>` (`.crumb`, sjá `template.html`). Undirsíða byrjar á `<!doctype html>`, `<meta charset="utf-8">` og viewport-meta.
+- `data-nav` er aðeins fyrir tengla á **önnur** artifact (t.d. Sjálfvirknivæðingu, sem vistar sig sjálf): forskriftin neðst í `components.js` opnar þá í sama flipa ef hægt er, annars í nýjum.
+- Röð við smíði: birtu fyrst miðstöðina (tóma eða með bráðabirgðatölum), bættu svo hverju mælaborði við sem skrá á sömu slóð og uppfærðu miðstöðina með lykiltölum í sömu birtingu.

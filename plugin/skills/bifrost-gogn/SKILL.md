@@ -1,6 +1,6 @@
 ---
 name: bifrost-gogn
-description: Sækir og undirbýr gögn úr Business Central í gegnum Bifröst fyrir mælaborð — samtölur fyrst (Data.Totals.Get, period_breakdown, aging), færslur aðeins þar sem þarf; flokkar bókhaldslykla, greinir tímabil, ófullbókaða mánuði, einskiptisliði og hvaða starfsemi félagið notar (vörur, verk, þjónusta, bankar) og skilar dataset.json. Notaðu á undan hverju Bifröst-mælaborði, eða þegar beðið er um rekstrartölur, mánaðaryfirlit eða samanburð við fyrra ár úr BC.
+description: "Gagnalag Bifröst-mælaborða: sækir og undirbýr gögn úr Business Central í gegnum Bifröst fyrir mælaborð pluginsins — samtölur fyrst (Data.Totals.Get, FlowFields, period_breakdown, aging), flokkun lykla, ófullbókaðir mánuðir, einskiptisliðir, samstæða og áætlanir; skilar dataset.json. Innra skill Bifröst-mælaborða: notað af hinum skillum pluginsins við smíði mælaborða. Ekki nota það eitt og sér og ekki fyrir önnur verkefni."
 ---
 
 # Bifröst gagnalag

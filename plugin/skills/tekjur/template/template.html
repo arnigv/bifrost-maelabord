@@ -1,0 +1,601 @@
+<meta charset="utf-8">
+<script>(function(){var m="light";try{m=localStorage.getItem("bf-theme-v5")||"light"}catch(e){}var r=document.documentElement;r.setAttribute("data-bf",m==="dark"?"dark":"light");r.setAttribute("data-pal",(m==="blue"||m==="earth")?m:"bifrost")})()</script>
+<title>{{meta.company_short}} tekjur</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&subset=latin,latin-ext&display=swap">
+<style>
+{{THEME_CSS}}
+/* Kostnaður 1.0: tré, hliðarspjald, leit */
+.wrap{overflow-x:clip}
+td.mono,.mono{font-family:var(--f-mono);font-size:.8rem;white-space:nowrap}
+.hero .row b{white-space:nowrap}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.search{font:inherit;font-size:.84rem;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:7px 12px;min-width:0;width:min(280px,100%)}
+.search:focus-visible{outline:2px solid var(--brand);outline-offset:1px}
+.tree{width:100%;border-collapse:collapse}
+.tree td{vertical-align:middle}
+.tree tr.cat td{font-weight:600;cursor:pointer}
+.tree tr.acc td:first-child{padding-left:30px}
+.tree tr.acc{cursor:pointer}
+.tree tr.cat:hover td,.tree tr.acc:hover td{background:var(--panel2)}
+.tree .car{display:inline-block;width:14px;color:var(--muted);transition:transform .15s}
+.tree tr.cat[aria-expanded="true"] .car{transform:rotate(90deg)}
+.tree .mbar{height:6px;border-radius:999px;background:var(--panel2);overflow:hidden;min-width:60px}
+.tree .mbar span{display:block;height:100%;border-radius:999px;background:var(--brand)}
+.tree tr.dim td{color:var(--muted)}
+.linkbtn{font:inherit;background:none;border:none;padding:0;color:inherit;cursor:pointer;text-align:left;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.linkbtn:hover{text-decoration-color:var(--brand)}
+.prow.click{cursor:pointer;border-radius:12px;padding:6px;margin:-6px}
+.prow.click:hover{background:var(--panel2)}
+.prow.click:focus-visible{outline:2px solid var(--brand)}
+.more{font-size:.74rem;color:var(--muted)}
+/* Hliðarspjald */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:40}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(760px,100%);background:var(--panel);border-left:1px solid var(--line);box-shadow:var(--shadow);z-index:41;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:12px;padding:18px 18px 14px}
+.drawer .dh{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.drawer .dh h2{margin:0}
+.drawer .x{font:inherit;font-size:1.1rem;line-height:1;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:6px 10px;cursor:pointer}
+.drawer .scroll{overflow:auto;min-height:0}
+.drawer table{min-width:600px}
+.drawer thead th{position:sticky;top:0;background:var(--panel);z-index:1}
+.drawer .foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.8rem;color:var(--muted)}
+.drawer .foot b{color:var(--ink);font-family:var(--f-mono)}
+.chips2{display:flex;flex-wrap:wrap;gap:6px}
+.savrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:6px 0;border-top:1px solid var(--line);font-size:.84rem}
+.savrow:first-child{border-top:none}
+.savrow span{color:var(--muted);font-size:.78rem}
+.savrow b{font-family:var(--f-mono);white-space:nowrap}
+@media (max-width:480px){.wrap{padding-inline:16px}.drawer{padding:14px 16px}.tree tr.acc td:first-child{padding-left:18px}}
+
+.hero .big{font-size:clamp(2.6rem,7vw,4rem)}
+.hero p{max-width:62ch}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:860px){.g3{grid-template-columns:minmax(0,1fr)}}
+.mini2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.mk{display:grid;gap:2px;padding:10px 12px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);min-width:0}
+.mk b{font-size:1.25rem;font-weight:600;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill.cS{background:var(--brand-soft);color:var(--brand)}
+.pill.cL{background:color-mix(in srgb,var(--s2) 18%,transparent);color:var(--s2)}
+.pill.cA{background:color-mix(in srgb,var(--s6) 20%,transparent);color:var(--s6)}
+td.mono{font-family:var(--f-mono);font-size:.8rem;white-space:nowrap}
+.item b{font-size:.9rem}
+.item p{overflow-wrap:anywhere}
+.act{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);cursor:pointer}
+.act input{accent-color:var(--brand);width:18px;height:18px;margin-top:2px}
+.act p{font-size:.8rem;color:var(--muted)}
+.act .n{font-family:var(--f-mono);font-size:.82rem;font-weight:600;text-align:right;white-space:nowrap}
+.act .n small{display:block;color:var(--muted);font-weight:500}
+.seg{flex-wrap:wrap}
+.k-link a{color:var(--brand);font-weight:600}
+details.method{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:8px 12px;margin-bottom:6px}
+details.method summary{cursor:pointer;font-weight:600;color:var(--ink);font-size:.82rem}
+details.method[open] summary{margin-bottom:8px}
+@media (max-width:480px){.wrap{padding-inline:16px}.ch{flex-wrap:wrap}}
+
+/* Tekjur 1.0.0 · viðbætur ofan á kost10.css (hliðarspjald, tré) og tekj10_extra.css (Tekjuleki) */
+.ctl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end}
+.ctl .f{display:grid;gap:4px;min-width:0}
+.ctl .f2{display:flex;gap:12px;min-width:0;flex-wrap:wrap}
+.ctl .f2[hidden],.ctl .f[hidden]{display:none}
+.ctl .seg{flex-wrap:wrap}
+select{font:inherit;font-size:.86rem;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:7px 10px;min-width:0;max-width:100%}
+#per{padding:12px 16px}
+#per[hidden]{display:none}
+.warnbar{border-color:var(--warn-soft)} .warnbar .spark{background:var(--warn);color:#17150f}
+.insight p{margin:0;line-height:1.5}
+.insight a,.note a{color:var(--brand);font-weight:600}
+.legend i.dash{background:none;border-top:2px dashed;height:0;width:14px;border-radius:0;vertical-align:3px}
+.one{display:inline-block;font-size:.66rem;font-weight:700;padding:1px 6px;border-radius:999px;background:var(--warn-soft);color:var(--warn);margin-left:6px;vertical-align:1px}
+/* Tekjustoðir sem smellanlegar súlur */
+.sbar{display:grid;grid-template-columns:minmax(0,13rem) minmax(0,1fr) 5.5rem;gap:10px;align-items:center;padding:6px;margin:0 -6px;border-radius:10px;cursor:pointer;font:inherit;color:inherit;background:none;border:none;width:calc(100% + 12px);text-align:left}
+.sbar:hover{background:var(--panel2)} .sbar:focus-visible{outline:2px solid var(--brand)}
+.sbar .lb{font-size:.84rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sbar .lb small{display:block;font-weight:500;color:var(--muted);font-size:.72rem}
+.sbar .t{height:10px;border-radius:999px;background:var(--panel2);overflow:hidden}
+.sbar .t span{display:block;height:100%;border-radius:999px;background:var(--brand)}
+.sbar .n{font-family:var(--f-mono);font-size:.82rem;font-weight:600;text-align:right;white-space:nowrap}
+.sbar .n small{display:block;color:var(--muted);font-weight:500}
+.sbar.neg .t span{background:var(--dn)}
+/* Viðskiptavinir */
+.conc{margin:-2px 0 12px}
+.conc .stack{height:12px}
+.conc .lg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.74rem;color:var(--muted);margin-top:6px}
+.conc .lg i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.trend{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:2px;height:18px;align-items:end;margin-top:4px;max-width:180px}
+.trend i{display:block;background:var(--s2);border-radius:2px 2px 0 0;min-height:1px}
+.trend i.z{background:var(--line)}
+.trend i.inc{opacity:.45}
+.unreg{border-top:1px dashed var(--line);padding-top:12px;margin-top:4px}
+.unreg .av{background:var(--panel2);color:var(--muted)}
+.prow .pill{margin-left:6px;vertical-align:1px}
+/* Vörur og þjónusta */
+.prc{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line);font-size:.84rem}
+.prc:first-child{border-top:none}
+.prc span{color:var(--muted);font-size:.76rem;grid-column:1/-1}
+.prc b{font-family:var(--f-mono);white-space:nowrap}
+#v-jobs .mbar{height:6px;border-radius:999px;background:var(--panel2);overflow:hidden;min-width:50px}
+#v-jobs .mbar span{display:block;height:100%;border-radius:999px;background:var(--s2)}
+/* Tekjuleki */
+#l-upp[hidden],#l-adg[hidden]{display:none}
+@media (max-width:560px){.ctl{display:grid;grid-template-columns:minmax(0,1fr)}.ctl select{width:100%}.sbar{grid-template-columns:minmax(0,1fr) 5rem}.sbar .t{grid-column:1/-1;grid-row:2}}
+#d-tbl tr.click{cursor:pointer} #d-tbl tr.click:hover td{background:var(--panel2)} #d-tbl tr.click:focus-visible{outline:2px solid var(--brand)}
+
+</style>
+<div class="wrap">
+  <nav class="crumb" aria-label="Leiðarstika"><a href="index.html">← Miðstöð<span class="c-l"> mælaborða</span></a><span class="sep">/</span><span>Tekjur</span></nav>
+  <header class="top">
+    <div class="brandmark">
+      <div class="logo" aria-hidden="true">{{meta.initials}}</div>
+      <div style="min-width:0"><span class="eyebrow">{{meta.company}} · sala, viðskiptavinir og tekjuleki · m.kr. án VSK</span><h1>Tekjur</h1></div>
+    </div>
+    <div class="chips"><div id="mode"></div><span class="chip-lg m-hide"><span class="dot"></span>Tengt BC · Bifröst</span><span class="chip-lg">Staða <b>{{meta.as_of}}</b></span></div>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Flipar">
+    <button role="tab" aria-controls="t-yfir">Yfirsýn</button>
+    <button role="tab" aria-controls="t-vm">Viðskiptavinir</button>
+    <button role="tab" aria-controls="t-vor">Vörur og þjónusta</button>
+    <button role="tab" aria-controls="t-leki">Tekjuleki</button>
+  </div>
+
+  <!-- TÍMABILSVAL: gildir fyrir Yfirsýn, Viðskiptavini og Vörur og þjónustu -->
+  <section class="card" id="per">
+    <div class="ctl">
+      <div class="f"><span class="sub">Tímabil</span>
+        <div class="seg" id="pt" role="group" aria-label="Tegund tímabils"><button type="button" data-pt="m">Mánuður</button><button type="button" data-pt="q">Ársfjórðungur</button><button type="button" data-pt="ytd">Ár til dags</button><button type="button" data-pt="bil">Valið bil</button></div>
+      </div>
+      <label class="f" id="pp-one"><span class="sub" id="pp-one-l">Veldu</span><select id="pp-sel" aria-label="Veldu tímabil"></select></label>
+      <div class="f2" id="pp-bil" hidden>
+        <label class="f"><span class="sub">Frá</span><select id="pp-from"></select></label>
+        <label class="f"><span class="sub">Til</span><select id="pp-to"></select></label>
+      </div>
+    </div>
+    <p class="note" id="per-note"></p>
+  </section>
+
+  <!-- YFIRSÝN -->
+  <section class="tab" id="t-yfir" role="tabpanel">
+    <section class="card hero">
+      <span class="eyebrow" id="h-eye"></span>
+      <div class="big" id="h-big"></div>
+      <p id="h-txt"></p>
+      <div class="row" id="h-row"></div>
+    </section>
+    <section class="kpis" id="y-kpis"></section>
+    <section class="card">
+      <div class="ch"><h2>Tekjur á mánuði</h2><div class="legend" id="y-leg"></div></div>
+      <div class="cv" style="height:280px"><canvas id="c-month" role="img" aria-label="Tekjur á mánuði {{meta.year}} á móti meðaltali {{meta.py}} og áætlun"></canvas></div>
+      <p class="note" id="y-mnote"></p>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Tekjustoðir</h2><span class="sub">valið tímabil · smelltu á stoð til að sjá færslur</span></div>
+      <div id="y-st"></div>
+      <p class="note" id="y-stnote"></p>
+    </section>
+  </section>
+
+  <!-- VIÐSKIPTAVINIR -->
+  <section class="tab" id="t-vm" role="tabpanel" hidden>
+    <div class="insight warnbar"><span class="spark" aria-hidden="true">!</span><p id="vm-dq"></p></div>
+    <section class="kpis" id="vm-kpis"></section>
+    <section class="card">
+      <div class="ch"><h2>Sala á viðskiptavin</h2><span class="sub">reikningar án VSK · smelltu til að sjá reikninga og línur</span></div>
+      <div class="conc" id="vm-conc"></div>
+      <div class="plist" id="vm-list"></div>
+      <div class="prow unreg" id="vm-unreg"></div>
+      <p class="note">Handfærðar tekjur: sjá <a href="manadarlok.html">Mánaðarlok</a>. Innheimta og gjaldfallnar kröfur: sjá <a href="sjodstreymi.html">Sjóðstreymi og bankar</a>.</p>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Hvernig salan er skráð</h2><div class="legend" id="vm-leg"></div></div>
+      <div class="cv" style="height:240px"><canvas id="c-reg" role="img" aria-label="Tekjur á mánuði: reikningar á viðskiptavin á móti dagbók án viðskiptavinar"></canvas></div>
+      <p class="note" id="vm-regnote"></p>
+    </section>
+  </section>
+
+  <!-- VÖRUR OG ÞJÓNUSTA -->
+  <section class="tab" id="t-vor" role="tabpanel" hidden>
+    <section class="kpis" id="v-kpis"></section>
+    <section class="card">
+      <div class="ch"><h2>Tekjur eftir stoð og lykli</h2><span class="sub">smelltu á stoð til að opna lyklana, á lykil til að sjá færslur</span></div>
+      <div class="scroll"><table class="tree" id="v-tree" style="min-width:620px"><thead><tr><th>Stoð / lykill</th><th class="n">m.kr.</th><th style="width:18%">Hlutdeild</th><th class="n">Hlutdeild {{meta.py}}</th><th class="n">Færslur</th></tr></thead><tbody></tbody></table></div>
+      <p class="note" id="v-tnote"></p>
+    </section>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Verk</h2><span class="sub">samningur og reikningsfært {{meta.year}} til dags</span></div>
+        <div class="scroll"><table id="v-jobs" style="min-width:520px"><thead><tr><th>Verk</th><th>Viðskiptavinur</th><th class="n">Samningur</th><th class="n">Reikningsfært</th><th style="width:22%">Hlutfall</th></tr></thead><tbody></tbody></table></div>
+        <p class="note">Framlegð og framvinda verka: sjá <a href="framlegd.html">Framlegð og verk</a>.</p>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Verð og afslættir</h2><span class="sub">af reikningslínum og verðskrá</span></div>
+        <div id="v-price"></div>
+      </section>
+    </div>
+  </section>
+
+  <!-- TEKJULEKI -->
+  <section class="tab" id="t-leki" role="tabpanel" hidden>
+    <section class="card hero">
+      <span class="eyebrow">Tekjuleki · sækjanlegt strax · staða {{meta.leak_as_of}}</span>
+      <div class="big" id="l-big"></div>
+      <p id="l-txt"></p>
+    </section>
+    <section class="g3" id="l-kpis"></section>
+    <section class="card">
+      <div class="ch"><h2 id="l-h"></h2><div class="seg" id="l-view" role="group" aria-label="Sýn"><button type="button" data-v="adg" aria-pressed="true">Aðgerðir</button><button type="button" data-v="upp" aria-pressed="false">Uppruni</button></div></div>
+      <div id="l-adg">
+        <div class="mini2" id="adg-k"></div>
+        <div class="items" id="acts"></div>
+      </div>
+      <div id="l-upp" hidden>
+        <div class="seg" id="flt" role="group" aria-label="Sía á tegund" style="margin-bottom:10px"></div>
+        <div class="scroll"><table id="src" style="min-width:760px"><thead><tr><th data-sort="no">Verk</th><th data-sort="desc">Lýsing</th><th data-sort="cust">Viðskiptavinur</th><th data-sort="kind">Tegund</th><th class="n" data-sort="h">Klst.</th><th class="n" data-sort="amt">Fjárhæð, kr.</th><th data-sort="v">Vissa</th></tr></thead><tbody></tbody></table></div>
+        <p class="note" id="src-note"></p>
+      </div>
+    </section>
+    <details class="method">
+      <summary>Aðferð og athuganir</summary>
+      <p class="note">Athuganirnar fylgja skillinu <b>tekjuleki</b> (A–H). Fjárhæðir án VSK á verðskrá; árleg áhrif eru mat. Gögn: verk, verkfærslur og áætlunarlínur í BC, sótt {{meta.leak_fetched}}.</p>
+      <div class="scroll"><table id="meth" style="min-width:620px"><thead><tr><th>Athugun</th><th>Staða</th><th>Niðurstaða</th></tr></thead><tbody></tbody></table></div>
+    </details>
+  </section>
+
+  <footer>
+    <p>Heimild: fjárhagsfærslur á tekjulyklum {{meta.rev_accounts}} ({{meta.py}}–{{meta.year}}), viðskiptamannafærslur, bókaðir sölureikningar og reikningslínur, verk og verkfærslur {{meta.company_gen}} í Business Central (Bifröst, umhverfi {{meta.bc_env}}), sótt {{meta.fetched}}. Aðeins lesið, ekkert skrifað í BC. Fjárhæðir án VSK.</p>
+    <p>{{{html.footer_notes}}}</p>
+    <p>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</p>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="d-title" hidden>
+  <div class="dh"><div style="min-width:0"><span class="eyebrow" id="d-eye"></span><h2 id="d-title"></h2><p class="sub" id="d-sub"></p></div><button class="x" id="d-x" aria-label="Loka">✕</button></div>
+  <div class="tools"><button class="linkbtn more" id="d-back" hidden>← Til baka í reikninga</button><input class="search" id="q-d" type="search" placeholder="Leita í færslum" aria-label="Leita í færslum"></div>
+  <div class="scroll"><table id="d-tbl"><thead></thead><tbody></tbody></table></div>
+  <div class="foot" id="d-foot"></div>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+{{COMPONENTS_JS}}
+const DATA={{DATA_JSON}};
+const { $, fmt, sg, mkr, MON, css, alpha, date, sortable, themeToggle, tabs } = BF;
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+const sum = (a, f) => a.reduce((s, x) => s + f(x), 0);
+const pct = (v, d = 0) => fmt(100 * v, d) + '%';
+const MF = ['janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 'júlí', 'ágúst', 'september', 'október', 'nóvember', 'desember'];
+const mi = ym => +ym.slice(5, 7) - 1, ml = ym => MON[mi(ym)];
+const M = DATA.M, INC = DATA.inc, FULL = M.filter(m => !INC[m]);
+const SN = Object.fromEntries(DATA.streams), SK = DATA.streams.map(s => s[0]);
+const CUST = Object.fromEntries(DATA.cust.map(c => [c.no, c]));
+const CN = no => (CUST[no] && CUST[no].name) || no;
+const AN = {{js.acc_names}};
+// E: [dags, lykill, fylgiskjal, lýsing, fjárhæð (+ = tekjur), tegund reikn|dagb|bakf, viðskiptavinur, stoð]
+const E = DATA.E.map(([d, a, doc, desc, amt, k, c, s]) => ({ d, ym: d.slice(0, 7), a, doc, desc, amt, k, c, s }));
+const ONEDOC = new Set(E.filter(e => e.s === 'einsk').map(e => e.doc));
+const CH = {};
+const up = (key, el, cfg) => { if (!window.Chart || !el) return; if (CH[key]) CH[key].destroy(); CH[key] = new Chart(el, cfg); };
+const tip = () => ({ backgroundColor: css('--panel2'), titleColor: css('--ink'), bodyColor: css('--ink2'), borderColor: css('--line'), borderWidth: 1, padding: 10 });
+const m1 = v => mkr(v), kr = v => fmt(v, 0);
+
+/* ================= TÍMABIL ================= */
+const QS = [1, 2, 3, 4].map(q => ({ id: 'Q' + q, ms: M.filter(m => Math.floor(mi(m) / 3) === q - 1) })).filter(q => q.ms.length);
+/* sjálfgefinn ársfjórðungur: síðasti fullbókaði (annars síðasti með fullbókuðum mánuði) */
+const QDEF = (QS.filter(q => q.ms.length === 3 && q.ms.every(m => !INC[m])).at(-1) || QS.filter(q => q.ms.some(m => !INC[m])).at(-1) || QS[0] || { id: 'Q1' }).id;
+const st = { pt: 'ytd', m: FULL.at(-1), q: QDEF, from: M[0], to: M.at(-1) };
+const span = ms => ms.length === 1 ? `${MF[mi(ms[0])]} ${ms[0].slice(0, 4)}` : `${ml(ms[0])}–${ml(ms.at(-1))} ${ms.at(-1).slice(0, 4)}`;
+function period() {
+  let ms, label;
+  if (st.pt === 'm') { ms = [st.m]; label = span(ms); }
+  else if (st.pt === 'q') { const q = QS.find(x => x.id === st.q) || QS[0]; ms = q.ms; label = `${q.id} ${{{js.year}}} (${span(ms).replace((' ' + {{js.year}}), '')})`; }
+  else if (st.pt === 'ytd') { ms = FULL; label = `Ár til dags, ${span(ms)}`; }
+  else { const a = st.from <= st.to ? st.from : st.to, b = st.from <= st.to ? st.to : st.from; ms = M.filter(m => m >= a && m <= b); label = span(ms); }
+  const S = new Set(ms), Ep = E.filter(e => S.has(e.ym));
+  return { ms, S, label, inc: ms.filter(m => INC[m]), E: Ep, rev: sum(Ep, e => e.amt), one: sum(Ep.filter(e => e.s === 'einsk'), e => e.amt),
+    inv: sum(Ep.filter(e => e.k === 'reikn'), e => e.amt), py: DATA.py * ms.length / 12, bud: sum(ms, m => DATA.bud[m] || 0) };
+}
+const revM = m => sum(E.filter(e => e.ym === m), e => e.amt);
+function perInit() {
+  const pts = $('pt');
+  pts.querySelectorAll('button').forEach(b => b.onclick = () => { st.pt = b.dataset.pt; perCtl(); render(); });
+  $('pp-sel').onchange = e => { if (st.pt === 'm') st.m = e.target.value; else st.q = e.target.value; render(); };
+  const mo = M.map(m => `<option value="${m}">${MF[mi(m)]} ${{{js.year}}}${INC[m] ? ' (bráðabirgða)' : ''}</option>`).join('');
+  $('pp-from').innerHTML = mo; $('pp-to').innerHTML = mo; $('pp-from').value = st.from; $('pp-to').value = st.to;
+  $('pp-from').onchange = e => { st.from = e.target.value; render(); }; $('pp-to').onchange = e => { st.to = e.target.value; render(); };
+  perCtl();
+}
+function perCtl() {
+  $('pt').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.pt === st.pt));
+  $('pp-one').hidden = st.pt === 'ytd' || st.pt === 'bil'; $('pp-bil').hidden = st.pt !== 'bil';
+  if (st.pt === 'm') { $('pp-one-l').textContent = 'Mánuður'; $('pp-sel').innerHTML = M.map(m => `<option value="${m}">${MF[mi(m)]} ${{{js.year}}}${INC[m] ? ' (bráðabirgða)' : ''}</option>`).join(''); $('pp-sel').value = st.m; }
+  if (st.pt === 'q') { $('pp-one-l').textContent = 'Ársfjórðungur'; $('pp-sel').innerHTML = QS.map(q => `<option value="${q.id}">${q.id} ${{{js.year}}} (${span(q.ms).replace((' ' + {{js.year}}), '')})${q.ms.some(m => INC[m]) ? ' · bráðabirgða' : ''}</option>`).join(''); $('pp-sel').value = st.q; }
+}
+function perNote(P) {
+  $('per-note').innerHTML = `<b>${esc(P.label)}</b>. Viðmið ${{{js.py}}}: ársheild ${m1(DATA.py)} m.kr. × ${P.ms.length}/12, sama aðferð og í Stjórn (árstíðasveiflur koma ekki fram).` +
+    (P.inc.length ? ` Í tímabilinu ${P.inc.length === 1 ? 'er bráðabirgðamánuður' : 'eru bráðabirgðamánuðir'}: ${P.inc.map(m => `${MF[mi(m)]} (${INC[m]})`).join('; ')}. Tekjur þar eru því vanmetnar.` : '');
+}
+
+/* ================= YFIRSÝN ================= */
+function yfir(P) {
+  const months = P.ms.map(m => [m, revM(m)]), best = months.reduce((a, b) => (b[1] > a[1] ? b : a));
+  const chg = P.rev - P.py, core = P.rev - P.one;
+  $('h-eye').textContent = `Tekjur · ${P.label}`;
+  $('h-big').innerHTML = `${m1(P.rev)}<small>m.kr.</small>`;
+  $('h-txt').textContent = `Tekjur eru ${sg(100 * (P.rev / P.py - 1))}% á móti sama tímabili ${{{js.py}}}` +
+    (P.one ? (', ' + {{js.one_incl}}) : '') +
+    (P.inc.length ? ', og bráðabirgðamánuðir eru vanmetnir þar til söludagbók hefur verið bókuð' : '') + '.';
+  $('h-row').innerHTML = [[`${sg(chg / 1e6)} m`, ('breyting frá ' + {{js.py}})], [`${m1(P.rev / P.ms.length)} m`, 'meðaltal á mánuði'], [`${m1(core)} m`, 'án einskiptissölu'],
+    P.ms.length > 1 ? [`${MF[mi(best[0])]}`, `besti mánuður, ${m1(best[1])} m`] : [`${pct(P.inv / P.rev)}`, 'á viðskiptamannabók']]
+    .map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join('');
+  // Lykilmælar
+  const byC = custSales(P), top3 = sum(byC.slice(0, 3), c => c.v);
+  const LK = DATA.leak.items.filter(i => i.v !== 'A'), now = sum(LK, i => i.amt);
+  const K = [
+    ['Vöxtur án einskiptis', `${sg(100 * (core / P.py - 1))}<small>%</small>`, `á móti ${{{js.py}}} × ${P.ms.length}/12 (${m1(P.py)} m.kr.)`, core >= P.py ? 'up' : 'dn'],
+    ['Á móti áætlun', `${sg((P.rev - P.bud) / 1e6)}<small>m.kr.</small>`, `${esc(DATA.bud_name)} <span class="pill m">drög</span> ${sg(100 * (P.rev / P.bud - 1))}%`, P.rev >= P.bud ? 'up' : 'dn'],
+    ['Þrír stærstu viðskiptavinir', P.inv ? `${fmt(100 * top3 / P.inv, 0)}<small>%</small>` : '–', P.inv ? `af sölu á viðskiptamannabók (${byC.slice(0, 3).map(c => c.no).join(', ')})` : 'enginn reikningur á tímabilinu', ''],
+    ['Sækjanlegt strax', `${m1(now)}<small>m.kr.</small>`, 'tekjuleki · sjá flipann Tekjuleki', ''],
+  ];
+  $('y-kpis').innerHTML = K.map(([l, v, d, c]) => `<div class="card kpi"><span class="l">${l}${c ? ` <span class="chip ${c}">${c === 'up' ? 'yfir' : 'undir'}</span>` : ''}</span><span class="v">${v}</span><span class="d">${d}</span></div>`).join('');
+  // Tekjustoðir
+  const S = streamSums(P), mx = Math.max(1, ...S.map(s => Math.abs(s.v)));
+  $('y-st').innerHTML = S.map(s => `<button type="button" class="sbar${s.v < 0 ? ' neg' : ''}" data-s="${s.k}" aria-label="Opna færslur: ${esc(SN[s.k])}"><span class="lb">${esc(SN[s.k])}${s.k === 'einsk' ? '<span class="one">1×</span>' : ''}<small>${s.accs.join(', ')}${s.k !== 'einsk' && s.k !== 'adrar' && s.k !== 'afsl' ? ` · ${s.n} færslur` : ''}</small></span><span class="t"><span style="width:${Math.max(1, 100 * Math.abs(s.v) / mx).toFixed(1)}%"></span></span><span class="n">${m1(s.v)}<small>${pct(s.v / P.rev)}</small></span></button>`).join('');
+  $('y-stnote').textContent = {{js.streams_note}};
+  monthChart(P);
+}
+function streamSums(P) {
+  return SK.map(k => { const X = P.E.filter(e => e.s === k); return { k, v: sum(X, e => e.amt), n: X.length, accs: [...new Set(X.map(e => e.a))].sort() }; })
+    .filter(s => s.n).sort((a, b) => b.v - a.v);
+}
+function monthChart(P) {
+  $('y-leg').innerHTML = `<span><i style="background:var(--s1)"></i>Tekjur ${{{js.year}}}</span><span><i style="background:var(--warn)"></i>Einskipti 1×</span><span><i class="dash" style="color:var(--base)"></i>${{{js.py}}}, meðaltal á mánuði</span><span><i class="dash" style="color:var(--s2)"></i>${esc(DATA.bud_name)} (drög)</span>`;
+  $('y-mnote').textContent = `Valið tímabil er í fullum lit. ${{{js.inc_note}}} ${{{js.py}}} var ${m1(DATA.py)} m.kr., eða ${m1(DATA.py / 12)} m.kr. á mánuði að meðaltali. Áætlunin er ${m1(DATA.bud[M[0]])} m.kr. á mánuði (${esc(DATA.bud_desc)}).`;
+  if (!window.Chart) return;
+  Chart.defaults.font.family = css('--f-body'); Chart.defaults.color = css('--muted');
+  const c1 = css('--s1'), cw = css('--warn');
+  const a = m => P.S.has(m) ? (INC[m] ? .55 : 1) : (INC[m] ? .18 : .32);
+  const one = M.map(m => sum(E.filter(e => e.ym === m && e.s === 'einsk'), e => e.amt) / 1e6);
+  up('month', $('c-month'), { type: 'bar', data: { labels: M.map(ml), datasets: [
+    { label: ('Tekjur ' + {{js.year}}), data: M.map((m, i) => revM(m) / 1e6 - one[i]), backgroundColor: M.map(m => alpha(c1, a(m))), borderRadius: 6, stack: 'r', order: 2 },
+    { label: 'Einskipti 1×', data: one, backgroundColor: M.map(m => alpha(cw, a(m))), borderRadius: 6, stack: 'r', order: 2 },
+    { type: 'line', label: ({{js.py}} + ', meðaltal'), data: M.map(() => DATA.py / 12 / 1e6), borderColor: css('--base'), borderDash: [5, 4], borderWidth: 2, pointRadius: 0, stack: 'p', order: 1 },
+    { type: 'line', label: `${DATA.bud_name} (drög)`, data: M.map(m => (DATA.bud[m] || 0) / 1e6), borderColor: css('--s2'), borderDash: [2, 3], borderWidth: 2, pointRadius: 0, stack: 'b', order: 1 },
+  ] }, options: { responsive: true, maintainAspectRatio: false, animation: { duration: 300 }, interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { display: false }, tooltip: { ...tip(), callbacks: { title: c => `${MF[mi(M[c[0].dataIndex])]} ${{{js.year}}}${INC[M[c[0].dataIndex]] ? ' · bráðabirgða' : ''}`, label: c => c.raw ? ` ${c.dataset.label}: ${fmt(c.raw)} m.kr.` : null } } },
+    scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, beginAtZero: true, grid: { color: css('--line') }, border: { display: false }, ticks: { callback: v => fmt(v, 0) } } } } });
+}
+
+/* ================= VIÐSKIPTAVINIR ================= */
+function custSales(P) {
+  const R = {};
+  P.E.filter(e => e.k === 'reikn').forEach(e => { const x = R[e.c] = R[e.c] || { no: e.c, v: 0, docs: new Set() }; x.v += e.amt; x.docs.add(e.doc); });
+  return Object.values(R).sort((a, b) => b.v - a.v);
+}
+function vm(P) {
+  const C = custSales(P), all = E.filter(e => e.k === 'reikn'), allInv = sum(all, e => e.amt), allRev = sum(E, e => e.amt);
+  const isAll = P.ms.length === M.length;
+  $('vm-dq').innerHTML = `${{{js.dq_note}}}` +
+    (isAll ? '' : ` Allt árið til dags (${{{js.ytd_short}}}) eru ${m1(allInv)} af ${m1(allRev)} m.kr. (${pct(allInv / allRev)}) á viðskiptamannabók.`) + (' ' + {{js.dq_tail}});
+  const invP = DATA.inv.filter(i => P.S.has(i.d.slice(0, 7)));
+  const nNew = C.filter(c => CUST[c.no].new).length, nIC = C.filter(c => CUST[c.no].ic).length;
+  const K = [
+    ['Á viðskiptamannabók', `${m1(P.inv)}<small>m.kr.</small>`, `${pct(P.inv / P.rev)} af tekjum tímabilsins`],
+    ['Viðskiptavinir með reikning', `${C.length}`, `þar af ${nNew} nýir á árinu${nIC ? ` · ${nIC} tengdir aðilar` : ''}`],
+    ['Stærsti viðskiptavinur', C.length ? `${fmt(100 * C[0].v / P.inv, 0)}<small>%</small>` : '–', C.length ? esc(CN(C[0].no)) : 'enginn reikningur'],
+    ['Reikningar', `${invP.length}`, invP.length ? `meðalreikningur ${m1(sum(invP, i => i.net) / invP.length)} m.kr.` : '–'],
+  ];
+  $('vm-kpis').innerHTML = K.map(([l, v, d]) => `<div class="card kpi"><span class="l">${l}</span><span class="v">${v}</span><span class="d">${d}</span></div>`).join('');
+  // Samþjöppun
+  if (C.length) {
+    const p1 = C[0].v / P.inv, p3 = sum(C.slice(1, 3), c => c.v) / P.inv, pr = 1 - p1 - p3;
+    $('vm-conc').innerHTML = `<div class="stack" role="img" aria-label="Samþjöppun sölu á viðskiptamannabók"><span style="width:${(100 * p1).toFixed(1)}%;background:var(--s1)"></span><span style="width:${(100 * p3).toFixed(1)}%;background:var(--s2)"></span><span style="width:${(100 * Math.max(0, pr)).toFixed(1)}%;background:var(--s6)"></span></div>
+      <div class="lg"><span><i style="background:var(--s1)"></i>Stærsti</span><span><i style="background:var(--s2)"></i>Næstu tveir</span><span><i style="background:var(--s6)"></i>Aðrir (${Math.max(0, C.length - 3)})</span></div>`;
+  } else $('vm-conc').innerHTML = '';
+  // Listi
+  const mx = Math.max(1, ...C.map(c => c.v));
+  const monthly = no => M.map(m => sum(E.filter(e => e.k === 'reikn' && e.c === no && e.ym === m), e => e.amt)), mxAll = Math.max(1, ...DATA.cust.map(c => Math.max(...monthly(c.no))));
+  $('vm-list').innerHTML = C.map(c => {
+    const x = CUST[c.no], mo = monthly(c.no);
+    const tags = (x.new ? ('<span class="pill l">nýr ' + {{js.year}} + '</span>') : '') + (x.one ? '<span class="one">1×</span>' : '') + (x.ic ? '<span class="pill i">tengdur aðili</span>' : '');
+    return `<div class="prow click" data-c="${c.no}" tabindex="0" role="button" aria-label="Opna reikninga ${esc(x.name)}"><span class="av">${c.no}</span><div style="min-width:0"><div class="nm">${esc(x.name)}${tags}</div><div class="sub">${c.docs.size} reikn. á tímabilinu · fyrsti reikningur ${{{js.year}}} ${date(x.first)}</div>
+      <div class="trend" aria-hidden="true">${mo.map((v, i) => `<i class="${v ? '' : 'z'}${INC[M[i]] ? ' inc' : ''}" style="height:${v ? Math.max(8, 100 * v / mxAll).toFixed(0) : 6}%" title="${MON[i]}: ${m1(v)} m"></i>`).join('')}</div>
+      <div class="bar"><span style="width:${(100 * c.v / mx).toFixed(1)}%"></span></div></div><span class="n">${m1(c.v)}<small>m.kr.</small></span></div>`;
+  }).join('') || '<p class="sub">Enginn reikningur á viðskiptavin á tímabilinu.</p>';
+  const unreg = P.rev - P.inv, nJ = P.E.filter(e => e.k !== 'reikn').length;
+  $('vm-unreg').innerHTML = `<span class="av">–</span><div style="min-width:0"><div class="nm">Óskráð á viðskiptavin</div><div class="sub">${{{js.unreg_desc}}} · ${nJ} færslur · <button class="linkbtn" id="unreg-open">sjá færslur</button></div></div><span class="n">${m1(unreg)}<small>m.kr. · ${pct(unreg / P.rev)}</small></span>`;
+  const none = DATA.cust.filter(c => !C.some(x => x.no === c.no)).length;
+  regChart(P, none);
+}
+function regChart(P, none) {
+  const inv = M.map(m => sum(E.filter(e => e.ym === m && e.k === 'reikn'), e => e.amt) / 1e6), jr = M.map((m, i) => revM(m) / 1e6 - inv[i]);
+  $('vm-leg').innerHTML = '<span><i style="background:var(--s2)"></i>Reikningar á viðskiptavin</span><span><i style="background:var(--s6)"></i>Dagbók án viðskiptavinar</span>';
+  const sw = M.find((m, i) => inv[i] > jr[i]);
+  $('vm-regnote').textContent = `${sw ? `Reikningar urðu stærri en dagbókin í ${MF[mi(sw)]}. ` : ''}${{{js.reg_py}}} ${none ? `${none} viðskiptavinir eru ekki með reikning á völdu tímabili. ` : ''}${{{js.reg_lost}}}`;
+  if (!window.Chart) return;
+  const a = m => P.S.has(m) ? (INC[m] ? .55 : 1) : .3;
+  up('reg', $('c-reg'), { type: 'bar', data: { labels: M.map(ml), datasets: [
+    { label: 'Reikningar á viðskiptavin', data: inv, backgroundColor: M.map(m => alpha(css('--s2'), a(m))), borderRadius: 4 },
+    { label: 'Dagbók án viðskiptavinar', data: jr, backgroundColor: M.map(m => alpha(css('--s6'), a(m))), borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, animation: { duration: 300 }, interaction: { mode: 'index', intersect: false },
+      plugins: { legend: { display: false }, tooltip: { ...tip(), callbacks: { label: c => ` ${c.dataset.label}: ${fmt(c.raw)} m.kr.` } } },
+      scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { color: css('--line') }, border: { display: false }, ticks: { callback: v => fmt(v, 0) } } } } });
+}
+
+/* ================= VÖRUR OG ÞJÓNUSTA ================= */
+const openS = new Set();
+function vor(P) {
+  const invP = DATA.inv.filter(i => P.S.has(i.d.slice(0, 7))), L = invP.flatMap(i => i.lines.map(l => ({ i, l })));
+  const onJob = sum(L.filter(x => x.l[7]), x => x.l[6]), afsl = -sum(P.E.filter(e => e.s === 'afsl'), e => e.amt), ldisc = L.filter(x => x.l[5]).length;
+  const nonGL = {{js.non_gl_lines}}; // allar línur eru af tegundinni fjárhagslykill (G/L Account) í BC
+  const K = [
+    ['Bókað á verk', `${m1(onJob)}<small>m.kr.</small>`, `${pct(onJob / P.rev, 1)} tekna · ${{{js.onjob_note}}}`],
+    ['Verðskrá vinnu', DATA.prices.length ? `${fmt(Math.min(...DATA.prices), 0)}–${fmt(Math.max(...DATA.prices), 0)}` : '–', 'kr./klst. án VSK · verðskrá forða í BC'],
+    ['Afslættir', `${mkr(afsl, 2)}<small>m.kr.</small>`, `${afsl ? P.E.filter(e => e.s === 'afsl').map(e => `${e.doc} ${date(e.d)}, ${esc(e.desc)}`).join('; ') : ('enginn á lykil ' + {{js.disc_account}})} · ${ldisc} línur með línuafslætti`],
+    ['Reikningslínur á vöru eða forða', `${nonGL}<small>af ${L.length}</small>`, {{js.non_gl_note}}],
+  ];
+  $('v-kpis').innerHTML = K.map(([l, v, d]) => `<div class="card kpi"><span class="l">${l}</span><span class="v">${v}</span><span class="d">${d}</span></div>`).join('');
+  // Tré: stoð -> lykill -> færslur
+  const S = streamSums(P), mx = Math.max(1, ...S.map(s => Math.abs(s.v)));
+  const bar = v => `<div class="mbar"><span style="width:${Math.max(1, Math.min(100, 100 * Math.abs(v) / mx)).toFixed(1)}%"></span></div>`;
+  $('v-tree').querySelector('tbody').innerHTML = S.map(s => {
+    const on = openS.has(s.k), py = DATA.py_stream[s.k] || 0;
+    const head = `<tr class="cat" data-s="${s.k}" tabindex="0" role="button" aria-expanded="${on}"><td><span class="car" aria-hidden="true">▸</span> ${esc(SN[s.k])}${s.k === 'einsk' ? '<span class="one">1×</span>' : ''}</td><td class="n">${m1(s.v)}</td><td>${bar(s.v)} <span class="sub">${pct(s.v / P.rev)}</span></td><td class="n">${py ? pct(py / DATA.py) : '–'}</td><td class="n">${s.n}</td></tr>`;
+    const kids = on ? s.accs.map(a => { const X = P.E.filter(e => e.s === s.k && e.a === a), v = sum(X, e => e.amt);
+      return `<tr class="acc" data-s="${s.k}" data-a="${a}" tabindex="0" role="button" aria-label="Opna færslur á lykli ${a}"><td><span class="mono">${a}</span> ${esc(AN[a] || a)}</td><td class="n">${m1(v)}</td><td>${bar(v)}</td><td class="n">–</td><td class="n">${X.length}</td></tr>`; }).join('') : '';
+    return head + kids;
+  }).join('') + `<tr class="sum"><td>Samtals tekjur</td><td class="n">${m1(P.rev)}</td><td></td><td class="n">100%</td><td class="n">${P.E.length}</td></tr>`;
+  const big = S.filter(s => DATA.py_stream[s.k]).map(s => ({ s, d: s.v / P.rev - DATA.py_stream[s.k] / DATA.py })).sort((a, b) => Math.abs(b.d) - Math.abs(a.d))[0];
+  $('v-tnote').textContent = `Hlutdeild ${{{js.py}}} ${{{js.py_share_src}}} ${m1(DATA.py)} m.kr.).${big ? ` Mesta breyting á samsetningu: ${SN[big.s.k].toLowerCase()} ${sg(100 * big.d)} pp.` : ''} ${{{js.py_share_tail}}}`;
+  // Verk
+  const J = DATA.jobs.slice().sort((a, b) => b.inv - a.inv);
+  $('v-jobs').querySelector('tbody').innerHTML = J.map(j => { const r = j.contract ? j.inv / j.contract : null;
+    return `<tr><td><span class="mono">${esc(j.no)}</span> ${esc(j.desc)}</td><td>${esc(j.cust)}</td><td class="n">${j.contract ? m1(j.contract) : '–'}</td><td class="n">${m1(j.inv)}</td><td>${r == null ? '<span class="sub">innra verk</span>' : `<div class="mbar"><span style="width:${Math.min(100, 100 * r).toFixed(1)}%;${r > 1 ? 'background:var(--warn)' : ''}"></span></div> <span class="sub">${pct(r)}</span>`}</td></tr>`; }).join('');
+  // Verð og afslættir
+  const L2 = DATA.inv.flatMap(i => i.lines.map(l => ({ i, l }))), find = d => L2.find(x => x.l[2].startsWith(d));
+  /* dæmi um verð: [{kind: 'rate'|'fixed'|'oneoff', label, match (upphaf línulýsingar) eða acc (lykill)}] */
+  const P2 = {{js.price_examples}}.map(x => {
+    if (x.kind === 'fixed') { const f = L2.filter(y => y.l[2].startsWith(x.match)); return f.length ? [`${x.label}, ${CN(f[0].i.c)}`, `${kr(f[0].l[4])} kr./mán.`, `${f.length} reikningar ${ml(f[0].i.d.slice(0, 7))}–${ml(f.at(-1).i.d.slice(0, 7))}; tímar umfram gjaldið eru í flipanum Tekjuleki`] : null; }
+    if (x.kind === 'oneoff') { const t = L2.find(y => y.l[1] === x.acc); return t ? [`${x.label}, ${CN(t.i.c)}`, `${kr(t.l[4])} ${t.i.fx}`, `${t.i.doc} ${date(t.i.d)}, lykill ${x.acc}, einskiptissala 1×`] : null; }
+    const r = find(x.match); return r ? [`${x.label}, ${CN(r.i.c)}`, `${kr(r.l[4])} kr./klst.`, `${kr(r.l[3])} klst. á ${r.i.doc} (${date(r.i.d)}), á verðskrá`] : null;
+  }).filter(Boolean);
+  $('v-price').innerHTML = P2.map(([t, v, s]) => `<div class="prc"><div style="min-width:0">${esc(t)}</div><b>${esc(v)}</b><span>${esc(s)}</span></div>`).join('') +
+    `<p class="note">${{{js.price_note}}} 0 kr. línur og vinna utan samnings: sjá <button class="linkbtn" data-go="t-leki">flipann Tekjuleki</button>.</p>`;
+}
+
+/* ================= TEKJULEKI (Tekjuleki 1.0) ================= */
+const SEV0 = { S: ['Staðfest', 'cS'], L: ['Líklegt', 'cL'], A: ['Athuga', 'cA'] }, SEV = new Proxy(SEV0, { get: (o, k) => o[k] || o.A });
+const LI = DATA.leak.items.slice().sort((a, b) => b.amt - a.amt), LEAK = LI.filter(i => i.v !== 'A'), CHK = LI.filter(i => i.v === 'A');
+function leki() {
+  const now = sum(LEAK, i => i.amt), yr = sum(LEAK, i => i.yr), chk = sum(CHK, i => i.amt);
+  $('l-big').innerHTML = `${m1(now)}<small>m.kr.</small>`;
+  $('l-txt').textContent = {{js.leak_txt}};
+  $('l-kpis').innerHTML = [
+    ['Til athugunar', `${m1(chk)}<small>m.kr.</small>`, {{js.leak_k1}}],
+    ['Endurtekur sig á ári', `${m1(yr)}<small>m.kr.</small>`, {{js.leak_k2}}],
+    ['Verk og samningar með leka', `${DATA.leak.leakJobs}<small>af ${DATA.leak.openJobs}</small>`, {{js.leak_k3}}],
+  ].map(([l, v, d]) => `<div class="card kpi"><span class="l">${l}</span><span class="v">${v}</span><span class="d">${d}</span></div>`).join('');
+  $('meth').querySelector('tbody').innerHTML = DATA.leak.method.map(([a, s, n]) => `<tr><td>${esc(a)}</td><td><span class="pill ${s === 'Gert' ? 'l' : 'i'}">${esc(s)}</span></td><td>${esc(n)}</td></tr>`).join('');
+}
+const LV = { v: 'adg' };
+function lView(v) {
+  LV.v = v; $('l-adg').hidden = v !== 'adg'; $('l-upp').hidden = v !== 'upp';
+  $('l-h').textContent = v === 'adg' ? 'Veldu aðgerðir · samtalan uppfærist' : 'Hvaðan lekinn kemur';
+  $('l-view').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v));
+}
+const ON = DATA.leak.actions.map(() => false);
+function adg() {
+  $('acts').innerHTML = DATA.leak.actions.map((a, i) => `<label class="act"><input type="checkbox" data-i="${i}"><div><b>${esc(a.t)}</b><p><span class="pill ${SEV[a.v][1]}">${SEV[a.v][0]}</span> · átak: ${esc(a.eff)} · ${esc(a.next)}</p></div><div class="n">${a.once ? m1(a.once) : '–'}<small>${a.yr ? m1(a.yr) + ' á ári' : 'einskiptis'}</small></div></label>`).join('');
+  $('acts').querySelectorAll('input').forEach(c => c.onchange = () => { ON[+c.dataset.i] = c.checked; adgSum(); });
+  adgSum();
+}
+function adgSum() {
+  const sel = DATA.leak.actions.filter((a, i) => ON[i]);
+  const tx = sel.length ? `${sel.length} ${sel.length === 1 ? 'aðgerð valin' : 'aðgerðir valdar'}` : 'veldu aðgerðir hér að neðan';
+  $('adg-k').innerHTML = [['Einskiptis', sum(sel, a => a.once)], ['Á ári, endurtekið', sum(sel, a => a.yr)]]
+    .map(([l, v]) => `<div class="mk"><span class="sub">${l} · ${tx}</span><b>${sel.length ? m1(v) + ' m.kr.' : '–'}</b></div>`).join('');
+}
+const GROUPS = [['all', 'Allt'], ['verk', 'Verk og tímar'], ['zero', '0 kr. notkun'], ['price', 'Verð og afslættir']];
+let G = 'all', LSK = 'amt', LSD = -1;
+function upp() {
+  const R = DATA.leak.src.filter(r => G === 'all' || r.g === G);
+  const r = R.slice().sort((a, b) => (typeof a[LSK] === 'number' ? (a[LSK] || 0) - (b[LSK] || 0) : String(a[LSK]).localeCompare(String(b[LSK]), 'is')) * LSD);
+  $('src').querySelector('tbody').innerHTML = r.length
+    ? r.map(x => `<tr><td class="mono">${esc(x.no)}</td><td>${esc(x.desc)}</td><td>${esc(x.cust)}</td><td>${esc(x.kind)}</td><td class="n">${x.h ? fmt(x.h, 0) : '–'}</td><td class="n">${kr(x.amt)}</td><td><span class="pill ${SEV[x.v][1]}">${SEV[x.v][0]}</span></td></tr>`).join('')
+      + `<tr class="sum"><td></td><td>Samtals</td><td></td><td></td><td class="n">${fmt(sum(R, x => x.h || 0), 0)}</td><td class="n">${kr(sum(R, x => x.amt))}</td><td></td></tr>`
+    : '<tr><td colspan="7">Engin frávik fundust.</td></tr>';
+  $('src-note').textContent = G === 'price' ? DATA.leak.priceNote : G === 'zero' ? {{js.src_note_zero}} : 'Allar línur úr verkum í BC. Línur merktar Athuga eru ekki taldar með í sækjanlegu strax.';
+  $('flt').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.g === G));
+}
+function uppInit() {
+  $('flt').innerHTML = GROUPS.map(([g, l]) => `<button type="button" data-g="${g}">${l}</button>`).join('');
+  $('flt').querySelectorAll('button').forEach(b => b.onclick = () => { G = b.dataset.g; upp(); });
+  sortable($('src'), (k, d) => { LSK = k; LSD = k === 'amt' || k === 'h' ? -d : d; upp(); });
+  upp();
+}
+
+/* ================= HLIÐARSPJALD ================= */
+let DR = null, lastFocus = null;
+function drawer(cfg) {
+  if (!DR) lastFocus = document.activeElement;
+  DR = { ...cfg, k: cfg.sort || null, d: cfg.dir || -1 };
+  $('d-eye').textContent = cfg.eye; $('d-title').textContent = cfg.title; $('d-sub').innerHTML = cfg.sub || '';
+  $('d-back').hidden = !cfg.back; $('q-d').value = '';
+  $('d-tbl').querySelector('thead').innerHTML = '<tr>' + cfg.cols.map(c => `<th${c.n ? ' class="n"' : ''} data-sort="${c.k}">${c.l}</th>`).join('') + '</tr>';
+  sortable($('d-tbl'), (k, d) => { DR.k = k; DR.d = d; drawRows(); });
+  $('scrim').hidden = false; $('drawer').hidden = false; drawRows();
+  try { $('d-x').focus(); } catch (e) {}
+}
+function drawRows() {
+  const q = norm($('q-d').value || ''), C = DR.cols;
+  let r = DR.rows.filter(x => !q || norm(C.map(c => x[c.k]).join(' ')).includes(q));
+  if (DR.k) r = r.slice().sort((a, b) => { const x = a[DR.k], y = b[DR.k]; return (typeof x === 'number' ? x - y : String(x).localeCompare(String(y), 'is')) * DR.d; });
+  $('d-tbl').querySelector('tbody').innerHTML = r.length ? r.map(x => `<tr${DR.rowAttr ? DR.rowAttr(x) : ''}>` + C.map(c => `<td${c.n ? ' class="n"' : c.mono ? ' class="mono"' : ''}>${c.f ? c.f(x[c.k], x) : esc(x[c.k])}</td>`).join('') + '</tr>').join('')
+    : `<tr><td colspan="${C.length}" class="sub">Engin færsla passar við leitina.</td></tr>`;
+  $('d-foot').innerHTML = DR.foot(r);
+}
+function closeDrawer() { $('scrim').hidden = true; $('drawer').hidden = true; DR = null; try { lastFocus && lastFocus.focus(); } catch (e) {} }
+const who = x => x.k === 'reikn' ? esc(CN(x.c)) : x.k === 'bakf' ? '<span class="sub">bakfærsla</span>' : '<span class="sub">dagbók</span>';
+const ECOLS = [{ k: 'd', l: 'Dags.', f: v => date(v), mono: 1 }, { k: 'doc', l: 'Fylgiskjal', mono: 1 }, { k: 'desc', l: 'Lýsing' }, { k: 'a', l: 'Lykill', mono: 1 }, { k: 'cn', l: 'Viðskiptavinur / uppruni', f: (v, x) => who(x) }, { k: 'amt', l: 'Fjárhæð', n: 1, f: kr }];
+const efoot = r => `<span>${r.length} færslur · tekjur jákvæðar, afsláttur og bakfærslur neikvæð</span><span>Samtals <b>${kr(sum(r, x => x.amt))}</b> kr.</span>`;
+function openEntries(title, eye, rows, sub) {
+  drawer({ eye, title, sub, rows: rows.map(e => ({ ...e, cn: e.k === 'reikn' ? CN(e.c) : e.k })), cols: ECOLS, sort: 'amt', dir: -1, foot: efoot });
+}
+function openStream(k, a) {
+  const P = period(), X = P.E.filter(e => e.s === k && (!a || e.a === a));
+  openEntries(a ? `${a} ${AN[a] || ''}` : SN[k], `Tekjustoð · ${SN[k]}${a ? '' : ' · allir lyklar'}`, X, `${esc(P.label)} · ${X.length} færslur · ${m1(sum(X, e => e.amt))} m.kr. án VSK`);
+}
+function openUnreg() {
+  const P = period(), X = P.E.filter(e => e.k !== 'reikn');
+  openEntries('Óskráð á viðskiptavin', 'Dagbókarfærslur á tekjulyklum', X, `${esc(P.label)} · ${{{js.unreg_drawer}}} Handfærðar tekjur: sjá <a href="manadarlok.html">Mánaðarlok</a>.`);
+}
+function openCust(no) {
+  const P = period(), x = CUST[no]; if (!x) return;
+  const all = DATA.inv.filter(i => i.c === no), I = all.filter(i => P.S.has(i.d.slice(0, 7)));
+  const st = i => i.open ? '<span class="pill i">opið</span>' : '<span class="pill l">greitt</span>';
+  drawer({ eye: `Viðskiptavinur ${no}${x.ic ? ' · tengdur aðili' : ''}${x.new ? (' · nýr ' + {{js.year}}) : ''}`, title: x.name,
+    sub: `${esc(P.label)}: ${I.length} reikningar · ${m1(sum(I, i => i.net))} m.kr. án VSK · allt ${{{js.year}}}: ${all.length} reikn., ${m1(sum(all, i => i.net))} m.kr. Smelltu á reikning til að sjá línurnar.`,
+    rows: I.map(i => ({ ...i, acc: [...new Set(i.lines.map(l => l[1]))].join(', '), s: i.open ? 'opið' : 'greitt' })), sort: 'd', dir: -1,
+    rowAttr: i => ` class="click" data-doc="${i.doc}" tabindex="0" role="button"`,
+    cols: [{ k: 'd', l: 'Dags.', f: v => date(v), mono: 1 }, { k: 'doc', l: 'Reikningur', mono: 1 }, { k: 'desc', l: 'Lýsing', f: (v, i) => esc(v) + (i.lines.length > 1 ? ` <span class="sub">+${i.lines.length - 1} línur</span>` : '') + (ONEDOC.has(i.doc) ? '<span class="one">1×</span>' : '') }, { k: 'acc', l: 'Lykill', mono: 1 }, { k: 'net', l: 'Án VSK', n: 1, f: kr }, { k: 'gross', l: 'Með VSK', n: 1, f: kr }, { k: 's', l: 'Staða', f: (_, i) => st(i) }],
+    foot: r => `<span>${r.length} reikningar · staða úr viðskiptamannabók</span><span>Samtals <b>${kr(sum(r, i => i.net))}</b> kr. án VSK</span>` });
+  DR.cust = no;
+}
+function openInv(doc) {
+  const i = DATA.inv.find(x => x.doc === doc); if (!i) return; const back = DR && DR.cust;
+  drawer({ eye: `Reikningur ${i.doc} · ${date(i.d)}`, title: CN(i.c), back,
+    sub: `${i.lines.length} ${i.lines.length === 1 ? 'lína' : 'línur'} · ${m1(i.net)} m.kr. án VSK${i.fx ? ` · reikningur í ${i.fx}, fjárhæð í kr. á gengi bókunar` : ''}`,
+    rows: i.lines.map(([ln, a, desc, q, p, disc, amt, job]) => ({ ln, a, desc, q, p, disc, amt, job })), sort: 'ln', dir: 1,
+    cols: [{ k: 'ln', l: 'Lína', mono: 1, f: v => String(v / 10000) }, { k: 'a', l: 'Lykill', mono: 1 }, { k: 'desc', l: 'Lýsing' }, { k: 'q', l: 'Magn', n: 1, f: v => fmt(v, 0) }, { k: 'p', l: 'Einingarverð', n: 1, f: v => kr(v) + (i.fx ? ' ' + i.fx : '') }, { k: 'disc', l: 'Afsl. %', n: 1, f: v => v ? fmt(v, 1) : '–' }, { k: 'amt', l: 'Upphæð, kr.', n: 1, f: kr }, { k: 'job', l: 'Verk', mono: 1, f: v => v || '–' }],
+    foot: r => `<span>Línur á fjárhagslykil (tegund G/L Account)</span><span>Samtals <b>${kr(sum(r, x => x.amt))}</b> kr. án VSK</span>` });
+  DR.backTo = back;
+}
+
+/* ================= ATBURÐIR ================= */
+const act = (sel, fn) => document.addEventListener('click', e => { const el = e.target.closest && e.target.closest(sel); if (el) fn(el, e); });
+const key = (sel, fn) => document.addEventListener('keydown', e => { if (e.key !== 'Enter' && e.key !== ' ') return; const el = e.target.closest && e.target.closest(sel); if (el) { e.preventDefault(); fn(el); } });
+act('.sbar[data-s]', el => openStream(el.dataset.s));
+act('#v-tree tr.cat', el => { const k = el.dataset.s; openS.has(k) ? openS.delete(k) : openS.add(k); vor(period()); });
+key('#v-tree tr.cat', el => { const k = el.dataset.s; openS.has(k) ? openS.delete(k) : openS.add(k); vor(period()); const n = document.querySelector(`#v-tree tr.cat[data-s="${k}"]`); n && n.focus(); });
+act('#v-tree tr.acc', el => openStream(el.dataset.s, el.dataset.a)); key('#v-tree tr.acc', el => openStream(el.dataset.s, el.dataset.a));
+act('.prow[data-c]', el => openCust(el.dataset.c)); key('.prow[data-c]', el => openCust(el.dataset.c));
+act('#unreg-open', () => openUnreg());
+act('#d-tbl tr[data-doc]', el => openInv(el.dataset.doc)); key('#d-tbl tr[data-doc]', el => openInv(el.dataset.doc));
+act('#d-back', () => DR && DR.backTo && openCust(DR.backTo));
+act('[data-go]', el => showTab && showTab(el.dataset.go));
+$('d-x').onclick = closeDrawer; $('scrim').onclick = closeDrawer;
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && DR) closeDrawer(); });
+$('q-d').addEventListener('input', () => DR && drawRows());
+$('l-view').querySelectorAll('button').forEach(b => b.onclick = () => lView(b.dataset.v));
+
+let cur = 't-yfir', showTab = null;
+function render() {
+  const P = period(); perNote(P);
+  if (cur === 't-yfir') yfir(P); else if (cur === 't-vm') vm(P); else if (cur === 't-vor') vor(P);
+}
+themeToggle($('mode'), () => { Object.keys(CH).forEach(k => { CH[k].destroy(); delete CH[k]; }); render(); });
+perInit(); leki(); adg(); uppInit(); lView('adg'); openS.add({{js.open_stream}});
+showTab = tabs(document.querySelector('.tabs'), id => { cur = id || 't-yfir'; $('per').hidden = cur === 't-leki'; requestAnimationFrame(render); });
+
+</script>

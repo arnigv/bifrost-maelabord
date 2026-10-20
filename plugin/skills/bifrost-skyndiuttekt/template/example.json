@@ -1,0 +1,177 @@
+{
+ "meta": {
+  "company": "DT Vélsmiðjan ehf.",
+  "company_acc": "DT Vélsmiðjuna ehf.",
+  "initials": "DT",
+  "as_of": "17.10.2026",
+  "source_dates": "16.–17.10.2026"
+ },
+ "hero": {
+  "title": "Góð afkoma,",
+  "sub": "en sjóðurinn er í hættu",
+  "text": "EBITDA stefnir í 441,5 m árið 2026, meira en tvöfalt 2025. En 90% krafna eru gjaldfallnar og sjóður gæti farið undir núll í þessari viku ef óbókaðar greiðslur hafa farið út.",
+  "figures": [
+   [
+    "441,5 m",
+    "EBITDA 2026, spá"
+   ],
+   [
+    "447,4 m",
+    "gjaldfallnar kröfur"
+   ],
+   [
+    "−18,1 m",
+    "lágpunktur sjóðs"
+   ],
+   [
+    "15,2 m",
+    "sækjanlegt strax (tekjur)"
+   ]
+  ]
+ },
+ "top": [
+  {
+   "sev": "h",
+   "title": "Innheimta hjá þremur stærstu skuldurum",
+   "text": "365,0 m gjaldfallið. Lyftir lágpunkti sjóðs um 308,6 m.",
+   "src": "Sjóðstreymi"
+  },
+  {
+   "sev": "h",
+   "title": "Staðfesta óbókaðar greiðslur sep–okt",
+   "text": "Laun, staðgreiðsla, VSK og afborganir, 123,5 m, ekki í bankabók. Sjóður líklega ofmetinn.",
+   "src": "Sjóðstreymi · Mánaðarlok"
+  },
+  {
+   "sev": "h",
+   "title": "Kanna tvífærðan áfanga V-2601",
+   "text": "SR00089 og SR00110, hvor 50,0 m án VSK, sama dag. Reikningsfært 41,0 m umfram framvindu.",
+   "src": "Mánaðarlok"
+  },
+  {
+   "sev": "m",
+   "title": "Loka ársuppgjöri 2025 í BC",
+   "text": "168,1 m hagnaður 2025 ekki færður á eigið fé.",
+   "src": "Mánaðarlok"
+  },
+  {
+   "sev": "m",
+   "title": "Reikningsfæra óreikningsfærða vinnu",
+   "text": "15,2 m sækjanlegt strax: tímaverk, akstur á 0 kr., tímar umfram fast gjald.",
+   "src": "Tekjur"
+  }
+ ],
+ "cards": [
+  {
+   "title": "Stjórn",
+   "tabs": "Yfirsýn · Rekstur · Efnahagur og sjóðstreymi · Áhættur",
+   "label": "EBITDA jan–ágú",
+   "value": "271,5 m",
+   "note": "21% af tekjum · +20% tekjur",
+   "href": "stjorn.html",
+   "color": "--s1",
+   "status": "up"
+  },
+  {
+   "title": "Sjóðstreymi og bankar",
+   "tabs": "Staða í bönkum · 13 vikna spá · Innheimta",
+   "label": "Lágpunktur sjóðs",
+   "value": "−18,1 m",
+   "note": "vika 43 · 19.–25.10.",
+   "href": "sjodstreymi.html",
+   "color": "--s3",
+   "status": "dn"
+  },
+  {
+   "title": "Tekjur",
+   "tabs": "Yfirsýn · Viðskiptavinir · Vörur og þjónusta · Tekjuleki",
+   "label": "Tekjur jan–ágú",
+   "value": "1.295,6 m",
+   "note": "+20% frá fyrra ári · 15,2 m sækjanlegt strax",
+   "href": "tekjur.html",
+   "color": "--s2",
+   "status": "warn"
+  },
+  {
+   "title": "Kostnaður",
+   "tabs": "Samþykkt reikninga · Birgjar og kostnaðarliðir",
+   "label": "Bíður samþykkis",
+   "value": "111,3 m",
+   "note": "27 reikningar, 6 gjaldfallnir",
+   "href": "kostnadur.html",
+   "color": "--s4",
+   "status": "warn"
+  },
+  {
+   "title": "Mánaðarlok og afstemmingar",
+   "tabs": "Lokun mánaðar · Afstemmingar · Opin atriði",
+   "label": "September lokið",
+   "value": "1 af 7",
+   "note": "16 opin atriði, 8 brýn",
+   "href": "manadarlok.html",
+   "color": "--s5",
+   "status": "dn"
+  },
+  {
+   "title": "Framlegð og verk",
+   "tabs": "Yfirsýn · Verk · Vörur og ABC · Herming",
+   "label": "Framlegð jan–ágú",
+   "value": "62,2%",
+   "note": "V-2601 reikningsfært 41,0 m umfram framvindu",
+   "href": "framlegd.html",
+   "color": "--s2",
+   "status": "warn"
+  },
+  {
+   "title": "Spágerð",
+   "tabs": "Spá · Forsendur · Raun vs spá · Rekstrarhermir",
+   "label": "EBITDA 2026 (P50)",
+   "value": "441,5 m",
+   "note": "bil 337–546 m",
+   "href": "spagerd.html",
+   "color": "--s1",
+   "status": "up"
+  },
+  {
+   "title": "Endurskoðun og ársreikningur",
+   "tabs": "Stærðarflokkur · Ársreikningur · Undirbúningur · Færsluprófanir",
+   "label": "Stærðarflokkur",
+   "value": "Meðalstórt",
+   "note": "endurskoðun skyld · skil 31.08.2027",
+   "href": "endurskodun.html",
+   "color": "--s7",
+   "status": "info",
+   "pill": "upplýsingar"
+  },
+  {
+   "title": "Sjálfvirknivæðing",
+   "tabs": "Yfirlit · Erindrekar · Handverk · Dagatal",
+   "label": "Erindrekar og handverk á áætlun",
+   "value": "11 af 32",
+   "note": "keyrsla óvirk þar til virkjað með ráðgjafa",
+   "href": "https://claude.ai/artifact/Fnzn8TbfB4uEXxbjLeHPoK",
+   "color": "--s6",
+   "status": "info"
+  }
+ ],
+ "recommended": [
+  {
+   "id": "verktakar",
+   "reasons": [
+    "15 verk og 51 verkbókarfærslur"
+   ]
+  },
+  {
+   "id": "samstaeda",
+   "reasons": [
+    "4 félög í sama tenant, 2 tengd"
+   ]
+  },
+  {
+   "id": "serfraedi",
+   "reasons": [
+    "6 forðar bókaðir á verk"
+   ]
+  }
+ ]
+}

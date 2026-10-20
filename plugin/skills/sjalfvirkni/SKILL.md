@@ -1,13 +1,13 @@
 ---
 name: sjalfvirkni
-description: Mælaborðið „Sjálfvirknivæðing“ — yfirlit erindreka (vöktun bókhalds: mánaðarlok, afstemmingar, færsluvakt, innheimta, samþykkt reikninga, reikningsfærsla, sjóðstaða, stjórnarpakki, ársuppgjör) og handverks bókara eftir ferli (innkaup til greiðslu, sala til innheimtu, banki og fjármagn, mánaðarlok, laun og opinber skil, grunnskrár), með vali á því hvenær hvert verk keyrir (daglega, vikulega, X. virka dag, VSK-tímabil, við atburð í BC), dagatali, biðröð og sögu. Keyrsla er læst þar til aðgerðin hefur verið virkjuð með ráðgjafa. Notaðu þegar beðið er um sjálfvirknivæðingu, erindreka, sjálfvirkar keyrslur, „hvað má sjálfvirknivæða í bókhaldinu“, áætlaðar afstemmingar eða vöktun bókhalds.
+description: "Mælaborðið „Sjálfvirknivæðing“ í Bifröst-mælaborðum: erindrekar og handverk bókara með áætlun, dagatali og sögu; keyrsla læst þar til virkjað með ráðgjafa. Notaðu AÐEINS innan Bifröst-mælaborða: þegar notandinn biður um Bifröst-mælaborð eða þetta mælaborð með nafni, eða breytir mælaborði sem pluginið bjó til. Ekki fyrir almennar spurningar um rekstur eða Business Central, aðrar skýrslur, skjöl eða artifacts."
 ---
 
 # Sjálfvirknivæðing
 
 Svarar: **Hvaða endurtekin verk í bókhaldinu má fela erindrekum, hvenær eiga þeir að keyra, og hvað fundu þeir síðast?**
 
-Fylgdu `bifrost-maelabord` (útlit). Aðeins lesið úr BC. Notaðu orðið **erindreki** (ft. erindrekar), aldrei „agent“.
+Fylgdu `bifrost-maelabord` (útlit). Endurgerðu eða endurbirtu þessa síðu **aðeins** þegar beðið er um breytingu á henni; hún geymir stillingar notandans (lestu alltaf nýjustu útgáfu og haltu STATE). Aðeins lesið úr BC. Notaðu orðið **erindreki** (ft. erindrekar), aldrei „agent“.
 
 ## 1. Öryggisreglur (óbreytanlegar)
 

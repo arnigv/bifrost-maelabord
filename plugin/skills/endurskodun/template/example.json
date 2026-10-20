@@ -1,0 +1,406 @@
+{
+ "py": {
+  "tekjur": 1620000000.0,
+  "vorunotkun": 695000000.0,
+  "laun": 621600000.0,
+  "husnaedi": 37700000.0,
+  "annar_rekstur": 77200000.0,
+  "afskriftir": 12000000.0,
+  "fjarmagn": 10700000.0,
+  "ebitda": 188500000.0,
+  "hagnadur": 165800000.0
+ },
+ "cy": {
+  "tekjur": 1295600000.0,
+  "vorunotkun": 490347000.0,
+  "laun": 437561005.0,
+  "husnaedi": 25394800.0,
+  "annar_rekstur": 70783620.0,
+  "afskriftir": 8009528.0,
+  "fjarmagn": 5666293.0,
+  "ebitda": 271513575.0,
+  "hagnadur": 257837754.0
+ },
+ "bs_jan": {
+  "fastafjarmunir": 212484517.0,
+  "krofur": 1488000.0,
+  "handbaert_fe": 407303503.0,
+  "eignir": 621276020.0,
+  "eigid_fe": 313777719.0,
+  "langtimaskuldir": 133750000.0,
+  "skammtimaskuldir": 173748301.0
+ },
+ "bs_aug": {
+  "fastafjarmunir": 205476180.0,
+  "krofur": 457848800.0,
+  "handbaert_fe": 167088388.0,
+  "eignir": 830413368.0,
+  "eigid_fe": 511461206.0,
+  "langtimaskuldir": 125000000.0,
+  "skammtimaskuldir": 193952162.0
+ },
+ "cf": [
+  [
+   "Hagnaður tímabils",
+   247683487.0,
+   "rekstur"
+  ],
+  [
+   "Afskriftir",
+   7008337,
+   "rekstur"
+  ],
+  [
+   "Hækkun viðskiptakrafna",
+   -456360800.0,
+   "rekstur"
+  ],
+  [
+   "Breyting skammtímaskulda",
+   20203861.0,
+   "rekstur"
+  ],
+  [
+   "Fjárfesting",
+   0.0,
+   "fjarfesting"
+  ],
+  [
+   "Afborganir lána",
+   -8750000.0,
+   "fjarmognun"
+  ],
+  [
+   "Greiddur arður",
+   -50000000.0,
+   "fjarmognun"
+  ]
+ ],
+ "cash": [
+  407303503.0,
+  167088388.0
+ ],
+ "size": {
+  "flokkur": "medalstort",
+  "flokkur_heiti": "Meðalstórt félag",
+  "fyrra_ar": "medalstort",
+  "stadfest_tvo_ar": true,
+  "fte_vantar": true,
+  "vidmid": [
+   {
+    "heiti": "Heildareignir",
+    "gildi": 830400000.0,
+    "mork_litid": 600000000,
+    "mork_medal": 3000000000
+   },
+   {
+    "heiti": "Hrein velta",
+    "gildi": 1950000000.0,
+    "mork_litid": 1200000000,
+    "mork_medal": 6000000000
+   },
+   {
+    "heiti": "Ársverk",
+    "gildi": null,
+    "mork_litid": 50,
+    "mork_medal": 250
+   }
+  ],
+  "endurskodun": "skyld",
+  "endurskodun_stada": "staðfesta",
+  "sjodstreymi_skylt": true,
+  "skilafrestur": "2027-08-31",
+  "sekt_kr": 600000,
+  "slitakrafa_fra": "2028-02-29",
+  "fyrirvari": "Frumvörp á 158. löggjafarþingi (þskj. 25 og 77, sept. 2026) um breytingar á stærðarmörkum, endurskoðunarmörkum og skilafresti. Ef þau verða að lögum breytast mörkin hér að neðan.",
+  "heimild": "https://www.althingi.is/lagas/nuna/2006003.html"
+ },
+ "size_vals": {
+  "eignir": 830400000.0,
+  "velta": 1979000000.0,
+  "velta_py": 1620000000.0,
+  "eignir_py": 621300000.0
+ },
+ "mat": {
+  "rev": [
+   8100000.0,
+   16200000.0
+  ],
+  "pbt": [
+   8290000.0,
+   16580000.0
+  ],
+  "assets": [
+   8304000.0,
+   16608000.0
+  ],
+  "valið": 12000000.0
+ },
+ "vsk": {
+  "utskattur": 312910560,
+  "innskattur": 133524940,
+  "uppgjor": 122582188
+ },
+ "closed_gap": 168123452.0,
+ "meta": {
+  "company": "DT Vélsmiðjan ehf.",
+  "short": "DT",
+  "logo": "DT",
+  "year": 2026,
+  "py": 2025,
+  "as_of": "17.10.2026",
+  "fetched": "16.–17.10.2026",
+  "cf_start": "1.2.",
+  "bs_end": "31.8.2026"
+ },
+ "text": {
+  "law_note": "Á 158. löggjafarþingi liggja fyrir frumvörp (þskj. 25 og 77) um breytingar á stærðarmörkum, endurskoðunarmörkum og skilafresti. Mörkin hér miðast við gildandi lög 17.10.2026.",
+  "size_class": "Meðalstórt",
+  "size_class_lc": "meðalstórt félag",
+  "ars_note": "Drög, óendurskoðað. 2026 sýnir 1.1.–31.8. (síðasti fullbókaði mánuður). 2025 er heilt ár. Efnahagur 2025 er staða 31.1.2026 þar sem ársuppgjör 2025 er ekki lokað í BC.",
+  "filing_note": "Skil eru eingöngu rafræn til ársreikningaskrár Skattsins. Ársreikningur 2025 átti að berast eigi síðar en 31.08.2026. Staðfestu að honum hafi verið skilað, því ársuppgjör 2025 er ekki lokað í BC.",
+  "footer_note": "Mörk 98. gr. (200 m eignir, 400 m velta, 50 ársverk) þarf að staðfesta. Ársverk vantar í BC."
+ },
+ "html": {
+  "size_text": "Fer yfir mörk lítils félags í heildareignum og veltu, bæði 2025 og 2026. Því er <b>endurskoðun skyld</b> og <b>sjóðstreymisyfirlit skylt</b> (28. gr.)."
+ },
+ "js": {
+  "agm": "maí 2027",
+  "audit": "Skyld",
+  "bs_end": "31.8.2026",
+  "bs_start": "31.1.2026",
+  "cashflow": "Skylt",
+  "cf_end": "31.8.",
+  "cf_note_tail": "Fjárfesting engin.",
+  "cf_start": "1.2.",
+  "cy_days": 243,
+  "cy_label": "2026 jan–ágú",
+  "days_to_deadline": 318,
+  "deadline": "31.08.2027",
+  "dissolution": "28.02.2028",
+  "first_je_amt": "87 f.",
+  "fy_end": "31.12.2026",
+  "je_js": [
+   [
+    "h",
+    "Handfærðar tekjur",
+    87,
+    "Tekjur á 1110 bókaðar með dagbók (upprunakóði FHFBOK, „SALA-25xx/26xx“) í mánaðarlegum heildarfærslum, ekki úr sölureikningum.",
+    "Fá sundurliðun sölu að baki hverri færslu og stemma við reikninga."
+   ],
+   [
+    "h",
+    "Ójöfnuður innan mánaðar",
+    2,
+    "Debet og kredit stemma ekki innan janúar og október (±2,4 m).",
+    "Finna fylgiskjalið og leiðrétta."
+   ],
+   [
+    "m",
+    "Sléttar fjárhæðir",
+    4,
+    "Reikningar SR00089 og SR00110, hvor 62.000.000 kr. með VSK, sunnudaginn 23.08.2026, sami áfangi V-2601. Laun greidd í sléttum heildarfjárhæðum (LAUNGR).",
+    "Sannreyna samninga og afhendingu að baki."
+   ],
+   [
+    "m",
+    "Yfir framkvæmdamikilvægi",
+    121,
+    "Færslur ≥ 20 m: opnunarstöður, mánaðarleg „Innheimt sala“, launagreiðslur og innkaup 2010.",
+    "Úrtak til skoðunar."
+   ],
+   [
+    "l",
+    "Helgarfærslur",
+    2,
+    "SR00089 og SR00110 eru dagsettir sunnudaginn 23.08.2026.",
+    "Kanna af hverju bókað á sunnudegi."
+   ],
+   [
+    "l",
+    "Sjaldgæfir notendur",
+    1,
+    "Einn notandi (hlutverk: bókari) bókar nær allar handfærslur.",
+    "Aðgreining starfa: annar aðili samþykki dagbækur."
+   ]
+  ],
+  "kpi1_d": "framkvæmda 9,0 m · smávægilegt 0,6 m",
+  "kpi2_d": "hagnaður 2025 ekki færður á eigið fé",
+  "kpi2_l": "Ólokað ársuppgjör 2025",
+  "kpi3_d": "dagbók í stað sölureikninga",
+  "kpi3_l": "Handfærðar tekjufærslur",
+  "kpi3_v": "87",
+  "kpi4_d": "sep–okt, sjóður ofmetinn",
+  "kpi4_l": "Óbókaðar greiðslur",
+  "kpi4_v": "123,5<small>m</small>",
+  "notes_js": [
+   [
+    "Reikningsskilaaðferðir",
+    "já",
+    "Úr uppsetningu BC og fyrri ársreikningi"
+   ],
+   [
+    "Fastafjármunir og afskriftir",
+    "að hluta",
+    "Afskriftir vantar fyrir sep–okt"
+   ],
+   [
+    "Viðskiptakröfur og niðurfærsla",
+    "að hluta",
+    "Aldursgreining til, mat vantar"
+   ],
+   [
+    "Birgðir",
+    "nei",
+    "Enginn birgðalykill"
+   ],
+   [
+    "Langtímaskuldir eftir gjalddögum",
+    "já",
+    "Lánaskilmálar 9110"
+   ],
+   [
+    "Eigið fé og arður",
+    "að hluta",
+    "Ársuppgjör 2025 ólokað"
+   ],
+   [
+    "Tengdir aðilar",
+    "að hluta",
+    "Eyjavör, Hríseyjarhús"
+   ],
+   [
+    "Meðalfjöldi starfa",
+    "nei",
+    "Ársverk ekki skráð í BC"
+   ],
+   [
+    "Laun stjórnenda og stjórnar",
+    "nei",
+    "Utan BC"
+   ],
+   [
+    "Þóknun endurskoðanda",
+    "já",
+    "Lykill 3610"
+   ],
+   [
+    "Atburðir eftir reikningsskiladag",
+    "nei",
+    "Stjórnendur"
+   ],
+   [
+    "Rekstrarhæfi",
+    "að hluta",
+    "Sjóðstaða lækkaði um 336,9 m frá maí"
+   ]
+  ],
+  "pbc_js": [
+   [
+    "vantar",
+    "Ógreiddar greiðslur sep–okt ekki bókaðar",
+    "Laun september, staðgreiðsla 15.09. og 15.10., VSK júl–ágú (gjalddagi 05.10.) og afborganir lána eru ekki bókaðar. Bókað handbært fé er því líklega ofmetið.",
+    "123,5 m"
+   ],
+   [
+    "vantar",
+    "Áfangi V-2601 reikningsfærður tvisvar?",
+    "SR00089 og SR00110, hvor 50,0 m án VSK (62,0 m með VSK), sama dag 23.08. Allur samningurinn (148,0 m) reikningsfærður á 72% framvindu.",
+    "41,0 m"
+   ],
+   [
+    "vantar",
+    "Ársuppgjör 2025 ekki lokað",
+    "Hagnaður 2025 hefur ekki verið færður á óráðstafað eigið fé. Bókað eigið fé er 135,5 m en ætti að vera um 301 m.",
+    "168,1 m"
+   ],
+   [
+    "vantar",
+    "Niðurfærsla viðskiptakrafna",
+    "90% krafna eru gjaldfallnar. Mat á vafasömum kröfum vantar.",
+    "498,4 m"
+   ],
+   [
+    "vantar",
+    "Birgðir",
+    "16 vörur í kerfinu en enginn birgðalykill í efnahag. Talning og verðmat vantar.",
+    "–"
+   ],
+   [
+    "vantar",
+    "Skurður (cut-off) september",
+    "Laun og vörunotkun ekki bókuð fyrir september. Tímabil ekki lokað.",
+    "sep"
+   ],
+   [
+    "vantar",
+    "Ójöfnuður innan mánaða",
+    "Fjárhagur í ójafnvægi innan janúar (+2,4 m) og október (−2,4 m).",
+    "2,4 m"
+   ],
+   [
+    "vinnslu",
+    "Viðskiptamenn: undirbók á móti fjárhag",
+    "Fjárhagur er 3,8 m hærri en undirbók viðskiptamanna.",
+    "3,8 m"
+   ],
+   [
+    "vinnslu",
+    "Lánardrottnar og ósamþykktir reikningar",
+    "27 reikningar bíða samþykkis, 6 þeirra komnir fram yfir gjalddaga.",
+    "111,3 m"
+   ],
+   [
+    "vinnslu",
+    "Fastafjármunir og afskriftir",
+    "Afskriftir bókaðar jan–ágú en ekki sep–okt.",
+    "2,0 m"
+   ],
+   [
+    "vinnslu",
+    "VSK-uppgjör",
+    "Uppgjörsreikningur VSK stendur í 122,6 m debet. Stemma við skilagreinar.",
+    "56,8 m"
+   ],
+   [
+    "vinnslu",
+    "Tengdir aðilar",
+    "Umsýslugjald frá Eyjavör 2,4 m á mánuði og kröfur á tengda aðila 5,1 m. Skrá og fjárhæðir.",
+    "5,1 m"
+   ],
+   [
+    "vinnslu",
+    "Eigið fé og arður",
+    "Arður 50,0 m greiddur í apríl. Staðfesta samþykkt aðalfundar.",
+    "50,0 m"
+   ],
+   [
+    "vinnslu",
+    "Bankaafstemmingar",
+    "Allir 6 bankareikningar afstemmdir til 31.08.2026 og stemma við fjárhag. Afstemming sep–okt vantar.",
+    "6/6"
+   ],
+   [
+    "lokid",
+    "Laun á móti staðgreiðslu",
+    "Staðgreiðsla, tryggingagjald og lífeyrir bókuð mánaðarlega á skuldalykla.",
+    "✓"
+   ],
+   [
+    "lokid",
+    "Langtímalán",
+    "Afborganir 1,25 m á mánuði stemma við lánaskilmála.",
+    "125,0 m"
+   ],
+   [
+    "lokid",
+    "Fastafjármunir: staða",
+    "Engar fjárfestingar eða sölur á árinu. Stofnverð óbreytt.",
+    "205,5 m"
+   ]
+  ],
+  "py": 2025,
+  "ring_note": "Öll atriði sem vantar eru leysanleg í BC fyrir áramót.",
+  "year": 2026
+ }
+}

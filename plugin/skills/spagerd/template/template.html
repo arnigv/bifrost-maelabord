@@ -1,0 +1,479 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{meta.short}} spágerð og hermir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&subset=latin,latin-ext&display=swap">
+<style>
+{{THEME_CSS}}
+
+.warnbar{border-color:var(--warn-soft)} .warnbar .spark{background:var(--warn);color:#17150f}
+.insight a,.lnk{color:var(--brand);font-weight:600}
+.tag{font-size:.64rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:var(--brand-soft);color:var(--brand);white-space:nowrap}
+.legend i.dash{width:16px;height:0;border-top:2px dashed;border-radius:0;vertical-align:3px;background:none}
+.legend i.tick{width:3px;height:12px;border-radius:1px}
+.rng-wrap{display:grid;gap:4px;padding-top:6px}
+.rt{position:relative;height:18px;background:var(--panel2);border-radius:999px}
+.rt.small{height:12px;margin-top:4px}
+.rb{position:absolute;top:0;bottom:0;border-radius:999px;background:var(--teal-2);opacity:.6}
+.rb.s1{background:var(--s1);opacity:1}
+.tk{position:absolute;top:-5px;bottom:-5px;width:3px;margin-left:-1.5px;background:var(--ink2);border-radius:2px}
+.tk.sel{background:var(--gold);width:4px;margin-left:-2px;top:-7px;bottom:-7px;box-shadow:0 0 0 3px var(--brand-soft)}
+.tk.zero{background:var(--muted);width:1px;margin-left:0}
+.lf{position:relative;height:16px;font-size:.7rem;color:var(--muted);font-family:var(--f-mono)}
+.lf span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.lf span:first-child{transform:none} .lf span:last-child{transform:translateX(-100%)}
+.slegend span{display:flex;align-items:center}
+.mini{gap:12px}
+.mk{display:grid;gap:4px;padding:12px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);min-width:0;justify-items:start}
+.mk b{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;white-space:nowrap}
+td.mut,.mut{color:var(--muted)} td.nw{white-space:nowrap}
+#as-tbl td{vertical-align:top} #as-tbl td:last-child{min-width:16rem;font-size:.8rem}
+#as-tbl a{color:var(--brand)}
+.simbar{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+.presets button[aria-pressed="true"]{background:var(--brand);color:#17150f;border-color:var(--brand)}
+.sim{display:grid;grid-template-columns:minmax(0,330px) minmax(0,1fr);gap:18px;align-items:start}
+.simr{display:grid;gap:18px;min-width:0}
+.ctrl{gap:14px;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow-y:auto}
+.grp{display:grid;gap:12px;padding-top:12px;border-top:1px solid var(--line)}
+.grp h3{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.sl .top{gap:8px;flex-wrap:nowrap}
+.sl label{min-width:0}
+.reset{font:inherit;font-size:.8rem;font-weight:600;border:1px solid var(--line);background:var(--panel2);color:var(--ink2);border-radius:10px;padding:7px 11px;cursor:pointer}
+#sim-kpis .kpi .v{font-size:1.45rem}
+.needbig{font-size:2.6rem;font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--warn)}
+.needbig small{font-size:1rem;margin-left:4px}
+.hb .r{grid-template-columns:minmax(0,9.5rem) minmax(0,1fr) auto}
+@media (max-width:1000px){.sim{grid-template-columns:minmax(0,1fr)}.ctrl{position:static;max-height:none;overflow:visible}}
+@media (max-width:480px){.wrap{padding-inline:16px}h1{font-size:1.4rem}.hb .r{grid-template-columns:minmax(0,6.5rem) minmax(0,1fr) auto;gap:8px}.hero .row{gap:14px}.mini.g2{grid-template-columns:minmax(0,1fr)}}
+
+</style>
+<div class="wrap">
+  <header class="top">
+    <div class="brandmark">
+      <div class="logo" aria-hidden="true">{{meta.logo}}</div>
+      <div style="min-width:0"><span class="eyebrow">Spágerð og rekstrarhermir · {{meta.year}} og næstu 12 mánuðir</span><h1>{{meta.company}}</h1></div>
+    </div>
+    <div class="chips"><div id="mode"></div><span class="chip-lg m-hide"><span class="dot"></span>Tengt BC · Bifröst</span><span class="chip-lg">Staða <b>{{meta.as_of}}</b></span><span class="chip-lg">m.kr.</span></div>
+  </header>
+
+  <div class="insight warnbar"><span class="spark" aria-hidden="true">!</span><p><b>Spá, ekki raun.</b> {{text.warn}}, sjá <a href="#t-fors" class="lnk" data-go="t-fors">Forsendur</a>.</p></div>
+
+  <div class="tabs" role="tablist" aria-label="Flipar">
+    <button role="tab" aria-controls="t-spa">Spá</button>
+    <button role="tab" aria-controls="t-fors">Forsendur</button>
+    <button role="tab" aria-controls="t-sim">Rekstrarhermir</button>
+  </div>
+
+  <!-- SPÁ -->
+  <section class="tab" id="t-spa" role="tabpanel">
+    <div class="g-hero">
+      <section class="card hero">
+        <span class="eyebrow">Áætluð EBITDA {{meta.year}} · P50 · spá</span>
+        <div class="big" id="h-big">–<small>m.kr.</small></div>
+        <p id="h-txt"></p>
+        <div class="row" id="h-row"></div>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Óvissubil ársins</h2><span class="sub">EBITDA {{meta.year}}, m.kr.</span></div>
+        <div class="rng-wrap">
+          <div class="rt" id="rng"></div>
+          <div class="lf" id="rng-ax"></div>
+        </div>
+        <div class="legend"><span><i style="background:var(--teal-2);opacity:.6"></i>P10–P90</span><span><i class="tick" style="background:var(--gold)"></i>P50</span><span><i class="tick" style="background:var(--s6)"></i>{{meta.py}}</span></div>
+        <div class="stack" id="yr-stack" aria-label="Skipting EBITDA {{meta.year}} í raun og spá"></div>
+        <div class="slegend" id="yr-leg"></div>
+      </section>
+    </div>
+    <div class="insight"><span class="spark" aria-hidden="true">→</span><p id="spa-sentence"></p></div>
+    <section class="g4" id="spa-kpis"></section>
+    <section class="card">
+      <div class="ch"><h2>Mánaðarleg þróun: raun → spá</h2>
+        <div class="seg" role="group" aria-label="Mælikvarði" id="spa-seg"><button data-k="ebitda" aria-pressed="true">EBITDA</button><button data-k="tekjur" aria-pressed="false">Tekjur</button></div></div>
+      <div class="cv" style="height:320px"><canvas id="c-spa" role="img" aria-label="Raun og spá eftir mánuðum með óvissubili og {{meta.py}} til samanburðar"></canvas></div>
+      <div class="legend"><span><i style="background:var(--s1)"></i>Raun {{meta.year}}</span><span><i class="dash" style="border-color:var(--s1)"></i>Spá (P50)</span><span><i style="background:var(--gold-3);opacity:.5"></i>P10–P90</span><span><i class="dash" style="border-color:var(--s6)"></i>{{meta.py}}, meðaltal á mánuði</span><span><i style="background:var(--base);border-radius:50%"></i>Ófullbókað (bókað hingað til)</span></div>
+      <p class="note">{{text.spa_note}}</p>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Spá næstu 12 mánuði</h2><span class="sub">m.kr. · P50 með P10–P90</span></div>
+      <div class="scroll"><table id="spa-tbl"></table></div>
+    </section>
+  </section>
+
+  <!-- FORSENDUR -->
+  <section class="tab" id="t-fors" role="tabpanel" hidden>
+    <section class="card">
+      <div class="ch"><h2>Forsendur spárinnar</h2><span class="sub">sóttar {{meta.fetched}}</span></div>
+      <div class="scroll"><table id="as-tbl"></table></div>
+    </section>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Bakprófun</h2><span class="sub">líkan metið án {{text.bt_months}}, borið saman við raun</span></div>
+        <div class="g2 mini" id="bt-k"></div>
+        <div class="seg" role="group" aria-label="Mælikvarði bakprófunar" id="bt-seg"><button data-k="ebitda" aria-pressed="true">EBITDA</button><button data-k="tekjur" aria-pressed="false">Tekjur</button></div>
+        <div class="cv" style="height:240px"><canvas id="c-bt" role="img" aria-label="Spá á móti raun síðustu þriggja mánaða"></canvas></div>
+        <div class="legend"><span><i style="background:var(--s1)"></i>Raun</span><span><i style="background:var(--s6)"></i>Spá bakprófunar</span></div>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>{{text.why_h}}</h2><span class="sub">{{text.why_sub}}</span></div>
+        <div class="dec" id="why"></div>
+      </section>
+    </div>
+    <section class="card">
+      <div class="ch"><h2>Líkanið</h2><span class="sub">útskýranleg drifþáttaspá</span></div>
+      <div class="g4 mini" id="model-k"></div>
+      <div class="scroll"><table id="model-tbl"></table></div>
+    </section>
+  </section>
+
+  <!-- HERMIR -->
+  <section class="tab" id="t-sim" role="tabpanel" hidden>
+    <div class="insight"><span class="spark" aria-hidden="true">≈</span><p id="sim-sentence"></p></div>
+    <div class="simbar">
+      <div class="presets" role="group" aria-label="Sviðsmyndir" id="presets"></div>
+      <div class="seg" role="group" aria-label="Tímabil" id="hz"><button data-h="12" aria-pressed="true">Næstu 12 mán.</button><button data-h="y" aria-pressed="false">Árið {{meta.year}}</button></div>
+    </div>
+    <div class="sim">
+      <section class="card ctrl" id="ctrl"></section>
+      <div class="simr">
+        <section class="g4" id="sim-kpis"></section>
+        <div class="g2">
+          <section class="card">
+            <div class="ch"><h2>Uppsöfnuð EBITDA</h2><span class="sub" id="cum-sub"></span></div>
+            <div class="cv" style="height:260px"><canvas id="c-cum" role="img" aria-label="Uppsöfnuð EBITDA, grunnur og sviðsmynd"></canvas></div>
+            <div class="legend"><span><i class="dash" style="border-color:var(--base)"></i>Grunnur</span><span><i style="background:var(--scen)"></i>Sviðsmynd</span><span><i style="background:var(--teal-2);opacity:.35"></i>Grunnur P10–P90</span></div>
+          </section>
+          <section class="card">
+            <div class="ch"><h2>Áhrif hverrar forsendu</h2><span class="sub">á hagnað fyrir skatta, m.kr.</span></div>
+            <div id="imp"></div>
+            <p class="note" id="imp-note"></p>
+          </section>
+        </div>
+        <div class="g2">
+          <section class="card need">
+            <div class="ch"><h2>Verðhækkun sem þarf</h2><span class="sub">til að halda EBITDA-hlutfalli grunns</span></div>
+            <div class="needbig" id="need-big">–</div>
+            <p id="need-txt" class="sub"></p>
+            <div class="rt small" id="need-bar"></div>
+            <div class="legend"><span><i style="background:var(--s1)"></i>Stillt verðskrá</span><span><i class="tick" style="background:var(--warn)"></i>Þarf</span></div>
+          </section>
+          <section class="card">
+            <div class="ch"><h2>Laun af tekjum</h2><span class="sub">eftir mánuðum, %</span></div>
+            <div class="cv" style="height:220px"><canvas id="c-wage" role="img" aria-label="Laun sem hlutfall af tekjum, grunnur og sviðsmynd"></canvas></div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div><b>Heimild:</b> Business Central (Bifröst), {{meta.company}}, {{text.footer_src}}</div>
+    <div>Spá, ekki fjárfestingar- eða lánaráðgjöf. Hermirinn sýnir áhrif forsendna sem notandi stillir; þær eru merktar <i>Forsenda</i>. Aðeins lesið úr BC.</div>
+    <div>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</div>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+{{COMPONENTS_JS}}
+const DATA={{DATA_JSON}};
+const { $, fmt, sg, MON, css, alpha, chip, grad } = BF;
+const CH = {};
+const M = v => v / 1e6;
+const m1 = v => fmt(M(v), 1);
+const pct = (v, d = 1) => fmt(v * 100, d) + '%';
+const lab = ym => ym.endsWith('-01') ? MON[0] + ' ' + ym.slice(2, 4) : BF.monLabel(ym);
+const sum = (rows, k) => rows.reduce((s, r) => s + r[k], 0);
+
+/*MODEL*/
+const F = DATA.fit, A = DATA.A, FC = DATA.fc, PY = DATA.py, Y = DATA.year;
+const ACT = DATA.months.filter(m => m.complete), INC = DATA.months.filter(m => !m.complete);
+const MONTHS = FC.map(f => f.ym);
+const DECIDE = {{js.decide_ym}};            /* ákvarðanir (verðskrá, aðföng, stöðugildi, ný gjöld) taka gildi decide_date */
+/* fyrsti kjarasamningur í spátímabilinu; enginn → engin hækkun */
+const KJ0 = (A.kjarasamningar || [])[0] || { fra: '9999-12-31', haekkun: 0 };
+const KJ_FRA = KJ0.fra.slice(0, 7);
+const NY = String(+{{js.year}} + 1), INC_LAST = INC.length ? INC.at(-1).ym : '';
+const r3 = v => Math.round(v * 1000) / 1000;
+const DEF = { pr: 0, vol: 0, fee: 0, adf: 0, pass: r3(A.yfirfaersla_efnis * 100), kj: r3(KJ0.haekkun * 100), drift: 0, fte: 0, cpi: r3(A.verdbolga * 100), fuel: r3(A.eldsneyti_breyting * 100), rate: r3(A.styrivextir * 100) };
+/* Sama líkan og spagerd/forecast.py → project(). Grunnstillingar gefa sömu tölur og dt_fc.json. */
+function sim(p) {
+  let damp = 0;
+  return MONTHS.map((ym, i) => {
+    const h = i + 1; damp += Math.pow(A.demping_leitni, h);
+    const dec = ym >= DECIDE;
+    const rev0 = F.base * Math.pow(1 + F.g, damp) * Math.pow(1 + p.vol / 100, h / 12);
+    const price = 1 + (dec ? p.pr / 100 : 0), matp = 1 + (dec ? p.adf / 100 : 0);
+    const cogs = rev0 * F.mat * matp;
+    const rev = rev0 * price + (dec ? p.fee * 1e6 : 0) + rev0 * F.mat * (matp - 1) * p.pass / 100;
+    const wage = F.fixed.laun * (1 + (ym >= KJ_FRA ? p.kj / 100 : 0)) * (1 + (dec ? p.fte / 100 : 0)) * Math.pow(1 + p.drift / 100, h / 12);
+    const infl = Math.pow(1 + p.cpi / 100, h / 12);
+    const house = F.fixed.husnaedi * infl, other = F.fixed.annar_rekstur * infl * (1 + A.eldsneyti_hlutur * p.fuel / 100);
+    const fin = F.fixed.fjarmagn * (p.rate / 100) / A.styrivextir_grunnur, dep = F.fixed.afskriftir;
+    const eb = rev - cogs - wage - house - other, s = F.sigma * Math.sqrt(h), band = 1.2816 * s * rev * (1 - F.mat);
+    return { ym, tekjur: rev, vorunotkun: cogs, laun: wage, husnaedi: house, annar_rekstur: other, afskriftir: dep, fjarmagn: fin, ebitda: eb, hagnadur_fs: eb - dep - fin, ebitda_p10: eb - band, ebitda_p90: eb + band };
+  });
+}
+/* tímabil: '12' = næstu 12 mán. (h12); 'y' = árið year (raun act_short + spá fc_short) */
+const rowsFor = (p, hz) => hz === 'y' ? ACT.concat(sim(p).filter(r => r.ym < NY)) : sim(p);
+function agg(rows) {
+  const t = {}; ['tekjur', 'vorunotkun', 'laun', 'husnaedi', 'annar_rekstur', 'afskriftir', 'fjarmagn', 'ebitda', 'hagnadur_fs'].forEach(k => t[k] = sum(rows, k));
+  t.margin = t.ebitda / t.tekjur; t.fm = (t.tekjur - t.vorunotkun) / t.tekjur; t.va = (t.tekjur - t.vorunotkun) / t.laun;
+  t.fixed = t.laun + t.husnaedi + t.annar_rekstur + t.afskriftir + t.fjarmagn; t.be = t.fixed / t.fm; t.safety = (t.tekjur - t.be) / t.tekjur;
+  return t;
+}
+function needPrice(p, hz) {
+  const target = agg(rowsFor(DEF, hz)).margin, f = x => agg(rowsFor({ ...p, pr: x }, hz)).margin - target;
+  let lo = -50, hi = 300; if (f(lo) > 0) return lo; if (f(hi) < 0) return null;
+  for (let i = 0; i < 60; i++) { const mid = (lo + hi) / 2; if (f(mid) < 0) lo = mid; else hi = mid; }
+  return (lo + hi) / 2;
+}
+/*END MODEL*/
+
+const tip = () => ({ backgroundColor: css('--panel2'), titleColor: css('--ink'), bodyColor: css('--ink2'), borderColor: css('--line'), borderWidth: 1, padding: 10, displayColors: true, boxPadding: 4 });
+function upsert(key, canvas, cfg) { if (CH[key]) { CH[key].data = cfg.data; CH[key].options = cfg.options; CH[key].update('none'); } else CH[key] = new Chart(canvas, cfg); return CH[key]; }
+function chartDefaults() { Chart.defaults.font.family = css('--f-body'); Chart.defaults.color = css('--muted'); Chart.defaults.font.size = 12; }
+
+/* lykilmælir: gildi, samanburður, flaga og smáferill */
+const kpiCard = (id, label, tag) => `<section class="card kpi" id="${id}"><div class="l"><span>${label}</span>${tag ? `<span class="tag">${tag}</span>` : ''}</div><div class="v">–</div><div class="d"></div><canvas aria-hidden="true"></canvas></section>`;
+function setKpi(id, { v, unit = 'm.kr.', baseTxt, d, good = true, dTxt, s, bs }) {
+  const el = $(id); el.querySelector('.v').innerHTML = v + (unit ? `<small>${unit}</small>` : '');
+  el.querySelector('.d').innerHTML = (baseTxt ? `<span>${baseTxt}</span>` : '') + (d != null ? chip(d, good, dTxt) : '');
+  const c = el.querySelector('canvas'); if (c && s) BF.spark(c, bs, s);
+}
+
+/* ---------------- SPÁ ---------------- */
+const FC26 = FC.filter(f => f.ym < NY);
+const Y26 = { tekjur: Y.ar_tekjur, ebitda: Y.ar_ebitda, p10: Y.raun_ebitda + Y.p10_ebitda, p90: Y.raun_ebitda + Y.p90_ebitda, hagnadur_fs: sum(ACT, 'hagnadur_fs') + sum(FC26, 'hagnadur_fs') };
+Y26.margin = Y26.ebitda / Y26.tekjur;
+const ONE = DATA.oneoffs.reduce((s, o) => s + o.amount, 0);
+const matR = ACT.map(r => r.vorunotkun / r.tekjur), wageR = ACT.map(r => r.laun / r.tekjur);
+
+function spaStatic() {
+  $('h-big').innerHTML = m1(Y26.ebitda) + '<small>m.kr.</small>';
+  $('h-txt').innerHTML = `Bil P10–P90: <b>${m1(Y26.p10)}–${m1(Y26.p90)} m.kr.</b> Raun ${{{js.act_long}}} ${m1(Y.raun_ebitda)} m.kr. og spá ${{{js.fc_long}}} ${m1(Y.spa_ebitda)} m.kr. Á móti ${m1(PY.ebitda)} m.kr. EBITDA ${{{js.py}}}.`;
+  $('h-row').innerHTML = [[('Tekjur ' + {{js.year}}), m1(Y26.tekjur)], ['EBITDA-hlutfall', pct(Y26.margin)], ['Hagnaður f. skatta', m1(Y26.hagnadur_fs)], [('EBITDA á móti ' + {{js.py}}), sg((Y26.ebitda / PY.ebitda - 1) * 100, 0) + '%']].map(([l, v]) => `<div><b>${v}</b><span>${l}</span></div>`).join('');
+  /* óvissubil á kvarða */
+  const mx = Math.max(100, Math.ceil(Y26.p90 / 1e8) * 100), X = v => Math.max(0, Math.min(100, M(v) / mx * 100));
+  $('rng').innerHTML = `<span class="rb" style="left:${X(Y26.p10)}%;width:${X(Y26.p90) - X(Y26.p10)}%"></span><i class="tk" style="left:${X(PY.ebitda)}%;background:var(--s6)" title="${{{js.py}}}: ${m1(PY.ebitda)}"></i><i class="tk sel" style="left:${X(Y26.ebitda)}%" title="P50: ${m1(Y26.ebitda)}"></i>`;
+  $('rng-ax').innerHTML = [0, .25, .5, .75, 1].map(f => `<span style="left:${f * 100}%">${fmt(mx * f, 0)}</span>`).join('');
+  const tot = Y26.ebitda;
+  $('yr-stack').innerHTML = `<span style="width:${Y.raun_ebitda / tot * 100}%;background:var(--s1)"></span><span style="width:${Y.spa_ebitda / tot * 100}%;background:var(--gold-3);opacity:.7"></span>`;
+  $('yr-leg').innerHTML = `<div><span><i style="background:var(--s1)"></i>Raun ${{{js.act_short}}}</span><b>${m1(Y.raun_ebitda)}</b></div><div><span><i style="background:var(--gold-3)"></i>Spá ${{{js.fc_short}}}</span><b>${m1(Y.spa_ebitda)}</b></div><div><span><i style="background:var(--warn)"></i>Þar af einskipti í raun</span><b>${m1(ONE)}</b></div>`;
+  const per1pp = M(Y.spa_tekjur) * .01;
+  $('spa-sentence').innerHTML = `<b>Árið ${{{js.year}}} stefnir í ${m1(Y26.ebitda)} m.kr. EBITDA</b> (bil ${m1(Y26.p10)}–${m1(Y26.p90)} m.kr.) og ${m1(Y26.tekjur)} m.kr. tekjur. Stærsti óvissuþátturinn er framlegðin: efnishlutfall hefur verið ${pct(Math.min(...matR))}–${pct(Math.max(...matR))} og laun ${pct(Math.min(...wageR))}–${pct(Math.max(...wageR))} af tekjum eftir mánuðum. Hvert prósentustig í efnishlutfalli ${{{js.fc_short}}} jafngildir um ${fmt(per1pp, 1)} m.kr. í EBITDA.`;
+  /* tafla */
+  const t = sum(FC, 'tekjur'), e = sum(FC, 'ebitda');
+  $('spa-tbl').innerHTML = `<thead><tr><th>Mánuður</th><th class="n">Tekjur</th><th class="n">P10–P90</th><th class="n">EBITDA</th><th class="n">P10–P90</th><th class="n">EBITDA %</th><th class="n">Hagnaður f. sk.</th></tr></thead><tbody>` +
+    FC.map(f => `<tr><td>${lab(f.ym)} ${f.ym.slice(0, 4)}${INC_LAST && f.ym <= INC_LAST ? ' <span class="pill i">ófullbókað</span>' : ''}</td><td class="n">${m1(f.tekjur)}</td><td class="n mut">${m1(f.tekjur_p10)}–${m1(f.tekjur_p90)}</td><td class="n">${m1(f.ebitda)}</td><td class="n mut">${m1(f.ebitda_p10)}–${m1(f.ebitda_p90)}</td><td class="n">${pct(f.ebitda / f.tekjur)}</td><td class="n">${m1(f.hagnadur_fs)}</td></tr>`).join('') +
+    `<tr class="sum"><td>12 mánuðir</td><td class="n">${m1(t)}</td><td class="n"></td><td class="n">${m1(e)}</td><td class="n"></td><td class="n">${pct(e / t)}</td><td class="n">${m1(sum(FC, 'hagnadur_fs'))}</td></tr></tbody>`;
+}
+function spaKpis() {
+  const yr = ACT.concat(FC26);
+  setKpi('k-rev', { v: m1(Y26.tekjur), baseTxt: `${{{js.py}}}: ${m1(PY.tekjur)}`, d: Y26.tekjur / PY.tekjur - 1, dTxt: sg((Y26.tekjur / PY.tekjur - 1) * 100) + '%', s: yr.map(r => r.tekjur), bs: yr.map(() => PY.tekjur / 12) });
+  const pm = PY.ebitda / PY.tekjur;
+  setKpi('k-mar', { v: fmt(Y26.margin * 100), unit: '%', baseTxt: `${{{js.py}}}: ${pct(pm)}`, d: Y26.margin - pm, dTxt: sg((Y26.margin - pm) * 100) + ' pp', s: yr.map(r => r.ebitda / r.tekjur), bs: yr.map(() => pm) });
+  setKpi('k-np', { v: m1(Y26.hagnadur_fs), baseTxt: `${{{js.py}}}: ${m1(PY.hagnadur_fs)}`, d: Y26.hagnadur_fs / PY.hagnadur_fs - 1, dTxt: sg((Y26.hagnadur_fs / PY.hagnadur_fs - 1) * 100, 0) + '%', s: yr.map(r => r.hagnadur_fs), bs: yr.map(() => PY.hagnadur_fs / 12) });
+  let c = 0; const cum = yr.map(r => c += r.ebitda), cpy = yr.map((r, i) => PY.ebitda / 12 * (i + 1));
+  setKpi('k-chg', { v: sg(M(Y26.ebitda - PY.ebitda)), baseTxt: `${{{js.py}}}: ${m1(PY.ebitda)}`, d: Y26.ebitda - PY.ebitda, dTxt: sg((Y26.ebitda / PY.ebitda - 1) * 100, 0) + '%', s: cum, bs: cpy });
+}
+let spaK = 'ebitda';
+function drawSpa() {
+  if (!window.Chart) return; chartDefaults();
+  const k = spaK, labels = ACT.map(r => r.ym).concat(MONTHS), nA = ACT.length, last = nA ? ACT[nA - 1][k] : 0;
+  const raun = labels.map((_, i) => i < nA ? M(ACT[i][k]) : null);
+  const spa = labels.map((_, i) => i < nA - 1 ? null : i === nA - 1 ? M(last) : M(FC[i - nA][k]));
+  const lo = labels.map((_, i) => i < nA - 1 ? null : i === nA - 1 ? M(last) : M(FC[i - nA][k + '_p10']));
+  const hi = labels.map((_, i) => i < nA - 1 ? null : i === nA - 1 ? M(last) : M(FC[i - nA][k + '_p90']));
+  const py = labels.map(() => M(PY[k] / 12));
+  const inc = labels.map(ym => { const r = INC.find(x => x.ym === ym); return r ? M(r[k]) : null; });
+  const s1 = css('--s1'), g3 = css('--gold-3'), s6 = css('--s6');
+  const names = ['P10', 'P90', 'Raun', 'Spá (P50)', ({{js.py}} + ' meðaltal'), 'Ófullbókað, bókað'];
+  upsert('spa', $('c-spa'), { type: 'line', data: { labels: labels.map(lab), datasets: [
+    { label: names[0], data: lo, borderColor: 'transparent', pointRadius: 0, tension: .4, fill: false },
+    { label: names[1], data: hi, borderColor: 'transparent', pointRadius: 0, tension: .4, fill: '-1', backgroundColor: alpha(g3, .2) },
+    { label: names[2], data: raun, borderColor: s1, borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: s1, pointBorderColor: css('--panel'), pointBorderWidth: 2, tension: .4, fill: 'origin', backgroundColor: grad(s1, .28) },
+    { label: names[3], data: spa, borderColor: s1, borderDash: [6, 5], borderWidth: 2.5, pointRadius: 0, tension: .4, fill: false },
+    { label: names[4], data: py, borderColor: s6, borderDash: [3, 4], borderWidth: 1.5, pointRadius: 0, fill: false },
+    { label: names[5], data: inc, showLine: false, pointRadius: 5, pointStyle: 'circle', pointBackgroundColor: alpha(css('--base'), .55), pointBorderColor: css('--base'), borderColor: css('--base') }] },
+    options: { responsive: true, maintainAspectRatio: false, animation: { duration: 300 }, interaction: { mode: 'index', intersect: false }, layout: { padding: { right: 6 } },
+      plugins: { legend: { display: false }, tooltip: { ...tip(), filter: c => c.raw != null && !(c.datasetIndex === 3 && c.dataIndex === nA - 1) && !(c.datasetIndex < 2 && c.dataIndex === nA - 1),
+        callbacks: { label: c => ` ${c.dataset.label}: ${fmt(c.raw, 1)} m.kr.`, afterBody: it => { const i = it[0].dataIndex; return labels[i] === {{js.oneoff_ym}} && ONE ? `${{{js.oneoff_month_cap}}} inniheldur einskiptissölu ${m1(ONE)} m.kr.` : (INC.some(x => x.ym === labels[i]) ? {{js.inc_tip}} : ''); } } } },
+      scales: { x: { grid: { display: false }, ticks: { autoSkip: true, maxRotation: 0 } }, y: { grid: { color: css('--line') }, border: { display: false }, ticks: { callback: v => fmt(v, 0) } } } } });
+}
+
+/* ---------------- FORSENDUR ---------------- */
+function forsendur() {
+  const L = (t, u) => u ? `<a href="${u}" target="_blank" rel="noopener">${t}</a>` : t;
+  const st = { 'staðfest': 'l', 'óstaðfest': 'm', 'notandi': 'i', 'forsenda': 'i', 'saga': 'i', 'vantar': 'h' };
+  const rows = [
+    ['Verðbólga (VNV, 12 mán.)', pct(A.verdbolga), L('Hagstofa Íslands', 'https://hagstofa.is'), {{js.as_cpi_date}}, {{js.as_cpi_st}}, 'Húsnæði og annar rekstur hækka með mánaðarlegri uppsöfnun.'],
+    ['Stýrivextir (meginvextir)', pct(A.styrivextir), L('Seðlabanki Íslands', 'https://www.sedlabanki.is'), {{js.as_rate_date}}, {{js.as_rate_st}}, {{js.as_rate_note}}],
+    ['Kjarasamningar', (A.kjarasamningar || []).length ? `${pct(KJ0.haekkun)} frá ${{{js.as_kj_date}}}` : 'engir í spá', L('SA', 'https://www.sa.is') + ' / ' + L('ASÍ', 'https://www.asi.is'), {{js.as_kj_date}}, {{js.as_kj_st}}, {{js.as_kj_note}}],
+    ['Eldsneyti', '0%', 'Forsenda', {{js.as_of}}, 'forsenda', `Eldsneyti talið ${pct(A.eldsneyti_hlutur, 0)} af öðrum rekstri.`],
+    ['Verðskrá félagsins', 'óbreytt', 'Notandi', '–', 'notandi', ('Breyting í hermi tekur gildi ' + {{js.decide_date}} + '.')],
+    ['Aðfangaverð', `óbreytt · yfirfærsla ${pct(A.yfirfaersla_efnis, 0)}`, 'Notandi / birgjar', '–', 'notandi', 'Yfirfærsla: hlutfall aðfangahækkunar sem velt er út í verð.'],
+    ['Stöðugildi og laun', `óbreytt · ${m1(F.fixed.laun)} m.kr./mán.`, 'Saga í BC', {{js.base3}}, 'saga', 'Meðallaun síðustu þriggja fullbókaðra mánaða.'],
+    ['Magn og leitni', `+${pct(F.g)} á mán., demping ${fmt(A.demping_leitni, 2)}`, 'Saga í BC', {{js.hist_period}}, 'saga', 'Leitni í hámarki líkansins (±1,5% á mán.).'],
+    ONE && ['Einskiptisliðir', `${m1(ONE)} m.kr. í ${{{js.oneoff_month}}} tekið út`, ('BC, lykill ' + {{js.oneoff_acc}}), {{js.oneoff_period}}, 'saga', {{js.oneoff_note}}],
+    ['Gengi (EUR/ISK)', {{js.as_fx_val}}, {{js.as_fx_src}}, '–', {{js.as_fx_st}}, {{js.as_fx_note}}],
+    ['Þekktar pantanir og verk', {{js.as_ord_val}}, 'BC: sölupantanir, verkáætlanir', '–', {{js.as_ord_st}}, {{js.as_ord_note}}],
+  ].filter(Boolean);
+  $('as-tbl').innerHTML = `<thead><tr><th>Forsenda</th><th>Gildi</th><th>Heimild</th><th>Dags.</th><th>Staða</th><th>Athugasemd</th></tr></thead><tbody>` +
+    rows.map(r => `<tr><td><b>${r[0]}</b></td><td class="nw">${r[1]}</td><td class="nw">${r[2]}</td><td class="nw">${r[3]}</td><td><span class="pill ${st[r[4]]}">${r[4]}</span></td><td class="mut">${r[5]}</td></tr>`).join('') + '</tbody>';
+  const B = DATA.backtest;
+  const adj = B.rows.map(r => { const o = DATA.oneoffs.filter(x => x.ym === r.ym).reduce((s, x) => s + x.amount, 0); return Math.abs(r.spa_ebitda - (r.raun_ebitda - o)) / Math.abs(r.raun_ebitda - o); });
+  const mapeAdj = adj.length ? adj.reduce((a, b) => a + b, 0) / adj.length : null;
+  $('bt-k').innerHTML = `<div class="mk"><span class="sub">MAPE tekjur</span><b>${pct(B.mape_tekjur)}</b>${chip({{js.bt_rev_sign}}, true, {{js.bt_rev_chip}})}</div><div class="mk"><span class="sub">MAPE EBITDA</span><b>${pct(B.mape_ebitda)}</b>${chip({{js.bt_eb_sign}}, true, {{js.bt_eb_chip}})}</div>`;
+  const why = [
+    ['h', '!', 'Sveiflukennd framlegð', `Efnishlutfall ${pct(Math.min(...matR))}–${pct(Math.max(...matR))} og laun ${pct(Math.min(...wageR))}–${pct(Math.max(...wageR))} af tekjum eftir mánuðum. ${{{js.why1_tail}}}`, `σ ${pct(F.sigma)}`],
+    INC.length && ['h', '!', 'Ófullbókaðir mánuðir', `${INC.map(r => lab(r.ym)).join(' og ')}: ${{{js.why2_mid}}} og grunnurinn byggir aðeins á ${F.n} mánuðum.`, `${INC.length} mán.`],
+    ONE && ['m', '1×', ('Einskiptissala í ' + {{js.oneoff_month}}), `${m1(ONE)} m.kr. á lykli ${{{js.oneoff_acc}}} er tekin úr tekjugrunni. Í bakprófuninni er hún dregin frá tekjum en ekki frá raun-EBITDA; leiðrétt fyrir henni er MAPE EBITDA um ${pct(mapeAdj, 0)}, enn yfir 25%.`, m1(ONE) + ' m'],
+    ['m', '~', 'Engar árstíðir', {{js.why4_text}}, '< 13 mán.'],
+    ['l', '✓', 'Tekjuspáin er traustari', `MAPE tekna ${pct(B.mape_tekjur)}. Óvissubilið vex með √tíma og nær yfir sveiflu sögunnar.`, pct(B.mape_tekjur)],
+  ].filter(Boolean);
+  $('why').innerHTML = why.map(([c, i, t, p, a]) => `<div class="d-item"><div class="d-ico ${c}">${i}</div><div><b>${t}</b><p>${p}</p></div><span class="amt">${a}</span></div>`).join('');
+  $('model-k').innerHTML = [['Grunnstig tekna', m1(F.base) + ' m/mán.'], ['Leitni', '+' + pct(F.g) + '/mán.'], ['Sveifla (σ)', pct(F.sigma)], ['Efnishlutfall', pct(F.mat)]].map(([l, v]) => `<div class="mk"><span class="sub">${l}</span><b>${v}</b></div>`).join('');
+  $('model-tbl').innerHTML = `<thead><tr><th>Liður</th><th>Regla</th><th class="n">Grunnur/mán.</th></tr></thead><tbody>` + [
+    ['Tekjur', 'grunnstig × dempuð leitni × magn × verðskrá + þekktar pantanir', F.base],
+    ['Vörunotkun', 'tekjur × efnishlutfall (6 mán.) × aðfangaverð', F.base * F.mat],
+    ['Laun', 'grunnlaun × kjarasamningar × stöðugildi × launaskrið', F.fixed.laun],
+    ['Húsnæði', 'grunnur × verðbólga', F.fixed.husnaedi], ['Annar rekstur', 'grunnur × verðbólga × eldsneyti', F.fixed.annar_rekstur],
+    ['Afskriftir', 'flatt', F.fixed.afskriftir], ['Fjármagnsliðir', ('grunnur × stýrivextir / ' + {{js.rate_base}}), F.fixed.fjarmagn]
+  ].map(r => `<tr><td>${r[0]}</td><td class="mut">${r[1]}</td><td class="n">${fmt(M(r[2]), 2)}</td></tr>`).join('') + '</tbody>';
+}
+let btK = 'ebitda';
+function drawBt() {
+  if (!window.Chart) return; chartDefaults();
+  const B = DATA.backtest.rows;
+  upsert('bt', $('c-bt'), { type: 'bar', data: { labels: B.map(r => lab(r.ym)), datasets: [
+    { label: 'Raun', data: B.map(r => M(r['raun_' + btK])), backgroundColor: css('--s1'), borderRadius: 6, barPercentage: .7, categoryPercentage: .7 },
+    { label: 'Spá', data: B.map(r => M(r['spa_' + btK])), backgroundColor: css('--s6'), borderRadius: 6, barPercentage: .7, categoryPercentage: .7 }] },
+    options: { responsive: true, maintainAspectRatio: false, animation: { duration: 300 }, plugins: { legend: { display: false }, tooltip: { ...tip(), callbacks: { label: c => ` ${c.dataset.label}: ${fmt(c.raw, 1)} m.kr.` } } },
+      scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: css('--line') }, border: { display: false }, ticks: { callback: v => fmt(v, 0) } } } } });
+}
+
+/* ---------------- HERMIR ---------------- */
+const SPEC = [
+  ['Tekjur', [
+    ['pr', 'Verðskrá', -10, 15, .5, v => sg(v) + '%', 1, ('Frá ' + {{js.decide_date}} + '. Forsenda: óbreytt.')],
+    ['vol', 'Magn, árleg breyting', -20, 20, 1, v => sg(v, 0) + '%', 1, 'Verkefnastaða og sala. Forsenda: 0%.'],
+    ['fee', 'Ný gjöld á mánuði', 0, 5, .1, v => fmt(v) + ' m', 1, ('Nýjar tekjur án kostnaðar, frá ' + {{js.decide_date}} + '.')]]],
+  ['Aðföng', [
+    ['adf', 'Aðfangaverð', -10, 20, 1, v => sg(v, 0) + '%', -1, ('Efni og innkaup, frá ' + {{js.decide_date}} + '.')],
+    ['pass', 'Yfirfærsla í verð', 0, 100, 10, v => fmt(v, 0) + '%', 1, ('Hlutfall aðfangahækkunar sem velt er út í verð. Forsenda: ' + {{js.pass_def}} + '.')]]],
+  ['Laun', [
+    ['kj', ('Kjarasamningar ' + {{js.as_kj_date}}), 0, 8, .25, v => fmt(v, 2) + '%', -1, {{js.kj_desc}}],
+    ['drift', 'Launaskrið á ári', 0, 5, .25, v => fmt(v, 2) + '%', -1, 'Umfram kjarasamninga.'],
+    ['fte', 'Stöðugildi', -15, 15, 1, v => sg(v, 0) + '%', -1, ('Breyting á fjölda frá ' + {{js.decide_date}} + '.')]]],
+  ['Umhverfi', [
+    ['cpi', 'Verðbólga', 0, 12, .1, v => fmt(v) + '%', -1, {{js.cpi_desc}}],
+    ['fuel', 'Eldsneyti', -30, 60, 5, v => sg(v, 0) + '%', -1, {{js.fuel_desc}}],
+    ['rate', 'Stýrivextir', 4, 12, .25, v => fmt(v, 2) + '%', -1, {{js.rate_desc}}]]],
+];
+const LBL = Object.fromEntries(SPEC.flatMap(g => g[1]).map(s => [s[0], s[1]]));
+const PRESETS = [
+  ['Grunnur', 'Allar forsendur eins og í spánni.', {}],
+  ['Kjarasamningar', ('Hærri samningar: 6% ' + {{js.as_kj_date}} + ' og 2% launaskrið.'), { kj: 6, drift: 2 }],
+  ['Svartsýn', 'Magn −10%, aðföng +5% (30% yfirfærsla), verðbólga 7,5%, eldsneyti +20%, vextir 9%, launaskrið 1%.', { vol: -10, adf: 5, pass: 30, cpi: 7.5, fuel: 20, rate: 9, drift: 1 }],
+  ['Sókn', 'Verðskrá +4%, magn +8%, stöðugildi +3%, ný gjöld 1 m/mán., 80% yfirfærsla.', { pr: 4, vol: 8, fte: 3, fee: 1, pass: 80 }],
+];
+let HZ = '12', SC = 'Grunnur', SL;
+function buildCtrl() {
+  $('ctrl').innerHTML = `<div class="ch"><h2>Forsendur</h2><span class="tag">Forsenda</span></div>` + SPEC.map(([g, list]) => `<div class="grp"><h3>${g}</h3>` + list.map(([k, l, mn, mx, st, , , ds]) =>
+    `<div class="sl"><div class="top"><label for="s-${k}">${l}</label><output id="o-${k}" for="s-${k}"></output></div><input type="range" id="s-${k}" min="${mn}" max="${mx}" step="${st}" value="${DEF[k]}"><small>${ds}</small></div>`).join('') + '</div>').join('') +
+    `<button type="button" class="reset" id="reset">Endurstilla á grunn</button>`;
+  $('presets').innerHTML = PRESETS.map(([n, d], i) => `<button type="button" data-i="${i}" title="${d}" aria-pressed="${i === 0}">${n}</button>`).join('');
+  const spec = Object.fromEntries(SPEC.flatMap(g => g[1]).map(s => [s[0], { fmt: s[5], good: s[6], zero: DEF[s[0]] }]));
+  SL = BF.bindSliders(spec, simRun);
+  Object.keys(spec).forEach(k => $('s-' + k).addEventListener('input', () => { SC = null; markPreset(-1); }, true));
+  const pick = i => { SC = PRESETS[i][0]; markPreset(i); SL.set({ ...DEF, ...PRESETS[i][2] }); };
+  $('presets').querySelectorAll('button').forEach(b => b.onclick = () => pick(+b.dataset.i));
+  $('reset').onclick = () => pick(0);
+  $('hz').querySelectorAll('button').forEach(b => b.onclick = () => { HZ = b.dataset.h; $('hz').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); simRun(SL.read()); });
+}
+const markPreset = i => $('presets').querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-pressed', j === i));
+
+function simRun(p) {
+  const bR = rowsFor(DEF, HZ), sR = rowsFor(p, HZ), b = agg(bR), s = agg(sR);
+  const per = HZ === 'y' ? ('árið ' + {{js.year}}) : 'næstu 12 mánuði';
+  const ser = (rows, f) => rows.map(f);
+  const mk = (id, sv, bv, good, isPct, dd = 1, scale = 1, unit) => setKpi(id, {
+    v: isPct ? fmt(sv * 100, dd) : fmt(sv / scale, dd), unit: unit ?? (isPct ? '%' : 'm.kr.'), baseTxt: 'grunnur ' + (isPct ? fmt(bv * 100, dd) + '%' : fmt(bv / scale, dd)),
+    d: sv - bv, good, dTxt: isPct ? sg((sv - bv) * 100) + ' pp' : sg((sv - bv) / scale, dd) });
+  mk('s-rev', s.tekjur, b.tekjur, true, false, 1, 1e6); mk('s-eb', s.ebitda, b.ebitda, true, false, 1, 1e6);
+  mk('s-mar', s.margin, b.margin, true, true); mk('s-np', s.hagnadur_fs, b.hagnadur_fs, true, false, 1, 1e6);
+  mk('s-fm', s.fm, b.fm, true, true); mk('s-va', s.va, b.va, true, false, 2, 1, 'kr.');
+  mk('s-be', s.be, b.be, false, false, 1, 1e6); mk('s-sf', s.safety, b.safety, true, true);
+  const sp = { 's-rev': r => r.tekjur, 's-eb': r => r.ebitda, 's-mar': r => r.ebitda / r.tekjur, 's-np': r => r.hagnadur_fs, 's-fm': r => 1 - r.vorunotkun / r.tekjur,
+    's-va': r => (r.tekjur - r.vorunotkun) / r.laun, 's-be': r => (r.laun + r.husnaedi + r.annar_rekstur + r.afskriftir + r.fjarmagn) / (1 - r.vorunotkun / r.tekjur), 's-sf': r => 1 - (r.laun + r.husnaedi + r.annar_rekstur + r.afskriftir + r.fjarmagn) / (r.tekjur - r.vorunotkun) };
+  Object.entries(sp).forEach(([id, f]) => { const c = $(id).querySelector('canvas'); BF.spark(c, ser(bR, f), ser(sR, f)); });
+  /* áhrif hverrar forsendu (ein í einu frá grunni) á hagnað */
+  const groups = [['pr'], ['vol'], ['fee'], ['adf', 'pass'], ['kj'], ['drift'], ['fte'], ['cpi'], ['fuel'], ['rate']];
+  const rows = groups.map(ks => { const q = { ...DEF }; ks.forEach(k => q[k] = p[k]); return { label: ks.length > 1 ? 'Aðföng og yfirfærsla' : LBL[ks[0]], value: M(agg(rowsFor(q, HZ)).hagnadur_fs - b.hagnadur_fs) }; });
+  const tot = M(s.hagnadur_fs - b.hagnadur_fs), rest = tot - rows.reduce((a, r) => a + r.value, 0);
+  if (Math.abs(rest) >= .05) rows.push({ label: 'Samspil', value: rest });
+  const nz = rows.filter(r => Math.abs(r.value) >= .05).sort((a, c) => Math.abs(c.value) - Math.abs(a.value));
+  if (nz.length) { BF.hbars($('imp'), nz.map(r => ({ ...r, text: sg(r.value) })), { diverging: true }); $('imp-note').textContent = `Samtals ${sg(tot)} m.kr. á hagnað fyrir skatta ${per}. Hver forsenda metin ein og sér frá grunni.`; }
+  else { $('imp').innerHTML = '<p class="sub">Allar forsendur á grunngildum. Hreyfðu stiku eða veldu sviðsmynd.</p>'; $('imp-note').textContent = ''; }
+  /* verðhækkun sem þarf */
+  const need = needPrice(p, HZ);
+  $('need-big').innerHTML = need == null ? 'næst ekki' : sg(need) + '<small>%</small>';
+  $('need-txt').innerHTML = need == null ? {{js.need_fail}} : `Verðskrá frá ${{{js.decide_date}}} til að halda <b>${pct(b.margin)}</b> EBITDA-hlutfalli grunns ${per}. Stillt: ${sg(p.pr)}%. ` + (need > p.pr + .05 ? `Vantar <b>${fmt(need - p.pr)} pp</b>.` : 'Stillt verðskrá dugar.');
+  const lo = Math.min(-10, p.pr, need ?? 0), hi = Math.max(15, p.pr, need ?? 0) + 1, X = v => (v - lo) / (hi - lo) * 100;
+  $('need-bar').innerHTML = `<i class="tk zero" style="left:${X(0)}%"></i><span class="rb s1" style="left:${Math.min(X(0), X(p.pr))}%;width:${Math.abs(X(p.pr) - X(0))}%"></span>` + (need != null ? `<i class="tk" style="left:${X(need)}%;background:var(--warn)"></i>` : '');
+  /* niðurstöðusetning */
+  const dE = s.ebitda - b.ebitda, name = SC ? `Sviðsmynd ${SC}` : 'Eigin sviðsmynd';
+  $('sim-sentence').innerHTML = Math.abs(dE) < 5e4
+    ? `<b>${name}:</b> EBITDA ${per} er ${m1(s.ebitda)} m.kr. (${pct(s.margin)} EBITDA-hlutfall), sömu tölur og spáin. Hreyfðu stikur til að sjá áhrifin.`
+    : `<b>${name}:</b> EBITDA ${per} ${dE > 0 ? 'hækkar' : 'lækkar'} um <b>${m1(Math.abs(dE))} m.kr.</b> í ${m1(s.ebitda)} m.kr. (${pct(s.margin)} EBITDA-hlutfall). ` +
+      (need == null ? 'Ekki er hægt að halda EBITDA-hlutfalli grunns með verðskrá einni.' : `Til að halda ${pct(b.margin)} EBITDA-hlutfalli þarf verðskrá að ${need >= 0 ? 'hækka' : 'lækka'} um <b>${fmt(Math.abs(need))}%</b> frá ${{{js.decide_date}}}${Math.abs(p.pr) > .01 ? ` (stillt ${sg(p.pr)}%)` : ''}.`);
+  $('cum-sub').textContent = per + ', m.kr.';
+  drawSim(bR, sR);
+}
+function drawSim(bR, sR) {
+  if (!window.Chart) return; chartDefaults();
+  const cumf = (rows, k) => { let c = 0; return rows.map(r => M(c += r[k])); };
+  const labels = bR.map(r => lab(r.ym)), bc = cumf(bR, 'ebitda'), sc = cumf(sR, 'ebitda');
+  const p10 = cumf(bR.map(r => ({ v: r.ebitda_p10 ?? r.ebitda })), 'v'), p90 = cumf(bR.map(r => ({ v: r.ebitda_p90 ?? r.ebitda })), 'v');
+  const up = css('--up'), dn = css('--dn'), t2 = css('--teal-2');
+  upsert('cum', $('c-cum'), { type: 'line', data: { labels, datasets: [
+    { label: 'P10', data: p10, borderColor: 'transparent', pointRadius: 0, tension: .4, fill: false },
+    { label: 'P90', data: p90, borderColor: 'transparent', pointRadius: 0, tension: .4, fill: '-1', backgroundColor: alpha(t2, .14) },
+    { label: 'Grunnur', data: bc, borderColor: css('--base'), borderDash: [6, 4], borderWidth: 2, pointRadius: 0, tension: .4, fill: false },
+    { label: 'Sviðsmynd', data: sc, borderColor: css('--scen'), borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 4, tension: .4, fill: { target: 2, above: alpha(up, .22), below: alpha(dn, .22) } }] },
+    options: { responsive: true, maintainAspectRatio: false, animation: { duration: 200 }, interaction: { mode: 'index', intersect: false },
+      plugins: { legend: { display: false }, tooltip: { ...tip(), callbacks: { label: c => ` ${c.dataset.label}: ${fmt(c.raw, 1)} m.kr.` } } },
+      scales: { x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkip: true } }, y: { grid: { color: css('--line') }, border: { display: false }, ticks: { callback: v => fmt(v, 0) } } } } });
+  const wr = rows => rows.map(r => r.laun / r.tekjur * 100);
+  upsert('wage', $('c-wage'), { type: 'line', data: { labels, datasets: [
+    { label: 'Grunnur', data: wr(bR), borderColor: css('--base'), borderDash: [6, 4], borderWidth: 2, pointRadius: 0, tension: .4 },
+    { label: 'Sviðsmynd', data: wr(sR), borderColor: css('--s2'), borderWidth: 2.5, pointRadius: 0, tension: .4, fill: 'origin', backgroundColor: grad(css('--s2'), .25) }] },
+    options: { responsive: true, maintainAspectRatio: false, animation: { duration: 200 }, interaction: { mode: 'index', intersect: false },
+      plugins: { legend: { display: false }, tooltip: { ...tip(), callbacks: { label: c => ` ${c.dataset.label}: ${fmt(c.raw, 1)}%` } } },
+      scales: { x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkip: true } }, y: { grid: { color: css('--line') }, border: { display: false }, ticks: { callback: v => fmt(v, 0) + '%' } } } } });
+}
+
+/* ---------------- RÆSING ---------------- */
+function setup() {
+  $('spa-kpis').innerHTML = kpiCard('k-rev', ('Tekjur ' + {{js.year}}), 'Spá') + kpiCard('k-mar', ('EBITDA-hlutfall ' + {{js.year}}), 'Spá') + kpiCard('k-np', 'Hagnaður fyrir skatta', 'Spá') + kpiCard('k-chg', ('EBITDA, breyting frá ' + {{js.py}}), 'Spá');
+  $('sim-kpis').innerHTML = [['s-rev', 'Tekjur'], ['s-eb', 'EBITDA'], ['s-mar', 'EBITDA-hlutfall'], ['s-np', 'Hagnaður f. skatta'], ['s-fm', 'Framlegðarhlutfall'], ['s-va', 'Virðisauki á launakrónu'], ['s-be', 'Núllpunktur tekna'], ['s-sf', 'Öryggisbil']].map(([i, l]) => kpiCard(i, l, 'Hermt')).join('');
+  spaStatic(); forsendur(); buildCtrl();
+  const seg = (id, set) => $(id).querySelectorAll('button').forEach(b => b.onclick = () => { $(id).querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); set(b.dataset.k); });
+  seg('spa-seg', k => { spaK = k; drawSpa(); }); seg('bt-seg', k => { btK = k; drawBt(); });
+}
+let CUR = null;
+function renderTab(id) {
+  CUR = id || CUR;
+  if (CUR === 't-spa') { spaKpis(); drawSpa(); }
+  if (CUR === 't-fors') drawBt();
+  if (CUR === 't-sim') SL.run();
+  Object.values(CH).forEach(c => c.resize());
+}
+function redrawAll() { Object.keys(CH).forEach(k => { CH[k].destroy(); delete CH[k]; }); renderTab(); }
+setup();
+BF.themeToggle($('mode'), redrawAll);
+const show = BF.tabs(document.querySelector('.tabs'), id => requestAnimationFrame(() => renderTab(id)));
+document.querySelectorAll('[data-go]').forEach(a => a.onclick = e => { e.preventDefault(); show(a.dataset.go); });
+let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => renderTab(), 150); });
+
+</script>

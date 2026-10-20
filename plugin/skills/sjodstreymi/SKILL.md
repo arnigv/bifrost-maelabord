@@ -1,9 +1,11 @@
 ---
 name: sjodstreymi
-description: Sjóðstreymi og bankar úr Business Central (3 flipar) — staða hvers bankareiknings og greiðslukorts í dag, 13 vikna sjóðspá með lægstu stöðu, útgreiðslum og reikningum í samþykkt, stikum og sviðsmyndum, og innheimta. Afstemmingar eru í Mánaðarlokum. Notaðu þegar beðið er um sjóðstreymi, sjóðspá, stöðu í bönkum, lausafé, greiðslugetu, innheimtu eða „eigum við fyrir launum“.
+description: "Mælaborðið „Sjóðstreymi og bankar“ í Bifröst-mælaborðum (Staða í bönkum, 13 vikna spá, Innheimta), smíðað úr föstu sniðmáti. Notaðu AÐEINS innan Bifröst-mælaborða: þegar notandinn biður um Bifröst-mælaborð eða þetta mælaborð með nafni, eða breytir mælaborði sem pluginið bjó til. Ekki fyrir almennar spurningar um rekstur eða Business Central, aðrar skýrslur, skjöl eða artifacts."
 ---
 
 # Sjóðstreymi
+
+> **Fast sniðmát.** Þetta mælaborð er smíðað úr `template/` (sjá `bifrost-maelabord`, *Föst sniðmát*). Skrifaðu ekki HTML. Safnaðu gögnunum eftir `template/schema.md` (sýnidæmi: `template/example.json`), og smíðaðu með `render.py --dashboard sjodstreymi` eða `bundle.py`. Við breytingu eða uppfærslu er **aðeins þetta mælaborð** endurgert og birt (og viðbætur þess í `ext/`), sjá *Umfang breytinga*. Lýsingin hér að neðan segir hvað sniðmátið sýnir og hvaðan gögnin koma.
 
 Svarar: **Hvað eigum við í peningum næstu 13 vikur, hvar er lágpunkturinn og hvað getum við gert?**
 

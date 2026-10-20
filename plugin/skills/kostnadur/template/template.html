@@ -1,0 +1,312 @@
+<meta charset="utf-8">
+<script>(function(){var m="light";try{m=localStorage.getItem("bf-theme-v5")||"light"}catch(e){}var r=document.documentElement;r.setAttribute("data-bf",m==="dark"?"dark":"light");r.setAttribute("data-pal",(m==="blue"||m==="earth")?m:"bifrost")})()</script>
+<title>Kostnaður og innkaup</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&subset=latin,latin-ext&display=swap">
+<style>
+{{THEME_CSS}}
+/* Kostnaður 1.0: tré, hliðarspjald, leit */
+.wrap{overflow-x:clip}
+td.mono,.mono{font-family:var(--f-mono);font-size:.8rem;white-space:nowrap}
+.hero .row b{white-space:nowrap}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.search{font:inherit;font-size:.84rem;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:7px 12px;min-width:0;width:min(280px,100%)}
+.search:focus-visible{outline:2px solid var(--brand);outline-offset:1px}
+.tree{width:100%;border-collapse:collapse}
+.tree td{vertical-align:middle}
+.tree tr.cat td{font-weight:600;cursor:pointer}
+.tree tr.acc td:first-child{padding-left:30px}
+.tree tr.acc{cursor:pointer}
+.tree tr.cat:hover td,.tree tr.acc:hover td{background:var(--panel2)}
+.tree .car{display:inline-block;width:14px;color:var(--muted);transition:transform .15s}
+.tree tr.cat[aria-expanded="true"] .car{transform:rotate(90deg)}
+.tree .mbar{height:6px;border-radius:999px;background:var(--panel2);overflow:hidden;min-width:60px}
+.tree .mbar span{display:block;height:100%;border-radius:999px;background:var(--brand)}
+.tree tr.dim td{color:var(--muted)}
+.linkbtn{font:inherit;background:none;border:none;padding:0;color:inherit;cursor:pointer;text-align:left;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.linkbtn:hover{text-decoration-color:var(--brand)}
+.prow.click{cursor:pointer;border-radius:12px;padding:6px;margin:-6px}
+.prow.click:hover{background:var(--panel2)}
+.prow.click:focus-visible{outline:2px solid var(--brand)}
+.more{font-size:.74rem;color:var(--muted)}
+/* Hliðarspjald */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:40}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(760px,100%);background:var(--panel);border-left:1px solid var(--line);box-shadow:var(--shadow);z-index:41;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:12px;padding:18px 18px 14px}
+.drawer .dh{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.drawer .dh h2{margin:0}
+.drawer .x{font:inherit;font-size:1.1rem;line-height:1;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:6px 10px;cursor:pointer}
+.drawer .scroll{overflow:auto;min-height:0}
+.drawer table{min-width:600px}
+.drawer thead th{position:sticky;top:0;background:var(--panel);z-index:1}
+.drawer .foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.8rem;color:var(--muted)}
+.drawer .foot b{color:var(--ink);font-family:var(--f-mono)}
+.chips2{display:flex;flex-wrap:wrap;gap:6px}
+.savrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:6px 0;border-top:1px solid var(--line);font-size:.84rem}
+.savrow:first-child{border-top:none}
+.savrow span{color:var(--muted);font-size:.78rem}
+.savrow b{font-family:var(--f-mono);white-space:nowrap}
+@media (max-width:480px){.wrap{padding-inline:16px}.drawer{padding:14px 16px}.tree tr.acc td:first-child{padding-left:18px}}
+
+</style>
+<div class="wrap">
+  <nav class="crumb" aria-label="Leiðarstika"><a href="index.html">← Miðstöð<span class="c-l"> mælaborða</span></a><span class="sep">/</span><span>Kostnaður og innkaup</span></nav>
+  <header class="top">
+    <div class="brandmark">
+      <div class="logo" aria-hidden="true">{{meta.logo}}</div>
+      <div style="min-width:0"><span class="eyebrow">{{meta.company}} · staða {{meta.as_of}}</span><h1>Kostnaður og innkaup</h1></div>
+    </div>
+    <div class="chips"><div id="mode"></div><span class="chip-lg m-hide"><span class="dot"></span>Tengt BC · Bifröst</span><span class="chip-lg">Staða <b>{{meta.as_of}}</b></span></div>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Flipar">
+    <button role="tab" aria-controls="t-samt">Samþykkt reikninga</button>
+    <button role="tab" aria-controls="t-kost">Birgjar og kostnaðarliðir</button>
+  </div>
+
+  <!-- SAMÞYKKT -->
+  <section class="tab" id="t-samt" role="tabpanel">
+    <section class="card hero">
+      <span class="eyebrow">Bíður samþykkis · kr. með VSK</span>
+      <div class="big" id="h-amt"></div>
+      <p id="h-text"></p>
+      <div class="row" id="h-row"></div>
+    </section>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Hvenær á að greiða</h2><span class="sub">gjalddagar reikninga í samþykkt, m.kr.</span></div>
+        <div class="cv" style="height:240px"><canvas id="c-due" role="img" aria-label="Upphæð reikninga í samþykkt eftir gjalddaga"></canvas></div>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Hjá hverjum</h2><span class="sub">í bið eftir samþykkjanda</span></div>
+        <div class="plist" id="who"></div>
+        <p class="sub" id="who-note"></p>
+      </section>
+    </div>
+    <section class="card">
+      <div class="ch"><h2>Allir reikningar í samþykkt</h2><span class="sub">smelltu á birgi til að sjá alla reikninga hans</span></div>
+      <div class="tools">
+        <div class="seg" role="group" aria-label="Sía"><button id="f-all" aria-pressed="true">Allir</button><button id="f-od" aria-pressed="false">Komnir á gjalddaga</button><button id="f-wk" aria-pressed="false">Í þessari viku</button></div>
+        <input class="search" id="q-inv" type="search" placeholder="Leita að skjali eða birgi" aria-label="Leita í reikningum í samþykkt">
+      </div>
+      <div class="scroll"><table id="tbl" style="min-width:760px"><thead><tr><th data-sort="doc">Skjal</th><th data-sort="vendor">Birgir</th><th class="n" data-sort="amt">Upphæð</th><th data-sort="due">Gjalddagi</th><th class="n" data-sort="days">Dagar í bið</th><th>Samþykkjandi</th><th>Staða</th></tr></thead><tbody></tbody></table></div>
+    </section>
+  </section>
+
+  <!-- BIRGJAR OG KOSTNAÐARLIÐIR -->
+  <section class="tab" id="t-kost" role="tabpanel" hidden>
+    <section class="g4" id="kpis"></section>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Kostnaðarliðir</h2><span class="sub">{{text.period}} {{meta.year}} · smelltu á flokk, svo á lykil</span></div>
+        <div class="scroll"><table class="tree" id="tree" style="min-width:460px"><thead><tr><th>Flokkur / lykill</th><th class="n">m.kr.</th><th style="width:22%">Hlutdeild</th><th class="n">Færslur</th></tr></thead><tbody></tbody></table></div>
+        <p class="note" id="tree-note"></p>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Birgjar</h2><span class="sub">reikningar {{meta.year}} með VSK · smelltu til að sjá reikninga</span></div>
+        <input class="search" id="q-vend" type="search" placeholder="Leita að birgi" aria-label="Leita að birgi">
+        <div class="plist" id="vend"></div>
+        <p class="note">Gjaldfallið og opið er úr lánardrottnabók. Reikningar sem bíða samþykkis eru taldir sér.</p>
+      </section>
+    </div>
+    <section class="card">
+      <div class="ch"><h2>Kostnaður á mánuði eftir flokki</h2><div class="legend" id="mlegend"></div></div>
+      <div class="cv" style="height:260px"><canvas id="c-month" role="img" aria-label="Rekstrarkostnaður á mánuði eftir flokki, {{text.period_long}} {{meta.year}}"></canvas></div>
+      <p class="note" id="month-note"></p>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Sparnaðartækifæri</h2><span class="sub" id="sav-sum"></span></div>
+      <div id="sav"></div>
+    </section>
+  </section>
+
+  <footer>
+    <p>Heimild: fjárhagsfærslur (lyklar {{text.acc_range}}, {{text.period}} {{meta.year}}), lánardrottnabók, innkaupareikningar og samþykktarfærslur {{meta.company_gen}} í Business Central (Bifröst), sótt {{text.fetched}}. Aðeins lesið, ekkert skrifað í BC. Samþykkjendur og greiðslukort eru sýnd sem hlutverk og númer. {{text.incomplete_sentence}} Sparnaður er mat og þarf að staðfesta.</p>
+    <p>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</p>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="d-title" hidden>
+  <div class="dh"><div style="min-width:0"><span class="eyebrow" id="d-eye"></span><h2 id="d-title"></h2><p class="sub" id="d-sub"></p></div><button class="x" id="d-x" aria-label="Loka">✕</button></div>
+  <div class="tools"><input class="search" id="q-d" type="search" placeholder="Leita í færslum" aria-label="Leita í færslum"><div class="chips2" id="d-chips"></div></div>
+  <div class="scroll"><table id="d-tbl"><thead></thead><tbody></tbody></table></div>
+  <div class="foot" id="d-foot"></div>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+{{COMPONENTS_JS}}
+const DATA={{DATA_JSON}};
+const { $, fmt, sg, mkr, MON, css, alpha, date, sortable, themeToggle, tabs } = BF;
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+const I = DATA.inv, TOT = I.reduce((s, i) => s + i.amt, 0);
+const OD = I.filter(i => i.overdue > 0), WK = I.filter(i => i.overdue <= 0 && i.overdue > -7);
+const sum = (a, f) => a.reduce((s, x) => s + f(x), 0);
+const CH = {};
+const up = (k, el, cfg) => { if (!window.Chart || !el) return; if (CH[k]) CH[k].destroy(); CH[k] = new Chart(el, cfg); };
+const tip = () => ({ backgroundColor: css('--panel2'), titleColor: css('--ink'), bodyColor: css('--ink2'), borderColor: css('--line'), borderWidth: 1, padding: 10 });
+const ini = n => n.replace(/ehf\.|hf\.|AB/g, '').trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+const VEND = Object.fromEntries(DATA.vend.map(v => [v.no, v]));
+const ACC = Object.fromEntries(DATA.accs.map(a => [a.no, a]));
+const isOpex = c => DATA.opex.includes(c);
+const growing = a => a.v8 > 1e6 && (a.py8 === 0 ? a.v8 > 0 : a.v8 / a.py8 - 1 > DATA.revg + 0.05);
+
+/* ---------- SAMÞYKKT ---------- */
+let filt = 'all', sk = 'amt', sd = -1;
+function samt() {
+  const avg = I.length ? sum(I, i => i.days) / I.length : 0, big = I.length ? I.reduce((a, b) => (b.amt > a.amt ? b : a)) : null;
+  $('h-amt').innerHTML = `${mkr(TOT)}<small>m.kr.</small>`;
+  $('h-text').textContent = !big ? 'Engir innkaupareikningar bíða samþykkis.' : `Innkaupareikningar sem bíða samþykkis. Stærsti einstaki reikningurinn (${big.vendor}) er á gjalddaga ${date(big.due)} og sá elsti hefur beðið í ${Math.max(...I.map(i => i.days))} daga.`;
+  $('h-row').innerHTML = [[String(I.length), 'reikningar í bið'], [`${mkr(sum(OD, i => i.amt))} m`, `komnir á gjalddaga (${OD.length})`], [`${mkr(sum(WK, i => i.amt))} m`, `á gjalddaga í vikunni (${WK.length})`], [`${fmt(avg, 0)} d.`, 'meðalbið']]
+    .map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join('');
+  const byA = {}; I.forEach(i => { const a = byA[i.approver] = byA[i.approver] || { amt: 0, n: 0 }; a.amt += i.amt; a.n++; });
+  const A = Object.entries(byA).sort((a, b) => b[1].amt - a[1].amt);
+  $('who').innerHTML = A.map(([k, v]) => `<div class="prow"><span class="av">S${k.replace(/\D/g, '') || ''}</span><div style="min-width:0"><div class="nm">${esc(k)}</div><div class="sub">${v.n} reikningar</div><div class="bar"><span style="width:${(100 * v.amt / A[0][1].amt).toFixed(1)}%"></span></div></div><span class="n">${fmt(100 * v.amt / TOT, 0)}%<small>af upphæð</small></span></div>`).join('');
+  $('who-note').textContent = A.length === 1 ? 'Allir reikningar fara í gegnum einn samþykkjanda. Varamaður í fjarveru minnkar hættu á töfum og dráttarvöxtum.' : '';
+  table();
+}
+const status = i => i.overdue > 0 ? `<span class="delta dn">${i.overdue} d. yfir gjalddaga</span>` : i.overdue > -7 ? `<span class="delta eq" style="color:var(--warn)">á gjalddaga í vikunni</span>` : `<span class="delta up">í lagi</span>`;
+function table(k, d) {
+  if (k) { sk = k; sd = d; }
+  const q = norm($('q-inv').value || '');
+  const r = I.filter(i => (filt === 'all' || (filt === 'od' ? i.overdue > 0 : i.overdue <= 0 && i.overdue > -7)) && (!q || norm(i.doc + ' ' + i.vendor).includes(q)));
+  r.sort((a, b) => { const x = a[sk], y = b[sk]; return (typeof x === 'string' ? x.localeCompare(y, 'is') : x - y) * sd; });
+  $('tbl').querySelector('tbody').innerHTML = r.length ? r.map(i => `<tr><td class="mono">${i.doc}</td><td><button class="linkbtn" data-v="${i.vno}">${esc(i.vendor)}</button>${i.ic ? ' <span class="pill i">tengdur aðili</span>' : ''}</td><td class="n">${fmt(i.amt, 0)}${i.fx ? ' <small style="color:var(--muted)">EUR</small>' : ''}</td><td>${date(i.due)}</td><td class="n">${i.days}</td><td>${esc(i.approver)}</td><td>${status(i)}</td></tr>`).join('')
+    : '<tr><td colspan="7" class="sub">Enginn reikningur passar við leitina.</td></tr>';
+}
+
+/* ---------- BIRGJAR OG KOSTNAÐARLIÐIR ---------- */
+const open = new Set();
+let showAllV = false;
+function kost() {
+  const ox = DATA.accs.filter(a => isOpex(a.cat)), opex = sum(ox, a => a.v), opex8 = sum(ox, a => a.v8);
+  const vOpen = sum(DATA.vend, v => v.open), vOd = sum(DATA.vend, v => v.od), g = DATA.accs.filter(growing);
+  const K = [
+    [('Rekstrarkostnaður ' + {{js.period}}), mkr(opex), 'm.kr.', {{js.kpi_opex_note}}],
+    [('Af tekjum ' + {{js.full_period}}), fmt(100 * opex8 / DATA.rev8), '%', 'fullbókaðir mánuðir'],
+    ['Opnar skuldir við birgja', mkr(vOpen), 'm.kr.', `þar af gjaldfallið ${mkr(vOd)} m`],
+    ['Liðir sem vaxa hraðar en tekjur', String(g.length), 'lyklar', `tekjur ${sg(100 * DATA.revg, 0)}% á móti ${{{js.py}}}`],
+  ];
+  $('kpis').innerHTML = K.map(([l, v, u, d]) => `<div class="card kpi"><span class="l">${l}</span><span class="v">${v}<small>${u}</small></span><span class="d">${d}</span></div>`).join('');
+  tree(); vend(); sav(); monthChart();
+}
+function tree() {
+  const all = sum(DATA.accs.filter(a => isOpex(a.cat)), a => a.v);
+  const cats = Object.keys(DATA.cats).map(c => ({ c, A: DATA.accs.filter(a => a.cat === c) })).filter(x => x.A.length);
+  const mx = Math.max(...cats.map(x => sum(x.A, a => a.v)));
+  const row = (cls, attrs, name, v, n, w, extra = '') => `<tr class="${cls}" ${attrs}><td>${name}${extra}</td><td class="n">${fmt(v / 1e6)}</td><td><div class="mbar"><span style="width:${Math.max(1, Math.min(100, 100 * Math.abs(v) / mx)).toFixed(1)}%"></span></div></td><td class="n">${n}</td></tr>`;
+  $('tree').querySelector('tbody').innerHTML = cats.map(({ c, A }) => {
+    const v = sum(A, a => a.v), on = open.has(c), dim = !isOpex(c);
+    const head = row('cat' + (dim ? ' dim' : ''), `data-c="${c}" tabindex="0" role="button" aria-expanded="${on}"`, `<span class="car" aria-hidden="true">▸</span> ${esc(DATA.cats[c])}`, v, sum(A, a => a.n), 0,
+      dim ? ' <span class="pill i">utan rekstrarkostnaðar</span>' : ` <span class="sub">${fmt(100 * v / all, 0)}%</span>`);
+    const kids = on ? A.map(a => row('acc', `data-a="${a.no}" tabindex="0" role="button" aria-label="Opna færslur á lykli ${a.no}"`, `<span class="mono">${a.no}</span> ${esc(a.name)}`, a.v, a.n, 0,
+      growing(a) ? ` <span class="pill m">${a.py8 ? sg(100 * (a.v8 / a.py8 - 1), 0) + ('% á móti ' + {{js.py}}) : 'nýr liður'}</span>` : '')).join('') : '';
+    return head + kids;
+  }).join('');
+  $('tree-note').textContent = `${DATA.accs.length} lyklar með ${sum(DATA.accs, a => a.n)} færslum. Upphæðir án VSK. Samtala lykla stemmir við fjárhag upp á krónu.`;
+}
+function vend() {
+  const q = norm($('q-vend').value || '');
+  const L = DATA.vend.filter(v => !q || norm(v.name + ' ' + v.no).includes(q)), mx = Math.max(1, ...DATA.vend.map(v => v.tot + v.samt));
+  const shown = q || showAllV ? L : L.slice(0, 8);
+  $('vend').innerHTML = shown.map(v => {
+    const bits = [`${v.inv.filter(i => i[6] === 'bok').length} reikn.`];
+    if (v.od > 0) bits.push(`<span style="color:var(--dn)">gjaldfallið ${mkr(v.od)} m</span>`); else if (v.open > 0) bits.push(`opið ${mkr(v.open)} m`);
+    if (v.samt > 0) bits.push(`í samþykkt ${mkr(v.samt)} m`);
+    return `<div class="prow click" data-v="${v.no}" tabindex="0" role="button" aria-label="Opna reikninga ${esc(v.name)}"><span class="av">${v.no.startsWith('KORT') ? 'K' + v.name.slice(-1) : ini(v.name)}</span><div style="min-width:0"><div class="nm">${esc(v.name)}${v.ic ? ' <span class="pill i">tengdur aðili</span>' : ''}</div><div class="sub">${bits.join(' · ')}</div><div class="bar"><span style="width:${(100 * (v.tot + v.samt) / mx).toFixed(1)}%"></span></div></div><span class="n">${mkr(v.tot)}<small>m.kr.</small></span></div>`;
+  }).join('') + (!q && L.length > 8 ? `<button class="linkbtn more" id="v-more">${showAllV ? 'Sýna færri' : `Sýna alla ${L.length} birgja`}</button>` : '') + (!L.length ? '<p class="sub">Enginn birgir passar við leitina.</p>' : '');
+  const mb = $('v-more'); if (mb) mb.onclick = () => { showAllV = !showAllV; vend(); };
+}
+function sav() {
+  const S = DATA.sav.slice().sort((a, b) => b.amt - a.amt), t = sum(S, s => s.amt);
+  $('sav-sum').textContent = `${S.length} tækifæri · allt að ${mkr(t)} m.kr. á ári ef öll nást · mat`;
+  $('sav').innerHTML = S.map(s => `<div class="savrow"><div style="min-width:0">${esc(s.t)} <span>· ${esc(s.next)}</span></div><b>${mkr(s.amt)} m</b></div>`).join('');
+}
+const CC = ['--s1', '--s2', '--s3', '--s4'];
+function monthChart() {
+  /* mánuðir sem a.m vísar í (js.months, ÁÁÁÁ-MM) */
+  const MS = {{js.months}}, inc = MS.map((ym, i) => (ym in DATA.incomplete ? i : -1)).filter(i => i >= 0);
+  $('mlegend').innerHTML = DATA.opex.map((c, i) => `<span><i style="background:var(${CC[i]})"></i>${esc(DATA.cats[c])}</span>`).join('');
+  $('month-note').textContent = Object.keys(DATA.incomplete).length ? `${{{js.incomplete_lead}}} (${Object.values(DATA.incomplete)[0]}) og sýndir daufir.` : '';
+  if (!window.Chart) return;
+  Chart.defaults.font.family = css('--f-body'); Chart.defaults.color = css('--muted');
+  const ds = DATA.opex.map((c, i) => { const col = css(CC[i]); return { label: DATA.cats[c], data: MS.map((_, m) => sum(DATA.accs.filter(a => a.cat === c), a => a.m[m] || 0) / 1e6), backgroundColor: MS.map((_, m) => inc.includes(m) ? alpha(col, .35) : col), borderRadius: 4, barPercentage: .75 }; });
+  up('month', $('c-month'), { type: 'bar', data: { labels: MS.map(ym => MON[+ym.slice(5) - 1]), datasets: ds }, options: { responsive: true, maintainAspectRatio: false, animation: { duration: 300 }, interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { display: false }, tooltip: { ...tip(), callbacks: { label: c => ` ${c.dataset.label}: ${fmt(c.raw)} m.kr.` } } },
+    scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, grid: { color: css('--line') }, border: { display: false }, ticks: { callback: v => fmt(v, 0) } } } } });
+}
+function dueChart() {
+  if (!window.Chart) return;
+  const B = [['Yfir gjalddaga', i => i.overdue > 0, '--dn'], ['Þessi vika', i => i.overdue <= 0 && i.overdue > -7, '--warn'], ['Næsta vika', i => i.overdue <= -7 && i.overdue > -14, '--s2'], ['Síðar', i => i.overdue <= -14, '--s1']];
+  up('due', $('c-due'), { type: 'bar', data: { labels: B.map(b => b[0]), datasets: [{ data: B.map(([, f]) => sum(I.filter(f), i => i.amt) / 1e6), backgroundColor: B.map(b => css(b[2])), borderRadius: 10, maxBarThickness: 56 }] },
+    options: { responsive: true, maintainAspectRatio: false, animation: { duration: 300 }, plugins: { legend: { display: false }, tooltip: { ...tip(), callbacks: { label: c => ` ${fmt(c.raw)} m.kr.` } } },
+      scales: { x: { grid: { display: false } }, y: { grid: { color: css('--line') }, border: { display: false }, ticks: { callback: v => fmt(v, 0) } } } } });
+}
+
+/* ---------- HLIÐARSPJALD (færslur / reikningar) ---------- */
+let DR = null, lastFocus = null;
+function drawer(cfg) {
+  DR = { ...cfg, k: cfg.sort || null, d: cfg.dir || -1 };
+  lastFocus = document.activeElement;
+  $('d-eye').textContent = cfg.eye; $('d-title').textContent = cfg.title; $('d-sub').innerHTML = cfg.sub || '';
+  $('d-chips').innerHTML = cfg.chips || ''; $('q-d').value = '';
+  $('d-tbl').querySelector('thead').innerHTML = '<tr>' + cfg.cols.map(c => `<th${c.n ? ' class="n"' : ''} data-sort="${c.k}">${c.l}</th>`).join('') + '</tr>';
+  sortable($('d-tbl'), (k, d) => { DR.k = k; DR.d = d; drawRows(); });
+  $('scrim').hidden = false; $('drawer').hidden = false; drawRows();
+  try { $('d-x').focus(); } catch (e) {}
+}
+function drawRows() {
+  const q = norm($('q-d').value || ''), C = DR.cols;
+  let r = DR.rows.filter(x => !q || norm(C.map(c => x[c.k]).join(' ')).includes(q));
+  if (DR.k) r = r.slice().sort((a, b) => { const x = a[DR.k], y = b[DR.k]; return (typeof x === 'number' ? x - y : String(x).localeCompare(String(y), 'is')) * DR.d; });
+  $('d-tbl').querySelector('tbody').innerHTML = r.length ? r.map(x => '<tr>' + C.map(c => `<td${c.n ? ' class="n"' : c.mono ? ' class="mono"' : ''}>${c.f ? c.f(x[c.k], x) : esc(x[c.k])}</td>`).join('') + '</tr>').join('')
+    : `<tr><td colspan="${C.length}" class="sub">Engin færsla passar við leitina.</td></tr>`;
+  $('d-foot').innerHTML = DR.foot(r);
+}
+function closeDrawer() { $('scrim').hidden = true; $('drawer').hidden = true; DR = null; try { lastFocus && lastFocus.focus(); } catch (e) {} }
+const kr = v => fmt(v, 0);
+function openAcc(no) {
+  const a = ACC[no]; if (!a) return;
+  const rows = a.e.map(([d, doc, desc, src, amt]) => ({ d, doc, desc, src, amt }));
+  drawer({ eye: `${DATA.cats[a.cat]} · lykill ${a.no}`, title: a.name, sub: `Færslur ${{{js.period}}} ${{{js.year}}} · ${a.n} færslur · ${fmt(a.v / 1e6)} m.kr. án VSK${growing(a) && a.py8 ? ` · ${{{js.full_period}}} ${sg(100 * (a.v8 / a.py8 - 1), 0)}% á móti sama tíma ${{{js.py}}}` : ''}`,
+    sort: 'amt', dir: -1, rows,
+    cols: [{ k: 'd', l: 'Dags.', f: v => date(v), mono: 1 }, { k: 'doc', l: 'Fylgiskjal', mono: 1 }, { k: 'desc', l: 'Lýsing' }, { k: 'src', l: 'Birgir / uppruni', f: (v, x) => v ? esc(v) : '<span class="sub">dagbók</span>' }, { k: 'amt', l: 'Fjárhæð', n: 1, f: kr }],
+    foot: r => `<span>${r.length} af ${a.n} færslum sýndar${a.rest[0] ? ` · aðrar færslur (${a.rest[0]}): <b>${kr(a.rest[1])}</b>` : ''}</span><span>Samtals sýnt <b>${kr(sum(r, x => x.amt))}</b> kr.</span>` });
+}
+function openVend(vno) {
+  const v = VEND[vno]; if (!v) return;
+  const t = DATA.today;
+  const st = x => x.k === 'samt' ? '<span class="pill m">í samþykkt</span>' : x.rem === 0 ? '<span class="pill l">greitt</span>' : x.rem < 0 ? '<span class="pill i">inneign</span>' : x.due < t ? '<span class="pill h">gjaldfallið</span>' : '<span class="pill i">opið</span>';
+  const rows = v.inv.map(([d, doc, desc, due, amt, rem, k]) => ({ d, doc, desc, due, amt, rem, k, s: k === 'samt' ? 'í samþykkt' : rem === 0 ? 'greitt' : due < t ? 'gjaldfallið' : 'opið' }));
+  const chips = v.gl.length ? '<span class="sub">Bókað á:</span>' + v.gl.map(([no, n, amt]) => `<button class="seg linkbtn" style="padding:3px 9px;text-decoration:none" data-a="${no}">${no} ${esc(n)} · ${fmt(amt / 1e6)} m</button>`).join('') : '';
+  drawer({ eye: `${v.no.startsWith('KORT') ? 'Fyrirtækjakort · kortayfirlit' : 'Birgir ' + v.no}${v.ic ? ' · tengdur aðili' : ''}`, title: v.name,
+    sub: `Reikningar ${{{js.year}}} með VSK: ${fmt(v.tot / 1e6)} m.kr.${v.open ? ` · opið ${fmt(v.open / 1e6, 2)} m` : ''}${v.od ? ` · gjaldfallið ${fmt(v.od / 1e6, 2)} m` : ''}${v.samt ? ` · í samþykkt ${fmt(v.samt / 1e6, 2)} m` : ''}`,
+    chips, sort: 'd', dir: -1, rows,
+    cols: [{ k: 'd', l: 'Dags.', f: v => date(v), mono: 1 }, { k: 'doc', l: 'Skjal', mono: 1 }, { k: 'desc', l: 'Lýsing' }, { k: 'due', l: 'Gjalddagi', f: v => date(v), mono: 1 }, { k: 'amt', l: 'Fjárhæð', n: 1, f: kr }, { k: 'rem', l: 'Eftirstöðvar', n: 1, f: v => v ? kr(v) : '–' }, { k: 's', l: 'Staða', f: (_, x) => st(x) }],
+    foot: r => `<span>${r.length} skjöl · kreditreikningar með mínus</span><span>Samtals <b>${kr(sum(r, x => x.amt))}</b> kr. · eftirstöðvar <b>${kr(sum(r, x => x.rem))}</b> kr.</span>` });
+}
+
+/* ---------- ATBURÐIR ---------- */
+const act = (sel, fn) => document.addEventListener('click', e => { const el = e.target.closest && e.target.closest(sel); if (el) fn(el, e); });
+const key = (sel, fn) => document.addEventListener('keydown', e => { if (e.key !== 'Enter' && e.key !== ' ') return; const el = e.target.closest && e.target.closest(sel); if (el) { e.preventDefault(); fn(el); } });
+act('tr.cat', el => { const c = el.dataset.c; open.has(c) ? open.delete(c) : open.add(c); tree(); });
+key('tr.cat', el => { const c = el.dataset.c; open.has(c) ? open.delete(c) : open.add(c); tree(); const n = document.querySelector(`tr.cat[data-c="${c}"]`); n && n.focus(); });
+act('tr.acc', el => openAcc(el.dataset.a)); key('tr.acc', el => openAcc(el.dataset.a));
+act('[data-v]', el => openVend(el.dataset.v)); key('.prow[data-v]', el => openVend(el.dataset.v));
+act('#d-chips [data-a]', el => openAcc(el.dataset.a));
+$('d-x').onclick = closeDrawer; $('scrim').onclick = closeDrawer;
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && DR) closeDrawer(); });
+$('q-d').addEventListener('input', () => DR && drawRows());
+$('q-inv').addEventListener('input', () => table());
+$('q-vend').addEventListener('input', vend);
+[['f-all', 'all'], ['f-od', 'od'], ['f-wk', 'wk']].forEach(([id, f]) => $(id).onclick = () => { filt = f; ['f-all', 'f-od', 'f-wk'].forEach(x => $(x).setAttribute('aria-pressed', x === id)); table(); });
+sortable($('tbl'), (k, d) => table(k, d));
+open.add('vorunotkun');
+let cur = 't-samt';
+themeToggle($('mode'), () => { Object.keys(CH).forEach(k => { CH[k].destroy(); delete CH[k]; }); cur === 't-samt' ? dueChart() : monthChart(); });
+samt(); kost();
+tabs(document.querySelector('.tabs'), id => { cur = id; requestAnimationFrame(() => (id === 't-kost' ? monthChart() : dueChart())); });
+
+</script>

@@ -1,9 +1,11 @@
 ---
 name: kostnadur
-description: Kostnaðar- og innkaupamælaborð úr Business Central (2 flipar) — samþykkt reikninga (allir ósamþykktir innkaupareikningar, hver á eftir að samþykkja, gjalddagar) og birgjar og kostnaðarliðir með drill-down frá flokki í lykla og niður í einstakar færslur, og sparnaðarmat. Notaðu þegar beðið er um samþykkt reikninga, „hver á eftir að samþykkja“, birgja, innkaup, kostnað, kostnaðargreiningu, færslur á kostnaðarlykli eða sparnað.
+description: "Mælaborðið „Kostnaður“ í Bifröst-mælaborðum (Samþykkt reikninga, Birgjar og kostnaðarliðir), smíðað úr föstu sniðmáti. Notaðu AÐEINS innan Bifröst-mælaborða: þegar notandinn biður um Bifröst-mælaborð eða þetta mælaborð með nafni, eða breytir mælaborði sem pluginið bjó til. Ekki fyrir almennar spurningar um rekstur eða Business Central, aðrar skýrslur, skjöl eða artifacts."
 ---
 
 # Kostnaður og innkaup
+
+> **Fast sniðmát.** Þetta mælaborð er smíðað úr `template/` (sjá `bifrost-maelabord`, *Föst sniðmát*). Skrifaðu ekki HTML. Safnaðu gögnunum eftir `template/schema.md` (sýnidæmi: `template/example.json`), og smíðaðu með `render.py --dashboard kostnadur` eða `bundle.py`. Við breytingu eða uppfærslu er **aðeins þetta mælaborð** endurgert og birt (og viðbætur þess í `ext/`), sjá *Umfang breytinga*. Lýsingin hér að neðan segir hvað sniðmátið sýnir og hvaðan gögnin koma.
 
 Svarar: **Hvað bíður samþykktar og hjá hverjum, í hvað fara peningarnir, og hvar getum við sparað?**
 

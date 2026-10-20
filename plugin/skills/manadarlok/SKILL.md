@@ -1,9 +1,11 @@
 ---
 name: manadarlok
-description: Mælaborðið „Mánaðarlok og afstemmingar“ úr Business Central — gátlisti fyrir lokun mánaðar (tekjur, laun, vörunotkun, afskriftir, VSK-uppgjörsfærsla, gengismunur, áfallið og fyrirframgreitt, tímabil lokað í BC) með stöðu, fjárhæð og ábyrgðarhlutverki, yfirlit um hvaða mánuðir eru fullbókaðir, afstemmingar banka, korta, viðskiptamanna, lánardrottna og VSK við fjárhag og jöfnuður færslna innan mánaðar, og samandreginn listi opinna atriða eftir alvarleika með næsta skrefi. Notaðu þegar beðið er um mánaðarlok, lokun mánaðar, „er mánuðurinn lokaður“, afstemmingar, „stemmir bókhaldið“, bankaafstemmingu, undirbækur á móti fjárhag, opin atriði í bókhaldi eða hvað bókari á eftir að gera.
+description: "Mælaborðið „Mánaðarlok og afstemmingar“ í Bifröst-mælaborðum (Lokun mánaðar, Afstemmingar, Opin atriði), smíðað úr föstu sniðmáti. Notaðu AÐEINS innan Bifröst-mælaborða: þegar notandinn biður um Bifröst-mælaborð eða þetta mælaborð með nafni, eða breytir mælaborði sem pluginið bjó til. Ekki fyrir almennar spurningar um rekstur eða Business Central, aðrar skýrslur, skjöl eða artifacts."
 ---
 
 # Mánaðarlok og afstemmingar
+
+> **Fast sniðmát.** Þetta mælaborð er smíðað úr `template/` (sjá `bifrost-maelabord`, *Föst sniðmát*). Skrifaðu ekki HTML. Safnaðu gögnunum eftir `template/schema.md` (sýnidæmi: `template/example.json`), og smíðaðu með `render.py --dashboard manadarlok` eða `bundle.py`. Við breytingu eða uppfærslu er **aðeins þetta mælaborð** endurgert og birt (og viðbætur þess í `ext/`), sjá *Umfang breytinga*. Lýsingin hér að neðan segir hvað sniðmátið sýnir og hvaðan gögnin koma.
 
 Svarar: **Er síðasti mánuður lokaður, stemmir bókhaldið og hvað á eftir að gera, af hverjum?**
 

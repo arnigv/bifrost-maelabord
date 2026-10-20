@@ -1,9 +1,11 @@
 ---
 name: endurskodun
-description: Mælaborðið „Endurskoðun og ársreikningur“ fyrir Business Central — stærðarflokkun skv. lögum um ársreikninga nr. 3/2006, endurskoðunarskylda, skilafrestur til ársreikningaskrár, drög að rekstrar- og efnahagsreikningi og sjóðstreymi, undirbúningslisti fyrir endurskoðanda (PBC), færsluprófanir og mikilvægi, og gátlisti um skýringar. Notaðu þegar beðið er um ársreikning, ársuppgjör, endurskoðun, undirbúning fyrir endurskoðanda, lög um ársreikninga, stærðarflokk, skilafrest eða færsluprófanir.
+description: "Mælaborðið „Endurskoðun og ársreikningur“ í Bifröst-mælaborðum (stærðarflokkur skv. lögum nr. 3/2006, drög að ársreikningi, undirbúningur, færsluprófanir), smíðað úr föstu sniðmáti. Notaðu AÐEINS innan Bifröst-mælaborða: þegar notandinn biður um Bifröst-mælaborð eða þetta mælaborð með nafni, eða breytir mælaborði sem pluginið bjó til. Ekki fyrir almennar spurningar um rekstur eða Business Central, aðrar skýrslur, skjöl eða artifacts."
 ---
 
 # Endurskoðun og ársreikningur (lög nr. 3/2006)
+
+> **Fast sniðmát.** Þetta mælaborð er smíðað úr `template/` (sjá `bifrost-maelabord`, *Föst sniðmát*). Skrifaðu ekki HTML. Safnaðu gögnunum eftir `template/schema.md` (sýnidæmi: `template/example.json`), og smíðaðu með `render.py --dashboard endurskodun` eða `bundle.py`. Við breytingu eða uppfærslu er **aðeins þetta mælaborð** endurgert og birt (og viðbætur þess í `ext/`), sjá *Umfang breytinga*. Lýsingin hér að neðan segir hvað sniðmátið sýnir og hvaðan gögnin koma.
 
 **Valmælaborð** (ekki sjálfgefið í 1.0; bætt við úr miðstöð eða að beiðni, sérstaklega fyrir árslok).
 

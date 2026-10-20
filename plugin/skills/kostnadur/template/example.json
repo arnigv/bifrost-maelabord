@@ -1,0 +1,7823 @@
+{
+ "today": "2026-10-16",
+ "inv": [
+  {
+   "doc": "R00010",
+   "vno": "L180",
+   "vendor": "Hríseyjarhús ehf.",
+   "amt": 3334360,
+   "due": "2026-10-01",
+   "sent": "2026-10-05",
+   "days": 11,
+   "overdue": 15,
+   "approver": "Samþykkjandi 1",
+   "ic": true,
+   "fx": ""
+  },
+  {
+   "doc": "R00012",
+   "vno": "L90",
+   "vendor": "Fjarskiptaver ehf.",
+   "amt": 1751872,
+   "due": "2026-10-20",
+   "sent": "2026-10-05",
+   "days": 11,
+   "overdue": -4,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00015",
+   "vno": "L60",
+   "vendor": "Olís",
+   "amt": 845680,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "days": 8,
+   "overdue": -4,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00016",
+   "vno": "L130",
+   "vendor": "Steðjasalan ehf.",
+   "amt": 1488000,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "days": 8,
+   "overdue": -4,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00018",
+   "vno": "L20",
+   "vendor": "Kuldaverið ehf.",
+   "amt": 25048000,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "days": 8,
+   "overdue": -4,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00019",
+   "vno": "L140",
+   "vendor": "Flutningar Eyjafjarðar ehf.",
+   "amt": 4114320,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "days": 8,
+   "overdue": -4,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00020",
+   "vno": "L100",
+   "vendor": "Sundvík ehf.",
+   "amt": 744000,
+   "due": "2026-10-14",
+   "sent": "2026-10-08",
+   "days": 8,
+   "overdue": 2,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00021",
+   "vno": "L50",
+   "vendor": "Norðurorka",
+   "amt": 2153200,
+   "due": "2026-10-01",
+   "sent": "2026-10-08",
+   "days": 8,
+   "overdue": 15,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00022",
+   "vno": "L120",
+   "vendor": "Hlíðarmatur ehf.",
+   "amt": 1276500,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "days": 8,
+   "overdue": -4,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00023",
+   "vno": "L120",
+   "vendor": "Hlíðarmatur ehf.",
+   "amt": 1276500,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "days": 8,
+   "overdue": -4,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00024",
+   "vno": "L170",
+   "vendor": "Auglýsingastofa Norðurlands ehf.",
+   "amt": 669600,
+   "due": "2026-10-20",
+   "sent": "2026-10-08",
+   "days": 8,
+   "overdue": -4,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00025",
+   "vno": "L150",
+   "vendor": "Þórunnarverk ehf.",
+   "amt": 415400,
+   "due": "2026-10-14",
+   "sent": "2026-10-08",
+   "days": 8,
+   "overdue": 2,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00026",
+   "vno": "L40",
+   "vendor": "Kustsmide AB",
+   "amt": 2027100,
+   "due": "2026-10-14",
+   "sent": "2026-10-08",
+   "days": 8,
+   "overdue": 2,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": "EUR"
+  },
+  {
+   "doc": "R00027",
+   "vno": "L190",
+   "vendor": "Eyjavör fjárfestingar ehf.",
+   "amt": 2400000,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "days": 7,
+   "overdue": -35,
+   "approver": "Samþykkjandi 1",
+   "ic": true,
+   "fx": ""
+  },
+  {
+   "doc": "R00028",
+   "vno": "L50",
+   "vendor": "Norðurorka",
+   "amt": 2837820,
+   "due": "2026-11-01",
+   "sent": "2026-10-09",
+   "days": 7,
+   "overdue": -16,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00029",
+   "vno": "L90",
+   "vendor": "Fjarskiptaver ehf.",
+   "amt": 1262320,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "days": 7,
+   "overdue": -35,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00030",
+   "vno": "L80",
+   "vendor": "Fægiver ehf.",
+   "amt": 297600,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "days": 7,
+   "overdue": -35,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00031",
+   "vno": "L160",
+   "vendor": "Krókeyri ehf.",
+   "amt": 558000,
+   "due": "2026-11-01",
+   "sent": "2026-10-09",
+   "days": 7,
+   "overdue": -16,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00032",
+   "vno": "L150",
+   "vendor": "Þórunnarverk ehf.",
+   "amt": 427800,
+   "due": "2026-10-21",
+   "sent": "2026-10-09",
+   "days": 7,
+   "overdue": -5,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00033",
+   "vno": "L130",
+   "vendor": "Steðjasalan ehf.",
+   "amt": 1516520,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "days": 7,
+   "overdue": -35,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00035",
+   "vno": "L140",
+   "vendor": "Flutningar Eyjafjarðar ehf.",
+   "amt": 4504920,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "days": 7,
+   "overdue": -35,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00036",
+   "vno": "L30",
+   "vendor": "Rafspennir ehf.",
+   "amt": 13702000,
+   "due": "2026-10-20",
+   "sent": "2026-10-09",
+   "days": 7,
+   "overdue": -4,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00037",
+   "vno": "L10",
+   "vendor": "Stálvogur ehf.",
+   "amt": 35240800,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "days": 7,
+   "overdue": -35,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00038",
+   "vno": "L60",
+   "vendor": "Olís",
+   "amt": 757640,
+   "due": "2026-11-20",
+   "sent": "2026-10-09",
+   "days": 7,
+   "overdue": -35,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00039",
+   "vno": "L110",
+   "vendor": "Krossanesvörn ehf.",
+   "amt": 955000,
+   "due": "2026-11-01",
+   "sent": "2026-10-09",
+   "days": 7,
+   "overdue": -16,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00034",
+   "vno": "L100",
+   "vendor": "Sundvík ehf.",
+   "amt": 744000,
+   "due": "2026-10-19",
+   "sent": "2026-10-15",
+   "days": 1,
+   "overdue": -3,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  },
+  {
+   "doc": "R00017",
+   "vno": "L110",
+   "vendor": "Krossanesvörn ehf.",
+   "amt": 955000,
+   "due": "2026-10-01",
+   "sent": "2026-10-16",
+   "days": 0,
+   "overdue": 15,
+   "approver": "Samþykkjandi 1",
+   "ic": false,
+   "fx": ""
+  }
+ ],
+ "sav": [
+  {
+   "t": "Innkaupasamningar á efni",
+   "d": "2% betri kjör á vöruinnkaupum (stál, lagnaefni). Vöruinnkaup eru um 651 m.kr. á ári.",
+   "amt": 13030200.0,
+   "eff": "Miðl.",
+   "v": "Líklegt",
+   "next": "Útboð eða endursamningur við tvo stærstu efnisbirgja"
+  },
+  {
+   "t": "Samræmdar sendingar",
+   "d": "10% af flutningskostnaði með færri og stærri sendingum. Flutningur er 5,8% af vöruinnkaupum.",
+   "amt": 3772500.0,
+   "eff": "Lítið",
+   "v": "Líklegt",
+   "next": "Fastur sendingardagur og samningur við einn flutningsaðila"
+  },
+  {
+   "t": "Bílaleiga á móti eigin bíl",
+   "d": "Bílaleigubílar kosta um 8 m.kr. á ári. Eigin þjónustubíll eða samnýting gæti lækkað það um 30%.",
+   "amt": 2412000.0,
+   "eff": "Miðl.",
+   "v": "Mat",
+   "next": "Greina nýtingu bílaleigubíla eftir verkum"
+  },
+  {
+   "t": "Útboð á raforku",
+   "d": "Rafmagn kostar um 17,7 m.kr. á ári. Útboð skilar oft um 10% lækkun.",
+   "amt": 1765500.0,
+   "eff": "Lítið",
+   "v": "Líklegt",
+   "next": "Biðja þrjá raforkusala um tilboð"
+  },
+  {
+   "t": "Reikningar samþykktir á réttum tíma",
+   "d": "Reikningar sem bíða samþykkis fram yfir gjalddaga kalla á dráttarvexti og glataða staðgreiðsluafslætti (um 1% af upphæð).",
+   "amt": 1155487.2000000002,
+   "eff": "Lítið",
+   "v": "Mat",
+   "next": "Samþykktarfrestur 5 dagar og varamaður í samþykkt"
+  }
+ ],
+ "rev8": 1295600000.0,
+ "revg": 0.1996296296296296,
+ "cats": {
+  "vorunotkun": "Vörunotkun og aðföng",
+  "laun": "Laun og launatengd gjöld",
+  "husnaedi": "Húsnæði",
+  "annar_rekstur": "Annar rekstrarkostnaður",
+  "afskriftir": "Afskriftir",
+  "fjarmagn": "Fjármagnsliðir",
+  "oreglulegt": "Óreglulegir liðir"
+ },
+ "opex": [
+  "vorunotkun",
+  "laun",
+  "husnaedi",
+  "annar_rekstur"
+ ],
+ "accs": [
+  {
+   "no": "2010",
+   "name": "Vöruinnkaup",
+   "cat": "vorunotkun",
+   "v": 434340000.0,
+   "v8": 434340000.0,
+   "py8": 410400000.0,
+   "n": 24,
+   "m": [
+    46740000,
+    50160000,
+    58140000,
+    61560000,
+    63840000,
+    60420000,
+    44460000,
+    49020000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-05-31",
+     "IR00079",
+     "Stál og plötur, maí 2026",
+     "Stálvogur ehf.",
+     33196800
+    ],
+    [
+     "2026-04-30",
+     "IR00060",
+     "Stál og plötur, apríl 2026",
+     "Stálvogur ehf.",
+     32011200
+    ],
+    [
+     "2026-06-30",
+     "IR00098",
+     "Stál og plötur, júní 2026",
+     "Stálvogur ehf.",
+     31418400
+    ],
+    [
+     "2026-03-31",
+     "IR00041",
+     "Stál og plötur, mars 2026",
+     "Stálvogur ehf.",
+     30232800
+    ],
+    [
+     "2026-02-28",
+     "IR00022",
+     "Stál og plötur, febrúar 2026",
+     "Stálvogur ehf.",
+     26083200
+    ],
+    [
+     "2026-08-31",
+     "IR00136",
+     "Stál og plötur, ágúst 2026",
+     "Stálvogur ehf.",
+     25490400
+    ],
+    [
+     "2026-01-31",
+     "IR00003",
+     "Stál og plötur, janúar 2026",
+     "Stálvogur ehf.",
+     24304800
+    ],
+    [
+     "2026-07-31",
+     "IR00117",
+     "Stál og plötur, júlí 2026",
+     "Stálvogur ehf.",
+     23119200
+    ],
+    [
+     "2026-05-31",
+     "IR00080",
+     "Kæli- og lagnabúnaður, maí 2026",
+     "Kuldaverið ehf.",
+     17875200
+    ],
+    [
+     "2026-04-30",
+     "IR00061",
+     "Kæli- og lagnabúnaður, apríl 2026",
+     "Kuldaverið ehf.",
+     17236800
+    ],
+    [
+     "2026-06-30",
+     "IR00099",
+     "Kæli- og lagnabúnaður, júní 2026",
+     "Kuldaverið ehf.",
+     16917600
+    ],
+    [
+     "2026-03-31",
+     "IR00042",
+     "Kæli- og lagnabúnaður, mars 2026",
+     "Kuldaverið ehf.",
+     16279200
+    ],
+    [
+     "2026-02-28",
+     "IR00023",
+     "Kæli- og lagnabúnaður, febrúar 2026",
+     "Kuldaverið ehf.",
+     14044800
+    ],
+    [
+     "2026-08-31",
+     "IR00137",
+     "Kæli- og lagnabúnaður, ágúst 2026",
+     "Kuldaverið ehf.",
+     13725600
+    ],
+    [
+     "2026-01-31",
+     "IR00004",
+     "Kæli- og lagnabúnaður, janúar 2026",
+     "Kuldaverið ehf.",
+     13087200
+    ],
+    [
+     "2026-05-31",
+     "IR00081",
+     "Rafmagnsíhlutir, maí 2026",
+     "Rafspennir ehf.",
+     12768000
+    ],
+    [
+     "2026-07-31",
+     "IR00118",
+     "Kæli- og lagnabúnaður, júlí 2026",
+     "Kuldaverið ehf.",
+     12448800
+    ],
+    [
+     "2026-04-30",
+     "IR00062",
+     "Rafmagnsíhlutir, apríl 2026",
+     "Rafspennir ehf.",
+     12312000
+    ],
+    [
+     "2026-06-30",
+     "IR00100",
+     "Rafmagnsíhlutir, júní 2026",
+     "Rafspennir ehf.",
+     12084000
+    ],
+    [
+     "2026-03-31",
+     "IR00043",
+     "Rafmagnsíhlutir, mars 2026",
+     "Rafspennir ehf.",
+     11628000
+    ],
+    [
+     "2026-02-28",
+     "IR00024",
+     "Rafmagnsíhlutir, febrúar 2026",
+     "Rafspennir ehf.",
+     10032000
+    ],
+    [
+     "2026-08-31",
+     "IR00138",
+     "Rafmagnsíhlutir, ágúst 2026",
+     "Rafspennir ehf.",
+     9804000
+    ],
+    [
+     "2026-01-31",
+     "IR00005",
+     "Rafmagnsíhlutir, janúar 2026",
+     "Rafspennir ehf.",
+     9348000
+    ],
+    [
+     "2026-07-31",
+     "IR00119",
+     "Rafmagnsíhlutir, júlí 2026",
+     "Rafspennir ehf.",
+     8892000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "2120",
+   "name": "Annað kostnaðarverð seldra vara",
+   "cat": "vorunotkun",
+   "v": 32111000.0,
+   "v8": 30861000.0,
+   "py8": 29160000.0,
+   "n": 12,
+   "m": [
+    3321000,
+    3564000,
+    4131000,
+    4374000,
+    4536000,
+    4293000,
+    3159000,
+    3483000,
+    0,
+    1250000
+   ],
+   "e": [
+    [
+     "2026-05-31",
+     "IR00084",
+     "Undirverktaki, hönnun og eftirlit, maí 2026",
+     "Verkfræðistofan Nyrðra ehf.",
+     4536000
+    ],
+    [
+     "2026-04-30",
+     "IR00065",
+     "Undirverktaki, hönnun og eftirlit, apríl 2026",
+     "Verkfræðistofan Nyrðra ehf.",
+     4374000
+    ],
+    [
+     "2026-06-30",
+     "IR00103",
+     "Undirverktaki, hönnun og eftirlit, júní 2026",
+     "Verkfræðistofan Nyrðra ehf.",
+     4293000
+    ],
+    [
+     "2026-03-31",
+     "IR00046",
+     "Undirverktaki, hönnun og eftirlit, mars 2026",
+     "Verkfræðistofan Nyrðra ehf.",
+     4131000
+    ],
+    [
+     "2026-02-28",
+     "IR00027",
+     "Undirverktaki, hönnun og eftirlit, febrúar 2026",
+     "Verkfræðistofan Nyrðra ehf.",
+     3564000
+    ],
+    [
+     "2026-08-31",
+     "IR00140",
+     "Undirverktaki, hönnun og eftirlit, ágúst 2026",
+     "Verkfræðistofan Nyrðra ehf.",
+     3483000
+    ],
+    [
+     "2026-01-31",
+     "IR00008",
+     "Undirverktaki, hönnun og eftirlit, janúar 2026",
+     "Verkfræðistofan Nyrðra ehf.",
+     3321000
+    ],
+    [
+     "2026-07-31",
+     "IR00122",
+     "Undirverktaki, hönnun og eftirlit, júlí 2026",
+     "Verkfræðistofan Nyrðra ehf.",
+     3159000
+    ],
+    [
+     "2026-10-05",
+     "IR00153",
+     "Sérfræðiþjónusta, greining bilana í kælikerfi",
+     "Verkfræðistofan Nyrðra ehf.",
+     850000
+    ],
+    [
+     "2026-10-06",
+     "IR00154",
+     "Sérfræðiþjónusta, úttekt á stýrikerfi",
+     "Verkfræðistofan Nyrðra ehf.",
+     640000
+    ],
+    [
+     "2026-10-06",
+     "IKR00001",
+     "Kreditreikningur, ofreiknaðir tímar á NY-2610-041",
+     "Verkfræðistofan Nyrðra ehf.",
+     -150000
+    ],
+    [
+     "2026-10-06",
+     "IKR00002",
+     "Kreditreikningur, afsláttur af NY-2610-052",
+     "Verkfræðistofan Nyrðra ehf.",
+     -90000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "2050",
+   "name": "Flutningskostnaður",
+   "cat": "vorunotkun",
+   "v": 25146000.0,
+   "v8": 25146000.0,
+   "py8": 23760000.0,
+   "n": 8,
+   "m": [
+    2706000,
+    2904000,
+    3366000,
+    3564000,
+    3696000,
+    3498000,
+    2574000,
+    2838000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-05-31",
+     "IR00091",
+     "Flutningskostnaður verka, maí 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     3696000
+    ],
+    [
+     "2026-04-30",
+     "IR00072",
+     "Flutningskostnaður verka, apríl 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     3564000
+    ],
+    [
+     "2026-06-30",
+     "IR00110",
+     "Flutningskostnaður verka, júní 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     3498000
+    ],
+    [
+     "2026-03-31",
+     "IR00053",
+     "Flutningskostnaður verka, mars 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     3366000
+    ],
+    [
+     "2026-02-28",
+     "IR00034",
+     "Flutningskostnaður verka, febrúar 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     2904000
+    ],
+    [
+     "2026-08-31",
+     "IR00147",
+     "Flutningskostnaður verka, ágúst 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     2838000
+    ],
+    [
+     "2026-01-31",
+     "IR00015",
+     "Flutningskostnaður verka, janúar 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     2706000
+    ],
+    [
+     "2026-07-31",
+     "IR00129",
+     "Flutningskostnaður verka, júlí 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     2574000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "2040",
+   "name": "Fenginn afsláttur af vörukaupum",
+   "cat": "vorunotkun",
+   "v": -186000.0,
+   "v8": 0,
+   "py8": 0.0,
+   "n": 1,
+   "m": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    -186000
+   ],
+   "e": [
+    [
+     "2026-10-14",
+     "LEIDR-1014B",
+     "Endurgreiðsla frá birgi, leiðrétting",
+     "",
+     -186000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "2210",
+   "name": "Laun",
+   "cat": "laun",
+   "v": 355944849.0,
+   "v8": 355944849.0,
+   "py8": 336325838.6666667,
+   "n": 40,
+   "m": [
+    38303776,
+    41106491,
+    47646161,
+    50448876,
+    52317354,
+    49514637,
+    36435300,
+    40172254,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Laun maí 2026",
+     "",
+     17787900
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Laun apríl 2026",
+     "",
+     17152618
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Laun júní 2026",
+     "",
+     16834977
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Laun mars 2026",
+     "",
+     16199695
+    ],
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Laun maí 2026",
+     "",
+     15695206
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Laun apríl 2026",
+     "",
+     15134663
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Laun júní 2026",
+     "",
+     14854391
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Laun mars 2026",
+     "",
+     14293848
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Laun febrúar 2026",
+     "",
+     13976207
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Laun ágúst 2026",
+     "",
+     13658566
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Laun janúar 2026",
+     "",
+     13023284
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Laun júlí 2026",
+     "",
+     12388002
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Laun febrúar 2026",
+     "",
+     12331947
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Laun ágúst 2026",
+     "",
+     12051676
+    ],
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Laun maí 2026",
+     "",
+     11509818
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Laun janúar 2026",
+     "",
+     11491133
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Laun apríl 2026",
+     "",
+     11098753
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Laun júlí 2026",
+     "",
+     10930590
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Laun júní 2026",
+     "",
+     10893220
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Laun mars 2026",
+     "",
+     10482155
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Laun febrúar 2026",
+     "",
+     9043428
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Laun ágúst 2026",
+     "",
+     8837896
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Laun janúar 2026",
+     "",
+     8426831
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Laun júlí 2026",
+     "",
+     8015766
+    ],
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Laun maí 2026",
+     "",
+     5754909
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Laun apríl 2026",
+     "",
+     5549376
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Laun júní 2026",
+     "",
+     5446610
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Laun mars 2026",
+     "",
+     5241078
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Laun febrúar 2026",
+     "",
+     4521714
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Laun ágúst 2026",
+     "",
+     4418948
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Laun janúar 2026",
+     "",
+     4213415
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Laun júlí 2026",
+     "",
+     4007883
+    ],
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Laun maí 2026",
+     "",
+     1569521
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Laun apríl 2026",
+     "",
+     1513466
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Laun júní 2026",
+     "",
+     1485439
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Laun mars 2026",
+     "",
+     1429385
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Laun febrúar 2026",
+     "",
+     1233195
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Laun ágúst 2026",
+     "",
+     1205168
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Laun janúar 2026",
+     "",
+     1149113
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Laun júlí 2026",
+     "",
+     1093059
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "2230",
+   "name": "Framlag í lífeyrissjóð",
+   "cat": "laun",
+   "v": 40933658.0,
+   "v8": 40933658.0,
+   "py8": 38677470.666666664,
+   "n": 40,
+   "m": [
+    4404935,
+    4727246,
+    5479309,
+    5801621,
+    6016496,
+    5694182,
+    4190060,
+    4619809,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Lífeyrissjóður, framlag maí 2026",
+     "",
+     2045608
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Lífeyrissjóður, framlag apríl 2026",
+     "",
+     1972551
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Lífeyrissjóður, framlag júní 2026",
+     "",
+     1936022
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Lífeyrissjóður, framlag mars 2026",
+     "",
+     1862965
+    ],
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Lífeyrissjóður, framlag maí 2026",
+     "",
+     1804949
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Lífeyrissjóður, framlag apríl 2026",
+     "",
+     1740486
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Lífeyrissjóður, framlag júní 2026",
+     "",
+     1708255
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Lífeyrissjóður, framlag mars 2026",
+     "",
+     1643793
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Lífeyrissjóður, framlag febrúar 2026",
+     "",
+     1607264
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Lífeyrissjóður, framlag ágúst 2026",
+     "",
+     1570735
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Lífeyrissjóður, framlag janúar 2026",
+     "",
+     1497678
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Lífeyrissjóður, framlag júlí 2026",
+     "",
+     1424620
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Lífeyrissjóður, framlag febrúar 2026",
+     "",
+     1418174
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Lífeyrissjóður, framlag ágúst 2026",
+     "",
+     1385943
+    ],
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Lífeyrissjóður, framlag maí 2026",
+     "",
+     1323629
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Lífeyrissjóður, framlag janúar 2026",
+     "",
+     1321480
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Lífeyrissjóður, framlag apríl 2026",
+     "",
+     1276357
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Lífeyrissjóður, framlag júlí 2026",
+     "",
+     1257018
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Lífeyrissjóður, framlag júní 2026",
+     "",
+     1252720
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Lífeyrissjóður, framlag mars 2026",
+     "",
+     1205448
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Lífeyrissjóður, framlag febrúar 2026",
+     "",
+     1039994
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Lífeyrissjóður, framlag ágúst 2026",
+     "",
+     1016358
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Lífeyrissjóður, framlag janúar 2026",
+     "",
+     969086
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Lífeyrissjóður, framlag júlí 2026",
+     "",
+     921813
+    ],
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Lífeyrissjóður, framlag maí 2026",
+     "",
+     661815
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Lífeyrissjóður, framlag apríl 2026",
+     "",
+     638178
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Lífeyrissjóður, framlag júní 2026",
+     "",
+     626360
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Lífeyrissjóður, framlag mars 2026",
+     "",
+     602724
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Lífeyrissjóður, framlag febrúar 2026",
+     "",
+     519997
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Lífeyrissjóður, framlag ágúst 2026",
+     "",
+     508179
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Lífeyrissjóður, framlag janúar 2026",
+     "",
+     484543
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Lífeyrissjóður, framlag júlí 2026",
+     "",
+     460907
+    ],
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Lífeyrissjóður, framlag maí 2026",
+     "",
+     180495
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Lífeyrissjóður, framlag apríl 2026",
+     "",
+     174049
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Lífeyrissjóður, framlag júní 2026",
+     "",
+     170825
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Lífeyrissjóður, framlag mars 2026",
+     "",
+     164379
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Lífeyrissjóður, framlag febrúar 2026",
+     "",
+     141817
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Lífeyrissjóður, framlag ágúst 2026",
+     "",
+     138594
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Lífeyrissjóður, framlag janúar 2026",
+     "",
+     132148
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Lífeyrissjóður, framlag júlí 2026",
+     "",
+     125702
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "2260",
+   "name": "Tryggingargjald",
+   "cat": "laun",
+   "v": 22602498.0,
+   "v8": 22602498.0,
+   "py8": 21356691.333333332,
+   "n": 40,
+   "m": [
+    2432291,
+    2610263,
+    3025531,
+    3203503,
+    3322153,
+    3144179,
+    2313641,
+    2550937,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Tryggingagjald maí 2026",
+     "",
+     1129532
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Tryggingagjald apríl 2026",
+     "",
+     1089191
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Tryggingagjald júní 2026",
+     "",
+     1069021
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Tryggingagjald mars 2026",
+     "",
+     1028681
+    ],
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Tryggingagjald maí 2026",
+     "",
+     996646
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Tryggingagjald apríl 2026",
+     "",
+     961051
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Tryggingagjald júní 2026",
+     "",
+     943254
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Tryggingagjald mars 2026",
+     "",
+     907659
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Tryggingagjald febrúar 2026",
+     "",
+     887489
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Tryggingagjald ágúst 2026",
+     "",
+     867319
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Tryggingagjald janúar 2026",
+     "",
+     826979
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Tryggingagjald júlí 2026",
+     "",
+     786638
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Tryggingagjald febrúar 2026",
+     "",
+     783079
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Tryggingagjald ágúst 2026",
+     "",
+     765281
+    ],
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Tryggingagjald maí 2026",
+     "",
+     730873
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Tryggingagjald janúar 2026",
+     "",
+     729687
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Tryggingagjald apríl 2026",
+     "",
+     704771
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Tryggingagjald júlí 2026",
+     "",
+     694092
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Tryggingagjald júní 2026",
+     "",
+     691719
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Tryggingagjald mars 2026",
+     "",
+     665617
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Tryggingagjald febrúar 2026",
+     "",
+     574258
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Tryggingagjald ágúst 2026",
+     "",
+     561206
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Tryggingagjald janúar 2026",
+     "",
+     535104
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Tryggingagjald júlí 2026",
+     "",
+     509001
+    ],
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Tryggingagjald maí 2026",
+     "",
+     365437
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Tryggingagjald apríl 2026",
+     "",
+     352385
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Tryggingagjald júní 2026",
+     "",
+     345860
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Tryggingagjald mars 2026",
+     "",
+     332808
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Tryggingagjald febrúar 2026",
+     "",
+     287129
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Tryggingagjald ágúst 2026",
+     "",
+     280603
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Tryggingagjald janúar 2026",
+     "",
+     267552
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Tryggingagjald júlí 2026",
+     "",
+     254501
+    ],
+    [
+     "2026-05-31",
+     "LAUN-2605",
+     "Tryggingagjald maí 2026",
+     "",
+     99665
+    ],
+    [
+     "2026-04-30",
+     "LAUN-2604",
+     "Tryggingagjald apríl 2026",
+     "",
+     96105
+    ],
+    [
+     "2026-06-30",
+     "LAUN-2606",
+     "Tryggingagjald júní 2026",
+     "",
+     94325
+    ],
+    [
+     "2026-03-31",
+     "LAUN-2603",
+     "Tryggingagjald mars 2026",
+     "",
+     90766
+    ],
+    [
+     "2026-02-28",
+     "LAUN-2602",
+     "Tryggingagjald febrúar 2026",
+     "",
+     78308
+    ],
+    [
+     "2026-08-31",
+     "LAUN-2608",
+     "Tryggingagjald ágúst 2026",
+     "",
+     76528
+    ],
+    [
+     "2026-01-31",
+     "LAUN-2601",
+     "Tryggingagjald janúar 2026",
+     "",
+     72969
+    ],
+    [
+     "2026-07-31",
+     "LAUN-2607",
+     "Tryggingagjald júlí 2026",
+     "",
+     69409
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "2420",
+   "name": "Matarkostnaður starfsmanna",
+   "cat": "laun",
+   "v": 10212000.0,
+   "v8": 10212000.0,
+   "py8": 10212000.0,
+   "n": 8,
+   "m": [
+    1276500,
+    1276500,
+    1276500,
+    1276500,
+    1276500,
+    1276500,
+    1276500,
+    1276500,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00013",
+     "Matarkostnaður starfsmanna, janúar 2026",
+     "Hlíðarmatur ehf.",
+     1276500
+    ],
+    [
+     "2026-02-28",
+     "IR00032",
+     "Matarkostnaður starfsmanna, febrúar 2026",
+     "Hlíðarmatur ehf.",
+     1276500
+    ],
+    [
+     "2026-03-31",
+     "IR00051",
+     "Matarkostnaður starfsmanna, mars 2026",
+     "Hlíðarmatur ehf.",
+     1276500
+    ],
+    [
+     "2026-04-30",
+     "IR00070",
+     "Matarkostnaður starfsmanna, apríl 2026",
+     "Hlíðarmatur ehf.",
+     1276500
+    ],
+    [
+     "2026-05-31",
+     "IR00089",
+     "Matarkostnaður starfsmanna, maí 2026",
+     "Hlíðarmatur ehf.",
+     1276500
+    ],
+    [
+     "2026-06-30",
+     "IR00108",
+     "Matarkostnaður starfsmanna, júní 2026",
+     "Hlíðarmatur ehf.",
+     1276500
+    ],
+    [
+     "2026-07-31",
+     "IR00127",
+     "Matarkostnaður starfsmanna, júlí 2026",
+     "Hlíðarmatur ehf.",
+     1276500
+    ],
+    [
+     "2026-08-31",
+     "IR00145",
+     "Matarkostnaður starfsmanna, ágúst 2026",
+     "Hlíðarmatur ehf.",
+     1276500
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "2430",
+   "name": "Gjafir og styrkir til starfsmanna",
+   "cat": "laun",
+   "v": 3040000.0,
+   "v8": 3040000.0,
+   "py8": 3040000.0,
+   "n": 8,
+   "m": [
+    380000,
+    380000,
+    380000,
+    380000,
+    380000,
+    380000,
+    380000,
+    380000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "GJOLD-2601",
+     "Íþróttastyrkir starfsmanna, janúar 2026",
+     "",
+     380000
+    ],
+    [
+     "2026-02-28",
+     "GJOLD-2602",
+     "Íþróttastyrkir starfsmanna, febrúar 2026",
+     "",
+     380000
+    ],
+    [
+     "2026-03-31",
+     "GJOLD-2603",
+     "Íþróttastyrkir starfsmanna, mars 2026",
+     "",
+     380000
+    ],
+    [
+     "2026-04-30",
+     "GJOLD-2604",
+     "Íþróttastyrkir starfsmanna, apríl 2026",
+     "",
+     380000
+    ],
+    [
+     "2026-05-31",
+     "GJOLD-2605",
+     "Íþróttastyrkir starfsmanna, maí 2026",
+     "",
+     380000
+    ],
+    [
+     "2026-06-30",
+     "GJOLD-2606",
+     "Íþróttastyrkir starfsmanna, júní 2026",
+     "",
+     380000
+    ],
+    [
+     "2026-07-31",
+     "GJOLD-2607",
+     "Íþróttastyrkir starfsmanna, júlí 2026",
+     "",
+     380000
+    ],
+    [
+     "2026-08-31",
+     "GJOLD-2608",
+     "Íþróttastyrkir starfsmanna, ágúst 2026",
+     "",
+     380000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "2440",
+   "name": "Annar starfsmannakostnaður",
+   "cat": "laun",
+   "v": 2908000.0,
+   "v8": 2908000.0,
+   "py8": 2876800.0,
+   "n": 9,
+   "m": [
+    359600,
+    359600,
+    359600,
+    359600,
+    359600,
+    359600,
+    359600,
+    390800,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00021",
+     "Annar starfsmannakostnaður, janúar 2026",
+     "Greiðslukort 3",
+     359600
+    ],
+    [
+     "2026-02-28",
+     "IR00040",
+     "Annar starfsmannakostnaður, febrúar 2026",
+     "Greiðslukort 3",
+     359600
+    ],
+    [
+     "2026-03-31",
+     "IR00059",
+     "Annar starfsmannakostnaður, mars 2026",
+     "Greiðslukort 3",
+     359600
+    ],
+    [
+     "2026-04-30",
+     "IR00078",
+     "Annar starfsmannakostnaður, apríl 2026",
+     "Greiðslukort 3",
+     359600
+    ],
+    [
+     "2026-05-31",
+     "IR00097",
+     "Annar starfsmannakostnaður, maí 2026",
+     "Greiðslukort 3",
+     359600
+    ],
+    [
+     "2026-06-30",
+     "IR00116",
+     "Annar starfsmannakostnaður, júní 2026",
+     "Greiðslukort 3",
+     359600
+    ],
+    [
+     "2026-07-31",
+     "IR00135",
+     "Annar starfsmannakostnaður, júlí 2026",
+     "Greiðslukort 3",
+     359600
+    ],
+    [
+     "2026-08-31",
+     "IR00152",
+     "Annar starfsmannakostnaður, ágúst 2026",
+     "Greiðslukort 3",
+     359600
+    ],
+    [
+     "2026-08-18",
+     "IR00002",
+     "Vinnuföt og hlífðarbúnaður",
+     "Greiðslukort 2",
+     31200
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "2410",
+   "name": "Slysatryggingar starfsmanna",
+   "cat": "laun",
+   "v": 1920000.0,
+   "v8": 1920000.0,
+   "py8": 1920000.0,
+   "n": 8,
+   "m": [
+    240000,
+    240000,
+    240000,
+    240000,
+    240000,
+    240000,
+    240000,
+    240000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00012",
+     "Slysatryggingar starfsmanna, janúar 2026",
+     "Krossanesvörn ehf.",
+     240000
+    ],
+    [
+     "2026-02-28",
+     "IR00031",
+     "Slysatryggingar starfsmanna, febrúar 2026",
+     "Krossanesvörn ehf.",
+     240000
+    ],
+    [
+     "2026-03-31",
+     "IR00050",
+     "Slysatryggingar starfsmanna, mars 2026",
+     "Krossanesvörn ehf.",
+     240000
+    ],
+    [
+     "2026-04-30",
+     "IR00069",
+     "Slysatryggingar starfsmanna, apríl 2026",
+     "Krossanesvörn ehf.",
+     240000
+    ],
+    [
+     "2026-05-31",
+     "IR00088",
+     "Slysatryggingar starfsmanna, maí 2026",
+     "Krossanesvörn ehf.",
+     240000
+    ],
+    [
+     "2026-06-30",
+     "IR00107",
+     "Slysatryggingar starfsmanna, júní 2026",
+     "Krossanesvörn ehf.",
+     240000
+    ],
+    [
+     "2026-07-31",
+     "IR00126",
+     "Slysatryggingar starfsmanna, júlí 2026",
+     "Krossanesvörn ehf.",
+     240000
+    ],
+    [
+     "2026-08-31",
+     "IR00144",
+     "Slysatryggingar starfsmanna, ágúst 2026",
+     "Krossanesvörn ehf.",
+     240000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3040",
+   "name": "Rafmagn",
+   "cat": "husnaedi",
+   "v": 11774000.0,
+   "v8": 11774000.0,
+   "py8": 11658000.0,
+   "n": 8,
+   "m": [
+    1450000,
+    1450000,
+    2044500,
+    1450000,
+    1450000,
+    1450000,
+    1029500,
+    1450000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-03-31",
+     "IR00044",
+     "Rafmagn, mars 2026 (+41%)",
+     "Norðurorka",
+     2044500
+    ],
+    [
+     "2026-08-31",
+     "IR00001",
+     "Rafmagn, ágúst 2026",
+     "Norðurorka",
+     1450000
+    ],
+    [
+     "2026-01-31",
+     "IR00006",
+     "Rafmagn, janúar 2026",
+     "Norðurorka",
+     1450000
+    ],
+    [
+     "2026-02-28",
+     "IR00025",
+     "Rafmagn, febrúar 2026",
+     "Norðurorka",
+     1450000
+    ],
+    [
+     "2026-04-30",
+     "IR00063",
+     "Rafmagn, apríl 2026",
+     "Norðurorka",
+     1450000
+    ],
+    [
+     "2026-05-31",
+     "IR00082",
+     "Rafmagn, maí 2026",
+     "Norðurorka",
+     1450000
+    ],
+    [
+     "2026-06-30",
+     "IR00101",
+     "Rafmagn, júní 2026",
+     "Norðurorka",
+     1450000
+    ],
+    [
+     "2026-07-31",
+     "IR00120",
+     "Rafmagn, júlí 2026 (-29%)",
+     "Norðurorka",
+     1029500
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3010",
+   "name": "Húsaleiga",
+   "cat": "husnaedi",
+   "v": 3600000.0,
+   "v8": 3600000.0,
+   "py8": 3600000.0,
+   "n": 16,
+   "m": [
+    450000,
+    450000,
+    450000,
+    450000,
+    450000,
+    450000,
+    450000,
+    450000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00017",
+     "Leiga á lagerhúsi í Hrísey, janúar 2026",
+     "Krókeyri ehf.",
+     285000
+    ],
+    [
+     "2026-02-28",
+     "IR00036",
+     "Leiga á lagerhúsi í Hrísey, febrúar 2026",
+     "Krókeyri ehf.",
+     285000
+    ],
+    [
+     "2026-03-31",
+     "IR00055",
+     "Leiga á lagerhúsi í Hrísey, mars 2026",
+     "Krókeyri ehf.",
+     285000
+    ],
+    [
+     "2026-04-30",
+     "IR00074",
+     "Leiga á lagerhúsi í Hrísey, apríl 2026",
+     "Krókeyri ehf.",
+     285000
+    ],
+    [
+     "2026-05-31",
+     "IR00093",
+     "Leiga á lagerhúsi í Hrísey, maí 2026",
+     "Krókeyri ehf.",
+     285000
+    ],
+    [
+     "2026-06-30",
+     "IR00112",
+     "Leiga á lagerhúsi í Hrísey, júní 2026",
+     "Krókeyri ehf.",
+     285000
+    ],
+    [
+     "2026-07-31",
+     "IR00131",
+     "Leiga á lagerhúsi í Hrísey, júlí 2026",
+     "Krókeyri ehf.",
+     285000
+    ],
+    [
+     "2026-08-31",
+     "IR00149",
+     "Leiga á lagerhúsi í Hrísey, ágúst 2026",
+     "Krókeyri ehf.",
+     285000
+    ],
+    [
+     "2026-01-31",
+     "IR00017",
+     "Rekstrarleiga, þjónustubíll, janúar 2026",
+     "Krókeyri ehf.",
+     165000
+    ],
+    [
+     "2026-02-28",
+     "IR00036",
+     "Rekstrarleiga, þjónustubíll, febrúar 2026",
+     "Krókeyri ehf.",
+     165000
+    ],
+    [
+     "2026-03-31",
+     "IR00055",
+     "Rekstrarleiga, þjónustubíll, mars 2026",
+     "Krókeyri ehf.",
+     165000
+    ],
+    [
+     "2026-04-30",
+     "IR00074",
+     "Rekstrarleiga, þjónustubíll, apríl 2026",
+     "Krókeyri ehf.",
+     165000
+    ],
+    [
+     "2026-05-31",
+     "IR00093",
+     "Rekstrarleiga, þjónustubíll, maí 2026",
+     "Krókeyri ehf.",
+     165000
+    ],
+    [
+     "2026-06-30",
+     "IR00112",
+     "Rekstrarleiga, þjónustubíll, júní 2026",
+     "Krókeyri ehf.",
+     165000
+    ],
+    [
+     "2026-07-31",
+     "IR00131",
+     "Rekstrarleiga, þjónustubíll, júlí 2026",
+     "Krókeyri ehf.",
+     165000
+    ],
+    [
+     "2026-08-31",
+     "IR00149",
+     "Rekstrarleiga, þjónustubíll, ágúst 2026",
+     "Krókeyri ehf.",
+     165000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3030",
+   "name": "Hiti",
+   "cat": "husnaedi",
+   "v": 2700800.0,
+   "v8": 2700800.0,
+   "py8": 2560000.0,
+   "n": 8,
+   "m": [
+    460800,
+    320000,
+    320000,
+    320000,
+    320000,
+    320000,
+    320000,
+    320000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00006",
+     "Hiti, janúar 2026 (+44%)",
+     "Norðurorka",
+     460800
+    ],
+    [
+     "2026-08-31",
+     "IR00001",
+     "Hiti, ágúst 2026",
+     "Norðurorka",
+     320000
+    ],
+    [
+     "2026-02-28",
+     "IR00025",
+     "Hiti, febrúar 2026",
+     "Norðurorka",
+     320000
+    ],
+    [
+     "2026-03-31",
+     "IR00044",
+     "Hiti, mars 2026",
+     "Norðurorka",
+     320000
+    ],
+    [
+     "2026-04-30",
+     "IR00063",
+     "Hiti, apríl 2026",
+     "Norðurorka",
+     320000
+    ],
+    [
+     "2026-05-31",
+     "IR00082",
+     "Hiti, maí 2026",
+     "Norðurorka",
+     320000
+    ],
+    [
+     "2026-06-30",
+     "IR00101",
+     "Hiti, júní 2026",
+     "Norðurorka",
+     320000
+    ],
+    [
+     "2026-07-31",
+     "IR00120",
+     "Hiti, júlí 2026",
+     "Norðurorka",
+     320000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3060",
+   "name": "Fasteignagjöld",
+   "cat": "husnaedi",
+   "v": 2480000.0,
+   "v8": 2480000.0,
+   "py8": 2480000.0,
+   "n": 8,
+   "m": [
+    310000,
+    310000,
+    310000,
+    310000,
+    310000,
+    310000,
+    310000,
+    310000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "GJOLD-2601",
+     "Fasteignagjöld, Hjallavegur 15, janúar 2026",
+     "",
+     310000
+    ],
+    [
+     "2026-02-28",
+     "GJOLD-2602",
+     "Fasteignagjöld, Hjallavegur 15, febrúar 2026",
+     "",
+     310000
+    ],
+    [
+     "2026-03-31",
+     "GJOLD-2603",
+     "Fasteignagjöld, Hjallavegur 15, mars 2026",
+     "",
+     310000
+    ],
+    [
+     "2026-04-30",
+     "GJOLD-2604",
+     "Fasteignagjöld, Hjallavegur 15, apríl 2026",
+     "",
+     310000
+    ],
+    [
+     "2026-05-31",
+     "GJOLD-2605",
+     "Fasteignagjöld, Hjallavegur 15, maí 2026",
+     "",
+     310000
+    ],
+    [
+     "2026-06-30",
+     "GJOLD-2606",
+     "Fasteignagjöld, Hjallavegur 15, júní 2026",
+     "",
+     310000
+    ],
+    [
+     "2026-07-31",
+     "GJOLD-2607",
+     "Fasteignagjöld, Hjallavegur 15, júlí 2026",
+     "",
+     310000
+    ],
+    [
+     "2026-08-31",
+     "GJOLD-2608",
+     "Fasteignagjöld, Hjallavegur 15, ágúst 2026",
+     "",
+     310000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3050",
+   "name": "Þrif",
+   "cat": "husnaedi",
+   "v": 1920000.0,
+   "v8": 1920000.0,
+   "py8": 1920000.0,
+   "n": 8,
+   "m": [
+    240000,
+    240000,
+    240000,
+    240000,
+    240000,
+    240000,
+    240000,
+    240000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00009",
+     "Þrif, janúar 2026",
+     "Fægiver ehf.",
+     240000
+    ],
+    [
+     "2026-02-28",
+     "IR00028",
+     "Þrif, febrúar 2026",
+     "Fægiver ehf.",
+     240000
+    ],
+    [
+     "2026-03-31",
+     "IR00047",
+     "Þrif, mars 2026",
+     "Fægiver ehf.",
+     240000
+    ],
+    [
+     "2026-04-30",
+     "IR00066",
+     "Þrif, apríl 2026",
+     "Fægiver ehf.",
+     240000
+    ],
+    [
+     "2026-05-31",
+     "IR00085",
+     "Þrif, maí 2026",
+     "Fægiver ehf.",
+     240000
+    ],
+    [
+     "2026-06-30",
+     "IR00104",
+     "Þrif, júní 2026",
+     "Fægiver ehf.",
+     240000
+    ],
+    [
+     "2026-07-31",
+     "IR00123",
+     "Þrif, júlí 2026",
+     "Fægiver ehf.",
+     240000
+    ],
+    [
+     "2026-08-31",
+     "IR00141",
+     "Þrif, ágúst 2026",
+     "Fægiver ehf.",
+     240000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3020",
+   "name": "Tryggingar húsnæðis",
+   "cat": "husnaedi",
+   "v": 1480000.0,
+   "v8": 1480000.0,
+   "py8": 1480000.0,
+   "n": 8,
+   "m": [
+    185000,
+    185000,
+    185000,
+    185000,
+    185000,
+    185000,
+    185000,
+    185000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00012",
+     "Tryggingar húsnæðis, janúar 2026",
+     "Krossanesvörn ehf.",
+     185000
+    ],
+    [
+     "2026-02-28",
+     "IR00031",
+     "Tryggingar húsnæðis, febrúar 2026",
+     "Krossanesvörn ehf.",
+     185000
+    ],
+    [
+     "2026-03-31",
+     "IR00050",
+     "Tryggingar húsnæðis, mars 2026",
+     "Krossanesvörn ehf.",
+     185000
+    ],
+    [
+     "2026-04-30",
+     "IR00069",
+     "Tryggingar húsnæðis, apríl 2026",
+     "Krossanesvörn ehf.",
+     185000
+    ],
+    [
+     "2026-05-31",
+     "IR00088",
+     "Tryggingar húsnæðis, maí 2026",
+     "Krossanesvörn ehf.",
+     185000
+    ],
+    [
+     "2026-06-30",
+     "IR00107",
+     "Tryggingar húsnæðis, júní 2026",
+     "Krossanesvörn ehf.",
+     185000
+    ],
+    [
+     "2026-07-31",
+     "IR00126",
+     "Tryggingar húsnæðis, júlí 2026",
+     "Krossanesvörn ehf.",
+     185000
+    ],
+    [
+     "2026-08-31",
+     "IR00144",
+     "Tryggingar húsnæðis, ágúst 2026",
+     "Krossanesvörn ehf.",
+     185000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3070",
+   "name": "Annar húsnæðiskostnaður",
+   "cat": "husnaedi",
+   "v": 1440000.0,
+   "v8": 1440000.0,
+   "py8": 1440000.0,
+   "n": 8,
+   "m": [
+    180000,
+    180000,
+    180000,
+    180000,
+    180000,
+    180000,
+    180000,
+    180000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00014",
+     "Annar húsnæðiskostnaður, janúar 2026",
+     "Steðjasalan ehf.",
+     180000
+    ],
+    [
+     "2026-02-28",
+     "IR00033",
+     "Annar húsnæðiskostnaður, febrúar 2026",
+     "Steðjasalan ehf.",
+     180000
+    ],
+    [
+     "2026-03-31",
+     "IR00052",
+     "Annar húsnæðiskostnaður, mars 2026",
+     "Steðjasalan ehf.",
+     180000
+    ],
+    [
+     "2026-04-30",
+     "IR00071",
+     "Annar húsnæðiskostnaður, apríl 2026",
+     "Steðjasalan ehf.",
+     180000
+    ],
+    [
+     "2026-05-31",
+     "IR00090",
+     "Annar húsnæðiskostnaður, maí 2026",
+     "Steðjasalan ehf.",
+     180000
+    ],
+    [
+     "2026-06-30",
+     "IR00109",
+     "Annar húsnæðiskostnaður, júní 2026",
+     "Steðjasalan ehf.",
+     180000
+    ],
+    [
+     "2026-07-31",
+     "IR00128",
+     "Annar húsnæðiskostnaður, júlí 2026",
+     "Steðjasalan ehf.",
+     180000
+    ],
+    [
+     "2026-08-31",
+     "IR00146",
+     "Annar húsnæðiskostnaður, ágúst 2026",
+     "Steðjasalan ehf.",
+     180000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3670",
+   "name": "Annar rekstrarkostnaður",
+   "cat": "annar_rekstur",
+   "v": 24250000.0,
+   "v8": 19200000.0,
+   "py8": 0.0,
+   "n": 14,
+   "m": [
+    2400000,
+    2400000,
+    2400000,
+    2400000,
+    2400000,
+    2400000,
+    2400000,
+    2400000,
+    5050000,
+    0
+   ],
+   "e": [
+    [
+     "2026-09-30",
+     "NSS-26-4418",
+     "Nordic Steel Supply, ryðfrítt plötustál",
+     "",
+     2650000
+    ],
+    [
+     "2026-09-30",
+     "DTE-0926",
+     "Stjórnunarþjónusta september",
+     "",
+     2400000
+    ],
+    [
+     "2026-01-31",
+     "DTE-0126",
+     "Stjórnunarþjónusta janúar",
+     "Eyjavör fjárfestingar ehf.",
+     2400000
+    ],
+    [
+     "2026-02-28",
+     "DTE-0226",
+     "Stjórnunarþjónusta febrúar",
+     "Eyjavör fjárfestingar ehf.",
+     2400000
+    ],
+    [
+     "2026-03-31",
+     "DTE-0326",
+     "Stjórnunarþjónusta mars",
+     "Eyjavör fjárfestingar ehf.",
+     2400000
+    ],
+    [
+     "2026-04-30",
+     "DTE-0426",
+     "Stjórnunarþjónusta apríl",
+     "Eyjavör fjárfestingar ehf.",
+     2400000
+    ],
+    [
+     "2026-05-31",
+     "DTE-0526",
+     "Stjórnunarþjónusta maí",
+     "Eyjavör fjárfestingar ehf.",
+     2400000
+    ],
+    [
+     "2026-06-30",
+     "DTE-0626",
+     "Stjórnunarþjónusta júní",
+     "Eyjavör fjárfestingar ehf.",
+     2400000
+    ],
+    [
+     "2026-07-31",
+     "DTE-0726",
+     "Stjórnunarþjónusta júlí",
+     "Eyjavör fjárfestingar ehf.",
+     2400000
+    ],
+    [
+     "2026-08-31",
+     "DTE-0826",
+     "Stjórnunarþjónusta ágúst",
+     "Eyjavör fjárfestingar ehf.",
+     2400000
+    ],
+    [
+     "2026-09-30",
+     "MILLIF-0930",
+     "Millifærsla tengdra aðila",
+     "",
+     380000
+    ],
+    [
+     "2026-09-30",
+     "MILLIF-0930",
+     "Millifærsla tengdra aðila",
+     "",
+     -380000
+    ],
+    [
+     "2026-09-30",
+     "MILLIF-0930",
+     "Millifærsla tengdra aðila",
+     "",
+     380000
+    ],
+    [
+     "2026-09-30",
+     "MILLIF-0930",
+     "Millifærsla tengdra aðila",
+     "",
+     -380000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3470",
+   "name": "Bílaleigubílar og leigubílar",
+   "cat": "annar_rekstur",
+   "v": 5360200.0,
+   "v8": 5360200.0,
+   "py8": 5616000.0,
+   "n": 8,
+   "m": [
+    639600,
+    686400,
+    795600,
+    842400,
+    873600,
+    826800,
+    608400,
+    87400,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-05-31",
+     "IR00096",
+     "Bílaleigubílar og leigubílar, maí 2026",
+     "Greiðslukort 2",
+     873600
+    ],
+    [
+     "2026-04-30",
+     "IR00077",
+     "Bílaleigubílar og leigubílar, apríl 2026",
+     "Greiðslukort 2",
+     842400
+    ],
+    [
+     "2026-06-30",
+     "IR00115",
+     "Bílaleigubílar og leigubílar, júní 2026",
+     "Greiðslukort 2",
+     826800
+    ],
+    [
+     "2026-03-31",
+     "IR00058",
+     "Bílaleigubílar og leigubílar, mars 2026",
+     "Greiðslukort 2",
+     795600
+    ],
+    [
+     "2026-02-28",
+     "IR00039",
+     "Bílaleigubílar og leigubílar, febrúar 2026",
+     "Greiðslukort 2",
+     686400
+    ],
+    [
+     "2026-01-31",
+     "IR00020",
+     "Bílaleigubílar og leigubílar, janúar 2026",
+     "Greiðslukort 2",
+     639600
+    ],
+    [
+     "2026-07-31",
+     "IR00134",
+     "Bílaleigubílar og leigubílar, júlí 2026",
+     "Greiðslukort 2",
+     608400
+    ],
+    [
+     "2026-08-18",
+     "IR00002",
+     "Bílaleigubíll, uppsetning hjá K70 á Sauðárkróki",
+     "Greiðslukort 2",
+     87400
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3150",
+   "name": "Viðhald áhalda og tækja",
+   "cat": "annar_rekstur",
+   "v": 5120000.0,
+   "v8": 5120000.0,
+   "py8": 5120000.0,
+   "n": 8,
+   "m": [
+    640000,
+    640000,
+    640000,
+    640000,
+    640000,
+    640000,
+    640000,
+    640000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00014",
+     "Viðhald áhalda og tækja, janúar 2026",
+     "Steðjasalan ehf.",
+     640000
+    ],
+    [
+     "2026-02-28",
+     "IR00033",
+     "Viðhald áhalda og tækja, febrúar 2026",
+     "Steðjasalan ehf.",
+     640000
+    ],
+    [
+     "2026-03-31",
+     "IR00052",
+     "Viðhald áhalda og tækja, mars 2026",
+     "Steðjasalan ehf.",
+     640000
+    ],
+    [
+     "2026-04-30",
+     "IR00071",
+     "Viðhald áhalda og tækja, apríl 2026",
+     "Steðjasalan ehf.",
+     640000
+    ],
+    [
+     "2026-05-31",
+     "IR00090",
+     "Viðhald áhalda og tækja, maí 2026",
+     "Steðjasalan ehf.",
+     640000
+    ],
+    [
+     "2026-06-30",
+     "IR00109",
+     "Viðhald áhalda og tækja, júní 2026",
+     "Steðjasalan ehf.",
+     640000
+    ],
+    [
+     "2026-07-31",
+     "IR00128",
+     "Viðhald áhalda og tækja, júlí 2026",
+     "Steðjasalan ehf.",
+     640000
+    ],
+    [
+     "2026-08-31",
+     "IR00146",
+     "Viðhald áhalda og tækja, ágúst 2026",
+     "Steðjasalan ehf.",
+     640000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3410",
+   "name": "Bensín og olía",
+   "cat": "annar_rekstur",
+   "v": 4960000.0,
+   "v8": 4960000.0,
+   "py8": 4960000.0,
+   "n": 8,
+   "m": [
+    620000,
+    620000,
+    620000,
+    620000,
+    620000,
+    620000,
+    620000,
+    620000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00007",
+     "Bensín og olía, janúar 2026",
+     "Olís",
+     620000
+    ],
+    [
+     "2026-02-28",
+     "IR00026",
+     "Bensín og olía, febrúar 2026",
+     "Olís",
+     620000
+    ],
+    [
+     "2026-03-31",
+     "IR00045",
+     "Bensín og olía, mars 2026",
+     "Olís",
+     620000
+    ],
+    [
+     "2026-04-30",
+     "IR00064",
+     "Bensín og olía, apríl 2026",
+     "Olís",
+     620000
+    ],
+    [
+     "2026-05-31",
+     "IR00083",
+     "Bensín og olía, maí 2026",
+     "Olís",
+     620000
+    ],
+    [
+     "2026-06-30",
+     "IR00102",
+     "Bensín og olía, júní 2026",
+     "Olís",
+     620000
+    ],
+    [
+     "2026-07-31",
+     "IR00121",
+     "Bensín og olía, júlí 2026",
+     "Olís",
+     620000
+    ],
+    [
+     "2026-08-31",
+     "IR00139",
+     "Bensín og olía, ágúst 2026",
+     "Olís",
+     620000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3610",
+   "name": "Bókhalds- og endurskoðunarkostnaður",
+   "cat": "annar_rekstur",
+   "v": 3850000.0,
+   "v8": 3840000.0,
+   "py8": 3840000.0,
+   "n": 9,
+   "m": [
+    480000,
+    480000,
+    480000,
+    480000,
+    480000,
+    480000,
+    480000,
+    480000,
+    0,
+    10000
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00011",
+     "Bókhald og endurskoðun, janúar 2026",
+     "Sundvík ehf.",
+     480000
+    ],
+    [
+     "2026-02-28",
+     "IR00030",
+     "Bókhald og endurskoðun, febrúar 2026",
+     "Sundvík ehf.",
+     480000
+    ],
+    [
+     "2026-03-31",
+     "IR00049",
+     "Bókhald og endurskoðun, mars 2026",
+     "Sundvík ehf.",
+     480000
+    ],
+    [
+     "2026-04-30",
+     "IR00068",
+     "Bókhald og endurskoðun, apríl 2026",
+     "Sundvík ehf.",
+     480000
+    ],
+    [
+     "2026-05-31",
+     "IR00087",
+     "Bókhald og endurskoðun, maí 2026",
+     "Sundvík ehf.",
+     480000
+    ],
+    [
+     "2026-06-30",
+     "IR00106",
+     "Bókhald og endurskoðun, júní 2026",
+     "Sundvík ehf.",
+     480000
+    ],
+    [
+     "2026-07-31",
+     "IR00125",
+     "Bókhald og endurskoðun, júlí 2026",
+     "Sundvík ehf.",
+     480000
+    ],
+    [
+     "2026-08-31",
+     "IR00143",
+     "Bókhald og endurskoðun, ágúst 2026",
+     "Sundvík ehf.",
+     480000
+    ],
+    [
+     "2026-10-09",
+     "IR00155",
+     "PRÓFUN athugasemd í samþykkt",
+     "Þórunnarverk ehf.",
+     10000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3550",
+   "name": "Sendingarkostnaður",
+   "cat": "annar_rekstur",
+   "v": 3840000.0,
+   "v8": 3840000.0,
+   "py8": 3840000.0,
+   "n": 8,
+   "m": [
+    480000,
+    480000,
+    480000,
+    480000,
+    480000,
+    480000,
+    480000,
+    480000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00015",
+     "Sendingarkostnaður, janúar 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     480000
+    ],
+    [
+     "2026-02-28",
+     "IR00034",
+     "Sendingarkostnaður, febrúar 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     480000
+    ],
+    [
+     "2026-03-31",
+     "IR00053",
+     "Sendingarkostnaður, mars 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     480000
+    ],
+    [
+     "2026-04-30",
+     "IR00072",
+     "Sendingarkostnaður, apríl 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     480000
+    ],
+    [
+     "2026-05-31",
+     "IR00091",
+     "Sendingarkostnaður, maí 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     480000
+    ],
+    [
+     "2026-06-30",
+     "IR00110",
+     "Sendingarkostnaður, júní 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     480000
+    ],
+    [
+     "2026-07-31",
+     "IR00129",
+     "Sendingarkostnaður, júlí 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     480000
+    ],
+    [
+     "2026-08-31",
+     "IR00147",
+     "Sendingarkostnaður, ágúst 2026",
+     "Flutningar Eyjafjarðar ehf.",
+     480000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3110",
+   "name": "Gjaldfærður hugbúnaður",
+   "cat": "annar_rekstur",
+   "v": 3360000.0,
+   "v8": 3360000.0,
+   "py8": 3360000.0,
+   "n": 8,
+   "m": [
+    420000,
+    420000,
+    420000,
+    420000,
+    420000,
+    420000,
+    420000,
+    420000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00010",
+     "Gjaldfærður hugbúnaður, janúar 2026",
+     "Fjarskiptaver ehf.",
+     420000
+    ],
+    [
+     "2026-02-28",
+     "IR00029",
+     "Gjaldfærður hugbúnaður, febrúar 2026",
+     "Fjarskiptaver ehf.",
+     420000
+    ],
+    [
+     "2026-03-31",
+     "IR00048",
+     "Gjaldfærður hugbúnaður, mars 2026",
+     "Fjarskiptaver ehf.",
+     420000
+    ],
+    [
+     "2026-04-30",
+     "IR00067",
+     "Gjaldfærður hugbúnaður, apríl 2026",
+     "Fjarskiptaver ehf.",
+     420000
+    ],
+    [
+     "2026-05-31",
+     "IR00086",
+     "Gjaldfærður hugbúnaður, maí 2026",
+     "Fjarskiptaver ehf.",
+     420000
+    ],
+    [
+     "2026-06-30",
+     "IR00105",
+     "Gjaldfærður hugbúnaður, júní 2026",
+     "Fjarskiptaver ehf.",
+     420000
+    ],
+    [
+     "2026-07-31",
+     "IR00124",
+     "Gjaldfærður hugbúnaður, júlí 2026",
+     "Fjarskiptaver ehf.",
+     420000
+    ],
+    [
+     "2026-08-31",
+     "IR00142",
+     "Gjaldfærður hugbúnaður, ágúst 2026",
+     "Fjarskiptaver ehf.",
+     420000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3130",
+   "name": "Gjaldfærð áhöld og tæki",
+   "cat": "annar_rekstur",
+   "v": 3040000.0,
+   "v8": 3040000.0,
+   "py8": 3040000.0,
+   "n": 8,
+   "m": [
+    380000,
+    380000,
+    380000,
+    380000,
+    380000,
+    380000,
+    380000,
+    380000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00014",
+     "Gjaldfærð áhöld og tæki, janúar 2026",
+     "Steðjasalan ehf.",
+     380000
+    ],
+    [
+     "2026-02-28",
+     "IR00033",
+     "Gjaldfærð áhöld og tæki, febrúar 2026",
+     "Steðjasalan ehf.",
+     380000
+    ],
+    [
+     "2026-03-31",
+     "IR00052",
+     "Gjaldfærð áhöld og tæki, mars 2026",
+     "Steðjasalan ehf.",
+     380000
+    ],
+    [
+     "2026-04-30",
+     "IR00071",
+     "Gjaldfærð áhöld og tæki, apríl 2026",
+     "Steðjasalan ehf.",
+     380000
+    ],
+    [
+     "2026-05-31",
+     "IR00090",
+     "Gjaldfærð áhöld og tæki, maí 2026",
+     "Steðjasalan ehf.",
+     380000
+    ],
+    [
+     "2026-06-30",
+     "IR00109",
+     "Gjaldfærð áhöld og tæki, júní 2026",
+     "Steðjasalan ehf.",
+     380000
+    ],
+    [
+     "2026-07-31",
+     "IR00128",
+     "Gjaldfærð áhöld og tæki, júlí 2026",
+     "Steðjasalan ehf.",
+     380000
+    ],
+    [
+     "2026-08-31",
+     "IR00146",
+     "Gjaldfærð áhöld og tæki, ágúst 2026",
+     "Steðjasalan ehf.",
+     380000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3590",
+   "name": "Aðrar tryggingar",
+   "cat": "annar_rekstur",
+   "v": 2560000.0,
+   "v8": 2560000.0,
+   "py8": 2560000.0,
+   "n": 8,
+   "m": [
+    320000,
+    320000,
+    320000,
+    320000,
+    320000,
+    320000,
+    320000,
+    320000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00012",
+     "Aðrar tryggingar, janúar 2026",
+     "Krossanesvörn ehf.",
+     320000
+    ],
+    [
+     "2026-02-28",
+     "IR00031",
+     "Aðrar tryggingar, febrúar 2026",
+     "Krossanesvörn ehf.",
+     320000
+    ],
+    [
+     "2026-03-31",
+     "IR00050",
+     "Aðrar tryggingar, mars 2026",
+     "Krossanesvörn ehf.",
+     320000
+    ],
+    [
+     "2026-04-30",
+     "IR00069",
+     "Aðrar tryggingar, apríl 2026",
+     "Krossanesvörn ehf.",
+     320000
+    ],
+    [
+     "2026-05-31",
+     "IR00088",
+     "Aðrar tryggingar, maí 2026",
+     "Krossanesvörn ehf.",
+     320000
+    ],
+    [
+     "2026-06-30",
+     "IR00107",
+     "Aðrar tryggingar, júní 2026",
+     "Krossanesvörn ehf.",
+     320000
+    ],
+    [
+     "2026-07-31",
+     "IR00126",
+     "Aðrar tryggingar, júlí 2026",
+     "Krossanesvörn ehf.",
+     320000
+    ],
+    [
+     "2026-08-31",
+     "IR00144",
+     "Aðrar tryggingar, ágúst 2026",
+     "Krossanesvörn ehf.",
+     320000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3230",
+   "name": "Ferðakostnaður",
+   "cat": "annar_rekstur",
+   "v": 2468500.0,
+   "v8": 2468500.0,
+   "py8": 2320000.0,
+   "n": 9,
+   "m": [
+    290000,
+    290000,
+    290000,
+    290000,
+    290000,
+    290000,
+    290000,
+    438500,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00019",
+     "Ferðakostnaður, janúar 2026",
+     "Greiðslukort 1",
+     290000
+    ],
+    [
+     "2026-02-28",
+     "IR00038",
+     "Ferðakostnaður, febrúar 2026",
+     "Greiðslukort 1",
+     290000
+    ],
+    [
+     "2026-03-31",
+     "IR00057",
+     "Ferðakostnaður, mars 2026",
+     "Greiðslukort 1",
+     290000
+    ],
+    [
+     "2026-04-30",
+     "IR00076",
+     "Ferðakostnaður, apríl 2026",
+     "Greiðslukort 1",
+     290000
+    ],
+    [
+     "2026-05-31",
+     "IR00095",
+     "Ferðakostnaður, maí 2026",
+     "Greiðslukort 1",
+     290000
+    ],
+    [
+     "2026-06-30",
+     "IR00114",
+     "Ferðakostnaður, júní 2026",
+     "Greiðslukort 1",
+     290000
+    ],
+    [
+     "2026-07-31",
+     "IR00133",
+     "Ferðakostnaður, júlí 2026",
+     "Greiðslukort 1",
+     290000
+    ],
+    [
+     "2026-08-31",
+     "IR00151",
+     "Ferðakostnaður, ágúst 2026",
+     "Greiðslukort 1",
+     290000
+    ],
+    [
+     "2026-08-18",
+     "IR00002",
+     "Flug Akureyri-Reykjavík, tvær ferðir, Icelandair",
+     "Greiðslukort 2",
+     148500
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3510",
+   "name": "Símakostnaður",
+   "cat": "annar_rekstur",
+   "v": 2413950.0,
+   "v8": 2413950.0,
+   "py8": 2378800.0,
+   "n": 8,
+   "m": [
+    285000,
+    285000,
+    285000,
+    285000,
+    285000,
+    285000,
+    285000,
+    418950,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-08-31",
+     "IR00142",
+     "Símakostnaður, ágúst 2026 (+47%)",
+     "Fjarskiptaver ehf.",
+     418950
+    ],
+    [
+     "2026-01-31",
+     "IR00010",
+     "Símakostnaður, janúar 2026",
+     "Fjarskiptaver ehf.",
+     285000
+    ],
+    [
+     "2026-02-28",
+     "IR00029",
+     "Símakostnaður, febrúar 2026",
+     "Fjarskiptaver ehf.",
+     285000
+    ],
+    [
+     "2026-03-31",
+     "IR00048",
+     "Símakostnaður, mars 2026",
+     "Fjarskiptaver ehf.",
+     285000
+    ],
+    [
+     "2026-04-30",
+     "IR00067",
+     "Símakostnaður, apríl 2026",
+     "Fjarskiptaver ehf.",
+     285000
+    ],
+    [
+     "2026-05-31",
+     "IR00086",
+     "Símakostnaður, maí 2026",
+     "Fjarskiptaver ehf.",
+     285000
+    ],
+    [
+     "2026-06-30",
+     "IR00105",
+     "Símakostnaður, júní 2026",
+     "Fjarskiptaver ehf.",
+     285000
+    ],
+    [
+     "2026-07-31",
+     "IR00124",
+     "Símakostnaður, júlí 2026",
+     "Fjarskiptaver ehf.",
+     285000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3480",
+   "name": "Viðgerðir og viðhald bifreiða",
+   "cat": "annar_rekstur",
+   "v": 1920000.0,
+   "v8": 1920000.0,
+   "py8": 1920000.0,
+   "n": 8,
+   "m": [
+    240000,
+    240000,
+    240000,
+    240000,
+    240000,
+    240000,
+    240000,
+    240000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00016",
+     "Viðgerðir og viðhald bifreiða, janúar 2026",
+     "Þórunnarverk ehf.",
+     240000
+    ],
+    [
+     "2026-02-28",
+     "IR00035",
+     "Viðgerðir og viðhald bifreiða, febrúar 2026",
+     "Þórunnarverk ehf.",
+     240000
+    ],
+    [
+     "2026-03-31",
+     "IR00054",
+     "Viðgerðir og viðhald bifreiða, mars 2026",
+     "Þórunnarverk ehf.",
+     240000
+    ],
+    [
+     "2026-04-30",
+     "IR00073",
+     "Viðgerðir og viðhald bifreiða, apríl 2026",
+     "Þórunnarverk ehf.",
+     240000
+    ],
+    [
+     "2026-05-31",
+     "IR00092",
+     "Viðgerðir og viðhald bifreiða, maí 2026",
+     "Þórunnarverk ehf.",
+     240000
+    ],
+    [
+     "2026-06-30",
+     "IR00111",
+     "Viðgerðir og viðhald bifreiða, júní 2026",
+     "Þórunnarverk ehf.",
+     240000
+    ],
+    [
+     "2026-07-31",
+     "IR00130",
+     "Viðgerðir og viðhald bifreiða, júlí 2026",
+     "Þórunnarverk ehf.",
+     240000
+    ],
+    [
+     "2026-08-31",
+     "IR00148",
+     "Viðgerðir og viðhald bifreiða, ágúst 2026",
+     "Þórunnarverk ehf.",
+     240000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3160",
+   "name": "Annar hugbúnaðar- og tæknikostnaður",
+   "cat": "annar_rekstur",
+   "v": 1680000.0,
+   "v8": 1680000.0,
+   "py8": 1680000.0,
+   "n": 8,
+   "m": [
+    210000,
+    210000,
+    210000,
+    210000,
+    210000,
+    210000,
+    210000,
+    210000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00010",
+     "Annar tæknikostnaður, janúar 2026",
+     "Fjarskiptaver ehf.",
+     210000
+    ],
+    [
+     "2026-02-28",
+     "IR00029",
+     "Annar tæknikostnaður, febrúar 2026",
+     "Fjarskiptaver ehf.",
+     210000
+    ],
+    [
+     "2026-03-31",
+     "IR00048",
+     "Annar tæknikostnaður, mars 2026",
+     "Fjarskiptaver ehf.",
+     210000
+    ],
+    [
+     "2026-04-30",
+     "IR00067",
+     "Annar tæknikostnaður, apríl 2026",
+     "Fjarskiptaver ehf.",
+     210000
+    ],
+    [
+     "2026-05-31",
+     "IR00086",
+     "Annar tæknikostnaður, maí 2026",
+     "Fjarskiptaver ehf.",
+     210000
+    ],
+    [
+     "2026-06-30",
+     "IR00105",
+     "Annar tæknikostnaður, júní 2026",
+     "Fjarskiptaver ehf.",
+     210000
+    ],
+    [
+     "2026-07-31",
+     "IR00124",
+     "Annar tæknikostnaður, júlí 2026",
+     "Fjarskiptaver ehf.",
+     210000
+    ],
+    [
+     "2026-08-31",
+     "IR00142",
+     "Annar tæknikostnaður, ágúst 2026",
+     "Fjarskiptaver ehf.",
+     210000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3420",
+   "name": "Tryggingar bifreiða",
+   "cat": "annar_rekstur",
+   "v": 1680000.0,
+   "v8": 1680000.0,
+   "py8": 1680000.0,
+   "n": 8,
+   "m": [
+    210000,
+    210000,
+    210000,
+    210000,
+    210000,
+    210000,
+    210000,
+    210000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00012",
+     "Tryggingar bifreiða, janúar 2026",
+     "Krossanesvörn ehf.",
+     210000
+    ],
+    [
+     "2026-02-28",
+     "IR00031",
+     "Tryggingar bifreiða, febrúar 2026",
+     "Krossanesvörn ehf.",
+     210000
+    ],
+    [
+     "2026-03-31",
+     "IR00050",
+     "Tryggingar bifreiða, mars 2026",
+     "Krossanesvörn ehf.",
+     210000
+    ],
+    [
+     "2026-04-30",
+     "IR00069",
+     "Tryggingar bifreiða, apríl 2026",
+     "Krossanesvörn ehf.",
+     210000
+    ],
+    [
+     "2026-05-31",
+     "IR00088",
+     "Tryggingar bifreiða, maí 2026",
+     "Krossanesvörn ehf.",
+     210000
+    ],
+    [
+     "2026-06-30",
+     "IR00107",
+     "Tryggingar bifreiða, júní 2026",
+     "Krossanesvörn ehf.",
+     210000
+    ],
+    [
+     "2026-07-31",
+     "IR00126",
+     "Tryggingar bifreiða, júlí 2026",
+     "Krossanesvörn ehf.",
+     210000
+    ],
+    [
+     "2026-08-31",
+     "IR00144",
+     "Tryggingar bifreiða, ágúst 2026",
+     "Krossanesvörn ehf.",
+     210000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3210",
+   "name": "Auglýsingar og önnur markaðssetning",
+   "cat": "annar_rekstur",
+   "v": 1440000.0,
+   "v8": 1440000.0,
+   "py8": 1440000.0,
+   "n": 8,
+   "m": [
+    180000,
+    180000,
+    180000,
+    180000,
+    180000,
+    180000,
+    180000,
+    180000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00018",
+     "Auglýsingar, janúar 2026",
+     "Auglýsingastofa Norðurlands ehf.",
+     180000
+    ],
+    [
+     "2026-02-28",
+     "IR00037",
+     "Auglýsingar, febrúar 2026",
+     "Auglýsingastofa Norðurlands ehf.",
+     180000
+    ],
+    [
+     "2026-03-31",
+     "IR00056",
+     "Auglýsingar, mars 2026",
+     "Auglýsingastofa Norðurlands ehf.",
+     180000
+    ],
+    [
+     "2026-04-30",
+     "IR00075",
+     "Auglýsingar, apríl 2026",
+     "Auglýsingastofa Norðurlands ehf.",
+     180000
+    ],
+    [
+     "2026-05-31",
+     "IR00094",
+     "Auglýsingar, maí 2026",
+     "Auglýsingastofa Norðurlands ehf.",
+     180000
+    ],
+    [
+     "2026-06-30",
+     "IR00113",
+     "Auglýsingar, júní 2026",
+     "Auglýsingastofa Norðurlands ehf.",
+     180000
+    ],
+    [
+     "2026-07-31",
+     "IR00132",
+     "Auglýsingar, júlí 2026",
+     "Auglýsingastofa Norðurlands ehf.",
+     180000
+    ],
+    [
+     "2026-08-31",
+     "IR00150",
+     "Auglýsingar, ágúst 2026",
+     "Auglýsingastofa Norðurlands ehf.",
+     180000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3570",
+   "name": "Minni skrifstofubúnaður",
+   "cat": "annar_rekstur",
+   "v": 1184900.0,
+   "v8": 1184900.0,
+   "py8": 1120000.0,
+   "n": 9,
+   "m": [
+    140000,
+    140000,
+    140000,
+    140000,
+    140000,
+    140000,
+    140000,
+    204900,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00021",
+     "Minni skrifstofubúnaður, janúar 2026",
+     "Greiðslukort 3",
+     140000
+    ],
+    [
+     "2026-02-28",
+     "IR00040",
+     "Minni skrifstofubúnaður, febrúar 2026",
+     "Greiðslukort 3",
+     140000
+    ],
+    [
+     "2026-03-31",
+     "IR00059",
+     "Minni skrifstofubúnaður, mars 2026",
+     "Greiðslukort 3",
+     140000
+    ],
+    [
+     "2026-04-30",
+     "IR00078",
+     "Minni skrifstofubúnaður, apríl 2026",
+     "Greiðslukort 3",
+     140000
+    ],
+    [
+     "2026-05-31",
+     "IR00097",
+     "Minni skrifstofubúnaður, maí 2026",
+     "Greiðslukort 3",
+     140000
+    ],
+    [
+     "2026-06-30",
+     "IR00116",
+     "Minni skrifstofubúnaður, júní 2026",
+     "Greiðslukort 3",
+     140000
+    ],
+    [
+     "2026-07-31",
+     "IR00135",
+     "Minni skrifstofubúnaður, júlí 2026",
+     "Greiðslukort 3",
+     140000
+    ],
+    [
+     "2026-08-31",
+     "IR00152",
+     "Minni skrifstofubúnaður, ágúst 2026",
+     "Greiðslukort 3",
+     140000
+    ],
+    [
+     "2026-08-18",
+     "IR00002",
+     "Spjaldtölva og hlif, notuð á verkstæði",
+     "Greiðslukort 2",
+     64900
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3250",
+   "name": "Gistikostnaður innanlands",
+   "cat": "annar_rekstur",
+   "v": 1076000.0,
+   "v8": 1076000.0,
+   "py8": 1120000.0,
+   "n": 8,
+   "m": [
+    140000,
+    140000,
+    140000,
+    140000,
+    140000,
+    140000,
+    140000,
+    96000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00020",
+     "Gistikostnaður innanlands, janúar 2026",
+     "Greiðslukort 2",
+     140000
+    ],
+    [
+     "2026-02-28",
+     "IR00039",
+     "Gistikostnaður innanlands, febrúar 2026",
+     "Greiðslukort 2",
+     140000
+    ],
+    [
+     "2026-03-31",
+     "IR00058",
+     "Gistikostnaður innanlands, mars 2026",
+     "Greiðslukort 2",
+     140000
+    ],
+    [
+     "2026-04-30",
+     "IR00077",
+     "Gistikostnaður innanlands, apríl 2026",
+     "Greiðslukort 2",
+     140000
+    ],
+    [
+     "2026-05-31",
+     "IR00096",
+     "Gistikostnaður innanlands, maí 2026",
+     "Greiðslukort 2",
+     140000
+    ],
+    [
+     "2026-06-30",
+     "IR00115",
+     "Gistikostnaður innanlands, júní 2026",
+     "Greiðslukort 2",
+     140000
+    ],
+    [
+     "2026-07-31",
+     "IR00134",
+     "Gistikostnaður innanlands, júlí 2026",
+     "Greiðslukort 2",
+     140000
+    ],
+    [
+     "2026-08-18",
+     "IR00002",
+     "Hótel Reykjavík, þrír gistinætur",
+     "Greiðslukort 2",
+     96000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3600",
+   "name": "Lögfræðiskostnaður",
+   "cat": "annar_rekstur",
+   "v": 960000.0,
+   "v8": 960000.0,
+   "py8": 960000.0,
+   "n": 8,
+   "m": [
+    120000,
+    120000,
+    120000,
+    120000,
+    120000,
+    120000,
+    120000,
+    120000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00011",
+     "Lögfræðikostnaður, janúar 2026",
+     "Sundvík ehf.",
+     120000
+    ],
+    [
+     "2026-02-28",
+     "IR00030",
+     "Lögfræðikostnaður, febrúar 2026",
+     "Sundvík ehf.",
+     120000
+    ],
+    [
+     "2026-03-31",
+     "IR00049",
+     "Lögfræðikostnaður, mars 2026",
+     "Sundvík ehf.",
+     120000
+    ],
+    [
+     "2026-04-30",
+     "IR00068",
+     "Lögfræðikostnaður, apríl 2026",
+     "Sundvík ehf.",
+     120000
+    ],
+    [
+     "2026-05-31",
+     "IR00087",
+     "Lögfræðikostnaður, maí 2026",
+     "Sundvík ehf.",
+     120000
+    ],
+    [
+     "2026-06-30",
+     "IR00106",
+     "Lögfræðikostnaður, júní 2026",
+     "Sundvík ehf.",
+     120000
+    ],
+    [
+     "2026-07-31",
+     "IR00125",
+     "Lögfræðikostnaður, júlí 2026",
+     "Sundvík ehf.",
+     120000
+    ],
+    [
+     "2026-08-31",
+     "IR00143",
+     "Lögfræðikostnaður, ágúst 2026",
+     "Sundvík ehf.",
+     120000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3530",
+   "name": "Internetkostnaður",
+   "cat": "annar_rekstur",
+   "v": 841700.0,
+   "v8": 841700.0,
+   "py8": 760000.0,
+   "n": 8,
+   "m": [
+    95000,
+    95000,
+    95000,
+    95000,
+    95000,
+    176700,
+    95000,
+    95000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-06-30",
+     "IR00105",
+     "Internetkostnaður, júní 2026 (+86%)",
+     "Fjarskiptaver ehf.",
+     176700
+    ],
+    [
+     "2026-01-31",
+     "IR00010",
+     "Internetkostnaður, janúar 2026",
+     "Fjarskiptaver ehf.",
+     95000
+    ],
+    [
+     "2026-02-28",
+     "IR00029",
+     "Internetkostnaður, febrúar 2026",
+     "Fjarskiptaver ehf.",
+     95000
+    ],
+    [
+     "2026-03-31",
+     "IR00048",
+     "Internetkostnaður, mars 2026",
+     "Fjarskiptaver ehf.",
+     95000
+    ],
+    [
+     "2026-04-30",
+     "IR00067",
+     "Internetkostnaður, apríl 2026",
+     "Fjarskiptaver ehf.",
+     95000
+    ],
+    [
+     "2026-05-31",
+     "IR00086",
+     "Internetkostnaður, maí 2026",
+     "Fjarskiptaver ehf.",
+     95000
+    ],
+    [
+     "2026-07-31",
+     "IR00124",
+     "Internetkostnaður, júlí 2026",
+     "Fjarskiptaver ehf.",
+     95000
+    ],
+    [
+     "2026-08-31",
+     "IR00142",
+     "Internetkostnaður, ágúst 2026",
+     "Fjarskiptaver ehf.",
+     95000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3270",
+   "name": "Fundakostnaður",
+   "cat": "annar_rekstur",
+   "v": 802300.0,
+   "v8": 802300.0,
+   "py8": 760000.0,
+   "n": 9,
+   "m": [
+    95000,
+    95000,
+    95000,
+    95000,
+    95000,
+    95000,
+    95000,
+    137300,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00019",
+     "Fundakostnaður, janúar 2026",
+     "Greiðslukort 1",
+     95000
+    ],
+    [
+     "2026-02-28",
+     "IR00038",
+     "Fundakostnaður, febrúar 2026",
+     "Greiðslukort 1",
+     95000
+    ],
+    [
+     "2026-03-31",
+     "IR00057",
+     "Fundakostnaður, mars 2026",
+     "Greiðslukort 1",
+     95000
+    ],
+    [
+     "2026-04-30",
+     "IR00076",
+     "Fundakostnaður, apríl 2026",
+     "Greiðslukort 1",
+     95000
+    ],
+    [
+     "2026-05-31",
+     "IR00095",
+     "Fundakostnaður, maí 2026",
+     "Greiðslukort 1",
+     95000
+    ],
+    [
+     "2026-06-30",
+     "IR00114",
+     "Fundakostnaður, júní 2026",
+     "Greiðslukort 1",
+     95000
+    ],
+    [
+     "2026-07-31",
+     "IR00133",
+     "Fundakostnaður, júlí 2026",
+     "Greiðslukort 1",
+     95000
+    ],
+    [
+     "2026-08-31",
+     "IR00151",
+     "Fundakostnaður, ágúst 2026",
+     "Greiðslukort 1",
+     95000
+    ],
+    [
+     "2026-08-18",
+     "IR00002",
+     "Veitingar á verkfundi með Smíðaþjónustu Norðurlands",
+     "Greiðslukort 2",
+     42300
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3640",
+   "name": "Þjónustu- og bankakostnaður",
+   "cat": "annar_rekstur",
+   "v": 789150.0,
+   "v8": 785750.0,
+   "py8": 760000.0,
+   "n": 24,
+   "m": [
+    95000,
+    95000,
+    98400,
+    98400,
+    98400,
+    98400,
+    98400,
+    103750,
+    3400,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "GJOLD-2601",
+     "Þjónustu- og bankakostnaður, janúar 2026",
+     "",
+     95000
+    ],
+    [
+     "2026-02-28",
+     "GJOLD-2602",
+     "Þjónustu- og bankakostnaður, febrúar 2026",
+     "",
+     95000
+    ],
+    [
+     "2026-03-31",
+     "GJOLD-2603",
+     "Þjónustu- og bankakostnaður, mars 2026",
+     "",
+     95000
+    ],
+    [
+     "2026-04-30",
+     "GJOLD-2604",
+     "Þjónustu- og bankakostnaður, apríl 2026",
+     "",
+     95000
+    ],
+    [
+     "2026-05-31",
+     "GJOLD-2605",
+     "Þjónustu- og bankakostnaður, maí 2026",
+     "",
+     95000
+    ],
+    [
+     "2026-06-30",
+     "GJOLD-2606",
+     "Þjónustu- og bankakostnaður, júní 2026",
+     "",
+     95000
+    ],
+    [
+     "2026-07-31",
+     "GJOLD-2607",
+     "Þjónustu- og bankakostnaður, júlí 2026",
+     "",
+     95000
+    ],
+    [
+     "2026-08-31",
+     "GJOLD-2608",
+     "Þjónustu- og bankakostnaður, ágúst 2026",
+     "",
+     95000
+    ],
+    [
+     "2026-08-31",
+     "BANKGJ-0831",
+     "Færslugjöld ágúst 2026",
+     "Landsbankinn",
+     4850
+    ],
+    [
+     "2026-03-31",
+     "ISB-03K",
+     "Bankakostnaður, mars 2026",
+     "Íslandsbanki",
+     1950
+    ],
+    [
+     "2026-04-30",
+     "ISB-04K",
+     "Bankakostnaður, apríl 2026",
+     "Íslandsbanki",
+     1950
+    ],
+    [
+     "2026-05-31",
+     "ISB-05K",
+     "Bankakostnaður, maí 2026",
+     "Íslandsbanki",
+     1950
+    ],
+    [
+     "2026-06-30",
+     "ISB-06K",
+     "Bankakostnaður, júní 2026",
+     "Íslandsbanki",
+     1950
+    ],
+    [
+     "2026-07-31",
+     "ISB-07K",
+     "Bankakostnaður, júlí 2026",
+     "Íslandsbanki",
+     1950
+    ],
+    [
+     "2026-08-31",
+     "ISB-08K",
+     "Bankakostnaður, ágúst 2026",
+     "Íslandsbanki",
+     1950
+    ],
+    [
+     "2026-09-30",
+     "ISB-09K",
+     "Bankakostnaður, september 2026",
+     "Íslandsbanki",
+     1950
+    ],
+    [
+     "2026-03-31",
+     "ARI-03K",
+     "Færslugjöld, mars 2026",
+     "Arion banki",
+     1450
+    ],
+    [
+     "2026-04-30",
+     "ARI-04K",
+     "Færslugjöld, apríl 2026",
+     "Arion banki",
+     1450
+    ],
+    [
+     "2026-05-31",
+     "ARI-05K",
+     "Færslugjöld, maí 2026",
+     "Arion banki",
+     1450
+    ],
+    [
+     "2026-06-30",
+     "ARI-06K",
+     "Færslugjöld, júní 2026",
+     "Arion banki",
+     1450
+    ],
+    [
+     "2026-07-31",
+     "ARI-07K",
+     "Færslugjöld, júlí 2026",
+     "Arion banki",
+     1450
+    ],
+    [
+     "2026-08-31",
+     "ARI-08K",
+     "Færslugjöld, ágúst 2026",
+     "Arion banki",
+     1450
+    ],
+    [
+     "2026-09-30",
+     "ARI-09K",
+     "Færslugjöld, september 2026",
+     "Arion banki",
+     1450
+    ],
+    [
+     "2026-08-31",
+     "BANKGJ-0831",
+     "Mismunur á innborgunum ágúst, bankagjald",
+     "Landsbankinn",
+     500
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3490",
+   "name": "Annar bifreiðakostnaður",
+   "cat": "annar_rekstur",
+   "v": 760000.0,
+   "v8": 760000.0,
+   "py8": 760000.0,
+   "n": 8,
+   "m": [
+    95000,
+    95000,
+    95000,
+    95000,
+    95000,
+    95000,
+    95000,
+    95000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00016",
+     "Annar bifreiðakostnaður, janúar 2026",
+     "Þórunnarverk ehf.",
+     95000
+    ],
+    [
+     "2026-02-28",
+     "IR00035",
+     "Annar bifreiðakostnaður, febrúar 2026",
+     "Þórunnarverk ehf.",
+     95000
+    ],
+    [
+     "2026-03-31",
+     "IR00054",
+     "Annar bifreiðakostnaður, mars 2026",
+     "Þórunnarverk ehf.",
+     95000
+    ],
+    [
+     "2026-04-30",
+     "IR00073",
+     "Annar bifreiðakostnaður, apríl 2026",
+     "Þórunnarverk ehf.",
+     95000
+    ],
+    [
+     "2026-05-31",
+     "IR00092",
+     "Annar bifreiðakostnaður, maí 2026",
+     "Þórunnarverk ehf.",
+     95000
+    ],
+    [
+     "2026-06-30",
+     "IR00111",
+     "Annar bifreiðakostnaður, júní 2026",
+     "Þórunnarverk ehf.",
+     95000
+    ],
+    [
+     "2026-07-31",
+     "IR00130",
+     "Annar bifreiðakostnaður, júlí 2026",
+     "Þórunnarverk ehf.",
+     95000
+    ],
+    [
+     "2026-08-31",
+     "IR00148",
+     "Annar bifreiðakostnaður, ágúst 2026",
+     "Þórunnarverk ehf.",
+     95000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3260",
+   "name": "Risna og gjafir",
+   "cat": "annar_rekstur",
+   "v": 680000.0,
+   "v8": 680000.0,
+   "py8": 680000.0,
+   "n": 8,
+   "m": [
+    85000,
+    85000,
+    85000,
+    85000,
+    85000,
+    85000,
+    85000,
+    85000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "IR00019",
+     "Risna og gjafir, janúar 2026",
+     "Greiðslukort 1",
+     85000
+    ],
+    [
+     "2026-02-28",
+     "IR00038",
+     "Risna og gjafir, febrúar 2026",
+     "Greiðslukort 1",
+     85000
+    ],
+    [
+     "2026-03-31",
+     "IR00057",
+     "Risna og gjafir, mars 2026",
+     "Greiðslukort 1",
+     85000
+    ],
+    [
+     "2026-04-30",
+     "IR00076",
+     "Risna og gjafir, apríl 2026",
+     "Greiðslukort 1",
+     85000
+    ],
+    [
+     "2026-05-31",
+     "IR00095",
+     "Risna og gjafir, maí 2026",
+     "Greiðslukort 1",
+     85000
+    ],
+    [
+     "2026-06-30",
+     "IR00114",
+     "Risna og gjafir, júní 2026",
+     "Greiðslukort 1",
+     85000
+    ],
+    [
+     "2026-07-31",
+     "IR00133",
+     "Risna og gjafir, júlí 2026",
+     "Greiðslukort 1",
+     85000
+    ],
+    [
+     "2026-08-31",
+     "IR00151",
+     "Risna og gjafir, ágúst 2026",
+     "Greiðslukort 1",
+     85000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3430",
+   "name": "Bifreiðagjald",
+   "cat": "annar_rekstur",
+   "v": 520000.0,
+   "v8": 520000.0,
+   "py8": 520000.0,
+   "n": 8,
+   "m": [
+    65000,
+    65000,
+    65000,
+    65000,
+    65000,
+    65000,
+    65000,
+    65000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "GJOLD-2601",
+     "Bifreiðagjald, janúar 2026",
+     "",
+     65000
+    ],
+    [
+     "2026-02-28",
+     "GJOLD-2602",
+     "Bifreiðagjald, febrúar 2026",
+     "",
+     65000
+    ],
+    [
+     "2026-03-31",
+     "GJOLD-2603",
+     "Bifreiðagjald, mars 2026",
+     "",
+     65000
+    ],
+    [
+     "2026-04-30",
+     "GJOLD-2604",
+     "Bifreiðagjald, apríl 2026",
+     "",
+     65000
+    ],
+    [
+     "2026-05-31",
+     "GJOLD-2605",
+     "Bifreiðagjald, maí 2026",
+     "",
+     65000
+    ],
+    [
+     "2026-06-30",
+     "GJOLD-2606",
+     "Bifreiðagjald, júní 2026",
+     "",
+     65000
+    ],
+    [
+     "2026-07-31",
+     "GJOLD-2607",
+     "Bifreiðagjald, júlí 2026",
+     "",
+     65000
+    ],
+    [
+     "2026-08-31",
+     "GJOLD-2608",
+     "Bifreiðagjald, ágúst 2026",
+     "",
+     65000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3620",
+   "name": "Seðilgjöld",
+   "cat": "annar_rekstur",
+   "v": 290320.0,
+   "v8": 290320.0,
+   "py8": 290320.0,
+   "n": 8,
+   "m": [
+    36290,
+    36290,
+    36290,
+    36290,
+    36290,
+    36290,
+    36290,
+    36290,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "GJOLD-2601",
+     "Seðilgjöld, janúar 2026",
+     "",
+     36290
+    ],
+    [
+     "2026-02-28",
+     "GJOLD-2602",
+     "Seðilgjöld, febrúar 2026",
+     "",
+     36290
+    ],
+    [
+     "2026-03-31",
+     "GJOLD-2603",
+     "Seðilgjöld, mars 2026",
+     "",
+     36290
+    ],
+    [
+     "2026-04-30",
+     "GJOLD-2604",
+     "Seðilgjöld, apríl 2026",
+     "",
+     36290
+    ],
+    [
+     "2026-05-31",
+     "GJOLD-2605",
+     "Seðilgjöld, maí 2026",
+     "",
+     36290
+    ],
+    [
+     "2026-06-30",
+     "GJOLD-2606",
+     "Seðilgjöld, júní 2026",
+     "",
+     36290
+    ],
+    [
+     "2026-07-31",
+     "GJOLD-2607",
+     "Seðilgjöld, júlí 2026",
+     "",
+     36290
+    ],
+    [
+     "2026-08-31",
+     "GJOLD-2608",
+     "Seðilgjöld, ágúst 2026",
+     "",
+     36290
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3580",
+   "name": "Minni skrifstofubúnaður",
+   "cat": "annar_rekstur",
+   "v": 186400.0,
+   "v8": 0,
+   "py8": 0.0,
+   "n": 1,
+   "m": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    186400,
+    0
+   ],
+   "e": [
+    [
+     "2026-09-30",
+     "UTL-SAM-0926",
+     "Útlagður kostnaður, september",
+     "",
+     186400
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3710",
+   "name": "Afskriftir húsnæðis",
+   "cat": "afskriftir",
+   "v": 4933336.0,
+   "v8": 4933336.0,
+   "py8": 4933333.333333333,
+   "n": 8,
+   "m": [
+    616667,
+    616667,
+    616667,
+    616667,
+    616667,
+    616667,
+    616667,
+    616667,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "AFSKR-2601",
+     "Afskrift janúar 2026",
+     "",
+     616667
+    ],
+    [
+     "2026-02-28",
+     "AFSKR-2602",
+     "Afskrift febrúar 2026",
+     "",
+     616667
+    ],
+    [
+     "2026-03-31",
+     "AFSKR-2603",
+     "Afskrift mars 2026",
+     "",
+     616667
+    ],
+    [
+     "2026-04-30",
+     "AFSKR-2604",
+     "Afskrift apríl 2026",
+     "",
+     616667
+    ],
+    [
+     "2026-05-31",
+     "AFSKR-2605",
+     "Afskrift maí 2026",
+     "",
+     616667
+    ],
+    [
+     "2026-06-30",
+     "AFSKR-2606",
+     "Afskrift júní 2026",
+     "",
+     616667
+    ],
+    [
+     "2026-07-31",
+     "AFSKR-2607",
+     "Afskrift júlí 2026",
+     "",
+     616667
+    ],
+    [
+     "2026-08-31",
+     "AFSKR-2608",
+     "Afskrift ágúst 2026",
+     "",
+     616667
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3720",
+   "name": "Afskriftir tækja",
+   "cat": "afskriftir",
+   "v": 2200000.0,
+   "v8": 2200000.0,
+   "py8": 2200000.0,
+   "n": 16,
+   "m": [
+    275000,
+    275000,
+    275000,
+    275000,
+    275000,
+    275000,
+    275000,
+    275000,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "AFSKR-2601",
+     "Afskrift janúar 2026",
+     "",
+     204167
+    ],
+    [
+     "2026-02-28",
+     "AFSKR-2602",
+     "Afskrift febrúar 2026",
+     "",
+     204167
+    ],
+    [
+     "2026-03-31",
+     "AFSKR-2603",
+     "Afskrift mars 2026",
+     "",
+     204167
+    ],
+    [
+     "2026-04-30",
+     "AFSKR-2604",
+     "Afskrift apríl 2026",
+     "",
+     204167
+    ],
+    [
+     "2026-05-31",
+     "AFSKR-2605",
+     "Afskrift maí 2026",
+     "",
+     204167
+    ],
+    [
+     "2026-06-30",
+     "AFSKR-2606",
+     "Afskrift júní 2026",
+     "",
+     204167
+    ],
+    [
+     "2026-07-31",
+     "AFSKR-2607",
+     "Afskrift júlí 2026",
+     "",
+     204167
+    ],
+    [
+     "2026-08-31",
+     "AFSKR-2608",
+     "Afskrift ágúst 2026",
+     "",
+     204167
+    ],
+    [
+     "2026-01-31",
+     "AFSKR-2601",
+     "Afskrift janúar 2026",
+     "",
+     70833
+    ],
+    [
+     "2026-02-28",
+     "AFSKR-2602",
+     "Afskrift febrúar 2026",
+     "",
+     70833
+    ],
+    [
+     "2026-03-31",
+     "AFSKR-2603",
+     "Afskrift mars 2026",
+     "",
+     70833
+    ],
+    [
+     "2026-04-30",
+     "AFSKR-2604",
+     "Afskrift apríl 2026",
+     "",
+     70833
+    ],
+    [
+     "2026-05-31",
+     "AFSKR-2605",
+     "Afskrift maí 2026",
+     "",
+     70833
+    ],
+    [
+     "2026-06-30",
+     "AFSKR-2606",
+     "Afskrift júní 2026",
+     "",
+     70833
+    ],
+    [
+     "2026-07-31",
+     "AFSKR-2607",
+     "Afskrift júlí 2026",
+     "",
+     70833
+    ],
+    [
+     "2026-08-31",
+     "AFSKR-2608",
+     "Afskrift ágúst 2026",
+     "",
+     70833
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "3730",
+   "name": "Afskriftir bifreiða",
+   "cat": "afskriftir",
+   "v": 876192.0,
+   "v8": 876192.0,
+   "py8": 876194.6666666666,
+   "n": 8,
+   "m": [
+    109524,
+    109524,
+    109524,
+    109524,
+    109524,
+    109524,
+    109524,
+    109524,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "AFSKR-2601",
+     "Afskrift janúar 2026",
+     "",
+     109524
+    ],
+    [
+     "2026-02-28",
+     "AFSKR-2602",
+     "Afskrift febrúar 2026",
+     "",
+     109524
+    ],
+    [
+     "2026-03-31",
+     "AFSKR-2603",
+     "Afskrift mars 2026",
+     "",
+     109524
+    ],
+    [
+     "2026-04-30",
+     "AFSKR-2604",
+     "Afskrift apríl 2026",
+     "",
+     109524
+    ],
+    [
+     "2026-05-31",
+     "AFSKR-2605",
+     "Afskrift maí 2026",
+     "",
+     109524
+    ],
+    [
+     "2026-06-30",
+     "AFSKR-2606",
+     "Afskrift júní 2026",
+     "",
+     109524
+    ],
+    [
+     "2026-07-31",
+     "AFSKR-2607",
+     "Afskrift júlí 2026",
+     "",
+     109524
+    ],
+    [
+     "2026-08-31",
+     "AFSKR-2608",
+     "Afskrift ágúst 2026",
+     "",
+     109524
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "4220",
+   "name": "Vaxtagjöld af bankalánum",
+   "cat": "fjarmagn",
+   "v": 6531250.0,
+   "v8": 6531250.0,
+   "py8": 7156250.0,
+   "n": 8,
+   "m": [
+    843750,
+    835938,
+    828125,
+    820312,
+    812500,
+    804688,
+    796875,
+    789062,
+    0,
+    0
+   ],
+   "e": [
+    [
+     "2026-01-31",
+     "LAN-2601",
+     "Vextir af bankaláni janúar 2026",
+     "",
+     843750
+    ],
+    [
+     "2026-02-28",
+     "LAN-2602",
+     "Vextir af bankaláni febrúar 2026",
+     "",
+     835938
+    ],
+    [
+     "2026-03-31",
+     "LAN-2603",
+     "Vextir af bankaláni mars 2026",
+     "",
+     828125
+    ],
+    [
+     "2026-04-30",
+     "LAN-2604",
+     "Vextir af bankaláni apríl 2026",
+     "",
+     820312
+    ],
+    [
+     "2026-05-31",
+     "LAN-2605",
+     "Vextir af bankaláni maí 2026",
+     "",
+     812500
+    ],
+    [
+     "2026-06-30",
+     "LAN-2606",
+     "Vextir af bankaláni júní 2026",
+     "",
+     804688
+    ],
+    [
+     "2026-07-31",
+     "LAN-2607",
+     "Vextir af bankaláni júlí 2026",
+     "",
+     796875
+    ],
+    [
+     "2026-08-31",
+     "LAN-2608",
+     "Vextir af bankaláni ágúst 2026",
+     "",
+     789062
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "4110",
+   "name": "Vaxtatekjur af bankainnistæðum",
+   "cat": "fjarmagn",
+   "v": -1007762.0,
+   "v8": -864957.0,
+   "py8": 0.0,
+   "n": 14,
+   "m": [
+    0,
+    0,
+    -137740,
+    -142830,
+    -148004,
+    -140249,
+    -145433,
+    -150701,
+    -142805,
+    0
+   ],
+   "e": [
+    [
+     "2026-08-31",
+     "ISB-08V",
+     "Vextir, ágúst 2026",
+     "Íslandsbanki",
+     -95437
+    ],
+    [
+     "2026-05-31",
+     "ISB-05V",
+     "Vextir, maí 2026",
+     "Íslandsbanki",
+     -93775
+    ],
+    [
+     "2026-07-31",
+     "ISB-07V",
+     "Vextir, júlí 2026",
+     "Íslandsbanki",
+     -92116
+    ],
+    [
+     "2026-04-30",
+     "ISB-04V",
+     "Vextir, apríl 2026",
+     "Íslandsbanki",
+     -90512
+    ],
+    [
+     "2026-09-30",
+     "ISB-09V",
+     "Vextir, september 2026",
+     "Íslandsbanki",
+     -90421
+    ],
+    [
+     "2026-06-30",
+     "ISB-06V",
+     "Vextir, júní 2026",
+     "Íslandsbanki",
+     -88847
+    ],
+    [
+     "2026-03-31",
+     "ISB-03V",
+     "Vextir, mars 2026",
+     "Íslandsbanki",
+     -87300
+    ],
+    [
+     "2026-08-31",
+     "ARI-08V",
+     "Vextir, ágúst 2026",
+     "Arion banki",
+     -55264
+    ],
+    [
+     "2026-05-31",
+     "ARI-05V",
+     "Vextir, maí 2026",
+     "Arion banki",
+     -54229
+    ],
+    [
+     "2026-07-31",
+     "ARI-07V",
+     "Vextir, júlí 2026",
+     "Arion banki",
+     -53317
+    ],
+    [
+     "2026-09-30",
+     "ARI-09V",
+     "Vextir, september 2026",
+     "Arion banki",
+     -52384
+    ],
+    [
+     "2026-04-30",
+     "ARI-04V",
+     "Vextir, apríl 2026",
+     "Arion banki",
+     -52318
+    ],
+    [
+     "2026-06-30",
+     "ARI-06V",
+     "Vextir, júní 2026",
+     "Arion banki",
+     -51402
+    ],
+    [
+     "2026-03-31",
+     "ARI-03V",
+     "Vextir, mars 2026",
+     "Arion banki",
+     -50440
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  },
+  {
+   "no": "4420",
+   "name": "Óreglulegur kostnaður",
+   "cat": "oreglulegt",
+   "v": 380000.0,
+   "v8": 0,
+   "py8": 0.0,
+   "n": 1,
+   "m": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    380000,
+    0
+   ],
+   "e": [
+    [
+     "2026-09-30",
+     "MILLIF-0930",
+     "Millifærsla tengdra aðila",
+     "Viðskiptamaður K90",
+     380000
+    ]
+   ],
+   "rest": [
+    0,
+    0
+   ]
+  }
+ ],
+ "vend": [
+  {
+   "no": "L10",
+   "name": "Stálvogur ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-09",
+     "R00037",
+     "Innkaupareikningur í samþykkt",
+     "2026-11-20",
+     35240800,
+     35240800,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00136",
+     "Reikningur IK-2608-L10",
+     "2026-09-20",
+     31608096,
+     31608096,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00117",
+     "Reikningur IK-2607-L10",
+     "2026-08-20",
+     28667808,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00098",
+     "Reikningur IK-2606-L10",
+     "2026-07-20",
+     38958816,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00079",
+     "Reikningur IK-2605-L10",
+     "2026-06-20",
+     41164032,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00060",
+     "Reikningur IK-2604-L10",
+     "2026-05-20",
+     39693888,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00041",
+     "Reikningur IK-2603-L10",
+     "2026-04-20",
+     37488672,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00022",
+     "Reikningur IK-2602-L10",
+     "2026-03-20",
+     32343168,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00003",
+     "Reikningur IK-2601-L10",
+     "2026-02-20",
+     30137952,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 280062432.0,
+   "open": 31608096.0,
+   "od": 31608096.0,
+   "samt": 35240800,
+   "gl": [
+    [
+     "2010",
+     "Vöruinnkaup",
+     225856800
+    ]
+   ]
+  },
+  {
+   "no": "L20",
+   "name": "Kuldaverið ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-08",
+     "R00018",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-20",
+     25048000,
+     25048000,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00137",
+     "Reikningur IK-2608-L20",
+     "2026-09-20",
+     17019744,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00118",
+     "Reikningur IK-2607-L20",
+     "2026-08-20",
+     15436512,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00099",
+     "Reikningur IK-2606-L20",
+     "2026-07-20",
+     20977824,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00080",
+     "Reikningur IK-2605-L20",
+     "2026-06-20",
+     22165248,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00061",
+     "Reikningur IK-2604-L20",
+     "2026-05-20",
+     21373632,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00042",
+     "Reikningur IK-2603-L20",
+     "2026-04-20",
+     20186208,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00023",
+     "Reikningur IK-2602-L20",
+     "2026-03-20",
+     17415552,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00004",
+     "Reikningur IK-2601-L20",
+     "2026-02-20",
+     16228128,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 150802848.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 25048000,
+   "gl": [
+    [
+     "2010",
+     "Vöruinnkaup",
+     121615200
+    ]
+   ]
+  },
+  {
+   "no": "L30",
+   "name": "Rafspennir ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-09",
+     "R00036",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-20",
+     13702000,
+     13702000,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00138",
+     "Reikningur IK-2608-L30",
+     "2026-09-14",
+     12156960,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00119",
+     "Reikningur IK-2607-L30",
+     "2026-08-14",
+     11026080,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00100",
+     "Reikningur IK-2606-L30",
+     "2026-07-14",
+     14984160,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00081",
+     "Reikningur IK-2605-L30",
+     "2026-06-14",
+     15832320,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00062",
+     "Reikningur IK-2604-L30",
+     "2026-05-14",
+     15266880,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00043",
+     "Reikningur IK-2603-L30",
+     "2026-04-14",
+     14418720,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00024",
+     "Reikningur IK-2602-L30",
+     "2026-03-14",
+     12439680,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00005",
+     "Reikningur IK-2601-L30",
+     "2026-02-14",
+     11591520,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 107716320.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 13702000,
+   "gl": [
+    [
+     "2010",
+     "Vöruinnkaup",
+     86868000
+    ]
+   ]
+  },
+  {
+   "no": "L140",
+   "name": "Flutningar Eyjafjarðar ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-09",
+     "R00035",
+     "Innkaupareikningur í samþykkt",
+     "2026-11-20",
+     4504920,
+     4504920,
+     "samt"
+    ],
+    [
+     "2026-10-08",
+     "R00019",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-20",
+     4114320,
+     4114320,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00147",
+     "Reikningur IK-2608-L140",
+     "2026-09-20",
+     4114320,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00129",
+     "Reikningur IK-2607-L140",
+     "2026-08-20",
+     3786960,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00110",
+     "Reikningur IK-2606-L140",
+     "2026-07-20",
+     4932720,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00091",
+     "Reikningur IK-2605-L140",
+     "2026-06-20",
+     5178240,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00072",
+     "Reikningur IK-2604-L140",
+     "2026-05-20",
+     5014560,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00053",
+     "Reikningur IK-2603-L140",
+     "2026-04-20",
+     4769040,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00034",
+     "Reikningur IK-2602-L140",
+     "2026-03-20",
+     4196160,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00015",
+     "Reikningur IK-2601-L140",
+     "2026-02-20",
+     3950640,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 35942640.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 8619240,
+   "gl": [
+    [
+     "2050",
+     "Flutningskostnaður",
+     25146000
+    ],
+    [
+     "3550",
+     "Sendingarkostnaður",
+     3840000
+    ]
+   ]
+  },
+  {
+   "no": "L70",
+   "name": "Verkfræðistofan Nyrðra ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-06",
+     "IKR00001",
+     "Kreditreikningur K00001",
+     "2026-10-06",
+     -186000,
+     -186000,
+     "bok"
+    ],
+    [
+     "2026-10-06",
+     "IR00154",
+     "Reikningur R00014",
+     "2026-10-20",
+     793600,
+     793600,
+     "bok"
+    ],
+    [
+     "2026-10-06",
+     "IKR00002",
+     "Kreditreikningur K00002",
+     "2026-10-06",
+     -111600,
+     -111600,
+     "bok"
+    ],
+    [
+     "2026-10-05",
+     "IR00153",
+     "Reikningur R00013",
+     "2026-10-19",
+     1054000,
+     1054000,
+     "bok"
+    ],
+    [
+     "2026-08-31",
+     "IR00140",
+     "Reikningur IK-2608-L70",
+     "2026-09-14",
+     4318920,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00122",
+     "Reikningur IK-2607-L70",
+     "2026-08-14",
+     3917160,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00103",
+     "Reikningur IK-2606-L70",
+     "2026-07-14",
+     5323320,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00084",
+     "Reikningur IK-2605-L70",
+     "2026-06-14",
+     5624640,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00065",
+     "Reikningur IK-2604-L70",
+     "2026-05-14",
+     5423760,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00046",
+     "Reikningur IK-2603-L70",
+     "2026-04-14",
+     5122440,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00027",
+     "Reikningur IK-2602-L70",
+     "2026-03-14",
+     4419360,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00008",
+     "Reikningur IK-2601-L70",
+     "2026-02-14",
+     4118040,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 39817640.0,
+   "open": 1550000.0,
+   "od": 0,
+   "samt": 0,
+   "gl": [
+    [
+     "2120",
+     "Annað kostnaðarverð seldra vara",
+     32111000
+    ]
+   ]
+  },
+  {
+   "no": "L50",
+   "name": "Norðurorka",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-09",
+     "R00028",
+     "Innkaupareikningur í samþykkt",
+     "2026-11-01",
+     2837820,
+     2837820,
+     "samt"
+    ],
+    [
+     "2026-10-08",
+     "R00021",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-01",
+     2153200,
+     2153200,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00001",
+     "Reikningur R00006",
+     "2026-09-01",
+     2153200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00120",
+     "Reikningur IK-2607-L50",
+     "2026-08-01",
+     1631780,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00101",
+     "Reikningur IK-2606-L50",
+     "2026-07-01",
+     2153200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00082",
+     "Reikningur IK-2605-L50",
+     "2026-06-01",
+     2153200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00063",
+     "Reikningur IK-2604-L50",
+     "2026-05-01",
+     2153200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00044",
+     "Reikningur IK-2603-L50",
+     "2026-04-01",
+     2890380,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00025",
+     "Reikningur IK-2602-L50",
+     "2026-03-01",
+     2153200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00006",
+     "Reikningur IK-2601-L50",
+     "2026-02-01",
+     2309488,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 17597648.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 4991020,
+   "gl": [
+    [
+     "3040",
+     "Rafmagn",
+     11774000
+    ],
+    [
+     "3030",
+     "Hiti",
+     2700800
+    ]
+   ]
+  },
+  {
+   "no": "L190",
+   "name": "Eyjavör fjárfestingar ehf.",
+   "ic": true,
+   "inv": [
+    [
+     "2026-10-09",
+     "R00027",
+     "Innkaupareikningur í samþykkt",
+     "2026-11-20",
+     2400000,
+     2400000,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "DTE-0826",
+     "Stjórnunarþjónusta ágúst",
+     "2026-09-20",
+     2400000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "DTE-0726",
+     "Stjórnunarþjónusta júlí",
+     "2026-08-20",
+     2400000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "DTE-0626",
+     "Stjórnunarþjónusta júní",
+     "2026-07-20",
+     2400000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "DTE-0526",
+     "Stjórnunarþjónusta maí",
+     "2026-06-20",
+     2400000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "DTE-0426",
+     "Stjórnunarþjónusta apríl",
+     "2026-05-20",
+     2400000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "DTE-0326",
+     "Stjórnunarþjónusta mars",
+     "2026-04-20",
+     2400000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "DTE-0226",
+     "Stjórnunarþjónusta febrúar",
+     "2026-03-20",
+     2400000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "DTE-0126",
+     "Stjórnunarþjónusta janúar",
+     "2026-02-20",
+     2400000,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 19200000.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 2400000,
+   "gl": [
+    [
+     "3670",
+     "Annar rekstrarkostnaður",
+     19200000
+    ]
+   ]
+  },
+  {
+   "no": "L130",
+   "name": "Steðjasalan ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-09",
+     "R00033",
+     "Innkaupareikningur í samþykkt",
+     "2026-11-20",
+     1516520,
+     1516520,
+     "samt"
+    ],
+    [
+     "2026-10-08",
+     "R00016",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-20",
+     1488000,
+     1488000,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00146",
+     "Reikningur IK-2608-L130",
+     "2026-09-20",
+     1488000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00128",
+     "Reikningur IK-2607-L130",
+     "2026-08-20",
+     1488000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00109",
+     "Reikningur IK-2606-L130",
+     "2026-07-20",
+     1488000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00090",
+     "Reikningur IK-2605-L130",
+     "2026-06-20",
+     1488000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00071",
+     "Reikningur IK-2604-L130",
+     "2026-05-20",
+     1488000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00052",
+     "Reikningur IK-2603-L130",
+     "2026-04-20",
+     1488000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00033",
+     "Reikningur IK-2602-L130",
+     "2026-03-20",
+     1488000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00014",
+     "Reikningur IK-2601-L130",
+     "2026-02-20",
+     1488000,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 11904000.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 3004520,
+   "gl": [
+    [
+     "3150",
+     "Viðhald áhalda og tækja",
+     5120000
+    ],
+    [
+     "3130",
+     "Gjaldfærð áhöld og tæki",
+     3040000
+    ],
+    [
+     "3070",
+     "Annar húsnæðiskostnaður",
+     1440000
+    ]
+   ]
+  },
+  {
+   "no": "L90",
+   "name": "Fjarskiptaver ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-09",
+     "R00029",
+     "Innkaupareikningur í samþykkt",
+     "2026-11-20",
+     1262320,
+     1262320,
+     "samt"
+    ],
+    [
+     "2026-10-05",
+     "R00012",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-20",
+     1751872,
+     1751872,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00142",
+     "Reikningur IK-2608-L90",
+     "2026-09-20",
+     1418498,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00124",
+     "Reikningur IK-2607-L90",
+     "2026-08-20",
+     1252400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00105",
+     "Reikningur IK-2606-L90",
+     "2026-07-20",
+     1353708,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00086",
+     "Reikningur IK-2605-L90",
+     "2026-06-20",
+     1252400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00067",
+     "Reikningur IK-2604-L90",
+     "2026-05-20",
+     1252400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00048",
+     "Reikningur IK-2603-L90",
+     "2026-04-20",
+     1252400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00029",
+     "Reikningur IK-2602-L90",
+     "2026-03-20",
+     1252400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00010",
+     "Reikningur IK-2601-L90",
+     "2026-02-20",
+     1252400,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 10286606.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 3014192,
+   "gl": [
+    [
+     "3110",
+     "Gjaldfærður hugbúnaður",
+     3360000
+    ],
+    [
+     "3510",
+     "Símakostnaður",
+     2413950
+    ],
+    [
+     "3160",
+     "Annar hugbúnaðar- og tæknikostnaður",
+     1680000
+    ],
+    [
+     "3530",
+     "Internetkostnaður",
+     841700
+    ]
+   ]
+  },
+  {
+   "no": "L120",
+   "name": "Hlíðarmatur ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-08",
+     "R00022",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-20",
+     1276500,
+     1276500,
+     "samt"
+    ],
+    [
+     "2026-10-08",
+     "R00023",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-20",
+     1276500,
+     1276500,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00145",
+     "Reikningur IK-2608-L120",
+     "2026-09-20",
+     1276500,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00127",
+     "Reikningur IK-2607-L120",
+     "2026-08-20",
+     1276500,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00108",
+     "Reikningur IK-2606-L120",
+     "2026-07-20",
+     1276500,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00089",
+     "Reikningur IK-2605-L120",
+     "2026-06-20",
+     1276500,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00070",
+     "Reikningur IK-2604-L120",
+     "2026-05-20",
+     1276500,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00051",
+     "Reikningur IK-2603-L120",
+     "2026-04-20",
+     1276500,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00032",
+     "Reikningur IK-2602-L120",
+     "2026-03-20",
+     1276500,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00013",
+     "Reikningur IK-2601-L120",
+     "2026-02-20",
+     1276500,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 10212000.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 2553000,
+   "gl": [
+    [
+     "2420",
+     "Matarkostnaður starfsmanna",
+     10212000
+    ]
+   ]
+  },
+  {
+   "no": "L110",
+   "name": "Krossanesvörn ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-16",
+     "R00017",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-01",
+     955000,
+     955000,
+     "samt"
+    ],
+    [
+     "2026-10-09",
+     "R00039",
+     "Innkaupareikningur í samþykkt",
+     "2026-11-01",
+     955000,
+     955000,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00144",
+     "Reikningur IK-2608-L110",
+     "2026-09-01",
+     955000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00126",
+     "Reikningur IK-2607-L110",
+     "2026-08-01",
+     955000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00107",
+     "Reikningur IK-2606-L110",
+     "2026-07-01",
+     955000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00088",
+     "Reikningur IK-2605-L110",
+     "2026-06-01",
+     955000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00069",
+     "Reikningur IK-2604-L110",
+     "2026-05-01",
+     955000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00050",
+     "Reikningur IK-2603-L110",
+     "2026-04-01",
+     955000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00031",
+     "Reikningur IK-2602-L110",
+     "2026-03-01",
+     955000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00012",
+     "Reikningur IK-2601-L110",
+     "2026-02-01",
+     955000,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 7640000.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 1910000,
+   "gl": [
+    [
+     "3590",
+     "Aðrar tryggingar",
+     2560000
+    ],
+    [
+     "2410",
+     "Slysatryggingar starfsmanna",
+     1920000
+    ],
+    [
+     "3420",
+     "Tryggingar bifreiða",
+     1680000
+    ],
+    [
+     "3020",
+     "Tryggingar húsnæðis",
+     1480000
+    ]
+   ]
+  },
+  {
+   "no": "KORT-2",
+   "name": "Greiðslukort 2",
+   "ic": false,
+   "inv": [
+    [
+     "2026-08-18",
+     "IR00002",
+     "Kortayfirlit 19.07. til 18.08.2026",
+     "2026-09-01",
+     563204,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00134",
+     "Kortayfirlit 07.2026",
+     "2026-08-01",
+     909816,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00115",
+     "Kortayfirlit 06.2026",
+     "2026-07-01",
+     1180632,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00096",
+     "Kortayfirlit 05.2026",
+     "2026-06-01",
+     1238664,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00077",
+     "Kortayfirlit 04.2026",
+     "2026-05-01",
+     1199976,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00058",
+     "Kortayfirlit 03.2026",
+     "2026-04-01",
+     1141944,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00039",
+     "Kortayfirlit 02.2026",
+     "2026-03-01",
+     1006536,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00020",
+     "Kortayfirlit 01.2026",
+     "2026-02-01",
+     948504,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 8189276.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 0,
+   "gl": [
+    [
+     "3470",
+     "Bílaleigubílar og leigubílar",
+     5360200
+    ],
+    [
+     "3250",
+     "Gistikostnaður innanlands",
+     1076000
+    ],
+    [
+     "3230",
+     "Ferðakostnaður",
+     148500
+    ],
+    [
+     "3570",
+     "Minni skrifstofubúnaður",
+     64900
+    ]
+   ]
+  },
+  {
+   "no": "L60",
+   "name": "Olís",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-09",
+     "R00038",
+     "Innkaupareikningur í samþykkt",
+     "2026-11-20",
+     757640,
+     757640,
+     "samt"
+    ],
+    [
+     "2026-10-08",
+     "R00015",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-20",
+     845680,
+     845680,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00139",
+     "Reikningur IK-2608-L60",
+     "2026-09-20",
+     768800,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00121",
+     "Reikningur IK-2607-L60",
+     "2026-08-20",
+     768800,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00102",
+     "Reikningur IK-2606-L60",
+     "2026-07-20",
+     768800,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00083",
+     "Reikningur IK-2605-L60",
+     "2026-06-20",
+     768800,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00064",
+     "Reikningur IK-2604-L60",
+     "2026-05-20",
+     768800,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00045",
+     "Reikningur IK-2603-L60",
+     "2026-04-20",
+     768800,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00026",
+     "Reikningur IK-2602-L60",
+     "2026-03-20",
+     768800,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00007",
+     "Reikningur IK-2601-L60",
+     "2026-02-20",
+     768800,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 6150400.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 1603320,
+   "gl": [
+    [
+     "3410",
+     "Bensín og olía",
+     4960000
+    ]
+   ]
+  },
+  {
+   "no": "L100",
+   "name": "Sundvík ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-15",
+     "R00034",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-19",
+     744000,
+     744000,
+     "samt"
+    ],
+    [
+     "2026-10-08",
+     "R00020",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-14",
+     744000,
+     744000,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00143",
+     "Reikningur IK-2608-L100",
+     "2026-09-14",
+     744000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00125",
+     "Reikningur IK-2607-L100",
+     "2026-08-14",
+     744000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00106",
+     "Reikningur IK-2606-L100",
+     "2026-07-14",
+     744000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00087",
+     "Reikningur IK-2605-L100",
+     "2026-06-14",
+     744000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00068",
+     "Reikningur IK-2604-L100",
+     "2026-05-14",
+     744000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00049",
+     "Reikningur IK-2603-L100",
+     "2026-04-14",
+     744000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00030",
+     "Reikningur IK-2602-L100",
+     "2026-03-14",
+     744000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00011",
+     "Reikningur IK-2601-L100",
+     "2026-02-14",
+     744000,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 5952000.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 1488000,
+   "gl": [
+    [
+     "3610",
+     "Bókhalds- og endurskoðunarkostnaður",
+     3840000
+    ],
+    [
+     "3600",
+     "Lögfræðiskostnaður",
+     960000
+    ]
+   ]
+  },
+  {
+   "no": "L160",
+   "name": "Krókeyri ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-09",
+     "R00031",
+     "Innkaupareikningur í samþykkt",
+     "2026-11-01",
+     558000,
+     558000,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00149",
+     "Reikningur IK-2608-L160",
+     "2026-09-01",
+     558000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00131",
+     "Reikningur IK-2607-L160",
+     "2026-08-01",
+     558000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00112",
+     "Reikningur IK-2606-L160",
+     "2026-07-01",
+     558000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00093",
+     "Reikningur IK-2605-L160",
+     "2026-06-01",
+     558000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00074",
+     "Reikningur IK-2604-L160",
+     "2026-05-01",
+     558000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00055",
+     "Reikningur IK-2603-L160",
+     "2026-04-01",
+     558000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00036",
+     "Reikningur IK-2602-L160",
+     "2026-03-01",
+     558000,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00017",
+     "Reikningur IK-2601-L160",
+     "2026-02-01",
+     558000,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 4464000.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 558000,
+   "gl": [
+    [
+     "3010",
+     "Húsaleiga",
+     3600000
+    ]
+   ]
+  },
+  {
+   "no": "KORT-1",
+   "name": "Greiðslukort 1",
+   "ic": false,
+   "inv": [
+    [
+     "2026-08-31",
+     "IR00151",
+     "Kortayfirlit 08.2026",
+     "2026-09-01",
+     562400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00133",
+     "Kortayfirlit 07.2026",
+     "2026-08-01",
+     562400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00114",
+     "Kortayfirlit 06.2026",
+     "2026-07-01",
+     562400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00095",
+     "Kortayfirlit 05.2026",
+     "2026-06-01",
+     562400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00076",
+     "Kortayfirlit 04.2026",
+     "2026-05-01",
+     562400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00057",
+     "Kortayfirlit 03.2026",
+     "2026-04-01",
+     562400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00038",
+     "Kortayfirlit 02.2026",
+     "2026-03-01",
+     562400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00019",
+     "Kortayfirlit 01.2026",
+     "2026-02-01",
+     562400,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 4499200.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 0,
+   "gl": [
+    [
+     "3230",
+     "Ferðakostnaður",
+     2320000
+    ],
+    [
+     "3270",
+     "Fundakostnaður",
+     760000
+    ],
+    [
+     "3260",
+     "Risna og gjafir",
+     680000
+    ]
+   ]
+  },
+  {
+   "no": "KORT-3",
+   "name": "Greiðslukort 3",
+   "ic": false,
+   "inv": [
+    [
+     "2026-08-31",
+     "IR00152",
+     "Kortayfirlit 08.2026",
+     "2026-09-01",
+     533200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00135",
+     "Kortayfirlit 07.2026",
+     "2026-08-01",
+     533200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00116",
+     "Kortayfirlit 06.2026",
+     "2026-07-01",
+     533200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00097",
+     "Kortayfirlit 05.2026",
+     "2026-06-01",
+     533200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00078",
+     "Kortayfirlit 04.2026",
+     "2026-05-01",
+     533200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00059",
+     "Kortayfirlit 03.2026",
+     "2026-04-01",
+     533200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00040",
+     "Kortayfirlit 02.2026",
+     "2026-03-01",
+     533200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00021",
+     "Kortayfirlit 01.2026",
+     "2026-02-01",
+     533200,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 4265600.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 0,
+   "gl": [
+    [
+     "2440",
+     "Annar starfsmannakostnaður",
+     2876800
+    ],
+    [
+     "3570",
+     "Minni skrifstofubúnaður",
+     1120000
+    ]
+   ]
+  },
+  {
+   "no": "L150",
+   "name": "Þórunnarverk ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-09",
+     "IR00155",
+     "Reikningur R00040",
+     "2026-10-23",
+     12400,
+     12400,
+     "bok"
+    ],
+    [
+     "2026-10-09",
+     "R00032",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-21",
+     427800,
+     427800,
+     "samt"
+    ],
+    [
+     "2026-10-08",
+     "R00025",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-14",
+     415400,
+     415400,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00148",
+     "Reikningur IK-2608-L150",
+     "2026-09-14",
+     415400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00130",
+     "Reikningur IK-2607-L150",
+     "2026-08-14",
+     415400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00111",
+     "Reikningur IK-2606-L150",
+     "2026-07-14",
+     415400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00092",
+     "Reikningur IK-2605-L150",
+     "2026-06-14",
+     415400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00073",
+     "Reikningur IK-2604-L150",
+     "2026-05-14",
+     415400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00054",
+     "Reikningur IK-2603-L150",
+     "2026-04-14",
+     415400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00035",
+     "Reikningur IK-2602-L150",
+     "2026-03-14",
+     415400,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00016",
+     "Reikningur IK-2601-L150",
+     "2026-02-14",
+     415400,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 3335600.0,
+   "open": 12400.0,
+   "od": 0,
+   "samt": 843200,
+   "gl": [
+    [
+     "3480",
+     "Viðgerðir og viðhald bifreiða",
+     1920000
+    ],
+    [
+     "3490",
+     "Annar bifreiðakostnaður",
+     760000
+    ],
+    [
+     "3610",
+     "Bókhalds- og endurskoðunarkostnaður",
+     10000
+    ]
+   ]
+  },
+  {
+   "no": "L180",
+   "name": "Hríseyjarhús ehf.",
+   "ic": true,
+   "inv": [
+    [
+     "2026-10-05",
+     "R00010",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-01",
+     3334360,
+     3334360,
+     "samt"
+    ]
+   ],
+   "tot": 0,
+   "open": 0,
+   "od": 0,
+   "samt": 3334360,
+   "gl": []
+  },
+  {
+   "no": "L80",
+   "name": "Fægiver ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-09",
+     "R00030",
+     "Innkaupareikningur í samþykkt",
+     "2026-11-20",
+     297600,
+     297600,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00141",
+     "Reikningur IK-2608-L80",
+     "2026-09-20",
+     297600,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00123",
+     "Reikningur IK-2607-L80",
+     "2026-08-20",
+     297600,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00104",
+     "Reikningur IK-2606-L80",
+     "2026-07-20",
+     297600,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00085",
+     "Reikningur IK-2605-L80",
+     "2026-06-20",
+     297600,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00066",
+     "Reikningur IK-2604-L80",
+     "2026-05-20",
+     297600,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00047",
+     "Reikningur IK-2603-L80",
+     "2026-04-20",
+     297600,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00028",
+     "Reikningur IK-2602-L80",
+     "2026-03-20",
+     297600,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00009",
+     "Reikningur IK-2601-L80",
+     "2026-02-20",
+     297600,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 2380800.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 297600,
+   "gl": [
+    [
+     "3050",
+     "Þrif",
+     1920000
+    ]
+   ]
+  },
+  {
+   "no": "L170",
+   "name": "Auglýsingastofa Norðurlands ehf.",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-08",
+     "R00024",
+     "Innkaupareikningur í samþykkt",
+     "2026-10-20",
+     669600,
+     669600,
+     "samt"
+    ],
+    [
+     "2026-08-31",
+     "IR00150",
+     "Reikningur IK-2608-L170",
+     "2026-09-20",
+     223200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-07-31",
+     "IR00132",
+     "Reikningur IK-2607-L170",
+     "2026-08-20",
+     223200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-06-30",
+     "IR00113",
+     "Reikningur IK-2606-L170",
+     "2026-07-20",
+     223200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-05-31",
+     "IR00094",
+     "Reikningur IK-2605-L170",
+     "2026-06-20",
+     223200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-04-30",
+     "IR00075",
+     "Reikningur IK-2604-L170",
+     "2026-05-20",
+     223200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-03-31",
+     "IR00056",
+     "Reikningur IK-2603-L170",
+     "2026-04-20",
+     223200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-02-28",
+     "IR00037",
+     "Reikningur IK-2602-L170",
+     "2026-03-20",
+     223200,
+     0,
+     "bok"
+    ],
+    [
+     "2026-01-31",
+     "IR00018",
+     "Reikningur IK-2601-L170",
+     "2026-02-20",
+     223200,
+     0,
+     "bok"
+    ]
+   ],
+   "tot": 1785600.0,
+   "open": 0.0,
+   "od": 0,
+   "samt": 669600,
+   "gl": [
+    [
+     "3210",
+     "Auglýsingar og önnur markaðssetning",
+     1440000
+    ]
+   ]
+  },
+  {
+   "no": "L40",
+   "name": "Kustsmide AB",
+   "ic": false,
+   "inv": [
+    [
+     "2026-10-08",
+     "R00026",
+     "Innkaupareikningur í samþykkt (EUR)",
+     "2026-10-14",
+     2027100,
+     2027100,
+     "samt"
+    ]
+   ],
+   "tot": 0,
+   "open": 0,
+   "od": 0,
+   "samt": 2027100,
+   "gl": []
+  }
+ ],
+ "incomplete": {
+  "2026-09": "laun vantar, vörunotkun vantar",
+  "2026-10": "laun vantar, vörunotkun vantar, yfirstandandi mánuður"
+ },
+ "meta": {
+  "company": "DT Vélsmiðjan ehf.",
+  "company_gen": "DT Vélsmiðjunnar ehf.",
+  "logo": "DT",
+  "as_of": "16.10.2026",
+  "year": "2026"
+ },
+ "text": {
+  "period": "jan–okt",
+  "period_long": "janúar til október",
+  "acc_range": "2000–4999",
+  "fetched": "16.–18.10.2026",
+  "incomplete_sentence": "September og október eru ófullbókaðir."
+ },
+ "html": {},
+ "js": {
+  "full_period": "jan–ágú",
+  "incomplete_lead": "Sep og okt eru ófullbókaðir",
+  "kpi_opex_note": "sep–okt ófullbókaðir",
+  "months": [
+   "2026-01",
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06",
+   "2026-07",
+   "2026-08",
+   "2026-09",
+   "2026-10"
+  ],
+  "period": "jan–okt",
+  "py": "2025",
+  "year": "2026"
+ }
+}

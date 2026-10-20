@@ -1,9 +1,11 @@
 ---
 name: stjorn
-description: Stjórnarmælaborð úr Business Central (4 flipar) — Yfirsýn með innsýn á stjórnarmáli, Rekstur með tímabilsvali, samanburði við fyrra tímabil, fyrra ár, fjárhagsáætlun eða spá, rekstrarreikningi með drill-down á lykla og EBITDA-brú, Efnahagur og sjóðstreymi sem töflur með lykilmælikvörðum, og Áhættur. Notaðu þegar beðið er um stjórnarmælaborð, stjórnaryfirlit, „hvernig gengur“, samanburð tímabila, „hvað breyttist“, raun vs áætlun eða spá, fjárhagsáætlun, efnahag og sjóðstreymi, mánaðar- eða ársfjórðungsyfirlit, eða yfirlit fyrir eigendur.
+description: "Mælaborðið „Stjórn“ í Bifröst-mælaborðum (4 flipar: Yfirsýn, Rekstur, Efnahagur og sjóðstreymi, Áhættur), smíðað úr föstu sniðmáti. Notaðu AÐEINS innan Bifröst-mælaborða: þegar notandinn biður um Bifröst-mælaborð eða þetta mælaborð með nafni, eða breytir mælaborði sem pluginið bjó til. Ekki fyrir almennar spurningar um rekstur eða Business Central, aðrar skýrslur, skjöl eða artifacts."
 ---
 
 # Stjórnarmælaborð
+
+> **Fast sniðmát.** Þetta mælaborð er smíðað úr `template/` (sjá `bifrost-maelabord`, *Föst sniðmát*). Skrifaðu ekki HTML. Safnaðu gögnunum eftir `template/schema.md` (sýnidæmi: `template/example.json`), og smíðaðu með `render.py --dashboard stjorn` eða `bundle.py`. Við breytingu eða uppfærslu er **aðeins þetta mælaborð** endurgert og birt (og viðbætur þess í `ext/`), sjá *Umfang breytinga*. Lýsingin hér að neðan segir hvað sniðmátið sýnir og hvaðan gögnin koma.
 
 Stjórn þarf að sjá á 30 sekúndum hvort reksturinn er á réttri leið, hvað breyttist og hvað kallar á ákvörðun. Mælaborðið á að vera hógvært í orðalagi og nákvæmt í tölum.
 

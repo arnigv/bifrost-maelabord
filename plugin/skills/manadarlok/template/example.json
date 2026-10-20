@@ -1,0 +1,1261 @@
+{
+ "today": "2026-10-17",
+ "company": "DT Vélsmiðjan ehf.",
+ "months": [
+  {
+   "ym": "2026-01",
+   "complete": true,
+   "reason": "",
+   "current": false,
+   "items": [
+    {
+     "k": "tekjur",
+     "t": "Tekjur bókaðar",
+     "s": "lokid",
+     "amt": 124200000.0,
+     "est": false,
+     "flag": false,
+     "role": "Bókari",
+     "note": "Sala og aðrar tekjur bókaðar."
+    },
+    {
+     "k": "laun",
+     "t": "Laun bókuð",
+     "s": "lokid",
+     "amt": 47397102.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Laun, lífeyrir og tryggingagjald (2210–2440)."
+    },
+    {
+     "k": "voru",
+     "t": "Vörunotkun bókuð",
+     "s": "lokid",
+     "amt": 52767000.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Vöruinnkaup og kostnaðarverð (2010–2120)."
+    },
+    {
+     "k": "afskr",
+     "t": "Afskriftir keyrðar",
+     "s": "lokid",
+     "amt": 1001191.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Afskriftir húsnæðis, tækja og bifreiða (3710–3730)."
+    },
+    {
+     "k": "vsk",
+     "t": "VSK-uppgjörsfærsla",
+     "s": "na",
+     "amt": null,
+     "est": false,
+     "role": "Bókari",
+     "note": "Miðtímabil. Uppgjör í lok næsta mánaðar."
+    },
+    {
+     "k": "fx",
+     "t": "Gengismunur endurmetinn",
+     "s": "na",
+     "amt": null,
+     "est": false,
+     "role": "Bókari",
+     "note": "Engar opnar færslur í erlendri mynt."
+    },
+    {
+     "k": "accr",
+     "t": "Áfallið og fyrirframgreitt",
+     "s": "lokid",
+     "amt": 4119550.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Húsnæði og vaxtagjöld bókuð í mánuðinum. Engir sérstakir lyklar fyrir áfallinn eða fyrirframgreiddan kostnað."
+    },
+    {
+     "k": "lok",
+     "t": "Tímabil lokað í BC",
+     "s": "vantar",
+     "amt": null,
+     "est": false,
+     "role": "Fjármálastjóri",
+     "note": "Bókun leyfð á öll tímabil: „Bókun leyfð frá/til“ er tómt í fjárhagsgrunni og hjá öllum notendum, og ekkert bókhaldstímabil er lokað."
+    }
+   ]
+  },
+  {
+   "ym": "2026-02",
+   "complete": true,
+   "reason": "",
+   "current": false,
+   "items": [
+    {
+     "k": "tekjur",
+     "t": "Tekjur bókaðar",
+     "s": "lokid",
+     "amt": 133200000.0,
+     "est": false,
+     "flag": false,
+     "role": "Bókari",
+     "note": "Sala og aðrar tekjur bókaðar."
+    },
+    {
+     "k": "laun",
+     "t": "Laun bókuð",
+     "s": "lokid",
+     "amt": 50700100.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Laun, lífeyrir og tryggingagjald (2210–2440)."
+    },
+    {
+     "k": "voru",
+     "t": "Vörunotkun bókuð",
+     "s": "lokid",
+     "amt": 56628000.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Vöruinnkaup og kostnaðarverð (2010–2120)."
+    },
+    {
+     "k": "afskr",
+     "t": "Afskriftir keyrðar",
+     "s": "lokid",
+     "amt": 1001191.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Afskriftir húsnæðis, tækja og bifreiða (3710–3730)."
+    },
+    {
+     "k": "vsk",
+     "t": "VSK-uppgjörsfærsla",
+     "s": "vantar",
+     "amt": 31665652.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Lok VSK-tímabils jan–feb. Útskattur og innskattur (9510–9540) eru ekki færðir á uppgjörsreikning; greiðslur safnast á 9570."
+    },
+    {
+     "k": "fx",
+     "t": "Gengismunur endurmetinn",
+     "s": "na",
+     "amt": null,
+     "est": false,
+     "role": "Bókari",
+     "note": "Engar opnar færslur í erlendri mynt."
+    },
+    {
+     "k": "accr",
+     "t": "Áfallið og fyrirframgreitt",
+     "s": "lokid",
+     "amt": 3970938.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Húsnæði og vaxtagjöld bókuð í mánuðinum. Engir sérstakir lyklar fyrir áfallinn eða fyrirframgreiddan kostnað."
+    },
+    {
+     "k": "lok",
+     "t": "Tímabil lokað í BC",
+     "s": "vantar",
+     "amt": null,
+     "est": false,
+     "role": "Fjármálastjóri",
+     "note": "Bókun leyfð á öll tímabil: „Bókun leyfð frá/til“ er tómt í fjárhagsgrunni og hjá öllum notendum, og ekkert bókhaldstímabil er lokað."
+    }
+   ]
+  },
+  {
+   "ym": "2026-03",
+   "complete": true,
+   "reason": "",
+   "current": false,
+   "items": [
+    {
+     "k": "tekjur",
+     "t": "Tekjur bókaðar",
+     "s": "lokid",
+     "amt": 154200000.0,
+     "est": false,
+     "flag": false,
+     "role": "Bókari",
+     "note": "Sala og aðrar tekjur bókaðar."
+    },
+    {
+     "k": "laun",
+     "t": "Laun bókuð",
+     "s": "lokid",
+     "amt": 58407101.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Laun, lífeyrir og tryggingagjald (2210–2440)."
+    },
+    {
+     "k": "voru",
+     "t": "Vörunotkun bókuð",
+     "s": "lokid",
+     "amt": 65637000.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Vöruinnkaup og kostnaðarverð (2010–2120)."
+    },
+    {
+     "k": "afskr",
+     "t": "Afskriftir keyrðar",
+     "s": "lokid",
+     "amt": 1001191.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Afskriftir húsnæðis, tækja og bifreiða (3710–3730)."
+    },
+    {
+     "k": "vsk",
+     "t": "VSK-uppgjörsfærsla",
+     "s": "na",
+     "amt": null,
+     "est": false,
+     "role": "Bókari",
+     "note": "Miðtímabil. Uppgjör í lok næsta mánaðar."
+    },
+    {
+     "k": "fx",
+     "t": "Gengismunur endurmetinn",
+     "s": "na",
+     "amt": null,
+     "est": false,
+     "role": "Bókari",
+     "note": "Engar opnar færslur í erlendri mynt."
+    },
+    {
+     "k": "accr",
+     "t": "Áfallið og fyrirframgreitt",
+     "s": "lokid",
+     "amt": 4557625.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Húsnæði og vaxtagjöld bókuð í mánuðinum. Engir sérstakir lyklar fyrir áfallinn eða fyrirframgreiddan kostnað."
+    },
+    {
+     "k": "lok",
+     "t": "Tímabil lokað í BC",
+     "s": "vantar",
+     "amt": null,
+     "est": false,
+     "role": "Fjármálastjóri",
+     "note": "Bókun leyfð á öll tímabil: „Bókun leyfð frá/til“ er tómt í fjárhagsgrunni og hjá öllum notendum, og ekkert bókhaldstímabil er lokað."
+    }
+   ]
+  },
+  {
+   "ym": "2026-04",
+   "complete": true,
+   "reason": "",
+   "current": false,
+   "items": [
+    {
+     "k": "tekjur",
+     "t": "Tekjur bókaðar",
+     "s": "lokid",
+     "amt": 185200000.0,
+     "est": false,
+     "flag": false,
+     "role": "Bókari",
+     "note": "Sala og aðrar tekjur bókaðar."
+    },
+    {
+     "k": "laun",
+     "t": "Laun bókuð",
+     "s": "lokid",
+     "amt": 61710100.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Laun, lífeyrir og tryggingagjald (2210–2440)."
+    },
+    {
+     "k": "voru",
+     "t": "Vörunotkun bókuð",
+     "s": "lokid",
+     "amt": 69498000.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Vöruinnkaup og kostnaðarverð (2010–2120)."
+    },
+    {
+     "k": "afskr",
+     "t": "Afskriftir keyrðar",
+     "s": "lokid",
+     "amt": 1001191.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Afskriftir húsnæðis, tækja og bifreiða (3710–3730)."
+    },
+    {
+     "k": "vsk",
+     "t": "VSK-uppgjörsfærsla",
+     "s": "vantar",
+     "amt": 44965980.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Lok VSK-tímabils mar–apr. Útskattur og innskattur (9510–9540) eru ekki færðir á uppgjörsreikning; greiðslur safnast á 9570."
+    },
+    {
+     "k": "fx",
+     "t": "Gengismunur endurmetinn",
+     "s": "na",
+     "amt": null,
+     "est": false,
+     "role": "Bókari",
+     "note": "Engar opnar færslur í erlendri mynt."
+    },
+    {
+     "k": "accr",
+     "t": "Áfallið og fyrirframgreitt",
+     "s": "lokid",
+     "amt": 3955312.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Húsnæði og vaxtagjöld bókuð í mánuðinum. Engir sérstakir lyklar fyrir áfallinn eða fyrirframgreiddan kostnað."
+    },
+    {
+     "k": "lok",
+     "t": "Tímabil lokað í BC",
+     "s": "vantar",
+     "amt": null,
+     "est": false,
+     "role": "Fjármálastjóri",
+     "note": "Bókun leyfð á öll tímabil: „Bókun leyfð frá/til“ er tómt í fjárhagsgrunni og hjá öllum notendum, og ekkert bókhaldstímabil er lokað."
+    }
+   ]
+  },
+  {
+   "ym": "2026-05",
+   "complete": true,
+   "reason": "",
+   "current": false,
+   "items": [
+    {
+     "k": "tekjur",
+     "t": "Tekjur bókaðar",
+     "s": "lokid",
+     "amt": 169200000.0,
+     "est": false,
+     "flag": false,
+     "role": "Bókari",
+     "note": "Sala og aðrar tekjur bókaðar."
+    },
+    {
+     "k": "laun",
+     "t": "Laun bókuð",
+     "s": "lokid",
+     "amt": 63912103.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Laun, lífeyrir og tryggingagjald (2210–2440)."
+    },
+    {
+     "k": "voru",
+     "t": "Vörunotkun bókuð",
+     "s": "lokid",
+     "amt": 72072000.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Vöruinnkaup og kostnaðarverð (2010–2120)."
+    },
+    {
+     "k": "afskr",
+     "t": "Afskriftir keyrðar",
+     "s": "lokid",
+     "amt": 1001191.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Afskriftir húsnæðis, tækja og bifreiða (3710–3730)."
+    },
+    {
+     "k": "vsk",
+     "t": "VSK-uppgjörsfærsla",
+     "s": "na",
+     "amt": null,
+     "est": false,
+     "role": "Bókari",
+     "note": "Miðtímabil. Uppgjör í lok næsta mánaðar."
+    },
+    {
+     "k": "fx",
+     "t": "Gengismunur endurmetinn",
+     "s": "na",
+     "amt": null,
+     "est": false,
+     "role": "Bókari",
+     "note": "Engar opnar færslur í erlendri mynt."
+    },
+    {
+     "k": "accr",
+     "t": "Áfallið og fyrirframgreitt",
+     "s": "lokid",
+     "amt": 3947500.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Húsnæði og vaxtagjöld bókuð í mánuðinum. Engir sérstakir lyklar fyrir áfallinn eða fyrirframgreiddan kostnað."
+    },
+    {
+     "k": "lok",
+     "t": "Tímabil lokað í BC",
+     "s": "vantar",
+     "amt": null,
+     "est": false,
+     "role": "Fjármálastjóri",
+     "note": "Bókun leyfð á öll tímabil: „Bókun leyfð frá/til“ er tómt í fjárhagsgrunni og hjá öllum notendum, og ekkert bókhaldstímabil er lokað."
+    }
+   ]
+  },
+  {
+   "ym": "2026-06",
+   "complete": true,
+   "reason": "",
+   "current": false,
+   "items": [
+    {
+     "k": "tekjur",
+     "t": "Tekjur bókaðar",
+     "s": "lokid",
+     "amt": 186200000.0,
+     "est": false,
+     "flag": false,
+     "role": "Bókari",
+     "note": "Sala og aðrar tekjur bókaðar."
+    },
+    {
+     "k": "laun",
+     "t": "Laun bókuð",
+     "s": "lokid",
+     "amt": 60609098.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Laun, lífeyrir og tryggingagjald (2210–2440)."
+    },
+    {
+     "k": "voru",
+     "t": "Vörunotkun bókuð",
+     "s": "lokid",
+     "amt": 68211000.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Vöruinnkaup og kostnaðarverð (2010–2120)."
+    },
+    {
+     "k": "afskr",
+     "t": "Afskriftir keyrðar",
+     "s": "lokid",
+     "amt": 1001191.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Afskriftir húsnæðis, tækja og bifreiða (3710–3730)."
+    },
+    {
+     "k": "vsk",
+     "t": "VSK-uppgjörsfærsla",
+     "s": "vantar",
+     "amt": 47678556.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Lok VSK-tímabils maí–jún. Útskattur og innskattur (9510–9540) eru ekki færðir á uppgjörsreikning; greiðslur safnast á 9570."
+    },
+    {
+     "k": "fx",
+     "t": "Gengismunur endurmetinn",
+     "s": "na",
+     "amt": null,
+     "est": false,
+     "role": "Bókari",
+     "note": "Engar opnar færslur í erlendri mynt."
+    },
+    {
+     "k": "accr",
+     "t": "Áfallið og fyrirframgreitt",
+     "s": "lokid",
+     "amt": 3939688.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Húsnæði og vaxtagjöld bókuð í mánuðinum. Engir sérstakir lyklar fyrir áfallinn eða fyrirframgreiddan kostnað."
+    },
+    {
+     "k": "lok",
+     "t": "Tímabil lokað í BC",
+     "s": "vantar",
+     "amt": null,
+     "est": false,
+     "role": "Fjármálastjóri",
+     "note": "Bókun leyfð á öll tímabil: „Bókun leyfð frá/til“ er tómt í fjárhagsgrunni og hjá öllum notendum, og ekkert bókhaldstímabil er lokað."
+    }
+   ]
+  },
+  {
+   "ym": "2026-07",
+   "complete": true,
+   "reason": "",
+   "current": false,
+   "items": [
+    {
+     "k": "tekjur",
+     "t": "Tekjur bókaðar",
+     "s": "lokid",
+     "amt": 163200000.0,
+     "est": false,
+     "flag": false,
+     "role": "Bókari",
+     "note": "Sala og aðrar tekjur bókaðar."
+    },
+    {
+     "k": "laun",
+     "t": "Laun bókuð",
+     "s": "lokid",
+     "amt": 45195101.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Laun, lífeyrir og tryggingagjald (2210–2440)."
+    },
+    {
+     "k": "voru",
+     "t": "Vörunotkun bókuð",
+     "s": "lokid",
+     "amt": 50193000.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Vöruinnkaup og kostnaðarverð (2010–2120)."
+    },
+    {
+     "k": "afskr",
+     "t": "Afskriftir keyrðar",
+     "s": "lokid",
+     "amt": 1001191.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Afskriftir húsnæðis, tækja og bifreiða (3710–3730)."
+    },
+    {
+     "k": "vsk",
+     "t": "VSK-uppgjörsfærsla",
+     "s": "na",
+     "amt": null,
+     "est": false,
+     "role": "Bókari",
+     "note": "Miðtímabil. Uppgjör í lok næsta mánaðar."
+    },
+    {
+     "k": "fx",
+     "t": "Gengismunur endurmetinn",
+     "s": "na",
+     "amt": null,
+     "est": false,
+     "role": "Bókari",
+     "note": "Engar opnar færslur í erlendri mynt."
+    },
+    {
+     "k": "accr",
+     "t": "Áfallið og fyrirframgreitt",
+     "s": "lokid",
+     "amt": 3511375.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Húsnæði og vaxtagjöld bókuð í mánuðinum. Engir sérstakir lyklar fyrir áfallinn eða fyrirframgreiddan kostnað."
+    },
+    {
+     "k": "lok",
+     "t": "Tímabil lokað í BC",
+     "s": "vantar",
+     "amt": null,
+     "est": false,
+     "role": "Fjármálastjóri",
+     "note": "Bókun leyfð á öll tímabil: „Bókun leyfð frá/til“ er tómt í fjárhagsgrunni og hjá öllum notendum, og ekkert bókhaldstímabil er lokað."
+    }
+   ]
+  },
+  {
+   "ym": "2026-08",
+   "complete": true,
+   "reason": "",
+   "current": false,
+   "items": [
+    {
+     "k": "tekjur",
+     "t": "Tekjur bókaðar",
+     "s": "lokid",
+     "amt": 180200000.0,
+     "est": false,
+     "flag": false,
+     "role": "Bókari",
+     "note": "Sala og aðrar tekjur bókaðar."
+    },
+    {
+     "k": "laun",
+     "t": "Laun bókuð",
+     "s": "lokid",
+     "amt": 49630300.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Laun, lífeyrir og tryggingagjald (2210–2440)."
+    },
+    {
+     "k": "voru",
+     "t": "Vörunotkun bókuð",
+     "s": "lokid",
+     "amt": 55341000.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Vöruinnkaup og kostnaðarverð (2010–2120)."
+    },
+    {
+     "k": "afskr",
+     "t": "Afskriftir keyrðar",
+     "s": "lokid",
+     "amt": 1001191.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Afskriftir húsnæðis, tækja og bifreiða (3710–3730)."
+    },
+    {
+     "k": "vsk",
+     "t": "VSK-uppgjörsfærsla",
+     "s": "vantar",
+     "amt": 45982312.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Lok VSK-tímabils júl–ágú. Útskattur og innskattur (9510–9540) eru ekki færðir á uppgjörsreikning; greiðslur safnast á 9570."
+    },
+    {
+     "k": "fx",
+     "t": "Gengismunur endurmetinn",
+     "s": "vantar",
+     "amt": -1386000,
+     "est": true,
+     "role": "Bókari",
+     "note": "Krafa SR00088, 210.000 EUR, bókuð á 147,40. Gengi 31.08. var 140,80. Endurmat aldrei keyrt (engin skrá í gengisleiðréttingum)."
+    },
+    {
+     "k": "accr",
+     "t": "Áfallið og fyrirframgreitt",
+     "s": "lokid",
+     "amt": 3924062.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Húsnæði og vaxtagjöld bókuð í mánuðinum. Engir sérstakir lyklar fyrir áfallinn eða fyrirframgreiddan kostnað."
+    },
+    {
+     "k": "lok",
+     "t": "Tímabil lokað í BC",
+     "s": "vantar",
+     "amt": null,
+     "est": false,
+     "role": "Fjármálastjóri",
+     "note": "Bókun leyfð á öll tímabil: „Bókun leyfð frá/til“ er tómt í fjárhagsgrunni og hjá öllum notendum, og ekkert bókhaldstímabil er lokað."
+    }
+   ]
+  },
+  {
+   "ym": "2026-09",
+   "complete": false,
+   "reason": "laun vantar, vörunotkun vantar",
+   "current": false,
+   "items": [
+    {
+     "k": "tekjur",
+     "t": "Tekjur bókaðar",
+     "s": "lokid",
+     "amt": 41790000.0,
+     "est": false,
+     "flag": true,
+     "role": "Bókari",
+     "note": "Bókað 41,8 m, um fjórðungur af meðaltali jan–ágú (162,0 m). Tekjur eru að hluta færðar með dagbók (FHFBOK). Staðfesta að öll sala september sé komin inn."
+    },
+    {
+     "k": "laun",
+     "t": "Laun bókuð",
+     "s": "vantar",
+     "amt": 49630300.0,
+     "est": true,
+     "role": "Bókari",
+     "note": "Engin laun á 2210–2440. Áætlað miðað við ágúst. Útborguð laun september (≈27,9 m) eru heldur ekki í bankabók."
+    },
+    {
+     "k": "voru",
+     "t": "Vörunotkun bókuð",
+     "s": "vantar",
+     "amt": 55341000.0,
+     "est": true,
+     "role": "Bókari",
+     "note": "Ekkert bókað á 2010–2120. Áætlað miðað við ágúst; raunfjárhæð fer eftir veltu mánaðarins."
+    },
+    {
+     "k": "afskr",
+     "t": "Afskriftir keyrðar",
+     "s": "vantar",
+     "amt": 1001191,
+     "est": true,
+     "role": "Bókari",
+     "note": "Engar afskriftir á 3710–3730 og uppsafnaðar afskriftir (5160) óbreyttar síðan 31.08."
+    },
+    {
+     "k": "vsk",
+     "t": "VSK-uppgjörsfærsla",
+     "s": "na",
+     "amt": null,
+     "est": false,
+     "role": "Bókari",
+     "note": "Miðtímabil. Uppgjör í lok næsta mánaðar."
+    },
+    {
+     "k": "fx",
+     "t": "Gengismunur endurmetinn",
+     "s": "vantar",
+     "amt": -1596000,
+     "est": true,
+     "role": "Bókari",
+     "note": "210.000 EUR krafa enn opin. Síðasta EUR-gengi í BC er frá 14.09. (139,80); gengi vantar eftir það."
+    },
+    {
+     "k": "accr",
+     "t": "Áfallið og fyrirframgreitt",
+     "s": "vantar",
+     "amt": 3924062.0,
+     "est": true,
+     "role": "Bókari",
+     "note": "Húsnæðiskostnaður (3010–3070) og vaxtagjöld (4220) ekki bókuð. Færa áfallinn kostnað. Áætlað miðað við ágúst."
+    },
+    {
+     "k": "lok",
+     "t": "Tímabil lokað í BC",
+     "s": "vantar",
+     "amt": null,
+     "est": false,
+     "role": "Fjármálastjóri",
+     "note": "Bókun leyfð á öll tímabil: „Bókun leyfð frá/til“ er tómt í fjárhagsgrunni og hjá öllum notendum, og ekkert bókhaldstímabil er lokað."
+    }
+   ]
+  },
+  {
+   "ym": "2026-10",
+   "complete": false,
+   "reason": "laun vantar, vörunotkun vantar, yfirstandandi mánuður",
+   "current": true,
+   "items": [
+    {
+     "k": "tekjur",
+     "t": "Tekjur bókaðar",
+     "s": "vantar",
+     "amt": 1693000.0,
+     "est": false,
+     "flag": false,
+     "role": "Bókari",
+     "note": "Mánuður stendur yfir. 1,7 m bókað til þessa."
+    },
+    {
+     "k": "laun",
+     "t": "Laun bókuð",
+     "s": "vantar",
+     "amt": 49630300.0,
+     "est": true,
+     "role": "Bókari",
+     "note": "Engin laun bókuð. Áætlað miðað við ágúst."
+    },
+    {
+     "k": "voru",
+     "t": "Vörunotkun bókuð",
+     "s": "vantar",
+     "amt": 55341000.0,
+     "est": true,
+     "role": "Bókari",
+     "note": "Aðeins 1,1 m bókað. Áætlað miðað við ágúst; raunfjárhæð fer eftir veltu mánaðarins."
+    },
+    {
+     "k": "afskr",
+     "t": "Afskriftir keyrðar",
+     "s": "vantar",
+     "amt": 1001191,
+     "est": true,
+     "role": "Bókari",
+     "note": "Engar afskriftir á 3710–3730 og uppsafnaðar afskriftir (5160) óbreyttar síðan 31.08."
+    },
+    {
+     "k": "vsk",
+     "t": "VSK-uppgjörsfærsla",
+     "s": "vantar",
+     "amt": 9093120.0,
+     "est": false,
+     "role": "Bókari",
+     "note": "Lok VSK-tímabils sep–okt. Útskattur og innskattur (9510–9540) eru ekki færðir á uppgjörsreikning; greiðslur safnast á 9570. Mánuður stendur yfir."
+    },
+    {
+     "k": "fx",
+     "t": "Gengismunur endurmetinn",
+     "s": "vantar",
+     "amt": -1596000,
+     "est": true,
+     "role": "Bókari",
+     "note": "210.000 EUR krafa enn opin. Síðasta EUR-gengi í BC er frá 14.09. (139,80); gengi vantar eftir það."
+    },
+    {
+     "k": "accr",
+     "t": "Áfallið og fyrirframgreitt",
+     "s": "vantar",
+     "amt": 3924062.0,
+     "est": true,
+     "role": "Bókari",
+     "note": "Húsnæðiskostnaður (3010–3070) og vaxtagjöld (4220) ekki bókuð. Færa áfallinn kostnað. Áætlað miðað við ágúst."
+    },
+    {
+     "k": "lok",
+     "t": "Tímabil lokað í BC",
+     "s": "vantar",
+     "amt": null,
+     "est": false,
+     "role": "Fjármálastjóri",
+     "note": "Bókun leyfð á öll tímabil: „Bókun leyfð frá/til“ er tómt í fjárhagsgrunni og hjá öllum notendum, og ekkert bókhaldstímabil er lokað."
+    }
+   ]
+  }
+ ],
+ "default": "2026-09",
+ "banks": [
+  {
+   "no": "LB-ISK",
+   "name": "Landsbankinn, veltureikningur",
+   "teg": "Veltureikningur",
+   "bal": 98195601,
+   "stmt_date": "2026-08-31",
+   "stmt_no": "2",
+   "stmt_bal": 168552350,
+   "outst": -25308519
+  },
+  {
+   "no": "ISB-ISK",
+   "name": "Íslandsbanki, veltureikningur",
+   "teg": "Veltureikningur",
+   "bal": 15624758,
+   "stmt_date": "2026-08-31",
+   "stmt_no": "1",
+   "stmt_bal": 15536287,
+   "outst": 0
+  },
+  {
+   "no": "ARION-ISK",
+   "name": "Arion banki, launareikningur",
+   "teg": "Launareikningur",
+   "bal": 8359204,
+   "stmt_date": "2026-08-31",
+   "stmt_no": "1",
+   "stmt_bal": 8308270,
+   "outst": 0
+  },
+  {
+   "no": "KORT-1",
+   "name": "Fyrirtækjakort 1",
+   "teg": "Greiðslukort",
+   "bal": -10685600,
+   "stmt_date": "2026-08-31",
+   "stmt_no": "1",
+   "stmt_bal": -10685600,
+   "outst": 0
+  },
+  {
+   "no": "KORT-2",
+   "name": "Fyrirtækjakort 2",
+   "teg": "Greiðslukort",
+   "bal": -19630642,
+   "stmt_date": "2026-08-31",
+   "stmt_no": "1",
+   "stmt_bal": -19630642,
+   "outst": 0
+  },
+  {
+   "no": "KORT-3",
+   "name": "Fyrirtækjakort 3",
+   "teg": "Greiðslukort",
+   "bal": -10130800,
+   "stmt_date": "2026-08-31",
+   "stmt_no": "1",
+   "stmt_bal": -10130800,
+   "outst": 0
+  }
+ ],
+ "banks_gl": {
+  "bankar": 122179563,
+  "kort": -40447042
+ },
+ "rec": {
+  "stmts": [
+   {
+    "acc": "ARION-ISK",
+    "name": "Arion, launareikningur",
+    "stmt": 8308270,
+    "ledger": 8308270,
+    "outst": 0
+   },
+   {
+    "acc": "ISB-ISK",
+    "name": "Íslandsbanki, veltureikningur",
+    "stmt": 15536287,
+    "ledger": 15536287,
+    "outst": 0
+   },
+   {
+    "acc": "LB-ISK",
+    "name": "Landsbankinn, veltureikningur",
+    "stmt": 168552350,
+    "ledger": 143243831,
+    "outst": -25308519
+   },
+   {
+    "acc": "KORT-1",
+    "name": "Fyrirtækjakort 1",
+    "stmt": -10685600,
+    "ledger": -10685600,
+    "outst": 0
+   },
+   {
+    "acc": "KORT-2",
+    "name": "Fyrirtækjakort 2",
+    "stmt": -19630642,
+    "ledger": -19630642,
+    "outst": 0
+   },
+   {
+    "acc": "KORT-3",
+    "name": "Fyrirtækjakort 3",
+    "stmt": -10130800,
+    "ledger": -10130800,
+    "outst": 0
+   }
+  ],
+  "gl6920_aug": 167088388.0,
+  "gl6340_aug": -40447042.0,
+  "gl6920": 122179563.0,
+  "stemming": [
+   {
+    "ym": "2026-01",
+    "mismunur": 2400000.0
+   },
+   {
+    "ym": "2026-10",
+    "mismunur": -2400000.0
+   }
+  ],
+  "loan": [
+   -133750000.0,
+   -132500000.0,
+   -131250000.0,
+   -130000000.0,
+   -128750000.0,
+   -127500000.0,
+   -126250000.0,
+   -125000000.0,
+   -125000000.0,
+   -125000000.0
+  ]
+ },
+ "unbooked": [
+  {
+   "k": "vsk",
+   "t": "VSK júlí–ágúst",
+   "d": "2026-10-05",
+   "amt": 45982312,
+   "note": "Gjalddagi 05.10.2026. Engin greiðsla bókuð."
+  },
+  {
+   "k": "skattar",
+   "t": "Staðgreiðsla, lífeyrir og tryggingagjald vegna ágúst",
+   "d": "2026-09-15",
+   "amt": 22034482,
+   "note": "Stendur ógreitt á skuldalyklum 9710–9740."
+  },
+  {
+   "k": "laun",
+   "t": "Útborguð laun september (áætlað)",
+   "d": "2026-09-30",
+   "amt": 27894514,
+   "note": "Laun september eru ekki bókuð."
+  },
+  {
+   "k": "skattar",
+   "t": "Staðgreiðsla o.fl. vegna september (áætlað)",
+   "d": "2026-10-15",
+   "amt": 24612807,
+   "note": "Gjalddagi 15.10.2026, ekki bókað."
+  },
+  {
+   "k": "lan",
+   "t": "Afborgun og vextir lána, september (áætlað)",
+   "d": "2026-09-30",
+   "amt": 2934062,
+   "note": "Afborgun ekki bókuð á 9110 í sept.–okt."
+  }
+ ],
+ "unb_total": 123458177,
+ "ag_total": 494673320,
+ "krofur_gl": 498443320.0,
+ "ven_total": 36006896,
+ "ap_gl": 35820896.0,
+ "vsk_net": 56803432.0,
+ "vsk_julagu": 45982312.0,
+ "vsk9570": 122582188.0,
+ "stemming": {
+  "2026-01": 2400000.0,
+  "2026-02": 0,
+  "2026-03": 0,
+  "2026-04": 0,
+  "2026-05": 0,
+  "2026-06": 0,
+  "2026-07": 0,
+  "2026-08": 0,
+  "2026-09": 0,
+  "2026-10": -2400000.0
+ },
+ "kort_m": 2129996.0,
+ "inv_n": 27,
+ "inv_sum": 111303952,
+ "inv_od_n": 6,
+ "inv_od_sum": 9629060,
+ "meta": {
+  "company": "DT Vélsmiðjan ehf.",
+  "short": "DT",
+  "logo": "DT",
+  "as_of": "17.10.2026",
+  "year": "2026",
+  "py": "2025"
+ },
+ "text": {
+  "source": "Heimild: Business Central (Bifröst), DT Vélsmiðjan ehf., fjárhagur, bankareikningar og bankaafstemmingar, viðskiptamanna- og lánardrottnabók, innkaupareikningar, gengi og bókhaldstímabil, sótt 16.–18.10.2026. Staða 17.10.2026."
+ },
+ "html": {},
+ "js": {
+  "bank_note": "Allir sex reikningar voru afstemmdir við bankayfirlit 31.08.2026 ({days:n} dagar). Afstemmingu fyrir september og október vantar og um {unb} m.kr. af greiðslum þeirra mánaða eru ekki bókaðar.",
+  "open_items": [
+   {
+    "s": "h",
+    "t": "Greiðslur sep–okt ekki bókaðar",
+    "d": "{unb_list}.",
+    "nx": "Sækja bankayfirlit sep–okt, bóka greiðslur og afstemma reikningana.",
+    "role": "Bókari",
+    "amt": null,
+    "if": "unb_n",
+    "ref": "unb"
+   },
+   {
+    "s": "h",
+    "t": "VSK-uppgjörsreikningur 122,6 m í debet",
+    "d": "Uppgjörsfærslur hafa ekki verið gerðar á árinu. Nettó VSK-skuld er {vsk_net} m; júl–ágú {vsk_julagu} m var á gjalddaga 05.10.",
+    "nx": "Staðfesta skil og greiðslu júl–ágú hjá Skattinum, gera uppgjörsfærslur og stemma við skilagreinar.",
+    "role": "Bókari",
+    "amt": null,
+    "ref": "vsk9570"
+   },
+   {
+    "s": "h",
+    "t": "Ársuppgjör 2025 ekki lokað",
+    "d": "Hagnaður 2025 hefur ekki verið færður á óráðstafað eigið fé og bókhaldsárið 2025 er opið.",
+    "nx": "Loka rekstrarreikningi 2025 þegar endurskoðandi hefur staðfest lokastöður.",
+    "role": "Fjármálastjóri",
+    "amt": 168100000
+   },
+   {
+    "s": "h",
+    "t": "September ófullbókaður",
+    "d": "Laun, vörunotkun, afskriftir, húsnæðiskostnaður og vextir eru ekki bókuð fyrir september. Sjá gátlista.",
+    "nx": "Bóka laun og vörunotkun, keyra afskriftir og færa áfallinn kostnað.",
+    "role": "Bókari",
+    "amt": null,
+    "est": true,
+    "ref": "inc_est"
+   },
+   {
+    "s": "h",
+    "t": "Áfangi V-2601 líklega tvíreikningsfærður",
+    "d": "SR00089 og SR00110, hvor 50,0 m án VSK (62,0 m með VSK), báðir dagsettir sunnudaginn 23.08.2026 fyrir sama áfanga.",
+    "nx": "Bera saman við verksamning og framvindu. Ef tvítekið: kreditreikningur á annan og leiðrétting tekna.",
+    "role": "Fjármálastjóri",
+    "amt": 50000000
+   },
+   {
+    "s": "h",
+    "t": "Viðskiptamenn: fjárhagur yfir undirbók",
+    "d": "Kröfulyklar eru hærri en aldursgreining. Handfærslur beint á 6310–6330 koma ekki fram hjá viðskiptamanni.",
+    "nx": "Rekja handfærslurnar (LEIÐR, MILLIF 30.09.) og bóka þær gegnum viðskiptamann.",
+    "role": "Bókari",
+    "amt": null,
+    "ref": "ARd"
+   },
+   {
+    "s": "h",
+    "t": "Ójöfnuður innan janúar og október",
+    "d": "Debet og kredit stemma ekki innan mánaðanna (+2,4 m og −2,4 m).",
+    "nx": "Finna fylgiskjalið og bakfæra með réttum dagsetningum.",
+    "role": "Bókari",
+    "amt": null,
+    "if": "stm_n",
+    "ref": "stm_first_abs"
+   },
+   {
+    "s": "h",
+    "t": "87 handfærðar tekjufærslur",
+    "d": "Tekjur á 1110 bókaðar með dagbók (upprunakóði FHFBOK) í mánaðarlegum heildarfærslum, ekki úr sölureikningum.",
+    "nx": "Fá sundurliðun sölu að baki hverri færslu og stemma við reikninga. Annar aðili samþykki dagbækur.",
+    "role": "Fjármálastjóri",
+    "amt": null,
+    "txt": "87 f."
+   },
+   {
+    "s": "m",
+    "t": "Ósamþykktir reikningar komnir á gjalddaga",
+    "d": "{inv_n:n} innkaupareikningar ({inv_sum} m) bíða samþykkis; {inv_od_n:n} þeirra eru komnir fram yfir gjalddaga.",
+    "nx": "Samþykkja eða hafna þeim sem eru á gjalddaga og bóka, svo skuld og kostnaður komi fram.",
+    "role": "Fjármálastjóri",
+    "amt": null,
+    "if": "inv_od_n",
+    "ref": "inv_od_sum"
+   },
+   {
+    "s": "m",
+    "t": "Bankaafstemming sep–okt ekki gerð",
+    "d": "Síðasta afstemming 31.08.2026. Á Landsbanka bíður útistandandi færsla (útborguð laun 31.08.) frá síðasta yfirliti.",
+    "nx": "Afstemma alla sex reikninga fyrir september og síðan október.",
+    "role": "Bókari",
+    "amt": null,
+    "ref": "lb_outst_abs"
+   },
+   {
+    "s": "m",
+    "t": "Kortafærslur sep–okt ekki bókaðar",
+    "d": "Lykill 6340 óbreyttur frá 31.08. þótt kortaskuld hafi hækkað mánaðarlega jan–ágú.",
+    "nx": "Sækja kortayfirlit sep–okt og bóka.",
+    "role": "Bókari",
+    "amt": null,
+    "est": true,
+    "ref": "kort_2"
+   },
+   {
+    "s": "m",
+    "t": "Langtímalán: afborganir sep–okt",
+    "d": "Staða 9110 óbreytt frá 31.08.; tvær afborganir 1,25 m vantar.",
+    "nx": "Bóka afborganir og vexti samkvæmt lánayfirliti.",
+    "role": "Bókari",
+    "amt": 2500000
+   },
+   {
+    "s": "m",
+    "t": "Gengismunur aldrei keyrður",
+    "d": "Krafa SR00088, 210.000 EUR, stendur á bókunargengi. EUR-gengi vantar í BC eftir 14.09.",
+    "nx": "Uppfæra gengistöflu og keyra endurmat gjaldmiðla fyrir lok september.",
+    "role": "Bókari",
+    "amt": 1596000,
+    "est": true
+   },
+   {
+    "s": "m",
+    "t": "Lánardrottnar: undirbók yfir fjárhag",
+    "d": "Opnar færslur lánardrottna eru hærri en skuldalyklar 9410–9440.",
+    "nx": "Finna færsluna sem vantar á fjárhag (kreditreikningur) og leiðrétta.",
+    "role": "Bókari",
+    "amt": null,
+    "ref": "APd"
+   },
+   {
+    "s": "m",
+    "t": "Innbyrðis staða við Eyjavör óstaðfest",
+    "d": "Krafa DT á Eyjavör (K110) 0,37 m og umsýslugjald 2,4 m á mánuði.",
+    "nx": "Stemma innbyrðis stöðu og viðskipti við bækur Eyjavarar fyrir samstæðuuppgjör.",
+    "role": "Fjármálastjóri",
+    "amt": 372000
+   },
+   {
+    "s": "m",
+    "t": "Bókunartímabil opin",
+    "d": "Bókun leyfð á öll tímabil, líka 2025, í fjárhagsgrunni og hjá öllum notendum.",
+    "nx": "Setja „Bókun leyfð frá“ á fyrsta opna mánuðinn þegar ágúst og september eru lokaðir.",
+    "role": "Fjármálastjóri",
+    "amt": null,
+    "txt": "–"
+   }
+  ],
+  "rec_bnk_pill": "Stemmir 31.08.",
+  "rec_rows": [
+   {
+    "s": "l",
+    "t": "Bankabók á móti fjárhag (6920)",
+    "d": "Þrír bankareikningar {bank_isk} m.kr. = lykill 6920 {bank_gl} m.kr. í dag.",
+    "amt": null,
+    "ref": "bank_diff"
+   },
+   {
+    "s": "l",
+    "t": "Greiðslukort á móti fjárhag (6340)",
+    "d": "Þrjú fyrirtækjakort {card_sum} m.kr. = lykill 6340 {card_gl} m.kr.",
+    "amt": null,
+    "ref": "card_diff"
+   },
+   {
+    "s": "m",
+    "t": "Bankayfirlit á móti bankabók 31.08.",
+    "d": "Fimm reikningar stemma upp á krónu. {lb_name}: yfirlit {lb_stmt} m, bankabók {lb_ledger} m; ein útistandandi færsla (útborguð laun 31.08.) bíður næsta yfirlits.",
+    "amt": null,
+    "if": "lb_outst",
+    "ref": "lb_outst"
+   },
+   {
+    "s": "h",
+    "t": "Bankafærslur sep–okt ekki bókaðar",
+    "d": "Laun september, staðgreiðsla 15.09. og 15.10., VSK 05.10. og afborganir lána vantar í bankabók. Staða í BC er því líklega of há.",
+    "amt": null,
+    "if": "unb",
+    "ref": "unb_neg"
+   },
+   {
+    "s": "m",
+    "t": "Kortafærslur sep–okt ekki bókaðar",
+    "d": "Lykill 6340 óbreyttur frá 31.08. Kortaskuld hækkaði um {kort_m} m á mánuði jan–ágú, svo búast má við færslum sem vantar.",
+    "amt": null,
+    "est": true,
+    "ref": "kort_neg2"
+   },
+   {
+    "s": "h",
+    "t": "Viðskiptamenn á móti fjárhag",
+    "d": "Aldursgreining {ag_total} m.kr., kröfulyklar 6310–6330 {krofur_gl} m.kr. Fjárhagur er hærri en undirbók: handfærslur beint á kröfulykla (LEIÐR, MILLIF 30.09.).",
+    "amt": null,
+    "ref": "ARd"
+   },
+   {
+    "s": "m",
+    "t": "Lánardrottnar á móti fjárhag",
+    "d": "Opnar færslur {ven_total:2} m.kr., lyklar 9410–9440 {ap_gl:2} m.kr. Undirbók er hærri en fjárhagur.",
+    "amt": null,
+    "ref": "APd"
+   },
+   {
+    "s": "h",
+    "t": "VSK á móti skilagreinum",
+    "d": "Nettó VSK-skuld {vsk_net} m.kr. Uppgjörsreikningur 9570 stendur í {vsk9570} m.kr. debet því uppgjörsfærslur vantar. Júl–ágú {vsk_julagu} m.kr., gjalddagi 05.10., engin greiðsla bókuð.",
+    "amt": null,
+    "ref": "vsk9570"
+   },
+   {
+    "s": "h",
+    "t": "Jöfnuður færslna innan mánaðar",
+    "d": "Debet og kredit stemma ekki: {stm_list}. Jafnast yfir árið en hvor mánuður fyrir sig er rangur.",
+    "amt": null,
+    "if": "stm_n",
+    "ref": "stm_first"
+   },
+   {
+    "s": "m",
+    "t": "Langtímalán (9110) á móti lánayfirliti",
+    "d": "Staða 125,0 m óbreytt frá 31.08. Afborganir sep. og okt. (2 × 1,25 m) ekki bókaðar.",
+    "amt": 2500000
+   },
+   {
+    "s": "m",
+    "t": "Innbyrðis staða við Eyjavör",
+    "d": "Krafa DT á Eyjavör (K110) 0,37 m og umsýslugjald 2,4 m á mánuði. Ekki staðfest við bækur gagnaðila.",
+    "amt": null
+   }
+  ],
+  "unrec": "sep–okt"
+ }
+}

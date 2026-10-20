@@ -1,9 +1,11 @@
 ---
 name: tekjur
-description: Tekjumælaborðið „Tekjur“ úr Business Central (4 flipar) — tekjur og sala tímabils á móti fyrra ári og áætlun, tekjustoðir eftir lyklum og tegund sölu, viðskiptavinir með þróun, nýjum viðskiptavinum og samþjöppun, drill-down frá viðskiptavini í reikninga og reikningslínur, vörur, þjónusta og verk, verð og afslættir, og tekjuleki (óreikningsfært, 0 kr. notkun, sækjanlegt strax) sem flipi. Notaðu þegar beðið er um tekjur, sölu, söluþróun, viðskiptavini, „hverjir kaupa mest“, samþjöppun viðskiptavina, tekjustoðir, verð og afslætti, sölu eftir vöru, þjónustu eða verki, eða tekjuleka.
+description: "Mælaborðið „Tekjur“ í Bifröst-mælaborðum (Yfirsýn, Viðskiptavinir, Vörur og þjónusta, Tekjuleki), smíðað úr föstu sniðmáti. Notaðu AÐEINS innan Bifröst-mælaborða: þegar notandinn biður um Bifröst-mælaborð eða þetta mælaborð með nafni, eða breytir mælaborði sem pluginið bjó til. Ekki fyrir almennar spurningar um rekstur eða Business Central, aðrar skýrslur, skjöl eða artifacts."
 ---
 
 # Tekjur
+
+> **Fast sniðmát.** Þetta mælaborð er smíðað úr `template/` (sjá `bifrost-maelabord`, *Föst sniðmát*). Skrifaðu ekki HTML. Safnaðu gögnunum eftir `template/schema.md` (sýnidæmi: `template/example.json`), og smíðaðu með `render.py --dashboard tekjur` eða `bundle.py`. Við breytingu eða uppfærslu er **aðeins þetta mælaborð** endurgert og birt (og viðbætur þess í `ext/`), sjá *Umfang breytinga*. Lýsingin hér að neðan segir hvað sniðmátið sýnir og hvaðan gögnin koma.
 
 Svarar: **Hvað seljum við, hverjum og á hvaða verði, hvernig þróast salan á móti fyrra ári og áætlun, og hvaða tekjur erum við að missa?**
 

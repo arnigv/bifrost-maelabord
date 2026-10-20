@@ -1,0 +1,1030 @@
+{
+ "as_of": "2026-10-17",
+ "months": [
+  {
+   "ym": "2026-01",
+   "rev": 124200000.0,
+   "cogs": 52767000.0,
+   "laun": 47397102.0,
+   "complete": true,
+   "oneoff": 0
+  },
+  {
+   "ym": "2026-02",
+   "rev": 133200000.0,
+   "cogs": 56628000.0,
+   "laun": 50700100.0,
+   "complete": true,
+   "oneoff": 0
+  },
+  {
+   "ym": "2026-03",
+   "rev": 154200000.0,
+   "cogs": 65637000.0,
+   "laun": 58407101.0,
+   "complete": true,
+   "oneoff": 0
+  },
+  {
+   "ym": "2026-04",
+   "rev": 185200000.0,
+   "cogs": 69498000.0,
+   "laun": 61710100.0,
+   "complete": true,
+   "oneoff": 0
+  },
+  {
+   "ym": "2026-05",
+   "rev": 169200000.0,
+   "cogs": 72072000.0,
+   "laun": 63912103.0,
+   "complete": true,
+   "oneoff": 0
+  },
+  {
+   "ym": "2026-06",
+   "rev": 186200000.0,
+   "cogs": 68211000.0,
+   "laun": 60609098.0,
+   "complete": true,
+   "oneoff": 0
+  },
+  {
+   "ym": "2026-07",
+   "rev": 163200000.0,
+   "cogs": 50193000.0,
+   "laun": 45195101.0,
+   "complete": true,
+   "oneoff": 0
+  },
+  {
+   "ym": "2026-08",
+   "rev": 180200000.0,
+   "cogs": 55341000.0,
+   "laun": 49630300.0,
+   "complete": true,
+   "oneoff": 30954000.0
+  },
+  {
+   "ym": "2026-09",
+   "rev": 41790000.0,
+   "cogs": 0.0,
+   "laun": 0.0,
+   "complete": false,
+   "oneoff": 0
+  },
+  {
+   "ym": "2026-10",
+   "rev": 1693000.0,
+   "cogs": 1064000.0,
+   "laun": 0.0,
+   "complete": false,
+   "oneoff": 0
+  }
+ ],
+ "py": {
+  "rev": 1620000000,
+  "cogs": 694980000,
+  "laun": 621613201
+ },
+ "ytd": {
+  "rev": 1295600000.0,
+  "cogs": 490347000.0,
+  "laun": 437561005.0
+ },
+ "oneoffs": [
+  {
+   "no": "1130",
+   "name": "Sala undanþegin VSK",
+   "cat": "tekjur",
+   "ym": "2026-08",
+   "amount": 30954000.0
+  }
+ ],
+ "cogs_acc": [
+  {
+   "no": "2010",
+   "name": "Vöruinnkaup 24% VSK",
+   "v": 434340000.0,
+   "py": 615600000
+  },
+  {
+   "no": "2040",
+   "name": "Fenginn afsláttur af vörukaupum",
+   "v": 0,
+   "py": null
+  },
+  {
+   "no": "2050",
+   "name": "Flutningskostnaður 24% VSK",
+   "v": 25146000.0,
+   "py": 35640000
+  },
+  {
+   "no": "2120",
+   "name": "Annað kostnaðarverð seldra vara 24% VSK",
+   "v": 30861000.0,
+   "py": 43740000
+  }
+ ],
+ "jobs": [
+  {
+   "no": "V-2601",
+   "desc": "Lagnaendurnýjun, frystihús",
+   "cno": "K10",
+   "cust": "Svarfaðarver ehf.",
+   "dept": "UPPSETN",
+   "typ": "Tilboðsverk",
+   "start": "2026-02-02",
+   "end": "2026-11-27",
+   "contract": 148000000,
+   "budcost": 116207000,
+   "cost": 84020000,
+   "hrs_b": 7470,
+   "hrs": 4470,
+   "invoiced": 148000000,
+   "tfrac": 0.862,
+   "used_val": 73159000.0,
+   "tobill": 32000000.0,
+   "margin": 31793000,
+   "contract_m": 148000000
+  },
+  {
+   "no": "L-2601",
+   "desc": "Lagnagrindur á lager, staðalstærð",
+   "cno": "K10",
+   "cust": "Innra verk (lager)",
+   "dept": "VERKST",
+   "typ": "Lagersmíði",
+   "start": "2026-03-09",
+   "end": "2026-10-30",
+   "contract": 0,
+   "budcost": 18018000,
+   "cost": 10701600,
+   "hrs_b": 1550,
+   "hrs": 840,
+   "invoiced": 0,
+   "tfrac": 0.945,
+   "used_val": 0.0,
+   "tobill": 0,
+   "margin": null,
+   "contract_m": 0
+  },
+  {
+   "no": "S-2601",
+   "desc": "Þjónustusamningur, viðhald og útköll",
+   "cno": "K20",
+   "cust": "Eyjafjarðar Sjókvíar ehf.",
+   "dept": "THJONUSTA",
+   "typ": "Þjónustusamningur",
+   "start": "2026-01-01",
+   "end": "2026-12-31",
+   "contract": 39790000,
+   "budcost": 61200000,
+   "cost": 21720000,
+   "hrs_b": 6000,
+   "hrs": 2100,
+   "invoiced": 36190000,
+   "tfrac": 0.794,
+   "used_val": 36190000.0,
+   "tobill": 3600000.0,
+   "contract_year": 112400000,
+   "margin": 51200000,
+   "contract_m": 112400000
+  },
+  {
+   "no": "S-2602",
+   "desc": "Útköll og bilanaviðgerðir",
+   "cno": "K40",
+   "cust": "Eyjafjarðar Kaldhreinsun ehf.",
+   "dept": "THJONUSTA",
+   "typ": "Þjónustusamningur",
+   "start": "2026-01-12",
+   "end": "2026-08-31",
+   "contract": 63475000,
+   "budcost": 58290000,
+   "cost": 58290000,
+   "hrs_b": 5000,
+   "hrs": 5000,
+   "invoiced": 67340000,
+   "tfrac": 1,
+   "used_val": 73000000.0,
+   "tobill": 17649000.0,
+   "margin": 5185000,
+   "contract_m": 63475000
+  },
+  {
+   "no": "S-2603",
+   "desc": "Rammasamningur, fast mánaðargjald 1,2 m",
+   "cno": "K50",
+   "cust": "Vélaverk Norðurlands ehf.",
+   "dept": "THJONUSTA",
+   "typ": "Rammasamningur",
+   "start": "2026-01-01",
+   "end": "2026-12-31",
+   "contract": 11188800,
+   "budcost": 6537600,
+   "cost": 6537600,
+   "hrs_b": 664,
+   "hrs": 664,
+   "invoiced": 10800000,
+   "tfrac": 0.794,
+   "used_val": 12484800.0,
+   "tobill": 0,
+   "margin": 4651200,
+   "contract_m": 11188800
+  },
+  {
+   "no": "D-01",
+   "desc": "Þjónustuúttekt og viðhald",
+   "cno": "K20",
+   "cust": "Eyjafjarðar Sjókvíar ehf.",
+   "dept": "THJONUSTA",
+   "typ": "Tímaverk",
+   "start": "2026-08-01",
+   "end": "2026-08-31",
+   "contract": 1296000,
+   "budcost": 672000,
+   "cost": 672000,
+   "hrs_b": 80,
+   "hrs": 80,
+   "invoiced": 0,
+   "tfrac": 1,
+   "used_val": 1296000.0,
+   "tobill": 1296000.0,
+   "margin": 624000,
+   "contract_m": 1296000
+  },
+  {
+   "no": "D-02",
+   "desc": "Útkallsvinna og bilanaleit",
+   "cno": "K40",
+   "cust": "Eyjafjarðar Kaldhreinsun ehf.",
+   "dept": "THJONUSTA",
+   "typ": "Tímaverk",
+   "start": "2026-08-01",
+   "end": "2026-08-31",
+   "contract": 934400,
+   "budcost": 518400,
+   "cost": 453600,
+   "hrs_b": 64,
+   "hrs": 56,
+   "invoiced": 0,
+   "tfrac": 1,
+   "used_val": 817600.0,
+   "tobill": 934400.0,
+   "margin": 416000,
+   "contract_m": 934400
+  },
+  {
+   "no": "D-03",
+   "desc": "Suðuvinna og viðgerðir",
+   "cno": "K70",
+   "cust": "Smíðaþjónusta Norðurlands ehf.",
+   "dept": "VERKST",
+   "typ": "Tímaverk",
+   "start": "2026-08-01",
+   "end": "2026-08-31",
+   "contract": 700800,
+   "budcost": 388800,
+   "cost": 324000,
+   "hrs_b": 48,
+   "hrs": 40,
+   "invoiced": 0,
+   "tfrac": 1,
+   "used_val": 584000.0,
+   "tobill": 700800.0,
+   "margin": 312000,
+   "contract_m": 700800
+  },
+  {
+   "no": "D-04",
+   "desc": "Uppsetning og frágangur",
+   "cno": "K80",
+   "cust": "Grenivíkurver ehf.",
+   "dept": "UPPSETN",
+   "typ": "Tímaverk",
+   "start": "2026-08-01",
+   "end": "2026-08-31",
+   "contract": 1668000,
+   "budcost": 936000,
+   "cost": 748800,
+   "hrs_b": 120,
+   "hrs": 96,
+   "invoiced": 0,
+   "tfrac": 1,
+   "used_val": 1334400.0,
+   "tobill": 1668000.0,
+   "margin": 732000,
+   "contract_m": 1668000
+  },
+  {
+   "no": "D-05",
+   "desc": "Uppsetning á búnaði",
+   "cno": "K50",
+   "cust": "Vélaverk Norðurlands ehf.",
+   "dept": "UPPSETN",
+   "typ": "Tímaverk",
+   "start": "2026-08-01",
+   "end": "2026-08-31",
+   "contract": 907200,
+   "budcost": 470400,
+   "cost": 403200,
+   "hrs_b": 56,
+   "hrs": 48,
+   "invoiced": 0,
+   "tfrac": 1,
+   "used_val": 777600.0,
+   "tobill": 907200.0,
+   "margin": 436800,
+   "contract_m": 907200
+  },
+  {
+   "no": "D-06",
+   "desc": "Hönnun og tæknileg úttekt",
+   "cno": "K20",
+   "cust": "Eyjafjarðar Sjókvíar ehf.",
+   "dept": "VERKST",
+   "typ": "Tímaverk",
+   "start": "2026-08-01",
+   "end": "2026-08-31",
+   "contract": 756000,
+   "budcost": 396000,
+   "cost": 316800,
+   "hrs_b": 40,
+   "hrs": 32,
+   "invoiced": 0,
+   "tfrac": 1,
+   "used_val": 604800.0,
+   "tobill": 756000.0,
+   "margin": 360000,
+   "contract_m": 756000
+  },
+  {
+   "no": "D-07",
+   "desc": "Viðgerðir á verkstæði",
+   "cno": "K40",
+   "cust": "Eyjafjarðar Kaldhreinsun ehf.",
+   "dept": "VERKST",
+   "typ": "Tímaverk",
+   "start": "2026-08-01",
+   "end": "2026-08-31",
+   "contract": 1051200,
+   "budcost": 583200,
+   "cost": 518400,
+   "hrs_b": 72,
+   "hrs": 64,
+   "invoiced": 0,
+   "tfrac": 1,
+   "used_val": 934400.0,
+   "tobill": 1051200.0,
+   "margin": 468000,
+   "contract_m": 1051200
+  },
+  {
+   "no": "D-08",
+   "desc": "Mánaðarleg úttekt",
+   "cno": "K70",
+   "cust": "Smíðaþjónusta Norðurlands ehf.",
+   "dept": "THJONUSTA",
+   "typ": "Tímaverk",
+   "start": "2026-08-01",
+   "end": "2026-08-31",
+   "contract": 444800,
+   "budcost": 249600,
+   "cost": 187200,
+   "hrs_b": 32,
+   "hrs": 24,
+   "invoiced": 0,
+   "tfrac": 1,
+   "used_val": 333600.0,
+   "tobill": 444800.0,
+   "margin": 195200,
+   "contract_m": 444800
+  },
+  {
+   "no": "D-09",
+   "desc": "Frágangur og prófanir",
+   "cno": "K80",
+   "cust": "Grenivíkurver ehf.",
+   "dept": "UPPSETN",
+   "typ": "Tímaverk",
+   "start": "2026-08-01",
+   "end": "2026-08-31",
+   "contract": 540000,
+   "budcost": 384000,
+   "cost": 256000,
+   "hrs_b": 24,
+   "hrs": 16,
+   "invoiced": 0,
+   "tfrac": 1,
+   "used_val": 360000.0,
+   "tobill": 540000.0,
+   "margin": 156000,
+   "contract_m": 540000
+  },
+  {
+   "no": "D-10",
+   "desc": "Uppsetning, síðari áfangi",
+   "cno": "K50",
+   "cust": "Vélaverk Norðurlands ehf.",
+   "dept": "UPPSETN",
+   "typ": "Tímaverk",
+   "start": "2026-08-01",
+   "end": "2026-08-31",
+   "contract": 1555200,
+   "budcost": 806400,
+   "cost": 672000,
+   "hrs_b": 96,
+   "hrs": 80,
+   "invoiced": 0,
+   "tfrac": 1,
+   "used_val": 1296000.0,
+   "tobill": 1555200.0,
+   "margin": 748800,
+   "contract_m": 1555200
+  }
+ ],
+ "resources": [
+  {
+   "code": "UVK",
+   "cost": 16000,
+   "price": 22500,
+   "hrs": 806
+  },
+  {
+   "code": "GTH",
+   "cost": 9900,
+   "price": 18900,
+   "hrs": 2072
+  },
+  {
+   "code": "SVA",
+   "cost": 8400,
+   "price": 16200,
+   "hrs": 1792
+  },
+  {
+   "code": "ARN",
+   "cost": 8100,
+   "price": 14600,
+   "hrs": 5616
+  },
+  {
+   "code": "JBS",
+   "cost": 8100,
+   "price": 14600,
+   "hrs": 1944
+  },
+  {
+   "code": "HKR",
+   "cost": 7800,
+   "price": 13900,
+   "hrs": 1380
+  }
+ ],
+ "dept": [
+  {
+   "code": "THJONUSTA",
+   "val": 124122000,
+   "cost": 67670400,
+   "hrs": 7924
+  },
+  {
+   "code": "VERKST",
+   "val": 14835200,
+   "cost": 8047200,
+   "hrs": 976
+  },
+  {
+   "code": "UPPSETN",
+   "val": 76927000,
+   "cost": 44744000,
+   "hrs": 4710
+  }
+ ],
+ "cust": [
+  {
+   "no": "K10",
+   "name": "Svarfaðarver ehf.",
+   "sales": 169375000,
+   "jobs": [
+    "V-2601"
+   ],
+   "job_contract": 148000000,
+   "job_margin": 31793000
+  },
+  {
+   "no": "K40",
+   "name": "Eyjafjarðar Kaldhreinsun ehf.",
+   "sales": 67340000,
+   "jobs": [
+    "S-2602",
+    "D-02",
+    "D-07"
+   ],
+   "job_contract": 65460600,
+   "job_margin": 6069000
+  },
+  {
+   "no": "K30",
+   "name": "Útgerðin Boðaföll ehf.",
+   "sales": 57665000,
+   "jobs": [],
+   "job_contract": 0,
+   "job_margin": 0
+  },
+  {
+   "no": "K20",
+   "name": "Eyjafjarðar Sjókvíar ehf.",
+   "sales": 51030000,
+   "jobs": [
+    "S-2601",
+    "D-01",
+    "D-06"
+   ],
+   "job_contract": 114452000,
+   "job_margin": 52184000
+  },
+  {
+   "no": "K60",
+   "name": "Havstil Marine AS",
+   "sales": 30954000,
+   "jobs": [],
+   "job_contract": 0,
+   "job_margin": 0
+  },
+  {
+   "no": "K70",
+   "name": "Smíðaþjónusta Norðurlands ehf.",
+   "sales": 19525000,
+   "jobs": [
+    "D-03",
+    "D-08"
+   ],
+   "job_contract": 1145600,
+   "job_margin": 507200
+  },
+  {
+   "no": "K50",
+   "name": "Vélaverk Norðurlands ehf.",
+   "sales": 16015000,
+   "jobs": [
+    "S-2603",
+    "D-05",
+    "D-10"
+   ],
+   "job_contract": 13651200,
+   "job_margin": 5836800
+  },
+  {
+   "no": "K80",
+   "name": "Grenivíkurver ehf.",
+   "sales": 3300000,
+   "jobs": [
+    "D-04",
+    "D-09"
+   ],
+   "job_contract": 2208000,
+   "job_margin": 888000
+  },
+  {
+   "no": "K100",
+   "name": "Hríseyjarhús ehf.",
+   "sales": 1643000,
+   "jobs": [],
+   "job_contract": 0,
+   "job_margin": 0
+  },
+  {
+   "no": "K110",
+   "name": "Eyjavör fjárfestingar ehf.",
+   "sales": 300000,
+   "jobs": [],
+   "job_contract": 0,
+   "job_margin": 0
+  }
+ ],
+ "items": [
+  {
+   "no": "1010",
+   "name": "Stálplata 8 mm",
+   "price": 740,
+   "cost": 480,
+   "inv": 11600
+  },
+  {
+   "no": "1020",
+   "name": "Ryðfrítt rör 76 mm",
+   "price": 7400,
+   "cost": 4900,
+   "inv": 300
+  },
+  {
+   "no": "1030",
+   "name": "Fittings, sett",
+   "price": 19500,
+   "cost": 12500,
+   "inv": 180
+  },
+  {
+   "no": "1040",
+   "name": "Kúluventill 2 tommur",
+   "price": 52000,
+   "cost": 34000,
+   "inv": 60
+  },
+  {
+   "no": "1050",
+   "name": "Suðuvír",
+   "price": 1850,
+   "cost": 1150,
+   "inv": 730
+  },
+  {
+   "no": "1060",
+   "name": "Einangrun, rúlla",
+   "price": 13500,
+   "cost": 8900,
+   "inv": 140
+  },
+  {
+   "no": "1070",
+   "name": "Rafstýring, skápur",
+   "price": 1290000,
+   "cost": 890000,
+   "inv": 2
+  },
+  {
+   "no": "1080",
+   "name": "Hitaskynjari",
+   "price": 44000,
+   "cost": 46000,
+   "inv": 45
+  },
+  {
+   "no": "1090",
+   "name": "Kapall 5x2,5",
+   "price": 1950,
+   "cost": 1240,
+   "inv": 210
+  },
+  {
+   "no": "1100",
+   "name": "Boltasett, blandað",
+   "price": 5200,
+   "cost": 3400,
+   "inv": 80
+  },
+  {
+   "no": "2010",
+   "name": "Lagnagrind, staðalstærð",
+   "price": 2100000,
+   "cost": 1450000,
+   "inv": 0
+  },
+  {
+   "no": "2020",
+   "name": "Frystigrind, lítil",
+   "price": 1450000,
+   "cost": 980000,
+   "inv": 0
+  }
+ ],
+ "cle_total": 417147000,
+ "gl_rev": 1295600000.0,
+ "meta": {
+  "company_short": "DT Vélsmiðjan",
+  "logo": "DT",
+  "year": "2026",
+  "company": "DT Vélsmiðjan ehf.",
+  "as_of": "17.10.2026",
+  "as_of_dm": "17.10.",
+  "job_fee": "S-2603",
+  "n_full": "8",
+  "py": "2025"
+ },
+ "text": {
+  "period": "jan–ágú",
+  "line_note": "Sep og okt eru ófullbókaðir (vörunotkun og laun vantar) og eru ekki taldir með.",
+  "cogs_note": "Aðföng lækka úr 42,9% af tekjum 2025 í 37,8% í ár. Skýringin er ekki í bókhaldinu, sjá Gæði gagna. Staðfesta þarf hvort þetta er raunverulegt.",
+  "verk_note": "S-2601 miðast við ársáætlun á verðskrá (112,4 m.kr.). D-verkin eru sameinuð.",
+  "gantt_note": "Rendur sýna vinnu eftir lokadag samnings (S-2602: vinna bókuð í október eftir samningslok 31.08.).",
+  "items_note": "DT vinnur nánast allt í verkum (15 opin verk, 6 forðar). Vörur eru 13 í kerfinu en engin vörusala er bókuð með söluverði (Value Entry), svo hér er verðskrá, ekki raunsala. Birgðir eru ekki færðar á birgðalykil í efnahag.",
+  "cost_examples": "stál, lagnaefni, flutningur, undirverktakar",
+  "source": "Heimild: Business Central (Bifrost), DT Vélsmiðjan ehf., sótt 17.10.2026 í gegnum Bifröst: fjárhagur (dataset), Job, Job Planning Line (79 línur), Job Ledger Entry (51 færsla), Cust. Ledger Entry og Item. Aðeins lesið.",
+  "caveats": "Fyrirvarar: Framlegð = tekjur − vörunotkun og aðföng (lyklar 2010, 2040, 2050, 2120). Tekjur eru að mestu bókaðar með dagbók á 1110, ekki úr sölureikningum, svo sala á viðskiptavin nær aðeins yfir 32% tekna. Framlegð á verk er áætluð við verklok (reikningshæft − áætlaður heildarkostnaður). Samningsvirði = reikningshæfar línur verks; fyrir S-2601 er notuð ársáætlun á verðskrá (112,4 m.kr.). Reikningsfært á verk er tengt eftir viðskiptamanni og fjárhæð. Einskiptissala í ágúst 31,0 m.kr. (lykill 1130). 2025 er aðeins til sem ársheild. Forðar sýndir með kóða."
+ },
+ "html": {},
+ "js": {
+  "abc_cust_mid": "Svarfaðarver eitt er",
+  "abc_job_tail": "V-2601 og S-2601 bera reksturinn; tíu D-verk eru samtals",
+  "cogs_bridge": [
+   {
+    "no": "2010",
+    "label": "Vöruinnk."
+   },
+   {
+    "no": "2050",
+    "label": "Flutn."
+   },
+   {
+    "no": "2120",
+    "label": "Annað kv."
+   }
+  ],
+  "dept_names": {
+   "THJONUSTA": "Þjónusta",
+   "VERKST": "Verkstæði",
+   "UPPSETN": "Uppsetning"
+  },
+  "dept_note": "Aðeins vinna sem bókuð er á verk (13.610 klst.). Virði á verðskrá er ekki það sama og reikningsfært; t.d. er samningsverð S-2602 38% undir verðskrá. Uppsetning er með lægsta álagningu, að mestu vegna hönnunartíma á V-2601.",
+  "fee_jobs": [
+   {
+    "no": "S-2603",
+    "fee_month": 1200000,
+    "fee_rate": 18900,
+    "months": [
+     "2026-01",
+     "2026-02",
+     "2026-03",
+     "2026-04",
+     "2026-05",
+     "2026-06",
+     "2026-07",
+     "2026-08",
+     "2026-09"
+    ],
+    "hours": [
+     62,
+     68,
+     74,
+     70,
+     76,
+     58,
+     44,
+     82,
+     106
+    ]
+   }
+  ],
+  "ins_tail": "Aðföng sem hlutfall af tekjum eru 5,1 pp lægri en 2025 og skýra hækkun framlegðarhlutfalls; það þarf að staðfesta.",
+  "item_flags": [
+   [
+    "h",
+    "!",
+    "1080 Hitaskynjari undir kostnaðarverði",
+    "Verðskrá 44.000 kr. en kostnaðarverð 46.000 kr. Hver seld eining tapar 2.000 kr. 45 stk. á lager.",
+    "−4,5%"
+   ],
+   [
+    "m",
+    "i",
+    "Engin vörusala í BC",
+    "Vörur eru notaðar á verk (L-2601) en ekki seldar með sölureikningi. Framlegð á vörur verður til í verkunum.",
+    "–"
+   ],
+   [
+    "l",
+    "kr",
+    "Bundið fé í vörum",
+    "Birgðir á kostnaðarverði samkvæmt vöruspjöldum; ekki færðar á birgðalykil í efnahag.",
+    "17,8 m"
+   ]
+  ],
+  "job_flags": [
+   [
+    "h",
+    "!",
+    "S-2602 · Kaldhreinsun: 8,2% framlegð",
+    "Samningsverð 45,0 m.kr. fyrir 5.000 klst. (9.000 kr./klst.) á móti verðskrá 14.600. Verkið er merkt umfram áætlun og vinna hélt áfram eftir samningslok 31.08.",
+    "5,2 m"
+   ],
+   [
+    "h",
+    "!",
+    "V-2601 · reikningsfært umfram framvindu",
+    "Reikningsfært 148,0 m á móti um 107,0 m áunnum (kostnaðarhlutfall 72%). SR00089 og SR00110 eru báðir 50,0 m, sama dag 23.08.",
+    "41,0 m"
+   ],
+   [
+    "m",
+    "↓",
+    "V-2601 · framlegð fellur í 21,5%",
+    "Var 23,2%. Ný efnislína 2,5 m.kr. bætt við 08.10. og hönnun fór 90 klst. fram úr. Ekkert aukaverk skráð á móti.",
+    "−1,7 pp"
+   ],
+   [
+    "m",
+    "↓",
+    "S-2603 · tímar umfram fast gjald",
+    "Fast gjald 1,2 m.kr. á mánuði ber um 63 klst. á verðskrá. Í september voru 106 klst. Framlegð september um 13%.",
+    "41,6% ár"
+   ],
+   [
+    "l",
+    "·",
+    "L-2601 · lagersmíði án tekna",
+    "10,7 m.kr. kostnaður. Framlegð ræðst við sölu; tilboð 28,4 m.kr. opið síðan 28.08. Utan framlegðartalna.",
+    "10,7 m"
+   ]
+  ],
+  "job_groups": [
+   {
+    "prefix": "D-",
+    "no": "D-01–D-10",
+    "desc": "Tíu tímaverk, ágúst",
+    "cust": "5 viðskiptavinir",
+    "start": "2026-08-01",
+    "end": "2026-08-31",
+    "label": "D-verk"
+   }
+  ],
+  "job_rows": [
+   {
+    "no": "V-2601",
+    "s": "bad",
+    "lbl": "Á eftir",
+    "prog": "cost",
+    "basis": "kostn.",
+    "prev": 0.232,
+    "note": "Áfangi 4 (32,0 m) átti að ljúka 30.09.; uppsetning um 40% búin. Reikningsfært 41,0 m umfram framvindu. Framlegð var 23,2% fyrir nýja efnislínu 08.10."
+   },
+   {
+    "no": "L-2601",
+    "s": "bad",
+    "lbl": "Á eftir",
+    "prog": "cost",
+    "basis": "kostn.",
+    "prev": null,
+    "note": "Lagersmíði án tekna. Prófun og frágangur (350 klst.) átti að hefjast 07.09. og er ekki hafin. Lokadagur 30.10."
+   },
+   {
+    "no": "S-2602",
+    "s": "bad",
+    "lbl": "Umfram",
+    "prog": "value",
+    "basis": "kostn.",
+    "prev": null,
+    "note": "Merkt umfram áætlun. Samningsverð vinnu 38% undir verðskrá. Samningi lauk 31.08. en vinna bókuð í október. Endursemja.",
+    "pv": 1
+   },
+   {
+    "no": "S-2603",
+    "s": "warn",
+    "lbl": "Umfram gjald",
+    "prog": "value",
+    "basis": "tímar/gjald",
+    "prev": null,
+    "note": "664 klst. á móti um 571 sem gjaldið ber jan–sep. 106 klst. í september.",
+    "pv": 1.162
+   },
+   {
+    "no": "S-2601",
+    "s": "ok",
+    "lbl": "Á áætlun",
+    "prog": "hrs",
+    "basis": "tímar",
+    "prev": null,
+    "note": "Notkun eftir þörf, undir ársáætlun."
+   },
+   {
+    "no": "D-01–D-10",
+    "s": "ok",
+    "lbl": "Lokið",
+    "prog": "hrs",
+    "basis": "tímar",
+    "prev": null,
+    "note": "Öllum lokið í ágúst. Reikningshæft miðast við áætlaða tíma."
+   }
+  ],
+  "overruns": {
+   "S-2602": "2026-10-06"
+  },
+  "period": "jan–ágú",
+  "py": "2025",
+  "quality": [
+   [
+    "h",
+    "!",
+    "Sala að mestu bókuð með dagbók",
+    "Tekjur eru bókaðar í mánaðarlegum heildarfærslum á lykil 1110, ekki úr sölureikningum. Aðeins 32% tekna (417,1 af 1.295,6 m.kr.) eru á viðskiptamann, svo sala og framlegð á viðskiptavin eru ófullkomnar.",
+    "32%"
+   ],
+   [
+    "h",
+    "!",
+    "Sala aðeins bókuð á eitt verk",
+    "Aðeins S-2603 hefur sölufærslur á verkinu (9 × 1,2 m). Önnur sala fer um dagbók á 1110, svo verkbókhaldið sýnir hvorki reikningsfært né raunframlegð verka. Framlegð á verk er því áætluð við verklok.",
+    "14 verk"
+   ],
+   [
+    "h",
+    "!",
+    "V-2601 reikningsfært að fullu á 72% framvindu",
+    "Fjórir reikningar til Svarfaðarvers, samtals 148,0 m (SR00108 22,0 · SR00109 26,0 · SR00089 50,0 · SR00110 50,0). Áfangi 3 virðist reikningsfærður tvisvar 23.08. og áföngum 4–5 (50,0 m) er ekki lokið.",
+    "50,0 m"
+   ],
+   [
+    "m",
+    "%",
+    "Vörunotkun bókuð sem fast hlutfall",
+    "Vörukaup eru bókuð sem fast hlutfall af tekjum. Lækkun aðfanga úr 42,9% í 37,8% af tekjum sést því ekki í undirliggjandi færslum og þarf að staðfesta.",
+    "−5,1 pp"
+   ],
+   [
+    "m",
+    "∑",
+    "Tímar í safnfærslum",
+    "S-2602: 5.000 klst. í einni færslu 30.06. V-2601: 700, 1.280 og 560 klst. í stökum færslum. Ekki hægt að rekja framvindu eftir mánuðum.",
+    "5.000 klst."
+   ],
+   [
+    "m",
+    "⏱",
+    "Opið verk eftir lokadag",
+    "S-2602 lauk 31.08. en er opið, merkt umfram áætlun, og vinna var bókuð 05.–06.10.",
+    "1,5 m"
+   ],
+   [
+    "m",
+    "·",
+    "D-verk án dagsetninga",
+    "Tíu verk stofnuð 07.09. án upphafs- og lokadags. Reikningshæfar línur miða við áætlaða tíma (9,9 m) en notaðir tímar eru 8,3 m virði.",
+    "1,5 m"
+   ],
+   [
+    "m",
+    "Σ",
+    "VÍV ekki reiknað",
+    "Öll verk eru með VÍV-aðferð „kostnaðarvirði“ en VÍV hefur aldrei verið bókað. Verk í vinnslu og fyrirframreikningsfærsla (V-2601) sjást ekki í efnahag.",
+    "–"
+   ],
+   [
+    "l",
+    "i",
+    "Ófullbókaðir mánuðir og 2025 sem ársheild",
+    "Sep og okt vantar vörunotkun og laun og eru utan framlegðartalna. 2025 er aðeins til sem ársheild, svo samanburður á mánuði er við meðaltal.",
+    "2 mán."
+   ],
+   [
+    "l",
+    "i",
+    "Reikningshæfar línur á kostnaðarlykli",
+    "S-2602: tvær reikningshæfar línur á lykli 2190 (0,65 m nettó). Ættu að vera á tekjulykli.",
+    "0,65 m"
+   ],
+   [
+    "l",
+    "i",
+    "Innra verk á viðskiptamann",
+    "L-2601 er lagersmíði en skráð á K10 Svarfaðarver. Opið tilboð 28,4 m til Grenivíkurvers síðan 28.08.",
+    "28,4 m"
+   ]
+  ],
+  "res_note_tail": "Lægsta álagning er á hönnunartímum; skoða verðskrá eða kostnaðarverð.",
+  "risks": [
+   [
+    "h",
+    "!",
+    "V-2601 · reikningsfært 41,0 m umfram framvindu",
+    "Allur samningurinn (148,0 m) er kominn á reikning á 72% framvindu. Áfangi 4 er á eftir og framlegð við verklok fallin í 21,5%.",
+    "41,0 m"
+   ],
+   [
+    "h",
+    "!",
+    "S-2602 · Kaldhreinsun: 8,2% framlegð",
+    "Samningsverð vinnu 38% undir verðskrá, merkt umfram áætlun og vinna hélt áfram eftir samningslok 31.08.",
+    "5,2 m"
+   ],
+   [
+    "m",
+    "↓",
+    "L-2601 · lagersmíði á eftir og án tekna",
+    "10,7 m.kr. kostnaður; prófun ekki hafin. Framlegð ræðst við sölu (tilboð 28,4 m opið síðan 28.08.).",
+    "10,7 m"
+   ],
+   [
+    "m",
+    "↓",
+    "S-2603 · tímar umfram fast gjald",
+    "Fast gjald 1,2 m.kr. á mánuði ber um 63 klst.; 106 klst. í september.",
+    "41,6%"
+   ],
+   [
+    "l",
+    "·",
+    "1080 Hitaskynjari undir kostnaðarverði",
+    "Verðskrá 44.000 kr. á móti 46.000 kr. kostnaði.",
+    "−4,5%"
+   ]
+  ],
+  "v1_note": "S-2601 sem ársáætlun",
+  "year": "2026"
+ },
+ "_maps": [
+  "js.dept_names",
+  "js.overruns"
+ ]
+}

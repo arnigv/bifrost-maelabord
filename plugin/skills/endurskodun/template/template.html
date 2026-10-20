@@ -1,0 +1,270 @@
+<meta charset="utf-8">
+<script>(function(){var m="light";try{m=localStorage.getItem("bf-theme-v5")||"light"}catch(e){}var r=document.documentElement;r.setAttribute("data-bf",m==="dark"?"dark":"light");r.setAttribute("data-pal",(m==="blue"||m==="earth")?m:"bifrost")})()</script>
+<title>{{meta.short}} endurskoðun og ársreikningur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&subset=latin,latin-ext&display=swap">
+<style>
+{{THEME_CSS}}
+
+.warnbar{border-color:var(--warn-soft)} .warnbar .spark{background:var(--warn);color:#17150f}
+.lim{display:grid;gap:18px}
+.lr{display:grid;gap:6px}
+.lh{display:flex;justify-content:space-between;gap:8px;font-size:.86rem;font-weight:600}
+.lh .n{font-family:var(--f-mono);font-size:.82rem}
+.lt{position:relative;height:14px;background:var(--panel2);border-radius:999px}
+.lb{position:absolute;left:0;top:3px;bottom:3px;border-radius:999px;background:var(--s1)}
+.lb.py{top:0;bottom:0;background:var(--plum-2);opacity:.45}
+.lb.na{background:repeating-linear-gradient(45deg,var(--panel2) 0 6px,var(--line) 6px 12px)}
+.lb.rng{top:0;bottom:0;background:var(--teal-2);opacity:.55}
+.tk{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink2);border-radius:2px}
+.tk.sel{background:var(--gold);width:3px;top:-6px;bottom:-6px}
+.legend i.tick{width:2px;height:12px;background:var(--ink2);border-radius:1px}
+.lf{position:relative;height:14px;font-size:.7rem;color:var(--muted)}
+.lf span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.lf span:last-child{transform:translateX(-100%)}
+.mini{gap:12px} .mini3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.mk{display:grid;gap:2px;padding:12px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);min-width:0}
+.mk b{font-size:1.3rem;font-weight:600;letter-spacing:-.02em;white-space:nowrap}
+.sw{width:10px;height:10px;border-radius:3px;display:inline-block}
+.timeline{display:grid;gap:0;border-left:2px solid var(--line);margin-left:6px}
+.tli{display:grid;grid-template-columns:auto 7.5rem minmax(0,1fr);gap:10px;align-items:center;padding:9px 0 9px 0;font-size:.86rem}
+.tli i{width:12px;height:12px;border-radius:50%;margin-left:-7px;box-shadow:0 0 0 3px var(--panel)}
+.tli b{font-family:var(--f-mono);font-size:.82rem}
+.item b{font-size:.9rem}
+@media (max-width:480px){.mini3{grid-template-columns:minmax(0,1fr)}.tli{grid-template-columns:auto minmax(0,1fr)}.tli span{grid-column:2}}
+
+</style>
+<div class="wrap">
+  <header class="top">
+    <div class="brandmark">
+      <div class="logo" aria-hidden="true">{{meta.logo}}</div>
+      <div style="min-width:0"><span class="eyebrow">Endurskoðun og ársreikningur · lög nr. 3/2006</span><h1>{{meta.company}}</h1></div>
+    </div>
+    <div class="chips"><div id="mode"></div><span class="chip-lg m-hide"><span class="dot"></span>Tengt BC · Bifröst</span><span class="chip-lg">Staða <b>{{meta.as_of}}</b></span><span class="chip-lg">m.kr.</span></div>
+  </header>
+
+  <div class="insight warnbar"><span class="spark" aria-hidden="true">§</span><p><b>Frumvörp í vinnslu.</b> {{text.law_note}}</p></div>
+
+  <div class="tabs" role="tablist" aria-label="Flipar">
+    <button role="tab" aria-controls="t-yfir">Yfirsýn</button>
+    <button role="tab" aria-controls="t-ars">Ársreikningur (drög)</button>
+    <button role="tab" aria-controls="t-pbc">Undirbúningur</button>
+    <button role="tab" aria-controls="t-je">Færsluprófanir</button>
+    <button role="tab" aria-controls="t-sky">Skýringar</button>
+  </div>
+
+  <!-- YFIRSÝN -->
+  <section class="tab" id="t-yfir" role="tabpanel">
+    <div class="g-hero">
+      <section class="card hero">
+        <span class="eyebrow">Stærðarflokkur skv. 2. gr. 11. tölul.</span>
+        <div class="big">{{text.size_class}}<small>félag</small></div>
+        <p>{{{html.size_text}}}</p>
+        <div class="row" id="h-row"></div>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Tilbúið fyrir endurskoðun</h2><span class="sub">undirbúningslisti</span></div>
+        <div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center">
+          <div class="ring" id="ring"></div>
+          <div style="display:grid;gap:8px" id="ring-side"></div>
+        </div>
+      </section>
+    </div>
+    <section class="g4" id="kpis"></section>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Félagið á móti stærðarmörkum</h2><span class="sub">tvö af þremur ráða</span></div>
+        <div id="limits" class="lim"></div>
+        <div class="legend"><span><i style="background:var(--s1)"></i>{{meta.short}} {{meta.year}}</span><span><i style="background:var(--plum-2)"></i>{{meta.short}} {{meta.py}}</span><span><i class="tick"></i>Mörk lítils / meðalstórs</span></div>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Fyrst að laga</h2><span class="sub">fyrir endurskoðun {{meta.year}}</span></div>
+        <div class="dec" id="first"></div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ÁRSREIKNINGUR -->
+  <section class="tab" id="t-ars" role="tabpanel" hidden>
+    <div class="insight"><span class="spark" aria-hidden="true">i</span><p>{{text.ars_note}}</p></div>
+    <div class="g2">
+      <section class="card"><div class="ch"><h2>Rekstrarreikningur</h2><span class="sub">m.kr.</span></div><div class="scroll"><table id="is"></table></div></section>
+      <section class="card"><div class="ch"><h2>Efnahagsreikningur</h2><span class="sub">m.kr.</span></div><div class="scroll"><table id="bs"></table></div></section>
+    </div>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Sjóðstreymi {{meta.cf_start}}–{{meta.bs_end}}</h2><span class="sub">óbein aðferð · skylt skv. 28. gr.</span></div>
+        <div class="cv" style="height:280px"><canvas id="c-cf" role="img" aria-label="Sjóðstreymi frá handbæru fé í byrjun til enda"></canvas></div>
+        <p class="note" id="cf-note"></p>
+      </section>
+      <section class="card"><div class="ch"><h2>Kennitölur</h2><span class="sub">{{meta.bs_end}}</span></div><div class="g2 mini" id="ratios"></div></section>
+    </div>
+  </section>
+
+  <!-- PBC -->
+  <section class="tab" id="t-pbc" role="tabpanel" hidden>
+    <section class="card">
+      <div class="ch"><h2>Undirbúningslisti fyrir endurskoðanda</h2><div class="seg" role="group" aria-label="Sía"><button data-f="all" aria-pressed="true">Allt</button><button data-f="vantar" aria-pressed="false">Vantar</button><button data-f="vinnslu" aria-pressed="false">Í vinnslu</button><button data-f="lokid" aria-pressed="false">Lokið</button></div></div>
+      <div class="stack" id="pbc-stack"></div>
+      <div class="items" id="pbc"></div>
+    </section>
+  </section>
+
+  <!-- JE -->
+  <section class="tab" id="t-je" role="tabpanel" hidden>
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Mikilvægi (tillaga)</h2><span class="sub">ISA 320 · endurskoðandi ákveður</span></div>
+        <div id="mat" class="lim"></div>
+        <div class="g4 mini3" id="mat-k"></div>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Ábendingar eftir prófun</h2><span class="sub">fjöldi færslna</span></div>
+        <div class="cv" style="height:260px"><canvas id="c-je" role="img" aria-label="Fjöldi færslna sem flaggaðar voru í hverri prófun"></canvas></div>
+      </section>
+    </div>
+    <section class="card">
+      <div class="ch"><h2>Prófanir og dæmi</h2><span class="sub">ábendingar til skoðunar, ekki niðurstaða um misferli</span></div>
+      <div class="items" id="je"></div>
+    </section>
+  </section>
+
+  <!-- SKÝRINGAR -->
+  <section class="tab" id="t-sky" role="tabpanel" hidden>
+    <div class="g2">
+      <section class="card"><div class="ch"><h2>Skýringar · {{text.size_class_lc}}</h2><span class="sub">gögn í BC?</span></div><div class="scroll"><table id="notes"></table></div></section>
+      <section class="card">
+        <div class="ch"><h2>Skil og frestir</h2><span class="sub">109. gr.</span></div>
+        <div class="timeline" id="tl"></div>
+        <p class="note">{{text.filing_note}}</p>
+      </section>
+    </div>
+  </section>
+
+  <footer>
+    <span>Heimild: Business Central (Bifröst), {{meta.company}}, gögn sótt {{meta.fetched}}. Lög um ársreikninga nr. 3/2006 (althingi.is/lagas/nuna/2006003.html), ársreikningaskrá Skattsins. {{text.footer_note}}</span>
+    <span>Ekki lögfræði- eða endurskoðunarráðgjöf. Endurskoðandi og stjórn bera ábyrgð á ársreikningnum. Notendur birtast sem hlutverk, ekki nöfn.</span>
+    <span>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</span>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+{{COMPONENTS_JS}}
+const DATA={{DATA_JSON}};
+const { $, fmt, mkr, css, alpha, tabs, grad } = BF;
+const CH = {};
+const m = (v, d = 1) => mkr(v, d);
+const PY = DATA.py, CY = DATA.cy, A = DATA.bs_aug, J = DATA.bs_jan;
+
+const PBC = {{js.pbc_js}};
+const JE = {{js.je_js}};
+const NOTES = {{js.notes_js}};
+
+function setup() {
+  /* Yfirsýn */
+  const S = DATA.size;
+  $('h-row').innerHTML = [['Endurskoðun', {{js.audit}}], ['Sjóðstreymi', {{js.cashflow}}], [('Skilafrestur ' + {{js.year}}), {{js.deadline}}], ['Dagar til skila', String({{js.days_to_deadline}})]]
+    .map(([l, v]) => `<div><b>${v}</b><span>${l}</span></div>`).join('');
+  const n = k => PBC.filter(p => p[0] === k).length, tot = Math.max(1, PBC.length), done = n('lokid'), pct = done / tot;
+  const R = 62, Cc = 2 * Math.PI * R;
+  $('ring').innerHTML = `<svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="${R}" fill="none" stroke="var(--panel2)" stroke-width="12"/>
+    <circle cx="75" cy="75" r="${R}" fill="none" stroke="var(--dn)" stroke-width="12" stroke-dasharray="${Cc * n('vantar') / tot} ${Cc}" stroke-dashoffset="${-Cc * (done + n('vinnslu')) / tot}"/>
+    <circle cx="75" cy="75" r="${R}" fill="none" stroke="var(--warn)" stroke-width="12" stroke-dasharray="${Cc * n('vinnslu') / tot} ${Cc}" stroke-dashoffset="${-Cc * done / tot}"/>
+    <circle cx="75" cy="75" r="${R}" fill="none" stroke="var(--up)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${Cc * pct} ${Cc}"/></svg>
+    <div class="lbl"><b>${fmt(pct * 100, 0)}%</b><span>lokið</span></div>`;
+  $('ring-side').innerHTML = [['up', 'Lokið', done], ['warn', 'Í vinnslu', n('vinnslu')], ['dn', 'Vantar', n('vantar')]]
+    .map(([c, l, v]) => `<div class="prow" style="grid-template-columns:auto minmax(0,1fr) auto"><i class="sw" style="background:var(--${c})"></i><span style="white-space:nowrap">${l}</span><b class="n">${v} atriði</b></div>`).join('')
+    + `<p class="sub">${{{js.ring_note}}}</p>`;
+  $('kpis').innerHTML = [
+    ['Mikilvægi (tillaga)', m(DATA.mat.valið, 1) + '<small>m</small>', {{js.kpi1_d}}],
+    [{{js.kpi2_l}}, m(DATA.closed_gap) + '<small>m</small>', {{js.kpi2_d}}],
+    [{{js.kpi3_l}}, {{js.kpi3_v}}, {{js.kpi3_d}}],
+    [{{js.kpi4_l}}, {{js.kpi4_v}}, {{js.kpi4_d}}],
+  ].map(([l, v, d]) => `<div class="card kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join('');
+  const V = DATA.size_vals, lim = [
+    ['Heildareignir', V.eignir, V.eignir_py, 600e6, 3000e6, 'm'],
+    ['Hrein velta', V.velta, V.velta_py, 1200e6, 6000e6, 'm'],
+    ['Ársverk', null, null, 50, 250, ''],
+  ];
+  $('limits').innerHTML = lim.map(([l, v, p, a, b]) => {
+    const mx = b * 1.05, w = x => (100 * Math.min(x, mx) / mx).toFixed(1);
+    const val = v == null ? '<span class="pill i">vantar í BC</span>' : `<b class="n">${m(v, 0)} m</b>`;
+    return `<div class="lr"><div class="lh"><span>${l}</span>${val}</div><div class="lt">
+      ${p != null ? `<span class="lb py" style="width:${w(p)}%"></span>` : ''}${v != null ? `<span class="lb" style="width:${w(v)}%"></span>` : '<span class="lb na" style="width:100%"></span>'}
+      <i class="tk" style="left:${w(a)}%" title="Lítið félag"></i><i class="tk" style="left:${w(b)}%" title="Meðalstórt félag"></i></div>
+      <div class="lf"><span style="left:${w(a)}%">lítið ${l === 'Ársverk' ? a : fmt(a / 1e6, 0)}</span><span style="left:${w(b)}%">meðalstórt ${l === 'Ársverk' ? b : fmt(b / 1e6, 0)}</span></div></div>`;
+  }).join('');
+  $('first').innerHTML = PBC.filter(p => p[0] === 'vantar').slice(0, 4).concat(JE.length ? [JE[0].slice(0, 1).concat([JE[0][1], JE[0][3], {{js.first_je_amt}}])] : [])
+    .map((p, i) => `<div class="d-item"><span class="d-ico ${i < 2 ? 'h' : 'm'}">${i + 1}</span><div><b>${p[1]}</b><p>${p[2]}</p></div><span class="amt">${p[3]}</span></div>`).join('');
+
+  /* Ársreikningur */
+  const row = (l, a, b, cls = '') => `<tr class="${cls}"><td>${l}</td><td class="n">${a == null ? '' : m(a)}</td><td class="n">${b == null ? '' : m(b)}</td></tr>`;
+  $('is').innerHTML = `<thead><tr><th></th><th class="n">${{{js.cy_label}}}</th><th class="n">${{{js.py}}}</th></tr></thead><tbody>
+    ${row('Rekstrartekjur', CY.tekjur, PY.tekjur)}${row('Vörunotkun', -CY.vorunotkun, -PY.vorunotkun)}${row('Laun og launatengd gjöld', -CY.laun, -PY.laun)}
+    ${row('Húsnæðiskostnaður', -CY.husnaedi, -PY.husnaedi)}${row('Annar rekstrarkostnaður', -CY.annar_rekstur, -PY.annar_rekstur)}
+    ${row('EBITDA', CY.ebitda, PY.ebitda, 'sum')}${row('Afskriftir', -CY.afskriftir, -PY.afskriftir)}${row('Fjármagnsgjöld', -CY.fjarmagn, -PY.fjarmagn)}
+    ${row('Hagnaður fyrir skatta', CY.hagnadur, PY.hagnadur, 'sum')}</tbody>`;
+  $('bs').innerHTML = `<thead><tr><th></th><th class="n">${{{js.bs_end}}}</th><th class="n">${{{js.bs_start}}}</th></tr></thead><tbody>
+    ${row('Fastafjármunir', A.fastafjarmunir, J.fastafjarmunir)}${row('Viðskiptakröfur', A.krofur, J.krofur)}${row('Handbært fé', A.handbaert_fe, J.handbaert_fe)}
+    ${row('Eignir samtals', A.eignir, J.eignir, 'sum')}${row('Eigið fé', A.eigid_fe, J.eigid_fe)}${row('Langtímaskuldir', A.langtimaskuldir, J.langtimaskuldir)}
+    ${row('Skammtímaskuldir', A.skammtimaskuldir, J.skammtimaskuldir)}${row('Eigið fé og skuldir', A.eigid_fe + A.langtimaskuldir + A.skammtimaskuldir, J.eigid_fe + J.langtimaskuldir + J.skammtimaskuldir, 'sum')}</tbody>`;
+  const ca = A.krofur + A.handbaert_fe, dso = A.krofur / (CY.tekjur * 1.24 / {{js.cy_days}});
+  $('ratios').innerHTML = [
+    ['Veltufjárhlutfall', fmt(ca / A.skammtimaskuldir, 2), 'yfir 1,5 er traust'],
+    ['Eiginfjárhlutfall', fmt(100 * A.eigid_fe / A.eignir, 1) + '%', 'eigið fé / eignir'],
+    ['Innheimtutími', fmt(dso, 0) + ' dagar', 'kröfur m. VSK / dagsala'],
+    ['EBITDA-hlutfall', fmt(100 * CY.ebitda / CY.tekjur, 1) + '%', `${{{js.py}}}: ${fmt(100 * PY.ebitda / PY.tekjur, 1)}%`],
+  ].map(([l, v, d]) => `<div class="mk"><span class="sub">${l}</span><b>${v}</b><span class="sub">${d}</span></div>`).join('');
+  const cfTot = DATA.cf.filter(x => x[2] === 'rekstur').reduce((s, x) => s + x[1], 0);
+  /* hagnaður og breyting krafna fundin eftir heiti línu í DATA.cf (ekki föstum vísi) */
+  const cfP = DATA.cf.find(x => /^Hagnaður/i.test(x[0])), cfK = DATA.cf.find(x => /krafn|kröfu/i.test(x[0])), below = cfP && cfTot < cfP[1];
+  $('cf-note').textContent = `Handbært fé frá rekstri var ${m(cfTot)} m${cfP ? (below ? ` þrátt fyrir ${m(cfP[1])} m hagnað` : ` og hagnaður ${m(cfP[1])} m`) : ''}${below && cfK && cfK[1] < 0 ? `, því viðskiptakröfur hækkuðu um ${m(-cfK[1])} m` : ''}. ${{{js.cf_note_tail}}}`;
+
+  /* PBC */
+  const lab0 = { vantar: ['h', 'Vantar'], vinnslu: ['m', 'Í vinnslu'], lokid: ['l', 'Lokið'] }, lab = new Proxy(lab0, { get: (o, k) => o[k] || ['i', String(k)] });
+  const drawPbc = f => { $('pbc').innerHTML = PBC.filter(p => f === 'all' || p[0] === f).map(p => `<div class="item"><span class="pill ${lab[p[0]][0]}">${lab[p[0]][1]}</span><div><b>${p[1]}</b><p>${p[2]}</p></div><span class="n">${p[3]}</span></div>`).join(''); };
+  $('pbc-stack').innerHTML = [['lokid', 'up'], ['vinnslu', 'warn'], ['vantar', 'dn']].map(([k, c]) => `<span style="flex:${n(k)};background:var(--${c})" title="${lab[k][1]}"></span>`).join('');
+  document.querySelectorAll('#t-pbc .seg button').forEach(b => b.onclick = () => { document.querySelectorAll('#t-pbc .seg button').forEach(x => x.setAttribute('aria-pressed', x === b)); drawPbc(b.dataset.f); });
+  drawPbc('all');
+  if (!PBC.length) $('pbc').innerHTML = '<p class="note">Enginn undirbúningslisti skráður.</p>';
+
+  /* JE */
+  const M = DATA.mat, mx = Math.max(...M.rev, ...M.pbt, ...M.assets) * 1.1, w = x => (100 * x / mx).toFixed(1);
+  $('mat').innerHTML = [[('0,5–1% tekna ' + {{js.py}}), M.rev], [('5–10% hagnaðar f. skatta ' + {{js.py}}), M.pbt], ['1–2% heildareigna', M.assets]].map(([l, [a, b]]) =>
+    `<div class="lr"><div class="lh"><span>${l}</span><b class="n">${m(a)}–${m(b)} m</b></div><div class="lt"><span class="lb rng" style="left:${w(a)}%;width:${w(b - a)}%"></span><i class="tk sel" style="left:${w(M.valið)}%"></i></div></div>`).join('');
+  $('mat-k').innerHTML = [['Heildarmikilvægi', M.valið], ['Framkvæmda (75%)', M.valið * .75], ['Smávægilegt (5%)', M.valið * .05]]
+    .map(([l, v]) => `<div class="mk"><span class="sub">${l}</span><b>${m(v)} m</b></div>`).join('');
+  const lv0 = { h: ['h', 'Hátt'], m: ['m', 'Miðlungs'], l: ['i', 'Lágt'] }, lv = new Proxy(lv0, { get: (o, k) => o[k] || o.l });
+  $('je').innerHTML = (JE.length ? '' : '<p class="note">Engar færsluprófanir skráðar.</p>') + JE.map(j => `<div class="item"><span class="pill ${lv[j[0]][0]}">${lv[j[0]][1]}</span><div><b>${j[1]} · ${j[2]} færslur</b><p>${j[3]}</p><p><b>Næsta skref:</b> ${j[4]}</p></div><span class="n"></span></div>`).join('');
+
+  /* Skýringar */
+  const st = { 'já': 'l', 'að hluta': 'm', 'nei': 'h' };
+  $('notes').innerHTML = `<thead><tr><th>Skýring</th><th>Í BC</th><th>Athugasemd</th></tr></thead><tbody>${NOTES.map(([a, b, c]) => `<tr><td>${a}</td><td><span class="pill ${st[b]}">${b}</span></td><td class="sub">${c}</td></tr>`).join('')}</tbody>`;
+  $('tl').innerHTML = [[{{js.fy_end}}, 'Lok reikningsárs', 'up'], [{{js.agm}}, 'Aðalfundur (dæmi)', 'base'], [{{js.deadline}}, 'Síðasti skiladagur, 8 mán. eftir árslok', 'warn'], ['eftir frest', 'Stjórnvaldssekt 600.000 kr.', 'dn'], [{{js.dissolution}}, 'Krafa um slit möguleg (6 mán. eftir frest)', 'dn']]
+    .map(([d, t, c]) => `<div class="tli"><i style="background:var(--${c})"></i><b>${d}</b><span>${t}</span></div>`).join('');
+}
+
+function charts() {
+  if (!window.Chart) return;
+  Chart.defaults.font.family = css('--f-body'); Chart.defaults.color = css('--muted');
+  const tip = { backgroundColor: css('--panel2'), titleColor: css('--ink'), bodyColor: css('--ink2'), borderColor: css('--line'), borderWidth: 1, padding: 10 };
+  /* fossrit sjóðstreymis */
+  const steps = [[('Handbært fé ' + {{js.cf_start}}), DATA.cash[0], 't']].concat(DATA.cf.filter(x => Math.abs(x[1]) > 1).map(x => [x[0], x[1], 'd'])).concat([[('Handbært fé ' + {{js.cf_end}}), DATA.cash[1], 't']]);
+  let run = 0; const data = [], col = [];
+  steps.forEach(([l, v, k]) => { if (k === 't') { data.push([0, v / 1e6]); run = v; col.push(css('--s2')); } else { data.push([run / 1e6, (run + v) / 1e6]); run += v; col.push(v >= 0 ? css('--up') : css('--dn')); } });
+  CH.cf = new Chart($('c-cf'), { type: 'bar', data: { labels: steps.map(s => s[0]), datasets: [{ data, backgroundColor: col, borderRadius: 6, borderSkipped: false, barPercentage: .7 }] },
+    options: { responsive: true, maintainAspectRatio: false, animation: { duration: 500 }, plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: { label: c => { const [a, b] = c.raw; return fmt(b - a, 1) + ' m'; } } } },
+      scales: { x: { grid: { display: false }, ticks: { maxRotation: 40, minRotation: 0, font: { size: 11 } } }, y: { grid: { color: css('--line') }, border: { display: false }, ticks: { callback: v => fmt(v, 0) } } } } });
+  const lvc = { h: css('--dn'), m: css('--warn'), l: css('--s6') };
+  CH.je = new Chart($('c-je'), { type: 'bar', data: { labels: JE.map(j => j[1]), datasets: [{ data: JE.map(j => j[2]), backgroundColor: JE.map(j => alpha(lvc[j[0]], .85)), borderRadius: 6, barPercentage: .65 }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, animation: { duration: 500 }, plugins: { legend: { display: false }, tooltip: tip },
+      scales: { x: { grid: { color: css('--line') }, border: { display: false } }, y: { grid: { display: false }, ticks: { font: { size: 12 } } } } } });
+}
+
+BF.themeToggle($('mode'), charts);
+setup();
+tabs(document.querySelector('.tabs'), () => requestAnimationFrame(() => Object.values(CH).forEach(c => c.resize())));
+charts();
+
+</script>

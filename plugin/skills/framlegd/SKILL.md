@@ -1,9 +1,11 @@
 ---
 name: framlegd
-description: Mælaborðið „Framlegð og verk“ úr Business Central — hvar framlegðin verður til og hvar hún lekur, eftir verki, vöru, þjónustu og viðskiptavini, ásamt stöðu og framvindu verka, tímalínu, ABC/Pareto-greiningu, birgðum og hægfara vörum, gæðum verkbókhalds og hermi fyrir verð, afslátt, magn og kostnaðarverð. Lagar sig að starfseminni (verk, vörur eða þjónusta). Notaðu þegar beðið er um framlegð, arðsemi viðskiptavina, vara eða verka, „hvað skilar okkur mestu“, verðlagningu, verkayfirlit, framvindu verka, vörugreiningu, ABC, birgðir eða hægfara vörur.
+description: "Mælaborðið „Framlegð og verk“ í Bifröst-mælaborðum (Yfirsýn, Verk, Vörur og ABC, Herming), smíðað úr föstu sniðmáti. Notaðu AÐEINS innan Bifröst-mælaborða: þegar notandinn biður um Bifröst-mælaborð eða þetta mælaborð með nafni, eða breytir mælaborði sem pluginið bjó til. Ekki fyrir almennar spurningar um rekstur eða Business Central, aðrar skýrslur, skjöl eða artifacts."
 ---
 
 # Framlegð og verk
+
+> **Fast sniðmát.** Þetta mælaborð er smíðað úr `template/` (sjá `bifrost-maelabord`, *Föst sniðmát*). Skrifaðu ekki HTML. Safnaðu gögnunum eftir `template/schema.md` (sýnidæmi: `template/example.json`), og smíðaðu með `render.py --dashboard framlegd` eða `bundle.py`. Við breytingu eða uppfærslu er **aðeins þetta mælaborð** endurgert og birt (og viðbætur þess í `ext/`), sjá *Umfang breytinga*. Lýsingin hér að neðan segir hvað sniðmátið sýnir og hvaðan gögnin koma.
 
 **Valmælaborð** (ekki sjálfgefið í 1.0; bætt við úr miðstöð eða að beiðni).
 

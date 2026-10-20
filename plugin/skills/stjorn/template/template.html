@@ -1,0 +1,549 @@
+<meta charset="utf-8">
+<script>(function(){var m="light";try{m=localStorage.getItem("bf-theme-v5")||"light"}catch(e){}var r=document.documentElement;r.setAttribute("data-bf",m==="dark"?"dark":"light");r.setAttribute("data-pal",(m==="blue"||m==="earth")?m:"bifrost")})()</script>
+<title>{{meta.company_short}} stjórn</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&subset=latin,latin-ext&display=swap">
+<style>
+{{THEME_CSS}}
+/* Stjórn 1.0 · viðbætur */
+.ctl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end}
+.ctl .f{display:grid;gap:4px;min-width:0}
+.ctl .f2{display:flex;gap:12px;min-width:0;flex-wrap:wrap}
+.ctl .f2[hidden],.ctl .f[hidden]{display:none}
+.ctl .seg{flex-wrap:wrap}
+select{font:inherit;font-size:.86rem;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:7px 10px;min-width:0;max-width:100%}
+#cmp{min-width:240px}
+.warnbar{border-color:var(--warn-soft)} .warnbar .spark{background:var(--warn);color:#17150f}
+.pl th:first-child,.pl td:first-child{position:sticky;left:0;background:var(--panel);z-index:1;min-width:13.5rem;max-width:16rem;white-space:normal}
+.pl tr.sum td,.pl tr.sum td:first-child{background:var(--panel2)}
+.pl tr.grp td{font-weight:700;color:var(--muted);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;padding-top:14px}
+.pl tr.cat td:first-child{font-weight:600}
+.pl tr.acc td{font-size:.78rem;color:var(--muted);background:var(--bg,transparent)}
+.pl tr.acc td:first-child{padding-left:28px;background:var(--panel)}
+.pl .tg{font:inherit;font-weight:600;color:var(--ink);background:none;border:none;padding:0;cursor:pointer;display:inline-flex;gap:6px;align-items:center;text-align:left}
+.pl .tg .car{display:inline-block;width:1em;color:var(--brand);transition:transform .15s}
+.pl .tg[aria-expanded="true"] .car{transform:rotate(90deg)}
+.pl th.sel,.pl td.sel{background:var(--brand-soft)}
+.pl tr.sum td.sel{background:var(--brand-soft)}
+.pl .dim{opacity:.55}
+.pl th.k1,.pl td.k1{border-left:2px solid var(--brand)}
+.pl th.k,.pl td.k{background:var(--panel2)}
+.pl td.pos{color:var(--up)} .pl td.neg{color:var(--dn)}
+.pl .one{display:inline-block;font-size:.66rem;font-weight:700;padding:1px 6px;border-radius:999px;background:var(--warn-soft);color:var(--warn);margin-left:6px;vertical-align:1px}
+.pl caption{caption-side:bottom;text-align:left}
+.d-item .pill{align-self:start}
+.ins-k{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:560px){.ctl{display:grid;grid-template-columns:minmax(0,1fr)}#cmp{min-width:0;width:100%}.ctl select{width:100%}.pl th:first-child,.pl td:first-child{min-width:9.5rem}}
+@media (max-width:480px){#t-yfir .d-item,#risk .d-item{grid-template-columns:auto minmax(0,1fr)}#t-yfir .d-item .pill,#risk .d-item .pill{grid-column:2;justify-self:start}}
+
+/* Spá og nánari greining */
+.fcg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:18px;align-items:start}
+.fcs{display:grid;gap:12px;min-width:0}
+.fck{display:grid;gap:2px}
+.fck .v{font-size:1.65rem;font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.fck .v small{font-size:.8rem;color:var(--muted);font-weight:600;margin-left:4px}
+.fcs p{font-size:.86rem;line-height:1.5;margin:0}
+a.more{font-size:.8rem;font-weight:600;color:var(--brand);text-decoration:none;white-space:nowrap}
+a.more:hover{text-decoration:underline}
+.legend i.dash{background:none;border-top:2px dashed;height:0;width:14px;border-radius:0;vertical-align:3px}
+.g2i{align-items:start}
+.h3{font-size:.86rem;font-weight:600;margin:0 0 10px}
+#chg-t td .hb{display:block}
+#chg-t .bc{display:grid;grid-template-columns:minmax(0,1fr) 4.2rem;gap:8px;align-items:center}
+#chg-t .bc .n{font-family:var(--f-mono);font-size:.78rem;font-weight:600;text-align:right;white-space:nowrap}
+#chg-t tr.one td{background:var(--warn-soft)}
+#rvs-t tr.sel td{background:var(--brand-soft)}
+@media (max-width:860px){.fcg{grid-template-columns:minmax(0,1fr)}}
+
+</style>
+<div class="wrap">
+  <nav class="crumb" aria-label="Leiðarstika"><a href="index.html">← Miðstöð<span class="c-l"> mælaborða</span></a><span class="sep">/</span><span>Stjórn</span></nav>
+  <header class="top">
+    <div class="brandmark">
+      <div class="logo" aria-hidden="true">{{meta.initials}}</div>
+      <div style="min-width:0"><span class="eyebrow">Stjórnarmælaborð · rekstur til {{meta.last_closed}}</span><h1>{{meta.company}}</h1></div>
+    </div>
+    <div class="chips"><div id="mode"></div><span class="chip-lg m-hide"><span class="dot"></span>Tengt BC · Bifröst</span><span class="chip-lg">Staða <b>{{meta.as_of}}</b></span><span class="chip-lg">m.kr. án VSK</span></div>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Flipar">
+    <button role="tab" aria-controls="t-yfir">Yfirsýn</button>
+    <button role="tab" aria-controls="t-rekstur">Rekstur</button>
+    <button role="tab" aria-controls="t-efna">Efnahagur og sjóðstreymi</button>
+    <button role="tab" aria-controls="t-aha">Áhættur</button>
+  </div>
+
+  <!-- ============ YFIRSÝN ============ -->
+  <section class="tab" id="t-yfir" role="tabpanel">
+    <div class="g-hero">
+      <section class="card hero">
+        <span class="eyebrow">EBITDA {{meta.ytd_label}}</span>
+        <div class="big" id="h-eb"></div>
+        <p id="h-text"></p>
+        <div class="row" id="h-row"></div>
+      </section>
+    </div>
+
+    <section class="card" id="fc-card">
+      <div class="ch"><h2>Árið stefnir í</h2><a class="more" href="spagerd.html">Nánar: Spágerð →</a></div>
+      <div class="fcg">
+        <div class="fcs">
+          <div class="fck"><span class="ins-k">EBITDA {{meta.year}} · miðgildi (P50)</span><span class="v" id="fc-eb"></span><span class="sub" id="fc-eb-d"></span></div>
+          <div class="fck"><span class="ins-k">Tekjur {{meta.year}}</span><span class="v" id="fc-rev"></span><span class="sub" id="fc-rev-d"></span></div>
+          <p id="fc-text"></p>
+        </div>
+        <div style="min-width:0">
+          <div class="legend"><span><i style="background:var(--s1)"></i>Raun</span><span><i style="background:var(--warn)"></i>Einskipti</span><span><i class="dash" style="border-color:var(--s2)"></i>Spá</span><span><i style="background:var(--teal-3)"></i>Bil P10–P90</span></div>
+          <div class="cv" style="height:240px"><canvas id="c-fc" role="img" aria-label="EBITDA á mánuði {{meta.year}}: raun {{text.fc_actual_range}} og spá {{text.fc_forecast_range}} með óvissubili"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="ch"><h2>Innsýn fyrir stjórn</h2><span class="sub">afkoma · sjóður · viðskiptavinir · áhætta</span></div>
+      <div class="dec" id="ins"></div>
+    </section>
+
+    <div class="g2">
+      <section class="card">
+        <div class="ch"><h2>Mánaðarleg þróun</h2><div class="seg" role="group" aria-label="Mælikvarði"><button id="m-rev" aria-pressed="false">Tekjur</button><button id="m-eb" aria-pressed="true">EBITDA</button></div></div>
+        <div class="legend"><span><i style="background:var(--s1)"></i>{{meta.year}}</span><span><i style="background:var(--base)"></i>Meðaltal á mánuði {{meta.py}}</span></div>
+        <div class="cv" style="height:250px"><canvas id="c-main" role="img" aria-label="Tekjur eða EBITDA á mánuði {{meta.year}} á móti meðaltali {{meta.py}}"></canvas></div>
+      </section>
+      <section class="card">
+        <div class="ch"><h2>Hagnaður á móti sjóði</h2><span class="sub">staða í lok mánaðar</span></div>
+        <div class="legend"><span><i style="background:var(--s3)"></i>Uppsafnaður hagnaður</span><span><i style="background:var(--s1)"></i>Handbært fé</span><span><i style="background:var(--dn)"></i>Viðskiptakröfur</span></div>
+        <div class="cv" style="height:250px"><canvas id="c-cash" role="img" aria-label="Uppsafnaður hagnaður, handbært fé og viðskiptakröfur á mánuði"></canvas></div>
+      </section>
+    </div>
+    <p class="note" id="yfir-note"></p>
+  </section>
+
+  <!-- ============ REKSTUR ============ -->
+  <section class="tab" id="t-rekstur" role="tabpanel" hidden>
+    <section class="card">
+      <div class="ctl">
+        <div class="f"><span class="sub">Tímabil</span>
+          <div class="seg" role="group" aria-label="Tegund tímabils"><button data-pt="m">Mánuður</button><button data-pt="q">Ársfjórðungur</button><button data-pt="ytd">Ár til dags</button><button data-pt="bil">Valið bil</button></div>
+        </div>
+        <div class="f" id="pp-one"><span class="sub" id="pp-one-l">Veldu</span><select id="pp-sel" aria-label="Veldu tímabil"></select></div>
+        <div class="f2" id="pp-bil" hidden>
+          <label class="f"><span class="sub">Frá</span><select id="pp-from"></select></label>
+          <label class="f"><span class="sub">Til</span><select id="pp-to"></select></label>
+        </div>
+        <label class="f"><span class="sub">Bera saman við</span><select id="cmp"></select></label>
+      </div>
+      <p class="note" id="cmp-note"></p>
+    </section>
+
+    <div class="insight warnbar" id="ref-empty" hidden><span class="spark" aria-hidden="true">i</span><p id="ref-empty-t"></p></div>
+
+    <section class="card" id="br-card">
+      <div class="ch"><h2>EBITDA-brú</h2><span class="sub" id="br-sub"></span></div>
+      <div class="cv" style="height:280px"><canvas id="c-bridge" role="img" aria-label="EBITDA-brú frá viðmiði til raunar eftir liðum"></canvas></div>
+    </section>
+
+    <section class="card" id="rvs-card" hidden>
+      <div class="ch"><h2>Raun á móti spá eftir mánuðum</h2><span class="sub">spá gerð mánuði fyrir fram · m.kr.</span></div>
+      <p class="note" id="rvs-ins"></p>
+      <div class="g2 g2i">
+        <div class="scroll"><table id="rvs-t" style="min-width:560px"></table></div>
+        <div style="min-width:0"><h3 class="h3">Hvar skeikaði spánni <span class="sub" id="rvs-hs"></span></h3><div class="hb" id="rvs-hb"></div></div>
+      </div>
+      <p class="note" id="rvs-note"></p>
+    </section>
+
+    <section class="card" id="chg-card">
+      <div class="ch"><h2>Hvað breyttist mest</h2><span class="sub" id="chg-sub"></span></div>
+      <p class="note" id="chg-ins"></p>
+      <div class="scroll"><table id="chg-t" style="min-width:640px"></table></div>
+    </section>
+
+    <section class="card">
+      <div class="ch"><h2>Lykilhlutföll á mánuði</h2><span class="sub">% af tekjum · fullbókaðir mánuðir</span></div>
+      <div class="legend" id="rt-leg"></div>
+      <div class="cv" style="height:240px"><canvas id="c-ratio" role="img" aria-label="Framlegð, laun af tekjum og EBITDA-hlutfall á mánuði {{meta.year}}"></canvas></div>
+      <p class="note" id="rt-note"></p>
+    </section>
+
+    <section class="card">
+      <div class="ch"><h2>Rekstrarreikningur</h2><span class="sub">smelltu á lið til að sjá lyklana · skrollaðu til vinstri fyrir eldri tímabil</span></div>
+      <div class="scroll" id="pl-wrap"><table id="pl" class="pl"></table></div>
+      <p class="note" id="pl-note"></p>
+    </section>
+  </section>
+
+  <!-- ============ EFNAHAGUR OG SJÓÐSTREYMI ============ -->
+  <section class="tab" id="t-efna" role="tabpanel" hidden>
+    <section class="g4" id="kpis2"></section>
+    <section class="card">
+      <div class="ch"><h2>Efnahagsreikningur</h2><span class="sub">m.kr. · smelltu á lið til að sjá lyklana</span></div>
+      <div class="scroll"><table id="bs" class="pl"></table></div>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Sjóðstreymi</h2><span class="sub">óbein aðferð · m.kr.</span></div>
+      <div class="scroll"><table id="cf" class="pl"></table></div>
+      <p class="note" id="cf-note"></p>
+    </section>
+  </section>
+
+  <!-- ============ ÁHÆTTUR ============ -->
+  <section class="tab" id="t-aha" role="tabpanel" hidden>
+    <section class="card"><div class="ch"><h2>Aldur viðskiptakrafna</h2><span class="sub" id="age-sub"></span></div><div class="stack" id="stack"></div><div class="slegend" id="slegend"></div></section>
+    <div class="g2">
+      <section class="card"><div class="ch"><h2>Stærstu skuldarar</h2><span class="sub">opið · hlutfall gjaldfallið</span></div><div class="plist" id="plist"></div></section>
+      <section class="card"><div class="ch"><h2>Áhættuskrá</h2><span class="sub">raðað eftir alvarleika</span></div><div class="dec" id="risk"></div></section>
+    </div>
+  </section>
+
+  <footer>
+    <p>Heimild: fjárhagur og viðskiptamannabók {{meta.company_gen}} í Business Central (Bifröst), sótt {{meta.as_of}}. Ekkert var skrifað í BC. Kröfur í aldursgreiningu eru úr viðskiptamannabók. Rekstrartölur ná til {{meta.last_closed}}, síðasta uppgerða mánaðar; {{text.prelim_months}}. Spá út árið er úr Spágerð Bifrastar (drifþáttaspá með P10–P90 bili) og er ekki skráð í BC.</p>
+    <p>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+{{COMPONENTS_JS}}
+const DATA={{DATA_JSON}};
+/* Stjórnarmælaborð 1.0 · Yfirsýn · Rekstur · Efnahagur og sjóðstreymi · Áhættur */
+const { $, fmt, sg, mkr, MON, css, alpha, tabs } = BF;
+const MF = ['janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 'júlí', 'ágúst', 'september', 'október', 'nóvember', 'desember'];
+const mi = ym => +ym.slice(5) - 1, ml = ym => MON[mi(ym)];
+const MS = DATA.months, ALLM = MS.map(r => r.ym), FULL = MS.filter(r => r.complete).map(r => r.ym), INC = new Set(MS.filter(r => !r.complete).map(r => r.ym));
+const LASTF = FULL.at(-1), ACC = DATA.accounts, AG = DATA.aging;
+const B = DATA.balance, C = B.categories, BLAST = B.months.length - 1, BL = B.months.map(ml);
+const EBC = ['tekjur', 'vorunotkun', 'laun', 'husnaedi', 'annar_rekstur'], BELOW = ['afskriftir', 'fjarmagn', 'oreglulegt'];
+const CATL = { tekjur: 'Tekjur', vorunotkun: 'Vörunotkun og aðföng', laun: 'Laun og launatengd gjöld', husnaedi: 'Húsnæði', annar_rekstur: 'Annar rekstrarkostnaður', afskriftir: 'Afskriftir', fjarmagn: 'Fjármagnsliðir', oreglulegt: 'Óreglulegir liðir' };
+const ONE = DATA.oneoffs.filter(o => o.cat === 'tekjur'), ONENO = new Set(ONE.map(o => o.no));
+const oneIn = ms => ONE.filter(o => ms.includes(o.ym)).reduce((s, o) => s + o.amount, 0);
+const ddmmyyyy = iso => `${iso.slice(8, 10)}.${iso.slice(5, 7)}.${iso.slice(0, 4)}`;
+const monthEnd = ym => { const d = new Date(Date.UTC(+ym.slice(0, 4), +ym.slice(5), 0)).getUTCDate(); return `${String(d).padStart(2, '0')}.${ym.slice(5)}.${ym.slice(0, 4)}`; };
+const sum = (a, f) => a.reduce((s, x) => s + f(x), 0);
+const delta = (d, good, txt) => `<span class="delta ${Math.abs(d) < 1e-9 ? 'eq' : ((d > 0) === good ? 'up' : 'dn')}">${txt}</span>`;
+const initials = n => n.replace(/ehf\.|hf\.|AS/g, '').trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+/* Formerki í rekstrarreikningi: tekjur jákvæðar, gjöld neikvæð (GL-formerki snúið) */
+const av = (a, ms) => -sum(ms, m => a.months[m] || 0);
+const catV = (k, ms) => sum(ACC.filter(a => a.cat === k), a => av(a, ms));
+
+/* ---------- Gröf ---------- */
+const CH = {};
+const up = (k, el, cfg) => { if (!window.Chart || !el) return; if (CH[k]) { CH[k].data = cfg.data; CH[k].options = cfg.options; CH[k].update('none'); } else CH[k] = new Chart(el, cfg); };
+const grad = (c, a1 = .32, a2 = 0) => ctx => { const ch = ctx.chart, ar = ch.chartArea; if (!ar) return alpha(c, a1); const g = ch.ctx.createLinearGradient(0, ar.top, 0, ar.bottom); g.addColorStop(0, alpha(c, a1)); g.addColorStop(1, alpha(c, a2)); return g; };
+const baseOpts = () => ({ responsive: true, maintainAspectRatio: false, animation: { duration: 350 }, interaction: { mode: 'index', intersect: false }, layout: { padding: { top: 6, right: 6 } },
+  plugins: { legend: { display: false }, tooltip: { backgroundColor: css('--ink'), titleColor: css('--panel'), bodyColor: css('--panel'), padding: 10, cornerRadius: 10, boxPadding: 4, callbacks: { label: c => c.raw == null ? null : ` ${c.dataset.label}: ${fmt(c.raw)} m.kr.` } } },
+  scales: { x: { grid: { display: false }, border: { display: false }, ticks: { color: css('--muted'), maxRotation: 0, autoSkip: true } }, y: { grid: { color: css('--line') }, border: { display: false }, ticks: { color: css('--muted'), callback: v => fmt(v, 0) } } } });
+function setDefaults() { if (window.Chart) { Chart.defaults.font.family = css('--f-body'); Chart.defaults.font.size = 12; } }
+
+/* ================= YFIRSÝN ================= */
+const FM = MS.filter(r => r.complete), N = FM.length, PYF = N / 12;
+const PY = {}; ACC.forEach(a => { PY[a.cat] = (PY[a.cat] || 0) - (a.months[{{js.py}}] || 0); });
+PY.ebitda = sum(EBC, k => PY[k] || 0);
+const YTD = { tekjur: sum(FM, r => r.tekjur), ebitda: sum(FM, r => r.ebitda), laun: sum(FM, r => r.laun), hagn: sum(FM, r => r.hagnadur_fs) };
+let metric = 'eb';
+function overview() {
+  const E = YTD.ebitda, R = YTD.tekjur, pyE = PY.ebitda * PYF, pyR = PY.tekjur * PYF;
+  const cash = C.handbaert_fe, peak = Math.max(...cash), pm = cash.indexOf(peak), ar = C.krofur;
+  const ratio = 100 * E / R, pyRatio = 100 * PY.ebitda / PY.tekjur;
+  $('h-eb').innerHTML = `${mkr(E)}<small>m.kr.</small>`;
+  $('h-text').textContent = `Afkoman er ${E / pyE >= 2 ? 'meira en tvöföld' : sg(100 * (E / pyE - 1), 0) + '%'} á við sama tíma í fyrra. ${{{js.h_cash_lead}}} ${mkr(peak - cash[BLAST])} m.kr. frá lokum ${MF[mi(B.months[pm])]}.`;
+  $('h-row').innerHTML = [['Tekjur', `${mkr(R)} m.kr.`, `${sg(100 * (R / pyR - 1))}% frá fyrra ári`], ['EBITDA-hlutfall', `${fmt(ratio)}%`, `${{{js.py}}}: ${fmt(pyRatio)}%`], ['Handbært fé', `${mkr(cash[BLAST])} m.kr.`, `staða ${ddmmyyyy(DATA.as_of)}`]]
+    .map(([l, v, s]) => `<div><b>${v}</b><span>${l} · ${s}</span></div>`).join('');
+  /* Innsýn á stjórnarmáli. Engin tala hér endurtekur töluna í hero. */
+  const lr = 100 * YTD.laun / R, pyLr = -100 * PY.laun / PY.tekjur, one = oneIn(FULL), exRatio = 100 * (E - one) / (R - one);
+  const top3 = 100 * sum(AG.rows.slice(0, 3), r => r.total) / AG.total, top1 = 100 * (AG.rows[0] ? AG.rows[0].total : 0) / AG.total, od = 100 * (AG.total - AG.not_yet_due) / AG.total;
+  const I = [
+    ['l', '↑', 'Afkoma', {{js.ins1_title}}, `${{{js.ins1_lead}}} ${fmt(lr)}% af tekjum á móti ${fmt(pyLr)}% í fyrra.${one ? ` ${{{js.ins1_one}}} (${mkr(one)} m.kr.) er einskiptis; án hennar er EBITDA-hlutfallið ${fmt(exRatio)}%.` : ''}`, 'Til upplýsingar'],
+    ['h', 'kr', 'Sjóður', {{js.ins2_title}}, `Útistandandi viðskiptakröfur eru ${mkr(ar[BLAST])} m.kr., um ${fmt(ar[BLAST] / cash[BLAST], 0)}-falt handbært fé. ${{{js.ins2_tail}}}`, 'Til ákvörðunar'],
+    ['m', '◎', 'Viðskiptavinir', {{js.ins3_title}}, `Þrír stærstu skuldararnir eiga ${fmt(top3, 0)}% útistandandi krafna og sá stærsti einn ${fmt(top1, 0)}%. ${{{js.ins3_tail}}}`, 'Til umræðu'],
+    ['h', '!', 'Áhætta', {{js.ins4_title}}, `${fmt(od, 0)}% krafna eru komnar fram yfir gjalddaga og ${mkr(AG.b61)} m.kr. eru eldri en 60 daga. ${{{js.ins4_tail}}}`, 'Til ákvörðunar']];
+  $('ins').innerHTML = I.map(([s, ic, k, t, p, tag]) => `<div class="d-item"><span class="d-ico ${s}">${ic}</span><div><span class="ins-k">${k}</span><b style="display:block">${t}</b><p>${p}</p></div><span class="pill ${tag === 'Til ákvörðunar' ? 'h' : tag === 'Til umræðu' ? 'm' : 'i'}">${tag}</span></div>`).join('');
+  $('yfir-note').textContent = `Samanburður við ${{{js.py}}} miðast við ${N}/12 af ársuppgjöri ${{{js.py}}} (mánaðartölur ${{{js.py}}} eru ekki í BC). Rekstrartölur ná til ${monthEnd(LASTF)}; sjóðsstaða og kröfur eru miðaðar við ${ddmmyyyy(DATA.as_of)}.`;
+  drawMain(); drawCash(); forecastCard();
+}
+/* ---------- Árið stefnir í (spá Bifrastar) ---------- */
+const FC = DATA.fc || null, FY = FC && FC.year, F26 = FC ? FC.forecast.filter(f => f.ym.startsWith({{js.year}})) : [];
+const oneM = m => ONE.filter(o => o.ym === m).reduce((s, o) => s + o.amount, 0);
+function forecastCard() {
+  if (!FC || !F26.length || !FY) { $('fc-card').hidden = true; return; }
+  const lo = FY.raun_ebitda + FY.p10_ebitda, hi = FY.raun_ebitda + FY.p90_ebitda, f0 = F26[0], f1 = F26.at(-1);
+  const w = f => (f.ebitda_p90 - f.ebitda_p10) / 2, done = 100 * FY.raun_ebitda / FY.ar_ebitda, one = oneIn(FULL);
+  $('fc-eb').innerHTML = `${mkr(FY.ar_ebitda)}<small>m.kr.</small>`;
+  $('fc-eb-d').innerHTML = `Bil P10–P90: <b>${fmt(lo / 1e6, 0)}–${fmt(hi / 1e6, 0)} m.kr.</b> · ${sg(100 * (FY.ar_ebitda / PY.ebitda - 1), 0)}% frá ${{{js.py}}} (${mkr(PY.ebitda)} m)`;
+  $('fc-rev').innerHTML = `${mkr(FY.ar_tekjur)}<small>m.kr.</small>`;
+  $('fc-rev-d').textContent = `Raun ${ml(FULL[0])}–${ml(LASTF)} ${mkr(FY.raun_tekjur)} m + spá ${ml(f0.ym)}–${ml(f1.ym)} ${mkr(FY.spa_tekjur)} m · ${sg(100 * (FY.ar_tekjur / PY.tekjur - 1), 0)}% frá ${{{js.py}}}`;
+  $('fc-text').textContent = `Um ${fmt(done, 0)}% af áætlaðri EBITDA ársins er þegar í höfn, svo óvissan liggur öll í ${MF[mi(f0.ym)]}–${MF[mi(f1.ym)]} og ræðst fyrst og fremst af tekjum: bilið breikkar úr ±${fmt(w(f0) / 1e6, 0)} m.kr. í ${MF[mi(f0.ym)]} í ±${fmt(w(f1) / 1e6, 0)} m.kr. í ${MF[mi(f1.ym)]}.${one ? ` Spáin gerir ekki ráð fyrir að einskiptissalan í ${MF[mi(ONE[0].ym)]} (${mkr(one)} m.kr.) endurtaki sig.` : ''}`;
+  if (!window.Chart) return;
+  const ms = [...FULL, ...F26.map(f => f.ym)], li = FULL.length - 1, act = r => r ? r.ebitda / 1e6 : null;
+  const raw = ms.map(m => { const r = FM.find(x => x.ym === m); return r ? (r.ebitda - oneM(m)) / 1e6 : null; });
+  const onev = ms.map(m => FULL.includes(m) && oneM(m) ? oneM(m) / 1e6 : null);
+  const anchor = act(FM.at(-1)), fv = k => ms.map((m, i) => { const f = F26.find(x => x.ym === m); return f ? f[k] / 1e6 : i === li ? anchor : null; });
+  const o = baseOpts(); o.scales.x.stacked = true;
+  o.plugins.tooltip.callbacks = { label: c => c.raw == null || (c.dataIndex === li && c.dataset.fc) ? null : ` ${c.dataset.label}: ${fmt(c.raw)} m.kr.` };
+  up('fc', $('c-fc'), { data: { labels: ms.map(ml), datasets: [
+    { type: 'line', label: 'P90', data: fv('ebitda_p90'), fc: 1, borderWidth: 0, pointRadius: 0, fill: '+1', backgroundColor: alpha(css('--teal-2'), .3), order: 3 },
+    { type: 'line', label: 'P10', data: fv('ebitda_p10'), fc: 1, borderWidth: 0, pointRadius: 0, fill: false, order: 3 },
+    { type: 'line', label: 'Spá (P50)', data: fv('ebitda'), fc: 1, borderColor: css('--s2'), borderDash: [6, 5], borderWidth: 2.5, pointRadius: ms.map((m, i) => i > li ? 3 : 0), pointBackgroundColor: css('--s2'), tension: .3, order: 1 },
+    { type: 'bar', label: 'Raun', data: raw, backgroundColor: css('--s1'), borderRadius: 6, maxBarThickness: 30, stack: 'r', order: 2 },
+    { type: 'bar', label: 'Einskipti', data: onev, backgroundColor: css('--warn'), borderRadius: 6, maxBarThickness: 30, stack: 'r', order: 2 }] }, options: o });
+}
+function drawMain() {
+  const avg = (metric === 'rev' ? PY.tekjur : PY.ebitda) / 12 / 1e6, col = css('--s1');
+  up('main', $('c-main'), { type: 'line', data: { labels: FM.map(r => ml(r.ym)), datasets: [
+    { label: {{js.year}}, data: FM.map(r => (metric === 'rev' ? r.tekjur : r.ebitda) / 1e6), borderColor: col, borderWidth: 3, tension: .4, fill: true, backgroundColor: grad(col), pointRadius: 0, pointHoverRadius: 6, pointBackgroundColor: col },
+    { label: ('Meðaltal ' + {{js.py}}), data: FM.map(() => avg), borderColor: css('--base'), borderDash: [6, 6], borderWidth: 2, pointRadius: 0 }] }, options: baseOpts() });
+}
+function drawCash() {
+  const ds = [['Uppsafnaður hagnaður', C.afkoma_arsins, '--s3', true], ['Handbært fé', C.handbaert_fe, '--s1', false], ['Viðskiptakröfur', C.krofur, '--dn', false]];
+  up('cash', $('c-cash'), { type: 'line', data: { labels: BL, datasets: ds.map(([l, d, c, f]) => ({ label: l, data: d.map(v => v / 1e6), borderColor: css(c), borderWidth: 2.5, tension: .4, pointRadius: 0, pointHoverRadius: 5, fill: f, backgroundColor: grad(css(c), .16, 0) })) }, options: baseOpts() });
+}
+
+/* ================= REKSTUR ================= */
+const QS = [1, 2, 3, 4].map(q => ({ id: 'Q' + q, ms: ALLM.filter(m => Math.floor(mi(m) / 3) === q - 1) })).filter(q => q.ms.length);
+const BU = DATA.budgets || [], SPA = DATA.spa || [];
+const QDEF = (QS.filter(q => q.ms.length === 3 && q.ms.every(m => FULL.includes(m))).at(-1) || QS.filter(q => q.ms.some(m => FULL.includes(m))).at(-1) || QS[0] || { id: 'Q1' }).id;
+const st = { pt: 'ytd', m: LASTF, q: QDEF, from: ALLM.includes({{js.bil_from}}) ? {{js.bil_from}} : FULL[0], to: LASTF, cmp: 'py', open: new Set() };
+const rng = (a, b) => ALLM.filter(m => m >= a && m <= b);
+const span = ms => ms.length === 1 ? `${MF[mi(ms[0])]} ${ms[0].slice(0, 4)}` : `${ml(ms[0])}–${ml(ms.at(-1))} ${ms.at(-1).slice(0, 4)}`;
+function period() {
+  let ms, label;
+  if (st.pt === 'm') { ms = [st.m]; label = span(ms); }
+  else if (st.pt === 'q') { const q = QS.find(x => x.id === st.q) || QS[0]; ms = q.ms; label = `${q.id} ${{{js.year}}} (${span(ms).replace((' ' + {{js.year}}), '')})`; }
+  else if (st.pt === 'ytd') { ms = FULL; label = `Ár til dags, ${span(ms)}`; }
+  else { const a = st.from <= st.to ? st.from : st.to, b = st.from <= st.to ? st.to : st.from; ms = rng(a, b); label = span(ms); }
+  return { ms, label, inc: ms.filter(m => INC.has(m)) };
+}
+/* Viðmið: skilar {acc(no)->kr|null, cat(k)->kr|null, label, ok, note} */
+function reference(P) {
+  const n = P.ms.length, c = st.cmp;
+  if (c === 'prev') {
+    const i0 = ALLM.indexOf(P.ms[0]), pm = i0 - n >= 0 ? ALLM.slice(i0 - n, i0) : null;
+    if (!pm) return { ok: false, label: 'Fyrra tímabil', note: `Ekkert sambærilegt fyrra tímabil er til fyrir ${P.label.toLowerCase()}: mánaðartölur fyrir ${{{js.py}}} eru ekki í BC. Veldu „Sama tímabil í fyrra“ eða styttra tímabil.` };
+    return { ok: true, label: span(pm), note: `Borið saman við næsta tímabil á undan af sömu lengd (${span(pm)}).${pm.some(m => INC.has(m)) ? ' Viðmiðið inniheldur bráðabirgðamánuð.' : ''}`, acc: a => av(a, pm), cat: k => catV(k, pm), oneRef: oneIn(pm) };
+  }
+  if (c === 'py') {
+    const f = n / 12;
+    return { ok: true, label: `${{{js.py}}} × ${n}/12`, note: `Sama tímabil í fyrra: ársuppgjör ${{{js.py}}} deilt jafnt á mánuði (${n}/12), þar sem mánaðartölur ${{{js.py}}} eru ekki í BC. Árstíðasveiflur koma því ekki fram í viðmiðinu.`, acc: a => -(a.months[{{js.py}}] || 0) * f, cat: k => sum(ACC.filter(a => a.cat === k), a => -(a.months[{{js.py}}] || 0) * f), oneRef: 0 };
+  }
+  if (c === 'spa') {
+    const S = P.ms.map(m => SPA.find(s => s.ym === m));
+    if (!SPA.length) return { ok: false, label: 'Spá', note: 'Engin spá Bifrastar er til fyrir þetta tímabil.' };
+    if (S.some(x => !x)) return { ok: false, label: 'Spá', note: `Spá Bifrastar (gerð mánuði fyrir fram) er aðeins til fyrir ${ml(SPA[0].ym)}–${ml(SPA.at(-1).ym)} ${{{js.year}}}. Veldu mánuð, ársfjórðung eða bil innan þess.` };
+    return { ok: true, label: 'Spá', note: 'Spá Bifrastar, gerð mánuði fyrir fram með gögnum sem lágu fyrir þá. Spáin er á liðum, ekki lyklum, og nær ekki til liða neðan EBITDA. Einskiptissala er ekki í spánni.', acc: () => null, cat: k => EBC.includes(k) ? (k === 'tekjur' ? 1 : -1) * sum(S, s => s[k] || 0) : null, oneRef: 0 };
+  }
+  const b = BU.find(x => 'bu:' + x.name === c) || { name: '?', acc: {} }, keys = Object.keys(b.acc);
+  const draft = b.src !== 'bc', lbl = `Áætlun ${b.name}${draft ? ' (drög)' : ''}`;
+  if (!keys.length) return { ok: false, label: lbl, note: `Áætlunin ${b.name} er til í BC en hefur engar færslur. Veldu drögin eða skráðu áætlun í BC (Fjárhagsáætlanir); þá birtist hún hér eftir lyklum og tímabilum.` };
+  const bv = no => -sum(P.ms, m => ((b.acc[no] || {})[m]) || 0);
+  return { ok: true, label: lbl, note: (draft ? 'Drög, ekki skráð í BC. ' : 'Sótt úr BC. ') + (b.desc || ''), acc: a => bv(a.no), cat: k => sum(ACC.filter(a => a.cat === k), a => bv(a.no)), oneRef: 0 };
+}
+function cols(P) {
+  const c = [{ k: {{js.py}}, l: ('Árið ' + {{js.py}}), ms: [{{js.py}}], py: true }];
+  if (st.pt === 'q') QS.forEach(q => c.push({ k: q.id, l: q.id + (' ' + {{js.year}}), ms: q.ms }));
+  else ALLM.forEach(m => c.push({ k: m, l: `${ml(m)} ${m.slice(2, 4)}`, ms: [m] }));
+  c.forEach(x => { x.inc = x.ms.some(m => INC.has(m)); x.sel = !x.py && x.ms.every(m => P.ms.includes(m)); });
+  return c;
+}
+function rekstur() {
+  const P = period(), R = reference(P), CO = cols(P);
+  $('cmp-note').textContent = R.note + (P.inc.length ? ` Í tímabilinu eru bráðabirgðamánuðir (${P.inc.map(ml).join(', ')}) þar sem laun og vörunotkun eru ekki komin inn.` : '');
+  $('ref-empty').hidden = R.ok; $('ref-empty-t').innerHTML = R.ok ? '' : `<b>${R.label}:</b> ${R.note}`;
+  $('br-card').hidden = !R.ok;
+  /* gildi á lið */
+  const rawCat = k => catV(k, P.ms), refCat = k => R.ok ? R.cat(k) : null;
+  const ebR = sum(EBC, rawCat), ebRef = R.ok ? sum(EBC, refCat) : null;
+  const belowRef = R.ok && BELOW.every(k => R.cat(k) != null);
+  const hR = ebR + sum(BELOW, rawCat), hRef = belowRef ? ebRef + sum(BELOW, refCat) : null;
+  const colV = (f, c) => c.py ? f([{{js.py}}]) : f(c.ms);
+  const cell = (v, cls = '') => `<td class="n ${cls}">${v == null ? '<span class="sub">–</span>' : mkr(v)}</td>`;
+  const cmpCells = (r, f) => { const d = f == null || r == null ? null : r - f, p = d == null || Math.abs(f) < 1 ? null : 100 * d / Math.abs(f), cl = d == null || Math.abs(d) < 5e4 ? '' : d > 0 ? 'pos' : 'neg';
+    return `${cell(r, 'k k1')}${cell(f, 'k')}<td class="n k ${cl}">${d == null ? '<span class="sub">–</span>' : sg(d / 1e6)}</td><td class="n k ${cl}">${p == null ? '<span class="sub">–</span>' : sg(p, 0) + '%'}</td>`; };
+  const mcells = f => CO.map(c => cell(colV(f, c), `${c.sel ? 'sel' : ''} ${c.inc ? 'dim' : ''}`)).join('');
+  const oneP = oneIn(P.ms);
+  const catRow = k => {
+    const o = st.open.has(k), mark = k === 'tekjur' && oneP ? '<span class="one" title="Inniheldur einskiptislið">1×</span>' : '';
+    let h = `<tr class="cat"><td><button class="tg" data-k="${k}" aria-expanded="${o}"><span class="car">▸</span>${CATL[k]}</button>${mark}</td>${mcells(ms => catV(k, ms))}${cmpCells(rawCat(k), refCat(k))}</tr>`;
+    if (o) ACC.filter(a => a.cat === k).filter(a => CO.some(c => Math.abs(colV(ms => av(a, ms), c)) > 1) || (R.ok && Math.abs(R.acc(a) || 0) > 1))
+      .forEach(a => { h += `<tr class="acc"><td><span class="mono">${a.no}</span> ${a.name}${ONENO.has(a.no) ? '<span class="one">1×</span>' : ''}</td>${mcells(ms => av(a, ms))}${cmpCells(av(a, P.ms), R.ok ? R.acc(a) : null)}</tr>`; });
+    return h;
+  };
+  const sumRow = (l, f, r, ref) => `<tr class="sum"><td>${l}</td>${mcells(f)}${cmpCells(r, ref)}</tr>`;
+  const ebF = ms => sum(EBC, k => catV(k, ms)), hF = ms => ebF(ms) + sum(BELOW, k => catV(k, ms));
+  const head = `<thead><tr><th>Liður</th>${CO.map(c => `<th class="n ${c.sel ? 'sel' : ''} ${c.inc ? 'dim' : ''}">${c.l}${c.inc ? '*' : ''}</th>`).join('')}<th class="n k k1">Raun</th><th class="n k">${R.ok ? R.label : 'Viðmið'}</th><th class="n k">Frávik</th><th class="n k">%</th></tr></thead>`;
+  $('pl').innerHTML = head + '<tbody>' + EBC.map(catRow).join('') + sumRow('EBITDA', ebF, ebR, ebRef) + BELOW.map(catRow).join('') + sumRow('Hagnaður fyrir skatta', hF, hR, hRef) + '</tbody>';
+  $('pl').querySelectorAll('.tg').forEach(b => b.onclick = () => { const k = b.dataset.k; st.open.has(k) ? st.open.delete(k) : st.open.add(k); rekstur(); });
+  const w = $('pl-wrap'); if (w && w.scrollWidth) w.scrollLeft = w.scrollWidth;
+  const notes = [`Dálkar: ${P.label}; auðkenndir dálkar eru í völdu tímabili. Raun, viðmið og frávik eru fyrir valið tímabil. Frávik = raun − viðmið; grænt er betra fyrir afkomu.`];
+  if (CO.some(c => c.inc)) notes.push('* Bráðabirgðatölur: laun og vörunotkun ekki komin inn.');
+  if (ONE.length) notes.push(`1× Einskiptisliður: ${ONE.map(o => `${o.no} ${o.name} í ${MF[mi(o.ym)]} (${mkr(o.amount)} m.kr.), ${{{js.one_desc}}}`).join('; ')}.${oneP ? ` Án hans er EBITDA tímabilsins ${mkr(ebR - oneP)} m.kr.` : ''}`);
+  $('pl-note').textContent = notes.join(' ');
+  changes(P, R, rawCat, refCat); rvsCard(P); ratios(P);
+  if (!R.ok || !window.Chart) return;
+  $('br-sub').textContent = `${R.label} → raun · ${P.label} · m.kr.`;
+  const steps = [{ l: 'EBITDA viðmið', v: ebRef / 1e6, t: 1 }, ...EBC.map(k => ({ l: CATL[k].replace(' og launatengd gjöld', '').replace(' og aðföng', '').replace('rekstrarkostnaður', 'rekstur'), v: (rawCat(k) - refCat(k)) / 1e6 })), { l: 'EBITDA raun', v: ebR / 1e6, t: 1 }];
+  let run = 0; const data = steps.map(s => { if (s.t) { run = s.v; return [0, s.v]; } const a = [run, run + s.v]; run += s.v; return a; });
+  const o = baseOpts(); o.interaction = { mode: 'nearest', intersect: true };
+  const lo = Math.min(...data.flat()), hi = Math.max(...data.flat()); o.scales.y.min = lo >= 0 ? Math.max(0, Math.floor((lo - (hi - lo) * .2) / 5) * 5) : undefined;
+  o.plugins.tooltip.callbacks = { label: c => { const s = steps[c.dataIndex]; return ' ' + (s.t ? '' : s.v >= 0 ? '+' : '') + fmt(s.v) + ' m.kr.'; } };
+  up('bridge', $('c-bridge'), { type: 'bar', data: { labels: steps.map(s => s.l), datasets: [{ data, borderRadius: 8, borderSkipped: false, maxBarThickness: 46, backgroundColor: steps.map((s, i) => s.t ? css(i ? '--brand' : '--base') : s.v >= 0 ? css('--up') : css('--dn')) }] }, options: o });
+}
+/* ---------- Hvað breyttist mest (lyklar eftir áhrifum á afkomu) ---------- */
+const catS = k => (CATL[k] || k).replace(' og launatengd gjöld', '').replace(' og aðföng', '').replace('rekstrarkostnaður', 'rekstur');
+function changes(P, R, rawCat, refCat) {
+  $('chg-card').hidden = !R.ok; if (!R.ok) return;
+  const byCat = st.cmp === 'spa';
+  let all = byCat ? EBC.map(k => ({ no: '', name: CATL[k], cat: k, r: rawCat(k), f: refCat(k) }))
+    : ACC.map(a => ({ no: a.no, name: a.name, cat: a.cat, r: av(a, P.ms), f: R.acc(a) || 0 }));
+  all = all.map(x => ({ ...x, eff: x.r - x.f })).filter(x => Math.abs(x.eff) >= 1e4).sort((a, b) => Math.abs(b.eff) - Math.abs(a.eff));
+  const top = all.slice(0, 10), tot = sum(all, x => x.eff), topS = sum(top, x => x.eff), mx = Math.max(1, ...top.map(x => Math.abs(x.eff)));
+  $('chg-sub').textContent = `${byCat ? 'liðir' : 'bókhaldslyklar'} · ${R.label} → raun · ${P.label} · m.kr.`;
+  const nm = x => `${x.no ? x.no + ' ' : ''}${x.name} (${sg(x.eff / 1e6)} m)`, pos = top.filter(x => x.eff > 0).slice(0, 2), neg = top.filter(x => x.eff < 0).slice(0, 2);
+  $('chg-ins').innerHTML = `${byCat ? 'EBITDA' : 'Hagnaður fyrir skatta'} er <b>${sg(tot / 1e6)} m.kr.</b> frá viðmiði (${R.label}); ${byCat ? (oneIn(P.ms) ? `þar af ${mkr(oneIn(P.ms))} m.kr. einskiptissala sem ekki var í spánni` : 'sundurliðað á liði') : `tíu stærstu lyklarnir skýra ${sg(topS / 1e6)} m.kr. af því`}. ` + (pos.length ? `Mest til hækkunar: ${pos.map(nm).join(', ')}. ` : '') + (neg.length ? `Mest til lækkunar: ${neg.map(nm).join(', ')}.` : '') + (byCat ? ' Spáin er á liðum, ekki lyklum.' : '');
+  const pct = x => Math.abs(x.f) < 1 ? 'nýtt' : Math.abs(x.r) < 1 ? 'féll út' : sg(100 * (x.r - x.f) / Math.abs(x.f), 0) + '%';
+  $('chg-t').innerHTML = `<thead><tr><th>${byCat ? 'Liður' : 'Lykill'}</th><th>Flokkur</th><th class="n">Raun</th><th class="n">${R.label}</th><th class="n">Frávik %</th><th style="width:30%">Áhrif á afkomu</th></tr></thead><tbody>` +
+    top.map(x => { const w = 50 * Math.abs(x.eff) / mx, one = ONENO.has(x.no) && oneIn(P.ms) || (byCat && x.cat === 'tekjur' && oneIn(P.ms));
+      return `<tr class="${one ? 'one' : ''}"><td>${x.no ? `<span class="mono">${x.no}</span> ` : ''}${x.name}${one ? '<span class="one">1×</span>' : ''}</td><td class="sub">${catS(x.cat)}</td><td class="n">${mkr(x.r)}</td><td class="n">${mkr(x.f)}</td><td class="n">${pct(x)}</td>
+      <td><div class="bc"><div class="hb"><div class="t"><i class="z"></i><span style="${x.eff >= 0 ? 'left:50%' : `left:${50 - w}%`};width:${w}%;background:var(${x.eff >= 0 ? '--up' : '--dn'})"></span></div></div><span class="n">${sg(x.eff / 1e6)}</span></div></td></tr>`; }).join('') + '</tbody>';
+}
+
+/* ---------- Raun á móti spá eftir mánuðum ---------- */
+const LID = [['vorunotkun', 'Vörunotkun'], ['laun', 'Laun'], ['husnaedi', 'Húsnæði'], ['annar_rekstur', 'Annar rekstur']];
+function rvsCard(P) {
+  const on = st.cmp === 'spa' && !!FC && !!(FC.rolling || []).length; $('rvs-card').hidden = !on; if (!on) return;
+  const RR = FC.rolling, sel = new Set(P.ms), inP = RR.filter(r => sel.has(r.ym)), U = inP.length ? inP : RR;
+  const ex = r => r.raun_ebitda - r.einskipti, inb = r => ex(r) >= r.p10 && ex(r) <= r.p90;
+  const row = r => { const d = ex(r) - r.spa_ebitda, ok = inb(r);
+    return `<tr class="${sel.has(r.ym) ? 'sel' : ''}"><td>${MF[mi(r.ym)]}${r.einskipti ? ' *' : ''}</td><td class="n">${mkr(r.spa_tekjur)}</td><td class="n">${mkr(r.raun_tekjur - r.einskipti)}</td><td class="n">${mkr(r.spa_ebitda)}</td><td class="n">${mkr(ex(r))}</td><td class="n">${delta(d, true, sg(d / 1e6))}</td><td class="n sub">${fmt(r.p10 / 1e6, 0)}–${fmt(r.p90 / 1e6, 0)}</td><td><span class="pill ${ok ? 'l' : 'm'}">${ok ? 'innan' : ex(r) > r.p90 ? 'yfir' : 'undir'}</span></td></tr>`; };
+  const S = f => sum(U, f), dT = S(ex) - S(r => r.spa_ebitda);
+  $('rvs-t').innerHTML = `<thead><tr><th>Mánuður</th><th class="n">Tekjur spá</th><th class="n">Tekjur raun</th><th class="n">EBITDA spá</th><th class="n">EBITDA raun</th><th class="n">Frávik</th><th class="n">Bil P10–P90</th><th>Innan bils</th></tr></thead><tbody>` + RR.map(row).join('') +
+    `<tr class="sum"><td>Samtals ${U.length < RR.length || inP.length ? span(U.map(r => r.ym)) : ''}</td><td class="n">${mkr(S(r => r.spa_tekjur))}</td><td class="n">${mkr(S(r => r.raun_tekjur - r.einskipti))}</td><td class="n">${mkr(S(r => r.spa_ebitda))}</td><td class="n">${mkr(S(ex))}</td><td class="n">${delta(dT, true, sg(dT / 1e6))}</td><td></td><td></td></tr></tbody>`;
+  const rows = [['Tekjur', S(r => r.raun_tekjur - r.einskipti - r.spa_tekjur)], ...LID.map(([k, l]) => [l, -S(r => r.lidir[k].raun - r.lidir[k].spa)])];
+  const mxx = Math.max(1, ...rows.map(x => Math.abs(x[1]))), big = rows.slice().sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]))[0];
+  $('rvs-hs').textContent = `· ${span(U.map(r => r.ym))}`;
+  $('rvs-hb').innerHTML = rows.map(([l, v]) => { const w = 50 * Math.abs(v) / mxx; return `<div class="r"><span>${l}</span><div class="t"><i class="z"></i><span style="${v >= 0 ? 'left:50%' : `left:${50 - w}%`};width:${w}%;background:var(${v >= 0 ? '--up' : '--dn'})"></span></div><span class="n">${sg(v / 1e6)} m</span></div>`; }).join('');
+  const nIn = U.filter(inb).length, nOver = U.filter(r => ex(r) > r.spa_ebitda).length;
+  $('rvs-ins').innerHTML = `${span(U.map(r => r.ym))}: EBITDA var <b>${sg(dT / 1e6)} m.kr.</b> frá spá (${sg(100 * dT / S(r => r.spa_ebitda), 0)}%). Raun var yfir spá í ${nOver} af ${U.length} mánuðum og innan óvissubils í ${nIn}. Mest munaði um ${big[0].toLowerCase()} (${sg(big[1] / 1e6)} m.kr.).${inP.length ? '' : ' Valið tímabil er utan spárinnar, svo allir spámánuðir eru sýndir.'}`;
+  const one = RR.find(r => r.einskipti), bt = FC.backtest;
+  $('rvs-note').textContent = `Spáin er gerð mánuði fyrir fram með þeim gögnum sem lágu fyrir þá. Auðkenndar línur eru í völdu tímabili. Grænt = betra en spá fyrir afkomu.${one ? ` * Raun er án einskiptissölu í ${MF[mi(one.ym)]} (${mkr(one.einskipti)} m.kr.), sem spáin gat ekki séð fyrir.` : ''}${bt ? ` Bakprófun ${ml(bt.manudir[0])}–${ml(bt.manudir.at(-1))}: meðalskekkja tekna ${fmt(100 * bt.mape_tekjur, 1)}%, EBITDA ${fmt(100 * bt.mape_ebitda, 1)}%.` : ''}`;
+}
+
+/* ---------- Lykilhlutföll á mánuði ---------- */
+function ratios(P) {
+  const RD = [['Framlegð', r => 100 * (r.tekjur - r.vorunotkun) / r.tekjur, '--s1', 100 * (PY.tekjur + PY.vorunotkun) / PY.tekjur],
+    ['Laun af tekjum', r => 100 * r.laun / r.tekjur, '--s4', -100 * PY.laun / PY.tekjur],
+    ['EBITDA-hlutfall', r => 100 * r.ebitda / r.tekjur, '--s3', 100 * PY.ebitda / PY.tekjur]];
+  const sel = new Set(P.ms), Rt = sum(FM.filter(r => sel.has(r.ym)), r => r.tekjur);
+  $('rt-leg').innerHTML = RD.map(([l, f, c, py]) => `<span><i style="background:var(${c})"></i>${l} · ${{{js.py}}}: ${fmt(py)}%</span>`).join('') + ('<span><i class="dash" style="border-color:var(--base)"></i>Stig ' + {{js.py}} + '</span>');
+  const one = ONE[0], om = one && FM.find(r => r.ym === one.ym);
+  const selTxt = Rt ? ` Í völdu tímabili (${P.label}): ${RD.map(([l, f]) => { const g = FM.filter(r => sel.has(r.ym)); const agg = { tekjur: sum(g, r => r.tekjur), vorunotkun: sum(g, r => r.vorunotkun), laun: sum(g, r => r.laun), ebitda: sum(g, r => r.ebitda) }; return `${l.replace('Framlegð', 'framlegð').replace('Laun', 'laun')} ${fmt(f(agg))}%`; }).join(', ')}.` : '';
+  $('rt-note').textContent = `Stærri punktar eru í völdu tímabili; bráðabirgðamánuðir eru ekki sýndir.${selTxt}${om ? ` ${MF[mi(one.ym)].replace(/^./, c => c.toUpperCase())} inniheldur einskiptissölu (${mkr(one.amount)} m.kr.); án hennar er EBITDA-hlutfall mánaðarins ${fmt(100 * (om.ebitda - one.amount) / (om.tekjur - one.amount))}%.` : ''}`;
+  if (!window.Chart) return;
+  const o = baseOpts(); o.scales.y.ticks.callback = v => fmt(v, 0) + '%'; o.scales.y.min = 0;
+  o.plugins.tooltip.callbacks = { label: c => c.dataset.py ? null : ` ${c.dataset.label}: ${fmt(c.raw)}%` };
+  const ds = [];
+  RD.forEach(([l, f, c, py]) => {
+    ds.push({ label: l, data: FM.map(f), borderColor: css(c), borderWidth: 2.5, tension: .35, pointRadius: FM.map(r => sel.has(r.ym) ? 4 : 0), pointHoverRadius: 5, pointBackgroundColor: css(c) });
+    ds.push({ label: l + (' ' + {{js.py}}), py: 1, data: FM.map(() => py), borderColor: alpha(css(c), .55), borderDash: [4, 5], borderWidth: 1.5, pointRadius: 0, pointHoverRadius: 0 });
+  });
+  up('ratio', $('c-ratio'), { type: 'line', data: { labels: FM.map(r => ml(r.ym)), datasets: ds }, options: o });
+}
+function initRekstur() {
+  const segB = [...document.querySelectorAll('#t-rekstur [data-pt]')];
+  const paint = () => {
+    segB.forEach(b => b.setAttribute('aria-pressed', b.dataset.pt === st.pt));
+    $('pp-one').hidden = st.pt === 'ytd' || st.pt === 'bil'; $('pp-bil').hidden = st.pt !== 'bil';
+    if (st.pt === 'm') { $('pp-one-l').textContent = 'Mánuður'; $('pp-sel').innerHTML = ALLM.map(m => `<option value="${m}">${MF[mi(m)]} ${m.slice(0, 4)}${INC.has(m) ? ' · bráðabirgða' : ''}</option>`).join(''); $('pp-sel').value = st.m; }
+    if (st.pt === 'q') { $('pp-one-l').textContent = 'Ársfjórðungur'; $('pp-sel').innerHTML = QS.map(q => `<option value="${q.id}">${q.id} ${{{js.year}}} (${span(q.ms).replace((' ' + {{js.year}}), '')})${q.ms.some(m => INC.has(m)) ? ' · bráðabirgða' : ''}</option>`).join(''); $('pp-sel').value = st.q; }
+  };
+  segB.forEach(b => b.onclick = () => { st.pt = b.dataset.pt; paint(); rekstur(); });
+  $('pp-sel').onchange = e => { if (st.pt === 'm') st.m = e.target.value; else st.q = e.target.value; rekstur(); };
+  const mo = ALLM.map(m => `<option value="${m}">${MF[mi(m)]} ${m.slice(0, 4)}${INC.has(m) ? ' · bráðabirgða' : ''}</option>`).join('');
+  $('pp-from').innerHTML = mo; $('pp-to').innerHTML = mo; $('pp-from').value = st.from; $('pp-to').value = st.to;
+  $('pp-from').onchange = e => { st.from = e.target.value; rekstur(); }; $('pp-to').onchange = e => { st.to = e.target.value; rekstur(); };
+  $('cmp').innerHTML = [['prev', 'Fyrra tímabil'], ['py', 'Sama tímabil í fyrra'], ...BU.map(b => ['bu:' + b.name, `Áætlun: ${b.name}${b.src === 'bc' ? ' (BC' + (Object.keys(b.acc).length ? ')' : ', tóm)') : ' (drög)'}`]), ['spa', 'Spá']]
+    .map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
+  $('cmp').value = st.cmp; $('cmp').onchange = e => { st.cmp = e.target.value; rekstur(); };
+  paint();
+}
+
+/* ================= EFNAHAGUR OG SJÓÐSTREYMI ================= */
+const BA = B.accounts, iA0 = B.months.indexOf(LASTF), iA = iA0 < 0 ? BLAST : iA0;
+const lvl = (no, i) => (BA.find(a => a.no === no) || { levels: [] }).levels[i] || 0;
+function cfCalc(i0, i1) {
+  const d = k => C[k][i1] - C[k][i0];
+  const dep = -(sum(BA.filter(a => {{js.dep_accounts}}.includes(a.no)), a => a.levels[i1] - a.levels[i0]));
+  const capex = d('fastafjarmunir') + dep;
+  const other = d('eigid_fe') - d('afkoma_arsins') - d('eigid_fe_bokad');
+  const r = { hagn: d('afkoma_arsins'), dep, krof: -d('krofur'), skamm: d('skammtimaskuldir'), capex: -capex, lan: d('langtimaskuldir'), ard: d('eigid_fe_bokad'), other, open: C.handbaert_fe[i0], close: C.handbaert_fe[i1] };
+  r.rek = r.hagn + r.dep + r.krof + r.skamm; r.fjf = r.capex; r.fjm = r.lan + r.ard + r.other; r.chg = r.rek + r.fjf + r.fjm; r.diff = r.open + r.chg - r.close;
+  return r;
+}
+/* hlutar sjóðstreymis: lok hvers ársfjórðungs fyrir síðasta fullbókaða mánuð, sá mánuður og nýjasta staða */
+const QE = B.months.map((m, i) => i).filter(i => i > 0 && i < iA && +B.months[i].slice(5) % 3 === 0);
+const SEG = [0, ...QE, iA, BLAST].map((v, i, a) => [a[i - 1], v]).slice(1).filter(([a, b]) => b > a);
+const segL = ([a, b]) => b === BLAST && B.months[b] > LASTF ? `${ml(B.months[a + 1])}–${ddmmyyyy(DATA.as_of).slice(0, 5)}*` : `${ml(B.months[a + 1])}–${ml(B.months[b])}`;
+const bsOpen = new Set();
+const BS0 = monthEnd(B.months[0]).slice(0, 6), CF0 = B.months[1] ? `1.${+B.months[1].slice(5)}.` : '';
+function efna() {
+  const L = BLAST, T = cfCalc(0, L), last3 = FM.slice(-3), avgRev = sum(last3, r => r.tekjur) / last3.length;
+  const vf = C.krofur[L] + C.handbaert_fe[L] - C.skammtimaskuldir[L], vf0 = C.krofur[0] + C.handbaert_fe[0] - C.skammtimaskuldir[0];
+  const dso = C.krofur[L] / avgRev * 30, eq = 100 * C.eigid_fe[L] / C.eignir[L], eq0 = 100 * C.eigid_fe[0] / C.eignir[0];
+  const K = [['Veltufé', mkr(vf), 'm.kr.', `${BS0}: ${mkr(vf0)} m · veltufjármunir − skammtímaskuldir`],
+    ['Handbært fé frá rekstri', sg(T.rek / 1e6), 'm.kr.', `${CF0}–${ddmmyyyy(DATA.as_of).slice(0, 5)}, þrátt fyrir ${mkr(T.hagn)} m hagnað`],
+    ['Innheimtutími', fmt(dso, 0), 'dagar', `kröfur á móti meðalsölu ${ml(last3[0].ym)}–${ml(last3.at(-1).ym)}`],
+    ['Eiginfjárhlutfall', fmt(eq), '%', `${delta(eq - eq0, true, sg(eq - eq0) + ' pp')} frá ${BS0} · skuldir ${mkr(C.langtimaskuldir[L] + C.skammtimaskuldir[L])} m`]];
+  $('kpis2').innerHTML = K.map(([l, v, u, d]) => `<div class="card kpi"><span class="l">${l}</span><span class="v">${v}<small>${u}</small></span><span class="d">${d}</span></div>`).join('');
+  /* Efnahagsreikningur */
+  const IX = [0, iA, L], hd = IX.map((i, j) => j === 2 && B.months[i] > LASTF ? ddmmyyyy(DATA.as_of) : monthEnd(B.months[i]));
+  const neg = new Set(['eigid_fe', 'langtimaskuldir', 'skammtimaskuldir']);
+  const accRows = k => k === 'eigid_fe'
+    ? [['Hlutafé og óráðstafað eigið fé', i => C.eigid_fe_bokad[i]], ['Afkoma fyrra árs', i => C.eigid_fe[i] - C.eigid_fe_bokad[i] - C.afkoma_arsins[i]], ['Hagnaður ársins', i => C.afkoma_arsins[i]]]
+    : BA.filter(a => a.cat === k).map(a => [`<span class="mono">${a.no}</span> ${a.name}`, i => (neg.has(k) ? -1 : 1) * a.levels[i]]);
+  const vrow = (lab, f, cls) => `<tr class="${cls}"><td>${lab}</td>${IX.map(i => `<td class="n">${mkr(f(i))}</td>`).join('')}<td class="n k k1">${sg((f(L) - f(0)) / 1e6)}</td></tr>`;
+  const catR = (k, l) => { const o = bsOpen.has(k); return vrow(`<button class="tg" data-k="${k}" aria-expanded="${o}"><span class="car">▸</span>${l}</button>`, i => C[k][i], 'cat') + (o ? accRows(k).map(([l2, f]) => vrow(l2, f, 'acc')).join('') : ''); };
+  $('bs').innerHTML = `<thead><tr><th>Liður</th>${hd.map(h => `<th class="n">${h}</th>`).join('')}<th class="n k k1">Breyting</th></tr></thead><tbody>
+    <tr class="grp"><td colspan="5">Eignir</td></tr>${catR('fastafjarmunir', 'Fastafjármunir')}${catR('krofur', 'Viðskiptakröfur')}${catR('handbaert_fe', 'Handbært fé')}${vrow('Eignir samtals', i => C.eignir[i], 'sum')}
+    <tr class="grp"><td colspan="5">Eigið fé og skuldir</td></tr>${catR('eigid_fe', 'Eigið fé')}${catR('langtimaskuldir', 'Langtímaskuldir')}${catR('skammtimaskuldir', 'Skammtímaskuldir')}${vrow('Eigið fé og skuldir samtals', i => C.eigid_fe[i] + C.langtimaskuldir[i] + C.skammtimaskuldir[i], 'sum')}</tbody>`;
+  $('bs').querySelectorAll('.tg').forEach(b => b.onclick = () => { const k = b.dataset.k; bsOpen.has(k) ? bsOpen.delete(k) : bsOpen.add(k); efna(); });
+  /* Sjóðstreymi */
+  const S = SEG.map(([a, b]) => cfCalc(a, b)), all = [...S, T];
+  const r = (l, k, cls = '') => `<tr class="${cls}"><td>${l}</td>${all.map((x, j) => `<td class="n ${j === all.length - 1 ? 'k k1' : ''}">${mkr(x[k])}</td>`).join('')}</tr>`;
+  const hasOther = all.some(x => Math.abs(x.other) > 1e3);
+  $('cf').innerHTML = `<thead><tr><th>Liður</th>${SEG.map(s => `<th class="n">${segL(s)}</th>`).join('')}<th class="n k k1">Samtals</th></tr></thead><tbody>
+    <tr class="grp"><td colspan="${all.length + 1}">Rekstur</td></tr>${r('Hagnaður tímabils', 'hagn')}${r('Afskriftir', 'dep')}${r('Breyting viðskiptakrafna', 'krof')}${r('Breyting skammtímaskulda', 'skamm')}${r('Handbært fé frá rekstri', 'rek', 'sum')}
+    <tr class="grp"><td colspan="${all.length + 1}">Fjárfesting</td></tr>${r('Fjárfesting í fastafjármunum', 'capex')}${r('Fjárfestingarhreyfingar', 'fjf', 'sum')}
+    <tr class="grp"><td colspan="${all.length + 1}">Fjármögnun</td></tr>${r('Afborganir langtímalána', 'lan')}${r('Greiddur arður', 'ard')}${hasOther ? r('Aðrar breytingar á eigin fé', 'other') : ''}${r('Fjármögnunarhreyfingar', 'fjm', 'sum')}
+    ${r('Breyting á handbæru fé', 'chg', 'sum')}${r('Handbært fé í upphafi', 'open')}${r('Handbært fé í lok', 'close', 'sum')}</tbody>`;
+  $('cf-note').textContent = `Óbein aðferð, reiknuð úr breytingum á efnahag. Upphafsstaða er ${monthEnd(B.months[0])}, fyrsti mánuður í gögnunum. * Hagnaður eftir ${monthEnd(LASTF)} er bráðabirgðatala þar sem laun og vörunotkun eru ekki komin inn; sjóðstaðan sjálf er raunstaða í banka.`;
+}
+
+/* ================= ÁHÆTTUR ================= */
+function aha() {
+  const cols = ['--up', '--s2', '--warn', '--s4', '--dn', '--s3'];
+  const od = AG.total - AG.not_yet_due;
+  $('age-sub').textContent = `${mkr(AG.total)} m.kr. opið · ${fmt(100 * od / AG.total, 0)}% gjaldfallið`;
+  $('stack').innerHTML = AG.buckets.map(([l, v], i) => v ? `<span style="width:${100 * v / AG.total}%;background:var(${cols[i]})" title="${l}: ${mkr(v)} m.kr."></span>` : '').join('');
+  $('slegend').innerHTML = AG.buckets.map(([l, v], i) => `<div><span><i style="background:var(${cols[i]})"></i>${l}</span><b>${mkr(v)}</b></div>`).join('');
+  const mx = AG.rows.length ? AG.rows[0].total : 1;
+  $('plist').innerHTML = AG.rows.slice(0, 6).map(r => `<div class="prow"><span class="av">${initials(r.name)}</span><div style="min-width:0"><div class="nm">${r.name}</div><div class="bar"><span style="width:${100 * r.total / mx}%"></span></div></div><span class="n">${mkr(r.total)}<small>${fmt(100 * r.overdue / r.total, 0)}% gjaldf.</small></span></div>`).join('');
+  const one = ONE[0], oneDebt = one ? AG.rows.find(r => Math.abs(r.total - one.amount) < 1) : null;
+  const cash = C.handbaert_fe, pk = cash.indexOf(Math.max(...cash)), burn = BLAST > pk ? (cash[pk] - cash[BLAST]) / (BLAST - pk) : 0;
+  const R = [
+    ['h', '!', 'Vanskil viðskiptavina', `${mkr(AG.b61)} m.kr. eru eldri en 60 daga. Líkur á tapi aukast með aldri krafna.`, 'Innheimtuáætlun og mat á niðurfærslu'],
+    ['h', 'kr', 'Lækkandi sjóður', `Handbært fé hefur lækkað um ${mkr(Math.abs(burn))} m.kr. á mánuði að meðaltali frá lokum ${MF[mi(B.months[pk])]}, á sama tíma og reksturinn skilar hagnaði.`, 'Mánaðarleg sjóðspá til stjórnar'],
+    ...(AG.rows.length ? [['m', '◎', 'Samþjöppun viðskiptavina', `${AG.rows[0].name} á ${fmt(100 * AG.rows[0].total / AG.total, 0)}% útistandandi krafna.`, 'Lánamörk á stærstu aðila']] : []),
+    ...(one ? [['m', '1×', 'Einskiptissala ógreidd', `${{{js.one_sale}}} í ${MF[mi(one.ym)]} (${mkr(one.amount)} m.kr.)${oneDebt ? ' er enn útistandandi' : ''} og endurtekur sig ekki.`, 'Tekið út í mati á undirliggjandi rekstri']] : [])];
+  $('risk').innerHTML = R.map(([s, i, t, p, a]) => `<div class="d-item"><span class="d-ico ${s}">${i}</span><div><b>${t}</b><p>${p}</p><p class="sub">Viðbragð: ${a}</p></div><span class="pill ${s}">${s === 'h' ? 'Mikil' : 'Miðlungs'}</span></div>`).join('');
+}
+
+/* ================= Ræsing ================= */
+function render(id) { setDefaults(); if (!id || id === 't-yfir') overview(); if (!id || id === 't-rekstur') rekstur(); if (!id || id === 't-efna') efna(); if (!id || id === 't-aha') aha(); }
+$('m-rev').onclick = () => { metric = 'rev'; $('m-rev').setAttribute('aria-pressed', true); $('m-eb').setAttribute('aria-pressed', false); drawMain(); };
+$('m-eb').onclick = () => { metric = 'eb'; $('m-eb').setAttribute('aria-pressed', true); $('m-rev').setAttribute('aria-pressed', false); drawMain(); };
+let curTab = 't-yfir';
+BF.themeToggle($('mode'), () => { Object.keys(CH).forEach(k => { CH[k].destroy(); delete CH[k]; }); render(curTab); });
+initRekstur();
+tabs(document.querySelector('.tabs'), id => { curTab = id; render(id); });
+
+</script>

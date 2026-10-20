@@ -1,0 +1,245 @@
+<meta charset="utf-8">
+<script>(function(){var m="light";try{m=localStorage.getItem("bf-theme-v5")||"light"}catch(e){}var r=document.documentElement;r.setAttribute("data-bf",m==="dark"?"dark":"light");r.setAttribute("data-pal",(m==="blue"||m==="earth")?m:"bifrost")})()</script>
+<title>{{meta.short}} mánaðarlok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&subset=latin,latin-ext&display=swap">
+<style>
+{{THEME_CSS}}
+
+.mgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.mt{display:grid;gap:8px;text-align:left;padding:12px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);color:var(--ink);font:inherit;cursor:pointer;min-width:0}
+.mt[aria-pressed="true"]{border-color:var(--brand);box-shadow:0 0 0 2px var(--brand-soft)}
+.mt:hover{border-color:var(--brand)}
+.mh{display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap}
+.mh b{font-size:1.05rem;text-transform:capitalize}
+.stack.sm{height:8px}
+.item p.role{font-size:.74rem;color:var(--muted);margin-top:2px}
+.fl{display:flex;gap:8px;flex-wrap:wrap}
+tr.grp td{font-size:.74rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;background:var(--panel2)}
+.kpi .v small{font-size:.8rem}
+.g4 > .kpi{min-width:0}
+@media (max-width:860px){.mgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:480px){.mgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+</style>
+<div class="wrap">
+  <nav class="crumb" aria-label="Leiðarstika"><a href="index.html">← Miðstöð<span class="c-l"> mælaborða</span></a><span class="sep">/</span><span>Mánaðarlok og afstemmingar</span></nav>
+  <header class="top">
+    <div class="brandmark">
+      <div class="logo" aria-hidden="true">{{meta.logo}}</div>
+      <div style="min-width:0"><span class="eyebrow">Mánaðarlok og afstemmingar · {{meta.year}}</span><h1>{{meta.company}}</h1></div>
+    </div>
+    <div class="chips"><div id="mode"></div><span class="chip-lg m-hide"><span class="dot"></span>Tengt BC · Bifröst</span><span class="chip-lg">Staða <b>{{meta.as_of}}</b></span><span class="chip-lg">Aðeins lesið</span></div>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Flipar">
+    <button role="tab" aria-controls="t-lok">Lokun mánaðar</button>
+    <button role="tab" aria-controls="t-afst">Afstemmingar</button>
+    <button role="tab" aria-controls="t-opin">Opin atriði</button>
+  </div>
+
+  <!-- LOKUN MÁNAÐAR -->
+  <section class="tab" id="t-lok" role="tabpanel">
+    <section class="card hero">
+      <span class="eyebrow" id="h-eb"></span>
+      <div class="big" id="h-big"></div>
+      <p id="h-txt"></p>
+      <div class="row" id="h-row"></div>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Mánaðaval</h2><span class="sub">síðustu 6 mánuðir · fullbókað og gátlisti</span></div>
+      <div class="mgrid" id="mpick" role="group" aria-label="Veldu mánuð"></div>
+      <div class="legend"><span><i style="background:var(--up)"></i>Lokið</span><span><i style="background:var(--dn)"></i>Vantar</span><span><i style="background:var(--line)"></i>Á ekki við</span></div>
+    </section>
+    <section class="card">
+      <div class="ch"><h2 id="cl-h">Gátlisti</h2><div class="seg" role="group" aria-label="Sía gátlista" id="cl-f"><button data-f="all" aria-pressed="true">Allt</button><button data-f="vantar" aria-pressed="false">Vantar</button><button data-f="lokid" aria-pressed="false">Lokið</button></div></div>
+      <div class="items" id="cl"></div>
+      <p class="note">Áætlaðar fjárhæðir (merktar ≈) byggja á síðasta fullbókaða mánuði og eru til viðmiðunar, ekki tillaga að bókun. Ábyrgð er sýnd sem hlutverk.</p>
+    </section>
+  </section>
+
+  <!-- AFSTEMMINGAR -->
+  <section class="tab" id="t-afst" role="tabpanel" hidden>
+    <section class="g4" id="a-kpis"></section>
+    <section class="card">
+      <div class="ch"><h2>Stemmir bókhaldið?</h2><span class="sub">undirbækur, bankar og VSK á móti fjárhag · mismunur í kr.</span></div>
+      <div class="stack" id="rc-stack"></div>
+      <div class="items" id="rec"></div>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Bankar og kort</h2><span class="sub">staða í BC {{meta.as_of}} og síðasta bankayfirlit</span></div>
+      <div class="scroll"><table id="bank-t" style="min-width:720px"></table></div>
+      <p class="note" id="bank-note"></p>
+    </section>
+    <section class="card">
+      <div class="ch"><h2>Jöfnuður færslna innan mánaðar</h2><span class="sub">debet − kredit í fjárhag, m.kr.</span></div>
+      <div id="stm"></div>
+      <p class="note" id="stm-note"></p>
+    </section>
+  </section>
+
+  <!-- OPIN ATRIÐI -->
+  <section class="tab" id="t-opin" role="tabpanel" hidden>
+    <section class="g4" id="o-kpis"></section>
+    <section class="card">
+      <div class="ch"><h2>Verkefnalisti</h2>
+        <div class="fl">
+          <div class="seg" role="group" aria-label="Alvarleiki" id="o-sev"><button data-f="all" aria-pressed="true">Allt</button><button data-f="h" aria-pressed="false">Rautt</button><button data-f="m" aria-pressed="false">Gult</button></div>
+          <div class="seg" role="group" aria-label="Hlutverk" id="o-role"><button data-f="all" aria-pressed="true">Öll hlutverk</button><button data-f="Bókari" aria-pressed="false">Bókari</button><button data-f="Fjármálastjóri" aria-pressed="false">Fjármálastjóri</button></div>
+        </div>
+      </div>
+      <div class="items" id="open"></div>
+      <p class="note">Raðað eftir alvarleika og svo fjárhæð. Ekkert hefur verið bókað, afstemmt eða leiðrétt í BC; næstu skref eru tillögur til þeirra sem bera ábyrgð.</p>
+    </section>
+  </section>
+
+  <footer>
+    <span>{{text.source}}</span>
+    <span>Aðeins lesið úr BC. Áætlaðar fjárhæðir eru merktar ≈. Notendur birtast sem hlutverk, ekki nöfn.</span>
+    <span>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</span>
+  </footer>
+</div>
+
+<script>
+{{COMPONENTS_JS}}
+const DATA={{DATA_JSON}};
+const { $, fmt, sg, date } = BF;
+const m = (v, d = 1) => fmt(v / 1e6, d);
+const kr = v => fmt(v, 0) + ' kr.';
+const MONF = ['janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 'júlí', 'ágúst', 'september', 'október', 'nóvember', 'desember'];
+const monF = ym => MONF[+ym.slice(5, 7) - 1];
+const monS = ym => BF.MON[+ym.slice(5, 7) - 1];
+const TODAY = DATA.today;
+const dayDiff = (a, b) => Math.round((new Date(b) - new Date(a)) / 864e5);
+const endOf = ym => { const y = +ym.slice(0, 4), mo = +ym.slice(5, 7); const d = new Date(Date.UTC(y, mo, 0)); return d.toISOString().slice(0, 10); };
+const ST = { lokid: ['l', 'Lokið'], vantar: ['h', 'Vantar'], na: ['i', 'Á ekki við'] };
+const cnt = it => ({ done: it.filter(i => i.s === 'lokid').length, todo: it.filter(i => i.s === 'vantar').length, app: it.filter(i => i.s !== 'na').length });
+const kpiCard = (l, v, d, pill) => `<div class="card kpi"><span class="l">${l}${pill ? ` <span class="pill ${pill[0]}">${pill[1]}</span>` : ''}</span><span class="v">${v}</span><span class="d">${d}</span></div>`;
+const seg = (el, cb) => { const bs = [...el.querySelectorAll('button')]; bs.forEach(b => b.onclick = () => { bs.forEach(x => x.setAttribute('aria-pressed', x === b)); cb(b.dataset.f); }); };
+
+/* ---------- LOKUN MÁNAÐAR ---------- */
+let SEL = DATA.months.some(x => x.ym === DATA.default) ? DATA.default : (DATA.months.at(-1) || {}).ym, CLF = 'all';
+const SHORT = { tekjur: 'tekjur', laun: 'laun', voru: 'vörunotkun', afskr: 'afskriftir', vsk: 'VSK-uppgjörsfærslu', fx: 'endurmat gjaldmiðla', accr: 'áfallinn kostnað', lok: 'lokun tímabils í BC' };
+const andList = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' og ' + a.at(-1);
+const lastFull = (DATA.months.filter(x => x.complete).at(-1) || {}).ym;
+const cap = s => s[0].toUpperCase() + s.slice(1);
+const nextYm = ym => { const y = +ym.slice(0, 4), mo = +ym.slice(5, 7); return mo === 12 ? `${y + 1}-01` : `${y}-${String(mo + 1).padStart(2, '0')}`; };
+function lokun() {
+  const M = DATA.months.find(x => x.ym === SEL); if (!M) return; const c = cnt(M.items), name = monF(SEL), Y = SEL.slice(0, 4);
+  $('h-eb').textContent = `Lokun mánaðar · ${name} ${Y}${M.current ? ' · mánuður stendur yfir' : ''}`;
+  $('h-big').innerHTML = `${c.done} af ${c.app}<small>atriðum lokið fyrir ${name}</small>`;
+  const miss = M.items.filter(i => i.s === 'vantar');
+  const estOp = miss.filter(i => ['laun', 'voru', 'afskr', 'accr'].includes(i.k)).reduce((s, i) => s + (i.amt || 0), 0);
+  $('h-txt').innerHTML = M.current
+    ? `${cap(name)} er ekki liðinn. Lokun hans hefst í byrjun ${monF(nextYm(SEL))}. Gátlistinn sýnir stöðuna í dag.`
+    : M.complete
+      ? `Reksturinn er fullbókaður fyrir ${name}, en ${andList(miss.map(i => SHORT[i.k] || i.t.toLowerCase()))} vantar. Mánuðurinn er því ekki lokaður.`
+      : `${name[0].toUpperCase() + name.slice(1)} er <b>ófullbókaður</b> (${M.reason}). Óbókaður rekstrarkostnaður er áætlaður um <b>${m(estOp)} m.kr.</b>, svo afkoma mánaðarins í BC er ofmetin. Tímabilið er opið fyrir bókun.`;
+  const ended = !M.current ? dayDiff(endOf(SEL), TODAY) : null;
+  $('h-row').innerHTML = [
+    [String(c.todo), 'atriði vantar'],
+    [estOp ? '≈ ' + m(estOp) + ' m' : '0,0 m', 'óbókaður rekstrarkostnaður'],
+    [lastFull ? monF(lastFull) : '–', 'síðasti fullbókaði mánuður'],
+    [ended != null ? String(ended) : '–', 'dagar frá mánaðarlokum'],
+  ].map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join('');
+
+  $('mpick').innerHTML = DATA.months.slice(-6).map(x => {
+    const k = cnt(x.items), na = x.items.length - k.app;
+    return `<button type="button" class="mt" data-ym="${x.ym}" aria-pressed="${x.ym === SEL}">
+      <span class="mh"><b>${monS(x.ym)}</b><span class="pill ${x.complete ? 'l' : x.current ? 'i' : 'h'}">${x.complete ? 'Fullbókaður' : x.current ? 'Stendur yfir' : 'Ófullbókaður'}</span></span>
+      <span class="stack sm"><span style="flex:${k.done};background:var(--up)"></span><span style="flex:${k.todo};background:var(--dn)"></span><span style="flex:${na};background:var(--line)"></span></span>
+      <span class="sub">${k.done} af ${k.app} lokið</span></button>`;
+  }).join('');
+  $('mpick').querySelectorAll('button').forEach(b => b.onclick = () => { SEL = b.dataset.ym; lokun(); });
+
+  $('cl-h').textContent = `Gátlisti · ${name} ${Y}`;
+  $('cl').innerHTML = M.items.filter(i => CLF === 'all' || i.s === CLF).map(i => {
+    const [p, l] = ST[i.s] || ST.na;
+    const amt = i.amt == null ? '–' : (i.est ? '≈ ' : '') + m(i.amt) + ' m';
+    return `<div class="item"><span class="pill ${p}">${l}</span><div><b>${i.t}</b>${i.flag ? ' <span class="pill m">Athuga</span>' : ''}<p>${i.note}</p><p class="role">Ábyrgð: ${i.role}</p></div><span class="n">${amt}</span></div>`;
+  }).join('') || '<p class="note">Ekkert atriði í þessari síu.</p>';
+}
+seg($('cl-f'), f => { CLF = f; lokun(); });
+
+/* ---------- AFSTEMMINGAR ---------- */
+const UNB = DATA.unb_total;
+const ARd = DATA.krofur_gl - DATA.ag_total, APd = DATA.ven_total - DATA.ap_gl;
+const STM = Object.entries(DATA.stemming), STMbad = STM.filter(([, v]) => Math.abs(v) > 0.5);
+const B0 = DATA.banks, ISK = B0.filter(b => b.teg !== 'Greiðslukort'), CRD = B0.filter(b => b.teg === 'Greiðslukort');
+const bsum = a => a.reduce((s, b) => s + b.bal, 0), LB = B0.find(b => b.outst);
+const ledgerOf = b => { const s = DATA.rec.stmts.find(x => x.acc === b.no); return s ? s.ledger : b.stmt_bal; };
+const LASTREC = B0.map(b => b.stmt_date).filter(Boolean).sort().at(-1) || null;
+const UNREC = {{js.unrec}};
+/* Gildi sem textar í js.rec_rows / js.open_items geta vísað í: {lykill} (m.kr., 1 aukastafur), {lykill:2}, {lykill:kr} (kr.), {lykill:n} (heiltala) */
+const V = {
+  bank_isk: bsum(ISK), bank_gl: DATA.banks_gl.bankar, bank_diff: bsum(ISK) - DATA.banks_gl.bankar,
+  card_sum: bsum(CRD), card_gl: DATA.banks_gl.kort, card_diff: bsum(CRD) - DATA.banks_gl.kort,
+  lb_name: LB ? LB.name : '', lb_stmt: LB ? LB.stmt_bal : null, lb_ledger: LB ? ledgerOf(LB) : null, lb_outst: LB ? LB.outst : 0, lb_outst_abs: LB ? Math.abs(LB.outst) : 0,
+  unb: UNB, unb_neg: -UNB, unb_n: DATA.unbooked.length, unb_list: DATA.unbooked.map(u => `${u.t} ${m(u.amt)} m`).join(' · '),
+  kort_m: DATA.kort_m, kort_2: 2 * DATA.kort_m, kort_neg2: -2 * DATA.kort_m,
+  ag_total: DATA.ag_total, krofur_gl: DATA.krofur_gl, ARd, ven_total: DATA.ven_total, ap_gl: DATA.ap_gl, APd,
+  vsk_net: DATA.vsk_net, vsk9570: DATA.vsk9570, vsk_julagu: DATA.vsk_julagu,
+  stm_n: STMbad.length, stm_list: STMbad.map(([k, v]) => `${monF(k)} ${sg(v / 1e6)} m`).join(', '), stm_first: STMbad.length ? STMbad[0][1] : 0, stm_first_abs: STMbad.length ? Math.abs(STMbad[0][1]) : 0,
+  inv_n: DATA.inv_n, inv_sum: DATA.inv_sum, inv_od_n: DATA.inv_od_n, inv_od_sum: DATA.inv_od_sum,
+  inc_est: DATA.months.filter(x => !x.complete && !x.current).reduce((s, M) => s + M.items.filter(i => i.s === 'vantar' && ['laun', 'voru', 'afskr', 'accr'].includes(i.k)).reduce((t, i) => t + (i.amt || 0), 0), 0),
+  days: LASTREC ? dayDiff(LASTREC, TODAY) : null,
+};
+const fv = (k, f) => { const v = V[k]; if (v == null) return '–'; if (typeof v === 'string') return v; return f === 'kr' ? fmt(v, 0) : f === 'n' ? String(v) : m(v, f ? +f : 1); };
+const tx = s => String(s == null ? '' : s).replace(/\{(\w+)(?::(\w+))?\}/g, (a, k, f) => (k in V ? fv(k, f) : a));
+const amtOf = r => r.ref ? (V[r.ref] == null ? null : V[r.ref]) : (r.amt == null ? null : r.amt);
+const shown = r => !r.if || !!V[r.if];
+const sevOf = (s, amt) => s === 'auto' ? (amt == null || Math.abs(amt) < 1 ? 'l' : 'h') : s;
+function afst() {
+  const B = B0, last = LASTREC, days = V.days;
+  const ok = B.filter(b => b.stmt_date === last).length;
+  const pl = (bad, warn) => bad ? ['h', 'Rautt'] : warn ? ['m', 'Gult'] : ['l', 'Grænt'];
+  $('a-kpis').innerHTML = [
+    kpiCard('Reikningar afstemmdir', `${ok}/${B.length}`, last ? `til ${date(last)}${UNREC ? ` · ${UNREC} vantar` : ''}` : 'engin afstemming skráð', pl(!last, ok < B.length || !!UNREC)),
+    kpiCard('Dagar frá síðustu afstemmingu', days == null ? '–' : String(days), last ? `síðasta yfirlit ${date(last)}` : '–', pl(days == null || days > 40, days > 20)),
+    kpiCard('Undirbækur á móti fjárhag', `${m(Math.abs(ARd) + Math.abs(APd), 2)}<small>m.kr.</small>`, 'mismunur samtals, viðskiptamenn og lánardrottnar', pl(Math.abs(ARd) + Math.abs(APd) >= 1, false)),
+    kpiCard('Ójöfnuður innan mánaðar', `${STMbad.length}<small>mánuðir</small>`, STMbad.length ? STMbad.map(([k, v]) => `${monS(k)} ${sg(v / 1e6)} m`).join(' · ') : 'allir mánuðir stemma', pl(STMbad.length, false)),
+  ].join('');
+
+  const isk = ISK, crd = CRD, sum = bsum;
+  /* afstemmingarlínur úr gögnum: {s: 'l'|'m'|'h'|'auto', t, d, amt (tala eða null), ref (heiti gildis í V, í stað amt), est, if} */
+  const R = {{js.rec_rows}}.filter(shown).map(r => { const v = amtOf(r); return [sevOf(r.s, v), tx(r.t), tx(r.d), v, !!r.est]; });
+  const lab = { h: 'Rautt', m: 'Gult', l: 'Grænt' }, n = k => R.filter(r => r[0] === k).length;
+  $('rc-stack').innerHTML = [['l', 'up'], ['m', 'warn'], ['h', 'dn']].map(([k, c]) => `<span style="flex:${n(k)};background:var(--${c})" title="${lab[k]}: ${n(k)}"></span>`).join('');
+  $('rec').innerHTML = R.map(([s, t, d, v, est]) => `<div class="item"><span class="pill ${s}">${lab[s]}</span><div><b>${t}</b><p>${d}</p></div><span class="n">${v == null ? 'óstaðfest' : (est ? '≈ ' : '') + kr(v)}</span></div>`).join('') || '<p class="note">Engar afstemmingarlínur.</p>';
+
+  const row = b => `<tr><td>${b.name}</td><td class="n">${fmt(b.bal, 0)}</td><td>${date(b.stmt_date)} · nr. ${b.stmt_no}</td><td class="n">${fmt(b.stmt_bal, 0)}</td><td class="n">${fmt(ledgerOf(b), 0)}</td><td class="n">${b.outst ? fmt(b.outst, 0) : '0'}</td><td><span class="pill ${b.outst ? 'm' : 'l'}">${b.outst ? 'Útistandandi' : {{js.rec_bnk_pill}}}</span>${UNREC ? ` <span class="pill h">${UNREC} vantar</span>` : ''}</td></tr>`;
+  const tot = a => `<td class="n">${fmt(sum(a), 0)}</td><td></td><td class="n">${fmt(a.reduce((s, b) => s + b.stmt_bal, 0), 0)}</td><td class="n">${fmt(a.reduce((s, b) => s + ledgerOf(b), 0), 0)}</td><td class="n">${fmt(a.reduce((s, b) => s + b.outst, 0), 0)}</td><td></td>`;
+  $('bank-t').innerHTML = `<thead><tr><th>Reikningur</th><th class="n">Staða í BC í dag</th><th>Síðasta yfirlit</th><th class="n">Yfirlit</th><th class="n">Bankabók þá</th><th class="n">Óafstemmt</th><th>Staða</th></tr></thead><tbody>
+    <tr class="grp"><td colspan="7">Bankareikningar</td></tr>${isk.map(row).join('')}<tr class="sum"><td>Samtals bankar</td>${tot(isk)}</tr>
+    ${crd.length ? `<tr class="grp"><td colspan="7">Greiðslukort</td></tr>${crd.map(row).join('')}<tr class="sum"><td>Samtals kort</td>${tot(crd)}</tr>` : ''}</tbody>`;
+  $('bank-note').textContent = `${tx({{js.bank_note}})} Kort eru sýnd með númeri, korthafar ekki nafngreindir. Ekkert hefur verið afstemmt í BC úr þessu mælaborði.`;
+
+  BF.hbars($('stm'), STM.map(([k, v]) => ({ label: monS(k), value: v / 1e6, text: Math.abs(v) < .5 ? '0,0' : sg(v / 1e6), color: Math.abs(v) < .5 ? '--line' : '--dn' })), { diverging: true });
+  $('stm-note').textContent = 'Í Business Central á hver færsla að stemma (debet = kredit). Ójöfnuður innan mánaðar bendir á færslu sem er bókuð með röngum dagsetningum á móti sér eða upphafsstöðu sem ekki stemmir. Finna fylgiskjalið og leiðrétta með bakfærslu.';
+}
+
+/* ---------- OPIN ATRIÐI ---------- */
+/* úr gögnum: {s: 'h'|'m', t, d, nx, role, amt (tala eða null), ref (heiti gildis í V), est, txt, if} */
+const OPEN = {{js.open_items}}.filter(shown).map(o => ({ s: o.s === 'h' ? 'h' : 'm', t: tx(o.t), d: tx(o.d), nx: tx(o.nx), role: o.role || 'Bókari', amt: amtOf(o), est: !!o.est, txt: o.txt ? tx(o.txt) : undefined }));
+OPEN.sort((a, b) => (a.s === b.s ? 0 : a.s === 'h' ? -1 : 1) || ((b.amt || 0) - (a.amt || 0)));
+let OS = 'all', OR = 'all';
+function opin() {
+  const h = OPEN.filter(o => o.s === 'h').length, g = OPEN.length - h;
+  $('o-kpis').innerHTML = [
+    kpiCard('Rauð atriði', String(h), 'þarf að laga áður en mánuði er lokað', ['h', 'Rautt']),
+    kpiCard('Gul atriði', String(g), 'þarf að skýra eða staðfesta', ['m', 'Gult']),
+    kpiCard('Óbókaðar greiðslur', `${m(UNB)}<small>m.kr.</small>`, `${DATA.unbooked.length} greiðsluliðir${UNREC ? ' ' + UNREC : ''}`),
+    kpiCard('Ósamþykkt á gjalddaga', `${m(DATA.inv_od_sum)}<small>m.kr.</small>`, `${DATA.inv_od_n} af ${DATA.inv_n} reikningum`),
+  ].join('');
+  const lab = { h: 'Rautt', m: 'Gult' };
+  $('open').innerHTML = OPEN.filter(o => (OS === 'all' || o.s === OS) && (OR === 'all' || o.role === OR)).map(o =>
+    `<div class="item"><span class="pill ${o.s}">${lab[o.s]}</span><div><b>${o.t}</b><p>${o.d}</p><p><b>Næsta skref:</b> ${o.nx}</p><p class="role">Ábyrgð: ${o.role}</p></div><span class="n">${o.txt || (o.amt == null ? '–' : (o.est ? '≈ ' : '') + m(o.amt) + ' m')}</span></div>`).join('') || '<p class="note">Ekkert atriði í þessari síu.</p>';
+}
+seg($('o-sev'), f => { OS = f; opin(); });
+seg($('o-role'), f => { OR = f; opin(); });
+
+BF.themeToggle($('mode'), () => { lokun(); afst(); opin(); });
+lokun(); afst(); opin();
+BF.tabs(document.querySelector('.tabs'));
+
+</script>

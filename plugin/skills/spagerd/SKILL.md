@@ -1,9 +1,11 @@
 ---
 name: spagerd
-description: Spágerð og rekstrarhermir úr Business Central — drifþáttaspá út árið og 12 mánuði fram með árstíðum, leitni, kjarasamningum, verðbólgu, stýrivöxtum, aðfangaverði og þekktum pöntunum, með P10/P50/P90 óvissubili og bakprófun, og hermir með stikum fyrir hverja forsendu. Forsendur eru sóttar frá Hagstofu, Seðlabanka og kjarasamningum og sýndar með heimild og dagsetningu. Notaðu þegar beðið er um spá, áætlun, „hvar endar árið“, sviðsmyndir, hermi eða áhrif kjarasamninga, verðbólgu, vaxta eða verðbreytinga.
+description: "Mælaborðið „Spágerð“ í Bifröst-mælaborðum (spá með óvissubili, forsendur með heimildum, raun á móti spá, rekstrarhermir), smíðað úr föstu sniðmáti. Notaðu AÐEINS innan Bifröst-mælaborða: þegar notandinn biður um Bifröst-mælaborð eða þetta mælaborð með nafni, eða breytir mælaborði sem pluginið bjó til. Ekki fyrir almennar spurningar um rekstur eða Business Central, aðrar skýrslur, skjöl eða artifacts."
 ---
 
 # Spágerð og rekstrarhermir
+
+> **Fast sniðmát.** Þetta mælaborð er smíðað úr `template/` (sjá `bifrost-maelabord`, *Föst sniðmát*). Skrifaðu ekki HTML. Safnaðu gögnunum eftir `template/schema.md` (sýnidæmi: `template/example.json`), og smíðaðu með `render.py --dashboard spagerd` eða `bundle.py`. Við breytingu eða uppfærslu er **aðeins þetta mælaborð** endurgert og birt (og viðbætur þess í `ext/`), sjá *Umfang breytinga*. Lýsingin hér að neðan segir hvað sniðmátið sýnir og hvaðan gögnin koma.
 
 **Valmælaborð** (ekki sjálfgefið í 1.0; bætt við úr miðstöð eða að beiðni).
 

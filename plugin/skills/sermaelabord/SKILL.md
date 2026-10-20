@@ -1,6 +1,6 @@
 ---
 name: sermaelabord
-description: Sérmælaborð eftir atvinnugrein (yfirflokkum ÍSAT) úr Business Central — flokkar félagið sjálfkrafa út frá ÍSAT-númeri og því sem er í notkun í BC (verk, tímaskráningar, birgðir, uppskriftir, endurteknir reikningar, eignir og lán, mörg félög) og smíðar sérmælaborð: Verk og útboð, Nýting og reikningsfærsla, Áskriftartekjur, Birgðir og lager, Verslanir og karfa, Nýting og bókanir, Afli afurðir og gengi, Framleiðsla og kostnaðarverð, Leigusafn, Samstæða, Floti og leiðir, Fjárheimildir. Notaðu þegar beðið er um mælaborð fyrir tiltekna atvinnugrein, „tillögur fyrir okkar félag“, „bættu við Verk og útboð“ (eða öðru sérmælaborði), ÍSAT, eða þegar miðstöðin þarf tillögur.
+description: "Sérmælaborð eftir atvinnugrein (12 pakkar eftir ÍSAT) í Bifröst-mælaborðum, og flokkun félags fyrir tillögur í miðstöðinni. Notaðu AÐEINS þegar notandinn bætir sérmælaborði við Bifröst-miðstöðina eða ræsirinn þarf tillögur. Ekki fyrir almennar atvinnugreinagreiningar eða önnur verkefni."
 ---
 
 # Sérmælaborð eftir yfirflokkum
@@ -13,7 +13,7 @@ Fylgdu `bifrost-maelabord` (útlit og reglur 1.0: hámark fjórir flipar og fjó
 
 1. **ÍSAT-númer:** úr `Company Information` (atvinnugreinaflokkun ef útfyllt), annars spyrðu notanda eða flettu kennitölu upp í fyrirtækjaskrá Skattsins. Óþekkt: haltu áfram á notkun.
 2. **Notkun í BC:** teldu með `data_record_count`: `Job`, `Job Ledger Entry`, `Resource`, `Time Sheet Header`, `Item`, `Item Ledger Entry`, `Production BOM Header`, `Standard Customer Sales Code`, `Location`, `Fixed Asset`; hlutfall fastafjármuna og langtímalána af efnahag úr `dataset.json`; fjöldi félaga í tenant (`Context_Companies_List`) og tengdir aðilar.
-3. Keyrðu `python3 ${CLAUDE_SKILL_DIR}/scripts/flokka.py --signals signals.json [--isat NN.NN] --out tillogur.json`. Efstu 1–3 verða **„Tillögur fyrir þitt félag“**: í upphafsvali ræsisins (áður en keyrslan fer af stað) og efst í glugganum „Fleiri mælaborð“ í miðstöðinni, með ástæðu („15 verk og 51 verkbókarfærsla“).
+3. Keyrðu `python3 ${CLAUDE_SKILL_DIR}/scripts/flokka.py --signals signals.json [--isat NN.NN] --out tillogur.json`. Efstu 1–3 verða **„Mælt með fyrir þitt félag“**: í upphafsvali ræsisins (áður en keyrslan fer af stað) og efst í glugganum „Fleiri mælaborð“ í miðstöðinni, með ástæðu („15 verk og 51 verkbókarfærsla“). Allir 12 pakkarnir eru alltaf til vals þar fyrir neðan (*Aðrir atvinnugreinapakkar*).
 4. Flokkun er tillaga, ekki niðurstaða: notandinn velur.
 
 ## 2. Pakkarnir
@@ -41,7 +41,7 @@ Fylgdu `bifrost-maelabord` (útlit og reglur 1.0: hámark fjórir flipar og fjó
 2. **Samtölur fyrst** (`bifrost-gogn`, kafli 0): t.d. WIP og kostnaður á verk, sala á verslun eða vöruflokk, leigutekjur á eign og kostnaður á bíl sem `Data.Totals.Get` með `groupBy` á viðkomandi reit (verk, vídd, staðsetning, vöruflokkur). Færslur aðeins fyrir drill-down á stærstu liðina.
 3. Endurnýttu gögn og útreikninga annarra skilla þar sem þau skarast (verk úr `framlegd`, birgðir úr `framlegd` vörusýn, samstæða úr `bifrost-gogn` kafla 7, áætlanir úr `stjorn`) svo tölur stemmi milli mælaborða.
 4. Leiðarstika á miðstöðina, fótur með heimild og gervigreindarmerkingu.
-5. Birtu sem nýtt artifact `<Félag> · <Sérmælaborð>` og **uppfærðu miðstöðina**: nýtt spjald í „Mælaborðin þín“, merkt „Þegar bætt við“ í glugganum.
+5. Bættu því við **miðstöðvar-artifactið** sem skrá `ser-<id>.html` (afstæð leiðarstika `index.html`, sjá `bifrost-skyndiuttekt`, kafli 3) og **uppfærðu miðstöðina í sömu birtingu**: nýtt spjald í „Mælaborðin þín“ á undan Sjálfvirknivæðingu, merkt „Þegar bætt við“ í glugganum.
 
 ## 4. Sannreyning
 
