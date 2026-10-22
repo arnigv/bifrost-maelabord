@@ -11,9 +11,21 @@ Líkan (útskýranlegt, ekki svartur kassi):
   Afskriftir  = grunnur (flatt)
 Óvissa: hlutfallslegt staðalfrávik leifa sögunnar × √h, P10/P50/P90.
 Bakprófun: líkanið metið á gögnum fram að t−3 og spá borin saman við raun síðustu 3 fullbókaða mánuði (MAPE).
+
+Stutt saga (fjöldi fullbókaðra mánaða n, eftir að einskiptistekjur eru dregnar frá):
+  n ≥ 6 (FULL_MIN)    fullt líkan eins og að ofan (adferd "full").
+  3 ≤ n < 6 (RR_MIN)  einföld spá, "run-rate" (adferd "runrate"): grunnstig = meðaltal síðustu 3 mánaða,
+                      engin leitni (g = 0), engar árstíðir, hlutföll og fastir liðir úr þeim mánuðum sem til eru,
+                      óvissubil víkkað: sigma = max(RR_SIGMA_FLOOR, RR_SIGMA_MULT × sigma sögunnar). Engin bakprófun.
+  n < 3               spá ekki gerð (adferd "none", stada "engin_spa"): forecast.json er samt skrifað, með tómri
+                      spá, raun ársins og skilaboðum (`skilabod`) sem mælaborðið sýnir. Útgangskóði 0.
 """
 import argparse, json, math, statistics
 from datetime import date
+
+FULL_MIN, RR_MIN = 6, 3            # fullt líkan / einföld spá (run-rate)
+RR_SIGMA_FLOOR, RR_SIGMA_MULT = 0.10, 1.5   # víðara óvissubil í run-rate
+MSG_NONE = 'Spá ekki gerð: of fáir fullbókaðir mánuðir ({n}; þarf a.m.k. %d).' % RR_MIN
 
 CATS = ['tekjur', 'vorunotkun', 'laun', 'husnaedi', 'annar_rekstur', 'afskriftir', 'fjarmagn', 'oreglulegt']
 
@@ -99,9 +111,30 @@ def main():
     for r in rows:
         o = one.get(r['ym'], 0)
         r['tekjur'] -= o; r['ebitda'] -= o; r['hagnadur_fs'] = r.get('hagnadur_fs', 0) - o  # einskipti út úr grunni og bakprófun
-    if len(rows) < 6:
-        raise SystemExit('Of fáir fullbókaðir mánuðir (< 6) fyrir spá.')
+    n = len(rows)
+    if n < RR_MIN:
+        # spá ekki gerð: skrifa samt gilt úttak svo mælaborðið geti sýnt skýra stöðu í stað tómra grafa
+        actual = [r for r in D['months'] if r.get('complete')]
+        last = actual[-1]['ym'] if actual else None
+        year = (last or D.get('as_of') or '')[:4]
+        actual_y = [r for r in actual if r['ym'].startswith(year)]
+        ar = dict(raun_tekjur=sum(r['tekjur'] for r in actual_y), raun_ebitda=sum(r['ebitda'] for r in actual_y),
+                  spa_tekjur=0, spa_ebitda=0, p10_ebitda=0, p90_ebitda=0)
+        ar['ar_tekjur'] = ar['raun_tekjur']; ar['ar_ebitda'] = ar['raun_ebitda']
+        msg = MSG_NONE.format(n=n)
+        out = dict(company=D.get('company'), as_of=D.get('as_of'), stada='engin_spa', skilabod=msg, n_manudir=n,
+                   model=dict(adferd='none', arstidir=False, grunnstig=None, leitni_man=None, sigma=None, efnishlutfall=None, sidasti=last),
+                   assumptions=A, forecast=[], backtest=None, year=ar, oneoffs_excluded=one)
+        json.dump(out, open(a.out, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+        print('SPÁ EKKI GERÐ. ' + msg + ' Smíðaðu mælaborðið með fit.mode = "none" og fc = [] (sjá schema.md).')
+        return
     F = fit(rows, A)
+    mode = 'full'
+    if n < FULL_MIN:
+        # einföld spá (run-rate): engin leitni, víðara bil
+        mode = 'runrate'
+        F['g'] = 0.0
+        F['sigma'] = max(RR_SIGMA_FLOOR, RR_SIGMA_MULT * F['sigma'])
     year = F['last'][:4]
     months = [ym_add(F['last'], k) for k in range(1, a.horizon + 1)]
     fc = project(F, A, months)
@@ -119,10 +152,12 @@ def main():
               spa_tekjur=tot(rest_y, 'tekjur'), spa_ebitda=tot(rest_y, 'ebitda'),
               p10_ebitda=tot(rest_y, 'ebitda_p10'), p90_ebitda=tot(rest_y, 'ebitda_p90'))
     ar['ar_tekjur'] = ar['raun_tekjur'] + ar['spa_tekjur']; ar['ar_ebitda'] = ar['raun_ebitda'] + ar['spa_ebitda']
-    out = dict(company=D.get('company'), as_of=D.get('as_of'), model=dict(arstidir=F['season'], grunnstig=F['base'], leitni_man=F['g'], sigma=F['sigma'], efnishlutfall=F['mat']),
+    out = dict(company=D.get('company'), as_of=D.get('as_of'), stada='spa' if mode == 'full' else 'einfold_spa',
+               skilabod='' if mode == 'full' else f'Einföld spá (run-rate): aðeins {n} fullbókaðir mánuðir; engin leitni og víðara óvissubil.', n_manudir=n,
+               model=dict(adferd=mode, arstidir=F['season'], grunnstig=F['base'], leitni_man=F['g'], sigma=F['sigma'], efnishlutfall=F['mat'], sidasti=F['last']),
                assumptions=A, forecast=[{k: round(v, 2) if isinstance(v, float) else v for k, v in f.items()} for f in fc], backtest=bt, year=ar, oneoffs_excluded=one)
     json.dump(out, open(a.out, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-    print(f"OK spá {months[0]}–{months[-1]}. Árstíðir: {'já' if F['season'] else 'nei (< 13 mán.)'}. Leitni {F['g']*100:.2f}%/mán, σ {F['sigma']*100:.1f}%. "
+    print(('' if mode == 'full' else f'EINFÖLD SPÁ (run-rate, {n} mán.). ') + f"OK spá {months[0]}–{months[-1]}. Árstíðir: {'já' if F['season'] else 'nei (< 13 mán.)'}. Leitni {F['g']*100:.2f}%/mán, σ {F['sigma']*100:.1f}%. "
           f"Árið {year}: tekjur {ar['ar_tekjur']/1e6:.1f} m, EBITDA {ar['ar_ebitda']/1e6:.1f} m (bil {(ar['raun_ebitda']+ar['p10_ebitda'])/1e6:.1f}–{(ar['raun_ebitda']+ar['p90_ebitda'])/1e6:.1f}). "
           f"Bakprófun: {bt}")
 

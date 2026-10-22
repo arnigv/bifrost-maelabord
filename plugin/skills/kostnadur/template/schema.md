@@ -131,3 +131,13 @@ Raðað eftir `tot + samt` lækkandi. Fyrstu 8 sýnd, leit og „Sýna alla“.
 - `text.acc_range`: lyklabil kostnaðar („2000–4999“). `text.fetched`: hvenær sótt („16.–18.10.2026“).
 
 **Tómt leyft:** `inv: []` (enginn reikningur í samþykkt) sýnir „Engir innkaupareikningar bíða samþykkis.“; `incomplete: {}` þegar allt er fullbókað; `sav: []`.
+
+## Tungumál (`lang`, `i18n`)
+
+| Lykill | Dæmi | Skýring |
+|---|---|---|
+| `lang` | `"is"` | tungumál grunngagna (úr `dataset.json`). Ræður hvaða mál opnast fyrst. Vanti það er það greint úr heitum í gögnunum. |
+| `i18n.en` (eða `i18n.is`) | `{"meta": {...}, "text": {...}, "html": {...}, "js": {...}, "names": {...}}` | yfirlag fyrir hitt málið. Sömu lyklar og að ofan, aðeins þeir sem breytast. Dagsetningar á ensku `17 Oct 2026`, tölur `1,234.5`. |
+| `i18n.<lang>.names` | `{"Áætlun 2026": "Budget 2026"}` | þýðir heila strengi hvar sem er í gögnunum (heiti lykla utan staðaltöflu, áætlana, flokka, stöðu). |
+
+Sjá `example.json` (yfirlagið `i18n.en`) og `bifrost-maelabord/SKILL.md`, kaflann *Tungumál*.

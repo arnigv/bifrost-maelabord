@@ -29,10 +29,15 @@ Skylt = verður að vera til (render.py stöðvar annars). Valfrjálst = má ver
 | `accounts[].months` | kort `{"ÁÁÁÁ-MM": kr, "<fyrra ár>": kr}` | já | Hreyfing á mánuð (GL-formerki) **og** lykillinn `"<meta.py>"` (t.d. `"2025"`) = hreyfing alls fyrra árs | mánuðir: `period_breakdown`; fyrra ár: Hreyfing (reitur 32) á `G/L Account` með `Date Filter` fyrra árs (kafli 0) |
 | `balance.months` | listi ÁÁÁÁ-MM | já | Mánaðarlok sem efnahagur er sýndur fyrir; síðasti má vera yfirstandandi mánuður (staða `as_of`) | |
 | `balance.categories.{fastafjarmunir, krofur, handbaert_fe, eignir, eigid_fe, eigid_fe_bokad, afkoma_arsins, langtimaskuldir, skammtimaskuldir}` | listi kr. (jafnlangur `balance.months`) | já | Staða flokka í lok hvers mánaðar. `eigid_fe_bokad` = bókað eigið fé án afkomu ársins; `afkoma_arsins` = uppsafnaður hagnaður ársins | `period_breakdown` á `G/L Account` (efnahagslyklar, `field_type:"balance"`, reitur 31) |
+| `balance.categories.birgdir` | listi kr. (jafnlangur `balance.months`) | valfrjálst | Birgðir í lok mánaðar. Ef einhver staða er > 0: lína „Birgðir“ í efnahag, „Breyting birgða“ í sjóðstreymi, birgðir í veltufé, lína í grafi „Hagnaður á móti sjóði“ og áhætta „Birgðir aukast“ ef þær hækka ≥ 15%. Vanti lykil eða allt 0: eins og áður. `eignir` á að innihalda birgðir | `build_dataset.py` (flokkur `birgdir`, lyklar með birgð/inventory/stock í heiti eða undirflokki) |
+| `balance.categories.adrar_eignir` | listi kr. | valfrjálst | Aðrar eignir (t.d. verðbréf, eignalyklar utan flokka). Ef ≠ 0: lína „Aðrar eignir“ í efnahag og „Breyting annarra eigna“ í fjárfestingarhreyfingum. Ekki talið í veltufé | `build_dataset.py` (flokkur `adrar_eignir`) |
+| `balance.accounts[].cat` | texti | já | Einn af flokkunum í `balance.categories` (líka `birgdir`, `adrar_eignir`) | |
 | `balance.accounts[]` | listi | já | `{no, name, cat, levels[]}` efnahagslyklar; `levels` = staða í lok hvers mánaðar, GL-formerki | sama kall |
 | `aging.rows[]` | listi | já | Viðskiptavinir raðaðir eftir `total` (stærst fyrst): `{no, name, total, overdue}` kr. | `aging` (`entity:"customer"`, `period_length:"1M"`) |
+| `aging.rows[].pos` | bool | valfrjálst | `true` = staðgreiðslu-, kassa- eða kortaviðskiptavinur (safnreikningur): talinn með í aldursgreiningu en **ekki** í samþjöppun (innsýn „Viðskiptavinir“ og áhætta „Samþjöppun viðskiptavina“). Vanti lykil gildir heitið: byrji það á „Staðgreiðsl“ eða „Cash“ telst hann staðgreiðsluviðskiptavinur; `false` hnekkir heitinu | `Customer` (heiti, `Customer Posting Group`/`Customer Price Group`) |
 | `aging.total`, `aging.not_yet_due`, `aging.b61` | tala kr. | já | Opið alls, ekki gjaldfallið, eldra en 60 daga | `aging` |
 | `aging.buckets` | listi `[heiti, kr]` (6) | já | Ekki gjaldfallið, 0–30, 31–60, 61–90, 91–120, yfir 120 dagar | `aging` |
+| `py_monthly_in_bc` | bool | valfrjálst | `true` ef mánaðartölur fyrra árs eru í BC (en síðan notar ársuppgjör × n/12): textar segja „eru ekki í gögnum mælaborðsins“ í stað „eru ekki í BC“. Sjálfgefið `false` | `period_breakdown` fyrra árs skilar mánaðarhreyfingu |
 | `spa[]` | listi | valfrjálst | Spá gerð mánuði fyrir fram: `{ym, tekjur, vorunotkun, laun, husnaedi, annar_rekstur}` kr. + | Spágerð (skill `spagerd`, rúllandi spá) |
 | `budgets[]` | listi | valfrjálst | `{name, desc, src:"bc"\|"draft", acc:{lykill:{ÁÁÁÁ-MM: kr}}}`, GL-formerki | `G/L Budget Name` + `Finance.BudgetEntry.Get` (kafli 6b); drög merkt `src` ≠ `"bc"` |
 | `fc` | hlutur eða `null` | valfrjálst | Spá Bifrastar út árið | skill `spagerd` |
@@ -61,7 +66,8 @@ Reglur: stutt og staðreyndamiðað, tölur á íslensku sniði („1.234,5 m“
 | `text.fc_actual_range` | janúar til ágúst | raunmánuðir í spágrafi |
 | `text.fc_forecast_range` | september til desember | spámánuðir |
 | `text.prelim_months` | september og október eru bráðabirgðatölur | ófullbókaðir mánuðir |
-| `js.h_cash_lead` | Hagnaðurinn hefur hins vegar ekki skilað sér í sjóð: handbært fé hefur lækkað um | á undan „X m.kr. frá lokum <mánaðar>“; skrifa eftir því hvort sjóður hækkaði eða lækkaði |
+| `js.h_cash_lead` | Hagnaðurinn hefur hins vegar ekki skilað sér í sjóð: handbært fé hefur lækkað um | á undan „X m.kr. frá lokum <mánaðar>“; skrifa eftir því hvort sjóður hækkaði eða lækkaði. Mánuðurinn er sá sem sjóðurinn var hæstur í; sé hann hæstur núna er borið saman við fyrsta mánaðarlok (hækkun) |
+| `js.fc_driver` | tekjum | valfrjálst. Þágufall: hvað óvissa spárinnar ræðst helst af („… og ræðst fyrst og fremst af X“). `""` sleppir setningarhlutanum. Vanti lykilinn: „tekjum“ ef tekjubil síðasta spámánaðar (P10–P90) er breiðara en EBITDA-bilið, annars sleppt. Í `i18n.en.js` á ensku („revenue“) |
 | `js.ins1_title` … `js.ins4_title` | Reksturinn skilar meiru á hverja krónu | fyrirsagnir innsýnar (afkoma, sjóður, viðskiptavinir, áhætta) á stjórnarmáli |
 | `js.ins1_lead` | Tekjuvöxtur hefur ekki dregið kostnað með sér: laun eru | á undan „X% af tekjum á móti Y% í fyrra“ |
 | `js.ins1_one` | Ein stór sala til erlends viðskiptavinar í ágúst | lýsing einskiptisliðar á undan „(X m.kr.) er einskiptis“ |
@@ -70,4 +76,16 @@ Reglur: stutt og staðreyndamiðað, tölur á íslensku sniði („1.234,5 m“
 | `js.one_sale` | Sala til erlends viðskiptavinar | sama, hástafur í upphafi (áhættuskrá) |
 | `js.dep_accounts` | ["5160"] | listi efnahagslykla uppsafnaðra afskrifta (óbeint sjóðstreymi); tómur listi → afskriftir 0 |
 
+**Birtist aðeins þegar gögnin sýna það:** áhættan „Vanskil viðskiptavina“ ef `aging.b61` > 0; „Lækkandi sjóður“ ef handbært fé hefur lækkað frá hámarki (viðbótin „á sama tíma og reksturinn skilar hagnaði“ aðeins ef hagnaður ársins > 0); „Einskiptissala ógreidd“ heitir „Einskiptissala“ ef krafan er greidd; kröfur sem margfeldi handbærs fjár aðeins ef kröfur ≥ handbært fé > 0; „þrátt fyrir X m hagnað“ aðeins ef handbært fé frá rekstri < hagnaður; neðanmálsgrein um bráðabirgðahagnað í sjóðstreymi aðeins ef nýjasta staða er eftir síðasta fullbókaða mánuð; setning um Spágerð í fæti aðeins ef `fc` er til; „Einskiptissala er ekki í spánni“ aðeins ef einskiptisliður er til.
+
 **Reiknað úr gögnum (ekki í meta):** fyrsta mánaðarlok og upphaf sjóðstreymis (úr `balance.months`), sjálfgefinn ársfjórðungur í Rekstri (síðasti fullbókaði ársfjórðungur, annars sá síðasti með fullbókuðum mánuði; Q1–Q4 eftir því hvaða mánuðir eru í `months`), hlutar sjóðstreymis (lok hvers ársfjórðungs á undan síðasta fullbókaða mánuði, sá mánuður og nýjasta staða). `oneoffs`, `budgets`, `spa`, `fc.rolling`, `fc.forecast` og `aging.rows` mega vera tómir.
+
+## Tungumál (`lang`, `i18n`)
+
+| Lykill | Dæmi | Skýring |
+|---|---|---|
+| `lang` | `"is"` | tungumál grunngagna (úr `dataset.json`). Ræður hvaða mál opnast fyrst. Vanti það er það greint úr heitum í gögnunum. |
+| `i18n.en` (eða `i18n.is`) | `{"meta": {...}, "text": {...}, "html": {...}, "js": {...}, "names": {...}}` | yfirlag fyrir hitt málið. Sömu lyklar og að ofan, aðeins þeir sem breytast. Dagsetningar á ensku `17 Oct 2026`, tölur `1,234.5`. |
+| `i18n.<lang>.names` | `{"Áætlun 2026": "Budget 2026"}` | þýðir heila strengi hvar sem er í gögnunum (heiti lykla utan staðaltöflu, áætlana, flokka, stöðu). |
+
+Sjá `example.json` (yfirlagið `i18n.en`) og `bifrost-maelabord/SKILL.md`, kaflann *Tungumál*.

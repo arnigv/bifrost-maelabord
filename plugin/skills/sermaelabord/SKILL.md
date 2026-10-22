@@ -16,6 +16,8 @@ Fylgdu `bifrost-maelabord` (útlit og reglur 1.0: hámark fjórir flipar og fjó
 3. Keyrðu `python3 ${CLAUDE_SKILL_DIR}/scripts/flokka.py --signals signals.json [--isat NN.NN] --out tillogur.json`. Efstu 1–3 verða **„Mælt með fyrir þitt félag“**: í upphafsvali ræsisins (áður en keyrslan fer af stað) og efst í glugganum „Fleiri mælaborð“ í miðstöðinni, með ástæðu („15 verk og 51 verkbókarfærsla“). Allir 12 pakkarnir eru alltaf til vals þar fyrir neðan (*Aðrir atvinnugreinapakkar*).
 4. Flokkun er tillaga, ekki niðurstaða: notandinn velur.
 
+Merki fyrir `flokka.py` (sjá haus skriftunnar): `related_companies` eru félög sem félagið á **viðskipti** við (tengdir viðskiptamenn/lánardrottnar), ekki fjöldi félaga í tenant, því sandkassar geyma mörg óskyld félög. Fyrir verslun: `store_dimension`, `pos_customers`, `card_settlement_accounts` og `locations`, svo smásala þekkist líka án ÍSAT.
+
 ## 2. Pakkarnir
 
 `assets/pakkar.json` geymir fyrir hvern pakka: yfirflokk, dæmi, heiti mælaborðs, fjóra flipa, lykilmælikvarða, BC-gögn og ÍSAT-forskeyti.
@@ -42,6 +44,7 @@ Fylgdu `bifrost-maelabord` (útlit og reglur 1.0: hámark fjórir flipar og fjó
 3. Endurnýttu gögn og útreikninga annarra skilla þar sem þau skarast (verk úr `framlegd`, birgðir úr `framlegd` vörusýn, samstæða úr `bifrost-gogn` kafla 7, áætlanir úr `stjorn`) svo tölur stemmi milli mælaborða.
 4. Leiðarstika á miðstöðina, fótur með heimild og gervigreindarmerkingu.
 5. Bættu því við **miðstöðvar-artifactið** sem skrá `ser-<id>.html` (afstæð leiðarstika `index.html`, sjá `bifrost-skyndiuttekt`, kafli 3) og **uppfærðu miðstöðina í sömu birtingu**: nýtt spjald í „Mælaborðin þín“ á undan Sjálfvirknivæðingu, merkt „Þegar bætt við“ í glugganum.
+6. **Tungumál:** skrifaðu á máli gagnanna (`lang`), settu `BF_LANG` í síðuna og smíðaðu hina útgáfuna sem `ser-<id>.<lang>.html` með rofanum IS | EN (`bifrost-maelabord`, *Tungumál*). Heiti og lýsingar pakka á ensku eru í `pakkar.json` undir `en`.
 
 ## 4. Sannreyning
 

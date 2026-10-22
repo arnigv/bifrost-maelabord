@@ -27,6 +27,8 @@ Villur: skriftan stöðvast ef lykil vantar í DATA (skv. example.json) eða sta
 --subpage bætir <!doctype html> og viewport-meta framan við (undirsíða í miðstöðvar-artifacti).
 """
 import argparse, html, json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import i18n as I
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SKILLS = os.path.normpath(os.path.join(HERE, '..', '..'))
@@ -47,12 +49,14 @@ def shape_errors(ex, got, path='DATA', maps=()):
     """
     errs = []
     p = path[5:] if path.startswith('DATA.') else ''
-    if got is None and isinstance(ex, (dict, list)) and path.count('.') > 1:
+    if got is None and isinstance(ex, (dict, list)) and path.count('.') >= 1:
         return errs  # valfrjáls hlutur eða listi má vera null
     if isinstance(ex, dict):
         if not isinstance(got, dict):
             return [f'{path}: á að vera hlutur (object)']
-        keys = [k for k in ex if not k.startswith('_')]
+        opt = set(ex.get('_optional', []))   # lyklar sem sýnidæmið hefur en mega vanta hjá öðrum félögum
+        keys = [k for k in ex if not k.startswith('_') and k not in opt and not (path == 'DATA' and k in ('i18n', 'lang', 'n_complete', 'profile'))]
+        # i18n (yfirlag) og lang eru valfrjáls: yfirlag sýnidæmisins er DT-sértækt og má aldrei krefjast þess
         is_map = p in maps or (keys and all(re.search(r'\d', k) for k in keys) and p not in ('meta', 'text', 'html'))
         if is_map:
             return errs
@@ -79,16 +83,66 @@ def shape_errors(ex, got, path='DATA', maps=()):
     return errs
 
 
-def render(name, data, subpage=False, strict=True, ext=None):
+NOTICE_MIN = {'spagerd': 6}   # spálíkanið þarf 6 fullbókaða mánuði; önnur mælaborð 3
+
+
+def n_complete(data):
+    """Fjöldi fullbókaðra mánaða: `n_complete` í gögnum, annars talið úr months[].complete. None ef óþekkt."""
+    if isinstance(data.get('n_complete'), int):
+        return data['n_complete']
+    ms = data.get('months')
+    if isinstance(ms, list) and ms and all(isinstance(m, dict) and 'complete' in m for m in ms):
+        return sum(1 for m in ms if m['complete'])
+    return None
+
+
+def inject_data_notice(html, name, data, lang):
+    """Skýr tilkynning efst þegar gögnin duga ekki fyrir marktækan samanburð (sama fyrir öll mælaborð).
+    DT og önnur félög með nóg af fullbókuðum mánuðum fá enga tilkynningu."""
+    n = n_complete(data)
+    fit = data.get('fit') if isinstance(data.get('fit'), dict) else {}
+    if name == 'spagerd' and isinstance(fit.get('n'), int):
+        n = fit['n']   # spálíkanið telur fullbókaða mánuði í sínum grunni (getur náð yfir fyrra ár)
+    need = NOTICE_MIN.get(name, 3)
+    if n is None or n >= need:
+        return html
+    en = lang == 'en'
+    if n == 0:
+        msg = ('<b>No month is fully posted.</b> The figures are provisional, from months that are not fully posted, '
+               'and comparisons with the prior year and budget are not meaningful. The dashboard becomes reliable once the first month has been closed.') if en else \
+              ('<b>Enginn mánuður er fullbókaður.</b> Tölurnar eru bráðabirgðatölur úr ófullbókuðum mánuðum og samanburður við fyrra ár '
+               'og áætlun er ekki marktækur. Mælaborðið verður marktækt þegar fyrsti mánuðurinn hefur verið gerður upp.')
+    elif name == 'spagerd' and n < 3:
+        msg = ('<b>No forecast: too few fully posted months.</b> A forecast needs at least 3 fully posted months; the page shows actuals to date.') if en else \
+              ('<b>Spá ekki gerð: of fáir fullbókaðir mánuðir.</b> Spá þarf minnst 3 fullbókaða mánuði; síðan sýnir raun til þessa.')
+    elif name == 'spagerd':
+        msg = (f'<b>Simple forecast ({n} fully posted months).</b> The average of recent months without trend or seasonality is used, since the full model needs 6; uncertainty is higher.') if en else \
+              (f'<b>Einföld spá ({n} fullbókaðir mánuðir).</b> Notað er meðaltal síðustu mánaða án leitni og árstíða, því fullt líkan þarf 6; óvissan er meiri.')
+    else:
+        msg = (f'<b>Only {n} fully posted month{"s" if n != 1 else ""}.</b> Comparisons and trends rest on few months and may change considerably.') if en else \
+              (f'<b>Aðeins {n} {"fullbókaður mánuður" if n == 1 else "fullbókaðir mánuðir"}.</b> Samanburður og leitni byggja á fáum mánuðum og geta breyst mikið.')
+    box = f'\n<div class="bf-notice" role="status">{msg}</div>'
+    i = html.find('</header>')
+    return html[:i + 9] + box + html[i + 9:] if i >= 0 else html
+
+
+def render(name, data, subpage=False, strict=True, ext=None, lang=None, hrefs=None, pages=None, primary=None):
+    """lang: 'is'/'en' (sjálfgefið: tungumál gagna). hrefs: {'is': skrá, 'en': skrá} fyrir tungumálarofa.
+    pages: afstæðar síður (t.d. ['index.html','stjorn.html']) sem tengjast í sama tungumáli; primary: aðaltungumál."""
     d = tdir(name)
+    lang = lang or I.data_lang(data)
+    primary = primary or I.data_lang(data)
+    data = I.localize_data(data, lang)
     tpl = open(os.path.join(d, 'template.html'), encoding='utf-8').read()
+    tpl, _ = I.translate(tpl, I.pairs_for(name, lang), where=f'{name}/{lang}')
+    tpl, _ = I.translate(tpl, I.shared_pairs(lang), strict=False)  # sameiginlegt: flipar, fótur, leiðarstika
     ex = json.load(open(os.path.join(d, 'example.json'), encoding='utf-8'))
     if strict:
         errs = shape_errors(ex, data, maps=tuple(ex.get('_maps', [])))
         if errs:
             sys.exit('Gögn passa ekki við sniðmát ' + name + ':\n  ' + '\n  '.join(errs[:40]))
     css = open(os.path.join(ASSETS, 'theme.css'), encoding='utf-8').read()
-    comp = open(os.path.join(ASSETS, 'components.js'), encoding='utf-8').read()
+    comp = open(os.path.join(ASSETS, 'components.js'), encoding='utf-8').read().replace("const BF_LANG = 'is';", f"const BF_LANG = '{lang}';", 1)
     dj = json.dumps({k: v for k, v in data.items() if not k.startswith('_')}, ensure_ascii=False).replace('<', '\\u003c')
 
     def get(section, key):
@@ -123,12 +177,17 @@ def render(name, data, subpage=False, strict=True, ext=None):
     if subpage and 'class="crumb"' not in out:
         # Allar undirsíður verða að hafa leið aftur í miðstöðina
         t = re.search(r'<title>(.*?)</title>', out)
-        crumb = ('<nav class="crumb" aria-label="Leiðarstika"><a href="index.html">← Miðstöð<span class="c-l"> mælaborða</span></a>'
+        CL = {'is': ('Leiðarstika', 'Miðstöð', ' mælaborða'), 'en': ('Breadcrumb', 'Hub', ' dashboards')}[lang]
+        crumb = (f'<nav class="crumb" aria-label="{CL[0]}"><a href="index.html">← {CL[1]}<span class="c-l">{CL[2]}</span></a>'
                  + (f'<span class="sep">/</span><span>{t.group(1)}</span>' if t else '') + '</nav>')
         i = out.find('<div class="wrap">')
         out = out[:i + 18] + '\n  ' + crumb + out[i + 18:] if i >= 0 else crumb + out
     if subpage and not out.lstrip().lower().startswith('<!doctype'):
-        out = '<!doctype html>\n<html lang="is">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n' + out
+        out = f'<!doctype html>\n<html lang="{lang}">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n' + out
+    out = inject_data_notice(out, name, data, lang)
+    out = I.inject_switch(out, lang, hrefs)
+    if pages:
+        out = I.relink(out, lang, primary, pages)
     return out
 
 
@@ -170,6 +229,7 @@ def main():
     ap.add_argument('--out')
     ap.add_argument('--subpage', action='store_true')
     ap.add_argument('--ext', action='append', default=[], help='viðbót notanda (HTML-bútur), sett inn á undan fæti')
+    ap.add_argument('--lang', choices=I.LANGS, help='tungumál síðu (sjálfgefið: tungumál gagna)')
     ap.add_argument('--list', action='store_true')
     ap.add_argument('--check-golden', metavar='HTML', help='bera sýnidæmi saman við gullútgáfu')
     a = ap.parse_args()
@@ -184,7 +244,7 @@ def main():
         ap.error('--dashboard og --out vantar')
     src = os.path.join(tdir(a.dashboard), 'example.json') if a.example else a.data
     data = json.load(open(src, encoding='utf-8'))
-    out = render(a.dashboard, data, a.subpage, ext=[open(f, encoding='utf-8').read() for f in a.ext])
+    out = render(a.dashboard, data, a.subpage, ext=[open(f, encoding='utf-8').read() for f in a.ext], lang=a.lang)
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     open(a.out, 'w', encoding='utf-8').write(out)
     print(f'{a.dashboard}: {len(out) // 1024} KB → {a.out}')

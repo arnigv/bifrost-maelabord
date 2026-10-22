@@ -44,7 +44,7 @@
     <div class="chips"><div id="mode"></div><span class="chip-lg m-hide"><span class="dot"></span>Tengt BC · Bifröst</span><span class="chip-lg">Staða <b>{{meta.as_of}}</b></span><span class="chip-lg">m.kr.</span></div>
   </header>
 
-  <div class="insight warnbar"><span class="spark" aria-hidden="true">§</span><p><b>Frumvörp í vinnslu.</b> {{text.law_note}}</p></div>
+  <div class="insight warnbar" id="lawbar"><span class="spark" aria-hidden="true">§</span><p><b>Frumvörp í vinnslu.</b> {{text.law_note}}</p></div>
 
   <div class="tabs" role="tablist" aria-label="Flipar">
     <button role="tab" aria-controls="t-yfir">Yfirsýn</button>
@@ -94,7 +94,7 @@
     </div>
     <div class="g2">
       <section class="card">
-        <div class="ch"><h2>Sjóðstreymi {{meta.cf_start}}–{{meta.bs_end}}</h2><span class="sub">óbein aðferð · skylt skv. 28. gr.</span></div>
+        <div class="ch"><h2>Sjóðstreymi {{meta.cf_start}}–{{meta.bs_end}}</h2><span class="sub" id="cf-sub">óbein aðferð · skylt skv. 28. gr.</span></div>
         <div class="cv" style="height:280px"><canvas id="c-cf" role="img" aria-label="Sjóðstreymi frá handbæru fé í byrjun til enda"></canvas></div>
         <p class="note" id="cf-note"></p>
       </section>
@@ -156,13 +156,18 @@ const DATA={{DATA_JSON}};
 const { $, fmt, mkr, css, alpha, tabs, grad } = BF;
 const CH = {};
 const m = (v, d = 1) => mkr(v, d);
+/* bs_jan = upphafsstaða, bs_aug = lokastaða (föst lyklaheiti, óháð mánuðum) */
 const PY = DATA.py, CY = DATA.cy, A = DATA.bs_aug, J = DATA.bs_jan;
+const invA = +A.birgdir || 0, invJ = +J.birgdir || 0, hasInv = invA > 0 || invJ > 0;
 
 const PBC = {{js.pbc_js}};
 const JE = {{js.je_js}};
 const NOTES = {{js.notes_js}};
 
 function setup() {
+  /* Frumvarpsborði aðeins ef text.law_note er ekki tómt */
+  const lawP = $('lawbar').querySelector('p');
+  if (!(lawP.lastChild && lawP.lastChild.textContent.trim())) $('lawbar').hidden = true;
   /* Yfirsýn */
   const S = DATA.size;
   $('h-row').innerHTML = [['Endurskoðun', {{js.audit}}], ['Sjóðstreymi', {{js.cashflow}}], [('Skilafrestur ' + {{js.year}}), {{js.deadline}}], ['Dagar til skila', String({{js.days_to_deadline}})]]
@@ -186,11 +191,11 @@ function setup() {
   const V = DATA.size_vals, lim = [
     ['Heildareignir', V.eignir, V.eignir_py, 600e6, 3000e6, 'm'],
     ['Hrein velta', V.velta, V.velta_py, 1200e6, 6000e6, 'm'],
-    ['Ársverk', null, null, 50, 250, ''],
+    ['Ársverk', V.arsverk ?? null, V.arsverk_py ?? null, 50, 250, ''],
   ];
-  $('limits').innerHTML = lim.map(([l, v, p, a, b]) => {
+  $('limits').innerHTML = lim.map(([l, v, p, a, b, u]) => {
     const mx = b * 1.05, w = x => (100 * Math.min(x, mx) / mx).toFixed(1);
-    const val = v == null ? '<span class="pill i">vantar í BC</span>' : `<b class="n">${m(v, 0)} m</b>`;
+    const val = v == null ? '<span class="pill i">vantar í BC</span>' : `<b class="n">${u ? m(v, 0) + ' m' : fmt(v, 0)}</b>`;
     return `<div class="lr"><div class="lh"><span>${l}</span>${val}</div><div class="lt">
       ${p != null ? `<span class="lb py" style="width:${w(p)}%"></span>` : ''}${v != null ? `<span class="lb" style="width:${w(v)}%"></span>` : '<span class="lb na" style="width:100%"></span>'}
       <i class="tk" style="left:${w(a)}%" title="Lítið félag"></i><i class="tk" style="left:${w(b)}%" title="Meðalstórt félag"></i></div>
@@ -202,25 +207,27 @@ function setup() {
   /* Ársreikningur */
   const row = (l, a, b, cls = '') => `<tr class="${cls}"><td>${l}</td><td class="n">${a == null ? '' : m(a)}</td><td class="n">${b == null ? '' : m(b)}</td></tr>`;
   $('is').innerHTML = `<thead><tr><th></th><th class="n">${{{js.cy_label}}}</th><th class="n">${{{js.py}}}</th></tr></thead><tbody>
-    ${row('Rekstrartekjur', CY.tekjur, PY.tekjur)}${row('Vörunotkun', -CY.vorunotkun, -PY.vorunotkun)}${row('Laun og launatengd gjöld', -CY.laun, -PY.laun)}
+    ${row('Rekstrartekjur', CY.tekjur, PY.tekjur)}${(CY.vorunotkun || PY.vorunotkun) ? row('Vörunotkun', -CY.vorunotkun, -PY.vorunotkun) : ''}${row('Laun og launatengd gjöld', -CY.laun, -PY.laun)}
     ${row('Húsnæðiskostnaður', -CY.husnaedi, -PY.husnaedi)}${row('Annar rekstrarkostnaður', -CY.annar_rekstur, -PY.annar_rekstur)}
     ${row('EBITDA', CY.ebitda, PY.ebitda, 'sum')}${row('Afskriftir', -CY.afskriftir, -PY.afskriftir)}${row('Fjármagnsgjöld', -CY.fjarmagn, -PY.fjarmagn)}
     ${row('Hagnaður fyrir skatta', CY.hagnadur, PY.hagnadur, 'sum')}</tbody>`;
   $('bs').innerHTML = `<thead><tr><th></th><th class="n">${{{js.bs_end}}}</th><th class="n">${{{js.bs_start}}}</th></tr></thead><tbody>
-    ${row('Fastafjármunir', A.fastafjarmunir, J.fastafjarmunir)}${row('Viðskiptakröfur', A.krofur, J.krofur)}${row('Handbært fé', A.handbaert_fe, J.handbaert_fe)}
+    ${row('Fastafjármunir', A.fastafjarmunir, J.fastafjarmunir)}${hasInv ? row('Birgðir', invA, invJ) : ''}${row('Viðskiptakröfur', A.krofur, J.krofur)}${row('Handbært fé', A.handbaert_fe, J.handbaert_fe)}
     ${row('Eignir samtals', A.eignir, J.eignir, 'sum')}${row('Eigið fé', A.eigid_fe, J.eigid_fe)}${row('Langtímaskuldir', A.langtimaskuldir, J.langtimaskuldir)}
     ${row('Skammtímaskuldir', A.skammtimaskuldir, J.skammtimaskuldir)}${row('Eigið fé og skuldir', A.eigid_fe + A.langtimaskuldir + A.skammtimaskuldir, J.eigid_fe + J.langtimaskuldir + J.skammtimaskuldir, 'sum')}</tbody>`;
-  const ca = A.krofur + A.handbaert_fe, dso = A.krofur / (CY.tekjur * 1.24 / {{js.cy_days}});
+  const ca = A.krofur + A.handbaert_fe + invA, credit = +CY.lanssala > 0 ? +CY.lanssala : CY.tekjur, dso = A.krofur / (credit * 1.24 / {{js.cy_days}});
   $('ratios').innerHTML = [
     ['Veltufjárhlutfall', fmt(ca / A.skammtimaskuldir, 2), 'yfir 1,5 er traust'],
     ['Eiginfjárhlutfall', fmt(100 * A.eigid_fe / A.eignir, 1) + '%', 'eigið fé / eignir'],
-    ['Innheimtutími', fmt(dso, 0) + ' dagar', 'kröfur m. VSK / dagsala'],
+    ['Innheimtutími', fmt(dso, 0) + ' dagar', +CY.lanssala > 0 ? 'kröfur m. VSK / dagleg lánssala' : 'kröfur m. VSK / dagsala'],
     ['EBITDA-hlutfall', fmt(100 * CY.ebitda / CY.tekjur, 1) + '%', `${{{js.py}}}: ${fmt(100 * PY.ebitda / PY.tekjur, 1)}%`],
   ].map(([l, v, d]) => `<div class="mk"><span class="sub">${l}</span><b>${v}</b><span class="sub">${d}</span></div>`).join('');
   const cfTot = DATA.cf.filter(x => x[2] === 'rekstur').reduce((s, x) => s + x[1], 0);
   /* hagnaður og breyting krafna fundin eftir heiti línu í DATA.cf (ekki föstum vísi) */
-  const cfP = DATA.cf.find(x => /^Hagnaður/i.test(x[0])), cfK = DATA.cf.find(x => /krafn|kröfu/i.test(x[0])), below = cfP && cfTot < cfP[1];
-  $('cf-note').textContent = `Handbært fé frá rekstri var ${m(cfTot)} m${cfP ? (below ? ` þrátt fyrir ${m(cfP[1])} m hagnað` : ` og hagnaður ${m(cfP[1])} m`) : ''}${below && cfK && cfK[1] < 0 ? `, því viðskiptakröfur hækkuðu um ${m(-cfK[1])} m` : ''}. ${{{js.cf_note_tail}}}`;
+  const cfP = DATA.cf.find(x => /^Hagnaður/i.test(x[0])), cfK = DATA.cf.find(x => /krafn|kröfu/i.test(x[0])), cfB = DATA.cf.find(x => /birgð|inventor/i.test(x[0])), below = cfP && cfTot < cfP[1];
+  $('cf-note').textContent = `Handbært fé frá rekstri var ${m(cfTot)} m${cfP ? (below ? ` þrátt fyrir ${m(cfP[1])} m hagnað` : ` og hagnaður ${m(cfP[1])} m`) : ''}${below && cfK && cfK[1] < 0 ? `, því viðskiptakröfur hækkuðu um ${m(-cfK[1])} m` : ''}${below && cfB && cfB[1] < 0 ? `${cfK && cfK[1] < 0 ? ' og' : ', því'} birgðir hækkuðu um ${m(-cfB[1])} m` : ''}. ${{{js.cf_note_tail}}}`;
+
+  if (DATA.size && DATA.size.sjodstreymi_skylt === false) $('cf-sub').textContent = 'óbein aðferð · ekki skylt (28. gr.)';
 
   /* PBC */
   const lab0 = { vantar: ['h', 'Vantar'], vinnslu: ['m', 'Í vinnslu'], lokid: ['l', 'Lokið'] }, lab = new Proxy(lab0, { get: (o, k) => o[k] || ['i', String(k)] });

@@ -2,13 +2,15 @@
 
 Plugin frá Origo sem býr til vönduð, gagnvirk mælaborð úr Business Central viðskiptavinar í gegnum Bifröst.
 
-**Útgáfa 1.0.0.** Miðstöð og **níu sjálfgefin mælaborð** í einu artifacti (Sjálfvirknivæðing alltaf nr. 9), einfaldari (hámark fjórir flipar og fjórir lykilmælar, engar tvítekningar). Sérmælaborð eftir atvinnugrein eru valin í upphafi (mælt með eftir ÍSAT og starfsemi) eða síðar með **+ Fleiri mælaborð** í miðstöðinni. Byggt á prófun notenda: drill-down í færslur, tímabilsval, stjórnarmál í Stjórn, nýtt mælaborð Mánaðarlok og afstemmingar, og skýrari kynning (tími, leyfisgluggar, umhverfi).
+**Útgáfa 1.0.0: íslenska og enska.** Öll mælaborð, miðstöðin og Sjálfvirknivæðing eru til á báðum málum með rofanum **IS | EN** efst. Mælaborðin opnast á **íslensku ef grunngögnin í BC eru á íslensku**, annars (enska eða annað mál) **á ensku**. Sniðmátin eru áfram á íslensku; enskan er í orðabókum (`template/i18n/en.json`) sem smíðin athugar strangt, svo þýðing getur ekki orðið úrelt án þess að það sjáist. Tölur og dagsetningar fylgja málinu (`1.234,5` / `1,234.5`).
+
+**Innihald.** Miðstöð og **níu sjálfgefin mælaborð** í einu artifacti (Sjálfvirknivæðing alltaf nr. 9), einfaldari (hámark fjórir flipar og fjórir lykilmælar, engar tvítekningar). Sérmælaborð eftir atvinnugrein eru valin í upphafi (mælt með eftir ÍSAT og starfsemi) eða síðar með **+ Fleiri mælaborð** í miðstöðinni. Byggt á prófun notenda: drill-down í færslur, tímabilsval, stjórnarmál í Stjórn, nýtt mælaborð Mánaðarlok og afstemmingar, og skýrari kynning (tími, leyfisgluggar, umhverfi).
 
 **Við uppsetningu:** skrifaðu t.d. „hvað gerir Bifröst-pluginið?“ eða „settu upp mælaborðin“. Claude sýnir þá töflu yfir öll mælaborðin með skýringum og leiðbeiningum um hvernig má vinna þau áfram (plugin getur ekki sent skilaboð sjálfkrafa við upphleðslu, svo fyrsta skilaboðið ræsir kynninguna).
 
 **Byrjaðu svona:** eftir uppsetningu, skrifaðu `/maelabord` eða „settu upp Bifröst-mælaborðin“. Skillin eru aðeins notuð fyrir Bifröst-mælaborðin; almennar spurningar og önnur verkefni notandans eru óháð pluginu. Ræsirinn spyr hvort þú viljir **eitt félag eða samstæðu**. Ræsirinn sækir gögnin einu sinni, býr til öll mælaborðin sem eiga við og miðstöð sem tengir þau saman.
 
-**Leiðbeiningar:** `docs/leidbeiningar.html` (uppsetning, fyrsta keyrsla, sýnidæmi á Vélsmiðjusamstæðunni, hvert mælaborð og hvað það þýðir, samstæður, skipanir, skills og samhengi, sjálfvirknivæðing, persónuverndarsíur Bifröst) og `docs/skills.html` (öll 14 skills). Báðar má líka hýsa á vefþjóni eða GitHub Pages.
+**Leiðbeiningar:** `docs/leidbeiningar.html` (uppsetning, fyrsta keyrsla, sýnidæmi á Vélsmiðjusamstæðunni, hvert mælaborð og hvað það þýðir, samstæður, skipanir, skills og samhengi, sjálfvirknivæðing, persónuverndarsíur Bifröst) og `docs/skills.html` (öll 14 skills). Báðar má líka hýsa á vefþjóni eða GitHub Pages. Báðar síðurnar eru á íslensku og ensku með rofanum **IS | EN** í hausnum (opnast á máli vafrans, valið er munað). Enskan er í `docs/i18n/*.en.json`; eftir breytingu á íslenska textanum: `python3 docs/i18n_docs.py check docs/leidbeiningar.html` sýnir hvað vantar og `build` setur orðabókina inn.
 
 ## Innihald
 
@@ -49,7 +51,7 @@ Plugin frá Origo sem býr til vönduð, gagnvirk mælaborð úr Business Centra
 ## Uppsetning (ZIP)
 
 1. Stjórnandi fer í *Organization settings › Plugins & skills* og velur *Add › Upload a plugin*.
-2. Hleður upp `bifrost-maelabord-1.0.0.zip`.
+2. Hleður upp `bifrost-maelabord-1.0.0.zip` (kemur í stað fyrri 1.0.0, sem er geymd sem `bifrost-maelabord-1.0.0_backup.zip`).
 3. Stillir á *Installed by default*.
 
 ## Grundvallarreglur

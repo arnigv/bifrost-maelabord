@@ -1,0 +1,914 @@
+[
+[
+"`<section class=\"card\"><div class=\"ch\"><h2>${f}</h2><span class=\"sub\">${CAT.filter(a => a.k === 'hand' && a.flow === f && cfg(a.id).on).length} virk</span></div>\n    <div class=\"scroll\"><table class=\"ht\"><thead><tr><th>Á áætlun</th><th>Verk</th><th>Hvað erindrekinn gerir</th><th>Keyrsla</th><th></th></tr></thead><tbody>${CAT.filter(a => a.k === 'hand' && a.flow === f).map(a => { const c = cfg(a.id), q = S.queue.some(x => x.id === a.id);\n      return `<tr><td><label class=\"sw\"><input type=\"checkbox\" data-tog=\"${a.id}\" ${c.on ? 'checked' : ''} aria-label=\"Setja ${esc(a.n)} á áætlun\"><span></span></label></td><td><b>${esc(a.n)}</b>${a.w ? '<br><span class=\"pill i\">getur stofnað drög</span>' : ''}</td><td class=\"sub\">${esc(a.d)}</td><td><span class=\"sched\">${schedText(c)}</span><br><span class=\"sub\">${MODE[c.mode]}</span></td>\n      <td class=\"acts\"><button class=\"btn sm\" type=\"button\" disabled title=\"Virkja þarf aðgerð með ráðgjafa\">🔒 Keyra</button><button class=\"btn sm ghost\" data-cfg=\"${a.id}\" type=\"button\">Stilla</button></td></tr>`; }).join('')}</tbody></table></div></section>`",
+"`<section class=\"card\"><div class=\"ch\"><h2>${f}</h2><span class=\"sub\">${CAT.filter(a => a.k === 'hand' && a.flow === f && cfg(a.id).on).length} enabled</span></div>\n    <div class=\"scroll\"><table class=\"ht\"><thead><tr><th>Scheduled</th><th>Task</th><th>What the agent does</th><th>Run</th><th></th></tr></thead><tbody>${CAT.filter(a => a.k === 'hand' && a.flow === f).map(a => { const c = cfg(a.id), q = S.queue.some(x => x.id === a.id);\n      return `<tr><td><label class=\"sw\"><input type=\"checkbox\" data-tog=\"${a.id}\" ${c.on ? 'checked' : ''} aria-label=\"Schedule ${esc(a.n)}\"><span></span></label></td><td><b>${esc(a.n)}</b>${a.w ? '<br><span class=\"pill i\">can create drafts</span>' : ''}</td><td class=\"sub\">${esc(a.d)}</td><td><span class=\"sched\">${schedText(c)}</span><br><span class=\"sub\">${MODE[c.mode]}</span></td>\n      <td class=\"acts\"><button class=\"btn sm\" type=\"button\" disabled title=\"The action must be activated with an advisor\">🔒 Run</button><button class=\"btn sm ghost\" data-cfg=\"${a.id}\" type=\"button\">Set up</button></td></tr>`; }).join('')}</tbody></table></div></section>`"
+],
+[
+"`<article class=\"card ac ${c.on ? 'on' : ''}\">\n    <div class=\"ch\"><h2>${esc(a.n)}</h2><label class=\"sw\" title=\"Setja á áætlun eða taka af\"><input type=\"checkbox\" data-tog=\"${a.id}\" ${c.on ? 'checked' : ''} aria-label=\"Setja ${esc(a.n)} á áætlun\"><span></span></label></div>\n    <p class=\"sub\">${esc(a.d)}</p>\n    ${a.r ? `<div class=\"res\"><span class=\"pill ${sv[0]}\">${sv[1]}</span><span>${esc(a.r[1])}</span></div>` : ''}\n    <div class=\"meta\"><span>🕑 ${schedText(c)}</span>${nx ? `<span>Næst: ${fmtNext(nx)}</span>` : ''}<span>${MODE[c.mode]}</span><span class=\"pill i\">Bíður virkjunar</span></div>\n    <div class=\"acts\"><button class=\"btn\" type=\"button\" disabled title=\"Virkja þarf aðgerð með ráðgjafa\">🔒 Keyra núna</button><button class=\"btn ghost\" data-cfg=\"${a.id}\" type=\"button\">Stilla tíma</button></div>\n  </article>`",
+"`<article class=\"card ac ${c.on ? 'on' : ''}\">\n    <div class=\"ch\"><h2>${esc(a.n)}</h2><label class=\"sw\" title=\"Add to or remove from schedule\"><input type=\"checkbox\" data-tog=\"${a.id}\" ${c.on ? 'checked' : ''} aria-label=\"Schedule ${esc(a.n)}\"><span></span></label></div>\n    <p class=\"sub\">${esc(a.d)}</p>\n    ${a.r ? `<div class=\"res\"><span class=\"pill ${sv[0]}\">${sv[1]}</span><span>${esc(a.r[1])}</span></div>` : ''}\n    <div class=\"meta\"><span>🕑 ${schedText(c)}</span>${nx ? `<span>Next: ${fmtNext(nx)}</span>` : ''}<span>${MODE[c.mode]}</span><span class=\"pill i\">Awaiting activation</span></div>\n    <div class=\"acts\"><button class=\"btn\" type=\"button\" disabled title=\"The action must be activated with an advisor\">🔒 Run now</button><button class=\"btn ghost\" data-cfg=\"${a.id}\" type=\"button\">Set time</button></div>\n  </article>`"
+],
+[
+"`<div class=\"d-item\"><span class=\"d-ico m\">⏳</span><div><b>${esc(a ? a.n : q.id)}</b><p>Sett í biðröð ${dstr(new Date(q.at))} kl. ${new Date(q.at).toTimeString().slice(0, 5)}</p></div><button class=\"btn sm ghost\" data-unq=\"${q.id}\" type=\"button\">Fjarlægja</button></div>`",
+"`<div class=\"d-item\"><span class=\"d-ico m\">⏳</span><div><b>${esc(a ? a.n : q.id)}</b><p>Queued ${dstr(new Date(q.at))} at ${new Date(q.at).toTimeString().slice(0, 5)}</p></div><button class=\"btn sm ghost\" data-unq=\"${q.id}\" type=\"button\">Remove</button></div>`"
+],
+[
+">Ráðgjafi Origo fer yfir aðgang að Business Central, hvaða erindrekar og handverk henta félaginu, hver samþykkir niðurstöður, og vinnslusamning um gögnin. Þangað til eru keyrsluhnappar óvirkir. Þú getur samt skoðað og skipulagt áætlanir.<",
+">An Origo advisor reviews access to Business Central, which agents and tasks suit the company, who approves results, and a data processing agreement. Until then the run buttons are disabled. You can still review and plan schedules.<"
+],
+[
+">Heimild: Business Central (Bifröst), {{COMPANY}}. Niðurstöður síðustu keyrslu eru úr greiningu {{SOURCE_DATE}}. Erindrekar lesa aðeins; skrif í BC krefjast samþykkis notanda. Viðtakendur eru hlutverk, ekki nöfn.<",
+">Source: Business Central (Bifröst), {{COMPANY}}. Results of the last run are from the analysis of {{SOURCE_DATE}}. Agents only read; writing to BC requires user approval. Recipients are roles, not names.<"
+],
+[
+"`<div class=\"d-item\"><span class=\"d-ico ${a.r[0]}\">!</span><div><b>${esc(a.n)}</b><p>${esc(a.r[1])}</p></div><button class=\"btn sm\" type=\"button\" disabled title=\"Virkja þarf aðgerð með ráðgjafa\">🔒 Keyra aftur</button></div>`",
+"`<div class=\"d-item\"><span class=\"d-ico ${a.r[0]}\">!</span><div><b>${esc(a.n)}</b><p>${esc(a.r[1])}</p></div><button class=\"btn sm\" type=\"button\" disabled title=\"The action must be activated with an advisor\">🔒 Run again</button></div>`"
+],
+[
+"> setur erindreka í biðröð; vélin tekur hann í næstu umferð. Keyrsluhnappar eru óvirkir þar til aðgerðin hefur verið virkjuð með ráðgjafa.<",
+"> puts an agent in the queue; the engine picks it up in the next round. Run buttons are disabled until the action has been activated with an advisor.<"
+],
+[
+"const MFULL = ['janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 'júlí', 'ágúst', 'september', 'október', 'nóvember', 'desember'];",
+"const MFULL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];"
+],
+[
+"`Næsta keyrsla: ${ups[0].a.n}, ${fmtNext(ups[0].t)}. ${finds.filter(a => a.r[0] === 'h').length} ábendingar kalla á viðbrögð.`",
+"`Next run: ${ups[0].a.n}, ${fmtNext(ups[0].t)}. ${finds.filter(a => a.r[0] === 'h').length} findings need action.`"
+],
+[
+">Vöktunarerindrekar fylgjast með bókhaldinu og láta vita. Veldu hvaða erindrekar eiga að vera á áætlun og hvenær þeir keyra.<",
+">Monitoring agents watch the books and raise alerts. Choose which agents are scheduled and when they run.<"
+],
+[
+"'Les rafræna reikninga og PDF, stofnar innkomið skjal og gerir bókunartillögu (lykill, VSK, deild, verk) eftir sögu birgis.'",
+"'Reads e-invoices and PDFs, creates an incoming document and proposes the posting (account, VAT, department, job) from the vendor\\'s history.'"
+],
+[
+"const DAYS = ['sunnudagur', 'mánudagur', 'þriðjudagur', 'miðvikudagur', 'fimmtudagur', 'föstudagur', 'laugardagur'];",
+"const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];"
+],
+[
+"> (áætlað verkefni í Claude) les síðuna, keyrir erindreka á réttum tíma með Bifröst og skráir niðurstöðu í söguna.<",
+"> (a scheduled task in Claude) reads the page, runs agents on time through Bifröst and records the result in the history.<"
+],
+[
+"'Gátlisti um lokun mánaðar: laun, vörunotkun, afskriftir og VSK bókuð, jöfnuður innan mánaðar, tímabili lokað.'",
+"'Month-end close checklist: payroll, materials, depreciation and VAT posted, balance within the month, period closed.'"
+],
+[
+"'Banki á móti bankabók og fjárhag, kort, undirbækur á móti fjárhag, VSK og innbyrðis staða. Tillögur að pörun.'",
+"'Bank against bank ledger and G/L, cards, subledgers against G/L, VAT and intercompany positions. Matching proposals.'"
+],
+[
+"'Undirbúningslisti fyrir endurskoðanda, lokun fyrra árs, skilafrestir og stærðarflokkur skv. lögum nr. 3/2006.'",
+"'Preparation list for the auditor, closing of the prior year, filing deadlines and size class under Act No. 3/2006.'"
+],
+[
+"'Handfærðar tekjur, sléttar fjárhæðir, helgarfærslur, tvíreikningsfærsla, breyttir bankareikningar birgja.'",
+"'Manual revenue entries, round amounts, weekend entries, double billing, changed vendor bank accounts.'"
+],
+[
+"'Aldursgreining, drög að innheimtupóstum og viðvörun þegar nýr reikningur fer á viðskiptavin í vanskilum.'",
+"'Ageing, draft dunning emails and a warning when a new invoice goes to a customer in arrears.'"
+],
+[
+">Virkir dagar miðast við mánudag–föstudag. Almennir frídagar eru ekki dregnir frá í þessari frumgerð.<",
+">Working days are Monday–Friday. Public holidays are not deducted in this prototype.<"
+],
+[
+"'Parar kvittanir, flokkar kostnað, merkir risnu og ófrádráttarbæran VSK, eltir kvittanir sem vantar.'",
+"'Matches receipts, classifies costs, flags entertainment and non-deductible VAT, chases missing receipts.'"
+],
+[
+"'Áminning til samþykkjanda fyrir gjalddaga og staðgreiðsluafslátt. Leitar að tvíteknum reikningum.'",
+"'Reminder to the approver before the due date and prompt-payment discount. Looks for duplicate invoices.'"
+],
+[
+"`<thead><tr><th>Tími</th><th>Erindreki</th><th>Niðurstaða</th><th>Staða</th></tr></thead><tbody>`",
+"`<thead><tr><th>Time</th><th>Agent</th><th>Result</th><th>Status</th></tr></thead><tbody>`"
+],
+[
+"'Óreikningsfærð vinna á verkum, notkun á 0 kr. og vinna eftir samningslok. Drög að reikningum.'",
+"'Unbilled work on jobs, use of ISK 0 prices and work after contract end. Draft invoices.'"
+],
+[
+"'Greiðslubunki eftir gjalddögum, afslætti og sjóðstöðu. Bókari samþykkir, bankinn framkvæmir.'",
+"'Payment batch by due date, discounts and cash position. The bookkeeper approves, the bank executes.'"
+],
+[
+"'Reglur fyrir bankagjöld, vexti, millifærslur milli eigin reikninga og fastar greiðslur.'",
+"'Rules for bank charges, interest, transfers between own accounts and standing payments.'"
+],
+[
+"'Les launaskrá og bókar laun, staðgreiðslu, lífeyri, stéttarfélög og tryggingagjald.'",
+"'Reads the payroll file and posts salaries, withholding tax, pensions, union fees and social security tax.'"
+],
+[
+"'Engin keyrsla á áætlun. Veldu erindreka eða handverk og stilltu hvenær það keyrir.'",
+"'No runs are scheduled. Choose agents or tasks and set when they run.'"
+],
+[
+"const dstr = d => `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()}`;",
+"const dstr = d => `${d.getDate()} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()]} ${d.getFullYear()}`;"
+],
+[
+"'Uppfærir mælaborðin, raun á móti spá, og skrifar drög að stöðupósti til stjórnar.'",
+"'Updates the dashboards, actual versus forecast, and drafts a status note to the board.'"
+],
+[
+"'Undirbýr skýrslu tímabilsins, afstemmir uppgjörsreikning, finnur ranga VSK-kóða.'",
+"'Prepares the period\\'s return, reconciles the settlement account, finds wrong VAT codes.'"
+],
+[
+"'Keyrir um leið og atburðurinn verður í BC (Bifröst-áskrift að viðskiptaatburði).'",
+"'Runs as soon as the event happens in BC (Bifröst subscription to a business event).'"
+],
+[
+"'Áskriftir og leiga, verðuppfærsla eftir vísitölu þar sem samningur kveður á um.'",
+"'Subscriptions and leases, index-linked price updates where the contract provides for it.'"
+],
+[
+">Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.<",
+">Prepared with the help of AI (Claude). Review before relying on the figures.<"
+],
+[
+"`${DS[d.getDay()]} ${dstr(d)} kl. ${pad(d.getHours())}:${pad(d.getMinutes())}`",
+"`${DS[d.getDay()]} ${dstr(d)} at ${pad(d.getHours())}:${pad(d.getMinutes())}`"
+],
+[
+">Áður en keyrsla er framkvæmd þarf að virkja aðgerðina og tala við ráðgjafa.<",
+">Before anything runs, the action must be activated together with an advisor.<"
+],
+[
+">Frumgerð: sjálfvirknivélin sem keyrir áætlanirnar er ekki enn sett upp.<",
+">Prototype: the automation engine that runs the schedules has not been set up yet.<"
+],
+[
+">Áætlunin keyrir ekki fyrr en aðgerðin hefur verið virkjuð með ráðgjafa.<",
+">The schedule does not run until the action has been activated with an advisor.<"
+],
+[
+"'Uppfærir 13 vikna spá og varar við ef lægsta staða fer undir lágmark.'",
+"'Updates the 13-week forecast and warns if the lowest balance falls below the minimum.'"
+],
+[
+"'Mánaðarleg færsla verðbóta og vaxta eftir vísitölu og afborganatöflu.'",
+"'Monthly posting of indexation and interest per the index and repayment schedule.'"
+],
+[
+"'Umsýslugjöld milli félaga, millifélagareikningar og jöfnun samstæðu.'",
+"'Management fees between companies, intercompany accounts and group eliminations.'"
+],
+[
+"'Parar innborganir við kröfur eftir tilvísun, kennitölu eða fjárhæð.'",
+"'Matches receipts to receivables by reference, ID number or amount.'"
+],
+[
+"'Keyrir afskriftir og stingur upp á eignfærslu innkaupa yfir mörkum.'",
+"'Runs depreciation and suggests capitalising purchases above the threshold.'"
+],
+[
+">Erindrekar lesa úr BC og skila tilkynningu, tillögu eða drögum. <",
+">Agents read from BC and return a notification, a proposal or a draft. <"
+],
+[
+"'Endurmat erlendra krafna, skulda og banka á gengi Seðlabankans.'",
+"'Revaluation of foreign receivables, payables and bank balances at the Central Bank rate.'"
+],
+[
+">Handverk sem bókarar vinna í dag. Hvert verk getur keyrt sem <",
+">Tasks bookkeepers do by hand today. Each task can run as a <"
+],
+[
+"'Flettir upp kennitölu og VSK-númeri, varar við tvískráningu.'",
+"'Looks up ID and VAT numbers, warns about duplicate records.'"
+],
+[
+"`${finds.filter(a => a.r[0] === 'h').length} kalla á viðbrögð`",
+"`${finds.filter(a => a.r[0] === 'h').length} need action`"
+],
+[
+"`${dstr(days[0])}–${dstr(days[13])} · ${runs.length} keyrslur`",
+"`${dstr(days[0])}–${dstr(days[13])} · ${runs.length} runs`"
+],
+[
+"const DS = ['sun', 'mán', 'þri', 'mið', 'fim', 'fös', 'lau'];",
+"const DS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];"
+],
+[
+"`Við atburð: ${(c.ev || 'bókun í fjárhag').toLowerCase()}`",
+"`On event: ${(c.ev || 'G/L posting').toLowerCase()}`"
+],
+[
+"'Drög að sölureikningum úr tímaskráningu og verkáföngum.'",
+"'Draft sales invoices from time entries and job milestones.'"
+],
+[
+"'Dreifir tolli, flutningi og aðflutningsgjöldum á vörur.'",
+"'Allocates customs, freight and import duties to items.'"
+],
+[
+"'<p class=\"sub\">Enginn erindreki keyrir við atburð.</p>'",
+"'<p class=\"sub\">No agent runs on an event.</p>'"
+],
+[
+"md = c.md === 'last' ? 'síðasta dag' : `${c.md || 1}.`;",
+"md = c.md === 'last' ? 'the last day' : `day ${c.md || 1}`;"
+],
+[
+"> eru aldrei bókuð. Bókari fer yfir og bókar sjálfur.<",
+"> are never posted. A bookkeeper reviews and posts them.<"
+],
+[
+"`${on.length}<small>af ${all.length} á áætlun</small>`",
+"`${on.length}<small>of ${all.length} scheduled</small>`"
+],
+[
+">Sjálfvirknivæðing · erindrekar og handverk bókhalds<",
+">Automation · agents and bookkeeping tasks<"
+],
+[
+"'Þríhliða pörun og merking verð- og magnfrávika.'",
+"'Three-way matching and flagging of price and quantity variances.'"
+],
+[
+"'Hleður áætlun inn svo raun á móti áætlun virki.'",
+"'Loads the budget so that actual versus budget works.'"
+],
+[
+"'<p class=\"sub\">Engar keyrslur næstu 7 daga.</p>'",
+"'<p class=\"sub\">No runs in the next 7 days.</p>'"
+],
+[
+"'Krefst staðfestingar annars aðila (svikavörn).'",
+"'Requires confirmation by a second person (fraud prevention).'"
+],
+[
+"'Svar um stöðu reiknings og samþykktarferli.'",
+"'Answers on invoice status and approval workflow.'"
+],
+[
+"'Mánaðarleg dreifing og sjálfvirk bakfærsla.'",
+"'Monthly allocation and automatic reversal.'"
+],
+[
+"'<option value=\"last\">síðasti dagur</option>'",
+"'<option value=\"last\">last day</option>'"
+],
+[
+"`Árlega ${md} ${MFULL[+c.mo || 0]} kl. ${t}`",
+"`Annually, ${md} of ${MFULL[+c.mo || 0]} at ${t}`"
+],
+[
+"'Keyrir aðeins þegar ýtt er á „Keyra núna“.'",
+"'Runs only when “Run now” is pressed.'"
+],
+[
+"'Undirbúningur í janúar úr gögnum ársins.'",
+"'Preparation in January from the year\\'s data.'"
+],
+[
+"`${c.md || 1}. virka dag mánaðar kl. ${t}`",
+"`Working day ${c.md || 1} of the month at ${t}`"
+],
+[
+"'Sendir yfirlit, sérstaklega við áramót.'",
+"'Sends statements, especially at year-end.'"
+],
+[
+"'Áfallinn og fyrirframgreiddur kostnaður'",
+"'Accrued and prepaid costs'"
+],
+[
+"'Viðskiptayfirlit og stöðustaðfestingar'",
+"'Customer statements and balance confirmations'"
+],
+[
+"'Skil 15. hvers mánaðar á móti fjárhag.'",
+"'Filings on the 15th of each month against the ledger.'"
+],
+[
+"'Launamiðar, verktakamiðar og hlunnindi'",
+"'Payslips, contractor slips and benefits'"
+],
+[
+"> og gilda fyrir alla sem hafa aðgang.<",
+"> and apply to everyone with access.<"
+],
+[
+">Á tveggja mánaða fresti (VSK-tímabil)<",
+">Every two months (VAT period)<"
+],
+[
+">Ekkert er bókað án samþykkis bókara.<",
+">Nothing is posted without a bookkeeper's approval.<"
+],
+[
+"<option value=\"4\">fimmtudagur</option>",
+"<option value=\"4\">Thursday</option>"
+],
+[
+"'Pörun pöntunar, móttöku og reiknings'",
+"'Order, receipt and invoice matching'"
+],
+[
+"'Breytingar á bankaupplýsingum birgja'",
+"'Changes to vendor bank details'"
+],
+[
+"`Ársfjórðungslega, ${md} dag kl. ${t}`",
+"`Quarterly, ${md} at ${t}`"
+],
+[
+">Áætlanir eru geymdar í þessari síðu<",
+">Schedules are stored in this page<"
+],
+[
+"'Afstemming staðgreiðslu og lífeyris'",
+"'Reconciliation of withholding tax and pensions'"
+],
+[
+"`Á 2 mán. fresti, ${md} dag kl. ${t}`",
+"`Every 2 months, ${md} at ${t}`"
+],
+[
+"'<p class=\"sub\">Biðröðin er tóm.</p>'",
+"'<p class=\"sub\">The queue is empty.</p>'"
+],
+[
+"`Hvern ${DAYS[+c.wd || 1]} kl. ${t}`",
+"`Every ${DAYS[+c.wd || 1]} at ${t}`"
+],
+[
+"> · samantekt send, ekkert annað<",
+"> · summary sent, nothing else<"
+],
+[
+"> · stofnuð í BC en aldrei bókuð<",
+"> · created in BC but never posted<"
+],
+[
+"`Mánaðarlega, ${md} dag kl. ${t}`",
+"`Monthly, ${md} at ${t}`"
+],
+[
+"> · bókari samþykkir eða hafnar<",
+"> · bookkeeper approves or rejects<"
+],
+[
+"`Næsta keyrsla: ${fmtNext(nx)}.`",
+"`Next run: ${fmtNext(nx)}.`"
+],
+[
+"'Reikningar úr tímum og verkum'",
+"'Invoices from hours and jobs'"
+],
+[
+"'Nýir birgjar og viðskiptamenn'",
+"'New vendors and customers'"
+],
+[
+"'keyrsla óvirk þar til virkjað'",
+"'runs disabled until activated'"
+],
+[
+">Mánaðarlega, X. virki dagur<",
+">Monthly, Xth working day<"
+],
+[
+"'Reikningsfærsla (tekjuleki)'",
+"'Billing (revenue leakage)'"
+],
+[
+"'Innlestur innkaupareikninga'",
+"'Import of purchase invoices'"
+],
+[
+"'Verðbætur verðtryggðra lána'",
+"'Indexation of index-linked loans'"
+],
+[
+">um leið og atburður verður<",
+">as soon as the event happens<"
+],
+[
+">Mánaðarlega, dagur mánaðar<",
+">Monthly, day of month<"
+],
+[
+"'Afskriftir og nýjar eignir'",
+"'Depreciation and new assets'"
+],
+[
+"'Tengt · vistast sjálfkrafa'",
+"'Connected · saves automatically'"
+],
+[
+"'Kortafærslur og kvittanir'",
+"'Card transactions and receipts'"
+],
+[
+"'Forskoðun · vistast ekki'",
+"'Preview · not saved'"
+],
+[
+">Bifröst · aðeins lestur<",
+">Bifröst · read only<"
+],
+[
+">Sjálfvirkni eftir ferli<",
+">Automation by process<"
+],
+[
+">Breyting á lánardrottni<",
+">Change to a vendor<"
+],
+[
+"'Fjárhagsáætlun inn í BC'",
+"'Budget into BC'"
+],
+[
+"'Breytingar vistast ekki'",
+"'Changes are not saved'"
+],
+[
+">tillaga til samþykktar<",
+">proposal for approval<"
+],
+[
+"> sem bókari samþykkir.<",
+"> that a bookkeeper approves.<"
+],
+[
+">Keyrir við atburð í BC<",
+">Runs on an event in BC<"
+],
+[
+">Hvernig keyrsla virkar<",
+">How runs work<"
+],
+[
+">Tillaga til samþykktar<",
+">Proposal for approval<"
+],
+[
+"'Endurteknir reikningar'",
+"'Recurring invoices'"
+],
+[
+"'Keyrslur næstu 7 daga'",
+"'Runs in the next 7 days'"
+],
+[
+"'Annar vistaði á undan'",
+"'Someone else saved first'"
+],
+[
+">Daglega (virka daga)<",
+">Daily (working days)<"
+],
+[
+"'Innkaup til greiðslu'",
+"'Purchase to pay'"
+],
+[
+"'Laun og opinber skil'",
+"'Payroll and statutory filings'"
+],
+[
+"'Bókun bankahreyfinga'",
+"'Posting of bank movements'"
+],
+[
+"'Landað kostnaðarverð'",
+"'Landed cost'"
+],
+[
+"'Virkjað með ráðgjafa'",
+"'Activated with an advisor'"
+],
+[
+">← Miðstöð mælaborða<",
+">← Dashboard hub<"
+],
+[
+">Nýtt innkomið skjal<",
+">New incoming document<"
+],
+[
+"'Fyrirspurnir birgja'",
+"'Vendor enquiries'"
+],
+[
+"'Innbyrðis viðskipti'",
+"'Intercompany transactions'"
+],
+[
+"`Virka daga kl. ${t}`",
+"`Working days at ${t}`"
+],
+[
+">Nýjustu ábendingar<",
+">Latest findings<"
+],
+[
+">úr síðustu keyrslu<",
+">from the last run<"
+],
+[
+"'Sala til innheimtu'",
+"'Order to cash'"
+],
+[
+"'Samþykkt reikninga'",
+"'Invoice approval'"
+],
+[
+"'Vöktunarerindrekar'",
+"'Monitoring agents'"
+],
+[
+"'Aðeins lesaðgangur'",
+"'Read access only'"
+],
+[
+">Sjálfvirknivæðing<",
+">Automation<"
+],
+[
+">Sjálfvirkni í dag<",
+">Automation today<"
+],
+[
+">virkt af mögulegu<",
+">enabled of possible<"
+],
+[
+">Nýr lánardrottinn<",
+">New vendor<"
+],
+[
+"'Banki og fjármagn'",
+"'Bank and finance'"
+],
+[
+"'ekkert vistað enn'",
+"'nothing saved yet'"
+],
+[
+">Sjálfvirknivélin<",
+">The automation engine<"
+],
+[
+">Ársfjórðungslega<",
+">Quarterly<"
+],
+[
+">Aðeins handvirkt<",
+">Manual only<"
+],
+[
+"'Aðeins handvirkt'",
+"'Manual only'"
+],
+[
+">Framkvæmdastjóri<",
+">Managing director<"
+],
+[
+"=\"Sía eftir ferli\"",
+"=\"Filter by process\""
+],
+[
+"'Greiðslutillögur'",
+"'Payment proposals'"
+],
+[
+"'Pörun innborgana'",
+"'Payment matching'"
+],
+[
+"'Opnar ábendingar'",
+"'Open findings'"
+],
+[
+"'Virkur dagur nr.'",
+"'Working day no.'"
+],
+[
+">Dagatal og saga<",
+">Calendar and history<"
+],
+[
+">Við atburð í BC<",
+">On an event in BC<"
+],
+[
+">Bókun í fjárhag<",
+">G/L posting<"
+],
+[
+"'Bókun í fjárhag'",
+"'G/L posting'"
+],
+[
+"'Vistun mistókst'",
+"'Saving failed'"
+],
+[
+"<b>tilkynning</b>",
+"<b>notification</b>"
+],
+[
+">Næstu keyrslur<",
+">Next runs<"
+],
+[
+">Næstu 14 dagar<",
+">Next 14 days<"
+],
+[
+">Stilla keyrslu<",
+">Set up run<"
+],
+[
+">Ný bankafærsla<",
+">New bank entry<"
+],
+[
+">Fjármálastjóri<",
+">CFO<"
+],
+[
+"'Fjármálastjóri'",
+"'CFO'"
+],
+[
+"'Innra eftirlit'",
+"'Internal control'"
+],
+[
+">næstu 7 dagar<",
+">next 7 days<"
+],
+[
+"'Stjórnarpakki'",
+"'Board pack'"
+],
+[
+"'Síðast vistað'",
+"'Last saved'"
+],
+[
+"'Dagur mánaðar'",
+"'Day of month'"
+],
+[
+">nýjast fyrst<",
+">newest first<"
+],
+[
+">miðvikudagur<",
+">Wednesday<"
+],
+[
+">Vista áætlun<",
+">Save schedule<"
+],
+[
+"=\"Leiðarstika\"",
+"=\"Breadcrumb\""
+],
+[
+"'Bregðast við'",
+"'Act now'"
+],
+[
+"'Afstemmingar'",
+"'Reconciliations'"
+],
+[
+">Tæma biðröð<",
+">Clear queue<"
+],
+[
+">Keyrslusaga<",
+">Run history<"
+],
+[
+">þriðjudagur<",
+">Tuesday<"
+],
+[
+">Hvað gerist<",
+">What happens<"
+],
+[
+"'Gengismunur'",
+"'Exchange differences'"
+],
+[
+"'Bókun launa'",
+"'Payroll posting'"
+],
+[
+"'Ekki keyrt.'",
+"'Not run.'"
+],
+[
+"'skv. áætlun'",
+"'per schedule'"
+],
+[
+">Erindrekar<",
+">Agents<"
+],
+[
+">Keyra núna<",
+">Run now<"
+],
+[
+">föstudagur<",
+">Friday<"
+],
+[
+">Tilkynning<",
+">Notification<"
+],
+[
+"'Tilkynning'",
+"'Notification'"
+],
+[
+">Viðtakandi<",
+">Recipient<"
+],
+[
+"'Ekki keyrt'",
+"'Not run'"
+],
+[
+"'Mánaðarlok'",
+"'Month-end'"
+],
+[
+"'Færsluvakt'",
+"'Journal watch'"
+],
+[
+"'Ársuppgjör'",
+"'Year-end close'"
+],
+[
+"'Grunnskrár'",
+"'Master data'"
+],
+[
+"'Við atburð'",
+"'On event'"
+],
+[
+">drög í BC<",
+">draft in BC<"
+],
+[
+">Drög í BC<",
+">Drafts in BC<"
+],
+[
+"'Drög í BC'",
+"'Drafts in BC'"
+],
+[
+">Vikudagur<",
+">Weekday<"
+],
+[
+">mánudagur<",
+">Monday<"
+],
+[
+">Hætta við<",
+">Cancel<"
+],
+[
+"'Innheimta'",
+"'Collections'"
+],
+[
+"'Sjóðstaða'",
+"'Cash position'"
+],
+[
+"'Öll ferli'",
+"'All processes'"
+],
+[
+">Frumgerð<",
+">Prototype<"
+],
+[
+">Handverk<",
+">Manual tasks<"
+],
+[
+"'Handverk'",
+"'Manual tasks'"
+],
+[
+">Vikulega<",
+">Weekly<"
+],
+[
+">Atburður<",
+">Event<"
+],
+[
+"'VSK-skil'",
+"'VAT returns'"
+],
+[
+"'Í biðröð'",
+"'In queue'"
+],
+[
+">Yfirlit<",
+">Overview<"
+],
+[
+">Mánuður<",
+">Month<"
+],
+[
+">Klukkan<",
+">Time<"
+],
+[
+"=\"Flipar\"",
+"=\"Tabs\""
+],
+[
+"'Tillaga'",
+"'Proposal'"
+],
+[
+">Biðröð<",
+">Queue<"
+],
+[
+">Árlega<",
+">Annually<"
+],
+[
+">Bókari<",
+">Bookkeeper<"
+],
+[
+">Stjórn<",
+">Board<"
+],
+[
+"'Athuga'",
+"'Check'"
+],
+[
+"'Í lagi'",
+"'OK'"
+],
+[
+"'Óvirkt'",
+"'Disabled'"
+],
+[
+"'Vista…'",
+"'Saving…'"
+],
+[
+"'Vistað'",
+"'Saved'"
+],
+[
+">Hleð…<",
+">Loading…<"
+],
+[
+"> eða <",
+"> or <"
+],
+[
+">Tíðni<",
+">Frequency<"
+],
+[
+">Dagur<",
+">Day<"
+],
+[
+">Félag<",
+">Company<"
+],
+[
+"=\"Loka\"",
+"=\"Close\""
+]
+]

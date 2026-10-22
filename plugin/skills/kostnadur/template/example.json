@@ -7819,5 +7819,54 @@
   "period": "jan–okt",
   "py": "2025",
   "year": "2026"
+ },
+ "i18n": {
+  "en": {
+   "meta": {
+    "company_gen": "DT Vélsmiðjan ehf.",
+    "as_of": "16 Oct 2026"
+   },
+   "text": {
+    "period": "Jan–Oct",
+    "period_long": "January to October",
+    "fetched": "16–18 Oct 2026",
+    "incomplete_sentence": "September and October are not fully posted."
+   },
+   "js": {
+    "full_period": "Jan–Aug",
+    "incomplete_lead": "Sep and Oct are not fully posted",
+    "kpi_opex_note": "Sep–Oct not fully posted",
+    "period": "Jan–Oct"
+   },
+   "names": {
+    "Samþykkjandi 1": "Approver 1",
+    "Innkaupasamningar á efni": "Purchasing agreements for materials",
+    "2% betri kjör á vöruinnkaupum (stál, lagnaefni). Vöruinnkaup eru um 651 m.kr. á ári.": "2% better terms on purchases (steel, piping). Purchases are about ISK 651m a year.",
+    "Miðl.": "Med.",
+    "Líklegt": "Likely",
+    "Lítið": "Low",
+    "Útboð eða endursamningur við tvo stærstu efnisbirgja": "Tender or renegotiate with the two largest materials suppliers",
+    "Samræmdar sendingar": "Consolidated shipments",
+    "10% af flutningskostnaði með færri og stærri sendingum. Flutningur er 5,8% af vöruinnkaupum.": "10% of freight costs through fewer, larger shipments. Freight is 5.8% of purchases.",
+    "Fastur sendingardagur og samningur við einn flutningsaðila": "Fixed shipping day and an agreement with one carrier",
+    "Bílaleiga á móti eigin bíl": "Car hire versus own vehicle",
+    "Bílaleigubílar kosta um 8 m.kr. á ári. Eigin þjónustubíll eða samnýting gæti lækkað það um 30%.": "Hire cars cost about ISK 8m a year. An own service vehicle or sharing could cut that by 30%.",
+    "Greina nýtingu bílaleigubíla eftir verkum": "Analyse hire car use by job",
+    "Útboð á raforku": "Tender for electricity",
+    "Rafmagn kostar um 17,7 m.kr. á ári. Útboð skilar oft um 10% lækkun.": "Electricity costs about ISK 17.7m a year. A tender often brings a reduction of about 10%.",
+    "Biðja þrjá raforkusala um tilboð": "Ask three electricity suppliers for quotes",
+    "Reikningar samþykktir á réttum tíma": "Invoices approved on time",
+    "Reikningar sem bíða samþykkis fram yfir gjalddaga kalla á dráttarvexti og glataða staðgreiðsluafslætti (um 1% af upphæð).": "Invoices awaiting approval past their due date lead to late-payment interest and lost prompt-payment discounts (about 1% of the amount).",
+    "Samþykktarfrestur 5 dagar og varamaður í samþykkt": "A 5-day approval deadline and a deputy approver",
+    "Vörunotkun og aðföng": "Cost of materials",
+    "Laun og launatengd gjöld": "Payroll and related costs",
+    "Húsnæði": "Premises",
+    "Annar rekstrarkostnaður": "Other operating expenses",
+    "Fjármagnsliðir": "Net finance costs",
+    "Óreglulegir liðir": "Non-recurring items",
+    "laun vantar, vörunotkun vantar": "payroll missing, materials missing",
+    "laun vantar, vörunotkun vantar, yfirstandandi mánuður": "payroll missing, materials missing, current month"
+   }
+  }
  }
 }

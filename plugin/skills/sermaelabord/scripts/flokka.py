@@ -8,7 +8,10 @@ signals.json (talningar úr BC, `data_record_count`):
   {"jobs": 15, "job_ledger_entries": 51, "resources": 6, "time_sheets": 0, "items": 16,
    "item_ledger_entries": 16, "production_boms": 0, "standard_sales_codes": 0, "locations": 1,
    "fixed_assets": 4, "fa_share_of_assets": 0.25, "lt_loans_share": 0.15, "companies_in_tenant": 4,
-   "related_companies": 2, "deferred_revenue_balance": 0, "fx_share_of_sales": 0.02}
+   "related_companies": 2, "deferred_revenue_balance": 0, "fx_share_of_sales": 0.02,
+   "store_dimension": 0, "pos_customers": 0, "card_settlement_accounts": 0}
+  related_companies: tengdir viðskiptamenn/lánardrottnar eða IC-aðilar sem félagið á VIÐSKIPTI við (ekki fjöldi félaga í tenant).
+  store_dimension: 1 ef vídd lýsir verslunum/útibúum; pos_customers: staðgreiðsluviðskiptamenn á verslun; card_settlement_accounts: kortauppgjörslyklar.
 Skilar raðaðri tillögu: [{id, heiti, stig, ástæður}], efstu 3 eru tillögur í miðstöð.
 """
 import argparse, json, os
@@ -38,10 +41,13 @@ def main():
     if g('standard_sales_codes') > 0 or g('deferred_revenue_balance') > 0: add('saas', 2, 'endurteknir reikningar eða fyrirframinnheimtar tekjur'); add('fasteignir', 1, 'endurteknir reikningar')
     if g('item_ledger_entries') >= 500: add('heildsala', 3, f"{g('item_ledger_entries')} birgðafærslur")
     if g('production_boms') > 0: add('framleidsla', 3, f"{g('production_boms')} uppskriftir (BOM)")
-    if g('locations') >= 3 and g('item_ledger_entries') >= 500: add('smasala', 2, f"{g('locations')} staðsetningar")
+    if g('locations') >= 3 and (g('item_ledger_entries') >= 100 or g('store_dimension') or g('pos_customers') >= 2 or g('card_settlement_accounts')):
+        add('smasala', 3 if g('item_ledger_entries') >= 500 else 2, f"{g('locations')} staðsetningar" + (', verslunarvídd' if g('store_dimension') else '') + (f", {g('pos_customers')} staðgreiðsluviðskiptamenn" if g('pos_customers') >= 2 else ''))
     if g('fa_share_of_assets') >= 0.5 and g('lt_loans_share') >= 0.3: add('fasteignir', 3, 'eignir og langtímalán vega þungt')
     if g('fx_share_of_sales') >= 0.5 and g('item_ledger_entries') > 0: add('sjavarutvegur', 1, 'meirihluti sölu í erlendri mynt')
-    if g('companies_in_tenant') >= 2: add('samstaeda', 2 + (1 if g('related_companies') else 0), f"{g('companies_in_tenant')} félög í sama tenant" + (f", {g('related_companies')} tengd" if g('related_companies') else ''))
+    # Samstæða aðeins ef félagið á viðskipti við önnur félög (tengdir viðskiptamenn/lánardrottnar, IC-aðilar).
+    # Fjöldi félaga í tenant einn og sér segir ekkert (sandkassar og prófunarfélög).
+    if g('related_companies') >= 1: add('samstaeda', 2 + (1 if g('companies_in_tenant') >= 2 else 0), f"{g('related_companies')} tengd félög í viðskiptum")
     out = sorted([dict(id=p['id'], heiti=p['heiti'], flokkur=p['flokkur'], stig=sc[p['id']][0], astaedur=sc[p['id']][1]) for p in P if sc[p['id']][0] > 0], key=lambda x: -x['stig'])
     if a.out: json.dump(out, open(a.out, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     for o in out[:5]: print(f"{o['stig']:>4.0f}  {o['heiti']:<32} {'; '.join(o['astaedur'])}")

@@ -1,0 +1,62 @@
+[
+[
+"<span class=\"eyebrow\">Bifröst mælaborð 1.0.0 · miðstöð</span>",
+"<span class=\"eyebrow\">Bifröst dashboards 1.0.0 · hub</span>"
+],
+[
+"Tengt BC · Bifröst",
+"Connected to BC · Bifröst"
+],
+[
+"<span class=\"chip-lg\">Staða <b>",
+"<span class=\"chip-lg\">As of <b>"
+],
+[
+"<span class=\"eyebrow\">Heildarmynd</span>",
+"<span class=\"eyebrow\">The big picture</span>"
+],
+[
+"<h2>Byrjaðu hér</h2><span class=\"sub\">raðað eftir áhrifum</span>",
+"<h2>Start here</h2><span class=\"sub\">sorted by impact</span>"
+],
+[
+"<h2>Mælaborðin þín</h2><button class=\"btn plus\" id=\"add-open\" type=\"button\" aria-label=\"Fleiri mælaborð\">",
+"<h2>Your dashboards</h2><button class=\"btn plus\" id=\"add-open\" type=\"button\" aria-label=\"More dashboards\">"
+],
+[
+"<span class=\"at-t\">Fleiri mælaborð</span><span class=\"sub\">Mælt með fyrir þitt félag, 12 atvinnugreinapakkar eða þitt eigið mælaborð</span>",
+"<span class=\"at-t\">More dashboards</span><span class=\"sub\">Recommended for your company, 12 industry packs or your own dashboard</span>"
+],
+[
+"<h2 id=\"add-t\">Fleiri mælaborð</h2><button class=\"btn ghost\" value=\"x\" aria-label=\"Loka\">",
+"<h2 id=\"add-t\">More dashboards</h2><button class=\"btn ghost\" value=\"x\" aria-label=\"Close\">"
+],
+[
+"<b>Svona virkar þetta:</b> veldu mælaborð og ýttu á <b>Afrita skipun</b>. Límdu skipunina í Claude; þá er mælaborðið smíðað (um 3–5 mín.) og birtist hér í miðstöðinni.",
+"<b>How it works:</b> choose a dashboard and press <b>Copy prompt</b>. Paste the prompt into Claude; the dashboard is then built (about 3–5 min.) and appears here in the hub."
+],
+[
+"placeholder=\"Leita, t.d. birgðir, verk, leiga…\" aria-label=\"Leita að mælaborði\"",
+"placeholder=\"Search, e.g. inventory, jobs, leases…\" aria-label=\"Search dashboards\""
+],
+[
+"<li><div><b>Annað mælaborð</b><p class=\"sub\">Lýstu því sem þú vilt sjá, t.d. „laun eftir deildum“ eða „birgðir og hægfara vörur“.</p></div><div class=\"addact\"><button class=\"btn\" type=\"button\" data-prompt=\"{{{html.prompt_other}}}\">Afrita skipun</button>",
+"<li><div><b>Another dashboard</b><p class=\"sub\">Describe what you want to see, e.g. “payroll by department” or “inventory and slow-moving stock”.</p></div><div class=\"addact\"><button class=\"btn\" type=\"button\" data-prompt=\"{{{html.prompt_other}}}\">Copy prompt</button>"
+],
+[
+"<footer><span>Heimild: Business Central (Bifröst), {{meta.company}}, gögn sótt {{meta.source_dates}}. Níu mælaborð í einni miðstöð; „← Miðstöð“ efst á hverju þeirra kemur þér aftur hingað.</span>",
+"<footer><span>Source: Business Central (Bifröst), {{meta.company}}, data retrieved {{meta.source_dates}}. Nine dashboards in one hub; “← Hub” at the top of each brings you back here.</span>"
+],
+[
+"<span>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</span>",
+"<span>Prepared with the help of AI (Claude). Review before relying on the figures.</span>"
+],
+[
+"msg.textContent=ok?'Skipunin er afrituð. Límdu hana í Claude (Cowork); mælaborðið er þá smíðað og birtist hér.':'Skrifaðu í Claude: „'+t+'…“';",
+"msg.textContent=ok?'The prompt has been copied. Paste it into Claude (Cowork); the dashboard is then built and appears here.':'Type in Claude: “'+t+'…”';"
+],
+[
+"<title>{{meta.initials}} miðstöð mælaborða</title>",
+"<title>{{meta.initials}} dashboard hub</title>"
+]
+]

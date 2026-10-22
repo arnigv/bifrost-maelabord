@@ -4,7 +4,7 @@ Gervigreindin fyllir aðeins þetta JSON og keyrir
 `render.py --dashboard sjodstreymi --data sjodstreymi.json --out sjodstreymi.html`. HTML er aldrei skrifað í höndunum.
 `example.json` er gullútgáfan (DT Vélsmiðjan ehf.).
 
-**Formerki og einingar.** Fjárhæðir í **kr.** Inn- og útgreiðslur sem **jákvæðar** tölur (spálíkanið ákveður stefnu). Bankainnstæður jákvæðar, kortaskuld neikvæð. Hlutföll sem tugabrot (0,51 = 51%). Dagsetningar `"ÁÁÁÁ-MM-DD"`.
+**Formerki og einingar.** Fjárhæðir í **kr.** Inn- og útgreiðslur sem **jákvæðar** tölur (spálíkanið ákveður stefnu). Bankainnstæður jákvæðar, kortaskuld neikvæð, kortauppgjör (krafa á færsluhirði) jákvætt. Hlutföll sem tugabrot (0,51 = 51%). Dagsetningar `"ÁÁÁÁ-MM-DD"`.
 
 ## Lyklar
 
@@ -12,7 +12,7 @@ Gervigreindin fyllir aðeins þetta JSON og keyrir
 |---|---|---|---|---|
 | `today` | ÁÁÁÁ-MM-DD | já | Staða gagna (BC) | dagur sóknar |
 | `start` | ÁÁÁÁ-MM-DD | já | Mánudagur fyrstu spáviku (13 vikur frá honum) | næsti mánudagur eftir `today` |
-| `cash` | kr. | já | Bankainnstæður nú (upphafsstaða spár) | `period_breakdown` á `G/L Account` (bankalyklar, balance) eða summa `banks[].bal` utan korta |
+| `cash` | kr. | já | Bankainnstæður nú (upphafsstaða spár) | `period_breakdown` á `G/L Account` (bankalyklar, balance) eða summa `banks[].bal` utan fyrirtækjakorta og kortauppgjörs |
 | `cash_hist[]` | listi kr. | já | Bankainnstæður í lok hvers mánaðar (`months`); síðasta = staða `today` | `period_breakdown` balance, 1M bil |
 | `months[]` | ÁÁÁÁ-MM | já | Mánuðir fyrir `cash_hist`/`krofur_hist` | |
 | `krofur_hist[]` | listi kr. | já | Viðskiptakröfur í lok mánaðar | `period_breakdown` á kröfulykli |
@@ -26,7 +26,7 @@ Gervigreindin fyllir aðeins þetta JSON og keyrir
 | `ven` | kort `{"DD": kr}` | já | Regluleg greiðsla til lánardrottna eftir degi mánaðar (meðaltal á mánuð) | `Data.Totals.Get` á `Bank Account Ledger Entry` (útgreiðslur, flokkað eftir degi) |
 | `innh` | kort `{ÁÁÁÁ-MM: kr}` | já | Innborganir á mánuð | sama, innborganir |
 | `net_sal_share` | hlutfall | já | Útborguð laun ÷ launakostnaður | bankafærslur |
-| `custs[]` | listi | já | `{no, name, b:[6 tölur kr.], delay}`; `b` = ekki gjaldfallið, 0–30, 31–60, 61–90, 91–120, > 120 d.; `delay` = meðaltöf greiddra reikninga í dögum (`null` = engin greiðsla) | `aging` (`entity:"customer"`); töf úr lokuðum `Cust. Ledger Entry` |
+| `custs[]` | listi | já | `{no, name, b:[6 tölur kr.], delay}`; `b` = ekki gjaldfallið, 0–30, 31–60, 61–90, 91–120, > 120 d.; `delay` = meðaltöf greiddra reikninga í dögum (`null` = engin greiðsla). Valfrjálst `pos: true` = staðgreiðslu-/kassaviðskiptamaður (t.d. „Staðgreiðsla <verslun>“): talinn með í aldursgreiningu og spá, en ekki með stærstu skuldurum, aðgerðinni „Innheimta hjá stærstu skuldurum“ né stikunni „Ef stærstu skuldarar greiða“ | `aging` (`entity:"customer"`); töf úr lokuðum `Cust. Ledger Entry` |
 | `nyd[]` | listi `[no, gjalddagi, kr]` | já | Ógjaldfallnar opnar kröfur með gjalddaga | `Cust. Ledger Entry`, `Open=CONST(true)`, Due Date ≥ today |
 | `ag_total` | kr. | já | Summa `custs[].b` | reiknað |
 | `krofur_gl` | kr. | já | Viðskiptakröfur skv. fjárhag | `period_breakdown` balance |
@@ -35,8 +35,9 @@ Gervigreindin fyllir aðeins þetta JSON og keyrir
 | `inv[]` | listi | já | Innkaupareikningar í samþykkt: `{doc, vno, vendor, amt, due, sent, ic, fx}`; `ic` = tengdur aðili, `fx` = mynt eða "" | `Purchase Header` (Document Type=Invoice, ósamþykkt) — sama og Kostnaður |
 | `unbooked[]` | listi | já | Gjaldfallnar greiðslur sem vantar í bókhald: `{k, t, d, amt, note}`; `k` ∈ `laun, skattar, vsk, lan` | mat út frá ófullbókuðum mánuðum (`months[].complete=false`) og stöðu skuldalykla |
 | `rec` | hlutur | já | Afstemmingargögn (notuð í Mánaðarlokum; haldið hér óbreyttum): `stmts[]{acc,name,stmt,ledger,outst}`, `gl6920_aug`, `gl6340_aug`, `gl6920`, `stemming[]{ym,mismunur}`, `loan[]` | `Bank Acc. Reconciliation`, `period_breakdown` |
-| `banks[]` | listi | já | Bankareikningar og kort: `{no, name, teg, bal, stmt_date, stmt_no, stmt_bal, outst}`; `teg` = "Greiðslukort" fyrir kort | `Bank Account` (Staða á dagsetningu, FlowField) + síðasta `Bank Account Statement`. Kort sem númer, ekki nöfn korthafa |
-| `banks_gl` | `{bankar, kort}` kr. | já | Bankar og kort skv. fjárhag | `period_breakdown` á bankalyklum |
+| `banks[]` | listi | já | Bankareikningar og kort: `{no, name, teg, bal, stmt_date, stmt_no, stmt_bal, outst}`. Þrjár tegundir: (1) bankareikningur (hvaða `teg` sem er); (2) **fyrirtækjakort** (skuld, neikvæð staða): `teg` = "Greiðslukort" eða `kind: "card"`; (3) **kortauppgjör** (krafa á færsluhirði vegna kortasölu, debetstaða, berst inn á fáum dögum): `teg` = "Kortauppgjör" eða `kind: "acquirer"`, valfrjálst `lag_days` (dagar þar til uppgjör berst, sjálfgefið 2). Kortauppgjör er sýnt sem fé á leiðinni inn, ekki í handbæru fé og ekki dregið frá sem kortaskuld; í spánni er jákvæð staða innborgun á `today + lag_days` | `Bank Account` (Staða á dagsetningu, FlowField) + síðasta `Bank Account Statement`. Kort sem númer, ekki nöfn korthafa |
+| `min_m` | m.kr. | nei | Sjálfgefin lágmarksstaða sjóðs í spá (stika, námundað í 5 m.kr.; efri mörk stiku = max(100, 3 × `min_m`)). Vanti = 30. Miðið við u.þ.b. hálfs mánaðar útgreiðslur | mat |
+| `banks_gl` | `{bankar, kort}` kr. | já | Bankar og fyrirtækjakort skv. fjárhag (`kort` = 0 ef engin kort). Valfrjálst `uppgjor` = kortauppgjör skv. fjárhag; ef það er gefið er það líka borið saman í „Stemmir“ | `period_breakdown` á bankalyklum |
 
 ## meta / text / html (texti utan DATA)
 
@@ -66,8 +67,10 @@ Reglur: stutt og staðreyndamiðað, íslenskt talnasnið („31,6 m.kr.“, „
 | `js.bank_txt` | Þrír bankareikningar og þrjú fyrirtækjakort. … | 2–3 setningar um bankastöðu og afstemmingu |
 | `js.bank_note` | Óafstemmt 31.08. er … | skýring á óafstemmdu; korthafar ekki nafngreindir |
 | `js.hist_inc` | Sep–okt eru ófullbókaðir. | |
-| `js.act2_title`, `js.act2_text` | Staðfesta hvort laun … voru greidd | aðgerð 2 í „Fyrst að gera“ |
-| `js.act3_text` | Stálvogur á 31,6 m.kr. gjaldfallið frá 20.09. … | stærsti gjaldfallni lánardrottinn |
+| `js.act2_title`, `js.act2_text` | Staðfesta hvort laun … voru greidd | aðgerð 2 í „Fyrst að gera“; `act2_title: ""` felur hana (t.d. þegar allt er fullbókað) |
+| `js.act3_title` | Semja um 30 daga greiðslufrest við lánardrottna | aðgerð 3 (lánardrottnar); aðeins ef gögnin réttlæta hana (gjaldfallnar skuldir, þröng staða). `""` felur hana. Hún birtist aðeins ef `vend_open` eða `inv` eru ekki tóm |
+| `js.act3_text` | Stálvogur á 31,6 m.kr. gjaldfallið frá 20.09. … | rökstuðningur aðgerðar 3, t.d. stærsti gjaldfallni lánardrottinn |
+| `js.act3_defer` | 30 | dagar frestunar sem áhrif aðgerðar 3 á lágpunkt eru reiknuð með (sama tala og í `act3_title`); `0` = engin áhrifatala |
 | `js.beyond_sale` | desembersala á gjalddaga 20.01.2027 | hvað fellur utan 13 vikna |
 | `js.ag_trend_pre` / `js.ag_trend_post` | „Kröfur hafa hækkað úr “ / „ m.kr. í júní, sem skýrir sjóðsfallið.“ | utan um töluna `krofur_hist[ag_ref_idx]` |
 | `js.warn_pre` / `js.warn_post` | „<b>September og október eru ófullbókaðir.</b> … samtals um “ / „ m.kr. Hvort sem …“ | viðvörunarborði utan um summu `unbooked` |
@@ -76,4 +79,16 @@ Reglur: stutt og staðreyndamiðað, íslenskt talnasnið („31,6 m.kr.“, „
 | `js.fc_vsk` | [["2026-12-07", 2]] | VSK-gjalddagar innan 13 vikna: `[dagsetning ÁÁÁÁ-MM-DD, fjöldi mánaða í uppgjöri]` (2 = tveggja mánaða tímabil, 1 = mánaðarskil, `null` → 2); `[]` ef enginn |
 | `js.ag_ref_ym` | 2026-06 | mánuður (ÁÁÁÁ-MM í `months`) sem kröfuþróun er borin saman við; mánuður utan `months` → setningin fellur út |
 
+**Fastar aðgerðir eru skilyrtar:** „Innheimta hjá stærstu skuldurum“ birtist aðeins ef einhver viðskiptamaður utan `pos` á gjaldfallið; „Samþykkja reikninga á réttum tíma“ aðeins ef reikningur í samþykkt er kominn fram yfir gjalddaga. Engin aðgerð → „Engar brýnar aðgerðir út frá gögnunum.“
+
 **Valfrjálst / tómt leyft:** `unbooked: []` felur viðvörunarborðann; `js.first_incomplete: ""` þegar allir mánuðir eru fullbókaðir; `js.unrec_period: ""` sýnir „Afstemmt“ í bankatöflu; `inv`, `vend_open`, `nyd` og `js.fc_*`-listar mega vera tómir. Lánardrottnadagur í `js.fc_vendor_dates` sem er ekki lykill í `ven` telst 0.
+
+## Tungumál (`lang`, `i18n`)
+
+| Lykill | Dæmi | Skýring |
+|---|---|---|
+| `lang` | `"is"` | tungumál grunngagna (úr `dataset.json`). Ræður hvaða mál opnast fyrst. Vanti það er það greint úr heitum í gögnunum. |
+| `i18n.en` (eða `i18n.is`) | `{"meta": {...}, "text": {...}, "html": {...}, "js": {...}, "names": {...}}` | yfirlag fyrir hitt málið. Sömu lyklar og að ofan, aðeins þeir sem breytast. Dagsetningar á ensku `17 Oct 2026`, tölur `1,234.5`. |
+| `i18n.<lang>.names` | `{"Áætlun 2026": "Budget 2026"}` | þýðir heila strengi hvar sem er í gögnunum (heiti lykla utan staðaltöflu, áætlana, flokka, stöðu). |
+
+Sjá `example.json` (yfirlagið `i18n.en`) og `bifrost-maelabord/SKILL.md`, kaflann *Tungumál*.

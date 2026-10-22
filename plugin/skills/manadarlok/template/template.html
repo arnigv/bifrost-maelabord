@@ -120,20 +120,46 @@ const seg = (el, cb) => { const bs = [...el.querySelectorAll('button')]; bs.forE
 /* ---------- LOKUN MÁNAÐAR ---------- */
 let SEL = DATA.months.some(x => x.ym === DATA.default) ? DATA.default : (DATA.months.at(-1) || {}).ym, CLF = 'all';
 const SHORT = { tekjur: 'tekjur', laun: 'laun', voru: 'vörunotkun', afskr: 'afskriftir', vsk: 'VSK-uppgjörsfærslu', fx: 'endurmat gjaldmiðla', accr: 'áfallinn kostnað', lok: 'lokun tímabils í BC' };
+const SHORT2 = { birgd: 'afstemmingu birgða', kortupp: 'afstemmingu kortauppgjörs', verk: 'uppgjör verka' };
+/* Snið félags úr gögnum: kortauppgjör (færsluhirðar), birgðir og verk. Atriði sem eiga ekki við félagið eru falin. */
+const slug = t => String(t || '').toLowerCase().normalize('NFD').replace(/[^a-z]/g, ''), CSTT = ['kortauppgjor', 'cardsettlement'], isCst = b => CSTT.includes(slug(b.teg));
+const STOCK = DATA.inventory || null, STK = STOCK ? { gl: +STOCK.gl || 0, sub: +STOCK.subledger || 0 } : null;
+const HAS_STK = !!STK && (Math.abs(STK.gl) >= 1 || Math.abs(STK.sub) >= 1), HAS_INV = HAS_STK || (+DATA.birgdir || 0) > 0;
+const JOBS_N = Array.isArray(DATA.jobs) ? DATA.jobs.length : (+DATA.jobs_n || 0), HAS_JOBS = JOBS_N > 0;
+const CST0 = (DATA.banks || []).filter(isCst), HAS_CST = CST0.length > 0;
+const CMP_YM = (STOCK && STOCK.ym) || DATA.default;
+const cstOut = CST0.reduce((s, b) => s + (b.outst || 0), 0), cstLate = CST0.filter(b => b.lag_days != null && b.open_days != null && b.open_days > b.lag_days);
+const stockDiff = STK ? STK.gl - STK.sub : 0, stockOk = Math.abs(stockDiff) < 1, cstOk = Math.abs(cstOut) < 1;
+const AUTO = {
+  birgd: () => ({ k: 'birgd', t: 'Birgðir stemma við fjárhag (birgðabók á móti birgðalykli)', s: Math.abs(stockDiff) < 1 ? 'lokid' : 'vantar', amt: stockDiff, est: false, role: 'Bókari',
+    note: `Birgðabók ${m(STK.sub)} m.kr., birgðalykill ${m(STK.gl)} m.kr.${stockOk ? '; stemmir.' : `; mismunur ${kr(stockDiff)}`}` }),
+  kortupp: () => ({ k: 'kortupp', t: 'Kortauppgjör stemmir við uppgjör færsluhirðis', s: Math.abs(cstOut) < 1 && !cstLate.length ? 'lokid' : 'vantar', amt: cstOut, est: false, role: 'Bókari',
+    note: `${CST0.length} uppgjörsreikningar færsluhirða, staða í BC ${m(CST0.reduce((s, b) => s + b.bal, 0))} m.kr.${cstOk ? '; stemma við síðasta uppgjör.' : `; óafstemmt ${kr(cstOut)}`}${cstLate.length ? ` Óuppgert lengur en uppgjörstími: ${cstLate.map(b => b.name).join(', ')}.` : ''}` }),
+};
+const applies = i => !(i.k === 'birgd' && !HAS_INV) && !(i.k === 'kortupp' && !HAS_CST) && !(i.k === 'verk' && !HAS_JOBS);
+const itemsOf = M => {
+  const it = M.items.filter(applies);
+  if (M.ym === CMP_YM && !M.current) {
+    const at = (k, after) => { if (it.some(i => i.k === k)) return; const j = it.findIndex(i => i.k === after); it.splice(j < 0 ? it.length : j + 1, 0, AUTO[k]()); };
+    if (HAS_STK) at('birgd', 'voru');
+    if (HAS_CST) at('kortupp', it.some(i => i.k === 'afskr') ? 'afskr' : 'voru');
+  }
+  return it;
+};
 const andList = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' og ' + a.at(-1);
 const lastFull = (DATA.months.filter(x => x.complete).at(-1) || {}).ym;
 const cap = s => s[0].toUpperCase() + s.slice(1);
 const nextYm = ym => { const y = +ym.slice(0, 4), mo = +ym.slice(5, 7); return mo === 12 ? `${y + 1}-01` : `${y}-${String(mo + 1).padStart(2, '0')}`; };
 function lokun() {
-  const M = DATA.months.find(x => x.ym === SEL); if (!M) return; const c = cnt(M.items), name = monF(SEL), Y = SEL.slice(0, 4);
+  const M = DATA.months.find(x => x.ym === SEL); if (!M) return; const MI = itemsOf(M), c = cnt(MI), name = monF(SEL), Y = SEL.slice(0, 4);
   $('h-eb').textContent = `Lokun mánaðar · ${name} ${Y}${M.current ? ' · mánuður stendur yfir' : ''}`;
   $('h-big').innerHTML = `${c.done} af ${c.app}<small>atriðum lokið fyrir ${name}</small>`;
-  const miss = M.items.filter(i => i.s === 'vantar');
+  const miss = MI.filter(i => i.s === 'vantar');
   const estOp = miss.filter(i => ['laun', 'voru', 'afskr', 'accr'].includes(i.k)).reduce((s, i) => s + (i.amt || 0), 0);
   $('h-txt').innerHTML = M.current
     ? `${cap(name)} er ekki liðinn. Lokun hans hefst í byrjun ${monF(nextYm(SEL))}. Gátlistinn sýnir stöðuna í dag.`
     : M.complete
-      ? `Reksturinn er fullbókaður fyrir ${name}, en ${andList(miss.map(i => SHORT[i.k] || i.t.toLowerCase()))} vantar. Mánuðurinn er því ekki lokaður.`
+      ? `Reksturinn er fullbókaður fyrir ${name}, en ${andList(miss.map(i => SHORT[i.k] || SHORT2[i.k] || i.t.toLowerCase()))} vantar. Mánuðurinn er því ekki lokaður.`
       : `${name[0].toUpperCase() + name.slice(1)} er <b>ófullbókaður</b> (${M.reason}). Óbókaður rekstrarkostnaður er áætlaður um <b>${m(estOp)} m.kr.</b>, svo afkoma mánaðarins í BC er ofmetin. Tímabilið er opið fyrir bókun.`;
   const ended = !M.current ? dayDiff(endOf(SEL), TODAY) : null;
   $('h-row').innerHTML = [
@@ -144,7 +170,7 @@ function lokun() {
   ].map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join('');
 
   $('mpick').innerHTML = DATA.months.slice(-6).map(x => {
-    const k = cnt(x.items), na = x.items.length - k.app;
+    const XI = itemsOf(x), k = cnt(XI), na = XI.length - k.app;
     return `<button type="button" class="mt" data-ym="${x.ym}" aria-pressed="${x.ym === SEL}">
       <span class="mh"><b>${monS(x.ym)}</b><span class="pill ${x.complete ? 'l' : x.current ? 'i' : 'h'}">${x.complete ? 'Fullbókaður' : x.current ? 'Stendur yfir' : 'Ófullbókaður'}</span></span>
       <span class="stack sm"><span style="flex:${k.done};background:var(--up)"></span><span style="flex:${k.todo};background:var(--dn)"></span><span style="flex:${na};background:var(--line)"></span></span>
@@ -153,7 +179,7 @@ function lokun() {
   $('mpick').querySelectorAll('button').forEach(b => b.onclick = () => { SEL = b.dataset.ym; lokun(); });
 
   $('cl-h').textContent = `Gátlisti · ${name} ${Y}`;
-  $('cl').innerHTML = M.items.filter(i => CLF === 'all' || i.s === CLF).map(i => {
+  $('cl').innerHTML = MI.filter(i => CLF === 'all' || i.s === CLF).map(i => {
     const [p, l] = ST[i.s] || ST.na;
     const amt = i.amt == null ? '–' : (i.est ? '≈ ' : '') + m(i.amt) + ' m';
     return `<div class="item"><span class="pill ${p}">${l}</span><div><b>${i.t}</b>${i.flag ? ' <span class="pill m">Athuga</span>' : ''}<p>${i.note}</p><p class="role">Ábyrgð: ${i.role}</p></div><span class="n">${amt}</span></div>`;
@@ -165,15 +191,18 @@ seg($('cl-f'), f => { CLF = f; lokun(); });
 const UNB = DATA.unb_total;
 const ARd = DATA.krofur_gl - DATA.ag_total, APd = DATA.ven_total - DATA.ap_gl;
 const STM = Object.entries(DATA.stemming), STMbad = STM.filter(([, v]) => Math.abs(v) > 0.5);
-const B0 = DATA.banks, ISK = B0.filter(b => b.teg !== 'Greiðslukort'), CRD = B0.filter(b => b.teg === 'Greiðslukort');
+const B0 = DATA.banks, ISK = B0.filter(b => b.teg !== 'Greiðslukort' && !isCst(b)), CST = B0.filter(isCst), CRD = B0.filter(b => b.teg === 'Greiðslukort');
 const bsum = a => a.reduce((s, b) => s + b.bal, 0), LB = B0.find(b => b.outst);
 const ledgerOf = b => { const s = DATA.rec.stmts.find(x => x.acc === b.no); return s ? s.ledger : b.stmt_bal; };
 const LASTREC = B0.map(b => b.stmt_date).filter(Boolean).sort().at(-1) || null;
 const UNREC = {{js.unrec}};
 /* Gildi sem textar í js.rec_rows / js.open_items geta vísað í: {lykill} (m.kr., 1 aukastafur), {lykill:2}, {lykill:kr} (kr.), {lykill:n} (heiltala) */
 const V = {
-  bank_isk: bsum(ISK), bank_gl: DATA.banks_gl.bankar, bank_diff: bsum(ISK) - DATA.banks_gl.bankar,
-  card_sum: bsum(CRD), card_gl: DATA.banks_gl.kort, card_diff: bsum(CRD) - DATA.banks_gl.kort,
+  bank_isk: bsum(ISK), bank_gl: DATA.banks_gl.bankar || 0, bank_diff: bsum(ISK) - (DATA.banks_gl.bankar || 0),
+  card_sum: bsum(CRD), card_gl: DATA.banks_gl.kort || 0, card_diff: bsum(CRD) - (DATA.banks_gl.kort || 0),
+  cs_n: CST.length, cs_sum: bsum(CST), cs_gl: DATA.banks_gl.kortauppgjor == null ? null : DATA.banks_gl.kortauppgjor, cs_diff: DATA.banks_gl.kortauppgjor == null ? null : bsum(CST) - DATA.banks_gl.kortauppgjor,
+  cs_outst: cstOut, cs_late_n: cstLate.length, cs_lag: CST.reduce((a, b) => Math.max(a, b.lag_days || 0), 0),
+  stock_gl: STK ? STK.gl : 0, stock_sub: STK ? STK.sub : 0, stock_diff: HAS_STK ? stockDiff : 0, has_stock: HAS_INV ? 1 : 0, jobs_n: JOBS_N,
   lb_name: LB ? LB.name : '', lb_stmt: LB ? LB.stmt_bal : null, lb_ledger: LB ? ledgerOf(LB) : null, lb_outst: LB ? LB.outst : 0, lb_outst_abs: LB ? Math.abs(LB.outst) : 0,
   unb: UNB, unb_neg: -UNB, unb_n: DATA.unbooked.length, unb_list: DATA.unbooked.map(u => `${u.t} ${m(u.amt)} m`).join(' · '),
   kort_m: DATA.kort_m, kort_2: 2 * DATA.kort_m, kort_neg2: -2 * DATA.kort_m,
@@ -181,7 +210,7 @@ const V = {
   vsk_net: DATA.vsk_net, vsk9570: DATA.vsk9570, vsk_julagu: DATA.vsk_julagu,
   stm_n: STMbad.length, stm_list: STMbad.map(([k, v]) => `${monF(k)} ${sg(v / 1e6)} m`).join(', '), stm_first: STMbad.length ? STMbad[0][1] : 0, stm_first_abs: STMbad.length ? Math.abs(STMbad[0][1]) : 0,
   inv_n: DATA.inv_n, inv_sum: DATA.inv_sum, inv_od_n: DATA.inv_od_n, inv_od_sum: DATA.inv_od_sum,
-  inc_est: DATA.months.filter(x => !x.complete && !x.current).reduce((s, M) => s + M.items.filter(i => i.s === 'vantar' && ['laun', 'voru', 'afskr', 'accr'].includes(i.k)).reduce((t, i) => t + (i.amt || 0), 0), 0),
+  inc_est: DATA.months.filter(x => !x.complete && !x.current).reduce((s, M) => s + itemsOf(M).filter(i => i.s === 'vantar' && ['laun', 'voru', 'afskr', 'accr'].includes(i.k)).reduce((t, i) => t + (i.amt || 0), 0), 0),
   days: LASTREC ? dayDiff(LASTREC, TODAY) : null,
 };
 const fv = (k, f) => { const v = V[k]; if (v == null) return '–'; if (typeof v === 'string') return v; return f === 'kr' ? fmt(v, 0) : f === 'n' ? String(v) : m(v, f ? +f : 1); };
@@ -202,17 +231,26 @@ function afst() {
 
   const isk = ISK, crd = CRD, sum = bsum;
   /* afstemmingarlínur úr gögnum: {s: 'l'|'m'|'h'|'auto', t, d, amt (tala eða null), ref (heiti gildis í V, í stað amt), est, if} */
-  const R = {{js.rec_rows}}.filter(shown).map(r => { const v = amtOf(r); return [sevOf(r.s, v), tx(r.t), tx(r.d), v, !!r.est]; });
+  const RD = {{js.rec_rows}}, refs = new Set(RD.map(r => r.ref).filter(Boolean));
+  const R = RD.filter(shown).map(r => { const v = amtOf(r); return [sevOf(r.s, v), tx(r.t), tx(r.d), v, !!r.est]; });
+  /* Línur sem sniðmátið bætir við þegar gögnin sýna kortauppgjör eða birgðir og línuna vantar í js.rec_rows */
+  const AR = [];
+  if (HAS_CST && !refs.has('cs_outst')) AR.push([cstLate.length ? 'h' : sevOf('auto', cstOut), 'Kortauppgjör stemmir við uppgjör færsluhirðis', `${CST.length} uppgjörsreikningar færsluhirða ${m(V.cs_sum)} m.kr. í BC. Krafa á færsluhirði á að greiðast innan uppgjörstíma${V.cs_lag ? ` (${V.cs_lag} dagar)` : ''}; óafstemmt við síðasta uppgjör ${kr(cstOut)}${cstLate.length ? ` Óuppgert lengur en uppgjörstími: ${cstLate.map(b => b.name).join(', ')}.` : ''}`, cstOut, false]);
+  if (HAS_CST && V.cs_gl != null && !refs.has('cs_diff')) AR.push([sevOf('auto', V.cs_diff), 'Kortauppgjör á móti fjárhag', `Uppgjörsreikningar færsluhirða ${m(V.cs_sum)} m.kr. á móti fjárhagslykli ${m(V.cs_gl)} m.kr.`, V.cs_diff, false]);
+  if (HAS_STK && !refs.has('stock_diff')) AR.push([sevOf('auto', stockDiff), 'Birgðir á móti fjárhag', `Birgðabók (virði birgðafærslna) ${m(STK.sub)} m.kr., birgðalykill í fjárhag ${m(STK.gl)} m.kr.`, stockDiff, false]);
+  const ai = RD.filter(shown).map(r => r.ref || '').reduce((a, k, j) => /^(bank_|card_|lb_)/.test(k) ? j + 1 : a, 0);
+  R.splice(ai, 0, ...AR);
   const lab = { h: 'Rautt', m: 'Gult', l: 'Grænt' }, n = k => R.filter(r => r[0] === k).length;
   $('rc-stack').innerHTML = [['l', 'up'], ['m', 'warn'], ['h', 'dn']].map(([k, c]) => `<span style="flex:${n(k)};background:var(--${c})" title="${lab[k]}: ${n(k)}"></span>`).join('');
   $('rec').innerHTML = R.map(([s, t, d, v, est]) => `<div class="item"><span class="pill ${s}">${lab[s]}</span><div><b>${t}</b><p>${d}</p></div><span class="n">${v == null ? 'óstaðfest' : (est ? '≈ ' : '') + kr(v)}</span></div>`).join('') || '<p class="note">Engar afstemmingarlínur.</p>';
 
-  const row = b => `<tr><td>${b.name}</td><td class="n">${fmt(b.bal, 0)}</td><td>${date(b.stmt_date)} · nr. ${b.stmt_no}</td><td class="n">${fmt(b.stmt_bal, 0)}</td><td class="n">${fmt(ledgerOf(b), 0)}</td><td class="n">${b.outst ? fmt(b.outst, 0) : '0'}</td><td><span class="pill ${b.outst ? 'm' : 'l'}">${b.outst ? 'Útistandandi' : {{js.rec_bnk_pill}}}</span>${UNREC ? ` <span class="pill h">${UNREC} vantar</span>` : ''}</td></tr>`;
+  const row = b => `<tr><td>${b.name}</td><td class="n">${fmt(b.bal, 0)}</td><td>${date(b.stmt_date)} · nr. ${b.stmt_no}</td><td class="n">${fmt(b.stmt_bal, 0)}</td><td class="n">${fmt(ledgerOf(b), 0)}</td><td class="n">${b.outst ? fmt(b.outst, 0) : '0'}</td><td><span class="pill ${b.outst ? 'm' : 'l'}">${b.outst ? 'Útistandandi' : {{js.rec_bnk_pill}}}</span>${UNREC ? ` <span class="pill h">${UNREC} vantar</span>` : ''}${b.lag_days != null && b.open_days > b.lag_days ? ` <span class="pill h">${b.open_days} d. óuppgert</span>` : ''}</td></tr>`;
   const tot = a => `<td class="n">${fmt(sum(a), 0)}</td><td></td><td class="n">${fmt(a.reduce((s, b) => s + b.stmt_bal, 0), 0)}</td><td class="n">${fmt(a.reduce((s, b) => s + ledgerOf(b), 0), 0)}</td><td class="n">${fmt(a.reduce((s, b) => s + b.outst, 0), 0)}</td><td></td>`;
   $('bank-t').innerHTML = `<thead><tr><th>Reikningur</th><th class="n">Staða í BC í dag</th><th>Síðasta yfirlit</th><th class="n">Yfirlit</th><th class="n">Bankabók þá</th><th class="n">Óafstemmt</th><th>Staða</th></tr></thead><tbody>
     <tr class="grp"><td colspan="7">Bankareikningar</td></tr>${isk.map(row).join('')}<tr class="sum"><td>Samtals bankar</td>${tot(isk)}</tr>
+    ${CST.length ? `<tr class="grp"><td colspan="7">Kortauppgjör færsluhirða</td></tr>${CST.map(row).join('')}<tr class="sum"><td>Samtals kortauppgjör</td>${tot(CST)}</tr>` : ''}
     ${crd.length ? `<tr class="grp"><td colspan="7">Greiðslukort</td></tr>${crd.map(row).join('')}<tr class="sum"><td>Samtals kort</td>${tot(crd)}</tr>` : ''}</tbody>`;
-  $('bank-note').textContent = `${tx({{js.bank_note}})} Kort eru sýnd með númeri, korthafar ekki nafngreindir. Ekkert hefur verið afstemmt í BC úr þessu mælaborði.`;
+  $('bank-note').textContent = `${tx({{js.bank_note}})}${CST.length ? ' Kortauppgjör eru kröfur á færsluhirða vegna kortasölu (debetstaða) sem eru gerðar upp innan fárra daga; þau eru ekki fyrirtækjakort.' : ''}${crd.length ? ' Kort eru sýnd með númeri, korthafar ekki nafngreindir.' : ''} Ekkert hefur verið afstemmt í BC úr þessu mælaborði.`;
 
   BF.hbars($('stm'), STM.map(([k, v]) => ({ label: monS(k), value: v / 1e6, text: Math.abs(v) < .5 ? '0,0' : sg(v / 1e6), color: Math.abs(v) < .5 ? '--line' : '--dn' })), { diverging: true });
   $('stm-note').textContent = 'Í Business Central á hver færsla að stemma (debet = kredit). Ójöfnuður innan mánaðar bendir á færslu sem er bókuð með röngum dagsetningum á móti sér eða upphafsstöðu sem ekki stemmir. Finna fylgiskjalið og leiðrétta með bakfærslu.';
@@ -221,6 +259,11 @@ function afst() {
 /* ---------- OPIN ATRIÐI ---------- */
 /* úr gögnum: {s: 'h'|'m', t, d, nx, role, amt (tala eða null), ref (heiti gildis í V), est, txt, if} */
 const OPEN = {{js.open_items}}.filter(shown).map(o => ({ s: o.s === 'h' ? 'h' : 'm', t: tx(o.t), d: tx(o.d), nx: tx(o.nx), role: o.role || 'Bókari', amt: amtOf(o), est: !!o.est, txt: o.txt ? tx(o.txt) : undefined }));
+{
+  const orefs = new Set({{js.open_items}}.map(o => o.ref).filter(Boolean));
+  if (HAS_CST && (Math.abs(cstOut) >= 1 || cstLate.length) && !orefs.has('cs_outst')) OPEN.push({ s: cstLate.length ? 'h' : 'm', t: 'Kortauppgjör stemmir ekki við uppgjör færsluhirðis', d: `Óafstemmt ${kr(cstOut)} á uppgjörsreikningum færsluhirða.${cstLate.length ? ` Óuppgert lengur en uppgjörstími: ${cstLate.map(b => b.name).join(', ')}.` : ''}`, nx: 'Sækja uppgjör færsluhirðis, para innborganir við kortasölu og bóka þóknun og mismun.', role: 'Bókari', amt: Math.abs(cstOut), est: false });
+  if (HAS_STK && Math.abs(stockDiff) >= 1 && !orefs.has('stock_diff')) OPEN.push({ s: 'h', t: 'Birgðir stemma ekki við fjárhag', d: `Birgðalykill ${m(STK.gl)} m.kr., birgðabók ${m(STK.sub)} m.kr.`, nx: 'Keyra „Leiðrétta kostnað – birgðafærslur“ og „Bóka birgðakostnað í fjárhag“ og rekja handfærslur á birgðalykil.', role: 'Bókari', amt: Math.abs(stockDiff), est: false });
+}
 OPEN.sort((a, b) => (a.s === b.s ? 0 : a.s === 'h' ? -1 : 1) || ((b.amt || 0) - (a.amt || 0)));
 let OS = 'all', OR = 'all';
 function opin() {

@@ -402,5 +402,272 @@
   "py": 2025,
   "ring_note": "Öll atriði sem vantar eru leysanleg í BC fyrir áramót.",
   "year": 2026
+ },
+ "i18n": {
+  "en": {
+   "meta": {
+    "as_of": "17 Oct 2026",
+    "fetched": "16–17 Oct 2026",
+    "cf_start": "1 Feb",
+    "bs_end": "31 Aug 2026"
+   },
+   "text": {
+    "law_note": "Bills (parliamentary documents 25 and 77) before the 158th session of Althingi would change the size thresholds, audit thresholds and filing deadline. The thresholds here follow the law in force on 17 Oct 2026.",
+    "size_class": "Medium-sized",
+    "size_class_lc": "medium-sized company",
+    "ars_note": "Draft, unaudited. 2026 shows 1 Jan–31 Aug (last fully posted month). 2025 is a full year. The 2025 balance sheet is the position at 31 Jan 2026 since the 2025 year-end is not closed in BC.",
+    "filing_note": "Filing is electronic only, to the Register of Annual Accounts at Iceland Revenue and Customs. The 2025 annual accounts were due no later than 31 Aug 2026. Confirm that they have been filed, as the 2025 year-end is not closed in BC.",
+    "footer_note": "The thresholds in Art. 98 (ISK 200m assets, ISK 400m turnover, 50 FTEs) need to be confirmed. FTEs are missing in BC."
+   },
+   "html": {
+    "size_text": "Exceeds the small-company thresholds for total assets and turnover, in both 2025 and 2026. An <b>audit is therefore required</b> and a <b>cash flow statement is required</b> (Art. 28)."
+   },
+   "js": {
+    "agm": "May 2027",
+    "audit": "Required",
+    "bs_end": "31 Aug 2026",
+    "bs_start": "31 Jan 2026",
+    "cashflow": "Required",
+    "cf_end": "31 Aug",
+    "cf_note_tail": "No investment.",
+    "cf_start": "1 Feb",
+    "cy_label": "2026 Jan–Aug",
+    "deadline": "31 Aug 2027",
+    "dissolution": "28 Feb 2028",
+    "first_je_amt": "87 e.",
+    "fy_end": "31 Dec 2026",
+    "je_js": [
+     [
+      "h",
+      "Manual revenue entries",
+      87,
+      "Revenue on 1110 posted through a journal (source code FHFBOK, “SALA-25xx/26xx”) in monthly totals, not from sales invoices.",
+      "Get the sales breakdown behind each entry and reconcile to invoices."
+     ],
+     [
+      "h",
+      "Imbalance within a month",
+      2,
+      "Debit and credit do not balance within January and October (±2.4m).",
+      "Find the document and correct it."
+     ],
+     [
+      "m",
+      "Round amounts",
+      4,
+      "Invoices SR00089 and SR00110, ISK 62,000,000 each incl. VAT, on Sunday 23 Aug 2026, same milestone V-2601. Salaries paid in round totals (LAUNGR).",
+      "Verify the contracts and delivery behind them."
+     ],
+     [
+      "m",
+      "Above performance materiality",
+      121,
+      "Entries ≥ 20m: opening balances, monthly “Collected sales”, salary payments and purchases on 2010.",
+      "Sample for review."
+     ],
+     [
+      "l",
+      "Weekend entries",
+      2,
+      "SR00089 and SR00110 are dated Sunday 23 Aug 2026.",
+      "Find out why they were posted on a Sunday."
+     ],
+     [
+      "l",
+      "Infrequent users",
+      1,
+      "One user (role: bookkeeper) posts nearly all manual entries.",
+      "Segregation of duties: a second person approves journals."
+     ]
+    ],
+    "kpi1_d": "performance 9.0m · clearly trivial 0.6m",
+    "kpi2_d": "2025 profit not transferred to equity",
+    "kpi2_l": "2025 year-end not closed",
+    "kpi3_d": "journal instead of sales invoices",
+    "kpi3_l": "Manual revenue entries",
+    "kpi4_d": "Sep–Oct, cash overstated",
+    "kpi4_l": "Unposted payments",
+    "kpi4_v": "123.5<small>m</small>",
+    "notes_js": [
+     [
+      "Accounting policies",
+      "yes",
+      "From BC setup and the prior annual accounts"
+     ],
+     [
+      "Non-current assets and depreciation",
+      "partly",
+      "Depreciation missing for Sep–Oct"
+     ],
+     [
+      "Trade receivables and impairment",
+      "partly",
+      "Ageing available, assessment missing"
+     ],
+     [
+      "Inventory",
+      "no",
+      "No inventory account"
+     ],
+     [
+      "Long-term liabilities by maturity",
+      "yes",
+      "Loan terms 9110"
+     ],
+     [
+      "Equity and dividends",
+      "partly",
+      "2025 year-end not closed"
+     ],
+     [
+      "Related parties",
+      "partly",
+      "Eyjavör, Hríseyjarhús"
+     ],
+     [
+      "Average number of employees",
+      "no",
+      "FTEs not recorded in BC"
+     ],
+     [
+      "Management and board remuneration",
+      "no",
+      "Outside BC"
+     ],
+     [
+      "Auditor's fee",
+      "yes",
+      "Account 3610"
+     ],
+     [
+      "Events after the reporting date",
+      "no",
+      "Management"
+     ],
+     [
+      "Going concern",
+      "partly",
+      "Cash fell by 336.9m since May"
+     ]
+    ],
+    "pbc_js": [
+     [
+      "vantar",
+      "Payments Sep–Oct not posted",
+      "September salaries, withholding tax due 15 Sep and 15 Oct, VAT Jul–Aug (due 5 Oct) and loan repayments are not posted. Booked cash is therefore probably overstated.",
+      "123.5m"
+     ],
+     [
+      "vantar",
+      "Milestone V-2601 billed twice?",
+      "SR00089 and SR00110, 50.0m each excl. VAT (62.0m incl. VAT), same day 23 Aug. The whole contract (148.0m) billed at 72% progress.",
+      "41.0m"
+     ],
+     [
+      "vantar",
+      "2025 year-end not closed",
+      "The 2025 profit has not been transferred to retained earnings. Booked equity is 135.5m but should be about 301m.",
+      "168.1m"
+     ],
+     [
+      "vantar",
+      "Impairment of trade receivables",
+      "90% of receivables are overdue. An assessment of doubtful receivables is missing.",
+      "498.4m"
+     ],
+     [
+      "vantar",
+      "Inventory",
+      "16 items in the system but no inventory account in the balance sheet. Count and valuation missing.",
+      "–"
+     ],
+     [
+      "vantar",
+      "September cut-off",
+      "Payroll and materials not posted for September. Period not closed.",
+      "Sep"
+     ],
+     [
+      "vantar",
+      "Imbalance within months",
+      "The ledger is out of balance within January (+2.4m) and October (−2.4m).",
+      "2.4m"
+     ],
+     [
+      "vinnslu",
+      "Customers: subledger against ledger",
+      "The ledger is 3.8m higher than the customer subledger.",
+      "3.8m"
+     ],
+     [
+      "vinnslu",
+      "Suppliers and unapproved invoices",
+      "27 invoices await approval, 6 of them past due.",
+      "111.3m"
+     ],
+     [
+      "vinnslu",
+      "Non-current assets and depreciation",
+      "Depreciation posted Jan–Aug but not Sep–Oct.",
+      "2.0m"
+     ],
+     [
+      "vinnslu",
+      "VAT settlement",
+      "The VAT settlement account stands at 122.6m debit. Reconcile to the returns.",
+      "56.8m"
+     ],
+     [
+      "vinnslu",
+      "Related parties",
+      "Management fee from Eyjavör 2.4m a month and receivables from related parties 5.1m. List and amounts.",
+      "5.1m"
+     ],
+     [
+      "vinnslu",
+      "Equity and dividends",
+      "Dividend of 50.0m paid in April. Confirm AGM approval.",
+      "50.0m"
+     ],
+     [
+      "vinnslu",
+      "Bank reconciliations",
+      "All 6 bank accounts reconciled to 31 Aug 2026 and agree to the ledger. Reconciliation Sep–Oct missing.",
+      "6/6"
+     ],
+     [
+      "lokid",
+      "Payroll against withholding tax",
+      "Withholding tax, social security tax and pensions posted monthly to liability accounts.",
+      "✓"
+     ],
+     [
+      "lokid",
+      "Long-term loans",
+      "Repayments of 1.25m a month agree to the loan terms.",
+      "125.0m"
+     ],
+     [
+      "lokid",
+      "Non-current assets: balance",
+      "No investments or disposals during the year. Cost unchanged.",
+      "205.5m"
+     ]
+    ],
+    "ring_note": "All missing items can be resolved in BC before year-end."
+   },
+   "names": {
+    "Hagnaður tímabils": "Profit for the period",
+    "Hækkun viðskiptakrafna": "Increase in trade receivables",
+    "Breyting skammtímaskulda": "Change in current liabilities",
+    "Fjárfesting": "Investment",
+    "Afborganir lána": "Loan repayments",
+    "Greiddur arður": "Dividends paid",
+    "Meðalstórt félag": "Medium-sized company",
+    "Ársverk": "FTEs",
+    "staðfesta": "confirm",
+    "Frumvörp á 158. löggjafarþingi (þskj. 25 og 77, sept. 2026) um breytingar á stærðarmörkum, endurskoðunarmörkum og skilafresti. Ef þau verða að lögum breytast mörkin hér að neðan.": "Bills before the 158th session of Althingi (documents 25 and 77, Sep 2026) would change the size thresholds, audit thresholds and filing deadline. If they become law, the thresholds below will change."
+   }
+  }
  }
 }

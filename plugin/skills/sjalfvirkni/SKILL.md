@@ -26,7 +26,7 @@ Fylgdu `bifrost-maelabord` (útlit). Endurgerðu eða endurbirtu þessa síðu *
 
 Síðan er skráin: stillingar, biðröð og saga eru geymd í síðunni og vistuð með `artifact`-getunni.
 
-1. Búðu til `config.json` (sjá haus `scripts/build.py`): félag, upphafsstafir, slóð miðstöðvar, dagsetning gagna, félög í vali, `find`.
+1. Búðu til `config.json` (sjá haus `scripts/build.py`): félag, upphafsstafir, slóð miðstöðvar, dagsetning gagna, félög í vali, `find`, og `lang` (`is`/`en`, sama og miðstöðin). Á ensku er síðan þýdd með `assets/i18n/en.json`.
 2. `python3 ${CLAUDE_SKILL_DIR}/scripts/build.py --config config.json --out sjalfvirkni.html`
 3. Birtu með `capabilities: {"artifact": {}}`.
 4. Lestu birtu síðuna aftur (`Artifact read`, `path: index.html`) og vistaðu allt fram að og með `<body>` auk `\n<meta charset="utf-8">\n` í `prefix.txt`.

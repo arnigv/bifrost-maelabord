@@ -173,5 +173,147 @@
     "6 forðar bókaðir á verk"
    ]
   }
- ]
+ ],
+ "i18n": {
+  "en": {
+   "meta": {
+    "company_acc": "DT Vélsmiðjan ehf.",
+    "as_of": "17 Oct 2026",
+    "source_dates": "16–17 Oct 2026"
+   },
+   "hero": {
+    "title": "Strong results,",
+    "sub": "but cash is at risk",
+    "text": "EBITDA is heading for ISK 441.5m in 2026, more than double 2025. But 90% of receivables are overdue and cash could go below zero this week if unposted payments have gone out.",
+    "figures": [
+     [
+      "441.5m",
+      "EBITDA 2026, forecast"
+     ],
+     [
+      "447.4m",
+      "overdue receivables"
+     ],
+     [
+      "−18.1m",
+      "cash low point"
+     ],
+     [
+      "15.2m",
+      "recoverable now (revenue)"
+     ]
+    ]
+   },
+   "top": [
+    {
+     "title": "Collect from the three largest debtors",
+     "text": "ISK 365.0m overdue. Lifts the cash low point by ISK 308.6m.",
+     "src": "Cash flow"
+    },
+    {
+     "title": "Confirm unposted payments Sep–Oct",
+     "text": "Payroll, withholding tax, VAT and loan repayments, ISK 123.5m, not in the bank ledger. Cash is probably overstated.",
+     "src": "Cash flow · Month-end"
+    },
+    {
+     "title": "Investigate double-billed milestone V-2601",
+     "text": "SR00089 and SR00110, ISK 50.0m each excl. VAT, same day. Billed ISK 41.0m ahead of progress.",
+     "src": "Month-end"
+    },
+    {
+     "title": "Close the 2025 year in BC",
+     "text": "ISK 168.1m 2025 profit not transferred to equity.",
+     "src": "Month-end"
+    },
+    {
+     "title": "Bill unbilled work",
+     "text": "ISK 15.2m recoverable now: time jobs, mileage at ISK 0, hours above fixed fee.",
+     "src": "Revenue"
+    }
+   ],
+   "cards": [
+    {
+     "title": "Board",
+     "tabs": "Overview · Operations · Balance sheet and cash flow · Risks",
+     "label": "EBITDA Jan–Aug",
+     "value": "271.5m",
+     "note": "21% of revenue · +20% revenue"
+    },
+    {
+     "title": "Cash flow and banks",
+     "tabs": "Bank balances · 13-week forecast · Collections",
+     "label": "Cash low point",
+     "value": "−18.1m",
+     "note": "week 43 · 19–25 Oct"
+    },
+    {
+     "title": "Revenue",
+     "tabs": "Overview · Customers · Products and services · Revenue leakage",
+     "label": "Revenue Jan–Aug",
+     "value": "1,295.6m",
+     "note": "+20% on prior year · 15.2m recoverable now"
+    },
+    {
+     "title": "Costs",
+     "tabs": "Invoice approval · Suppliers and cost lines",
+     "label": "Awaiting approval",
+     "value": "111.3m",
+     "note": "27 invoices, 6 overdue"
+    },
+    {
+     "title": "Month-end and reconciliations",
+     "tabs": "Month-end close · Reconciliations · Open items",
+     "label": "September closed",
+     "value": "1 of 7",
+     "note": "16 open items, 8 urgent"
+    },
+    {
+     "title": "Margin and jobs",
+     "tabs": "Overview · Jobs · Products and ABC · Simulation",
+     "label": "Gross margin Jan–Aug",
+     "value": "62.2%",
+     "note": "V-2601 billed 41.0m ahead of progress"
+    },
+    {
+     "title": "Forecasting",
+     "tabs": "Forecast · Assumptions · Actual vs forecast · Simulator",
+     "label": "EBITDA 2026 (P50)",
+     "value": "441.5m",
+     "note": "range 337–546m"
+    },
+    {
+     "title": "Audit and annual accounts",
+     "tabs": "Size class · Annual accounts · Preparation · Journal tests",
+     "label": "Size class",
+     "value": "Medium-sized",
+     "note": "audit required · filing 31 Aug 2027",
+     "pill": "information"
+    },
+    {
+     "title": "Automation",
+     "tabs": "Overview · Agents · Manual tasks · Calendar",
+     "label": "Agents and tasks scheduled",
+     "value": "11 of 32",
+     "note": "runs disabled until activated with an advisor"
+    }
+   ],
+   "recommended": [
+    {
+     "reasons": [
+      "15 jobs and 51 job ledger entries"
+     ]
+    },
+    {
+     "reasons": [
+      "4 companies in the same tenant, 2 related"
+     ]
+    },
+    {
+     "reasons": [
+      "6 resources posted to jobs"
+     ]
+    }
+   ]
+  }
+ }
 }

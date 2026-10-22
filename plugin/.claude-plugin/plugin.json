@@ -2,7 +2,7 @@
   "name": "bifrost-maelabord",
   "displayName": "Bifröst mælaborð",
   "version": "1.0.0",
-  "description": "Byrjaðu á: „Settu upp Bifröst-mælaborðin“ eða /maelabord. Bifröst-mælaborð: miðstöð og níu mælaborð úr Business Central í einu artifacti, smíðuð úr föstum sniðmátum, með sérmælaborðum eftir ÍSAT. Skillin eru aðeins notuð fyrir mælaborðin, ekki önnur verkefni. Aðeins lesið úr BC.",
+  "description": "Byrjaðu á: „Settu upp Bifröst-mælaborðin“ eða /maelabord. Bifröst-mælaborð: miðstöð og níu mælaborð úr Business Central í einu artifacti, smíðuð úr föstum sniðmátum, með sérmælaborðum eftir ÍSAT. Skillin eru aðeins notuð fyrir mælaborðin, ekki önnur verkefni. Íslenska og enska (rofi IS | EN; opnast á máli grunngagna). Aðeins lesið úr BC.",
   "author": {
     "name": "Origo ehf."
   },

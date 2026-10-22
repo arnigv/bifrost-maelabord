@@ -19,7 +19,10 @@ Fylgdu `bifrost-maelabord` (hönnun, ljóst sjálfgefið, leiðarstika, fótur) 
 | Efnahagslyklar á mánaðarlokum, jöfnuður innan mánaðar | `dataset.json`: `balance.accounts[].levels`, `balance.stemming` |
 | Bankareikningar, staða í dag, síðasta yfirlit | `Bank Account` (staða, „Last Statement No.“, „Balance Last Statement“), `Bank Account Statement`, `Bank Acc. Reconciliation` |
 | Útistandandi færslur við síðustu afstemmingu | `Bank Account Ledger Entry` (opnar, óafstemmdar) |
-| Greiðslukort | Bankareikningar af tegundinni greiðslukort á móti kortalykli í fjárhag |
+| Greiðslukort (fyrirtækjakort) | Bankareikningar af tegundinni greiðslukort (skuld, kreditstaða) á móti kortalykli í fjárhag. Ekkert fyrirtækjakort: `banks_gl.kort` = 0, `kort_m` = 0 |
+| Kortauppgjör (færsluhirðar) | Verslanir og aðrir sem taka við kortum: bankareikningar eða millireikningar fyrir uppgjör færsluhirða (debetstaða, gert upp innan fárra daga), `teg: "Kortauppgjör"`. Samtölur fyrst: staða úr `Bank Account` (Balance at Date) og lykli í `Bank Account Posting Group`; óuppgert = `Data.Totals.Get` á `Bank Account Ledger Entry` (Open = true, groupBy `Bank Account No.`); aldur elstu opnu færslu (`open_days`) úr einni færslu á reikning (`data_batch_records`, raðað eftir `Posting Date`, top 1). `lag_days` úr samningi eða miðgildi uppgjörstíma síðustu mánaða. Síðasta uppgjör færsluhirðis = `stmt_*` |
+| Birgðir (aðeins ef félagið heldur birgðir) | Samtölur fyrst: `Data.Totals.Get` á `Value Entry` (summa `Cost Amount (Actual)`, og `Cost Amount (Expected)` ef áætlaður kostnaður er bókaður, Posting Date ≤ dagur) = `inventory.subledger`; staða birgðalykla úr `Inventory Posting Setup` („Inventory Account“, og „Inventory Account (Interim)“ ef notað) = `inventory.gl`. `Item Ledger Entry` aðeins ef rekja þarf mismun á vöru eða birgðageymslu. Hreyfing birgðabreytingar/vörunotkunar á mánuð úr `period_breakdown`. Engar birgðir (enginn `Value Entry` eða staða 0): sleppa `inventory` |
+| Verk (aðeins ef verkbókhald er notað) | `jobs_n` = fjöldi opinna `Job`. 0 ef ekkert verk: verkatengd atriði (`verk`, áfangar, verk í vinnslu) falin |
 | Viðskiptamenn og lánardrottnar á móti fjárhag | `aging` (eða `Cust./Vendor Ledger Entry`, opnar) á móti stöðu safnlykla (bókunarflokkar) sama dag |
 | VSK | Útskattur, innskattur og uppgjörsreikningur VSK úr efnahag; tveggja mánaða tímabil, gjalddagi 5. annars mánaðar eftir tímabil |
 | Gengismunur | `Cust./Vendor Ledger Entry` með `Currency Code`, `Currency Exchange Rate` (gengi á mánaðarlokum), `Exch. Rate Adjmt. Reg.` (hvort endurmat hefur verið keyrt) |
@@ -39,7 +42,8 @@ Lesköll fara í gegnum Bifröst. Samtölur fyrst (`bifrost-gogn`, kafli 0): hvo
 - Gátlisti, hvert atriði með stöðu (*Lokið · Vantar · Á ekki við*), fjárhæð og ábyrgð (*Bókari / Fjármálastjóri*):
   1. Tekjur bókaðar (athuga ef langt undir meðaltali).
   2. Laun bókuð.
-  3. Vörunotkun bókuð.
+  3. Vörunotkun bókuð (aðeins ef félagið hefur vörunotkun; hjá félagi með birgðir „Birgðabreyting/vörunotkun bókuð“).
+  - *Eftir rekstri:* „Birgðir stemma við fjárhag (birgðabók á móti birgðalykli)“ ef birgðir; „Verk í vinnslu og áfangar bókuð“ ef `jobs_n` > 0; „Kortauppgjör stemmir við uppgjör færsluhirðis“ ef kortauppgjör eru í `banks`. Sniðmátið felur þessi atriði ef gögnin sýna ekki viðkomandi rekstur.
   4. Afskriftir keyrðar.
   5. VSK-uppgjörsfærsla (aðeins í lok tveggja mánaða tímabils; annars *á ekki við*). Uppgjörsreikningur með stöðu sem hækkar sífellt bendir á að uppgjörsfærslur vanti.
   6. Gengismunur endurmetinn (*á ekki við* ef engar opnar færslur í erlendri mynt). Áætla áhrif með gengi mánaðarloka.
@@ -51,7 +55,9 @@ Lesköll fara í gegnum Bifröst. Samtölur fyrst (`bifrost-gogn`, kafli 0): hvo
 | Athugun | Grænt þegar |
 |---|---|
 | Bankabók á móti bankalykli | Summa bankareikninga = fjárhagslykill |
-| Kort á móti kortalykli | Summa korta = fjárhagslykill |
+| Kort á móti kortalykli | Summa korta = fjárhagslykill (aðeins ef fyrirtækjakort) |
+| Kortauppgjör stemmir við uppgjör færsluhirðis | Óuppgert 0 kr. og engin færsla eldri en `lag_days` (aðeins ef kortauppgjör) |
+| Birgðir á móti fjárhag | Birgðabók (`Value Entry`) = birgðalykill (aðeins ef birgðir) |
 | Bankayfirlit á móti bankabók | Yfirlit + útistandandi = bankabók á síðasta afstemmingardegi |
 | Bankafærslur eftir síðustu afstemmingu | Engar þekktar greiðslur vantar (laun, staðgreiðsla, VSK, lán) |
 | Viðskiptamenn / lánardrottnar á móti fjárhag | `aging`-samtala = safnlyklar |
@@ -59,14 +65,15 @@ Lesköll fara í gegnum Bifröst. Samtölur fyrst (`bifrost-gogn`, kafli 0): hvo
 | Jöfnuður innan mánaðar | `balance.stemming` er 0 í hverjum mánuði (sýnt sem frávikssúlur) |
 | Langtímalán | Staða = lánayfirlit (afborganir bókaðar) |
 
-Tafla yfir banka og kort: staða í BC í dag, síðasta yfirlit (dags. og nr.), yfirlitsstaða, bankabók þá, óafstemmt og staða. Kort með númeri, aldrei nafn korthafa.
+Tafla yfir banka, kortauppgjör og kort: staða í BC í dag, síðasta yfirlit (dags. og nr.), yfirlitsstaða, bankabók þá, óafstemmt og staða. Kort með númeri, aldrei nafn korthafa.
 
-**Opin atriði** — samandreginn verkefnalisti úr hinum flipunum og úr `endurskodun`, `kostnadur` og `sjodstreymi`: óbókaðar greiðslur, VSK, ársuppgjör fyrra árs ólokað, ófullbókaður mánuður, möguleg tvíreikningsfærsla, handfærðar tekjur, ósamþykktir reikningar komnir á gjalddaga, gengismunur, lán, innbyrðis staða, opin tímabil. Hvert atriði: alvarleiki (rautt/gult), lýsing, **næsta skref**, ábyrgðarhlutverk og fjárhæð. Raðað eftir alvarleika og svo fjárhæð. Síur fyrir alvarleika og hlutverk.
+**Opin atriði** — samandreginn verkefnalisti úr hinum flipunum og úr `endurskodun`, `kostnadur` og `sjodstreymi`, aðeins þau sem eiga við félagið (t.d. tvíreikningsfærsla áfanga aðeins ef verk, með `"if": "jobs_n"`): óbókaðar greiðslur, VSK, ársuppgjör fyrra árs ólokað, ófullbókaður mánuður, möguleg tvíreikningsfærsla, handfærðar tekjur, ósamþykktir reikningar komnir á gjalddaga, gengismunur, lán, innbyrðis staða, opin tímabil. Hvert atriði: alvarleiki (rautt/gult), lýsing, **næsta skref**, ábyrgðarhlutverk og fjárhæð. Raðað eftir alvarleika og svo fjárhæð. Síur fyrir alvarleika og hlutverk.
 
 ## 3. Sannreyning
 
 - Fullbókaðir mánuðir í mælaborði = `months[].complete` í `dataset.json`.
-- Bankabók stemmir við bankalykil og kort við kortalykil upp á krónu (eða mismunurinn er sýndur rauður).
+- Bankabók stemmir við bankalykil og kort við kortalykil upp á krónu (eða mismunurinn er sýndur rauður). `banks_gl.bankar` á ekki að innihalda lykla kortauppgjörs; þeir fara í `banks_gl.kortauppgjor`.
+- Birgðir: `inventory.subledger` (Value Entry) á móti `inventory.gl` sama dag.
 - `aging`-samtölur á móti safnlyklum sama dag; mismunur sýndur í kr.
 - VSK-skuld á tímabil = breyting á útskatti − innskatti á tímabilinu; á að stemma við skilagrein (t.d. júl–ágú).
 - Summa óbókaðra greiðslna = summa liða í `unbooked`.

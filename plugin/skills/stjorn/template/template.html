@@ -113,7 +113,7 @@ a.more:hover{text-decoration:underline}
       </section>
       <section class="card">
         <div class="ch"><h2>Hagnaður á móti sjóði</h2><span class="sub">staða í lok mánaðar</span></div>
-        <div class="legend"><span><i style="background:var(--s3)"></i>Uppsafnaður hagnaður</span><span><i style="background:var(--s1)"></i>Handbært fé</span><span><i style="background:var(--dn)"></i>Viðskiptakröfur</span></div>
+        <div class="legend" id="cash-leg"><span><i style="background:var(--s3)"></i>Uppsafnaður hagnaður</span><span><i style="background:var(--s1)"></i>Handbært fé</span><span><i style="background:var(--dn)"></i>Viðskiptakröfur</span></div>
         <div class="cv" style="height:250px"><canvas id="c-cash" role="img" aria-label="Uppsafnaður hagnaður, handbært fé og viðskiptakröfur á mánuði"></canvas></div>
       </section>
     </div>
@@ -198,7 +198,7 @@ a.more:hover{text-decoration:underline}
   </section>
 
   <footer>
-    <p>Heimild: fjárhagur og viðskiptamannabók {{meta.company_gen}} í Business Central (Bifröst), sótt {{meta.as_of}}. Ekkert var skrifað í BC. Kröfur í aldursgreiningu eru úr viðskiptamannabók. Rekstrartölur ná til {{meta.last_closed}}, síðasta uppgerða mánaðar; {{text.prelim_months}}. Spá út árið er úr Spágerð Bifrastar (drifþáttaspá með P10–P90 bili) og er ekki skráð í BC.</p>
+    <p>Heimild: fjárhagur og viðskiptamannabók {{meta.company_gen}} í Business Central (Bifröst), sótt {{meta.as_of}}. Ekkert var skrifað í BC. Kröfur í aldursgreiningu eru úr viðskiptamannabók. Rekstrartölur ná til {{meta.last_closed}}, síðasta uppgerða mánaðar; {{text.prelim_months}}.<span id="ft-fc"> Spá út árið er úr Spágerð Bifrastar (drifþáttaspá með P10–P90 bili) og er ekki skráð í BC.</span></p>
     <p>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</p>
   </footer>
 </div>
@@ -211,9 +211,20 @@ const DATA={{DATA_JSON}};
 const { $, fmt, sg, mkr, MON, css, alpha, tabs } = BF;
 const MF = ['janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 'júlí', 'ágúst', 'september', 'október', 'nóvember', 'desember'];
 const mi = ym => +ym.slice(5) - 1, ml = ym => MON[mi(ym)];
-const MS = DATA.months, ALLM = MS.map(r => r.ym), FULL = MS.filter(r => r.complete).map(r => r.ym), INC = new Set(MS.filter(r => !r.complete).map(r => r.ym));
+const MS = DATA.months, ALLM = MS.map(r => r.ym), FULL0 = MS.filter(r => r.complete).map(r => r.ym), INC = new Set(MS.filter(r => !r.complete).map(r => r.ym));
+/* Enginn mánuður fullbókaður: notum alla mánuði sem bráðabirgðatölur svo síðan virki (tilkynning efst segir frá) */
+const PROV = FULL0.length === 0, FULL = PROV ? ALLM.slice() : FULL0;
 const LASTF = FULL.at(-1), ACC = DATA.accounts, AG = DATA.aging;
 const B = DATA.balance, C = B.categories, BLAST = B.months.length - 1, BL = B.months.map(ml);
+/* Valfrjálsir efnahagsflokkar: birgðir og aðrar eignir. Vanti lykil eða sé allt 0 er síðan eins og án þeirra. */
+const z0 = B.months.map(() => 0), hasC = (k, f) => Array.isArray(C[k]) && C[k].some(f);
+const HASB = hasC('birgdir', v => v > 0), HASA = hasC('adrar_eignir', v => Math.abs(v) >= 1);
+const BIR = HASB ? C.birgdir : z0, ADR = HASA ? C.adrar_eignir : z0;
+/* Staðgreiðslu- og kassaviðskiptavinir (aging.rows[].pos === true, eða heiti sem byrjar á Staðgreiðsl/Cash) teljast ekki til samþjöppunar; pos: false hnekkir heitinu */
+const isPos = r => r.pos === true || (r.pos !== false && /^\s*(sta\u00f0grei\u00f0sl\w*|cash)\b/i.test(r.name || ''));
+const AGC = AG.rows.filter(r => !isPos(r));
+/* Mánaðartölur fyrra árs: sjálfgefið ekki í BC; DATA.py_monthly_in_bc = true ef þær eru í BC en ekki í gögnum mælaborðsins */
+const PYNO = DATA.py_monthly_in_bc ? 'eru ekki í gögnum mælaborðsins' : 'eru ekki í BC';
 const EBC = ['tekjur', 'vorunotkun', 'laun', 'husnaedi', 'annar_rekstur'], BELOW = ['afskriftir', 'fjarmagn', 'oreglulegt'];
 const CATL = { tekjur: 'Tekjur', vorunotkun: 'Vörunotkun og aðföng', laun: 'Laun og launatengd gjöld', husnaedi: 'Húsnæði', annar_rekstur: 'Annar rekstrarkostnaður', afskriftir: 'Afskriftir', fjarmagn: 'Fjármagnsliðir', oreglulegt: 'Óreglulegir liðir' };
 const ONE = DATA.oneoffs.filter(o => o.cat === 'tekjur'), ONENO = new Set(ONE.map(o => o.no));
@@ -237,43 +248,43 @@ const baseOpts = () => ({ responsive: true, maintainAspectRatio: false, animatio
 function setDefaults() { if (window.Chart) { Chart.defaults.font.family = css('--f-body'); Chart.defaults.font.size = 12; } }
 
 /* ================= YFIRSÝN ================= */
-const FM = MS.filter(r => r.complete), N = FM.length, PYF = N / 12;
+const FM = PROV ? MS.slice() : MS.filter(r => r.complete), N = FM.length, PYF = N / 12;
 const PY = {}; ACC.forEach(a => { PY[a.cat] = (PY[a.cat] || 0) - (a.months[{{js.py}}] || 0); });
 PY.ebitda = sum(EBC, k => PY[k] || 0);
 const YTD = { tekjur: sum(FM, r => r.tekjur), ebitda: sum(FM, r => r.ebitda), laun: sum(FM, r => r.laun), hagn: sum(FM, r => r.hagnadur_fs) };
 let metric = 'eb';
 function overview() {
   const E = YTD.ebitda, R = YTD.tekjur, pyE = PY.ebitda * PYF, pyR = PY.tekjur * PYF;
-  const cash = C.handbaert_fe, peak = Math.max(...cash), pm = cash.indexOf(peak), ar = C.krofur;
+  const cash = C.handbaert_fe, peak = Math.max(...cash), pm = cash.indexOf(peak), ci = pm === BLAST ? 0 : pm, ar = C.krofur;
   const ratio = 100 * E / R, pyRatio = 100 * PY.ebitda / PY.tekjur;
   $('h-eb').innerHTML = `${mkr(E)}<small>m.kr.</small>`;
-  $('h-text').textContent = `Afkoman er ${E / pyE >= 2 ? 'meira en tvöföld' : sg(100 * (E / pyE - 1), 0) + '%'} á við sama tíma í fyrra. ${{{js.h_cash_lead}}} ${mkr(peak - cash[BLAST])} m.kr. frá lokum ${MF[mi(B.months[pm])]}.`;
+  $('h-text').textContent = `Afkoman er ${E / pyE >= 2 ? 'meira en tvöföld' : sg(100 * (E / pyE - 1), 0) + '%'} á við sama tíma í fyrra. ${{{js.h_cash_lead}}} ${mkr(Math.abs(cash[BLAST] - cash[ci]))} m.kr. frá lokum ${MF[mi(B.months[ci])]}.`;
   $('h-row').innerHTML = [['Tekjur', `${mkr(R)} m.kr.`, `${sg(100 * (R / pyR - 1))}% frá fyrra ári`], ['EBITDA-hlutfall', `${fmt(ratio)}%`, `${{{js.py}}}: ${fmt(pyRatio)}%`], ['Handbært fé', `${mkr(cash[BLAST])} m.kr.`, `staða ${ddmmyyyy(DATA.as_of)}`]]
     .map(([l, v, s]) => `<div><b>${v}</b><span>${l} · ${s}</span></div>`).join('');
   /* Innsýn á stjórnarmáli. Engin tala hér endurtekur töluna í hero. */
   const lr = 100 * YTD.laun / R, pyLr = -100 * PY.laun / PY.tekjur, one = oneIn(FULL), exRatio = 100 * (E - one) / (R - one);
-  const top3 = 100 * sum(AG.rows.slice(0, 3), r => r.total) / AG.total, top1 = 100 * (AG.rows[0] ? AG.rows[0].total : 0) / AG.total, od = 100 * (AG.total - AG.not_yet_due) / AG.total;
+  const top3 = 100 * sum(AGC.slice(0, 3), r => r.total) / AG.total, top1 = 100 * (AGC[0] ? AGC[0].total : 0) / AG.total, od = 100 * (AG.total - AG.not_yet_due) / AG.total;
   const I = [
     ['l', '↑', 'Afkoma', {{js.ins1_title}}, `${{{js.ins1_lead}}} ${fmt(lr)}% af tekjum á móti ${fmt(pyLr)}% í fyrra.${one ? ` ${{{js.ins1_one}}} (${mkr(one)} m.kr.) er einskiptis; án hennar er EBITDA-hlutfallið ${fmt(exRatio)}%.` : ''}`, 'Til upplýsingar'],
-    ['h', 'kr', 'Sjóður', {{js.ins2_title}}, `Útistandandi viðskiptakröfur eru ${mkr(ar[BLAST])} m.kr., um ${fmt(ar[BLAST] / cash[BLAST], 0)}-falt handbært fé. ${{{js.ins2_tail}}}`, 'Til ákvörðunar'],
+    ['h', 'kr', 'Sjóður', {{js.ins2_title}}, `Útistandandi viðskiptakröfur eru ${mkr(ar[BLAST])} m.kr.${cash[BLAST] > 0 && ar[BLAST] >= cash[BLAST] ? `, um ${fmt(ar[BLAST] / cash[BLAST], 0)}-falt handbært fé.` : ` og handbært fé ${mkr(cash[BLAST])} m.kr.`}${HASB ? ` Birgðir binda ${mkr(BIR[BLAST])} m.kr. til viðbótar.` : ''} ${{{js.ins2_tail}}}`, 'Til ákvörðunar'],
     ['m', '◎', 'Viðskiptavinir', {{js.ins3_title}}, `Þrír stærstu skuldararnir eiga ${fmt(top3, 0)}% útistandandi krafna og sá stærsti einn ${fmt(top1, 0)}%. ${{{js.ins3_tail}}}`, 'Til umræðu'],
     ['h', '!', 'Áhætta', {{js.ins4_title}}, `${fmt(od, 0)}% krafna eru komnar fram yfir gjalddaga og ${mkr(AG.b61)} m.kr. eru eldri en 60 daga. ${{{js.ins4_tail}}}`, 'Til ákvörðunar']];
   $('ins').innerHTML = I.map(([s, ic, k, t, p, tag]) => `<div class="d-item"><span class="d-ico ${s}">${ic}</span><div><span class="ins-k">${k}</span><b style="display:block">${t}</b><p>${p}</p></div><span class="pill ${tag === 'Til ákvörðunar' ? 'h' : tag === 'Til umræðu' ? 'm' : 'i'}">${tag}</span></div>`).join('');
-  $('yfir-note').textContent = `Samanburður við ${{{js.py}}} miðast við ${N}/12 af ársuppgjöri ${{{js.py}}} (mánaðartölur ${{{js.py}}} eru ekki í BC). Rekstrartölur ná til ${monthEnd(LASTF)}; sjóðsstaða og kröfur eru miðaðar við ${ddmmyyyy(DATA.as_of)}.`;
+  $('yfir-note').textContent = `Samanburður við ${{{js.py}}} miðast við ${N}/12 af ársuppgjöri ${{{js.py}}} (mánaðartölur ${{{js.py}}} ${PYNO}). Rekstrartölur ná til ${monthEnd(LASTF)}; sjóðsstaða og kröfur eru miðaðar við ${ddmmyyyy(DATA.as_of)}.`;
   drawMain(); drawCash(); forecastCard();
 }
 /* ---------- Árið stefnir í (spá Bifrastar) ---------- */
 const FC = DATA.fc || null, FY = FC && FC.year, F26 = FC ? FC.forecast.filter(f => f.ym.startsWith({{js.year}})) : [];
 const oneM = m => ONE.filter(o => o.ym === m).reduce((s, o) => s + o.amount, 0);
 function forecastCard() {
-  if (!FC || !F26.length || !FY) { $('fc-card').hidden = true; return; }
+  if (!FC || !F26.length || !FY) { $('fc-card').hidden = true; if ($('ft-fc')) $('ft-fc').hidden = true; return; }
   const lo = FY.raun_ebitda + FY.p10_ebitda, hi = FY.raun_ebitda + FY.p90_ebitda, f0 = F26[0], f1 = F26.at(-1);
-  const w = f => (f.ebitda_p90 - f.ebitda_p10) / 2, done = 100 * FY.raun_ebitda / FY.ar_ebitda, one = oneIn(FULL);
+  const w = f => (f.ebitda_p90 - f.ebitda_p10) / 2, drv = (DATA.js || {}).fc_driver != null ? DATA.js.fc_driver : (f1.tekjur_p90 - f1.tekjur_p10 >= f1.ebitda_p90 - f1.ebitda_p10 ? 'tekjum' : ''), done = 100 * FY.raun_ebitda / FY.ar_ebitda, one = oneIn(FULL);
   $('fc-eb').innerHTML = `${mkr(FY.ar_ebitda)}<small>m.kr.</small>`;
   $('fc-eb-d').innerHTML = `Bil P10–P90: <b>${fmt(lo / 1e6, 0)}–${fmt(hi / 1e6, 0)} m.kr.</b> · ${sg(100 * (FY.ar_ebitda / PY.ebitda - 1), 0)}% frá ${{{js.py}}} (${mkr(PY.ebitda)} m)`;
   $('fc-rev').innerHTML = `${mkr(FY.ar_tekjur)}<small>m.kr.</small>`;
   $('fc-rev-d').textContent = `Raun ${ml(FULL[0])}–${ml(LASTF)} ${mkr(FY.raun_tekjur)} m + spá ${ml(f0.ym)}–${ml(f1.ym)} ${mkr(FY.spa_tekjur)} m · ${sg(100 * (FY.ar_tekjur / PY.tekjur - 1), 0)}% frá ${{{js.py}}}`;
-  $('fc-text').textContent = `Um ${fmt(done, 0)}% af áætlaðri EBITDA ársins er þegar í höfn, svo óvissan liggur öll í ${MF[mi(f0.ym)]}–${MF[mi(f1.ym)]} og ræðst fyrst og fremst af tekjum: bilið breikkar úr ±${fmt(w(f0) / 1e6, 0)} m.kr. í ${MF[mi(f0.ym)]} í ±${fmt(w(f1) / 1e6, 0)} m.kr. í ${MF[mi(f1.ym)]}.${one ? ` Spáin gerir ekki ráð fyrir að einskiptissalan í ${MF[mi(ONE[0].ym)]} (${mkr(one)} m.kr.) endurtaki sig.` : ''}`;
+  $('fc-text').textContent = `Um ${fmt(done, 0)}% af áætlaðri EBITDA ársins er þegar í höfn, svo óvissan liggur öll í ${MF[mi(f0.ym)]}–${MF[mi(f1.ym)]} ${drv ? ` og ræðst fyrst og fremst af ${drv}` : ''}: bilið breikkar úr ±${fmt(w(f0) / 1e6, 0)} m.kr. í ${MF[mi(f0.ym)]} í ±${fmt(w(f1) / 1e6, 0)} m.kr. í ${MF[mi(f1.ym)]}.${one ? ` Spáin gerir ekki ráð fyrir að einskiptissalan í ${MF[mi(ONE[0].ym)]} (${mkr(one)} m.kr.) endurtaki sig.` : ''}`;
   if (!window.Chart) return;
   const ms = [...FULL, ...F26.map(f => f.ym)], li = FULL.length - 1, act = r => r ? r.ebitda / 1e6 : null;
   const raw = ms.map(m => { const r = FM.find(x => x.ym === m); return r ? (r.ebitda - oneM(m)) / 1e6 : null; });
@@ -296,6 +307,7 @@ function drawMain() {
 }
 function drawCash() {
   const ds = [['Uppsafnaður hagnaður', C.afkoma_arsins, '--s3', true], ['Handbært fé', C.handbaert_fe, '--s1', false], ['Viðskiptakröfur', C.krofur, '--dn', false]];
+  if (HASB) { ds.push(['Birgðir', BIR, '--warn', false]); if (!$('lg-bir')) $('cash-leg').insertAdjacentHTML('beforeend', '<span id="lg-bir"><i style="background:var(--warn)"></i>Birgðir</span>'); }
   up('cash', $('c-cash'), { type: 'line', data: { labels: BL, datasets: ds.map(([l, d, c, f]) => ({ label: l, data: d.map(v => v / 1e6), borderColor: css(c), borderWidth: 2.5, tension: .4, pointRadius: 0, pointHoverRadius: 5, fill: f, backgroundColor: grad(css(c), .16, 0) })) }, options: baseOpts() });
 }
 
@@ -319,18 +331,18 @@ function reference(P) {
   const n = P.ms.length, c = st.cmp;
   if (c === 'prev') {
     const i0 = ALLM.indexOf(P.ms[0]), pm = i0 - n >= 0 ? ALLM.slice(i0 - n, i0) : null;
-    if (!pm) return { ok: false, label: 'Fyrra tímabil', note: `Ekkert sambærilegt fyrra tímabil er til fyrir ${P.label.toLowerCase()}: mánaðartölur fyrir ${{{js.py}}} eru ekki í BC. Veldu „Sama tímabil í fyrra“ eða styttra tímabil.` };
+    if (!pm) return { ok: false, label: 'Fyrra tímabil', note: `Ekkert sambærilegt fyrra tímabil er til fyrir ${P.label.toLowerCase()}: mánaðartölur fyrir ${{{js.py}}} ${PYNO}. Veldu „Sama tímabil í fyrra“ eða styttra tímabil.` };
     return { ok: true, label: span(pm), note: `Borið saman við næsta tímabil á undan af sömu lengd (${span(pm)}).${pm.some(m => INC.has(m)) ? ' Viðmiðið inniheldur bráðabirgðamánuð.' : ''}`, acc: a => av(a, pm), cat: k => catV(k, pm), oneRef: oneIn(pm) };
   }
   if (c === 'py') {
     const f = n / 12;
-    return { ok: true, label: `${{{js.py}}} × ${n}/12`, note: `Sama tímabil í fyrra: ársuppgjör ${{{js.py}}} deilt jafnt á mánuði (${n}/12), þar sem mánaðartölur ${{{js.py}}} eru ekki í BC. Árstíðasveiflur koma því ekki fram í viðmiðinu.`, acc: a => -(a.months[{{js.py}}] || 0) * f, cat: k => sum(ACC.filter(a => a.cat === k), a => -(a.months[{{js.py}}] || 0) * f), oneRef: 0 };
+    return { ok: true, label: `${{{js.py}}} × ${n}/12`, note: `Sama tímabil í fyrra: ársuppgjör ${{{js.py}}} deilt jafnt á mánuði (${n}/12), þar sem mánaðartölur ${{{js.py}}} ${PYNO}. Árstíðasveiflur koma því ekki fram í viðmiðinu.`, acc: a => -(a.months[{{js.py}}] || 0) * f, cat: k => sum(ACC.filter(a => a.cat === k), a => -(a.months[{{js.py}}] || 0) * f), oneRef: 0 };
   }
   if (c === 'spa') {
     const S = P.ms.map(m => SPA.find(s => s.ym === m));
     if (!SPA.length) return { ok: false, label: 'Spá', note: 'Engin spá Bifrastar er til fyrir þetta tímabil.' };
     if (S.some(x => !x)) return { ok: false, label: 'Spá', note: `Spá Bifrastar (gerð mánuði fyrir fram) er aðeins til fyrir ${ml(SPA[0].ym)}–${ml(SPA.at(-1).ym)} ${{{js.year}}}. Veldu mánuð, ársfjórðung eða bil innan þess.` };
-    return { ok: true, label: 'Spá', note: 'Spá Bifrastar, gerð mánuði fyrir fram með gögnum sem lágu fyrir þá. Spáin er á liðum, ekki lyklum, og nær ekki til liða neðan EBITDA. Einskiptissala er ekki í spánni.', acc: () => null, cat: k => EBC.includes(k) ? (k === 'tekjur' ? 1 : -1) * sum(S, s => s[k] || 0) : null, oneRef: 0 };
+    return { ok: true, label: 'Spá', note: 'Spá Bifrastar, gerð mánuði fyrir fram með gögnum sem lágu fyrir þá. Spáin er á liðum, ekki lyklum, og nær ekki til liða neðan EBITDA.' + (ONE.length ? ' Einskiptissala er ekki í spánni.' : ''), acc: () => null, cat: k => EBC.includes(k) ? (k === 'tekjur' ? 1 : -1) * sum(S, s => s[k] || 0) : null, oneRef: 0 };
   }
   const b = BU.find(x => 'bu:' + x.name === c) || { name: '?', acc: {} }, keys = Object.keys(b.acc);
   const draft = b.src !== 'bc', lbl = `Áætlun ${b.name}${draft ? ' (drög)' : ''}`;
@@ -471,12 +483,12 @@ function initRekstur() {
 const BA = B.accounts, iA0 = B.months.indexOf(LASTF), iA = iA0 < 0 ? BLAST : iA0;
 const lvl = (no, i) => (BA.find(a => a.no === no) || { levels: [] }).levels[i] || 0;
 function cfCalc(i0, i1) {
-  const d = k => C[k][i1] - C[k][i0];
+  const d = k => C[k] ? C[k][i1] - C[k][i0] : 0;
   const dep = -(sum(BA.filter(a => {{js.dep_accounts}}.includes(a.no)), a => a.levels[i1] - a.levels[i0]));
   const capex = d('fastafjarmunir') + dep;
   const other = d('eigid_fe') - d('afkoma_arsins') - d('eigid_fe_bokad');
-  const r = { hagn: d('afkoma_arsins'), dep, krof: -d('krofur'), skamm: d('skammtimaskuldir'), capex: -capex, lan: d('langtimaskuldir'), ard: d('eigid_fe_bokad'), other, open: C.handbaert_fe[i0], close: C.handbaert_fe[i1] };
-  r.rek = r.hagn + r.dep + r.krof + r.skamm; r.fjf = r.capex; r.fjm = r.lan + r.ard + r.other; r.chg = r.rek + r.fjf + r.fjm; r.diff = r.open + r.chg - r.close;
+  const r = { hagn: d('afkoma_arsins'), dep, krof: -d('krofur'), bir: -(BIR[i1] - BIR[i0]), adr: -(ADR[i1] - ADR[i0]), skamm: d('skammtimaskuldir'), capex: -capex, lan: d('langtimaskuldir'), ard: d('eigid_fe_bokad'), other, open: C.handbaert_fe[i0], close: C.handbaert_fe[i1] };
+  r.rek = r.hagn + r.dep + r.krof + r.bir + r.skamm; r.fjf = r.capex + r.adr; r.fjm = r.lan + r.ard + r.other; r.chg = r.rek + r.fjf + r.fjm; r.diff = r.open + r.chg - r.close;
   return r;
 }
 /* hlutar sjóðstreymis: lok hvers ársfjórðungs fyrir síðasta fullbókaða mánuð, sá mánuður og nýjasta staða */
@@ -487,10 +499,10 @@ const bsOpen = new Set();
 const BS0 = monthEnd(B.months[0]).slice(0, 6), CF0 = B.months[1] ? `1.${+B.months[1].slice(5)}.` : '';
 function efna() {
   const L = BLAST, T = cfCalc(0, L), last3 = FM.slice(-3), avgRev = sum(last3, r => r.tekjur) / last3.length;
-  const vf = C.krofur[L] + C.handbaert_fe[L] - C.skammtimaskuldir[L], vf0 = C.krofur[0] + C.handbaert_fe[0] - C.skammtimaskuldir[0];
+  const vf = C.krofur[L] + BIR[L] + C.handbaert_fe[L] - C.skammtimaskuldir[L], vf0 = C.krofur[0] + BIR[0] + C.handbaert_fe[0] - C.skammtimaskuldir[0];
   const dso = C.krofur[L] / avgRev * 30, eq = 100 * C.eigid_fe[L] / C.eignir[L], eq0 = 100 * C.eigid_fe[0] / C.eignir[0];
   const K = [['Veltufé', mkr(vf), 'm.kr.', `${BS0}: ${mkr(vf0)} m · veltufjármunir − skammtímaskuldir`],
-    ['Handbært fé frá rekstri', sg(T.rek / 1e6), 'm.kr.', `${CF0}–${ddmmyyyy(DATA.as_of).slice(0, 5)}, þrátt fyrir ${mkr(T.hagn)} m hagnað`],
+    ['Handbært fé frá rekstri', sg(T.rek / 1e6), 'm.kr.', `${CF0}–${ddmmyyyy(DATA.as_of).slice(0, 5)}, ${T.rek < T.hagn ? `þrátt fyrir ${mkr(T.hagn)} m hagnað` : `hagnaður ${mkr(T.hagn)} m`}`],
     ['Innheimtutími', fmt(dso, 0), 'dagar', `kröfur á móti meðalsölu ${ml(last3[0].ym)}–${ml(last3.at(-1).ym)}`],
     ['Eiginfjárhlutfall', fmt(eq), '%', `${delta(eq - eq0, true, sg(eq - eq0) + ' pp')} frá ${BS0} · skuldir ${mkr(C.langtimaskuldir[L] + C.skammtimaskuldir[L])} m`]];
   $('kpis2').innerHTML = K.map(([l, v, u, d]) => `<div class="card kpi"><span class="l">${l}</span><span class="v">${v}<small>${u}</small></span><span class="d">${d}</span></div>`).join('');
@@ -503,7 +515,7 @@ function efna() {
   const vrow = (lab, f, cls) => `<tr class="${cls}"><td>${lab}</td>${IX.map(i => `<td class="n">${mkr(f(i))}</td>`).join('')}<td class="n k k1">${sg((f(L) - f(0)) / 1e6)}</td></tr>`;
   const catR = (k, l) => { const o = bsOpen.has(k); return vrow(`<button class="tg" data-k="${k}" aria-expanded="${o}"><span class="car">▸</span>${l}</button>`, i => C[k][i], 'cat') + (o ? accRows(k).map(([l2, f]) => vrow(l2, f, 'acc')).join('') : ''); };
   $('bs').innerHTML = `<thead><tr><th>Liður</th>${hd.map(h => `<th class="n">${h}</th>`).join('')}<th class="n k k1">Breyting</th></tr></thead><tbody>
-    <tr class="grp"><td colspan="5">Eignir</td></tr>${catR('fastafjarmunir', 'Fastafjármunir')}${catR('krofur', 'Viðskiptakröfur')}${catR('handbaert_fe', 'Handbært fé')}${vrow('Eignir samtals', i => C.eignir[i], 'sum')}
+    <tr class="grp"><td colspan="5">Eignir</td></tr>${catR('fastafjarmunir', 'Fastafjármunir')}${HASA ? catR('adrar_eignir', 'Aðrar eignir') : ''}${HASB ? catR('birgdir', 'Birgðir') : ''}${catR('krofur', 'Viðskiptakröfur')}${catR('handbaert_fe', 'Handbært fé')}${vrow('Eignir samtals', i => C.eignir[i], 'sum')}
     <tr class="grp"><td colspan="5">Eigið fé og skuldir</td></tr>${catR('eigid_fe', 'Eigið fé')}${catR('langtimaskuldir', 'Langtímaskuldir')}${catR('skammtimaskuldir', 'Skammtímaskuldir')}${vrow('Eigið fé og skuldir samtals', i => C.eigid_fe[i] + C.langtimaskuldir[i] + C.skammtimaskuldir[i], 'sum')}</tbody>`;
   $('bs').querySelectorAll('.tg').forEach(b => b.onclick = () => { const k = b.dataset.k; bsOpen.has(k) ? bsOpen.delete(k) : bsOpen.add(k); efna(); });
   /* Sjóðstreymi */
@@ -511,11 +523,11 @@ function efna() {
   const r = (l, k, cls = '') => `<tr class="${cls}"><td>${l}</td>${all.map((x, j) => `<td class="n ${j === all.length - 1 ? 'k k1' : ''}">${mkr(x[k])}</td>`).join('')}</tr>`;
   const hasOther = all.some(x => Math.abs(x.other) > 1e3);
   $('cf').innerHTML = `<thead><tr><th>Liður</th>${SEG.map(s => `<th class="n">${segL(s)}</th>`).join('')}<th class="n k k1">Samtals</th></tr></thead><tbody>
-    <tr class="grp"><td colspan="${all.length + 1}">Rekstur</td></tr>${r('Hagnaður tímabils', 'hagn')}${r('Afskriftir', 'dep')}${r('Breyting viðskiptakrafna', 'krof')}${r('Breyting skammtímaskulda', 'skamm')}${r('Handbært fé frá rekstri', 'rek', 'sum')}
-    <tr class="grp"><td colspan="${all.length + 1}">Fjárfesting</td></tr>${r('Fjárfesting í fastafjármunum', 'capex')}${r('Fjárfestingarhreyfingar', 'fjf', 'sum')}
+    <tr class="grp"><td colspan="${all.length + 1}">Rekstur</td></tr>${r('Hagnaður tímabils', 'hagn')}${r('Afskriftir', 'dep')}${r('Breyting viðskiptakrafna', 'krof')}${HASB ? r('Breyting birgða', 'bir') : ''}${r('Breyting skammtímaskulda', 'skamm')}${r('Handbært fé frá rekstri', 'rek', 'sum')}
+    <tr class="grp"><td colspan="${all.length + 1}">Fjárfesting</td></tr>${r('Fjárfesting í fastafjármunum', 'capex')}${HASA ? r('Breyting annarra eigna', 'adr') : ''}${r('Fjárfestingarhreyfingar', 'fjf', 'sum')}
     <tr class="grp"><td colspan="${all.length + 1}">Fjármögnun</td></tr>${r('Afborganir langtímalána', 'lan')}${r('Greiddur arður', 'ard')}${hasOther ? r('Aðrar breytingar á eigin fé', 'other') : ''}${r('Fjármögnunarhreyfingar', 'fjm', 'sum')}
     ${r('Breyting á handbæru fé', 'chg', 'sum')}${r('Handbært fé í upphafi', 'open')}${r('Handbært fé í lok', 'close', 'sum')}</tbody>`;
-  $('cf-note').textContent = `Óbein aðferð, reiknuð úr breytingum á efnahag. Upphafsstaða er ${monthEnd(B.months[0])}, fyrsti mánuður í gögnunum. * Hagnaður eftir ${monthEnd(LASTF)} er bráðabirgðatala þar sem laun og vörunotkun eru ekki komin inn; sjóðstaðan sjálf er raunstaða í banka.`;
+  $('cf-note').textContent = `Óbein aðferð, reiknuð úr breytingum á efnahag. Upphafsstaða er ${monthEnd(B.months[0])}, fyrsti mánuður í gögnunum.${B.months[BLAST] > LASTF ? ` * Hagnaður eftir ${monthEnd(LASTF)} er bráðabirgðatala þar sem laun og vörunotkun eru ekki komin inn; sjóðstaðan sjálf er raunstaða í banka.` : ''}`;
 }
 
 /* ================= ÁHÆTTUR ================= */
@@ -529,12 +541,14 @@ function aha() {
   $('plist').innerHTML = AG.rows.slice(0, 6).map(r => `<div class="prow"><span class="av">${initials(r.name)}</span><div style="min-width:0"><div class="nm">${r.name}</div><div class="bar"><span style="width:${100 * r.total / mx}%"></span></div></div><span class="n">${mkr(r.total)}<small>${fmt(100 * r.overdue / r.total, 0)}% gjaldf.</small></span></div>`).join('');
   const one = ONE[0], oneDebt = one ? AG.rows.find(r => Math.abs(r.total - one.amount) < 1) : null;
   const cash = C.handbaert_fe, pk = cash.indexOf(Math.max(...cash)), burn = BLAST > pk ? (cash[pk] - cash[BLAST]) / (BLAST - pk) : 0;
+  const bi0 = BIR[0], biL = BIR[BLAST], biUp = HASB && biL - bi0 > 0 && (bi0 <= 0 || biL / bi0 >= 1.15);
   const R = [
-    ['h', '!', 'Vanskil viðskiptavina', `${mkr(AG.b61)} m.kr. eru eldri en 60 daga. Líkur á tapi aukast með aldri krafna.`, 'Innheimtuáætlun og mat á niðurfærslu'],
-    ['h', 'kr', 'Lækkandi sjóður', `Handbært fé hefur lækkað um ${mkr(Math.abs(burn))} m.kr. á mánuði að meðaltali frá lokum ${MF[mi(B.months[pk])]}, á sama tíma og reksturinn skilar hagnaði.`, 'Mánaðarleg sjóðspá til stjórnar'],
-    ...(AG.rows.length ? [['m', '◎', 'Samþjöppun viðskiptavina', `${AG.rows[0].name} á ${fmt(100 * AG.rows[0].total / AG.total, 0)}% útistandandi krafna.`, 'Lánamörk á stærstu aðila']] : []),
-    ...(one ? [['m', '1×', 'Einskiptissala ógreidd', `${{{js.one_sale}}} í ${MF[mi(one.ym)]} (${mkr(one.amount)} m.kr.)${oneDebt ? ' er enn útistandandi' : ''} og endurtekur sig ekki.`, 'Tekið út í mati á undirliggjandi rekstri']] : [])];
-  $('risk').innerHTML = R.map(([s, i, t, p, a]) => `<div class="d-item"><span class="d-ico ${s}">${i}</span><div><b>${t}</b><p>${p}</p><p class="sub">Viðbragð: ${a}</p></div><span class="pill ${s}">${s === 'h' ? 'Mikil' : 'Miðlungs'}</span></div>`).join('');
+    ...(AG.b61 > 0 ? [['h', '!', 'Vanskil viðskiptavina', `${mkr(AG.b61)} m.kr. eru eldri en 60 daga. Líkur á tapi aukast með aldri krafna.`, 'Innheimtuáætlun og mat á niðurfærslu']] : []),
+    ...(burn > 0 ? [['h', 'kr', 'Lækkandi sjóður', `Handbært fé hefur lækkað um ${mkr(Math.abs(burn))} m.kr. á mánuði að meðaltali frá lokum ${MF[mi(B.months[pk])]}${YTD.hagn > 0 ? ', á sama tíma og reksturinn skilar hagnaði' : ''}.`, 'Mánaðarleg sjóðspá til stjórnar']] : []),
+    ...(biUp ? [['m', '▣', 'Birgðir aukast', `Birgðir hafa aukist um ${mkr(biL - bi0)} m.kr.${bi0 > 0 ? ` (${sg(100 * (biL / bi0 - 1), 0)}%)` : ''} frá ${BS0} og binda fé.`, 'Birgðastýring og mat á seljanleika birgða']] : []),
+    ...(AGC.length ? [['m', '◎', 'Samþjöppun viðskiptavina', `${AGC[0].name} á ${fmt(100 * AGC[0].total / AG.total, 0)}% útistandandi krafna.`, 'Lánamörk á stærstu aðila']] : []),
+    ...(one ? [['m', '1×', oneDebt ? 'Einskiptissala ógreidd' : 'Einskiptissala', `${{{js.one_sale}}} í ${MF[mi(one.ym)]} (${mkr(one.amount)} m.kr.)${oneDebt ? ' er enn útistandandi' : ''} og endurtekur sig ekki.`, 'Tekið út í mati á undirliggjandi rekstri']] : [])];
+  $('risk').innerHTML = R.length ? R.map(([s, i, t, p, a]) => `<div class="d-item"><span class="d-ico ${s}">${i}</span><div><b>${t}</b><p>${p}</p><p class="sub">Viðbragð: ${a}</p></div><span class="pill ${s}">${s === 'h' ? 'Mikil' : 'Miðlungs'}</span></div>`).join('') : '<p class="sub">Engin áhætta greinist úr gögnunum.</p>';
 }
 
 /* ================= Ræsing ================= */

@@ -8,13 +8,16 @@ config.json:
   {"company": "Félag ehf.", "initials": "FÉ", "hub_url": "https://claude.ai/artifact/…",
    "source_date": "17.10.2026", "companies": ["Félag ehf.", "Samstæða: …"],
    "find": {"afstemmingar": ["h", "texti"], …},       # niðurstöður síðustu greiningar (valkvætt)
-   "sched": {"afstemmingar": {"on": true, "freq": "weekly", "wd": "1", "time": "07:00", "mode": "propose", "rc": "Bókari"}, …}}
+   "sched": {"afstemmingar": {"on": true, "freq": "weekly", "wd": "1", "time": "07:00", "mode": "propose", "rc": "Bókari"}, …},
+   "lang": "is" | "en"}                               # tungumál síðunnar = aðaltungumál miðstöðvarinnar (sjálfgefið is)
 --prefix: beinagrind síðunnar eins og birtingartólið vefur hana (allt fram að og með <body>,
   auk '\\n<meta charset="utf-8">\\n'). Fengið með því að birta einu sinni án hennar og lesa síðuna aftur.
   Án prefix virkar síðan en vistar ekki breytingar.
 """
-import argparse, json, os
+import argparse, json, os, sys
 H = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(H, '..', '..', 'bifrost-maelabord', 'scripts'))
+import i18n as I
 A = os.path.join(H, '..', 'assets')
 T_ASSETS = os.path.join(H, '..', '..', 'bifrost-maelabord', 'assets')
 DEFAULT = {
@@ -33,6 +36,14 @@ def main():
     css = open(os.path.join(T_ASSETS, 'theme.css'), encoding='utf-8').read(); comp = open(os.path.join(T_ASSETS, 'components.js'), encoding='utf-8').read()
     extra = open(os.path.join(A, 'extra.css'), encoding='utf-8').read()
     body = open(os.path.join(A, 'body.html'), encoding='utf-8').read()
+    app = open(os.path.join(A, 'app.js'), encoding='utf-8').read()
+    lang = C.get('lang') or 'is'
+    P = json.load(open(os.path.join(A, 'i18n', lang + '.json'), encoding='utf-8')) if lang != 'is' else []
+    if P:
+        body, mb = I.translate(body, P, strict=False); app, ma = I.translate(app, P, strict=False)
+        stale = [x for x in mb if x in ma]
+        if stale:
+            sys.exit('Orðabók sjalfvirkni/' + lang + ': bútar finnast ekki (úrelt orðabók): ' + '; '.join(s[:60] for s in stale[:10]))
     esc = lambda s: s.replace('&', '&amp;').replace('<', '&lt;')
     opts = ''.join(f'<option>{esc(c)}</option>' for c in (C.get('companies') or [C['company']]))
     for k, v in {'{{HUB_URL}}': C.get('hub_url', '#'), '{{INITIALS}}': esc(C.get('initials', C['company'][:2])), '{{COMPANY}}': esc(C['company']),
@@ -40,8 +51,20 @@ def main():
         body = body.replace(k, v)
     if not C.get('hub_url'):
         body = body.replace('<nav class="crumb"', '<nav hidden class="crumb"', 1)
-    app = open(os.path.join(A, 'app.js'), encoding='utf-8').read()
-    T = f'''<title>Sjálfvirknivæðing</title>
+    title = 'Sjálfvirknivæðing'
+    if lang != 'is':
+        comp = comp.replace("const BF_LANG = 'is';", f"const BF_LANG = '{lang}';", 1)
+        title = {'en': 'Automation'}.get(lang, title)
+        RC = {'Bókari': 'Bookkeeper', 'Fjármálastjóri': 'CFO', 'Framkvæmdastjóri': 'Managing director', 'Stjórn': 'Board',
+              'Bókun í fjárhag': 'G/L posting', 'Breyting á lánardrottni': 'Change to a vendor', 'Nýtt innkomið skjal': 'New incoming document',
+              'Ný bankafærsla': 'New bank entry', 'Nýr lánardrottinn': 'New vendor'}
+        for v in DEFAULT.values():
+            for k in ('rc', 'ev'):
+                if v.get(k) in RC: v[k] = RC[v[k]]
+        for v in (C.get('sched') or {}).values():
+            for k in ('rc', 'ev'):
+                if v.get(k) in RC: v[k] = RC[v[k]]
+    T = f'''<title>{title}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&subset=latin,latin-ext&display=swap">
 <script>(function(){{var m="light";try{{m=localStorage.getItem("bf-theme-v5")||"light"}}catch(e){{}}var r=document.documentElement;r.setAttribute("data-bf",m==="dark"?"dark":"light");r.setAttribute("data-pal",(m==="blue"||m==="earth")?m:"bifrost")}})()</script>
@@ -62,7 +85,7 @@ const STATE=%%STATE%%;
         assert T.count(t) == 1, t
     sched = {}
     for k, v in (C.get('sched') or DEFAULT).items():
-        sched[k] = dict(dict(on=True, freq='manual', time='07:00', mode='notify', sc=C['company'], rc='Fjármálastjóri'), **v)
+        sched[k] = dict(dict(on=True, freq='manual', time='07:00', mode='notify', sc=C['company'], rc='Fjármálastjóri' if lang == 'is' else 'CFO'), **v)
     state = dict(company=C['company'], updated=None, queue=[], sched=sched, find=C.get('find', {}),
                  log=[dict(id=k, at=C.get('source_iso', ''), s=v[0], txt=v[1]) for k, v in C.get('find', {}).items() if C.get('source_iso')])
     j = lambda v: json.dumps(v, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')

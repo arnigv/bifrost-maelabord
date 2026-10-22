@@ -1,0 +1,478 @@
+[
+[
+"`Handbært fé frá rekstri var ${m(cfTot)} m${cfP ? (below ? ` þrátt fyrir ${m(cfP[1])} m hagnað` : ` og hagnaður ${m(cfP[1])} m`) : ''}${below && cfK && cfK[1] < 0 ? `, því viðskiptakröfur hækkuðu um ${m(-cfK[1])} m` : ''}${below && cfB && cfB[1] < 0 ? `${cfK && cfK[1] < 0 ? ' og' : ', því'} birgðir hækkuðu um ${m(-cfB[1])} m` : ''}. ${{{js.cf_note_tail}}}`",
+"`Cash from operations was ${m(cfTot)} m${cfP ? (below ? ` despite ${m(cfP[1])} m profit` : ` and profit ${m(cfP[1])} m`) : ''}${below && cfK && cfK[1] < 0 ? `, because trade receivables rose by ${m(-cfK[1])} m` : ''}${below && cfB && cfB[1] < 0 ? `${cfK && cfK[1] < 0 ? ' and' : ', because'} inventory rose by ${m(-cfB[1])} m` : ''}. ${{{js.cf_note_tail}}}`"
+],
+[
+"`<thead><tr><th>Skýring</th><th>Í BC</th><th>Athugasemd</th></tr></thead><tbody>${NOTES.map(([a, b, c]) => `<tr><td>${a}</td><td><span class=\"pill ${st[b]}\">${b}</span></td><td class=\"sub\">${c}</td></tr>`).join('')}</tbody>`",
+"`<thead><tr><th>Note</th><th>In BC</th><th>Comment</th></tr></thead><tbody>${NOTES.map(([a, b, c]) => `<tr><td>${a}</td><td><span class=\"pill ${st[b]}\">${b}</span></td><td class=\"sub\">${c}</td></tr>`).join('')}</tbody>`"
+],
+[
+">Heimild: Business Central (Bifröst), {{meta.company}}, gögn sótt {{meta.fetched}}. Lög um ársreikninga nr. 3/2006 (althingi.is/lagas/nuna/2006003.html), ársreikningaskrá Skattsins. {{text.footer_note}}<",
+">Source: Business Central (Bifröst), {{meta.company}}, data retrieved {{meta.fetched}}. Annual Accounts Act No. 3/2006 (althingi.is/lagas/nuna/2006003.html), the Register of Annual Accounts at Iceland Revenue and Customs. {{text.footer_note}}<"
+],
+[
+"`<div class=\"prow\" style=\"grid-template-columns:auto minmax(0,1fr) auto\"><i class=\"sw\" style=\"background:var(--${c})\"></i><span style=\"white-space:nowrap\">${l}</span><b class=\"n\">${v} atriði</b></div>`",
+"`<div class=\"prow\" style=\"grid-template-columns:auto minmax(0,1fr) auto\"><i class=\"sw\" style=\"background:var(--${c})\"></i><span style=\"white-space:nowrap\">${l}</span><b class=\"n\">${v} items</b></div>`"
+],
+[
+"`<div class=\"item\"><span class=\"pill ${lv[j[0]][0]}\">${lv[j[0]][1]}</span><div><b>${j[1]} · ${j[2]} færslur</b><p>${j[3]}</p><p><b>Næsta skref:</b> ${j[4]}</p></div><span class=\"n\"></span></div>`",
+"`<div class=\"item\"><span class=\"pill ${lv[j[0]][0]}\">${lv[j[0]][1]}</span><div><b>${j[1]} · ${j[2]} entries</b><p>${j[3]}</p><p><b>Next step:</b> ${j[4]}</p></div><span class=\"n\"></span></div>`"
+],
+[
+">Ekki lögfræði- eða endurskoðunarráðgjöf. Endurskoðandi og stjórn bera ábyrgð á ársreikningnum. Notendur birtast sem hlutverk, ekki nöfn.<",
+">Not legal or audit advice. The auditor and the board are responsible for the annual accounts. Users are shown as roles, not names.<"
+],
+[
+">Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.<",
+">Prepared with the help of AI (Claude). Review before relying on the figures.<"
+],
+[
+"<div class=\"lbl\"><b>${fmt(pct * 100, 0)}%</b><span>lokið</span></div>",
+"<div class=\"lbl\"><b>${fmt(pct * 100, 0)}%</b><span>done</span></div>"
+],
+[
+"'<p class=\"note\">Enginn undirbúningslisti skráður.</p>'",
+"'<p class=\"note\">No preparation list recorded.</p>'"
+],
+[
+">ábendingar til skoðunar, ekki niðurstaða um misferli<",
+">items to review, not a conclusion of misconduct<"
+],
+[
+"const st = { 'já': 'l', 'að hluta': 'm', 'nei': 'h' };",
+"const st = { 'yes': 'l', 'partly': 'm', 'no': 'h', 'já': 'l', 'að hluta': 'm', 'nei': 'h' };"
+],
+[
+"=\"Fjöldi færslna sem flaggaðar voru í hverri prófun\"",
+"=\"Number of entries flagged in each test\""
+],
+[
+"'<p class=\"note\">Engar færsluprófanir skráðar.</p>'",
+"'<p class=\"note\">No journal tests recorded.</p>'"
+],
+[
+"=\"Sjóðstreymi frá handbæru fé í byrjun til enda\"",
+"=\"Cash flow from opening to closing cash\""
+],
+[
+">Endurskoðun og ársreikningur · lög nr. 3/2006<",
+">Audit and annual accounts · Act No. 3/2006<"
+],
+[
+">Sjóðstreymi {{meta.cf_start}}–{{meta.bs_end}}<",
+">Cash flow {{meta.cf_start}}–{{meta.bs_end}}<"
+],
+[
+">{{meta.short}} endurskoðun og ársreikningur<",
+">{{meta.short}} audit and annual accounts<"
+],
+[
+"'Krafa um slit möguleg (6 mán. eftir frest)'",
+"'Winding-up may be requested (6 months after deadline)'"
+],
+[
+"'<span class=\"pill i\">vantar í BC</span>'",
+"'<span class=\"pill i\">missing in BC</span>'"
+],
+[
+"<span style=\"left:${w(b)}%\">meðalstórt ${",
+"<span style=\"left:${w(b)}%\">medium ${"
+],
+[
+"'Síðasti skiladagur, 8 mán. eftir árslok'",
+"'Last filing date, 8 months after year-end'"
+],
+[
+">Stærðarflokkur skv. 2. gr. 11. tölul.<",
+">Size class under Art. 2, item 11<"
+],
+[
+">Undirbúningslisti fyrir endurskoðanda<",
+">Preparation list for the auditor<"
+],
+[
+">Skýringar · {{text.size_class_lc}}<",
+">Notes · {{text.size_class_lc}}<"
+],
+[
+"<span style=\"left:${w(a)}%\">lítið ${",
+"<span style=\"left:${w(a)}%\">small ${"
+],
+[
+">óbein aðferð · skylt skv. 28. gr.<",
+">indirect method · required under Art. 28<"
+],
+[
+">fyrir endurskoðun {{meta.year}}<",
+">before the {{meta.year}} audit<"
+],
+[
+">ISA 320 · endurskoðandi ákveður<",
+">ISA 320 · determined by the auditor<"
+],
+[
+">Endurskoðun og ársreikningur<",
+">Audit and annual accounts<"
+],
+[
+">Félagið á móti stærðarmörkum<",
+">The company against the size thresholds<"
+],
+[
+"'Stjórnvaldssekt 600.000 kr.'",
+"'Administrative fine ISK 600,000'"
+],
+[
+">Tilbúið fyrir endurskoðun<",
+">Ready for audit<"
+],
+[
+"'5–10% hagnaðar f. skatta '",
+"'5–10% of profit before tax '"
+],
+[
+">Mörk lítils / meðalstórs<",
+">Small / medium thresholds<"
+],
+[
+"'Laun og launatengd gjöld'",
+"'Payroll and related costs'"
+],
+[
+">Ábendingar eftir prófun<",
+">Findings by test<"
+],
+[
+"'Annar rekstrarkostnaður'",
+"'Other operating expenses'"
+],
+[
+"'kröfur m. VSK / dagsala'",
+"'receivables incl. VAT / daily sales'"
+],
+[
+"'Hagnaður fyrir skatta'",
+"'Profit before tax'"
+],
+[
+">Ársreikningur (drög)<",
+">Annual accounts (draft)<"
+],
+[
+">Frumvörp í vinnslu.<",
+">Bills in progress.<"
+],
+[
+">Mikilvægi (tillaga)<",
+">Materiality (proposal)<"
+],
+[
+"'Mikilvægi (tillaga)'",
+"'Materiality (proposal)'"
+],
+[
+"'Eigið fé og skuldir'",
+"'Equity and liabilities'"
+],
+[
+">Tengt BC · Bifröst<",
+">Connected to BC · Bifröst<"
+],
+[
+">tvö af þremur ráða<",
+">two of three decide<"
+],
+[
+">Rekstrarreikningur<",
+">Income statement<"
+],
+[
+">Efnahagsreikningur<",
+">Balance sheet<"
+],
+[
+"'yfir 1,5 er traust'",
+"'above 1.5 is sound'"
+],
+[
+">undirbúningslisti<",
+">preparation list<"
+],
+[
+"=\"Meðalstórt félag\"",
+"=\"Medium-sized company\""
+],
+[
+"'Húsnæðiskostnaður'",
+"'Premises costs'"
+],
+[
+"'Veltufjárhlutfall'",
+"'Current ratio'"
+],
+[
+"'Eiginfjárhlutfall'",
+"'Equity ratio'"
+],
+[
+"'eigið fé / eignir'",
+"'equity / assets'"
+],
+[
+"'1–2% heildareigna'",
+"'1–2% of total assets'"
+],
+[
+"'Aðalfundur (dæmi)'",
+"'AGM (example)'"
+],
+[
+">Prófanir og dæmi<",
+">Tests and examples<"
+],
+[
+"'Skammtímaskuldir'",
+"'Current liabilities'"
+],
+[
+"'Heildarmikilvægi'",
+"'Overall materiality'"
+],
+[
+"'Framkvæmda (75%)'",
+"'Performance (75%)'"
+],
+[
+"'Smávægilegt (5%)'",
+"'Clearly trivial (5%)'"
+],
+[
+"'Lok reikningsárs'",
+"'End of financial year'"
+],
+[
+">Skil og frestir<",
+">Filing and deadlines<"
+],
+[
+"'Dagar til skila'",
+"'Days to filing'"
+],
+[
+"'Viðskiptakröfur'",
+"'Trade receivables'"
+],
+[
+"'Langtímaskuldir'",
+"'Non-current liabilities'"
+],
+[
+"'EBITDA-hlutfall'",
+"'EBITDA margin'"
+],
+[
+">Færsluprófanir<",
+">Journal tests<"
+],
+[
+">fjöldi færslna<",
+">number of entries<"
+],
+[
+"'Rekstrartekjur'",
+"'Operating revenue'"
+],
+[
+"'Fjármagnsgjöld'",
+"'Finance costs'"
+],
+[
+"'Fastafjármunir'",
+"'Non-current assets'"
+],
+[
+"'Eignir samtals'",
+"'Total assets'"
+],
+[
+">Undirbúningur<",
+">Preparation<"
+],
+[
+">Fyrst að laga<",
+">Fix first<"
+],
+[
+"'Skilafrestur '",
+"'Filing deadline '"
+],
+[
+"'Heildareignir'",
+"'Total assets'"
+],
+[
+"'Innheimtutími'",
+"'Days sales outstanding'"
+],
+[
+"'0,5–1% tekna '",
+"'0.5–1% of revenue '"
+],
+[
+"=\"Leiðarstika\"",
+"=\"Breadcrumb\""
+],
+[
+"=\"Lítið félag\"",
+"=\"Small company\""
+],
+[
+"'Handbært fé '",
+"'Cash '"
+],
+[
+"/krafn|kröfu/i",
+"/krafn|kröfu|receivable/i"
+],
+[
+"'Endurskoðun'",
+"'Audit'"
+],
+[
+"'Sjóðstreymi'",
+"'Cash flow'"
+],
+[
+"'Hrein velta'",
+"'Net turnover'"
+],
+[
+"'Handbært fé'",
+"'Cash'"
+],
+[
+"'eftir frest'",
+"'after deadline'"
+],
+[
+"> mælaborða<",
+"> dashboards<"
+],
+[
+">Kennitölur<",
+">Key ratios<"
+],
+[
+">gögn í BC?<",
+">data in BC?<"
+],
+[
+"'Vörunotkun'",
+"'Cost of materials'"
+],
+[
+"'Afskriftir'",
+"'Depreciation'"
+],
+[
+"/^Hagnaður/i",
+"/^(Hagnaður|Profit)/i"
+],
+[
+">← Miðstöð<",
+">← Hub<"
+],
+[
+">Skýringar<",
+">Notes<"
+],
+[
+">Í vinnslu<",
+">In progress<"
+],
+[
+"'Í vinnslu'",
+"'In progress'"
+],
+[
+">109. gr.<",
+">Art. 109<"
+],
+[
+"'Eigið fé'",
+"'Equity'"
+],
+[
+"'Miðlungs'",
+"'Medium'"
+],
+[
+">Yfirsýn<",
+">Overview<"
+],
+[
+"=\"Flipar\"",
+"=\"Tabs\""
+],
+[
+"'Ársverk'",
+"'FTEs'"
+],
+[
+">Staða <",
+">As of <"
+],
+[
+">Vantar<",
+">Missing<"
+],
+[
+"'Vantar'",
+"'Missing'"
+],
+[
+"' dagar'",
+"' days'"
+],
+[
+">félag<",
+">company<"
+],
+[
+">Lokið<",
+">Done<"
+],
+[
+"'Lokið'",
+"'Done'"
+],
+[
+">Allt<",
+">All<"
+],
+[
+"=\"Sía\"",
+"=\"Filter\""
+],
+[
+"'Hátt'",
+"'High'"
+],
+[
+"'Lágt'",
+"'Low'"
+],
+[
+"'Birgðir'",
+"'Inventories'"
+],
+[
+"'kröfur m. VSK / dagleg lánssala'",
+"'receivables incl. VAT / daily credit sales'"
+],
+[
+"'óbein aðferð · ekki skylt (28. gr.)'",
+"'indirect method · not required (Art. 28)'"
+]
+]

@@ -17,3 +17,13 @@ Skilaðu `hub.json` og keyrðu `render_hub.py`. Skrifaðu aldrei HTML miðstöð
 | `recommended[]` | 0–3 | `{id, reasons[]}` úr `sermaelabord/scripts/flokka.py` (`id` úr pakkar.json, `reasons` = `astaedur`) |
 
 Tölur: íslenskt snið („1.295,6 m“, „−18,1 m“). Sömu lykiltölur og í mælaborðunum sjálfum.
+
+## Tungumál (`lang`, `i18n`)
+
+| Lykill | Dæmi | Skýring |
+|---|---|---|
+| `lang` | `"is"` | tungumál grunngagna (úr `dataset.json`). Ræður hvaða mál opnast fyrst. Vanti það er það greint úr heitum í gögnunum. |
+| `i18n.en` (eða `i18n.is`) | `{"meta": {...}, "text": {...}, "html": {...}, "js": {...}, "names": {...}}` | yfirlag fyrir hitt málið. Sömu lyklar og að ofan, aðeins þeir sem breytast. Dagsetningar á ensku `17 Oct 2026`, tölur `1,234.5`. |
+| `i18n.<lang>.names` | `{"Áætlun 2026": "Budget 2026"}` | þýðir heila strengi hvar sem er í gögnunum (heiti lykla utan staðaltöflu, áætlana, flokka, stöðu). |
+
+Sjá `example.json` (yfirlagið `i18n.en`) og `bifrost-maelabord/SKILL.md`, kaflann *Tungumál*.

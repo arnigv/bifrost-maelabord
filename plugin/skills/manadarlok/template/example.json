@@ -1,6 +1,7 @@
 {
  "today": "2026-10-17",
  "company": "DT Vélsmiðjan ehf.",
+ "jobs_n": 15,
  "months": [
   {
    "ym": "2026-01",
@@ -1068,6 +1069,7 @@
    {
     "s": "h",
     "t": "Áfangi V-2601 líklega tvíreikningsfærður",
+    "if": "jobs_n",
     "d": "SR00089 og SR00110, hvor 50,0 m án VSK (62,0 m með VSK), báðir dagsettir sunnudaginn 23.08.2026 fyrir sama áfanga.",
     "nx": "Bera saman við verksamning og framvindu. Ef tvítekið: kreditreikningur á annan og leiðrétting tekna.",
     "role": "Fjármálastjóri",
@@ -1257,5 +1259,304 @@
    }
   ],
   "unrec": "sep–okt"
+ },
+ "i18n": {
+  "en": {
+   "meta": {
+    "as_of": "17 Oct 2026"
+   },
+   "text": {
+    "source": "Source: Business Central (Bifröst), DT Vélsmiðjan ehf., general ledger, bank accounts and bank reconciliations, customer and supplier ledgers, purchase invoices, exchange rates and accounting periods, retrieved 16–18 Oct 2026. As of 17 Oct 2026."
+   },
+   "js": {
+    "bank_note": "All six accounts were reconciled to bank statements on 31 Aug 2026 ({days:n} days ago). Reconciliation for September and October is missing, and about ISK {unb}m of payments for those months are not posted.",
+    "open_items": [
+     {
+      "s": "h",
+      "t": "Payments Sep–Oct not posted",
+      "d": "{unb_list}.",
+      "nx": "Get bank statements for Sep–Oct, post the payments and reconcile the accounts.",
+      "role": "Bookkeeper",
+      "amt": null,
+      "if": "unb_n",
+      "ref": "unb"
+     },
+     {
+      "s": "h",
+      "t": "VAT settlement account ISK 122.6m in debit",
+      "d": "No settlement entries have been made this year. Net VAT payable is {vsk_net}m; Jul–Aug {vsk_julagu}m was due on 5 Oct.",
+      "nx": "Confirm the Jul–Aug return and payment with Iceland Revenue, make settlement entries and reconcile to the returns.",
+      "role": "Bookkeeper",
+      "amt": null,
+      "ref": "vsk9570"
+     },
+     {
+      "s": "h",
+      "t": "2025 year-end not closed",
+      "d": "The 2025 profit has not been transferred to retained earnings and financial year 2025 is open.",
+      "nx": "Close the 2025 income statement once the auditor has confirmed the closing balances.",
+      "role": "CFO",
+      "amt": 168100000
+     },
+     {
+      "s": "h",
+      "t": "September not fully posted",
+      "d": "Payroll, materials, depreciation, premises costs and interest are not posted for September. See checklist.",
+      "nx": "Post payroll and materials, run depreciation and record accrued costs.",
+      "role": "Bookkeeper",
+      "amt": null,
+      "est": true,
+      "ref": "inc_est"
+     },
+     {
+      "s": "h",
+      "t": "Milestone V-2601 probably billed twice",
+      "if": "jobs_n",
+      "d": "SR00089 and SR00110, ISK 50.0m each excl. VAT (62.0m incl. VAT), both dated Sunday 23 Aug 2026 for the same milestone.",
+      "nx": "Compare with the job contract and progress. If duplicated: credit note on one and a revenue correction.",
+      "role": "CFO",
+      "amt": 50000000
+     },
+     {
+      "s": "h",
+      "t": "Customers: ledger above subledger",
+      "d": "Receivable accounts are higher than the ageing. Manual entries directly on 6310–6330 do not appear on any customer.",
+      "nx": "Trace the manual entries (LEIÐR, MILLIF 30 Sep) and post them through the customer.",
+      "role": "Bookkeeper",
+      "amt": null,
+      "ref": "ARd"
+     },
+     {
+      "s": "h",
+      "t": "Imbalance within January and October",
+      "d": "Debit and credit do not balance within the months (+2.4m and −2.4m).",
+      "nx": "Find the document and reverse it with the correct dates.",
+      "role": "Bookkeeper",
+      "amt": null,
+      "if": "stm_n",
+      "ref": "stm_first_abs"
+     },
+     {
+      "s": "h",
+      "t": "87 manual revenue entries",
+      "d": "Revenue on 1110 posted through a journal (source code FHFBOK) in monthly totals, not from sales invoices.",
+      "nx": "Get the sales breakdown behind each entry and reconcile to invoices. A second person approves journals.",
+      "role": "CFO",
+      "amt": null,
+      "txt": "87 e."
+     },
+     {
+      "s": "m",
+      "t": "Unapproved invoices past due",
+      "d": "{inv_n:n} purchase invoices ({inv_sum}m) await approval; {inv_od_n:n} of them are past due.",
+      "nx": "Approve or reject those that are due and post them so the liability and cost show.",
+      "role": "CFO",
+      "amt": null,
+      "if": "inv_od_n",
+      "ref": "inv_od_sum"
+     },
+     {
+      "s": "m",
+      "t": "Bank reconciliation Sep–Oct not done",
+      "d": "Last reconciliation 31 Aug 2026. Landsbankinn has an outstanding item (salaries paid 31 Aug) from the last statement.",
+      "nx": "Reconcile all six accounts for September and then October.",
+      "role": "Bookkeeper",
+      "amt": null,
+      "ref": "lb_outst_abs"
+     },
+     {
+      "s": "m",
+      "t": "Card transactions Sep–Oct not posted",
+      "d": "Account 6340 unchanged since 31 Aug although the card balance rose monthly Jan–Aug.",
+      "nx": "Get card statements for Sep–Oct and post them.",
+      "role": "Bookkeeper",
+      "amt": null,
+      "est": true,
+      "ref": "kort_2"
+     },
+     {
+      "s": "m",
+      "t": "Long-term loans: repayments Sep–Oct",
+      "d": "Balance on 9110 unchanged since 31 Aug; two repayments of 1.25m are missing.",
+      "nx": "Post repayments and interest per the loan statement.",
+      "role": "Bookkeeper",
+      "amt": 2500000
+     },
+     {
+      "s": "m",
+      "t": "Exchange differences never run",
+      "d": "Receivable SR00088, EUR 210,000, stands at the posting rate. The EUR rate is missing in BC after 14 Sep.",
+      "nx": "Update the exchange rate table and run currency revaluation before the end of September.",
+      "role": "Bookkeeper",
+      "amt": 1596000,
+      "est": true
+     },
+     {
+      "s": "m",
+      "t": "Suppliers: subledger above ledger",
+      "d": "Open supplier entries are higher than liability accounts 9410–9440.",
+      "nx": "Find the entry missing from the ledger (credit memo) and correct it.",
+      "role": "Bookkeeper",
+      "amt": null,
+      "ref": "APd"
+     },
+     {
+      "s": "m",
+      "t": "Intercompany position with Eyjavör unconfirmed",
+      "d": "DT's receivable from Eyjavör (K110) 0.37m and a management fee of 2.4m a month.",
+      "nx": "Reconcile intercompany balances and transactions with Eyjavör's books before the group close.",
+      "role": "CFO",
+      "amt": 372000
+     },
+     {
+      "s": "m",
+      "t": "Posting periods open",
+      "d": "Posting allowed in all periods, including 2025, in G/L setup and for all users.",
+      "nx": "Set “Allow posting from” to the first open month once August and September are closed.",
+      "role": "CFO",
+      "amt": null,
+      "txt": "–"
+     }
+    ],
+    "rec_bnk_pill": "Reconciled 31 Aug",
+    "rec_rows": [
+     {
+      "s": "l",
+      "t": "Bank ledger against G/L (6920)",
+      "d": "Three bank accounts ISK {bank_isk}m = account 6920 ISK {bank_gl}m today.",
+      "amt": null,
+      "ref": "bank_diff"
+     },
+     {
+      "s": "l",
+      "t": "Payment cards against G/L (6340)",
+      "d": "Three company cards ISK {card_sum}m = account 6340 ISK {card_gl}m.",
+      "amt": null,
+      "ref": "card_diff"
+     },
+     {
+      "s": "m",
+      "t": "Bank statements against bank ledger 31 Aug",
+      "d": "Five accounts agree to the króna. {lb_name}: statement {lb_stmt}m, bank ledger {lb_ledger}m; one outstanding item (salaries paid 31 Aug) awaits the next statement.",
+      "amt": null,
+      "if": "lb_outst",
+      "ref": "lb_outst"
+     },
+     {
+      "s": "h",
+      "t": "Bank transactions Sep–Oct not posted",
+      "d": "September salaries, withholding tax due 15 Sep and 15 Oct, VAT due 5 Oct and loan repayments are missing from the bank ledger. The BC balance is therefore probably too high.",
+      "amt": null,
+      "if": "unb",
+      "ref": "unb_neg"
+     },
+     {
+      "s": "m",
+      "t": "Card transactions Sep–Oct not posted",
+      "d": "Account 6340 unchanged since 31 Aug. The card balance rose by {kort_m}m a month Jan–Aug, so missing entries are to be expected.",
+      "amt": null,
+      "est": true,
+      "ref": "kort_neg2"
+     },
+     {
+      "s": "h",
+      "t": "Customers against G/L",
+      "d": "Ageing ISK {ag_total}m, receivable accounts 6310–6330 ISK {krofur_gl}m. The ledger is higher than the subledger: manual entries directly on receivable accounts (LEIÐR, MILLIF 30 Sep).",
+      "amt": null,
+      "ref": "ARd"
+     },
+     {
+      "s": "m",
+      "t": "Suppliers against G/L",
+      "d": "Open entries ISK {ven_total:2}m, accounts 9410–9440 ISK {ap_gl:2}m. The subledger is higher than the ledger.",
+      "amt": null,
+      "ref": "APd"
+     },
+     {
+      "s": "h",
+      "t": "VAT against returns",
+      "d": "Net VAT payable ISK {vsk_net}m. Settlement account 9570 stands at ISK {vsk9570}m debit because settlement entries are missing. Jul–Aug ISK {vsk_julagu}m, due 5 Oct, no payment posted.",
+      "amt": null,
+      "ref": "vsk9570"
+     },
+     {
+      "s": "h",
+      "t": "Balance of entries within the month",
+      "d": "Debit and credit do not balance: {stm_list}. It evens out over the year, but each month on its own is wrong.",
+      "amt": null,
+      "if": "stm_n",
+      "ref": "stm_first"
+     },
+     {
+      "s": "m",
+      "t": "Long-term loans (9110) against loan statement",
+      "d": "Balance 125.0m unchanged since 31 Aug. Repayments for Sep and Oct (2 × 1.25m) not posted.",
+      "amt": 2500000
+     },
+     {
+      "s": "m",
+      "t": "Intercompany position with Eyjavör",
+      "d": "DT's receivable from Eyjavör (K110) 0.37m and a management fee of 2.4m a month. Not confirmed against the counterparty's books.",
+      "amt": null
+     }
+    ],
+    "unrec": "Sep–Oct"
+   },
+   "names": {
+    "Tekjur bókaðar": "Revenue posted",
+    "Bókari": "Bookkeeper",
+    "Fjármálastjóri": "CFO",
+    "Sala og aðrar tekjur bókaðar.": "Sales and other income posted.",
+    "Laun bókuð": "Payroll posted",
+    "Laun, lífeyrir og tryggingagjald (2210–2440).": "Salaries, pensions and social security tax (2210–2440).",
+    "Vörunotkun bókuð": "Materials posted",
+    "Vöruinnkaup og kostnaðarverð (2010–2120).": "Purchases and cost of sales (2010–2120).",
+    "Afskriftir keyrðar": "Depreciation run",
+    "Afskriftir húsnæðis, tækja og bifreiða (3710–3730).": "Depreciation of buildings, equipment and vehicles (3710–3730).",
+    "VSK-uppgjörsfærsla": "VAT settlement entry",
+    "Miðtímabil. Uppgjör í lok næsta mánaðar.": "Mid-period. Settlement at the end of next month.",
+    "Endurmat gjaldmiðla": "Currency revaluation",
+    "Engar opnar færslur í erlendri mynt.": "No open entries in foreign currency.",
+    "Áfallið og fyrirframgreitt": "Accrued and prepaid",
+    "Húsnæði og vaxtagjöld bókuð í mánuðinum. Engir sérstakir lyklar fyrir áfallinn eða fyrirframgreiddan kostnað.": "Premises and interest posted in the month. No specific accounts for accrued or prepaid costs.",
+    "Tímabil lokað í BC": "Period closed in BC",
+    "Bókun leyfð á öll tímabil: „Bókun leyfð frá/til“ er tómt í fjárhagsgrunni og hjá öllum notendum, og ekkert bókhaldstímabil er lokað.": "Posting allowed in all periods: “Allow posting from/to” is empty in G/L setup and for all users, and no accounting period is closed.",
+    "Lok VSK-tímabils jan–feb. Útskattur og innskattur (9510–9540) eru ekki færðir á uppgjörsreikning; greiðslur safnast á 9570.": "End of VAT period Jan–Feb. Output and input VAT (9510–9540) are not transferred to the settlement account; payments accumulate on 9570.",
+    "Lok VSK-tímabils mar–apr. Útskattur og innskattur (9510–9540) eru ekki færðir á uppgjörsreikning; greiðslur safnast á 9570.": "End of VAT period Mar–Apr. Output and input VAT (9510–9540) are not transferred to the settlement account; payments accumulate on 9570.",
+    "Lok VSK-tímabils maí–jún. Útskattur og innskattur (9510–9540) eru ekki færðir á uppgjörsreikning; greiðslur safnast á 9570.": "End of VAT period May–Jun. Output and input VAT (9510–9540) are not transferred to the settlement account; payments accumulate on 9570.",
+    "Lok VSK-tímabils júl–ágú. Útskattur og innskattur (9510–9540) eru ekki færðir á uppgjörsreikning; greiðslur safnast á 9570.": "End of VAT period Jul–Aug. Output and input VAT (9510–9540) are not transferred to the settlement account; payments accumulate on 9570.",
+    "Krafa SR00088, 210.000 EUR, bókuð á 147,40. Gengi 31.08. var 140,80. Endurmat aldrei keyrt (engin skrá í gengisleiðréttingum).": "Receivable SR00088, EUR 210,000, posted at 147.40. The rate on 31 Aug was 140.80. Revaluation never run (no record in exchange rate adjustments).",
+    "laun vantar, vörunotkun vantar": "payroll missing, materials missing",
+    "Bókað 41,8 m, um fjórðungur af meðaltali jan–ágú (162,0 m). Tekjur eru að hluta færðar með dagbók (FHFBOK). Staðfesta að öll sala september sé komin inn.": "Posted 41.8m, about a quarter of the Jan–Aug average (162.0m). Revenue is partly posted through a journal (FHFBOK). Confirm that all September sales are in.",
+    "Engin laun á 2210–2440. Áætlað miðað við ágúst. Útborguð laun september (≈27,9 m) eru heldur ekki í bankabók.": "No payroll on 2210–2440. Estimated from August. September net salaries (≈27.9m) are not in the bank ledger either.",
+    "Ekkert bókað á 2010–2120. Áætlað miðað við ágúst; raunfjárhæð fer eftir veltu mánaðarins.": "Nothing posted on 2010–2120. Estimated from August; the actual amount depends on the month's turnover.",
+    "Engar afskriftir á 3710–3730 og uppsafnaðar afskriftir (5160) óbreyttar síðan 31.08.": "No depreciation on 3710–3730 and accumulated depreciation (5160) unchanged since 31 Aug.",
+    "210.000 EUR krafa enn opin. Síðasta EUR-gengi í BC er frá 14.09. (139,80); gengi vantar eftir það.": "EUR 210,000 receivable still open. The last EUR rate in BC is from 14 Sep (139.80); rates are missing after that.",
+    "Húsnæðiskostnaður (3010–3070) og vaxtagjöld (4220) ekki bókuð. Færa áfallinn kostnað. Áætlað miðað við ágúst.": "Premises costs (3010–3070) and interest (4220) not posted. Record accrued costs. Estimated from August.",
+    "laun vantar, vörunotkun vantar, yfirstandandi mánuður": "payroll missing, materials missing, current month",
+    "Mánuður stendur yfir. 1,7 m bókað til þessa.": "Month in progress. 1.7m posted so far.",
+    "Engin laun bókuð. Áætlað miðað við ágúst.": "No payroll posted. Estimated from August.",
+    "Aðeins 1,1 m bókað. Áætlað miðað við ágúst; raunfjárhæð fer eftir veltu mánaðarins.": "Only 1.1m posted. Estimated from August; the actual amount depends on the month's turnover.",
+    "Lok VSK-tímabils sep–okt. Útskattur og innskattur (9510–9540) eru ekki færðir á uppgjörsreikning; greiðslur safnast á 9570. Mánuður stendur yfir.": "End of VAT period Sep–Oct. Output and input VAT (9510–9540) are not transferred to the settlement account; payments accumulate on 9570. Month in progress.",
+    "Fyrirtækjakort 1": "Company card 1",
+    "Fyrirtækjakort 2": "Company card 2",
+    "Fyrirtækjakort 3": "Company card 3",
+    "Greiðslukort": "Payment cards",
+    "Íslandsbanki, veltureikningur": "Íslandsbanki, current account",
+    "Landsbankinn, veltureikningur": "Landsbankinn, current account",
+    "Arion, launareikningur": "Arion, payroll account",
+    "Bankareikningur": "Bank account",
+    "VSK júlí–ágúst": "VAT July–August",
+    "Gjalddagi 05.10.2026. Engin greiðsla bókuð.": "Due 5 Oct 2026. No payment posted.",
+    "Staðgreiðsla, lífeyrir og tryggingagjald vegna ágúst": "Withholding tax, pensions and social security tax for August",
+    "Stendur ógreitt á skuldalyklum 9710–9740.": "Unpaid on liability accounts 9710–9740.",
+    "Útborguð laun september (áætlað)": "September net salaries (estimated)",
+    "Laun september eru ekki bókuð.": "September payroll is not posted.",
+    "Staðgreiðsla o.fl. vegna september (áætlað)": "Withholding tax etc. for September (estimated)",
+    "Gjalddagi 15.10.2026, ekki bókað.": "Due 15 Oct 2026, not posted.",
+    "Afborgun og vextir lána, september (áætlað)": "Loan repayment and interest, September (estimated)",
+    "Afborgun ekki bókuð á 9110 í sept.–okt.": "Repayment not posted on 9110 in Sep–Oct."
+   }
+  }
  }
 }
