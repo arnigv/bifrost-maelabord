@@ -147,9 +147,12 @@ Skriftan:
 - reiknar mánaðarlega EBITDA og hagnað fyrir skatta (tekjur jákvæðar, kostnaður jákvæður),
 - merkir **ófullbókaða mánuði** (sala en laun eða vörunotkun undir 20% af miðgildi, eða yfirstandandi mánuður),
 - finnur **einskiptisliði** (lykill með hreyfingu í einum fullbókuðum mánuði og ≥ 10% af tekjum hans),
-- skilar `ytd` (aðeins fullbókaðir mánuðir), `py_same_period` og `py_full`.
+- skilar `ytd` (aðeins fullbókaðir mánuðir), `py_same_period` og `py_full`,
+- greinir **tungumál grunngagna** úr lyklaheitum og skrifar `lang` (`is` ef heitin eru á íslensku, annars `en`; `--lang` þvingar). Mælaborðin opnast á þessu máli (sjá `bifrost-maelabord`, *Tungumál*).
 
-Skriftan prentar samantekt. **Berðu tekjur og EBITDA saman við** samtölu period_breakdown áður en haldið er áfram. Ef lyklar lenda í röngum flokki: leiðréttu `cat` í `dataset.json` og segðu notandanum frá því.
+Skriftan prentar samantekt. **Útgangskóði 2 (TÓMT):** engar bókaðar hreyfingar; smíðaðu ekkert mælaborð og segðu notandanum það. Færri en 3 fullbókaðir mánuðir: haltu áfram, en segðu að samanburður sé takmarkaður.
+
+Flokkun lykla notar heiti, undirflokk og **flokk lykils í BC** (`Account Category`, óháð tungumáli) svo íslenskur og enskur lyklarammi flokkist rétt. Sæktu því `Account Category` með í `--accounts` ef reiturinn er til. **Berðu tekjur og EBITDA saman við** samtölu period_breakdown áður en haldið er áfram. Ef lyklar lenda í röngum flokki: leiðréttu `cat` í `dataset.json` og segðu notandanum frá því.
 
 ## 6. Viðbótargögn eftir mælaborði
 

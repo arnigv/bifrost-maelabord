@@ -2175,7 +2175,11 @@
   "leakJobs": 13,
   "openJobs": 15,
   "priceNote": "Engin afsláttar- eða verðfrávik: vörusala er lítil (16 vörur, fáar sölufærslur). Athugað aftur þegar vörusala eykst.",
-  "today": "2026-10-16"
+  "today": "2026-10-16",
+  "_optional": [
+   "leakJobs",
+   "openJobs"
+  ]
  },
  "oneoff": {
   "no": "1130",
@@ -2260,5 +2264,150 @@
   "unreg_drawer": "söludagbók (FHFBOK) og leiðréttingar án reiknings.",
   "year": "2026",
   "ytd_short": "jan–okt"
- }
+ },
+ "i18n": {
+  "en": {
+   "meta": {
+    "as_of": "18 Oct 2026",
+    "leak_as_of": "16 Oct 2026",
+    "leak_fetched": "16–17 Oct 2026",
+    "company_gen": "DT Vélsmiðjan ehf.",
+    "fetched": "16–18 Oct 2026"
+   },
+   "html": {
+    "footer_notes": "September and October are not fully posted (the monthly sales journal has not been posted) and are shown faded. 2025 is compared as a full year spread evenly over months, as in Board. The budget DRAFT-2026 is a draft, not recorded in BC. Revenue streams are classified by the description of the entry or invoice line. Customer company names are shown, not names of individuals."
+   },
+   "js": {
+    "acc_names": {
+     "1110": "Sales 24% VAT",
+     "1130": "Sales, VAT exempt",
+     "1140": "Discounts given",
+     "1910": "Other income 24% VAT",
+     "1930": "Other income, VAT exempt"
+    },
+    "dq_note": "<b>Data quality:</b> most revenue is posted through a monthly sales journal (FHFBOK) to account 1110 without a customer. Sales by customer, trends and concentration here therefore only cover invoiced sales.",
+    "dq_tail": "From September, revenue is almost entirely invoiced.",
+    "inc_note": "Sep and Oct are not fully posted and are shown faded.",
+    "leak_k1": "Spare parts delivered free of charge. May be included in the contract.",
+    "leak_k2": "If mileage and hours above the fixed fee continue not to be billed.",
+    "leak_k3": "All the jobs are still recorded as open.",
+    "leak_txt": "Work already done that has not been billed, and services delivered free of charge. The largest item is ten jobs from August for which no invoice has gone out.",
+    "non_gl_note": "all lines on G/L accounts, no item numbers",
+    "one_incl": "including the one-off sale to a foreign customer in August (1×)",
+    "onjob_note": "only S-2603 has sales lines on a job",
+    "price_examples": [
+     {
+      "kind": "rate",
+      "label": "Scheduled maintenance",
+      "match": "Reglubundið viðhald"
+     },
+     {
+      "kind": "rate",
+      "label": "Call-outs and breakdowns",
+      "match": "Útköll og bilanir"
+     },
+     {
+      "kind": "fixed",
+      "label": "Fixed monthly fee S-2603",
+      "match": "Fast mánaðargjald"
+     },
+     {
+      "kind": "oneoff",
+      "label": "Tank system",
+      "acc": "1130"
+     }
+    ],
+    "price_note": "Fixed prices and tenders are posted as one line per invoice, so price and unit discount variances cannot be analysed.",
+    "py_share_src": "comes from the year's sales journal (the same four streams,",
+    "py_share_tail": "There were no one-off sales or other income in 2025.",
+    "reg_lost": "Lost customers cannot be identified: 2025 is not by customer (only the open balance at year-end).",
+    "reg_py": "All 2025 sales were posted through the journal.",
+    "src_note_zero": "Spare parts (Check) are not counted in recoverable now until the contract has been read.",
+    "streams_note": "Streams are classified by description: the monthly sales journal on 1110 splits into four lines (tender jobs, service, fabrication, spare parts) and invoices by invoice line description. Discounts are deducted.",
+    "unreg_desc": "sales journal (FHFBOK) on 1110 and adjustments on 1930 and 1140",
+    "unreg_drawer": "sales journal (FHFBOK) and adjustments without an invoice.",
+    "ytd_short": "Jan–Oct"
+   },
+   "names": {
+    "söludagbók ekki bókuð, laun og vörunotkun vantar": "sales journal not posted, payroll and materials missing",
+    "yfirstandandi mánuður, söludagbók ekki bókuð": "current month, sales journal not posted",
+    "Drög: 2025 × forsendur (tekjur og vörunotkun +8%, laun +6%, annað +5,9% verðbólga), jöfn dreifing á mánuði": "Draft: 2025 × assumptions (revenue and materials +8%, payroll +6%, other +5.9% inflation), spread evenly over months",
+    "DRÖG-2026": "DRAFT-2026",
+    "Tilboðsverk og verkefni": "Tender jobs and projects",
+    "Þjónusta og útköll": "Service and call-outs",
+    "Smíði og stálvinna": "Fabrication and steelwork",
+    "Varahlutir og efni": "Spare parts and materials",
+    "Einskiptissala": "One-off sales",
+    "Aðrar tekjur og endurrukkun": "Other income and recharges",
+    "Afslættir": "Discounts",
+    "Tilboðsverk": "Tender job",
+    "Lagersmíði": "Stock fabrication",
+    "Þjónustusamningur": "Service contract",
+    "Rammasamningur": "Framework agreement",
+    "Tímaverk": "Time job",
+    "Innra verk (lager)": "Internal job (stock)",
+    "5 viðskiptavinir": "5 customers",
+    "Fimm viðskiptavinir": "Five customers",
+    "Tíu verk frá ágúst án reiknings": "Ten jobs from August without an invoice",
+    "Akstur rukkaður á 0 kr.": "Mileage billed at ISK 0",
+    "Tímar umfram fast mánaðargjald": "Hours above the fixed monthly fee",
+    "Vinna eftir að samningur rann út": "Work after the contract expired",
+    "Varahlutir á 0 kr.": "Spare parts at ISK 0",
+    "536 klst. unnar í ágúst og enginn reikningur farinn út.": "536 hours worked in August and no invoice sent.",
+    "Akstur, ferðir og bátsflutningar janúar–ágúst án gjalds. Samningurinn gerir ráð fyrir 50% álagi.": "Mileage, trips and boat transport January–August free of charge. The contract provides for a 50% mark-up.",
+    "Fasta gjaldið dugar fyrir um 63 klst. á mánuði en unnið var 121 klst. umfram (18.900 kr./klst.). Í september fóru tímarnir í 168% af gjaldinu.": "The fixed fee covers about 63 hours a month, but 121 hours more were worked (ISK 18,900/hr). In September hours reached 168% of the fee.",
+    "Samningurinn rann út 31.08.2026 en sérfræðivinna var unnin 05.10.2026 án gjalds.": "The contract expired on 31 Aug 2026, but specialist work was done on 5 Oct 2026 free of charge.",
+    "Varahlutir og efni í útköll afhent án gjalds. Gæti verið innifalið í föstu samningsverði.": "Spare parts and materials for call-outs delivered free of charge. May be included in the fixed contract price.",
+    "Senda reikningana í þessari viku": "Send the invoices this week",
+    "Rukka aksturinn og setja verð á hann framvegis": "Bill the mileage and price it going forward",
+    "Endursemja eða rukka tímana umfram": "Renegotiate or bill the extra hours",
+    "Rukka vinnuna og semja um framhald": "Bill the work and agree on continuation",
+    "Lesa samninginn": "Read the contract",
+    "Unnið, ekki rukkað": "Worked, not billed",
+    "Umfram fast gjald": "Above fixed fee",
+    "Eftir samningslok": "After contract end",
+    "0 kr. notkun": "ISK 0 usage",
+    "Senda reikninga fyrir tíu verk frá ágúst": "Send invoices for ten jobs from August",
+    "Rukka akstur á S-2601 með 50% álagi": "Bill mileage on S-2601 with a 50% mark-up",
+    "Rukka tíma umfram fast gjald á S-2603": "Bill hours above the fixed fee on S-2603",
+    "Rukka vinnu eftir lok S-2602 og semja um framhald": "Bill work after the end of S-2602 and agree on continuation",
+    "Varahlutir utan samnings á S-2602": "Spare parts outside the contract on S-2602",
+    "Verðskrá á 0 kr. línum og mánaðarleg yfirferð": "Price list for ISK 0 lines and monthly review",
+    "Lítið": "Low",
+    "Miðl.": "Med.",
+    "Reikningar úr verkbókhaldi á D-01–D-10 í þessari viku": "Invoices from job accounting for D-01–D-10 this week",
+    "Reikningur fyrir jan–ágú og verð á akstur framvegis": "Invoice for Jan–Aug and a price for mileage going forward",
+    "Endursemja: fast gjald fyrir 63 klst., tímar umfram á verðskrá": "Renegotiate: fixed fee for 63 hours, extra hours at list price",
+    "Nýr samningur við Kaldhreinsun áður en næsta útkall er bókað": "New contract with Kaldhreinsun before the next call-out is booked",
+    "Lesa samning; ef utan samnings, rukka á kostnaðarverði + álagi": "Read the contract; if outside it, bill at cost plus mark-up",
+    "Mánaðarleg skýrsla um 0 kr. línur á verkum áður en reikningar fara út (forsenda: 1,2 m.kr. á ári)": "Monthly report on ISK 0 lines on jobs before invoices go out (assumption: ISK 1.2m a year)",
+    "A Reikningshæft en óreikningsfært": "A Billable but unbilled",
+    "B Notkun á 0 kr. söluverði": "B Usage at ISK 0 sales price",
+    "C Verk búin en opin": "C Jobs finished but open",
+    "D Gjaldfallnar kröfur": "D Overdue receivables",
+    "E Afslættir og verðfrávik": "E Discounts and price variances",
+    "F Rof í endurteknum reikningum": "F Breaks in recurring invoices",
+    "G Tímar umfram fast verð": "G Hours above fixed price",
+    "H Samkeyrsla við ytri kerfi": "H Matching with external systems",
+    "Gert": "Done",
+    "Utan mælaborðs": "Outside dashboard",
+    "Á ekki við": "Not applicable",
+    "Ekki gert": "Not done",
+    "Tíu tímaverk (D-01–D-10) með notkun en engum reikningi. Staðfest 17.10.2026: 536 klst., 8.338.400 kr. á söluverði.": "Ten time jobs (D-01–D-10) with usage but no invoice. Confirmed 17 Oct 2026: 536 hours, ISK 8,338,400 at sales price.",
+    "Akstur á S-2601 og varahlutir á S-2602. Efni á V-2601 er á föstu verði og ekki talið með.": "Mileage on S-2601 and spare parts on S-2602. Materials on V-2601 are at a fixed price and not counted.",
+    "S-2602 rann út 31.08. en var notað í október. Öll 15 verk eru enn opin.": "S-2602 expired on 31 Aug but was used in October. All 15 jobs are still open.",
+    "Innheimta, ekki tekjuleki. Sýnt í mælaborðinu Sjóðstreymi og bankar og ekki talið með í sækjanlegu.": "Collections, not revenue leakage. Shown in the Cash flow and banks dashboard and not counted as recoverable.",
+    "Vörusala er lítil (16 vörur, fáar sölufærslur).": "Product sales are small (16 products, few sales entries).",
+    "Sala er að mestu bókuð í dagbók utan verkbókhalds, svo reikningaröð er ekki marktæk. Athuga þegar sala er bókuð á verk.": "Sales are mostly posted through a journal outside job accounting, so the invoice sequence is not meaningful. Check once sales are posted to jobs.",
+    "S-2603: 688 klst. jan–sep, 168% af gjaldi í september.": "S-2603: 688 hours Jan–Sep, 168% of the fee in September.",
+    "Engin ytri kerfi tengd.": "No external systems connected.",
+    "Engin afsláttar- eða verðfrávik: vörusala er lítil (16 vörur, fáar sölufærslur). Athugað aftur þegar vörusala eykst.": "No discount or price variances: product sales are small (16 products, few sales entries). Checked again when product sales grow."
+   }
+  }
+ },
+ "_optional": [
+  "items",
+  "oneoff",
+  "stores"
+ ]
 }

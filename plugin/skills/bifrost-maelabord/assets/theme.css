@@ -171,6 +171,7 @@ footer{font-size:.76rem;color:var(--muted);display:grid;gap:4px;padding-top:6px}
 input[type=range]{width:100%;accent-color:var(--brand)}
 .presets{display:flex;flex-wrap:wrap;gap:6px}
 .presets button{font:inherit;font-size:.8rem;font-weight:600;border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:10px;padding:5px 11px;cursor:pointer}
+.bf-notice{margin:12px 0 4px;padding:12px 14px;border-radius:12px;background:var(--warn-soft);color:var(--ink);border-left:4px solid var(--warn);font-size:.9rem;line-height:1.45}
 .note{font-size:.82rem;color:var(--muted);border-left:3px solid var(--line);padding-left:10px}
 
 :root[data-bf="light"] .tabs button[aria-selected="true"],:root[data-bf="light"] .mode button[aria-pressed="true"]{color:#fff}
@@ -198,6 +199,12 @@ input[type=range]{width:100%;accent-color:var(--brand)}
 .crumb a:hover{border-color:var(--brand);color:var(--brand)}
 .crumb a:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 .crumb .sep{opacity:.6}
+/* Tungumálarofi (IS | EN) við hlið litaþema */
+.lang-sw{display:inline-flex;align-items:center;gap:2px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px;box-shadow:var(--shadow)}
+.lang-sw a{font-size:.74rem;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--muted);padding:5px 9px;border-radius:999px}
+.lang-sw a[aria-current="true"]{background:var(--brand);color:#fff}
+:root:not([data-bf="light"]) .lang-sw a[aria-current="true"]{color:#17150f}
+.lang-sw a:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 
 [hidden]{display:none!important}
 #bu-body{display:grid;gap:18px}
@@ -217,6 +224,7 @@ input[type=range]{width:100%;accent-color:var(--brand)}
 dialog{max-height:calc(100vh - 48px);overflow:auto}
 @media (pointer:coarse){
   .tabs button,.seg button,.mode button,.presets button,.crumb a,.chips button,dialog button{min-height:44px}
+  .lang-sw a{min-height:36px;display:inline-flex;align-items:center}
   input[type=range]{height:32px}
   input,select,textarea{font-size:16px}           /* engin sjálfvirk stækkun í iOS */
   tbody tr:hover td{background:none}

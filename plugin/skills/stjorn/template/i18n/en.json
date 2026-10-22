@@ -1,0 +1,594 @@
+[
+[
+"<title>{{meta.company_short}} stjórn</title>",
+"<title>{{meta.company_short}} board</title>"
+],
+[
+"aria-label=\"Leiðarstika\"><a href=\"index.html\">← Miðstöð<span class=\"c-l\"> mælaborða</span></a><span class=\"sep\">/</span><span>Stjórn</span>",
+"aria-label=\"Breadcrumb\"><a href=\"index.html\">← Hub<span class=\"c-l\"> dashboards</span></a><span class=\"sep\">/</span><span>Board</span>"
+],
+[
+"Stjórnarmælaborð · rekstur til {{meta.last_closed}}",
+"Board dashboard · results to {{meta.last_closed}}"
+],
+[
+"Tengt BC · Bifröst",
+"Connected to BC · Bifröst"
+],
+[
+"<span class=\"chip-lg\">Staða <b>",
+"<span class=\"chip-lg\">As of <b>"
+],
+[
+"m.kr. án VSK",
+"ISK m excl. VAT"
+],
+[
+"aria-label=\"Flipar\"",
+"aria-label=\"Tabs\""
+],
+[
+"aria-controls=\"t-yfir\">Yfirsýn",
+"aria-controls=\"t-yfir\">Overview"
+],
+[
+"aria-controls=\"t-rekstur\">Rekstur",
+"aria-controls=\"t-rekstur\">Operations"
+],
+[
+"aria-controls=\"t-efna\">Efnahagur og sjóðstreymi",
+"aria-controls=\"t-efna\" data-short=\"Balance\">Balance sheet and cash flow"
+],
+[
+"aria-controls=\"t-aha\">Áhættur",
+"aria-controls=\"t-aha\">Risks"
+],
+[
+"<h2>Árið stefnir í</h2><a class=\"more\" href=\"spagerd.html\">Nánar: Spágerð →</a>",
+"<h2>Full-year outlook</h2><a class=\"more\" href=\"spagerd.html\">More: Forecasting →</a>"
+],
+[
+"EBITDA {{meta.year}} · miðgildi (P50)",
+"EBITDA {{meta.year}} · median (P50)"
+],
+[
+">Tekjur {{meta.year}}<",
+">Revenue {{meta.year}}<"
+],
+[
+"<i style=\"background:var(--s1)\"></i>Raun</span><span><i style=\"background:var(--warn)\"></i>Einskipti</span><span><i class=\"dash\" style=\"border-color:var(--s2)\"></i>Spá</span><span><i style=\"background:var(--teal-3)\"></i>Bil P10–P90",
+"<i style=\"background:var(--s1)\"></i>Actual</span><span><i style=\"background:var(--warn)\"></i>One-off</span><span><i class=\"dash\" style=\"border-color:var(--s2)\"></i>Forecast</span><span><i style=\"background:var(--teal-3)\"></i>P10–P90 range"
+],
+[
+"aria-label=\"EBITDA á mánuði {{meta.year}}: raun {{text.fc_actual_range}} og spá {{text.fc_forecast_range}} með óvissubili\"",
+"aria-label=\"Monthly EBITDA {{meta.year}}: actual {{text.fc_actual_range}} and forecast {{text.fc_forecast_range}} with uncertainty range\""
+],
+[
+"<h2>Innsýn fyrir stjórn</h2><span class=\"sub\">afkoma · sjóður · viðskiptavinir · áhætta</span>",
+"<h2>Insights for the board</h2><span class=\"sub\">results · cash · customers · risk</span>"
+],
+[
+"<h2>Mánaðarleg þróun</h2><div class=\"seg\" role=\"group\" aria-label=\"Mælikvarði\"><button id=\"m-rev\" aria-pressed=\"false\">Tekjur</button>",
+"<h2>Monthly trend</h2><div class=\"seg\" role=\"group\" aria-label=\"Metric\"><button id=\"m-rev\" aria-pressed=\"false\">Revenue</button>"
+],
+[
+"Meðaltal á mánuði {{meta.py}}",
+"Monthly average {{meta.py}}"
+],
+[
+"aria-label=\"Tekjur eða EBITDA á mánuði {{meta.year}} á móti meðaltali {{meta.py}}\"",
+"aria-label=\"Monthly revenue or EBITDA {{meta.year}} against {{meta.py}} average\""
+],
+[
+"<h2>Hagnaður á móti sjóði</h2><span class=\"sub\">staða í lok mánaðar</span>",
+"<h2>Profit versus cash</h2><span class=\"sub\">month-end position</span>"
+],
+[
+"<i style=\"background:var(--s3)\"></i>Uppsafnaður hagnaður</span><span><i style=\"background:var(--s1)\"></i>Handbært fé</span><span><i style=\"background:var(--dn)\"></i>Viðskiptakröfur",
+"<i style=\"background:var(--s3)\"></i>Cumulative profit</span><span><i style=\"background:var(--s1)\"></i>Cash</span><span><i style=\"background:var(--dn)\"></i>Trade receivables"
+],
+[
+"aria-label=\"Uppsafnaður hagnaður, handbært fé og viðskiptakröfur á mánuði\"",
+"aria-label=\"Cumulative profit, cash and trade receivables by month\""
+],
+[
+"<span class=\"sub\">Tímabil</span>",
+"<span class=\"sub\">Period</span>"
+],
+[
+"aria-label=\"Tegund tímabils\"",
+"aria-label=\"Period type\""
+],
+[
+"<button data-pt=\"m\">Mánuður</button><button data-pt=\"q\">Ársfjórðungur</button><button data-pt=\"ytd\">Ár til dags</button><button data-pt=\"bil\">Valið bil</button>",
+"<button data-pt=\"m\">Month</button><button data-pt=\"q\">Quarter</button><button data-pt=\"ytd\">Year to date</button><button data-pt=\"bil\">Custom range</button>"
+],
+[
+"id=\"pp-one-l\">Veldu</span><select id=\"pp-sel\" aria-label=\"Veldu tímabil\">",
+"id=\"pp-one-l\">Select</span><select id=\"pp-sel\" aria-label=\"Select period\">"
+],
+[
+"<span class=\"sub\">Frá</span>",
+"<span class=\"sub\">From</span>"
+],
+[
+"<span class=\"sub\">Til</span>",
+"<span class=\"sub\">To</span>"
+],
+[
+"<span class=\"sub\">Bera saman við</span>",
+"<span class=\"sub\">Compare with</span>"
+],
+[
+"<h2>EBITDA-brú</h2>",
+"<h2>EBITDA bridge</h2>"
+],
+[
+"aria-label=\"EBITDA-brú frá viðmiði til raunar eftir liðum\"",
+"aria-label=\"EBITDA bridge from comparison to actual by line\""
+],
+[
+"<h2>Raun á móti spá eftir mánuðum</h2><span class=\"sub\">spá gerð mánuði fyrir fram · m.kr.</span>",
+"<h2>Actual versus forecast by month</h2><span class=\"sub\">forecast made one month ahead · ISK m</span>"
+],
+[
+"Hvar skeikaði spánni",
+"Where the forecast missed"
+],
+[
+"<h2>Hvað breyttist mest</h2>",
+"<h2>Largest changes</h2>"
+],
+[
+"<h2>Lykilhlutföll á mánuði</h2><span class=\"sub\">% af tekjum · fullbókaðir mánuðir</span>",
+"<h2>Key ratios by month</h2><span class=\"sub\">% of revenue · closed months</span>"
+],
+[
+"aria-label=\"Framlegð, laun af tekjum og EBITDA-hlutfall á mánuði {{meta.year}}\"",
+"aria-label=\"Gross margin, payroll to revenue and EBITDA margin by month {{meta.year}}\""
+],
+[
+"<h2>Rekstrarreikningur</h2><span class=\"sub\">smelltu á lið til að sjá lyklana · skrollaðu til vinstri fyrir eldri tímabil</span>",
+"<h2>Income statement</h2><span class=\"sub\">click a line to see its accounts · scroll left for earlier periods</span>"
+],
+[
+"<h2>Efnahagsreikningur</h2><span class=\"sub\">m.kr. · smelltu á lið til að sjá lyklana</span>",
+"<h2>Balance sheet</h2><span class=\"sub\">ISK m · click a line to see its accounts</span>"
+],
+[
+"<h2>Sjóðstreymi</h2><span class=\"sub\">óbein aðferð · m.kr.</span>",
+"<h2>Cash flow</h2><span class=\"sub\">indirect method · ISK m</span>"
+],
+[
+"<h2>Aldur viðskiptakrafna</h2>",
+"<h2>Receivables ageing</h2>"
+],
+[
+"<h2>Stærstu skuldarar</h2><span class=\"sub\">opið · hlutfall gjaldfallið</span>",
+"<h2>Largest debtors</h2><span class=\"sub\">open · share overdue</span>"
+],
+[
+"<h2>Áhættuskrá</h2><span class=\"sub\">raðað eftir alvarleika</span>",
+"<h2>Risk register</h2><span class=\"sub\">sorted by severity</span>"
+],
+[
+"<p>Heimild: fjárhagur og viðskiptamannabók {{meta.company_gen}} í Business Central (Bifröst), sótt {{meta.as_of}}. Ekkert var skrifað í BC. Kröfur í aldursgreiningu eru úr viðskiptamannabók. Rekstrartölur ná til {{meta.last_closed}}, síðasta uppgerða mánaðar; {{text.prelim_months}}.<span id=\"ft-fc\"> Spá út árið er úr Spágerð Bifrastar (drifþáttaspá með P10–P90 bili) og er ekki skráð í BC.</span></p>",
+"<p>Source: general ledger and customer ledger of {{meta.company_gen}} in Business Central (Bifröst), retrieved {{meta.as_of}}. Nothing was written to BC. Receivables in the ageing come from the customer ledger. Results run to {{meta.last_closed}}, the last closed month; {{text.prelim_months}}.<span id=\"ft-fc\"> The full-year forecast comes from Bifröst Forecasting (driver-based forecast with a P10–P90 range) and is not recorded in BC.</span></p>"
+],
+[
+"<p>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</p>",
+"<p>Prepared with the help of AI (Claude). Review before relying on the figures.</p>"
+],
+[
+"const MF = ['janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 'júlí', 'ágúst', 'september', 'október', 'nóvember', 'desember'];",
+"const MF = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];"
+],
+[
+"const CATL = { tekjur: 'Tekjur', vorunotkun: 'Vörunotkun og aðföng', laun: 'Laun og launatengd gjöld', husnaedi: 'Húsnæði', annar_rekstur: 'Annar rekstrarkostnaður', afskriftir: 'Afskriftir', fjarmagn: 'Fjármagnsliðir', oreglulegt: 'Óreglulegir liðir' };",
+"const CATL = { tekjur: 'Revenue', vorunotkun: 'Cost of materials', laun: 'Payroll and related costs', husnaedi: 'Premises', annar_rekstur: 'Other operating expenses', afskriftir: 'Depreciation', fjarmagn: 'Net finance costs', oreglulegt: 'Non-recurring items' };"
+],
+[
+"const ddmmyyyy = iso => `${iso.slice(8, 10)}.${iso.slice(5, 7)}.${iso.slice(0, 4)}`;",
+"const ddmmyyyy = iso => `${+iso.slice(8, 10)} ${MON[+iso.slice(5, 7) - 1]} ${iso.slice(0, 4)}`;"
+],
+[
+"return `${String(d).padStart(2, '0')}.${ym.slice(5)}.${ym.slice(0, 4)}`; };",
+"return `${d} ${MON[+ym.slice(5) - 1]} ${ym.slice(0, 4)}`; };"
+],
+[
+"${fmt(c.raw)} m.kr.` } } },",
+"ISK ${fmt(c.raw)}m` } } },"
+],
+[
+"$('h-eb').innerHTML = `${mkr(E)}<small>m.kr.</small>`;",
+"$('h-eb').innerHTML = `${mkr(E)}<small>ISK m</small>`;"
+],
+[
+"$('h-text').textContent = `Afkoman er ${E / pyE >= 2 ? 'meira en tvöföld' : sg(100 * (E / pyE - 1), 0) + '%'} á við sama tíma í fyrra. ${{{js.h_cash_lead}}} ${mkr(Math.abs(cash[BLAST] - cash[ci]))} m.kr. frá lokum ${MF[mi(B.months[ci])]}.`;",
+"$('h-text').textContent = `EBITDA is ${E / pyE >= 2 ? 'more than double' : sg(100 * (E / pyE - 1), 0) + '% versus'} the same period last year. ${{{js.h_cash_lead}}} ISK ${mkr(Math.abs(cash[BLAST] - cash[ci]))}m since the end of ${MF[mi(B.months[ci])]}.`;"
+],
+[
+"$('h-row').innerHTML = [['Tekjur', `${mkr(R)} m.kr.`, `${sg(100 * (R / pyR - 1))}% frá fyrra ári`], ['EBITDA-hlutfall', `${fmt(ratio)}%`, `${{{js.py}}}: ${fmt(pyRatio)}%`], ['Handbært fé', `${mkr(cash[BLAST])} m.kr.`, `staða ${ddmmyyyy(DATA.as_of)}`]]",
+"$('h-row').innerHTML = [['Revenue', `ISK ${mkr(R)}m`, `${sg(100 * (R / pyR - 1))}% on prior year`], ['EBITDA margin', `${fmt(ratio)}%`, `${{{js.py}}}: ${fmt(pyRatio)}%`], ['Cash', `ISK ${mkr(cash[BLAST])}m`, `as of ${ddmmyyyy(DATA.as_of)}`]]"
+],
+[
+"['l', '↑', 'Afkoma', {{js.ins1_title}}, `${{{js.ins1_lead}}} ${fmt(lr)}% af tekjum á móti ${fmt(pyLr)}% í fyrra.${one ? ` ${{{js.ins1_one}}} (${mkr(one)} m.kr.) er einskiptis; án hennar er EBITDA-hlutfallið ${fmt(exRatio)}%.` : ''}`, 'Til upplýsingar'],",
+"['l', '↑', 'Results', {{js.ins1_title}}, `${{{js.ins1_lead}}} ${fmt(lr)}% of revenue against ${fmt(pyLr)}% last year.${one ? ` ${{{js.ins1_one}}} (ISK ${mkr(one)}m) is a one-off; excluding it the EBITDA margin is ${fmt(exRatio)}%.` : ''}`, 'For information'],"
+],
+[
+"['h', 'kr', 'Sjóður', {{js.ins2_title}}, `Útistandandi viðskiptakröfur eru ${mkr(ar[BLAST])} m.kr.${cash[BLAST] > 0 && ar[BLAST] >= cash[BLAST] ? `, um ${fmt(ar[BLAST] / cash[BLAST], 0)}-falt handbært fé.` : ` og handbært fé ${mkr(cash[BLAST])} m.kr.`}${HASB ? ` Birgðir binda ${mkr(BIR[BLAST])} m.kr. til viðbótar.` : ''} ${{{js.ins2_tail}}}`, 'Til ákvörðunar'],",
+"['h', 'kr', 'Cash', {{js.ins2_title}}, `Outstanding trade receivables are ISK ${mkr(ar[BLAST])}m${cash[BLAST] > 0 && ar[BLAST] >= cash[BLAST] ? `, about ${fmt(ar[BLAST] / cash[BLAST], 0)} times cash.` : ` and cash ISK ${mkr(cash[BLAST])}m.`}${HASB ? ` Inventory ties up a further ISK ${mkr(BIR[BLAST])}m.` : ''} ${{{js.ins2_tail}}}`, 'For decision'],"
+],
+[
+"['m', '◎', 'Viðskiptavinir', {{js.ins3_title}}, `Þrír stærstu skuldararnir eiga ${fmt(top3, 0)}% útistandandi krafna og sá stærsti einn ${fmt(top1, 0)}%. ${{{js.ins3_tail}}}`, 'Til umræðu'],",
+"['m', '◎', 'Customers', {{js.ins3_title}}, `The three largest debtors hold ${fmt(top3, 0)}% of outstanding receivables and the largest alone ${fmt(top1, 0)}%. ${{{js.ins3_tail}}}`, 'For discussion'],"
+],
+[
+"['h', '!', 'Áhætta', {{js.ins4_title}}, `${fmt(od, 0)}% krafna eru komnar fram yfir gjalddaga og ${mkr(AG.b61)} m.kr. eru eldri en 60 daga. ${{{js.ins4_tail}}}`, 'Til ákvörðunar']];",
+"['h', '!', 'Risk', {{js.ins4_title}}, `${fmt(od, 0)}% of receivables are past due and ISK ${mkr(AG.b61)}m are more than 60 days old. ${{{js.ins4_tail}}}`, 'For decision']];"
+],
+[
+"tag === 'Til ákvörðunar' ? 'h' : tag === 'Til umræðu' ? 'm' : 'i'",
+"tag === 'For decision' ? 'h' : tag === 'For discussion' ? 'm' : 'i'"
+],
+[
+"$('yfir-note').textContent = `Samanburður við ${{{js.py}}} miðast við ${N}/12 af ársuppgjöri ${{{js.py}}} (mánaðartölur ${{{js.py}}} ${PYNO}). Rekstrartölur ná til ${monthEnd(LASTF)}; sjóðsstaða og kröfur eru miðaðar við ${ddmmyyyy(DATA.as_of)}.`;",
+"$('yfir-note').textContent = `Comparison with ${{{js.py}}} uses ${N}/12 of the ${{{js.py}}} annual result (monthly ${{{js.py}}} figures ${PYNO}). Results run to ${monthEnd(LASTF)}; cash and receivables are as of ${ddmmyyyy(DATA.as_of)}.`;"
+],
+[
+"$('fc-eb').innerHTML = `${mkr(FY.ar_ebitda)}<small>m.kr.</small>`;",
+"$('fc-eb').innerHTML = `${mkr(FY.ar_ebitda)}<small>ISK m</small>`;"
+],
+[
+"`Bil P10–P90: <b>${fmt(lo / 1e6, 0)}–${fmt(hi / 1e6, 0)} m.kr.</b> · ${sg(100 * (FY.ar_ebitda / PY.ebitda - 1), 0)}% frá ${{{js.py}}} (${mkr(PY.ebitda)} m)`",
+"`P10–P90 range: <b>ISK ${fmt(lo / 1e6, 0)}–${fmt(hi / 1e6, 0)}m</b> · ${sg(100 * (FY.ar_ebitda / PY.ebitda - 1), 0)}% on ${{{js.py}}} (ISK ${mkr(PY.ebitda)}m)`"
+],
+[
+"$('fc-rev').innerHTML = `${mkr(FY.ar_tekjur)}<small>m.kr.</small>`;",
+"$('fc-rev').innerHTML = `${mkr(FY.ar_tekjur)}<small>ISK m</small>`;"
+],
+[
+"`Raun ${ml(FULL[0])}–${ml(LASTF)} ${mkr(FY.raun_tekjur)} m + spá ${ml(f0.ym)}–${ml(f1.ym)} ${mkr(FY.spa_tekjur)} m · ${sg(100 * (FY.ar_tekjur / PY.tekjur - 1), 0)}% frá ${{{js.py}}}`",
+"`Actual ${ml(FULL[0])}–${ml(LASTF)} ISK ${mkr(FY.raun_tekjur)}m + forecast ${ml(f0.ym)}–${ml(f1.ym)} ISK ${mkr(FY.spa_tekjur)}m · ${sg(100 * (FY.ar_tekjur / PY.tekjur - 1), 0)}% on ${{{js.py}}}`"
+],
+[
+"`Um ${fmt(done, 0)}% af áætlaðri EBITDA ársins er þegar í höfn, svo óvissan liggur öll í ${MF[mi(f0.ym)]}–${MF[mi(f1.ym)]} ${drv ? ` og ræðst fyrst og fremst af ${drv}` : ''}: bilið breikkar úr ±${fmt(w(f0) / 1e6, 0)} m.kr. í ${MF[mi(f0.ym)]} í ±${fmt(w(f1) / 1e6, 0)} m.kr. í ${MF[mi(f1.ym)]}.${one ? ` Spáin gerir ekki ráð fyrir að einskiptissalan í ${MF[mi(ONE[0].ym)]} (${mkr(one)} m.kr.) endurtaki sig.` : ''}`",
+"`About ${fmt(done, 0)}% of the expected full-year EBITDA is already booked, so the uncertainty lies in ${MF[mi(f0.ym)]}–${MF[mi(f1.ym)]} ${drv ? ` and depends mainly on ${drv}` : ''}: the range widens from ±ISK ${fmt(w(f0) / 1e6, 0)}m in ${MF[mi(f0.ym)]} to ±ISK ${fmt(w(f1) / 1e6, 0)}m in ${MF[mi(f1.ym)]}.${one ? ` The forecast does not assume the one-off sale in ${MF[mi(ONE[0].ym)]} (ISK ${mkr(one)}m) will recur.` : ''}`"
+],
+[
+"${fmt(c.raw)} m.kr.` };",
+"ISK ${fmt(c.raw)}m` };"
+],
+[
+"label: 'Spá (P50)'",
+"label: 'Forecast (P50)'"
+],
+[
+"type: 'bar', label: 'Raun', data: raw",
+"type: 'bar', label: 'Actual', data: raw"
+],
+[
+"label: 'Einskipti', data: onev",
+"label: 'One-off', data: onev"
+],
+[
+"{ label: ('Meðaltal ' + {{js.py}})",
+"{ label: ('Average ' + {{js.py}})"
+],
+[
+"[['Uppsafnaður hagnaður', C.afkoma_arsins, '--s3', true], ['Handbært fé', C.handbaert_fe, '--s1', false], ['Viðskiptakröfur', C.krofur, '--dn', false]]",
+"[['Cumulative profit', C.afkoma_arsins, '--s3', true], ['Cash', C.handbaert_fe, '--s1', false], ['Trade receivables', C.krofur, '--dn', false]]"
+],
+[
+"label = `Ár til dags, ${span(ms)}`;",
+"label = `Year to date, ${span(ms)}`;"
+],
+[
+"return { ok: false, label: 'Fyrra tímabil', note: `Ekkert sambærilegt fyrra tímabil er til fyrir ${P.label.toLowerCase()}: mánaðartölur fyrir ${{{js.py}}} ${PYNO}. Veldu „Sama tímabil í fyrra“ eða styttra tímabil.` };",
+"return { ok: false, label: 'Previous period', note: `No comparable previous period exists for ${P.label.toLowerCase()}: monthly figures for ${{{js.py}}} ${PYNO}. Choose “Same period last year” or a shorter period.` };"
+],
+[
+"note: `Borið saman við næsta tímabil á undan af sömu lengd (${span(pm)}).${pm.some(m => INC.has(m)) ? ' Viðmiðið inniheldur bráðabirgðamánuð.' : ''}`",
+"note: `Compared with the preceding period of the same length (${span(pm)}).${pm.some(m => INC.has(m)) ? ' The comparison includes a preliminary month.' : ''}`"
+],
+[
+"note: `Sama tímabil í fyrra: ársuppgjör ${{{js.py}}} deilt jafnt á mánuði (${n}/12), þar sem mánaðartölur ${{{js.py}}} ${PYNO}. Árstíðasveiflur koma því ekki fram í viðmiðinu.`",
+"note: `Same period last year: the ${{{js.py}}} annual result spread evenly over months (${n}/12), as monthly ${{{js.py}}} figures ${PYNO}. Seasonality is therefore not reflected in the comparison.`"
+],
+[
+"if (!SPA.length) return { ok: false, label: 'Spá', note: 'Engin spá Bifrastar er til fyrir þetta tímabil.' };",
+"if (!SPA.length) return { ok: false, label: 'Forecast', note: 'No Bifröst forecast exists for this period.' };"
+],
+[
+"if (S.some(x => !x)) return { ok: false, label: 'Spá', note: `Spá Bifrastar (gerð mánuði fyrir fram) er aðeins til fyrir ${ml(SPA[0].ym)}–${ml(SPA.at(-1).ym)} ${{{js.year}}}. Veldu mánuð, ársfjórðung eða bil innan þess.` };",
+"if (S.some(x => !x)) return { ok: false, label: 'Forecast', note: `The Bifröst forecast (made one month ahead) only covers ${ml(SPA[0].ym)}–${ml(SPA.at(-1).ym)} ${{{js.year}}}. Choose a month, quarter or range within it.` };"
+],
+[
+"return { ok: true, label: 'Spá', note: 'Spá Bifrastar, gerð mánuði fyrir fram með gögnum sem lágu fyrir þá. Spáin er á liðum, ekki lyklum, og nær ekki til liða neðan EBITDA.' + (ONE.length ? ' Einskiptissala er ekki í spánni.' : '')",
+"return { ok: true, label: 'Forecast', note: 'Bifröst forecast, made one month ahead with the data available at the time. The forecast is by line, not by account, and does not cover items below EBITDA.' + (ONE.length ? ' One-off sales are not in the forecast.' : '')"
+],
+[
+"lbl = `Áætlun ${b.name}${draft ? ' (drög)' : ''}`;",
+"lbl = `Budget ${b.name}${draft ? ' (draft)' : ''}`;"
+],
+[
+"if (!keys.length) return { ok: false, label: lbl, note: `Áætlunin ${b.name} er til í BC en hefur engar færslur. Veldu drögin eða skráðu áætlun í BC (Fjárhagsáætlanir); þá birtist hún hér eftir lyklum og tímabilum.` };",
+"if (!keys.length) return { ok: false, label: lbl, note: `The budget ${b.name} exists in BC but has no entries. Choose the draft or enter a budget in BC (G/L Budgets); it will then appear here by account and period.` };"
+],
+[
+"note: (draft ? 'Drög, ekki skráð í BC. ' : 'Sótt úr BC. ') + (b.desc || '')",
+"note: (draft ? 'Draft, not recorded in BC. ' : 'Retrieved from BC. ') + (b.desc || '')"
+],
+[
+"l: ('Árið ' + {{js.py}})",
+"l: ('Year ' + {{js.py}})"
+],
+[
+"` Í tímabilinu eru bráðabirgðamánuðir (${P.inc.map(ml).join(', ')}) þar sem laun og vörunotkun eru ekki komin inn.`",
+"` The period includes preliminary months (${P.inc.map(ml).join(', ')}) where payroll and cost of materials have not been posted.`"
+],
+[
+"title=\"Inniheldur einskiptislið\"",
+"title=\"Includes a one-off item\""
+],
+[
+"<th>Liður</th>${CO.map(",
+"<th>Line</th>${CO.map("
+],
+[
+"<th class=\"n k k1\">Raun</th><th class=\"n k\">${R.ok ? R.label : 'Viðmið'}</th><th class=\"n k\">Frávik</th>",
+"<th class=\"n k k1\">Actual</th><th class=\"n k\">${R.ok ? R.label : 'Comparison'}</th><th class=\"n k\">Variance</th>"
+],
+[
+"sumRow('Hagnaður fyrir skatta', hF, hR, hRef)",
+"sumRow('Profit before tax', hF, hR, hRef)"
+],
+[
+"`Dálkar: ${P.label}; auðkenndir dálkar eru í völdu tímabili. Raun, viðmið og frávik eru fyrir valið tímabil. Frávik = raun − viðmið; grænt er betra fyrir afkomu.`",
+"`Columns: ${P.label}; highlighted columns are in the selected period. Actual, comparison and variance are for the selected period. Variance = actual − comparison; green is better for profit.`"
+],
+[
+"'* Bráðabirgðatölur: laun og vörunotkun ekki komin inn.'",
+"'* Preliminary figures: payroll and cost of materials not yet posted.'"
+],
+[
+"`1× Einskiptisliður: ${ONE.map(o => `${o.no} ${o.name} í ${MF[mi(o.ym)]} (${mkr(o.amount)} m.kr.), ${{{js.one_desc}}}`).join('; ')}.${oneP ? ` Án hans er EBITDA tímabilsins ${mkr(ebR - oneP)} m.kr.` : ''}`",
+"`1× One-off item: ${ONE.map(o => `${o.no} ${o.name} in ${MF[mi(o.ym)]} (ISK ${mkr(o.amount)}m), ${{{js.one_desc}}}`).join('; ')}.${oneP ? ` Excluding it, EBITDA for the period is ISK ${mkr(ebR - oneP)}m.` : ''}`"
+],
+[
+"`${R.label} → raun · ${P.label} · m.kr.`",
+"`${R.label} → actual · ${P.label} · ISK m`"
+],
+[
+"{ l: 'EBITDA viðmið', v: ebRef / 1e6, t: 1 }",
+"{ l: 'EBITDA comparison', v: ebRef / 1e6, t: 1 }"
+],
+[
+"l: CATL[k].replace(' og launatengd gjöld', '').replace(' og aðföng', '').replace('rekstrarkostnaður', 'rekstur')",
+"l: CATL[k].replace(' and related costs', '').replace('Cost of materials', 'Materials').replace(' operating expenses', ' opex')"
+],
+[
+"{ l: 'EBITDA raun', v: ebR / 1e6, t: 1 }",
+"{ l: 'EBITDA actual', v: ebR / 1e6, t: 1 }"
+],
+[
+"fmt(s.v) + ' m.kr.'; } };",
+"fmt(s.v) + 'm'; } };"
+],
+[
+"const catS = k => (CATL[k] || k).replace(' og launatengd gjöld', '').replace(' og aðföng', '').replace('rekstrarkostnaður', 'rekstur');",
+"const catS = k => (CATL[k] || k).replace(' and related costs', '').replace('Cost of materials', 'Materials').replace(' operating expenses', ' opex');"
+],
+[
+"`${byCat ? 'liðir' : 'bókhaldslyklar'} · ${R.label} → raun · ${P.label} · m.kr.`",
+"`${byCat ? 'lines' : 'G/L accounts'} · ${R.label} → actual · ${P.label} · ISK m`"
+],
+[
+"(${sg(x.eff / 1e6)} m)`",
+"(${sg(x.eff / 1e6)}m)`"
+],
+[
+"`${byCat ? 'EBITDA' : 'Hagnaður fyrir skatta'} er <b>${sg(tot / 1e6)} m.kr.</b> frá viðmiði (${R.label}); ${byCat ? (oneIn(P.ms) ? `þar af ${mkr(oneIn(P.ms))} m.kr. einskiptissala sem ekki var í spánni` : 'sundurliðað á liði') : `tíu stærstu lyklarnir skýra ${sg(topS / 1e6)} m.kr. af því`}. ` + (pos.length ? `Mest til hækkunar: ${pos.map(nm).join(', ')}. ` : '') + (neg.length ? `Mest til lækkunar: ${neg.map(nm).join(', ')}.` : '') + (byCat ? ' Spáin er á liðum, ekki lyklum.' : '');",
+"`${byCat ? 'EBITDA' : 'Profit before tax'} is <b>ISK ${sg(tot / 1e6)}m</b> from the comparison (${R.label}); ${byCat ? (oneIn(P.ms) ? `of which ISK ${mkr(oneIn(P.ms))}m is a one-off sale not in the forecast` : 'broken down by line') : `the ten largest accounts explain ISK ${sg(topS / 1e6)}m of it`}. ` + (pos.length ? `Largest positive: ${pos.map(nm).join(', ')}. ` : '') + (neg.length ? `Largest negative: ${neg.map(nm).join(', ')}.` : '') + (byCat ? ' The forecast is by line, not by account.' : '');"
+],
+[
+"Math.abs(x.f) < 1 ? 'nýtt' : Math.abs(x.r) < 1 ? 'féll út'",
+"Math.abs(x.f) < 1 ? 'new' : Math.abs(x.r) < 1 ? 'dropped'"
+],
+[
+"<th>${byCat ? 'Liður' : 'Lykill'}</th><th>Flokkur</th><th class=\"n\">Raun</th><th class=\"n\">${R.label}</th><th class=\"n\">Frávik %</th><th style=\"width:30%\">Áhrif á afkomu</th>",
+"<th>${byCat ? 'Line' : 'Account'}</th><th>Category</th><th class=\"n\">Actual</th><th class=\"n\">${R.label}</th><th class=\"n\">Variance %</th><th style=\"width:30%\">Effect on profit</th>"
+],
+[
+"const LID = [['vorunotkun', 'Vörunotkun'], ['laun', 'Laun'], ['husnaedi', 'Húsnæði'], ['annar_rekstur', 'Annar rekstur']];",
+"const LID = [['vorunotkun', 'Materials'], ['laun', 'Payroll'], ['husnaedi', 'Premises'], ['annar_rekstur', 'Other opex']];"
+],
+[
+"${ok ? 'innan' : ex(r) > r.p90 ? 'yfir' : 'undir'}",
+"${ok ? 'within' : ex(r) > r.p90 ? 'above' : 'below'}"
+],
+[
+"<th>Mánuður</th><th class=\"n\">Tekjur spá</th><th class=\"n\">Tekjur raun</th><th class=\"n\">EBITDA spá</th><th class=\"n\">EBITDA raun</th><th class=\"n\">Frávik</th><th class=\"n\">Bil P10–P90</th><th>Innan bils</th>",
+"<th>Month</th><th class=\"n\">Revenue forecast</th><th class=\"n\">Revenue actual</th><th class=\"n\">EBITDA forecast</th><th class=\"n\">EBITDA actual</th><th class=\"n\">Variance</th><th class=\"n\">P10–P90</th><th>Within range</th>"
+],
+[
+"<tr class=\"sum\"><td>Samtals ${",
+"<tr class=\"sum\"><td>Total ${"
+],
+[
+"[['Tekjur', S(r => r.raun_tekjur",
+"[['Revenue', S(r => r.raun_tekjur"
+],
+[
+"${sg(v / 1e6)} m</span>",
+"${sg(v / 1e6)}m</span>"
+],
+[
+"`${span(U.map(r => r.ym))}: EBITDA var <b>${sg(dT / 1e6)} m.kr.</b> frá spá (${sg(100 * dT / S(r => r.spa_ebitda), 0)}%). Raun var yfir spá í ${nOver} af ${U.length} mánuðum og innan óvissubils í ${nIn}. Mest munaði um ${big[0].toLowerCase()} (${sg(big[1] / 1e6)} m.kr.).${inP.length ? '' : ' Valið tímabil er utan spárinnar, svo allir spámánuðir eru sýndir.'}`",
+"`${span(U.map(r => r.ym))}: EBITDA was <b>ISK ${sg(dT / 1e6)}m</b> from forecast (${sg(100 * dT / S(r => r.spa_ebitda), 0)}%). Actual beat the forecast in ${nOver} of ${U.length} months and was within the range in ${nIn}. The largest difference was ${big[0].toLowerCase()} (ISK ${sg(big[1] / 1e6)}m).${inP.length ? '' : ' The selected period is outside the forecast, so all forecast months are shown.'}`"
+],
+[
+"`Spáin er gerð mánuði fyrir fram með þeim gögnum sem lágu fyrir þá. Auðkenndar línur eru í völdu tímabili. Grænt = betra en spá fyrir afkomu.${one ? ` * Raun er án einskiptissölu í ${MF[mi(one.ym)]} (${mkr(one.einskipti)} m.kr.), sem spáin gat ekki séð fyrir.` : ''}${bt ? ` Bakprófun ${ml(bt.manudir[0])}–${ml(bt.manudir.at(-1))}: meðalskekkja tekna ${fmt(100 * bt.mape_tekjur, 1)}%, EBITDA ${fmt(100 * bt.mape_ebitda, 1)}%.` : ''}`",
+"`The forecast is made one month ahead with the data available at the time. Highlighted rows are in the selected period. Green = better than forecast for profit.${one ? ` * Actual excludes the one-off sale in ${MF[mi(one.ym)]} (ISK ${mkr(one.einskipti)}m), which the forecast could not foresee.` : ''}${bt ? ` Backtest ${ml(bt.manudir[0])}–${ml(bt.manudir.at(-1))}: mean revenue error ${fmt(100 * bt.mape_tekjur, 1)}%, EBITDA ${fmt(100 * bt.mape_ebitda, 1)}%.` : ''}`"
+],
+[
+"[['Framlegð', r =>",
+"[['Gross margin', r =>"
+],
+[
+"['Laun af tekjum', r =>",
+"['Payroll to revenue', r =>"
+],
+[
+"['EBITDA-hlutfall', r =>",
+"['EBITDA margin', r =>"
+],
+[
+"Stig ' + {{js.py}} + '</span>');",
+"Level ' + {{js.py}} + '</span>');"
+],
+[
+"` Í völdu tímabili (${P.label}): ${RD.map(",
+"` In the selected period (${P.label}): ${RD.map("
+],
+[
+"return `${l.replace('Framlegð', 'framlegð').replace('Laun', 'laun')} ${fmt(f(agg))}%`;",
+"return `${l.toLowerCase()} ${fmt(f(agg))}%`;"
+],
+[
+"`Stærri punktar eru í völdu tímabili; bráðabirgðamánuðir eru ekki sýndir.${selTxt}${om ? ` ${MF[mi(one.ym)].replace(/^./, c => c.toUpperCase())} inniheldur einskiptissölu (${mkr(one.amount)} m.kr.); án hennar er EBITDA-hlutfall mánaðarins ${fmt(100 * (om.ebitda - one.amount) / (om.tekjur - one.amount))}%.` : ''}`",
+"`Larger dots are in the selected period; preliminary months are not shown.${selTxt}${om ? ` ${MF[mi(one.ym)]} includes a one-off sale (ISK ${mkr(one.amount)}m); excluding it the month's EBITDA margin is ${fmt(100 * (om.ebitda - one.amount) / (om.tekjur - one.amount))}%.` : ''}`"
+],
+[
+"$('pp-one-l').textContent = 'Mánuður';",
+"$('pp-one-l').textContent = 'Month';"
+],
+[
+"$('pp-one-l').textContent = 'Ársfjórðungur';",
+"$('pp-one-l').textContent = 'Quarter';"
+],
+[
+"' · bráðabirgða'",
+"' · preliminary'"
+],
+[
+"[['prev', 'Fyrra tímabil'], ['py', 'Sama tímabil í fyrra'], ...BU.map(b => ['bu:' + b.name, `Áætlun: ${b.name}${b.src === 'bc' ? ' (BC' + (Object.keys(b.acc).length ? ')' : ', tóm)') : ' (drög)'}`]), ['spa', 'Spá']]",
+"[['prev', 'Previous period'], ['py', 'Same period last year'], ...BU.map(b => ['bu:' + b.name, `Budget: ${b.name}${b.src === 'bc' ? ' (BC' + (Object.keys(b.acc).length ? ')' : ', empty)') : ' (draft)'}`]), ['spa', 'Forecast']]"
+],
+[
+"[['Veltufé', mkr(vf), 'm.kr.', `${BS0}: ${mkr(vf0)} m · veltufjármunir − skammtímaskuldir`],",
+"[['Working capital', mkr(vf), 'ISK m', `${BS0}: ISK ${mkr(vf0)}m · current assets − current liabilities`],"
+],
+[
+"['Handbært fé frá rekstri', sg(T.rek / 1e6), 'm.kr.', `${CF0}–${ddmmyyyy(DATA.as_of).slice(0, 5)}, ${T.rek < T.hagn ? `þrátt fyrir ${mkr(T.hagn)} m hagnað` : `hagnaður ${mkr(T.hagn)} m`}`],",
+"['Cash from operations', sg(T.rek / 1e6), 'ISK m', `${CF0} to ${ddmmyyyy(DATA.as_of)}, ${T.rek < T.hagn ? `despite ISK ${mkr(T.hagn)}m profit` : `profit ISK ${mkr(T.hagn)}m`}`],"
+],
+[
+"['Innheimtutími', fmt(dso, 0), 'dagar', `kröfur á móti meðalsölu ${ml(last3[0].ym)}–${ml(last3.at(-1).ym)}`],",
+"['Days sales outstanding', fmt(dso, 0), 'days', `receivables against average sales ${ml(last3[0].ym)}–${ml(last3.at(-1).ym)}`],"
+],
+[
+"['Eiginfjárhlutfall', fmt(eq), '%', `${delta(eq - eq0, true, sg(eq - eq0) + ' pp')} frá ${BS0} · skuldir ${mkr(C.langtimaskuldir[L] + C.skammtimaskuldir[L])} m`]];",
+"['Equity ratio', fmt(eq), '%', `${delta(eq - eq0, true, sg(eq - eq0) + ' pp')} since ${BS0} · liabilities ISK ${mkr(C.langtimaskuldir[L] + C.skammtimaskuldir[L])}m`]];"
+],
+[
+"[['Hlutafé og óráðstafað eigið fé', i => C.eigid_fe_bokad[i]], ['Afkoma fyrra árs', i => C.eigid_fe[i] - C.eigid_fe_bokad[i] - C.afkoma_arsins[i]], ['Hagnaður ársins', i => C.afkoma_arsins[i]]]",
+"[['Share capital and retained earnings', i => C.eigid_fe_bokad[i]], ['Prior-year result', i => C.eigid_fe[i] - C.eigid_fe_bokad[i] - C.afkoma_arsins[i]], ['Profit for the year', i => C.afkoma_arsins[i]]]"
+],
+[
+"<th>Liður</th>${hd.map(h => `<th class=\"n\">${h}</th>`).join('')}<th class=\"n k k1\">Breyting</th>",
+"<th>Line</th>${hd.map(h => `<th class=\"n\">${h}</th>`).join('')}<th class=\"n k k1\">Change</th>"
+],
+[
+"<tr class=\"grp\"><td colspan=\"5\">Eignir</td></tr>${catR('fastafjarmunir', 'Fastafjármunir')}${HASA ? catR('adrar_eignir', 'Aðrar eignir') : ''}${HASB ? catR('birgdir', 'Birgðir') : ''}${catR('krofur', 'Viðskiptakröfur')}${catR('handbaert_fe', 'Handbært fé')}${vrow('Eignir samtals',",
+"<tr class=\"grp\"><td colspan=\"5\">Assets</td></tr>${catR('fastafjarmunir', 'Non-current assets')}${HASA ? catR('adrar_eignir', 'Other assets') : ''}${HASB ? catR('birgdir', 'Inventory') : ''}${catR('krofur', 'Trade receivables')}${catR('handbaert_fe', 'Cash')}${vrow('Total assets',"
+],
+[
+"<tr class=\"grp\"><td colspan=\"5\">Eigið fé og skuldir</td></tr>${catR('eigid_fe', 'Eigið fé')}${catR('langtimaskuldir', 'Langtímaskuldir')}${catR('skammtimaskuldir', 'Skammtímaskuldir')}${vrow('Eigið fé og skuldir samtals',",
+"<tr class=\"grp\"><td colspan=\"5\">Equity and liabilities</td></tr>${catR('eigid_fe', 'Equity')}${catR('langtimaskuldir', 'Non-current liabilities')}${catR('skammtimaskuldir', 'Current liabilities')}${vrow('Total equity and liabilities',"
+],
+[
+"<th>Liður</th>${SEG.map(s => `<th class=\"n\">${segL(s)}</th>`).join('')}<th class=\"n k k1\">Samtals</th>",
+"<th>Line</th>${SEG.map(s => `<th class=\"n\">${segL(s)}</th>`).join('')}<th class=\"n k k1\">Total</th>"
+],
+[
+">Rekstur</td></tr>${r('Hagnaður tímabils', 'hagn')}${r('Afskriftir', 'dep')}${r('Breyting viðskiptakrafna', 'krof')}${HASB ? r('Breyting birgða', 'bir') : ''}${r('Breyting skammtímaskulda', 'skamm')}${r('Handbært fé frá rekstri', 'rek', 'sum')}",
+">Operating</td></tr>${r('Profit for the period', 'hagn')}${r('Depreciation', 'dep')}${r('Change in trade receivables', 'krof')}${HASB ? r('Change in inventory', 'bir') : ''}${r('Change in current liabilities', 'skamm')}${r('Cash from operations', 'rek', 'sum')}"
+],
+[
+">Fjárfesting</td></tr>${r('Fjárfesting í fastafjármunum', 'capex')}${HASA ? r('Breyting annarra eigna', 'adr') : ''}${r('Fjárfestingarhreyfingar', 'fjf', 'sum')}",
+">Investing</td></tr>${r('Capital expenditure', 'capex')}${HASA ? r('Change in other assets', 'adr') : ''}${r('Investing activities', 'fjf', 'sum')}"
+],
+[
+">Fjármögnun</td></tr>${r('Afborganir langtímalána', 'lan')}${r('Greiddur arður', 'ard')}${hasOther ? r('Aðrar breytingar á eigin fé', 'other') : ''}${r('Fjármögnunarhreyfingar', 'fjm', 'sum')}",
+">Financing</td></tr>${r('Repayment of long-term loans', 'lan')}${r('Dividends paid', 'ard')}${hasOther ? r('Other changes in equity', 'other') : ''}${r('Financing activities', 'fjm', 'sum')}"
+],
+[
+"${r('Breyting á handbæru fé', 'chg', 'sum')}${r('Handbært fé í upphafi', 'open')}${r('Handbært fé í lok', 'close', 'sum')}",
+"${r('Change in cash', 'chg', 'sum')}${r('Opening cash', 'open')}${r('Closing cash', 'close', 'sum')}"
+],
+[
+"`Óbein aðferð, reiknuð úr breytingum á efnahag. Upphafsstaða er ${monthEnd(B.months[0])}, fyrsti mánuður í gögnunum.${B.months[BLAST] > LASTF ? ` * Hagnaður eftir ${monthEnd(LASTF)} er bráðabirgðatala þar sem laun og vörunotkun eru ekki komin inn; sjóðstaðan sjálf er raunstaða í banka.` : ''}`",
+"`Indirect method, derived from balance sheet movements. The opening position is ${monthEnd(B.months[0])}, the first month in the data.${B.months[BLAST] > LASTF ? ` * Profit after ${monthEnd(LASTF)} is preliminary as payroll and cost of materials are not yet posted; the cash position itself is the actual bank balance.` : ''}`"
+],
+[
+"`${mkr(AG.total)} m.kr. opið · ${fmt(100 * od / AG.total, 0)}% gjaldfallið`",
+"`ISK ${mkr(AG.total)}m open · ${fmt(100 * od / AG.total, 0)}% overdue`"
+],
+[
+"title=\"${l}: ${mkr(v)} m.kr.\"",
+"title=\"${l}: ISK ${mkr(v)}m\""
+],
+[
+"% gjaldf.</small>",
+"% overdue</small>"
+],
+[
+"...(AG.b61 > 0 ? [['h', '!', 'Vanskil viðskiptavina', `${mkr(AG.b61)} m.kr. eru eldri en 60 daga. Líkur á tapi aukast með aldri krafna.`, 'Innheimtuáætlun og mat á niðurfærslu']] : []),",
+"...(AG.b61 > 0 ? [['h', '!', 'Customer arrears', `ISK ${mkr(AG.b61)}m are more than 60 days old. The likelihood of loss rises with the age of receivables.`, 'Collection plan and impairment assessment']] : []),"
+],
+[
+"...(burn > 0 ? [['h', 'kr', 'Lækkandi sjóður', `Handbært fé hefur lækkað um ${mkr(Math.abs(burn))} m.kr. á mánuði að meðaltali frá lokum ${MF[mi(B.months[pk])]}${YTD.hagn > 0 ? ', á sama tíma og reksturinn skilar hagnaði' : ''}.`, 'Mánaðarleg sjóðspá til stjórnar']] : []),\n    ...(biUp ? [['m', '▣', 'Birgðir aukast', `Birgðir hafa aukist um ${mkr(biL - bi0)} m.kr.${bi0 > 0 ? ` (${sg(100 * (biL / bi0 - 1), 0)}%)` : ''} frá ${BS0} og binda fé.`, 'Birgðastýring og mat á seljanleika birgða']] : []),",
+"...(burn > 0 ? [['h', 'kr', 'Falling cash', `Cash has fallen by ISK ${mkr(Math.abs(burn))}m a month on average since the end of ${MF[mi(B.months[pk])]}${YTD.hagn > 0 ? ', while the business is reporting a profit' : ''}.`, 'Monthly cash forecast to the board']] : []),\n    ...(biUp ? [['m', '▣', 'Inventory rising', `Inventory has risen by ISK ${mkr(biL - bi0)}m${bi0 > 0 ? ` (${sg(100 * (biL / bi0 - 1), 0)}%)` : ''} since ${BS0} and ties up cash.`, 'Inventory management and assessment of saleability']] : []),"
+],
+[
+"['m', '◎', 'Samþjöppun viðskiptavina', `${AGC[0].name} á ${fmt(100 * AGC[0].total / AG.total, 0)}% útistandandi krafna.`, 'Lánamörk á stærstu aðila']",
+"['m', '◎', 'Customer concentration', `${AGC[0].name} holds ${fmt(100 * AGC[0].total / AG.total, 0)}% of outstanding receivables.`, 'Credit limits for the largest customers']"
+],
+[
+"['m', '1×', oneDebt ? 'Einskiptissala ógreidd' : 'Einskiptissala', `${{{js.one_sale}}} í ${MF[mi(one.ym)]} (${mkr(one.amount)} m.kr.)${oneDebt ? ' er enn útistandandi' : ''} og endurtekur sig ekki.`, 'Tekið út í mati á undirliggjandi rekstri']",
+"['m', '1×', oneDebt ? 'One-off sale unpaid' : 'One-off sale', `${{{js.one_sale}}} in ${MF[mi(one.ym)]} (ISK ${mkr(one.amount)}m)${oneDebt ? ' is still outstanding' : ''} and will not recur.`, 'Excluded when assessing underlying performance']"
+],
+[
+"<p class=\"sub\">Viðbragð: ${a}</p></div><span class=\"pill ${s}\">${s === 'h' ? 'Mikil' : 'Miðlungs'}</span>",
+"<p class=\"sub\">Response: ${a}</p></div><span class=\"pill ${s}\">${s === 'h' ? 'High' : 'Medium'}</span>"
+],
+[
+"/* Stjórnarmælaborð 1.0 · Yfirsýn · Rekstur · Efnahagur og sjóðstreymi · Áhættur */",
+"/* Board dashboard 1.0 (EN prototype) */"
+],
+[
+"${ddmmyyyy(DATA.as_of).slice(0, 5)}*`",
+"${ddmmyyyy(DATA.as_of).replace(/ \\d{4}$/, '')}*`"
+],
+[
+"'eru ekki í gögnum mælaborðsins' : 'eru ekki í BC'",
+"'are not in the dashboard data' : 'are not in BC'"
+],
+[
+"['Birgðir', BIR, '--warn', false]",
+"['Inventory', BIR, '--warn', false]"
+],
+[
+"<i style=\"background:var(--warn)\"></i>Birgðir</span>",
+"<i style=\"background:var(--warn)\"></i>Inventory</span>"
+],
+[
+"'tekjum' : ''),",
+"'revenue' : ''),"
+],
+[
+">Engin áhætta greinist úr gögnunum.<",
+">No risks identified from the data.<"
+]
+]

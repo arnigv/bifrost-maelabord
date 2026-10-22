@@ -23,7 +23,8 @@ python3 forecast.py --data dataset.json --assumptions assumptions.json --out for
 | `company`, `as_of` | `forecast.company`, `forecast.as_of` (= `dataset.company`, `dataset.as_of`) |
 | `months` | `dataset.months` (aðeins lyklarnir hér að neðan; `incomplete_reason` → `reason`) |
 | `oneoffs` | `dataset.oneoffs` |
-| `fit` | `forecast.fit()` innan skriftunnar. Úttakið `forecast.model` hefur hluta: `grunnstig`→`base`, `leitni_man`→`g`, `sigma`, `efnishlutfall`→`mat`, `arstidir`→`season`. `fixed`, `last` og `n` fást aðeins með því að kalla `fit()` beint (sjá dæmi í lok skjalsins). |
+| `profile` (valfrjálst) | `dataset.profile` (`profile.json` úr `bifrost-gogn`, kafli 2) |
+| `fit` | `forecast.fit()` innan skriftunnar; `mode` = `forecast.model.adferd`. Úttakið `forecast.model` hefur hluta: `grunnstig`→`base`, `leitni_man`→`g`, `sigma`, `efnishlutfall`→`mat`, `arstidir`→`season`. `fixed`, `last` og `n` fást aðeins með því að kalla `fit()` beint (sjá dæmi í lok skjalsins). |
 | `A` | `forecast.assumptions` (óbreytt, með `_`-lyklum) |
 | `fc` | `forecast.forecast` |
 | `year` | `forecast.year` |
@@ -63,19 +64,40 @@ BC: `period_breakdown` á `G/L Account`, `balance_fields:[32]` (Hreyfing), `fiel
 | `last` | `"ÁÁÁÁ-MM"` | Síðasti fullbókaði mánuður |
 | `season` | true/false | Árstíðir notaðar (þarf ≥ 13 fullbókaða mánuði) |
 | `n` | heiltala | Fjöldi fullbókaðra mánaða í líkaninu |
+| `mode` | texti, valfrjálst | Spáaðferð = `forecast.model.adferd`: `"full"` (n ≥ 6, fullt líkan), `"runrate"` (3 ≤ n < 6: einföld spá, `g` = 0, víðara bil), `"none"` (n < 3: spá ekki gerð). Vanti lykilinn er hann leiddur af `n` (vanti líka `n`: `"full"`). |
+
+**Stutt saga.** `runrate`: síðan merkir spána „Einföld spá“ í niðurstöðusetningu, forsendum, líkantöflu og óvissuþáttum, og `backtest` er `null` (bakprófun þarf ≥ 8 mánuði). `none`: `forecast.py` skrifar `forecast.json` með `stada: "engin_spa"`, `forecast: []` og `backtest: null`; settu `fc: []`, `backtest: null`, `fit` með `n`, `last`, `season: false`, `mode: "none"` og `null` í `base`, `g`, `sigma`, `mat`, `fixed`. Síðan sýnir þá „Spá ekki gerð: of fáir fullbókaðir mánuðir“ með raun ársins, felur flipann Rekstrarhermir og sýnir aðeins forsendutöfluna á Forsendum.
+
+### `profile` (hlutur, valfrjálst)
+`dataset.profile` óbreytt (`{"jobs": 15, "items": 16, "resources": 6, …}`, fjöldi færslna úr `bifrost-gogn` kafla 2). Síðan les aðeins `jobs`:
+| Skilyrði | Orðalag |
+|---|---|
+| `jobs > 0` eða `profile` vantar | verk: „efnishlutfall“, „Verkefnastaða og sala“, „Þekktar pantanir og verk“ (BC: sölupantanir, verkáætlanir), „Efni og innkaup“ |
+| `jobs` = 0 | vörur/þjónusta: „hlutfall vörunotkunar“, „Sala og eftirspurn“, „Þekktar pantanir“ (BC: sölupantanir), „Innkaupsverð“ |
+
+### Reglur sem síðan reiknar úr `months` (ekki skrifaðar af gervigreindinni)
+Reiknað úr fullbókuðum mánuðum með tekjur > 0:
+| Regla | Viðmið | Áhrif |
+|---|---|---|
+| Sveiflukennd framlegð | EBITDA-hlutfall mánaða spannar **> 10 prósentustig** (hæsta − lægsta; `VOL_MARGIN`) | Óvissuþátturinn „Sveiflukennd framlegð“ sýndur og niðurstöðusetningin segir að framlegðin sé stærsti óvissuþátturinn; annars segir hún að framlegð hafi verið stöðug og tekjustigið sé stærsti óvissuþátturinn (áhrif 1% tekna á EBITDA). |
+| Vörunotkun nefnd | vörunotkun **≥ 5% af tekjum** að meðaltali (`MAT_MIN`) | Annars eru aðeins laun nefnd (þjónusta, eignarhald). |
+| Stærsti kostnaðardrifinn | spönn efnishlutfalls ≥ spönn launahlutfalls | „Hvert prósentustig í efnishlutfalli…“, annars „…í launahlutfalli…“. |
+| Engar árstíðir | `fit.season` = false | Óvissuþátturinn „Engar árstíðir“ (texti `js.why4_text`). |
+| Tekjuspáin traustari | `backtest.mape_tekjur` ≤ 25% og < `mape_ebitda` | Græni óvissuþátturinn sýndur. |
+| Einskiptistekjur | `oneoffs` með `cat` = `"tekjur"` | Aðeins þær eru teknar úr grunni og sýndar sem einskipti; leiðrétt MAPE aðeins ef einskiptismánuður er í bakprófun („enn yfir 25%“ / „innan 25%“ reiknað). |
 
 ### `A` (hlutur), forsendur = `assumptions.json`
 Byrjaðu á `skills/spagerd/assets/assumptions.default.json` og uppfærðu (Hagstofa, Seðlabanki, kjarasamningar). Síðan les:
 `verdbolga` (tugabrot, 12 mán. VNV), `styrivextir`, `styrivextir_grunnur` (tugabrot), `kjarasamningar` (listi `{fra:"ÁÁÁÁ-MM-DD", haekkun}`; **a.m.k. ein færsla**, hermirinn notar þá fyrstu), `yfirfaersla_efnis` (0–1), `demping_leitni` (0–1), `eldsneyti_hlutur` (hlutfall annars rekstrar), `eldsneyti_breyting` (tugabrot). Aðrir lyklar (`verdskra`, `adfangaverd`, `thekktar_pantanir`, `stodugildi_breyting`, `magnbreyting_arleg`, `_…heimild`) fylgja óbreyttir.
 
 ### `fc` (listi, 12 hlutir, næstu 12 mánuðir eftir `fit.last`)
-`forecast.forecast` óbreytt: `ym`, sömu fjárhæðarlyklar og `months` (kr.), auk `tekjur_p10`, `tekjur_p90`, `ebitda_p10`, `ebitda_p90` (kr.). Ófullbókaðir mánuðir ársins eru spáðir (ekki raun).
+`forecast.forecast` óbreytt (tómur listi `[]` ef `fit.mode` = `"none"`): `ym`, sömu fjárhæðarlyklar og `months` (kr.), auk `tekjur_p10`, `tekjur_p90`, `ebitda_p10`, `ebitda_p90` (kr.). Ófullbókaðir mánuðir ársins eru spáðir (ekki raun).
 
 ### `year` (hlutur), yfirstandandi ár = raun (fullbókað) + spá
 `forecast.year`: `raun_tekjur`, `raun_ebitda` (fullbókaðir mánuðir, kr.), `spa_tekjur`, `spa_ebitda` (spá út árið), `p10_ebitda`, `p90_ebitda` (summa P10/P90 spámánaða ársins), `ar_tekjur`, `ar_ebitda` (raun + spá).
 
 ### `backtest` (hlutur)
-`forecast.backtest` (`manudir`, `mape_tekjur`, `mape_ebitda`, tugabrot) **auk** `rows`: listi `{ym, raun_tekjur, spa_tekjur, raun_ebitda, spa_ebitda}` (kr.) fyrir 3 síðustu fullbókuðu mánuðina. `rows` fæst með `fit(rows[:-3])` og `project(..., verdskra=[], adfangaverd=[], kjarasamningar=[], thekktar_pantanir=[])` eins og í `forecast.py`.
+Má vera `null` (færri en 8 fullbókaðir mánuðir): þá segir síðan „Bakprófun ekki gerð“. Annars `forecast.backtest` (`manudir`, `mape_tekjur`, `mape_ebitda`, tugabrot) **auk** `rows`: listi `{ym, raun_tekjur, spa_tekjur, raun_ebitda, spa_ebitda}` (kr.) fyrir 3 síðustu fullbókuðu mánuðina. `rows` fæst með `fit(rows[:-3])` og `project(..., verdskra=[], adfangaverd=[], kjarasamningar=[], thekktar_pantanir=[])` eins og í `forecast.py`.
 
 ### `py` (hlutur), fyrra ár í heild
 `tekjur`, `vorunotkun`, `laun`, `husnaedi`, `annar_rekstur`, `afskriftir`, `fjarmagn`, `ebitda`, `hagnadur_fs`, kr., jákvæð. Úr `dataset.py_full` ef til; annars Hreyfing (reitur 32) á `G/L Account` með `Date Filter` = allt fyrra ár (eitt `data_batch_records`-kall, `bifrost-gogn` kafli 0) flokkuð eins og `months`. Mánaðarskipting fyrra árs er ekki notuð (sýnd sem meðaltal á mánuði).
@@ -123,7 +145,7 @@ Byrjaðu á `skills/spagerd/assets/assumptions.default.json` og uppfærðu (Hags
 | `js.as_fx_val`, `js.as_fx_src`, `js.as_fx_st`, `js.as_fx_note` | ekki notað, Bifröst, gengistafla, vantar, Ekki sótt; … |  |
 | `js.as_ord_val`, `js.as_ord_st`, `js.as_ord_note` | engar í spá, vantar, Opnar pantanir … ekki sótt. |  |
 | `js.bt_rev_chip`, `js.bt_eb_chip` | innan 25%, yfir 25%: óviss |  |
-| `js.why1_tail` | Líkanið notar meðaltöl, en framlegð batnaði mikið jún–ágú og bakprófunin vanmat því EBITDA. |  |
+| `js.why1_tail` (aðeins sýnt ef framlegð er sveiflukennd, sjá *Reglur*; má vera `""`) | Líkanið notar meðaltöl, en framlegð batnaði mikið jún–ágú og bakprófunin vanmat því EBITDA. |  |
 | `js.why2_mid` | laun og vörunotkun ekki bókuð. Síðasti fullbókaði mánuður er ágúst |  |
 | `js.why4_text` | Mánaðarskipting 2025 er ekki í gögnunum (aðeins ársheild), svo jól og sumarleyfi koma ekki fram í spánni. |  |
 | `js.rate_base` | 8,0% (= `A.styrivextir_grunnur`) |  |
@@ -146,17 +168,33 @@ for o in D['oneoffs']:
     if o['cat'] == 'tekjur': one[o['ym']] = one.get(o['ym'], 0) + o['amount']
 rows = [dict(r) for r in D['months'] if r['complete']]
 for r in rows: r['tekjur'] -= one.get(r['ym'], 0)
-F = FC.fit(rows, A); Fb = FC.fit(rows[:-3], A)
-pb = FC.project(Fb, dict(A, verdskra=[], adfangaverd=[], kjarasamningar=[], thekktar_pantanir=[]), [r['ym'] for r in rows[-3:]])
+M = R['model']; mode = M.get('adferd', 'full')
+if mode == 'none':   # < 3 fullbókaðir mánuðir: spá ekki gerð
+    fit = dict(base=None, g=None, sigma=None, mat=None, fixed=None, last=M.get('sidasti'), season=False, n=len(rows), mode='none')
+else:
+    F = FC.fit(rows, A)   # g og sigma úr forecast.json (run-rate breytir þeim)
+    fit = dict(base=F['base'], g=M['leitni_man'], sigma=M['sigma'], mat=F['mat'], fixed=F['fixed'], last=F['last'], season=F['season'], n=len(rows), mode=mode)
+bt = None
+if R['backtest']:     # aðeins ef ≥ 8 fullbókaðir mánuðir
+    Fb = FC.fit(rows[:-3], A)
+    pb = FC.project(Fb, dict(A, verdskra=[], adfangaverd=[], kjarasamningar=[], thekktar_pantanir=[]), [r['ym'] for r in rows[-3:]])
+    bt = dict(R['backtest'], rows=[dict(ym=r['ym'], raun_tekjur=r['tekjur'], spa_tekjur=p['tekjur'], raun_ebitda=r['ebitda'], spa_ebitda=p['ebitda']) for p, r in zip(pb, rows[-3:])])
 K = ['tekjur','vorunotkun','laun','husnaedi','annar_rekstur','afskriftir','fjarmagn','ebitda','hagnadur_fs']
-DATA = dict(company=D['company'], as_of=D['as_of'],
+DATA = dict(company=D['company'], as_of=D['as_of'], profile=D.get('profile'),
   months=[dict({k: m[k] for k in K}, ym=m['ym'], complete=m['complete'], reason=m.get('incomplete_reason', '')) for m in D['months']],
-  oneoffs=D['oneoffs'],
-  fit=dict(base=F['base'], g=F['g'], sigma=F['sigma'], mat=F['mat'], fixed=F['fixed'], last=F['last'], season=F['season'], n=len(rows)),
-  A=A, fc=R['forecast'], year=R['year'],
-  backtest=dict(R['backtest'], rows=[dict(ym=r['ym'], raun_tekjur=r['tekjur'], spa_tekjur=p['tekjur'], raun_ebitda=r['ebitda'], spa_ebitda=p['ebitda']) for p, r in zip(pb, rows[-3:])]),
+  oneoffs=D['oneoffs'], fit=fit, A=A, fc=R['forecast'], year=R['year'], backtest=bt,
   py=PY_FULL)  # sjá „py“
 DATA.update(meta={...}, text={...}, html={})
 ```
 
 Athugið: `forecast.py` dregur einskiptistekjur líka frá `ebitda` í bakprófun, en gullútgáfan (DT) dró þær aðeins frá tekjum. Hermirinn í síðunni notar ekki árstíðastuðla; ef `fit.season` er `true` víkur grunnur hermis lítillega frá `fc`.
+
+## Tungumál (`lang`, `i18n`)
+
+| Lykill | Dæmi | Skýring |
+|---|---|---|
+| `lang` | `"is"` | tungumál grunngagna (úr `dataset.json`). Ræður hvaða mál opnast fyrst. Vanti það er það greint úr heitum í gögnunum. |
+| `i18n.en` (eða `i18n.is`) | `{"meta": {...}, "text": {...}, "html": {...}, "js": {...}, "names": {...}}` | yfirlag fyrir hitt málið. Sömu lyklar og að ofan, aðeins þeir sem breytast. Dagsetningar á ensku `17 Oct 2026`, tölur `1,234.5`. |
+| `i18n.<lang>.names` | `{"Áætlun 2026": "Budget 2026"}` | þýðir heila strengi hvar sem er í gögnunum (heiti lykla utan staðaltöflu, áætlana, flokka, stöðu). |
+
+Sjá `example.json` (yfirlagið `i18n.en`) og `bifrost-maelabord/SKILL.md`, kaflann *Tungumál*.

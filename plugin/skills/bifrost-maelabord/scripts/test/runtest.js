@@ -65,7 +65,7 @@ function flush(ctx) { let n = 0; while (timers.length && n++ < 200) { const f = 
 function err(ctx, e) { errors.push(`${ctx}: ${e && e.stack ? e.stack.split('\n').slice(0, 3).join(' | ') : e}`); }
 
 // 1) forskriftir
-const scripts = [...html.matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/gi)].filter(m => !/\bsrc=/.test(m[1] || '')).map(m => m[2]);
+const scripts = [...html.matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/gi)].filter(m => !/\bsrc=/.test(m[1] || '') && !/type="application\/(ld\+)?json"/.test(m[1] || '')).map(m => m[2]);
 scripts.forEach((s, i) => { try { new vm.Script(s, { filename: `script${i}.js` }).runInThisContext(); } catch (e) { err(`script ${i}`, e); } });
 flush('init');
 for (const f of (doc._l.DOMContentLoaded || [])) { try { f(mkEvent('DOMContentLoaded')); } catch (e) { err('DOMContentLoaded', e); } }

@@ -90,7 +90,7 @@ Ef notandi biður um leiðbeiningar, góð ráð eða „hvernig virkar þetta�
 | 4 | `manadarlok` | já | alltaf |
 | 5 | `tekjur` (flipinn Tekjuleki fylgir `tekjuleki`) | já | alltaf; segðu hve stór hluti tekna er á viðskiptamannabók |
 | 6 | `framlegd` | já | alltaf; sýn eftir starfsemi (verk, vörur eða þjónusta) |
-| 7 | `spagerd` | já | alltaf; færri en 6 fullbókaðir mánuðir: segðu að óvissan sé meiri |
+| 7 | `spagerd` | já | alltaf; 6+ fullbókaðir mánuðir: fullt líkan; 3–5: einföld spá (meðaltal, meiri óvissa); 0–2: engin spá, síðan sýnir raun og skýringu |
 | 8 | `endurskodun` | já | alltaf |
 | 9 | `sjalfvirkni` | já | alltaf, **síðast** (notar niðurstöður hinna); keyrsla læst |
 | + | `sermaelabord` | mælt með / val | eftir flokkun (ÍSAT + notkun í BC): 1–3 mælt með, allir 12 til vals |
@@ -104,6 +104,8 @@ python3 ${CLAUDE_PLUGIN_ROOT}/skills/bifrost-maelabord/scripts/bundle.py --hub h
 node ${CLAUDE_PLUGIN_ROOT}/skills/bifrost-maelabord/scripts/test/runtest.js build/<síða>.html
 ```
 Birtu miðstöðina fyrst (með þeim spjöldum sem eru tilbúin, hin merkt „í smíðum“ í `note`), og svo aftur á sömu slóð eftir hvert mælaborð, með nýju skránni í `files`. `bundle.py` vistar `data/*.json` og `manifest.json` með síðunum; birtu þær líka (þær gera síðari breytingar á einu mælaborði mögulegar án þess að sækja allt aftur). Gefðu `--automation-url` þegar Sjálfvirknivæðing hefur fengið slóð.
+
+**Tungumál.** `lang` úr `dataset.json` (íslensk heiti í BC → `is`, annars `en`) fer í `hub.json` og gögn allra mælaborða; skrifaðu textana á því máli og hitt málið í yfirlagið `i18n.<lang>` (sjá `bifrost-maelabord`, *Tungumál*). `bundle.py` smíðar bæði málin; `index.html` er aðalmálið og hitt er `index.<lang>.html`. Birtu **allar skrárnar sem `bundle.py` prentar** í `files`, líka `*.en.html`/`*.is.html`. Settu `lang` líka í `config.json` Sjálfvirknivæðingar. Ef notandi biður um annað mál en gögnin benda til, notaðu `--lang`.
 
 
 1. **Miðstöðin fyrst**, með tómum spjöldum („í smíðum“), til að fá slóð hennar.
@@ -128,6 +130,7 @@ Birtu miðstöðina fyrst (með þeim spjöldum sem eru tilbúin, hin merkt „�
 - Síðasta spjaldið: **„+ Fleiri mælaborð“** (stórt, með brotalínu) og „+“-hnappur við fyrirsögnina; báðir opna sama gluggann.
 - **Glugginn „Fleiri mælaborð“:** efst *Mælt með fyrir þitt félag* (úr `sermaelabord`, með ástæðu), svo *Aðrir atvinnugreinapakkar* (allir 12 að frádregnum þeim sem eru komnir) og *Annað* (eigið mælaborð), með leit. Hnappurinn heitir **„Afrita skipun“**, því síðan getur hvorki ræst Claude né búið til mælaborð sjálf: hún afritar skipunina, notandinn límir hana í Claude, og Claude fylgir kafla 0b, smíðar mælaborðið og uppfærir miðstöðina á sömu slóð.
 - Fótur: heimild, dagsetning og gervigreindarmerking.
+- Rofinn **IS | EN** efst; aðalmálið ræðst af grunngögnunum.
 
 ## 5. Í lokin
 

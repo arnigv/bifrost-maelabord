@@ -10,4 +10,6 @@ Ræstu Bifröst-mælaborðin með skillinu `bifrost-skyndiuttekt`, frá byrjun:
 3. Flokkaðu félagið (ÍSAT og starfsemi í BC), mæltu með sérmælaborðum og leyfðu val úr öllum 12 pökkum.
 4. Smíðaðu miðstöðina og mælaborðin í einu artifacti, Sjálfvirknivæðingu síðast.
 
+Mælaborðin opnast á íslensku ef grunngögnin í BC eru á íslensku, annars á ensku; rofinn IS | EN er efst á hverri síðu.
+
 Aðeins lesið úr BC.

@@ -114,8 +114,8 @@ select{font:inherit;font-size:.86rem;background:var(--panel2);color:var(--ink);b
 .prc:first-child{border-top:none}
 .prc span{color:var(--muted);font-size:.76rem;grid-column:1/-1}
 .prc b{font-family:var(--f-mono);white-space:nowrap}
-#v-jobs .mbar{height:6px;border-radius:999px;background:var(--panel2);overflow:hidden;min-width:50px}
-#v-jobs .mbar span{display:block;height:100%;border-radius:999px;background:var(--s2)}
+#v-jobs .mbar,#v-items .mbar{height:6px;border-radius:999px;background:var(--panel2);overflow:hidden;min-width:50px}
+#v-jobs .mbar span,#v-items .mbar span{display:block;height:100%;border-radius:999px;background:var(--s2)}
 /* Tekjuleki */
 #l-upp[hidden],#l-adg[hidden]{display:none}
 @media (max-width:560px){.ctl{display:grid;grid-template-columns:minmax(0,1fr)}.ctl select{width:100%}.sbar{grid-template-columns:minmax(0,1fr) 5rem}.sbar .t{grid-column:1/-1;grid-row:2}}
@@ -186,6 +186,7 @@ select{font:inherit;font-size:.86rem;background:var(--panel2);color:var(--ink);b
       <div class="prow unreg" id="vm-unreg"></div>
       <p class="note">Handfærðar tekjur: sjá <a href="manadarlok.html">Mánaðarlok</a>. Innheimta og gjaldfallnar kröfur: sjá <a href="sjodstreymi.html">Sjóðstreymi og bankar</a>.</p>
     </section>
+    <div id="vm-stc"></div>
     <section class="card">
       <div class="ch"><h2>Hvernig salan er skráð</h2><div class="legend" id="vm-leg"></div></div>
       <div class="cv" style="height:240px"><canvas id="c-reg" role="img" aria-label="Tekjur á mánuði: reikningar á viðskiptavin á móti dagbók án viðskiptavinar"></canvas></div>
@@ -202,11 +203,12 @@ select{font:inherit;font-size:.86rem;background:var(--panel2);color:var(--ink);b
       <p class="note" id="v-tnote"></p>
     </section>
     <div class="g2">
-      <section class="card">
+      <section class="card" id="v-jobc">
         <div class="ch"><h2>Verk</h2><span class="sub">samningur og reikningsfært {{meta.year}} til dags</span></div>
         <div class="scroll"><table id="v-jobs" style="min-width:520px"><thead><tr><th>Verk</th><th>Viðskiptavinur</th><th class="n">Samningur</th><th class="n">Reikningsfært</th><th style="width:22%">Hlutfall</th></tr></thead><tbody></tbody></table></div>
         <p class="note">Framlegð og framvinda verka: sjá <a href="framlegd.html">Framlegð og verk</a>.</p>
       </section>
+      <section class="card" id="v-itemc" hidden></section>
       <section class="card">
         <div class="ch"><h2>Verð og afslættir</h2><span class="sub">af reikningslínum og verðskrá</span></div>
         <div id="v-price"></div>
@@ -230,19 +232,19 @@ select{font:inherit;font-size:.86rem;background:var(--panel2);color:var(--ink);b
       </div>
       <div id="l-upp" hidden>
         <div class="seg" id="flt" role="group" aria-label="Sía á tegund" style="margin-bottom:10px"></div>
-        <div class="scroll"><table id="src" style="min-width:760px"><thead><tr><th data-sort="no">Verk</th><th data-sort="desc">Lýsing</th><th data-sort="cust">Viðskiptavinur</th><th data-sort="kind">Tegund</th><th class="n" data-sort="h">Klst.</th><th class="n" data-sort="amt">Fjárhæð, kr.</th><th data-sort="v">Vissa</th></tr></thead><tbody></tbody></table></div>
+        <div class="scroll"><table id="src" style="min-width:760px"><thead><tr><th data-sort="no" id="src-h-no">Verk</th><th data-sort="desc">Lýsing</th><th data-sort="cust">Viðskiptavinur</th><th data-sort="kind">Tegund</th><th class="n" data-sort="h" id="src-h-h">Klst.</th><th class="n" data-sort="amt">Fjárhæð, kr.</th><th data-sort="v">Vissa</th></tr></thead><tbody></tbody></table></div>
         <p class="note" id="src-note"></p>
       </div>
     </section>
     <details class="method">
       <summary>Aðferð og athuganir</summary>
-      <p class="note">Athuganirnar fylgja skillinu <b>tekjuleki</b> (A–H). Fjárhæðir án VSK á verðskrá; árleg áhrif eru mat. Gögn: verk, verkfærslur og áætlunarlínur í BC, sótt {{meta.leak_fetched}}.</p>
+      <p class="note" id="meth-p">Athuganirnar fylgja skillinu <b>tekjuleki</b> (A–H). Fjárhæðir án VSK á verðskrá; árleg áhrif eru mat. Gögn: verk, verkfærslur og áætlunarlínur í BC, sótt {{meta.leak_fetched}}.</p>
       <div class="scroll"><table id="meth" style="min-width:620px"><thead><tr><th>Athugun</th><th>Staða</th><th>Niðurstaða</th></tr></thead><tbody></tbody></table></div>
     </details>
   </section>
 
   <footer>
-    <p>Heimild: fjárhagsfærslur á tekjulyklum {{meta.rev_accounts}} ({{meta.py}}–{{meta.year}}), viðskiptamannafærslur, bókaðir sölureikningar og reikningslínur, verk og verkfærslur {{meta.company_gen}} í Business Central (Bifröst, umhverfi {{meta.bc_env}}), sótt {{meta.fetched}}. Aðeins lesið, ekkert skrifað í BC. Fjárhæðir án VSK.</p>
+    <p id="f-src">Heimild: fjárhagsfærslur á tekjulyklum {{meta.rev_accounts}} ({{meta.py}}–{{meta.year}}), viðskiptamannafærslur, bókaðir sölureikningar og reikningslínur, verk og verkfærslur {{meta.company_gen}} í Business Central (Bifröst, umhverfi {{meta.bc_env}}), sótt {{meta.fetched}}. Aðeins lesið, ekkert skrifað í BC. Fjárhæðir án VSK.</p>
     <p>{{{html.footer_notes}}}</p>
     <p>Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.</p>
   </footer>
@@ -264,17 +266,24 @@ const { $, fmt, sg, mkr, MON, css, alpha, date, sortable, themeToggle, tabs } = 
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 const sum = (a, f) => a.reduce((s, x) => s + f(x), 0);
-const pct = (v, d = 0) => fmt(100 * v, d) + '%';
+const pct = (v, d = 0) => (v == null || !isFinite(v)) ? '–' : fmt(100 * v, d) + '%';
 const MF = ['janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 'júlí', 'ágúst', 'september', 'október', 'nóvember', 'desember'];
 const mi = ym => +ym.slice(5, 7) - 1, ml = ym => MON[mi(ym)];
 const M = DATA.M, INC = DATA.inc, FULL = M.filter(m => !INC[m]);
 const SN = Object.fromEntries(DATA.streams), SK = DATA.streams.map(s => s[0]);
 const CUST = Object.fromEntries(DATA.cust.map(c => [c.no, c]));
 const CN = no => (CUST[no] && CUST[no].name) || no;
+/* Rekstrarform ræðst af gögnunum: verk og verðskrá forða (verkstæði, þjónusta) eða vörusala (verslun, heildsala) */
+const JOBS = DATA.jobs || [], HASJOBS = JOBS.length > 0, PRICES = DATA.prices || [], LAB = HASJOBS || PRICES.length > 0;
+const ITEMS = DATA.items || [], STORES = DATA.stores || [];
+const POS = no => !!(CUST[no] && CUST[no].pos);
+const ST_OK = ['Gert'], ST_NA = ['Á ekki við'];
 const AN = {{js.acc_names}};
 // E: [dags, lykill, fylgiskjal, lýsing, fjárhæð (+ = tekjur), tegund reikn|dagb|bakf, viðskiptavinur, stoð]
 const E = DATA.E.map(([d, a, doc, desc, amt, k, c, s]) => ({ d, ym: d.slice(0, 7), a, doc, desc, amt, k, c, s }));
 const ONEDOC = new Set(E.filter(e => e.s === 'einsk').map(e => e.doc));
+const HASONE = ONEDOC.size > 0, HASJR = E.some(e => e.k === 'dagb');
+const NONGL = {{js.non_gl_lines}}; // fjöldi reikningslína á vöru eða forða (0 = allar á fjárhagslykil)
 const CH = {};
 const up = (key, el, cfg) => { if (!window.Chart || !el) return; if (CH[key]) CH[key].destroy(); CH[key] = new Chart(el, cfg); };
 const tip = () => ({ backgroundColor: css('--panel2'), titleColor: css('--ink'), bodyColor: css('--ink2'), borderColor: css('--line'), borderWidth: 1, padding: 10 });
@@ -325,17 +334,19 @@ function yfir(P) {
   $('h-big').innerHTML = `${m1(P.rev)}<small>m.kr.</small>`;
   $('h-txt').textContent = `Tekjur eru ${sg(100 * (P.rev / P.py - 1))}% á móti sama tímabili ${{{js.py}}}` +
     (P.one ? (', ' + {{js.one_incl}}) : '') +
-    (P.inc.length ? ', og bráðabirgðamánuðir eru vanmetnir þar til söludagbók hefur verið bókuð' : '') + '.';
-  $('h-row').innerHTML = [[`${sg(chg / 1e6)} m`, ('breyting frá ' + {{js.py}})], [`${m1(P.rev / P.ms.length)} m`, 'meðaltal á mánuði'], [`${m1(core)} m`, 'án einskiptissölu'],
-    P.ms.length > 1 ? [`${MF[mi(best[0])]}`, `besti mánuður, ${m1(best[1])} m`] : [`${pct(P.inv / P.rev)}`, 'á viðskiptamannabók']]
+    (P.inc.length ? (HASJR ? ', og bráðabirgðamánuðir eru vanmetnir þar til söludagbók hefur verið bókuð' : ', og bráðabirgðamánuðir eru vanmetnir þar til þeir hafa verið fullbókaðir') : '') + '.';
+  /* án einskiptis aðeins ef einskiptissala er til; annars viðmið fyrra árs (og áætlun í stað hlutfalls á viðskiptamannabók, sem er þá lykilmælir) */
+  $('h-row').innerHTML = [[`${sg(chg / 1e6)} m`, ('breyting frá ' + {{js.py}})], [`${m1(P.rev / P.ms.length)} m`, 'meðaltal á mánuði'], HASONE ? [`${m1(core)} m`, 'án einskiptissölu'] : [`${m1(P.py)} m`, ('viðmið ' + {{js.py}})],
+    P.ms.length > 1 ? [`${MF[mi(best[0])]}`, `besti mánuður, ${m1(best[1])} m`] : HASONE ? [`${pct(P.inv / P.rev)}`, 'á viðskiptamannabók'] : [`${m1(P.bud)} m`, esc(DATA.bud_name)]]
     .map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join('');
-  // Lykilmælar
-  const byC = custSales(P), top3 = sum(byC.slice(0, 3), c => c.v);
+  // Lykilmælar. Staðgreiðsluviðskiptavinir (pos) eru ekki taldir með í samþjöppun
+  const byC = custSales(P).filter(c => !POS(c.no)), top3 = sum(byC.slice(0, 3), c => c.v), posV = posSales(P), invNP = P.inv - posV;
   const LK = DATA.leak.items.filter(i => i.v !== 'A'), now = sum(LK, i => i.amt);
   const K = [
-    ['Vöxtur án einskiptis', `${sg(100 * (core / P.py - 1))}<small>%</small>`, `á móti ${{{js.py}}} × ${P.ms.length}/12 (${m1(P.py)} m.kr.)`, core >= P.py ? 'up' : 'dn'],
+    HASONE ? ['Vöxtur án einskiptis', `${sg(100 * (core / P.py - 1))}<small>%</small>`, `á móti ${{{js.py}}} × ${P.ms.length}/12 (${m1(P.py)} m.kr.)`, core >= P.py ? 'up' : 'dn']
+      : ['Á viðskiptamannabók', `${P.rev ? fmt(100 * P.inv / P.rev, 0) : '–'}<small>%</small>`, 'af tekjum tímabilsins eru reikningar á viðskiptavin', ''],
     ['Á móti áætlun', `${sg((P.rev - P.bud) / 1e6)}<small>m.kr.</small>`, `${esc(DATA.bud_name)} <span class="pill m">drög</span> ${sg(100 * (P.rev / P.bud - 1))}%`, P.rev >= P.bud ? 'up' : 'dn'],
-    ['Þrír stærstu viðskiptavinir', P.inv ? `${fmt(100 * top3 / P.inv, 0)}<small>%</small>` : '–', P.inv ? `af sölu á viðskiptamannabók (${byC.slice(0, 3).map(c => c.no).join(', ')})` : 'enginn reikningur á tímabilinu', ''],
+    ['Þrír stærstu viðskiptavinir', invNP > 0 ? `${fmt(100 * top3 / invNP, 0)}<small>%</small>` : '–', invNP > 0 ? (posV ? `af reikningssölu utan staðgreiðslu (${byC.slice(0, 3).map(c => c.no).join(', ')})` : `af sölu á viðskiptamannabók (${byC.slice(0, 3).map(c => c.no).join(', ')})`) : 'enginn reikningur á tímabilinu', ''],
     ['Sækjanlegt strax', `${m1(now)}<small>m.kr.</small>`, 'tekjuleki · sjá flipann Tekjuleki', ''],
   ];
   $('y-kpis').innerHTML = K.map(([l, v, d, c]) => `<div class="card kpi"><span class="l">${l}${c ? ` <span class="chip ${c}">${c === 'up' ? 'yfir' : 'undir'}</span>` : ''}</span><span class="v">${v}</span><span class="d">${d}</span></div>`).join('');
@@ -350,7 +361,8 @@ function streamSums(P) {
     .filter(s => s.n).sort((a, b) => b.v - a.v);
 }
 function monthChart(P) {
-  $('y-leg').innerHTML = `<span><i style="background:var(--s1)"></i>Tekjur ${{{js.year}}}</span><span><i style="background:var(--warn)"></i>Einskipti 1×</span><span><i class="dash" style="color:var(--base)"></i>${{{js.py}}}, meðaltal á mánuði</span><span><i class="dash" style="color:var(--s2)"></i>${esc(DATA.bud_name)} (drög)</span>`;
+  const leg = `<span><i style="background:var(--s1)"></i>Tekjur ${{{js.year}}}</span><span><i style="background:var(--warn)"></i>Einskipti 1×</span><span><i class="dash" style="color:var(--base)"></i>${{{js.py}}}, meðaltal á mánuði</span><span><i class="dash" style="color:var(--s2)"></i>${esc(DATA.bud_name)} (drög)</span>`;
+  $('y-leg').innerHTML = HASONE ? leg : leg.replace(/<span><i style="background:var\(--warn\)"><\/i>[^<]*<\/span>/, '');
   $('y-mnote').textContent = `Valið tímabil er í fullum lit. ${{{js.inc_note}}} ${{{js.py}}} var ${m1(DATA.py)} m.kr., eða ${m1(DATA.py / 12)} m.kr. á mánuði að meðaltali. Áætlunin er ${m1(DATA.bud[M[0]])} m.kr. á mánuði (${esc(DATA.bud_desc)}).`;
   if (!window.Chart) return;
   Chart.defaults.font.family = css('--f-body'); Chart.defaults.color = css('--muted');
@@ -373,23 +385,28 @@ function custSales(P) {
   P.E.filter(e => e.k === 'reikn').forEach(e => { const x = R[e.c] = R[e.c] || { no: e.c, v: 0, docs: new Set() }; x.v += e.amt; x.docs.add(e.doc); });
   return Object.values(R).sort((a, b) => b.v - a.v);
 }
+/* sala á staðgreiðsluviðskiptavini (cust[].pos), t.d. „Staðgreiðsla <verslun>“: ekki raunverulegir viðskiptavinir */
+const posSales = P => sum(P.E.filter(e => e.k === 'reikn' && POS(e.c)), e => e.amt);
 function vm(P) {
   const C = custSales(P), all = E.filter(e => e.k === 'reikn'), allInv = sum(all, e => e.amt), allRev = sum(E, e => e.amt);
   const isAll = P.ms.length === M.length;
   $('vm-dq').innerHTML = `${{{js.dq_note}}}` +
     (isAll ? '' : ` Allt árið til dags (${{{js.ytd_short}}}) eru ${m1(allInv)} af ${m1(allRev)} m.kr. (${pct(allInv / allRev)}) á viðskiptamannabók.`) + (' ' + {{js.dq_tail}});
+  $('vm-dq').parentNode.hidden = !String({{js.dq_note}}).trim(); // enginn gagnagæðaborði ef salan er öll á viðskiptavini
   const invP = DATA.inv.filter(i => P.S.has(i.d.slice(0, 7)));
-  const nNew = C.filter(c => CUST[c.no].new).length, nIC = C.filter(c => CUST[c.no].ic).length;
+  /* staðgreiðsla (pos) er sýnd í listanum en ekki talin sem viðskiptavinur í fjölda, stærsta eða samþjöppun */
+  const CC = C.filter(c => !POS(c.no)), nPos = C.length - CC.length, invNP = P.inv - posSales(P);
+  const nNew = CC.filter(c => CUST[c.no].new).length, nIC = CC.filter(c => CUST[c.no].ic).length;
   const K = [
     ['Á viðskiptamannabók', `${m1(P.inv)}<small>m.kr.</small>`, `${pct(P.inv / P.rev)} af tekjum tímabilsins`],
-    ['Viðskiptavinir með reikning', `${C.length}`, `þar af ${nNew} nýir á árinu${nIC ? ` · ${nIC} tengdir aðilar` : ''}`],
-    ['Stærsti viðskiptavinur', C.length ? `${fmt(100 * C[0].v / P.inv, 0)}<small>%</small>` : '–', C.length ? esc(CN(C[0].no)) : 'enginn reikningur'],
+    ['Viðskiptavinir með reikning', `${CC.length}`, `þar af ${nNew} nýir á árinu${nIC ? ` · ${nIC} tengdir aðilar` : ''}` + (nPos ? ` · auk ${nPos} staðgreiðslureikn.` : '')],
+    ['Stærsti viðskiptavinur', CC.length && invNP > 0 ? `${fmt(100 * CC[0].v / invNP, 0)}<small>%</small>` : '–', CC.length ? esc(CN(CC[0].no)) + (nPos ? ' · af sölu utan staðgreiðslu' : '') : 'enginn reikningur'],
     ['Reikningar', `${invP.length}`, invP.length ? `meðalreikningur ${m1(sum(invP, i => i.net) / invP.length)} m.kr.` : '–'],
   ];
   $('vm-kpis').innerHTML = K.map(([l, v, d]) => `<div class="card kpi"><span class="l">${l}</span><span class="v">${v}</span><span class="d">${d}</span></div>`).join('');
-  // Samþjöppun
-  if (C.length) {
-    const p1 = C[0].v / P.inv, p3 = sum(C.slice(1, 3), c => c.v) / P.inv, pr = 1 - p1 - p3;
+  // Samþjöppun (án staðgreiðslu)
+  if (CC.length && invNP > 0) {
+    const p1 = CC[0].v / invNP, p3 = sum(CC.slice(1, 3), c => c.v) / invNP, pr = 1 - p1 - p3, C = CC;
     $('vm-conc').innerHTML = `<div class="stack" role="img" aria-label="Samþjöppun sölu á viðskiptamannabók"><span style="width:${(100 * p1).toFixed(1)}%;background:var(--s1)"></span><span style="width:${(100 * p3).toFixed(1)}%;background:var(--s2)"></span><span style="width:${(100 * Math.max(0, pr)).toFixed(1)}%;background:var(--s6)"></span></div>
       <div class="lg"><span><i style="background:var(--s1)"></i>Stærsti</span><span><i style="background:var(--s2)"></i>Næstu tveir</span><span><i style="background:var(--s6)"></i>Aðrir (${Math.max(0, C.length - 3)})</span></div>`;
   } else $('vm-conc').innerHTML = '';
@@ -398,7 +415,7 @@ function vm(P) {
   const monthly = no => M.map(m => sum(E.filter(e => e.k === 'reikn' && e.c === no && e.ym === m), e => e.amt)), mxAll = Math.max(1, ...DATA.cust.map(c => Math.max(...monthly(c.no))));
   $('vm-list').innerHTML = C.map(c => {
     const x = CUST[c.no], mo = monthly(c.no);
-    const tags = (x.new ? ('<span class="pill l">nýr ' + {{js.year}} + '</span>') : '') + (x.one ? '<span class="one">1×</span>' : '') + (x.ic ? '<span class="pill i">tengdur aðili</span>' : '');
+    const tags = (x.new ? ('<span class="pill l">nýr ' + {{js.year}} + '</span>') : '') + (x.one ? '<span class="one">1×</span>' : '') + (x.ic ? '<span class="pill i">tengdur aðili</span>' : '') + (x.pos ? '<span class="pill m">staðgreiðsla</span>' : '');
     return `<div class="prow click" data-c="${c.no}" tabindex="0" role="button" aria-label="Opna reikninga ${esc(x.name)}"><span class="av">${c.no}</span><div style="min-width:0"><div class="nm">${esc(x.name)}${tags}</div><div class="sub">${c.docs.size} reikn. á tímabilinu · fyrsti reikningur ${{{js.year}}} ${date(x.first)}</div>
       <div class="trend" aria-hidden="true">${mo.map((v, i) => `<i class="${v ? '' : 'z'}${INC[M[i]] ? ' inc' : ''}" style="height:${v ? Math.max(8, 100 * v / mxAll).toFixed(0) : 6}%" title="${MON[i]}: ${m1(v)} m"></i>`).join('')}</div>
       <div class="bar"><span style="width:${(100 * c.v / mx).toFixed(1)}%"></span></div></div><span class="n">${m1(c.v)}<small>m.kr.</small></span></div>`;
@@ -406,13 +423,22 @@ function vm(P) {
   const unreg = P.rev - P.inv, nJ = P.E.filter(e => e.k !== 'reikn').length;
   $('vm-unreg').innerHTML = `<span class="av">–</span><div style="min-width:0"><div class="nm">Óskráð á viðskiptavin</div><div class="sub">${{{js.unreg_desc}}} · ${nJ} færslur · <button class="linkbtn" id="unreg-open">sjá færslur</button></div></div><span class="n">${m1(unreg)}<small>m.kr. · ${pct(unreg / P.rev)}</small></span>`;
   const none = DATA.cust.filter(c => !C.some(x => x.no === c.no)).length;
+  stores(P, nPos);
   regChart(P, none);
+}
+/* Sala eftir verslun eða staðsetningu (valfrjálst `stores`): {code, name, m: {ÁÁÁÁ-MM: kr}} */
+function stores(P, nPos) {
+  if (!STORES.length) { $('vm-stc').innerHTML = ''; return; }
+  const R = STORES.map(s => ({ s, v: sum(P.ms, m => (s.m && s.m[m]) || 0) })).sort((a, b) => b.v - a.v), tot = sum(R, r => r.v), mx = Math.max(1, ...R.map(r => Math.abs(r.v)));
+  const rows = R.map(({ s, v }) => `<div class="prow"><span class="av">${esc(s.code)}</span><div style="min-width:0"><div class="nm">${esc(s.name)}</div><div class="bar"><span style="width:${Math.max(0, 100 * v / mx).toFixed(1)}%"></span></div></div><span class="n">${m1(v)}<small>${pct(tot ? v / tot : null)}</small></span></div>`).join('');
+  const note = `${R.length} ${R.length === 1 ? 'staðsetning' : 'staðsetningar'} · samtals ${m1(tot)} m.kr. á tímabilinu.` + (nPos ? ' Staðgreiðsluviðskiptavinir eru í listanum að ofan en ekki taldir með í samþjöppun og stærstu viðskiptavinum.' : '');
+  $('vm-stc').innerHTML = `<section class="card"><div class="ch"><h2>Sala eftir verslun</h2><span class="sub">staðgreiðsla og kortasala eftir staðsetningu eða vídd · valið tímabil</span></div><div class="plist">${rows}</div><p class="note">${note}</p></section>`;
 }
 function regChart(P, none) {
   const inv = M.map(m => sum(E.filter(e => e.ym === m && e.k === 'reikn'), e => e.amt) / 1e6), jr = M.map((m, i) => revM(m) / 1e6 - inv[i]);
   $('vm-leg').innerHTML = '<span><i style="background:var(--s2)"></i>Reikningar á viðskiptavin</span><span><i style="background:var(--s6)"></i>Dagbók án viðskiptavinar</span>';
-  const sw = M.find((m, i) => inv[i] > jr[i]);
-  $('vm-regnote').textContent = `${sw ? `Reikningar urðu stærri en dagbókin í ${MF[mi(sw)]}. ` : ''}${{{js.reg_py}}} ${none ? `${none} viðskiptavinir eru ekki með reikning á völdu tímabili. ` : ''}${{{js.reg_lost}}}`;
+  const sw = HASJR ? M.find((m, i) => inv[i] > jr[i]) : null;
+  $('vm-regnote').textContent = (HASJR ? '' : 'Öll sala er reikningsfærð á viðskiptavini; engin sala er bókuð með dagbók. ') + `${sw ? `Reikningar urðu stærri en dagbókin í ${MF[mi(sw)]}. ` : ''}${{{js.reg_py}}} ${none ? `${none} viðskiptavinir eru ekki með reikning á völdu tímabili. ` : ''}${{{js.reg_lost}}}`;
   if (!window.Chart) return;
   const a = m => P.S.has(m) ? (INC[m] ? .55 : 1) : .3;
   up('reg', $('c-reg'), { type: 'bar', data: { labels: M.map(ml), datasets: [
@@ -425,16 +451,27 @@ function regChart(P, none) {
 
 /* ================= VÖRUR OG ÞJÓNUSTA ================= */
 const openS = new Set();
+/* Vörur eða vöruflokkar (valfrjálst `items`): {no, name, rev, cost, m?: {ÁÁÁÁ-MM: [sala, kostnaður]}}; án `m` gildir árið til dags */
+const ITP = ITEMS.length > 0 && ITEMS.every(x => x.m);
+function itemSums(P) {
+  return ITEMS.map(x => ITP ? { x, name: x.name, rev: sum(P.ms, m => (x.m[m] || [0, 0])[0]), cost: sum(P.ms, m => (x.m[m] || [0, 0])[1]) } : { x, name: x.name, rev: x.rev || 0, cost: x.cost || 0 })
+    .filter(r => r.rev || r.cost).sort((a, b) => b.rev - a.rev);
+}
 function vor(P) {
   const invP = DATA.inv.filter(i => P.S.has(i.d.slice(0, 7))), L = invP.flatMap(i => i.lines.map(l => ({ i, l })));
   const onJob = sum(L.filter(x => x.l[7]), x => x.l[6]), afsl = -sum(P.E.filter(e => e.s === 'afsl'), e => e.amt), ldisc = L.filter(x => x.l[5]).length;
-  const nonGL = {{js.non_gl_lines}}; // allar línur eru af tegundinni fjárhagslykill (G/L Account) í BC
+  const nonGL = NONGL;
+  const IS = itemSums(P), iRev = sum(IS, x => x.rev), iCost = sum(IS, x => x.cost);
+  /* verk og verðskrá forða aðeins ef félagið er með verk eða forða; annars vörusala og framlegð úr `items` */
   const K = [
-    ['Bókað á verk', `${m1(onJob)}<small>m.kr.</small>`, `${pct(onJob / P.rev, 1)} tekna · ${{{js.onjob_note}}}`],
-    ['Verðskrá vinnu', DATA.prices.length ? `${fmt(Math.min(...DATA.prices), 0)}–${fmt(Math.max(...DATA.prices), 0)}` : '–', 'kr./klst. án VSK · verðskrá forða í BC'],
+    HASJOBS ? ['Bókað á verk', `${m1(onJob)}<small>m.kr.</small>`, `${pct(onJob / P.rev, 1)} tekna · ${{{js.onjob_note}}}`]
+      : IS.length ? ['Framlegð af vörusölu', `${iRev ? fmt(100 * (iRev - iCost) / iRev, 1) : '–'}<small>%</small>`, `${m1(iRev - iCost)} af ${m1(iRev)} m.kr. vörusölu · kostnaðarverð seldra vara`] : null,
+    PRICES.length ? ['Verðskrá vinnu', `${fmt(Math.min(...PRICES), 0)}–${fmt(Math.max(...PRICES), 0)}`, 'kr./klst. án VSK · verðskrá forða í BC']
+      : HASJOBS ? ['Verðskrá vinnu', '–', 'kr./klst. án VSK · verðskrá forða í BC']
+      : IS.length ? ['Stærsti vöruflokkur', `${iRev ? fmt(100 * IS[0].rev / iRev, 0) : '–'}<small>%</small>`, `${esc(IS[0].name)} · ${IS.length} ${IS.length === 1 ? 'flokkur' : 'flokkar'} alls`] : null,
     ['Afslættir', `${mkr(afsl, 2)}<small>m.kr.</small>`, `${afsl ? P.E.filter(e => e.s === 'afsl').map(e => `${e.doc} ${date(e.d)}, ${esc(e.desc)}`).join('; ') : ('enginn á lykil ' + {{js.disc_account}})} · ${ldisc} línur með línuafslætti`],
-    ['Reikningslínur á vöru eða forða', `${nonGL}<small>af ${L.length}</small>`, {{js.non_gl_note}}],
-  ];
+    [LAB ? 'Reikningslínur á vöru eða forða' : 'Reikningslínur á vöru', `${nonGL}<small>af ${L.length}</small>`, {{js.non_gl_note}}],
+  ].filter(Boolean);
   $('v-kpis').innerHTML = K.map(([l, v, d]) => `<div class="card kpi"><span class="l">${l}</span><span class="v">${v}</span><span class="d">${d}</span></div>`).join('');
   // Tré: stoð -> lykill -> færslur
   const S = streamSums(P), mx = Math.max(1, ...S.map(s => Math.abs(s.v)));
@@ -448,33 +485,54 @@ function vor(P) {
   }).join('') + `<tr class="sum"><td>Samtals tekjur</td><td class="n">${m1(P.rev)}</td><td></td><td class="n">100%</td><td class="n">${P.E.length}</td></tr>`;
   const big = S.filter(s => DATA.py_stream[s.k]).map(s => ({ s, d: s.v / P.rev - DATA.py_stream[s.k] / DATA.py })).sort((a, b) => Math.abs(b.d) - Math.abs(a.d))[0];
   $('v-tnote').textContent = `Hlutdeild ${{{js.py}}} ${{{js.py_share_src}}} ${m1(DATA.py)} m.kr.).${big ? ` Mesta breyting á samsetningu: ${SN[big.s.k].toLowerCase()} ${sg(100 * big.d)} pp.` : ''} ${{{js.py_share_tail}}}`;
-  // Verk
-  const J = DATA.jobs.slice().sort((a, b) => b.inv - a.inv);
+  // Verk (aðeins ef félagið er með verk)
+  $('v-jobc').hidden = !HASJOBS;
+  const J = JOBS.slice().sort((a, b) => b.inv - a.inv);
   $('v-jobs').querySelector('tbody').innerHTML = J.map(j => { const r = j.contract ? j.inv / j.contract : null;
     return `<tr><td><span class="mono">${esc(j.no)}</span> ${esc(j.desc)}</td><td>${esc(j.cust)}</td><td class="n">${j.contract ? m1(j.contract) : '–'}</td><td class="n">${m1(j.inv)}</td><td>${r == null ? '<span class="sub">innra verk</span>' : `<div class="mbar"><span style="width:${Math.min(100, 100 * r).toFixed(1)}%;${r > 1 ? 'background:var(--warn)' : ''}"></span></div> <span class="sub">${pct(r)}</span>`}</td></tr>`; }).join('');
+  // Vörur og vöruflokkar: sala og framlegð
+  $('v-itemc').hidden = !IS.length;
+  if (IS.length) {
+    const imx = Math.max(1, ...IS.map(r => Math.abs(r.rev)));
+    $('v-itemc').innerHTML = `<div class="ch"><h2>Vörur og vöruflokkar</h2><span class="sub">${ITP ? 'valið tímabil' : ('ár til dags ' + {{js.year}})} · sala og framlegð</span></div>
+      <div class="scroll"><table id="v-items" style="min-width:520px"><thead><tr><th>Vara / flokkur</th><th class="n">Sala</th><th class="n">Framlegð</th><th class="n">Framlegð %</th><th style="width:22%">Hlutdeild</th></tr></thead><tbody>` +
+      IS.slice(0, 15).map(r => `<tr><td>${r.x.no ? `<span class="mono">${esc(r.x.no)}</span> ` : ''}${esc(r.name)}</td><td class="n">${m1(r.rev)}</td><td class="n">${m1(r.rev - r.cost)}</td><td class="n"${r.rev && r.cost > r.rev ? ' style="color:var(--dn)"' : ''}>${r.rev ? pct((r.rev - r.cost) / r.rev, 1) : '–'}</td><td><div class="mbar"><span style="width:${Math.max(0, Math.min(100, 100 * r.rev / imx)).toFixed(1)}%"></span></div> <span class="sub">${pct(iRev ? r.rev / iRev : null)}</span></td></tr>`).join('') +
+      `<tr class="sum"><td>Samtals${IS.length > 15 ? ` (${IS.length} flokkar)` : ''}</td><td class="n">${m1(iRev)}</td><td class="n">${m1(iRev - iCost)}</td><td class="n">${iRev ? pct((iRev - iCost) / iRev, 1) : '–'}</td><td></td></tr></tbody></table></div>
+      <p class="note">Sala og kostnaðarverð seldra vara úr birgðafærslum í BC. Framlegð á vöru og ABC-flokkun: sjá <a href="framlegd.html">Framlegð og verk</a>.</p>`;
+  }
   // Verð og afslættir
   const L2 = DATA.inv.flatMap(i => i.lines.map(l => ({ i, l }))), find = d => L2.find(x => x.l[2].startsWith(d));
   /* dæmi um verð: [{kind: 'rate'|'fixed'|'oneoff', label, match (upphaf línulýsingar) eða acc (lykill)}] */
   const P2 = {{js.price_examples}}.map(x => {
-    if (x.kind === 'fixed') { const f = L2.filter(y => y.l[2].startsWith(x.match)); return f.length ? [`${x.label}, ${CN(f[0].i.c)}`, `${kr(f[0].l[4])} kr./mán.`, `${f.length} reikningar ${ml(f[0].i.d.slice(0, 7))}–${ml(f.at(-1).i.d.slice(0, 7))}; tímar umfram gjaldið eru í flipanum Tekjuleki`] : null; }
+    if (x.kind === 'fixed') { const f = L2.filter(y => y.l[2].startsWith(x.match)); return f.length ? [`${x.label}, ${CN(f[0].i.c)}`, `${kr(f[0].l[4])} kr./mán.`, HASJOBS ? `${f.length} reikningar ${ml(f[0].i.d.slice(0, 7))}–${ml(f.at(-1).i.d.slice(0, 7))}; tímar umfram gjaldið eru í flipanum Tekjuleki` : `${f.length} reikningar ${ml(f[0].i.d.slice(0, 7))}–${ml(f.at(-1).i.d.slice(0, 7))}`] : null; }
     if (x.kind === 'oneoff') { const t = L2.find(y => y.l[1] === x.acc); return t ? [`${x.label}, ${CN(t.i.c)}`, `${kr(t.l[4])} ${t.i.fx}`, `${t.i.doc} ${date(t.i.d)}, lykill ${x.acc}, einskiptissala 1×`] : null; }
-    const r = find(x.match); return r ? [`${x.label}, ${CN(r.i.c)}`, `${kr(r.l[4])} kr./klst.`, `${kr(r.l[3])} klst. á ${r.i.doc} (${date(r.i.d)}), á verðskrá`] : null;
+    /* eining úr gögnum (x.unit); sjálfgefið klst. ef verk eða verðskrá forða, annars stk. */
+    const r = find(x.match), U = x.unit || (LAB ? 'klst.' : 'stk.'); if (!r) return null;
+    return U === 'klst.' ? [`${x.label}, ${CN(r.i.c)}`, `${kr(r.l[4])} kr./klst.`, `${kr(r.l[3])} klst. á ${r.i.doc} (${date(r.i.d)}), á verðskrá`]
+      : [`${x.label}, ${CN(r.i.c)}`, `${kr(r.l[4])} kr./${U}`, `${fmt(r.l[3], 0)} ${U} á ${r.i.doc} (${date(r.i.d)})${r.l[5] ? ` · ${fmt(r.l[5], 1)}% afsláttur` : ''}`];
   }).filter(Boolean);
   $('v-price').innerHTML = P2.map(([t, v, s]) => `<div class="prc"><div style="min-width:0">${esc(t)}</div><b>${esc(v)}</b><span>${esc(s)}</span></div>`).join('') +
-    `<p class="note">${{{js.price_note}}} 0 kr. línur og vinna utan samnings: sjá <button class="linkbtn" data-go="t-leki">flipann Tekjuleki</button>.</p>`;
+    (HASJOBS ? `<p class="note">${{{js.price_note}}} 0 kr. línur og vinna utan samnings: sjá <button class="linkbtn" data-go="t-leki">flipann Tekjuleki</button>.</p>`
+      : `<p class="note">${{{js.price_note}}} 0 kr. sölulínur, afslættir umfram venju og verð undir kostnaði: sjá <button class="linkbtn" data-go="t-leki">flipann Tekjuleki</button>.</p>`);
 }
 
 /* ================= TEKJULEKI (Tekjuleki 1.0) ================= */
 const SEV0 = { S: ['Staðfest', 'cS'], L: ['Líklegt', 'cL'], A: ['Athuga', 'cA'] }, SEV = new Proxy(SEV0, { get: (o, k) => o[k] || o.A });
 const LI = DATA.leak.items.slice().sort((a, b) => b.amt - a.amt), LEAK = LI.filter(i => i.v !== 'A'), CHK = LI.filter(i => i.v === 'A');
+const MT = DATA.leak.method || [], NA = MT.filter(r => ST_NA.includes(r[1]));
 function leki() {
   const now = sum(LEAK, i => i.amt), yr = sum(LEAK, i => i.yr), chk = sum(CHK, i => i.amt);
   $('l-big').innerHTML = `${m1(now)}<small>m.kr.</small>`;
   $('l-txt').textContent = {{js.leak_txt}};
+  /* án verka: segja berum orðum hvaða athuganir eiga ekki við */
+  if (!HASJOBS && NA.length) $('l-txt').innerHTML = esc({{js.leak_txt}}) + `<br><span class="sub">Á ekki við hér: ${NA.map(r => esc(r[0])).join(', ')}. Sjá Aðferð og athuganir neðst.</span>`;
+  if (!HASJOBS) { $('meth-p').innerHTML = $('meth-p').innerHTML.replace('Gögn: verk, verkfærslur og áætlunarlínur í BC', 'Gögn: reikningslínur, birgðafærslur og viðskiptamannafærslur í BC'); $('src-h-no').textContent = 'Skjal / vara'; $('src-h-h').hidden = true; }
   $('l-kpis').innerHTML = [
     ['Til athugunar', `${m1(chk)}<small>m.kr.</small>`, {{js.leak_k1}}],
     ['Endurtekur sig á ári', `${m1(yr)}<small>m.kr.</small>`, {{js.leak_k2}}],
-    ['Verk og samningar með leka', `${DATA.leak.leakJobs}<small>af ${DATA.leak.openJobs}</small>`, {{js.leak_k3}}],
+    /* verk með leka aðeins ef félagið er með verk; annars hve margar athuganir áttu við */
+    HASJOBS && DATA.leak.openJobs != null ? ['Verk og samningar með leka', `${DATA.leak.leakJobs}<small>af ${DATA.leak.openJobs}</small>`, {{js.leak_k3}}]
+      : ['Athuganir gerðar', `${MT.filter(r => ST_OK.includes(r[1])).length}<small>af ${MT.length - NA.length}</small>`, `af þeim sem eiga við${NA.length ? ` · ${NA.length} eiga ekki við` : ''}${HASJOBS ? '' : ' (engin verk í BC)'}`],
   ].map(([l, v, d]) => `<div class="card kpi"><span class="l">${l}</span><span class="v">${v}</span><span class="d">${d}</span></div>`).join('');
   $('meth').querySelector('tbody').innerHTML = DATA.leak.method.map(([a, s, n]) => `<tr><td>${esc(a)}</td><td><span class="pill ${s === 'Gert' ? 'l' : 'i'}">${esc(s)}</span></td><td>${esc(n)}</td></tr>`).join('');
 }
@@ -496,16 +554,18 @@ function adgSum() {
   $('adg-k').innerHTML = [['Einskiptis', sum(sel, a => a.once)], ['Á ári, endurtekið', sum(sel, a => a.yr)]]
     .map(([l, v]) => `<div class="mk"><span class="sub">${l} · ${tx}</span><b>${sel.length ? m1(v) + ' m.kr.' : '–'}</b></div>`).join('');
 }
-const GROUPS = [['all', 'Allt'], ['verk', 'Verk og tímar'], ['zero', '0 kr. notkun'], ['price', 'Verð og afslættir']];
+/* síur eftir rekstri: verk og tímar aðeins ef verk; rof í endurteknum reikningum ef slíkar línur eru til */
+const GROUPS = HASJOBS ? [['all', 'Allt'], ['verk', 'Verk og tímar'], ['zero', '0 kr. notkun'], ['price', 'Verð og afslættir']].concat(DATA.leak.src.some(r => r.g === 'rof') ? [['rof', 'Rof í reikningum']] : [])
+  : [['all', 'Allt'], ['zero', '0 kr. sölulínur'], ['price', 'Verð og afslættir'], ['rof', 'Rof í reikningum']];
 let G = 'all', LSK = 'amt', LSD = -1;
 function upp() {
   const R = DATA.leak.src.filter(r => G === 'all' || r.g === G);
   const r = R.slice().sort((a, b) => (typeof a[LSK] === 'number' ? (a[LSK] || 0) - (b[LSK] || 0) : String(a[LSK]).localeCompare(String(b[LSK]), 'is')) * LSD);
   $('src').querySelector('tbody').innerHTML = r.length
-    ? r.map(x => `<tr><td class="mono">${esc(x.no)}</td><td>${esc(x.desc)}</td><td>${esc(x.cust)}</td><td>${esc(x.kind)}</td><td class="n">${x.h ? fmt(x.h, 0) : '–'}</td><td class="n">${kr(x.amt)}</td><td><span class="pill ${SEV[x.v][1]}">${SEV[x.v][0]}</span></td></tr>`).join('')
-      + `<tr class="sum"><td></td><td>Samtals</td><td></td><td></td><td class="n">${fmt(sum(R, x => x.h || 0), 0)}</td><td class="n">${kr(sum(R, x => x.amt))}</td><td></td></tr>`
+    ? r.map(x => `<tr><td class="mono">${esc(x.no)}</td><td>${esc(x.desc)}</td><td>${esc(x.cust)}</td><td>${esc(x.kind)}</td>${HASJOBS ? `<td class="n">${x.h ? fmt(x.h, 0) : '–'}</td>` : ''}<td class="n">${kr(x.amt)}</td><td><span class="pill ${SEV[x.v][1]}">${SEV[x.v][0]}</span></td></tr>`).join('')
+      + `<tr class="sum"><td></td><td>Samtals</td><td></td><td></td>${HASJOBS ? `<td class="n">${fmt(sum(R, x => x.h || 0), 0)}</td>` : ''}<td class="n">${kr(sum(R, x => x.amt))}</td><td></td></tr>`
     : '<tr><td colspan="7">Engin frávik fundust.</td></tr>';
-  $('src-note').textContent = G === 'price' ? DATA.leak.priceNote : G === 'zero' ? {{js.src_note_zero}} : 'Allar línur úr verkum í BC. Línur merktar Athuga eru ekki taldar með í sækjanlegu strax.';
+  $('src-note').textContent = G === 'price' ? DATA.leak.priceNote : G === 'zero' ? {{js.src_note_zero}} : HASJOBS ? 'Allar línur úr verkum í BC. Línur merktar Athuga eru ekki taldar með í sækjanlegu strax.' : 'Allar línur úr reikningslínum og birgðafærslum í BC. Línur merktar Athuga eru ekki taldar með í sækjanlegu strax.';
   $('flt').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.g === G));
 }
 function uppInit() {
@@ -567,8 +627,8 @@ function openInv(doc) {
   drawer({ eye: `Reikningur ${i.doc} · ${date(i.d)}`, title: CN(i.c), back,
     sub: `${i.lines.length} ${i.lines.length === 1 ? 'lína' : 'línur'} · ${m1(i.net)} m.kr. án VSK${i.fx ? ` · reikningur í ${i.fx}, fjárhæð í kr. á gengi bókunar` : ''}`,
     rows: i.lines.map(([ln, a, desc, q, p, disc, amt, job]) => ({ ln, a, desc, q, p, disc, amt, job })), sort: 'ln', dir: 1,
-    cols: [{ k: 'ln', l: 'Lína', mono: 1, f: v => String(v / 10000) }, { k: 'a', l: 'Lykill', mono: 1 }, { k: 'desc', l: 'Lýsing' }, { k: 'q', l: 'Magn', n: 1, f: v => fmt(v, 0) }, { k: 'p', l: 'Einingarverð', n: 1, f: v => kr(v) + (i.fx ? ' ' + i.fx : '') }, { k: 'disc', l: 'Afsl. %', n: 1, f: v => v ? fmt(v, 1) : '–' }, { k: 'amt', l: 'Upphæð, kr.', n: 1, f: kr }, { k: 'job', l: 'Verk', mono: 1, f: v => v || '–' }],
-    foot: r => `<span>Línur á fjárhagslykil (tegund G/L Account)</span><span>Samtals <b>${kr(sum(r, x => x.amt))}</b> kr. án VSK</span>` });
+    cols: [{ k: 'ln', l: 'Lína', mono: 1, f: v => String(v / 10000) }, { k: 'a', l: 'Lykill', mono: 1 }, { k: 'desc', l: 'Lýsing' }, { k: 'q', l: 'Magn', n: 1, f: v => fmt(v, 0) }, { k: 'p', l: 'Einingarverð', n: 1, f: v => kr(v) + (i.fx ? ' ' + i.fx : '') }, { k: 'disc', l: 'Afsl. %', n: 1, f: v => v ? fmt(v, 1) : '–' }, { k: 'amt', l: 'Upphæð, kr.', n: 1, f: kr }, { k: 'job', l: 'Verk', mono: 1, f: v => v || '–' }].filter(c => HASJOBS || c.k !== 'job'),
+    foot: r => NONGL ? `<span>${r.length} reikningslínur</span><span>Samtals <b>${kr(sum(r, x => x.amt))}</b> kr. án VSK</span>` : `<span>Línur á fjárhagslykil (tegund G/L Account)</span><span>Samtals <b>${kr(sum(r, x => x.amt))}</b> kr. án VSK</span>` });
   DR.backTo = back;
 }
 
@@ -595,6 +655,7 @@ function render() {
   if (cur === 't-yfir') yfir(P); else if (cur === 't-vm') vm(P); else if (cur === 't-vor') vor(P);
 }
 themeToggle($('mode'), () => { Object.keys(CH).forEach(k => { CH[k].destroy(); delete CH[k]; }); render(); });
+if (!HASJOBS) $('f-src').innerHTML = $('f-src').innerHTML.replace(', verk og verkfærslur', '');
 perInit(); leki(); adg(); uppInit(); lView('adg'); openS.add({{js.open_stream}});
 showTab = tabs(document.querySelector('.tabs'), id => { cur = id || 't-yfir'; $('per').hidden = cur === 't-leki'; requestAnimationFrame(render); });
 

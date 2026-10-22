@@ -2532,5 +2532,39 @@
   "one_sale": "Sala til erlends viðskiptavinar",
   "py": "2025",
   "year": "2026"
+ },
+ "i18n": {
+  "en": {
+   "meta": {
+    "company_gen": "DT Vélsmiðjan ehf.",
+    "last_closed": "31 Aug 2026",
+    "as_of": "16 Oct 2026",
+    "ytd_label": "January–August 2026"
+   },
+   "text": {
+    "fc_actual_range": "January to August",
+    "fc_forecast_range": "September to December",
+    "prelim_months": "September and October are preliminary"
+   },
+   "js": {
+    "h_cash_lead": "The profit has not turned into cash, however: cash has fallen by",
+    "ins1_lead": "Revenue growth has not pulled costs up with it: payroll is",
+    "ins1_one": "One large sale to a foreign customer in August",
+    "ins1_title": "The business earns more on every króna",
+    "ins2_tail": "If collections do not improve, the ability to pay will tighten in the coming months. We propose the board asks for a collection plan before the next meeting.",
+    "ins2_title": "The profit is tied up with customers",
+    "ins3_tail": "Revenue for the year is therefore sensitive to the position of a few customers.",
+    "ins3_title": "A few customers account for a large share",
+    "ins4_tail": "An impairment of receivables should be assessed before year-end, along with whether to stop further sales to customers in arrears.",
+    "ins4_title": "Some receivables may be lost",
+    "one_desc": "a single sale to a foreign customer",
+    "one_sale": "A sale to a foreign customer"
+   },
+   "names": {
+    "DRÖG-2026": "DRAFT-2026",
+    "Sjálfgefin áætlun": "Default budget",
+    "Drög: 2025 × forsendur (tekjur og vörunotkun +8%, laun +6%, annað +5,9% verðbólga), jöfn dreifing á mánuði": "Draft: 2025 × assumptions (revenue and materials +8%, payroll +6%, other +5.9% inflation), spread evenly over months"
+   }
+  }
  }
 }

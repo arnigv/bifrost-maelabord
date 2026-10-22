@@ -1,0 +1,902 @@
+[
+[
+"`<tr><td><span class=\"code\">${j.no}</span><span class=\"cell-sub\">${j.desc}</span></td><td><span class=\"pill ${{ ok: 'l', warn: 'm', bad: 'h' }[r.s]}\">${r.lbl}</span></td>\n      <td style=\"min-width:130px\"><div class=\"track\"><span class=\"fill\" style=\"width:${Math.min(100, r.prog * 100)}%;background:var(${SV[r.s]})\"></span><span class=\"time\" style=\"left:calc(${Math.min(100, j.tfrac * 100)}% - 1px)\"></span></div><span class=\"cell-sub\">${pct(r.prog, 0)} ${r.basis} · ${pct(j.tfrac, 0)} tími</span></td>\n      <td class=\"n\">${fmt(j.hrs, 0)} / ${fmt(j.hrs_b, 0)}</td><td class=\"n\">${fmt(j.cost / 1e6, 1)} / ${fmt(j.budcost / 1e6, 1)}</td><td class=\"n\">${j.contract_m ? m1(j.contract_m) : '–'}</td>\n      <td class=\"n\">${r.mp == null ? '–' : m1(j.margin)}</td><td class=\"n\">${r.mp == null ? '–' : `<span class=\"pill ${r.mp < 0 ? 'h' : r.mp < TARGET ? 'm' : 'l'}\">${pct(r.mp)}</span>`}${r.prev != null ? `<span class=\"cell-sub\">${BF.chip(r.mp - r.prev, true, sg((r.mp - r.prev) * 100) + ' pp')}</span>` : ''}</td>\n      <td style=\"font-size:.8rem;min-width:220px\">${r.note}</td></tr>`",
+"`<tr><td><span class=\"code\">${j.no}</span><span class=\"cell-sub\">${j.desc}</span></td><td><span class=\"pill ${{ ok: 'l', warn: 'm', bad: 'h' }[r.s]}\">${r.lbl}</span></td>\n      <td style=\"min-width:130px\"><div class=\"track\"><span class=\"fill\" style=\"width:${Math.min(100, r.prog * 100)}%;background:var(${SV[r.s]})\"></span><span class=\"time\" style=\"left:calc(${Math.min(100, j.tfrac * 100)}% - 1px)\"></span></div><span class=\"cell-sub\">${pct(r.prog, 0)} ${r.basis} · ${pct(j.tfrac, 0)} time</span></td>\n      <td class=\"n\">${fmt(j.hrs, 0)} / ${fmt(j.hrs_b, 0)}</td><td class=\"n\">${fmt(j.cost / 1e6, 1)} / ${fmt(j.budcost / 1e6, 1)}</td><td class=\"n\">${j.contract_m ? m1(j.contract_m) : '–'}</td>\n      <td class=\"n\">${r.mp == null ? '–' : m1(j.margin)}</td><td class=\"n\">${r.mp == null ? '–' : `<span class=\"pill ${r.mp < 0 ? 'h' : r.mp < TARGET ? 'm' : 'l'}\">${pct(r.mp)}</span>`}${r.prev != null ? `<span class=\"cell-sub\">${BF.chip(r.mp - r.prev, true, sg((r.mp - r.prev) * 100) + ' pp')}</span>` : ''}</td>\n      <td style=\"font-size:.8rem;min-width:220px\">${r.note}</td></tr>`"
+],
+[
+"`<tr class=\"sum\"><td>Samtals</td><td class=\"n\">${fmt(sum(rows, r => r.hrs), 0)}</td><td class=\"n\">${m1(sum(rows, r => r.a))}</td><td class=\"n\">${m1(sum(rows, r => r.c))}</td><td class=\"n\">${m1(sum(rows, r => r.g))}</td><td class=\"n\">${pct(sum(rows, r => r.g) / sum(rows, r => r.a))}</td>${st.unit === 'res' ? '<td></td><td></td>' : ''}</tr></tbody>`",
+"`<tr class=\"sum\"><td>Total</td><td class=\"n\">${fmt(sum(rows, r => r.hrs), 0)}</td><td class=\"n\">${m1(sum(rows, r => r.a))}</td><td class=\"n\">${m1(sum(rows, r => r.c))}</td><td class=\"n\">${m1(sum(rows, r => r.g))}</td><td class=\"n\">${pct(sum(rows, r => r.g) / sum(rows, r => r.a))}</td>${st.unit === 'res' ? '<td></td><td></td>' : ''}</tr></tbody>`"
+],
+[
+"`${['Ekkert', 'Eitt', 'Tvö', 'Þrjú'][top.length]} verk af ${jr.length}${GRPS.length ? ` (${GRPS.map(g => g.label).join(', ')} talin saman)` : ''}, ${top.map(r => r.j.no).join(', ')}, ${top.length === 1 ? 'skilar' : 'skila'} ${pct(sum(top, r => r.j.margin) / JM_G, 0)} af áætlaðri verkframlegð (${m1(JM_G)} m.kr.). ${{{js.ins_tail}}}`",
+"`${['No', 'One', 'Two', 'Three'][top.length]} job${top.length === 1 ? '' : 's'} of ${jr.length}${GRPS.length ? ` (${GRPS.map(g => g.label).join(', ')} counted together)` : ''}, ${top.map(r => r.j.no).join(', ')}, ${top.length === 1 ? 'delivers' : 'deliver'} ${pct(sum(top, r => r.j.margin) / JM_G, 0)} of the estimated job margin (ISK ${m1(JM_G)}m). ${{{js.ins_tail}}}`"
+],
+[
+"`<thead><tr><th data-sort=\"name\">Vara</th><th class=\"n\" data-sort=\"inv\">Birgðir</th><th class=\"n\" data-sort=\"a\">Verð (kr.)</th><th class=\"n\" data-sort=\"c\">Kostnaður (kr.)</th><th class=\"n\" data-sort=\"g\">Framlegð (kr.)</th><th class=\"n\" data-sort=\"p\">%</th><th class=\"n\" data-sort=\"bind\">Bundið fé (kr.)</th></tr></thead><tbody>`",
+"`<thead><tr><th data-sort=\"name\">Product</th><th class=\"n\" data-sort=\"inv\">Inventory</th><th class=\"n\" data-sort=\"a\">Price (ISK)</th><th class=\"n\" data-sort=\"c\">Cost (ISK)</th><th class=\"n\" data-sort=\"g\">Margin (ISK)</th><th class=\"n\" data-sort=\"p\">%</th><th class=\"n\" data-sort=\"bind\">Tied-up capital (ISK)</th></tr></thead><tbody>`"
+],
+[
+"`<tr class=\"sum\"><td>Samtals</td><td></td><td></td><td class=\"n\">${fmt(sum(ROWS, r => r.j.hrs), 0)}</td><td class=\"n\">${fmt(sum(ROWS, r => r.j.cost) / 1e6, 1)} / ${fmt(sum(ROWS, r => r.j.budcost) / 1e6, 1)}</td><td class=\"n\">${m1(CONTRACT)}</td><td class=\"n\">${m1(JM_G)}</td><td class=\"n\">${pct(JM_G / jc)}</td><td></td></tr>`",
+"`<tr class=\"sum\"><td>Total</td><td></td><td></td><td class=\"n\">${fmt(sum(ROWS, r => r.j.hrs), 0)}</td><td class=\"n\">${fmt(sum(ROWS, r => r.j.cost) / 1e6, 1)} / ${fmt(sum(ROWS, r => r.j.budcost) / 1e6, 1)}</td><td class=\"n\">${m1(CONTRACT)}</td><td class=\"n\">${m1(JM_G)}</td><td class=\"n\">${pct(JM_G / jc)}</td><td></td></tr>`"
+],
+[
+"`<tr class=\"sum\"><td>Samtals</td><td class=\"n\">${m1(T.c)}</td><td class=\"n\">${pct(T.c / T.r)}</td><td class=\"n\">${pct(PY.cogs / PY.rev)}</td><td class=\"n\">${BF.chip(T.c / T.r - PY.cogs / PY.rev, false, sg((T.c / T.r - PY.cogs / PY.rev) * 100) + ' pp')}</td></tr></tbody>`",
+"`<tr class=\"sum\"><td>Total</td><td class=\"n\">${m1(T.c)}</td><td class=\"n\">${pct(T.c / T.r)}</td><td class=\"n\">${pct(PY.cogs / PY.rev)}</td><td class=\"n\">${BF.chip(T.c / T.r - PY.cogs / PY.rev, false, sg((T.c / T.r - PY.cogs / PY.rev) * 100) + ' pp')}</td></tr></tbody>`"
+],
+[
+">Súlan sýnir kostnað (eða tíma) sem hlutfall af áætlun; strikið sýnir hve stór hluti verktímans er liðinn. Framlegð er áætluð við verklok (reikningshæft − áætlaður heildarkostnaður); markmið 25%. {{text.verk_note}} Óreikningsfært á verkum: sjá Tekjuleka í <",
+">The bar shows cost (or hours) as a share of the budget; the line shows how much of the job time has elapsed. Margin is estimated at completion (billable − estimated total cost); target 25%. {{text.verk_note}} Unbilled work on jobs: see Revenue leakage in <"
+],
+[
+"`<thead><tr><th>Verk</th><th>Staða</th><th>Framvinda / tími</th><th class=\"n\">Tímar</th><th class=\"n\">Kostn. / áætl. m.kr.</th><th class=\"n\">Samningur</th><th class=\"n\">Framlegð við verklok</th><th class=\"n\">%</th><th>Athugasemd</th></tr></thead><tbody>`",
+"`<thead><tr><th>Job</th><th>Status</th><th>Progress / time</th><th class=\"n\">Hours</th><th class=\"n\">Cost / budget ISK m</th><th class=\"n\">Contract</th><th class=\"n\">Margin at completion</th><th class=\"n\">%</th><th>Comment</th></tr></thead><tbody>`"
+],
+[
+">Forsenda: laun og annar rekstur haldast óbreytt. Magn hefur áhrif á tekjur og aðföng í sama hlutfalli. Grunnur er raun {{text.period}} {{meta.year}} ({{meta.n_full}} fullbókaðir mánuðir), með eða án einskiptissölu eftir vali á Yfirsýn.<",
+">Assumption: payroll and other operating costs stay unchanged. Volume affects revenue and inputs in the same proportion. The base is actual {{text.period}} {{meta.year}} ({{meta.n_full}} fully posted months), with or without the one-off sale as selected on Overview.<"
+],
+[
+"`${A.length} af ${items.length} verkum${GRPS.length ? ` (${GRPS.map(g => g.label).join(', ')} saman)` : ''} eru ${pct(A.at(-1).c, 0)} af samningsvirði (${m1(tot)} m.kr.). ${{{js.abc_job_tail}}}${D ? ' ' + pct(D.contract_m / tot) : ''}.`",
+"`${A.length} of ${items.length} jobs${GRPS.length ? ` (${GRPS.map(g => g.label).join(', ')} together)` : ''} make up ${pct(A.at(-1).c, 0)} of contract value (ISK ${m1(tot)}m). ${{{js.abc_job_tail}}}${D ? ' ' + pct(D.contract_m / tot) : ''}.`"
+],
+[
+"`Framlegð ${dG < 0 ? 'lækkar' : 'hækkar'} um <b>${m1(Math.abs(dG))} m.kr.</b> á ${MS.length} mánuðum (um ${m1(Math.abs(dG) * 12 / MS.length)} m.kr. á ári) og verður ${pct(S.p)}. `",
+"`Gross margin ${dG < 0 ? 'falls' : 'rises'} by <b>ISK ${m1(Math.abs(dG))}m</b> over ${MS.length} months (about ISK ${m1(Math.abs(dG) * 12 / MS.length)}m a year) and becomes ${pct(S.p)}. `"
+],
+[
+"`<thead><tr><th>Lykill</th><th class=\"n\">${{{js.year}}} m.kr.</th><th class=\"n\">% tekna</th><th class=\"n\">${{{js.py}}} %</th><th class=\"n\">Breyting</th></tr></thead><tbody>`",
+"`<thead><tr><th>Account</th><th class=\"n\">${{{js.year}}} ISK m</th><th class=\"n\">% of revenue</th><th class=\"n\">${{{js.py}}} %</th><th class=\"n\">Change</th></tr></thead><tbody>`"
+],
+[
+"`<div><span><i style=\"background:var(${SV[k]})\"></i>${names[k]}</span><b>${m1(grp[k])} m</b><span>${cnt[k]} verk · ${pct(grp[k] / CONTRACT, 0)}</span></div>`",
+"`<div><span><i style=\"background:var(${SV[k]})\"></i>${names[k]}</span><b>${m1(grp[k])} m</b><span>${cnt[k]} jobs · ${pct(grp[k] / CONTRACT, 0)}</span></div>`"
+],
+[
+"`Til að halda ${pct(B.p)} framlegð þarf verð að ${extra > 0 ? 'hækka' : 'mega lækka'} um <b>${fmt(Math.abs(extra) * 100, 1)}%</b> til viðbótar.`",
+"`To keep a ${pct(B.p)} margin, prices ${extra > 0 ? 'need to rise' : 'can fall'} by <b>${fmt(Math.abs(extra) * 100, 1)}%</b> more.`"
+],
+[
+"`<tr class=\"sum\"><td></td><td>Samtals</td><td class=\"n\">${m1(tot)}</td><td class=\"n\">100,0%</td><td></td></tr></tbody>`",
+"`<tr class=\"sum\"><td></td><td>Total</td><td class=\"n\">${m1(tot)}</td><td class=\"n\">100.0%</td><td></td></tr></tbody>`"
+],
+[
+"`Grunnur: framlegð ${m1(B.g)} m.kr. (${pct(B.p)}) ${{{js.period}}}. Hreyfðu stikurnar eða veldu sviðsmynd.`",
+"`Base: gross margin ISK ${m1(B.g)}m (${pct(B.p)}) ${{{js.period}}}. Move the sliders or choose a scenario.`"
+],
+[
+"=\"${BF.date(j.start)}–${BF.date(j.end)} · framlegð ${r.mp == null ? '–' : pct(r.mp)}\"",
+"=\"${BF.date(j.start)}–${BF.date(j.end)} · margin ${r.mp == null ? '–' : pct(r.mp)}\""
+],
+[
+">Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.<",
+">Prepared with the help of AI (Claude). Review before relying on the figures.<"
+],
+[
+"=\"Tímar á mánuði á {{meta.job_fee}} á móti þeim tímum sem fasta gjaldið ber\"",
+"=\"Hours per month on {{meta.job_fee}} versus the hours covered by the fixed fee\""
+],
+[
+"=\"Pareto-graf: hlutdeild og uppsöfnuð hlutdeild með mörkum við 80% og 95%\"",
+"=\"Pareto chart: share and cumulative share with thresholds at 80% and 95%\""
+],
+[
+"=\"Framlegðarhlutfall á mánuði {{meta.year}} á móti meðaltali {{meta.py}}\"",
+"=\"Gross margin % by month {{meta.year}} against {{meta.py}} average\""
+],
+[
+">Framlegð {{text.period}} {{meta.year}} · tekjur − vörunotkun og aðföng<",
+">Gross margin {{text.period}} {{meta.year}} · revenue − materials and inputs<"
+],
+[
+"'Forðar sýndir með kóða. Verðskrá og kostnaðarverð úr verkfærslum. '",
+"'Resources shown by code. Price list and cost from job entries. '"
+],
+[
+"`framlegð við verklok ${pct(JM_G / sum(JM, r => r.j.contract_m))}`",
+"`margin at completion ${pct(JM_G / sum(JM, r => r.j.contract_m))}`"
+],
+[
+"=\"Kostnaður til þessa og eftirstöðvar áætlunar á hvert verk\"",
+"=\"Cost to date and remaining budget per job\""
+],
+[
+">{{meta.job_fee}} · tímar á mánuði á móti föstu gjaldi<",
+">{{meta.job_fee}} · hours per month versus fixed fee<"
+],
+[
+"'<p class=\"note\">Engar athugasemdir um gæði gagna.</p>'",
+"'<p class=\"note\">No data quality remarks.</p>'"
+],
+[
+"=\"Brú frá tekjum að framlegð og framlagi eftir laun\"",
+"=\"Bridge from revenue to gross margin and contribution after payroll\""
+],
+[
+">Framlegð og verk · {{text.period}} {{meta.year}}<",
+">Margin and jobs · {{text.period}} {{meta.year}}<"
+],
+[
+">hlutfall kostnaðarhækkunar sem veltist í verðið<",
+">share of the cost increase passed on to price<"
+],
+[
+"=\"Framlegð á mánuði, grunnur á móti sviðsmynd\"",
+"=\"Monthly gross margin, base versus scenario\""
+],
+[
+">fleiri eða færri verk; aðföng fylgja magni<",
+">more or fewer jobs; inputs follow volume<"
+],
+[
+">Óreikningsfært á verkum: sjá Tekjuleka í <",
+">Unbilled work on jobs: see Revenue leakage in <"
+],
+[
+"'bókaðir tímar á verðskrá − kostnaðarverð'",
+"'booked hours at list price − cost'"
+],
+[
+"'Engin sala á viðskiptamann á tímabilinu.'",
+"'No customer sales in the period.'"
+],
+[
+">{{meta.company_short}} framlegð og verk<",
+">{{meta.company_short}} margin and jobs<"
+],
+[
+"`Framlegðarhlutfall helst í ${pct(B.p)}.`",
+"`Gross margin % stays at ${pct(B.p)}.`"
+],
+[
+">grunnur: {{text.period}} {{meta.year}}<",
+">base: {{text.period}} {{meta.year}}<"
+],
+[
+">það sem skekkir framlegð og framvindu<",
+">what distorts margin and progress<"
+],
+[
+"`${fmt(T.g / T.r * 100, 1)}% af tekjum`",
+"`${fmt(T.g / T.r * 100, 1)}% of revenue`"
+],
+[
+"(r.prog === 'hrs' ? 'tímar' : 'kostn.')",
+"(r.prog === 'hrs' ? 'hours' : 'cost')"
+],
+[
+">breyting á verðskrá vinnu og efnis<",
+">change in the labour and materials price list<"
+],
+[
+">einingarverð − kostnaðarverð, kr.<",
+">unit price − unit cost, ISK<"
+],
+[
+">Hækkun aðfanga sem fer út í verð<",
+">Input cost increase passed on to prices<"
+],
+[
+"'verðskrá − kostnaðarverð á klst.'",
+"'list price − cost per hour'"
+],
+[
+"'Engin verk með samningsvirði.'",
+"'No jobs with a contract value.'"
+],
+[
+">A ≤ 80% · B ≤ 95% · C restin<",
+">A ≤ 80% · B ≤ 95% · C the rest<"
+],
+[
+"<span class=\"sub\">klst.</span>",
+"<span class=\"sub\">hrs</span>"
+],
+[
+">Framlegðarhlutfall á mánuði<",
+">Gross margin % by month<"
+],
+[
+">Hvar verður framlegðin til?<",
+">Where is the margin made?<"
+],
+[
+">Áætluð framlegð við verklok<",
+">Estimated margin at completion<"
+],
+[
+">Verk: framvinda og framlegð<",
+">Jobs: progress and margin<"
+],
+[
+">Samningsvirði opinna verka<",
+">Contract value of open jobs<"
+],
+[
+"'Samningsvirði opinna verka'",
+"'Contract value of open jobs'"
+],
+[
+">m.kr. · % af reikningshæfu<",
+">ISK m · % of billable<"
+],
+[
+"'Framlegð vinnu eftir deild'",
+"'Labour margin by department'"
+],
+[
+"'Framlegð vinnu eftir forða'",
+"'Labour margin by resource'"
+],
+[
+">Aðföng á móti {{meta.py}}<",
+">Inputs versus {{meta.py}}<"
+],
+[
+">Álagning í verðskrá vara<",
+">Mark-up in the product price list<"
+],
+[
+">Í dag {{meta.as_of_dm}}<",
+">Today {{meta.as_of_dm}}<"
+],
+[
+">Kostnaður á móti áætlun<",
+">Cost versus budget<"
+],
+[
+">verðskrá, ekki raunsala<",
+">price list, not actual sales<"
+],
+[
+">. Viðskiptavinir: sjá <",
+">. Customers: see <"
+],
+[
+">{{text.period}}, m.kr.<",
+">{{text.period}}, ISK m<"
+],
+[
+">Tímalína {{meta.year}}<",
+">Timeline {{meta.year}}<"
+],
+[
+"fmt(c.raw, 0) + ' klst.'",
+"fmt(c.raw, 0) + ' hrs'"
+],
+[
+">Kostnaðarverð aðfanga<",
+">Cost of inputs<"
+],
+[
+">Meðaltal {{meta.py}}<",
+">Average {{meta.py}}<"
+],
+[
+">Framlegð við verklok<",
+">Margin at completion<"
+],
+[
+"'Vörunotkun og aðföng'",
+"'Materials and inputs'"
+],
+[
+">eftir samningsvirði<",
+">by contract value<"
+],
+[
+">Kostnaður til þessa<",
+">Cost to date<"
+],
+[
+">Á eða yfir markmiði<",
+">At or above target<"
+],
+[
+">Tengt BC · Bifrost<",
+">Connected to BC · Bifröst<"
+],
+[
+">Með einskiptissölu<",
+">Including one-off sale<"
+],
+[
+">Framlegðarhlutfall<",
+">Gross margin %<"
+],
+[
+">Framlag eftir laun<",
+">Contribution after payroll<"
+],
+[
+">hlutfall af tekjum<",
+">share of revenue<"
+],
+[
+">Undir 25% markmiði<",
+">Below 25% target<"
+],
+[
+">framlegð sem lekur<",
+">margin leaking<"
+],
+[
+"=\"Leita í vörutöflu\"",
+"=\"Search the product table\""
+],
+[
+">Án einskiptissölu<",
+">Excluding one-off sale<"
+],
+[
+">Vörur og álagning<",
+">Products and mark-up<"
+],
+[
+"=\"Lykilmælar verka\"",
+"=\"Job key metrics\""
+],
+[
+"' af reikningshæfu'",
+"' of billable'"
+],
+[
+">Framlegð og verk<",
+">Margin and jobs<"
+],
+[
+">framlegð og verk<",
+">margin and jobs<"
+],
+[
+">Á eftir / umfram<",
+">Behind / over<"
+],
+[
+"'Á eftir / umfram'",
+"'Behind / over'"
+],
+[
+"=\"Einskiptisliðir\"",
+"=\"One-off items\""
+],
+[
+"'Virði á verðskrá'",
+"'Value at list price'"
+],
+[
+">Liðinn verktími<",
+">Elapsed job time<"
+],
+[
+">Eftir af áætlun<",
+">Remaining budget<"
+],
+[
+"'Eftir af áætlun'",
+"'Remaining budget'"
+],
+[
+">Helstu áhættur<",
+">Main risks<"
+],
+[
+">Framlegð vinnu<",
+">Labour margin<"
+],
+[
+">Viðskiptavinir<",
+">Customers<"
+],
+[
+">Verðhækkun +3%<",
+">Price increase +3%<"
+],
+[
+">Afsláttur 2 pp<",
+">Discount 2 pp<"
+],
+[
+">25% eða meira<",
+">25% or more<"
+],
+[
+">Kostnaður +5%<",
+">Cost +5%<"
+],
+[
+"'Kostnaðarverð'",
+"'Cost'"
+],
+[
+">Vörur og ABC<",
+">Products and ABC<"
+],
+[
+">Tímar á verk<",
+">Hours on jobs<"
+],
+[
+">Þarf athygli<",
+">Needs attention<"
+],
+[
+"'Þarf athygli'",
+"'Needs attention'"
+],
+[
+">ABC-greining<",
+">ABC analysis<"
+],
+[
+"=\"Leiðarstika\"",
+"=\"Breadcrumb\""
+],
+[
+"' af áætluðum'",
+"' of estimated'"
+],
+[
+"'Kostn./klst.'",
+"'Cost/hr'"
+],
+[
+"=\"Lykilmælar\"",
+"=\"Key metrics\""
+],
+[
+">Staða verka<",
+">Job status<"
+],
+[
+"'25% markmið'",
+"'25% target'"
+],
+[
+"'Gjaldið ber'",
+"'Covered by fee'"
+],
+[
+"> mælaborða<",
+"> dashboards<"
+],
+[
+">Gæði gagna<",
+">Data quality<"
+],
+[
+">Lykilmælar<",
+">Key metrics<"
+],
+[
+">Niðurstaða<",
+">Result<"
+],
+[
+"' af tekjum'",
+"' of revenue'"
+],
+[
+"' af áætlun'",
+"' of budget'"
+],
+[
+"'Verð/klst.'",
+"'Rate/hr'"
+],
+[
+">← Miðstöð<",
+">← Hub<"
+],
+[
+">Til þessa<",
+">To date<"
+],
+[
+"'Til þessa'",
+"'To date'"
+],
+[
+">Hlutdeild<",
+">Share<"
+],
+[
+"'Hlutdeild'",
+"'Share'"
+],
+[
+">Uppsöfnuð<",
+">Cumulative<"
+],
+[
+"'Uppsöfnuð'",
+"'Cumulative'"
+],
+[
+">Undir 25%<",
+">Below 25%<"
+],
+[
+">Afsláttur<",
+">Discount<"
+],
+[
+">Sviðsmynd<",
+">Scenario<"
+],
+[
+"'Sviðsmynd'",
+"'Scenario'"
+],
+[
+"'Framlegð '",
+"'Gross margin '"
+],
+[
+"'Meðaltal '",
+"'Average '"
+],
+[
+">Framlegð<",
+">Gross margin<"
+],
+[
+"'Framlegð'",
+"'Gross margin'"
+],
+[
+">Á áætlun<",
+">On plan<"
+],
+[
+"'Á áætlun'",
+"'On plan'"
+],
+[
+">Undir 0%<",
+">Below 0%<"
+],
+[
+"' m áætl.'",
+"' m budget'"
+],
+[
+"'Hlutfall'",
+"'Ratio'"
+],
+[
+">Yfirsýn<",
+">Overview<"
+],
+[
+">Herming<",
+">Simulation<"
+],
+[
+">Á eftir<",
+">Behind<"
+],
+[
+"'Á eftir'",
+"'Behind'"
+],
+[
+">Athygli<",
+">Attention<"
+],
+[
+">Flokkar<",
+">Classes<"
+],
+[
+">Grunnur<",
+">Base<"
+],
+[
+"'Grunnur'",
+"'Base'"
+],
+[
+"=\"Flipar\"",
+"=\"Tabs\""
+],
+[
+"=\"Eining\"",
+"=\"Unit\""
+],
+[
+"=\"Leita…\"",
+"=\"Search…\""
+],
+[
+"'Framlag'",
+"'Contribution'"
+],
+[
+"' kr. · '",
+"' ISK · '"
+],
+[
+">Staða <",
+">As of <"
+],
+[
+">Tekjum<",
+">Revenue<"
+],
+[
+">Tekjur<",
+">Revenue<"
+],
+[
+"'Tekjur'",
+"'Revenue'"
+],
+[
+">Pareto<",
+">Pareto<"
+],
+[
+">Stikur<",
+">Sliders<"
+],
+[
+"'Forði '",
+"'Resource '"
+],
+[
+"'Aðföng'",
+"'Inputs'"
+],
+[
+">Deild<",
+">Department<"
+],
+[
+"'Deild'",
+"'Department'"
+],
+[
+">Forði<",
+">Resource<"
+],
+[
+"'Forði'",
+"'Resource'"
+],
+[
+">vörur<",
+">products<"
+],
+[
+">Vörur<",
+">Products<"
+],
+[
+">Hermt<",
+">Simulated<"
+],
+[
+"=\"Vídd\"",
+"=\"Dimension\""
+],
+[
+"' (ár)'",
+"' (year)'"
+],
+[
+"'Annað'",
+"'Other'"
+],
+[
+"'Tímar'",
+"'Hours'"
+],
+[
+">Verk<",
+">Jobs<"
+],
+[
+">Verð<",
+">Price<"
+],
+[
+">Magn<",
+">Volume<"
+],
+[
+"=\"Sía\"",
+"=\"Filter\""
+],
+[
+"'Laun'",
+"'Payroll'"
+],
+[
+">Öll<",
+">All<"
+],
+[
+"`${sg(dpp)} pp yfir`",
+"`${sg(dpp)} pp above`"
+],
+[
+"`${fmt(-dpp, 1)} pp undir`",
+"`${fmt(-dpp, 1)} pp below`"
+],
+[
+"`Framlegðarhlutfall <b>${pct(T.p)}</b>, ${cmp} meðaltali ${{{js.py}}} (${pct(PYM)}). Eftir laun standa <b>${m1(T.fl)} m.kr.</b> eftir (${pct(T.fl / T.r)} af tekjum).`",
+"`Gross margin <b>${pct(T.p)}</b>, ${cmp} the ${{{js.py}}} average (${pct(PYM)}). After payroll <b>ISK ${m1(T.fl)}m</b> remains (${pct(T.fl / T.r)} of revenue).`"
+],
+[
+"` Opin verk eru ${m1(CONTRACT)} m.kr. að samningsvirði og ${ROWS.filter(r => r.s === 'bad').length} þeirra á eftir eða umfram.`",
+"` Open jobs have a contract value of ISK ${m1(CONTRACT)}m and ${ROWS.filter(r => r.s === 'bad').length} of them are behind or over.`"
+],
+[
+"` Birgðir á kostnaðarverði eru ${m1(STOCK)} m.kr., um ${fmt(sdays, 0)} dagar af vörunotkun.`",
+"` Inventory at cost is ISK ${m1(STOCK)}m, about ${fmt(sdays, 0)} days of cost of sales.`"
+],
+[
+"['Birgðir', m1(STOCK)]",
+"['Inventory', m1(STOCK)]"
+],
+[
+"'Birgðir á kostnaðarverði'",
+"'Inventory at cost'"
+],
+[
+"`${fmt(sdays, 0)} birgðadagar`",
+"`${fmt(sdays, 0)} days of inventory`"
+],
+[
+"`${a.A.length} af ${fmt(a.n, 0)} vörum standa undir ${pct(a.cumA, 0)} af vörusölu ${{{js.period}}} (${m1(a.tot)} m.kr.). `",
+"`${a.A.length} of ${fmt(a.n, 0)} products account for ${pct(a.cumA, 0)} of product sales ${{{js.period}}} (ISK ${m1(a.tot)}m). `"
+],
+[
+"textContent = 'framlegð';",
+"textContent = 'margin';"
+],
+[
+"'það sem skekkir framlegð'",
+"'what distorts margin'"
+],
+[
+"`${A.length} af ${items.length} viðskiptavinum standa undir ${pct(A.at(-1).c, 0)} af reikningsfærðri sölu (${m1(tot)} m.kr.). ${{{js.abc_cust_mid}}} ${pct(items[0].s, 0)}.`",
+"`${A.length} of ${items.length} customers account for ${pct(A.at(-1).c, 0)} of invoiced sales (ISK ${m1(tot)}m). ${{{js.abc_cust_mid}}} ${pct(items[0].s, 0)}.`"
+],
+[
+"` Athugið: aðeins ${pct(tot / DATA.gl_rev, 0)} tekna eru á viðskiptamann.`",
+"` Note: only ${pct(tot / DATA.gl_rev, 0)} of revenue is on customers.`"
+],
+[
+"'Engin vörusala á tímabilinu.'",
+"'No product sales in the period.'"
+],
+[
+"`${A.length} af ${fmt(AB.n, 0)} ${st.dim === 'grp' ? 'vöruflokkum' : 'vörum'} standa undir ${pct(AB.cumA, 0)} af vörusölu ${{{js.period}}} (${m1(tot)} m.kr.). Framlegðarhlutfall í A-flokki er ${pct(gA)} á móti ${pct(gAll)} í heild.`",
+"`${A.length} of ${fmt(AB.n, 0)} ${st.dim === 'grp' ? 'product groups' : 'products'} account for ${pct(AB.cumA, 0)} of product sales ${{{js.period}}} (ISK ${m1(tot)}m). Class A gross margin is ${pct(gA)} against ${pct(gAll)} overall.`"
+],
+[
+"{ cust: 'Viðskiptavinur', job: 'Verk', item: 'Vara', grp: 'Vöruflokkur' }",
+"{ cust: 'Customer', job: 'Job', item: 'Product', grp: 'Product group' }"
+],
+[
+"`<thead><tr><th>Fl.</th><th>${DIMH[st.dim]}</th><th class=\"n\">m.kr.</th><th class=\"n\">Hlutdeild</th><th class=\"n\">Uppsafnað</th></tr></thead><tbody>`",
+"`<thead><tr><th>Cl.</th><th>${DIMH[st.dim]}</th><th class=\"n\">ISK m</th><th class=\"n\">Share</th><th class=\"n\">Cumulative</th></tr></thead><tbody>`"
+],
+[
+"'Vörur og framlegð'",
+"'Products and margin'"
+],
+[
+"'raunsala '",
+"'actual sales '"
+],
+[
+"'Framlegð eftir vöruflokki'",
+"'Gross margin by product group'"
+],
+[
+"'Framlegð söluhæstu vara'",
+"'Gross margin of top-selling products'"
+],
+[
+"'sala − kostnaðarverð seldra vara, m.kr.'",
+"'sales − cost of goods sold, ISK m'"
+],
+[
+"`<thead><tr><th data-sort=\"name\">Vara</th><th data-sort=\"grp\">Flokkur</th><th class=\"n\" data-sort=\"s\">Sala (kr.)</th><th class=\"n\" data-sort=\"c\">Kostnaðarverð seldra (kr.)</th><th class=\"n\" data-sort=\"g\">Framlegð (kr.)</th><th class=\"n\" data-sort=\"p\">%</th><th class=\"n\" data-sort=\"inv\">Birgðir</th><th class=\"n\" data-sort=\"bind\">Birgðavirði (kr.)</th></tr></thead><tbody>`",
+"`<thead><tr><th data-sort=\"name\">Product</th><th data-sort=\"grp\">Group</th><th class=\"n\" data-sort=\"s\">Sales (ISK)</th><th class=\"n\" data-sort=\"c\">Cost of goods sold (ISK)</th><th class=\"n\" data-sort=\"g\">Margin (ISK)</th><th class=\"n\" data-sort=\"p\">%</th><th class=\"n\" data-sort=\"inv\">Inventory</th><th class=\"n\" data-sort=\"bind\">Inventory value (ISK)</th></tr></thead><tbody>`"
+],
+[
+"`<tr><td colspan=\"8\"><span class=\"cell-sub\">Sýndar ${IT_MAX} af ${fmt(it.length, 0)} vörum. Leitaðu til að þrengja.</span></td></tr>`",
+"`<tr><td colspan=\"8\"><span class=\"cell-sub\">Showing ${IT_MAX} of ${fmt(it.length, 0)} products. Search to narrow down.</span></td></tr>`"
+],
+[
+"<h2>Hægfara vörur</h2><span class=\"sub\">birgðir án sölu í 90 daga eða lengur</span>",
+"<h2>Slow-moving products</h2><span class=\"sub\">stock with no sale in 90 days or more</span>"
+],
+[
+"`${fmt(slow.length, 0)} vörur með ${m1(sv)} m.kr. bundið í birgðum (${pct(sv / STOCK, 0)} af birgðum).`",
+"`${fmt(slow.length, 0)} products with ISK ${m1(sv)}m tied up in stock (${pct(sv / STOCK, 0)} of inventory).`"
+],
+[
+"`Þar af ${fmt(s180.length, 0)} án sölu í 180 daga eða lengur (${m1(sum(s180, x => x.v))} m.kr.).`",
+"`Of these, ${fmt(s180.length, 0)} with no sale in 180 days or more (ISK ${m1(sum(s180, x => x.v))}m).`"
+],
+[
+"<th>Vara</th><th class=\"n\">Birgðir</th><th class=\"n\">Birgðavirði (kr.)</th><th class=\"n\">Síðasta sala</th><th class=\"n\">Dagar</th>",
+"<th>Product</th><th class=\"n\">Inventory</th><th class=\"n\">Inventory value (ISK)</th><th class=\"n\">Last sale</th><th class=\"n\">Days</th>"
+],
+[
+"'engin á tímabilinu'",
+"'none in the period'"
+],
+[
+"<h2>Framlegð eftir staðsetningu</h2><span class=\"sub\">sala − kostnaðarverð seldra vara, m.kr.</span>",
+"<h2>Gross margin by location</h2><span class=\"sub\">sales − cost of goods sold, ISK m</span>"
+],
+[
+"<th>Staðsetning</th><th class=\"n\">Sala m.kr.</th><th class=\"n\">Framlegð m.kr.</th><th class=\"n\">%</th><th class=\"n\">Hlutdeild sölu</th>",
+"<th>Location</th><th class=\"n\">Sales ISK m</th><th class=\"n\">Margin ISK m</th><th class=\"n\">%</th><th class=\"n\">Share of sales</th>"
+],
+[
+"'<th class=\"n\">Birgðir m.kr.</th>'",
+"'<th class=\"n\">Inventory ISK m</th>'"
+],
+[
+"`<tr class=\"sum\"><td>Samtals</td><td class=\"n\">${m1(ts)}</td>",
+"`<tr class=\"sum\"><td>Total</td><td class=\"n\">${m1(ts)}</td>"
+],
+[
+">prósentustig af verði<",
+">percentage points of price<"
+],
+[
+"'prósentustig af verði'",
+"'percentage points of price'"
+],
+[
+"` (veittur afsláttur ${{{js.period}}}: ${pct(DATA.disc / (B.r + DATA.disc))} af verði)`",
+"` (discount given ${{{js.period}}}: ${pct(DATA.disc / (B.r + DATA.disc))} of price)`"
+],
+[
+"' (enginn afsláttur skráður)'",
+"' (no discount recorded)'"
+],
+[
+"'Framlegð og vörur'",
+"'Margin and products'"
+],
+[
+"replace('Framlegð og verk',",
+"replace('Margin and jobs',"
+],
+[
+"replace('framlegð og verk',",
+"replace('margin and jobs',"
+],
+[
+"'breyting á söluverði'",
+"'change in selling prices'"
+],
+[
+"'meira eða minna selt magn; vörunotkun fylgir magni'",
+"'more or less volume sold; cost of sales follows volume'"
+],
+[
+"[['item', 'Vörur']]",
+"[['item', 'Products']]"
+],
+[
+"[['grp', 'Vöruflokkar']]",
+"[['grp', 'Product groups']]"
+],
+[
+"['cust', 'Viðskiptavinir']",
+"['cust', 'Customers']"
+],
+[
+"[['job', 'Verk']]",
+"[['job', 'Jobs']]"
+]
+]

@@ -1,0 +1,418 @@
+[
+ [
+  "const SHORT2 = { birgd: 'afstemmingu birgða', kortupp: 'afstemmingu kortauppgjörs', verk: 'uppgjör verka' };",
+  "const SHORT2 = { birgd: 'the inventory reconciliation', kortupp: 'the card settlement reconciliation', verk: 'the job settlement' };"
+ ],
+ [
+  "t: 'Birgðir stemma við fjárhag (birgðabók á móti birgðalykli)'",
+  "t: 'Inventory agrees with the ledger (inventory ledger against inventory account)'"
+ ],
+ [
+  "`Birgðabók ${m(STK.sub)} m.kr., birgðalykill ${m(STK.gl)} m.kr.${stockOk ? '; stemmir.' : `; mismunur ${kr(stockDiff)}`}`",
+  "`Inventory ledger ISK ${m(STK.sub)}m, inventory account ISK ${m(STK.gl)}m${stockOk ? '; agrees.' : `; difference ${kr(stockDiff)}.`}`"
+ ],
+ [
+  "t: 'Kortauppgjör stemmir við uppgjör færsluhirðis'",
+  "t: 'Card settlement agrees with acquirer statements'"
+ ],
+ [
+  "`${CST0.length} uppgjörsreikningar færsluhirða, staða í BC ${m(CST0.reduce((s, b) => s + b.bal, 0))} m.kr.${cstOk ? '; stemma við síðasta uppgjör.' : `; óafstemmt ${kr(cstOut)}`}${cstLate.length ? ` Óuppgert lengur en uppgjörstími: ${cstLate.map(b => b.name).join(', ')}.` : ''}`",
+  "`${CST0.length} acquirer settlement accounts, BC balance ISK ${m(CST0.reduce((s, b) => s + b.bal, 0))}m${cstOk ? '; agree with the last settlement.' : `; unreconciled ${kr(cstOut)}.`}${cstLate.length ? ` Settled later than the settlement period allows: ${cstLate.map(b => b.name).join(', ')}.` : ''}`"
+ ],
+ [
+  "'Kortauppgjör stemmir við uppgjör færsluhirðis', `${CST.length} uppgjörsreikningar færsluhirða ${m(V.cs_sum)} m.kr. í BC. Krafa á færsluhirði á að greiðast innan uppgjörstíma${V.cs_lag ? ` (${V.cs_lag} dagar)` : ''}; óafstemmt við síðasta uppgjör ${kr(cstOut)}${cstLate.length ? ` Óuppgert lengur en uppgjörstími: ${cstLate.map(b => b.name).join(', ')}.` : ''}`",
+  "'Card settlement agrees with acquirer statements', `${CST.length} acquirer settlement accounts, ISK ${m(V.cs_sum)}m in BC. The receivable from the acquirer should be paid within the settlement period${V.cs_lag ? ` (${V.cs_lag} days)` : ''}; unreconciled against the last settlement ${kr(cstOut)}.${cstLate.length ? ` Overdue: ${cstLate.map(b => b.name).join(', ')}.` : ''}`"
+ ],
+ [
+  "'Kortauppgjör á móti fjárhag', `Uppgjörsreikningar færsluhirða ${m(V.cs_sum)} m.kr. á móti fjárhagslykli ${m(V.cs_gl)} m.kr.`",
+  "'Card settlement against the ledger', `Acquirer settlement accounts ISK ${m(V.cs_sum)}m against the G/L account ISK ${m(V.cs_gl)}m.`"
+ ],
+ [
+  "'Birgðir á móti fjárhag', `Birgðabók (virði birgðafærslna) ${m(STK.sub)} m.kr., birgðalykill í fjárhag ${m(STK.gl)} m.kr.`",
+  "'Inventory against the ledger', `Inventory ledger (value entries) ISK ${m(STK.sub)}m, inventory account in the ledger ISK ${m(STK.gl)}m.`"
+ ],
+ [
+  "`${tx({{js.bank_note}})}${CST.length ? ' Kortauppgjör eru kröfur á færsluhirða vegna kortasölu (debetstaða) sem eru gerðar upp innan fárra daga; þau eru ekki fyrirtækjakort.' : ''}${crd.length ? ' Kort eru sýnd með númeri, korthafar ekki nafngreindir.' : ''} Ekkert hefur verið afstemmt í BC úr þessu mælaborði.`",
+  "`${tx({{js.bank_note}})}${CST.length ? ' Card settlement accounts are receivables from card acquirers for card sales (debit balance), settled within a few days; they are not company cards.' : ''}${crd.length ? ' Cards are shown by number; cardholders are not named.' : ''} Nothing has been reconciled in BC from this dashboard.`"
+ ],
+ [
+  "t: 'Kortauppgjör stemmir ekki við uppgjör færsluhirðis', d: `Óafstemmt ${kr(cstOut)} á uppgjörsreikningum færsluhirða.${cstLate.length ? ` Óuppgert lengur en uppgjörstími: ${cstLate.map(b => b.name).join(', ')}.` : ''}`, nx: 'Sækja uppgjör færsluhirðis, para innborganir við kortasölu og bóka þóknun og mismun.'",
+  "t: 'Card settlement does not agree with acquirer statements', d: `Unreconciled ${kr(cstOut)} on acquirer settlement accounts.${cstLate.length ? ` Overdue: ${cstLate.map(b => b.name).join(', ')}.` : ''}`, nx: 'Get the acquirer settlement statements, match receipts to card sales and post fees and differences.'"
+ ],
+ [
+  "t: 'Birgðir stemma ekki við fjárhag', d: `Birgðalykill ${m(STK.gl)} m.kr., birgðabók ${m(STK.sub)} m.kr.`, nx: 'Keyra „Leiðrétta kostnað – birgðafærslur“ og „Bóka birgðakostnað í fjárhag“ og rekja handfærslur á birgðalykil.'",
+  "t: 'Inventory does not agree with the ledger', d: `Inventory account ISK ${m(STK.gl)}m, inventory ledger ISK ${m(STK.sub)}m.`, nx: 'Run Adjust Cost – Item Entries and Post Inventory Cost to G/L, and trace manual postings to the inventory account.'"
+ ],
+ [
+  "`<button type=\"button\" class=\"mt\" data-ym=\"${x.ym}\" aria-pressed=\"${x.ym === SEL}\">\n      <span class=\"mh\"><b>${monS(x.ym)}</b><span class=\"pill ${x.complete ? 'l' : x.current ? 'i' : 'h'}\">${x.complete ? 'Fullbókaður' : x.current ? 'Stendur yfir' : 'Ófullbókaður'}</span></span>\n      <span class=\"stack sm\"><span style=\"flex:${k.done};background:var(--up)\"></span><span style=\"flex:${k.todo};background:var(--dn)\"></span><span style=\"flex:${na};background:var(--line)\"></span></span>\n      <span class=\"sub\">${k.done} af ${k.app} lokið</span></button>`",
+  "`<button type=\"button\" class=\"mt\" data-ym=\"${x.ym}\" aria-pressed=\"${x.ym === SEL}\">\n      <span class=\"mh\"><b>${monS(x.ym)}</b><span class=\"pill ${x.complete ? 'l' : x.current ? 'i' : 'h'}\">${x.complete ? 'Fully posted' : x.current ? 'In progress' : 'Not fully posted'}</span></span>\n      <span class=\"stack sm\"><span style=\"flex:${k.done};background:var(--up)\"></span><span style=\"flex:${k.todo};background:var(--dn)\"></span><span style=\"flex:${na};background:var(--line)\"></span></span>\n      <span class=\"sub\">${k.done} of ${k.app} done</span></button>`"
+ ],
+ [
+  "`<thead><tr><th>Reikningur</th><th class=\"n\">Staða í BC í dag</th><th>Síðasta yfirlit</th><th class=\"n\">Yfirlit</th><th class=\"n\">Bankabók þá</th><th class=\"n\">Óafstemmt</th><th>Staða</th></tr></thead><tbody>\n    <tr class=\"grp\"><td colspan=\"7\">Bankareikningar</td></tr>${isk.map(row).join('')}<tr class=\"sum\"><td>Samtals bankar</td>${tot(isk)}</tr>\n    ${CST.length ? `<tr class=\"grp\"><td colspan=\"7\">Kortauppgjör færsluhirða</td></tr>${CST.map(row).join('')}<tr class=\"sum\"><td>Samtals kortauppgjör</td>${tot(CST)}</tr>` : ''}\n    ${crd.length ? `<tr class=\"grp\"><td colspan=\"7\">Greiðslukort</td></tr>${crd.map(row).join('')}<tr class=\"sum\"><td>Samtals kort</td>${tot(crd)}</tr>` : ''}</tbody>`",
+  "`<thead><tr><th>Account</th><th class=\"n\">BC balance today</th><th>Last statement</th><th class=\"n\">Statement</th><th class=\"n\">Bank ledger then</th><th class=\"n\">Unreconciled</th><th>Status</th></tr></thead><tbody>\n    <tr class=\"grp\"><td colspan=\"7\">Bank accounts</td></tr>${isk.map(row).join('')}<tr class=\"sum\"><td>Total banks</td>${tot(isk)}</tr>\n    ${CST.length ? `<tr class=\"grp\"><td colspan=\"7\">Acquirer card settlement</td></tr>${CST.map(row).join('')}<tr class=\"sum\"><td>Total card settlement</td>${tot(CST)}</tr>` : ''}\n    ${crd.length ? `<tr class=\"grp\"><td colspan=\"7\">Payment cards</td></tr>${crd.map(row).join('')}<tr class=\"sum\"><td>Total cards</td>${tot(crd)}</tr>` : ''}</tbody>`"
+ ],
+ [
+  "`<tr><td>${b.name}</td><td class=\"n\">${fmt(b.bal, 0)}</td><td>${date(b.stmt_date)} · nr. ${b.stmt_no}</td><td class=\"n\">${fmt(b.stmt_bal, 0)}</td><td class=\"n\">${fmt(ledgerOf(b), 0)}</td><td class=\"n\">${b.outst ? fmt(b.outst, 0) : '0'}</td><td><span class=\"pill ${b.outst ? 'm' : 'l'}\">${b.outst ? 'Útistandandi' : {{js.rec_bnk_pill}}}</span>${UNREC ? ` <span class=\"pill h\">${UNREC} vantar</span>` : ''}${b.lag_days != null && b.open_days > b.lag_days ? ` <span class=\"pill h\">${b.open_days} d. óuppgert</span>` : ''}</td></tr>`",
+  "`<tr><td>${b.name}</td><td class=\"n\">${fmt(b.bal, 0)}</td><td>${date(b.stmt_date)} · no. ${b.stmt_no}</td><td class=\"n\">${fmt(b.stmt_bal, 0)}</td><td class=\"n\">${fmt(ledgerOf(b), 0)}</td><td class=\"n\">${b.outst ? fmt(b.outst, 0) : '0'}</td><td><span class=\"pill ${b.outst ? 'm' : 'l'}\">${b.outst ? 'Outstanding' : {{js.rec_bnk_pill}}}</span>${UNREC ? ` <span class=\"pill h\">${UNREC} missing</span>` : ''}${b.lag_days != null && b.open_days > b.lag_days ? ` <span class=\"pill h\">${b.open_days} d. unsettled</span>` : ''}</td></tr>`"
+ ],
+ [
+  "`<div class=\"item\"><span class=\"pill ${o.s}\">${lab[o.s]}</span><div><b>${o.t}</b><p>${o.d}</p><p><b>Næsta skref:</b> ${o.nx}</p><p class=\"role\">Ábyrgð: ${o.role}</p></div><span class=\"n\">${o.txt || (o.amt == null ? '–' : (o.est ? '≈ ' : '') + m(o.amt) + ' m')}</span></div>`",
+  "`<div class=\"item\"><span class=\"pill ${o.s}\">${lab[o.s]}</span><div><b>${o.t}</b><p>${o.d}</p><p><b>Next step:</b> ${o.nx}</p><p class=\"role\">Responsible: ${o.role}</p></div><span class=\"n\">${o.txt || (o.amt == null ? '–' : (o.est ? '≈ ' : '') + m(o.amt) + ' m')}</span></div>`"
+ ],
+ [
+  "'Í Business Central á hver færsla að stemma (debet = kredit). Ójöfnuður innan mánaðar bendir á færslu sem er bókuð með röngum dagsetningum á móti sér eða upphafsstöðu sem ekki stemmir. Finna fylgiskjalið og leiðrétta með bakfærslu.'",
+  "'In Business Central every entry must balance (debit = credit). An imbalance within the month points to an entry posted with different dates on each side or an opening balance that does not agree. Find the document and correct it with a reversal.'"
+ ],
+ [
+  "`<div class=\"item\"><span class=\"pill ${p}\">${l}</span><div><b>${i.t}</b>${i.flag ? ' <span class=\"pill m\">Athuga</span>' : ''}<p>${i.note}</p><p class=\"role\">Ábyrgð: ${i.role}</p></div><span class=\"n\">${amt}</span></div>`",
+  "`<div class=\"item\"><span class=\"pill ${p}\">${l}</span><div><b>${i.t}</b>${i.flag ? ' <span class=\"pill m\">Check</span>' : ''}<p>${i.note}</p><p class=\"role\">Responsible: ${i.role}</p></div><span class=\"n\">${amt}</span></div>`"
+ ],
+ [
+  "`${name[0].toUpperCase() + name.slice(1)} er <b>ófullbókaður</b> (${M.reason}). Óbókaður rekstrarkostnaður er áætlaður um <b>${m(estOp)} m.kr.</b>, svo afkoma mánaðarins í BC er ofmetin. Tímabilið er opið fyrir bókun.`",
+  "`${name[0].toUpperCase() + name.slice(1)} is <b>not fully posted</b> (${M.reason}). Unposted operating costs are estimated at about <b>ISK ${m(estOp)}m</b>, so the month's result in BC is overstated. The period is open for posting.`"
+ ],
+ [
+  "const SHORT = { tekjur: 'tekjur', laun: 'laun', voru: 'vörunotkun', afskr: 'afskriftir', vsk: 'VSK-uppgjörsfærslu', fx: 'endurmat gjaldmiðla', accr: 'áfallinn kostnað', lok: 'lokun tímabils í BC' };",
+  "const SHORT = { tekjur: 'revenue', laun: 'payroll', voru: 'cost of materials', afskr: 'depreciation', vsk: 'the VAT settlement', fx: 'currency revaluation', accr: 'accrued costs', lok: 'period close in BC' };"
+ ],
+ [
+  ">Raðað eftir alvarleika og svo fjárhæð. Ekkert hefur verið bókað, afstemmt eða leiðrétt í BC; næstu skref eru tillögur til þeirra sem bera ábyrgð.<",
+  ">Sorted by severity, then amount. Nothing has been posted, reconciled or corrected in BC; next steps are suggestions for those responsible.<"
+ ],
+ [
+  "`Reksturinn er fullbókaður fyrir ${name}, en ${andList(miss.map(i => SHORT[i.k] || SHORT2[i.k] || i.t.toLowerCase()))} vantar. Mánuðurinn er því ekki lokaður.`",
+  "`Operations are fully posted for ${name}, but ${andList(miss.map(i => SHORT[i.k] || SHORT2[i.k] || i.t.toLowerCase()))} is missing. The month is therefore not closed.`"
+ ],
+ [
+  ">Áætlaðar fjárhæðir (merktar ≈) byggja á síðasta fullbókaða mánuði og eru til viðmiðunar, ekki tillaga að bókun. Ábyrgð er sýnd sem hlutverk.<",
+  ">Estimated amounts (marked ≈) are based on the last fully posted month and are for reference only, not a posting proposal. Responsibility is shown as a role.<"
+ ],
+ [
+  "const MONF = ['janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 'júlí', 'ágúst', 'september', 'október', 'nóvember', 'desember'];",
+  "const MONF = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];"
+ ],
+ [
+  "`${cap(name)} er ekki liðinn. Lokun hans hefst í byrjun ${monF(nextYm(SEL))}. Gátlistinn sýnir stöðuna í dag.`",
+  "`${cap(name)} has not ended yet. Its close starts at the beginning of ${monF(nextYm(SEL))}. The checklist shows the status today.`"
+ ],
+ [
+  ">Aðeins lesið úr BC. Áætlaðar fjárhæðir eru merktar ≈. Notendur birtast sem hlutverk, ekki nöfn.<",
+  ">Read only from BC. Estimated amounts are marked ≈. Users are shown as roles, not names.<"
+ ],
+ [
+  ">Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.<",
+  ">Prepared with the help of AI (Claude). Review before relying on the figures.<"
+ ],
+ [
+  "`Lokun mánaðar · ${name} ${Y}${M.current ? ' · mánuður stendur yfir' : ''}`",
+  "`Month-end close · ${name} ${Y}${M.current ? ' · month in progress' : ''}`"
+ ],
+ [
+  "`${DATA.unbooked.length} greiðsluliðir${UNREC ? ' ' + UNREC : ''}`",
+  "`${DATA.unbooked.length} payment items${UNREC ? ' ' + UNREC : ''}`"
+ ],
+ [
+  "`${c.done} af ${c.app}<small>atriðum lokið fyrir ${name}</small>`",
+  "`${c.done} of ${c.app}<small>items done for ${name}</small>`"
+ ],
+ [
+  ">undirbækur, bankar og VSK á móti fjárhag · mismunur í kr.<",
+  ">subledgers, banks and VAT against the ledger · difference in ISK<"
+ ],
+ [
+  "`til ${date(last)}${UNREC ? ` · ${UNREC} vantar` : ''}`",
+  "`to ${date(last)}${UNREC ? ` · ${UNREC} missing` : ''}`"
+ ],
+ [
+  "['h', 'Rautt'] : warn ? ['m', 'Gult'] : ['l', 'Grænt'];",
+  "['h', 'Red'] : warn ? ['m', 'Yellow'] : ['l', 'Green'];"
+ ],
+ [
+  ">staða í BC {{meta.as_of}} og síðasta bankayfirlit<",
+  ">BC balance {{meta.as_of}} and last bank statement<"
+ ],
+ [
+  "'<p class=\"note\">Ekkert atriði í þessari síu.</p>'",
+  "'<p class=\"note\">No items in this filter.</p>'"
+ ],
+ [
+  "'mismunur samtals, viðskiptamenn og lánardrottnar'",
+  "'total difference, customers and suppliers'"
+ ],
+ [
+  "const lab = { h: 'Rautt', m: 'Gult', l: 'Grænt' }",
+  "const lab = { h: 'Red', m: 'Yellow', l: 'Green' }"
+ ],
+ [
+  "a.slice(0, -1).join(', ') + ' og ' + a.at(-1);",
+  "a.slice(0, -1).join(', ') + ' and ' + a.at(-1);"
+ ],
+ [
+  "'<p class=\"note\">Engar afstemmingarlínur.</p>'",
+  "'<p class=\"note\">No reconciliation lines.</p>'"
+ ],
+ [
+  "`${DATA.inv_od_n} af ${DATA.inv_n} reikningum`",
+  "`${DATA.inv_od_n} of ${DATA.inv_n} invoices`"
+ ],
+ [
+  ">Mánaðarlok og afstemmingar · {{meta.year}}<",
+  ">Month-end and reconciliations · {{meta.year}}<"
+ ],
+ [
+  ">síðustu 6 mánuðir · fullbókað og gátlisti<",
+  ">last 6 months · fully posted and checklist<"
+ ],
+ [
+  "`${STMbad.length}<small>mánuðir</small>`",
+  "`${STMbad.length}<small>months</small>`"
+ ],
+ [
+  "'þarf að laga áður en mánuði er lokað'",
+  "'must be fixed before the month is closed'"
+ ],
+ [
+  "const lab = { h: 'Rautt', m: 'Gult' };",
+  "const lab = { h: 'Red', m: 'Yellow' };"
+ ],
+ [
+  ">debet − kredit í fjárhag, m.kr.<",
+  ">debit − credit in the ledger, ISK m<"
+ ],
+ [
+  ">Jöfnuður færslna innan mánaðar<",
+  ">Balance of entries within the month<"
+ ],
+ [
+  "'Dagar frá síðustu afstemmingu'",
+  "'Days since last reconciliation'"
+ ],
+ [
+  "`síðasta yfirlit ${date(last)}`",
+  "`last statement ${date(last)}`"
+ ],
+ [
+  "'þarf að skýra eða staðfesta'",
+  "'need explaining or confirming'"
+ ],
+ [
+  ">Mánaðarlok og afstemmingar<",
+  ">Month-end and reconciliations<"
+ ],
+ [
+  "'óbókaður rekstrarkostnaður'",
+  "'unposted operating costs'"
+ ],
+ [
+  "'síðasti fullbókaði mánuður'",
+  "'last fully posted month'"
+ ],
+ [
+  ">{{meta.short}} mánaðarlok<",
+  ">{{meta.short}} month-end<"
+ ],
+ [
+  "'Undirbækur á móti fjárhag'",
+  "'Subledgers against the ledger'"
+ ],
+ [
+  "`Gátlisti · ${name} ${Y}`",
+  "`Checklist · ${name} ${Y}`"
+ ],
+ [
+  "'Ójöfnuður innan mánaðar'",
+  "'Imbalance within the month'"
+ ],
+ [
+  "'dagar frá mánaðarlokum'",
+  "'days since month-end'"
+ ],
+ [
+  "'engin afstemming skráð'",
+  "'no reconciliation recorded'"
+ ],
+ [
+  "b.teg !== 'Greiðslukort'",
+  "![\"Greiðslukort\", \"Payment cards\"].includes(b.teg)"
+ ],
+ [
+  "b.teg === 'Greiðslukort'",
+  "[\"Greiðslukort\", \"Payment cards\"].includes(b.teg)"
+ ],
+ [
+  "'Reikningar afstemmdir'",
+  "'Accounts reconciled'"
+ ],
+ [
+  "'Ósamþykkt á gjalddaga'",
+  "'Unapproved and due'"
+ ],
+ [
+  "'allir mánuðir stemma'",
+  "'all months balance'"
+ ],
+ [
+  ">Tengt BC · Bifröst<",
+  ">Connected to BC · Bifröst<"
+ ],
+ [
+  ">Stemmir bókhaldið?<",
+  ">Do the books reconcile?<"
+ ],
+ [
+  "'Óbókaðar greiðslur'",
+  "'Unposted payments'"
+ ],
+ [
+  "=\"Fjármálastjóri\"",
+  "=\"CFO\""
+ ],
+ [
+  ">Bankar og kort<",
+  ">Banks and cards<"
+ ],
+ [
+  ">Fjármálastjóri<",
+  ">CFO<"
+ ],
+ [
+  "['h', 'Rautt']),",
+  "['h', 'Red']),"
+ ],
+ [
+  ">Lokun mánaðar<",
+  ">Month-end close<"
+ ],
+ [
+  ">Verkefnalisti<",
+  ">Task list<"
+ ],
+ [
+  "=\"Sía gátlista\"",
+  "=\"Filter checklist\""
+ ],
+ [
+  "'atriði vantar'",
+  "'items missing'"
+ ],
+ [
+  "['m', 'Gult']),",
+  "['m', 'Yellow']),"
+ ],
+ [
+  ">Aðeins lesið<",
+  ">Read only<"
+ ],
+ [
+  ">Afstemmingar<",
+  ">Reconciliations<"
+ ],
+ [
+  ">Öll hlutverk<",
+  ">All roles<"
+ ],
+ [
+  "=\"Leiðarstika\"",
+  "=\"Breadcrumb\""
+ ],
+ [
+  "=\"Veldu mánuð\"",
+  "=\"Select month\""
+ ],
+ [
+  ">Opin atriði<",
+  ">Open items<"
+ ],
+ [
+  "=\"Alvarleiki\"",
+  "=\"Severity\""
+ ],
+ [
+  "'Rauð atriði'",
+  "'Red items'"
+ ],
+ [
+  "> mælaborða<",
+  "> dashboards<"
+ ],
+ [
+  ">Á ekki við<",
+  ">Not applicable<"
+ ],
+ [
+  "'Á ekki við'",
+  "'Not applicable'"
+ ],
+ [
+  "'Gul atriði'",
+  "'Yellow items'"
+ ],
+ [
+  ">← Miðstöð<",
+  ">← Hub<"
+ ],
+ [
+  ">Mánaðaval<",
+  ">Month selection<"
+ ],
+ [
+  "=\"Hlutverk\"",
+  "=\"Role\""
+ ],
+ [
+  "'óstaðfest'",
+  "'unconfirmed'"
+ ],
+ [
+  ">Gátlisti<",
+  ">Checklist<"
+ ],
+ [
+  "=\"Bókari\"",
+  "=\"Bookkeeper\""
+ ],
+ [
+  "=\"Flipar\"",
+  "=\"Tabs\""
+ ],
+ [
+  ">Staða <",
+  ">As of <"
+ ],
+ [
+  ">Vantar<",
+  ">Missing<"
+ ],
+ [
+  "'Vantar'",
+  "'Missing'"
+ ],
+ [
+  ">Bókari<",
+  ">Bookkeeper<"
+ ],
+ [
+  "'Bókari'",
+  "'Bookkeeper'"
+ ],
+ [
+  ">Lokið<",
+  ">Done<"
+ ],
+ [
+  "'Lokið'",
+  "'Done'"
+ ],
+ [
+  ">Rautt<",
+  ">Red<"
+ ],
+ [
+  ">Allt<",
+  ">All<"
+ ],
+ [
+  ">Gult<",
+  ">Yellow<"
+ ]
+]

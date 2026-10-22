@@ -1,0 +1,930 @@
+[
+[
+"`<div class=\"mk\"><span class=\"sub\">MAPE tekjur</span><b>${pct(B.mape_tekjur)}</b>${chip({{js.bt_rev_sign}}, true, {{js.bt_rev_chip}})}</div><div class=\"mk\"><span class=\"sub\">MAPE EBITDA</span><b>${pct(B.mape_ebitda)}</b>${chip({{js.bt_eb_sign}}, true, {{js.bt_eb_chip}})}</div>`",
+"`<div class=\"mk\"><span class=\"sub\">MAPE revenue</span><b>${pct(B.mape_tekjur)}</b>${chip({{js.bt_rev_sign}}, true, {{js.bt_rev_chip}})}</div><div class=\"mk\"><span class=\"sub\">MAPE EBITDA</span><b>${pct(B.mape_ebitda)}</b>${chip({{js.bt_eb_sign}}, true, {{js.bt_eb_chip}})}</div>`"
+],
+[
+"`<tr class=\"sum\"><td>12 mánuðir</td><td class=\"n\">${m1(t)}</td><td class=\"n\"></td><td class=\"n\">${m1(e)}</td><td class=\"n\"></td><td class=\"n\">${pct(e / t)}</td><td class=\"n\">${m1(sum(FC, 'hagnadur_fs'))}</td></tr></tbody>`",
+"`<tr class=\"sum\"><td>12 months</td><td class=\"n\">${m1(t)}</td><td class=\"n\"></td><td class=\"n\">${m1(e)}</td><td class=\"n\"></td><td class=\"n\">${pct(e / t)}</td><td class=\"n\">${m1(sum(FC, 'hagnadur_fs'))}</td></tr></tbody>`"
+],
+[
+"`Til að halda ${pct(b.margin)} EBITDA-hlutfalli þarf verðskrá að ${need >= 0 ? 'hækka' : 'lækka'} um <b>${fmt(Math.abs(need))}%</b> frá ${{{js.decide_date}}}${Math.abs(p.pr) > .01 ? ` (stillt ${sg(p.pr)}%)` : ''}.`",
+"`To keep a ${pct(b.margin)} EBITDA margin, the price list needs to ${need >= 0 ? 'rise' : 'fall'} by <b>${fmt(Math.abs(need))}%</b> from ${{{js.decide_date}}}${Math.abs(p.pr) > .01 ? ` (set ${sg(p.pr)}%)` : ''}.`"
+],
+[
+"`<thead><tr><th>Mánuður</th><th class=\"n\">Tekjur</th><th class=\"n\">P10–P90</th><th class=\"n\">EBITDA</th><th class=\"n\">P10–P90</th><th class=\"n\">EBITDA %</th><th class=\"n\">Hagnaður f. sk.</th></tr></thead><tbody>`",
+"`<thead><tr><th>Month</th><th class=\"n\">Revenue</th><th class=\"n\">P10–P90</th><th class=\"n\">EBITDA</th><th class=\"n\">P10–P90</th><th class=\"n\">EBITDA %</th><th class=\"n\">Profit b. tax</th></tr></thead><tbody>`"
+],
+[
+"`Bil P10–P90: <b>${m1(Y26.p10)}–${m1(Y26.p90)} m.kr.</b> Raun ${{{js.act_long}}} ${m1(Y.raun_ebitda)} m.kr. og spá ${{{js.fc_long}}} ${m1(Y.spa_ebitda)} m.kr. Á móti ${m1(PY.ebitda)} m.kr. EBITDA ${{{js.py}}}.`",
+"`P10–P90 range: <b>ISK ${m1(Y26.p10)}–${m1(Y26.p90)}m</b>. Actual ${{{js.act_long}}} ISK ${m1(Y.raun_ebitda)}m and forecast ${{{js.fc_long}}} ISK ${m1(Y.spa_ebitda)}m. Against ISK ${m1(PY.ebitda)}m EBITDA ${{{js.py}}}.`"
+],
+[
+"`<b>${name}:</b> EBITDA ${per} ${dE > 0 ? 'hækkar' : 'lækkar'} um <b>${m1(Math.abs(dE))} m.kr.</b> í ${m1(s.ebitda)} m.kr. (${pct(s.margin)} EBITDA-hlutfall). `",
+"`<b>${name}:</b> EBITDA ${per} ${dE > 0 ? 'rises' : 'falls'} by <b>ISK ${m1(Math.abs(dE))}m</b> to ISK ${m1(s.ebitda)}m (${pct(s.margin)} EBITDA margin). `"
+],
+[
+"`<b>${name}:</b> EBITDA ${per} er ${m1(s.ebitda)} m.kr. (${pct(s.margin)} EBITDA-hlutfall), sömu tölur og spáin. Hreyfðu stikur til að sjá áhrifin.`",
+"`<b>${name}:</b> EBITDA ${per} is ISK ${m1(s.ebitda)}m (${pct(s.margin)} EBITDA margin), the same as the forecast. Move sliders to see the effect.`"
+],
+[
+"`Verðskrá frá ${{{js.decide_date}}} til að halda <b>${pct(b.margin)}</b> EBITDA-hlutfalli grunns ${per}. Stillt: ${sg(p.pr)}%. `",
+"`Price list from ${{{js.decide_date}}} to keep the base EBITDA margin of <b>${pct(b.margin)}</b> ${per}. Set: ${sg(p.pr)}%. `"
+],
+[
+"`<thead><tr><th>Forsenda</th><th>Gildi</th><th>Heimild</th><th>Dags.</th><th>Staða</th><th>Athugasemd</th></tr></thead><tbody>`",
+"`<thead><tr><th>Assumption</th><th>Value</th><th>Source</th><th>Date</th><th>Status</th><th>Comment</th></tr></thead><tbody>`"
+],
+[
+">Spá, ekki fjárfestingar- eða lánaráðgjöf. Hermirinn sýnir áhrif forsendna sem notandi stillir; þær eru merktar <",
+">A forecast, not investment or lending advice. The simulator shows the effect of assumptions the user sets; they are marked <"
+],
+[
+"const st = { 'staðfest': 'l', 'óstaðfest': 'm', 'notandi': 'i', 'forsenda': 'i', 'saga': 'i', 'vantar': 'h' };",
+"const st = { 'confirmed': 'l', 'unconfirmed': 'm', 'user': 'i', 'assumption': 'i', 'history': 'i', 'missing': 'h', 'staðfest': 'l', 'óstaðfest': 'm', 'notandi': 'i', 'forsenda': 'i', 'saga': 'i', 'vantar': 'h' };"
+],
+[
+"`${INC.map(r => lab(r.ym)).join(' og ')}: ${{{js.why2_mid}}} og grunnurinn byggir aðeins á ${F.n} mánuðum.`",
+"`${INC.map(r => lab(r.ym)).join(' and ')}: ${{{js.why2_mid}}} and the base rests on only ${F.n} months.`"
+],
+[
+"'Magn −10%, aðföng +5% (30% yfirfærsla), verðbólga 7,5%, eldsneyti +20%, vextir 9%, launaskrið 1%.'",
+"'Volume −10%, inputs +5% (30% pass-through), inflation 7.5%, fuel +20%, interest 9%, wage drift 1%.'"
+],
+[
+"`Samtals ${sg(tot)} m.kr. á hagnað fyrir skatta ${per}. Hver forsenda metin ein og sér frá grunni.`",
+"`Total ISK ${sg(tot)}m on profit before tax ${per}. Each assumption estimated on its own from the base.`"
+],
+[
+"`<thead><tr><th>Liður</th><th>Regla</th><th class=\"n\">Grunnur/mán.</th></tr></thead><tbody>`",
+"`<thead><tr><th>Line</th><th>Rule</th><th class=\"n\">Base/mo.</th></tr></thead><tbody>`"
+],
+[
+"`MAPE tekna ${pct(B.mape_tekjur)}. Óvissubilið vex með √tíma og nær yfir sveiflu sögunnar.`",
+"`MAPE revenue ${pct(B.mape_tekjur)}. The uncertainty range grows with √time and covers historical volatility.`"
+],
+[
+"'<p class=\"sub\">Allar forsendur á grunngildum. Hreyfðu stiku eða veldu sviðsmynd.</p>'",
+"'<p class=\"sub\">All assumptions at base values. Move a slider or choose a scenario.</p>'"
+],
+[
+">Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.<",
+">Prepared with the help of AI (Claude). Review before relying on the figures.<"
+],
+[
+"`<button type=\"button\" class=\"reset\" id=\"reset\">Endurstilla á grunn</button>`",
+"`<button type=\"button\" class=\"reset\" id=\"reset\">Reset to base</button>`"
+],
+[
+"'Verðskrá +4%, magn +8%, stöðugildi +3%, ný gjöld 1 m/mán., 80% yfirfærsla.'",
+"'Price list +4%, volume +8%, headcount +3%, new fees 1 m/mo., 80% pass-through.'"
+],
+[
+"`<div class=\"ch\"><h2>Forsendur</h2><span class=\"tag\">Forsenda</span></div>`",
+"`<div class=\"ch\"><h2>Assumptions</h2><span class=\"tag\">Assumption</span></div>`"
+],
+[
+"=\"Raun og spá eftir mánuðum með óvissubili og {{meta.py}} til samanburðar\"",
+"=\"Actual and forecast by month with uncertainty range and {{meta.py}} for comparison\""
+],
+[
+"`${{{js.oneoff_month_cap}}} inniheldur einskiptissölu ${m1(ONE)} m.kr.`",
+"`${{{js.oneoff_month_cap}}} includes a one-off sale of ISK ${m1(ONE)}m`"
+],
+[
+"> Business Central (Bifröst), {{meta.company}}, {{text.footer_src}}<",
+"> Business Central (Bifröst), {{meta.company}}, {{text.footer_src}}<"
+],
+[
+"'Ekki er hægt að halda EBITDA-hlutfalli grunns með verðskrá einni.'",
+"'The base EBITDA margin cannot be kept through the price list alone.'"
+],
+[
+"`Eldsneyti talið ${pct(A.eldsneyti_hlutur, 0)} af öðrum rekstri.`",
+"`Fuel assumed to be ${pct(A.eldsneyti_hlutur, 0)} of other operating costs.`"
+],
+[
+"'grunnstig × dempuð leitni × magn × verðskrá + þekktar pantanir'",
+"'base level × damped trend × volume × price list + known orders'"
+],
+[
+">Spágerð og rekstrarhermir · {{meta.year}} og næstu 12 mánuðir<",
+">Forecasting and business simulator · {{meta.year}} and the next 12 months<"
+],
+[
+"'Yfirfærsla: hlutfall aðfangahækkunar sem velt er út í verð.'",
+"'Pass-through: share of input cost increases passed on to prices.'"
+],
+[
+"'Húsnæði og annar rekstur hækka með mánaðarlegri uppsöfnun.'",
+"'Premises and other operating costs rise with monthly compounding.'"
+],
+[
+"'Hlutfall aðfangahækkunar sem velt er út í verð. Forsenda: '",
+"'Share of input cost increase passed on to prices. Assumption: '"
+],
+[
+">líkan metið án {{text.bt_months}}, borið saman við raun<",
+">model estimated without {{text.bt_months}}, compared with actuals<"
+],
+[
+"'grunnlaun × kjarasamningar × stöðugildi × launaskrið'",
+"'base pay × collective agreements × headcount × wage drift'"
+],
+[
+"=\"Laun sem hlutfall af tekjum, grunnur og sviðsmynd\"",
+"=\"Payroll as a share of revenue, base and scenario\""
+],
+[
+"`${m1(ONE)} m.kr. í ${{{js.oneoff_month}}} tekið út`",
+"`ISK ${m1(ONE)}m in ${{{js.oneoff_month}}} removed`"
+],
+[
+"'Meðallaun síðustu þriggja fullbókaðra mánaða.'",
+"'Average payroll of the last three fully posted months.'"
+],
+[
+"=\"Skipting EBITDA {{meta.year}} í raun og spá\"",
+"=\"Split of EBITDA {{meta.year}} into actual and forecast\""
+],
+[
+"`${pct(KJ0.haekkun)} frá ${{{js.as_kj_date}}}`",
+"`${pct(KJ0.haekkun)} from ${{{js.as_kj_date}}}`"
+],
+[
+"` ${c.dataset.label}: ${fmt(c.raw, 1)} m.kr.`",
+"` ${c.dataset.label}: ISK ${fmt(c.raw, 1)}m`"
+],
+[
+"'Leitni í hámarki líkansins (±1,5% á mán.).'",
+"'Trend at the model\\'s cap (±1.5% per mo.).'"
+],
+[
+">Áætluð EBITDA {{meta.year}} · P50 · spá<",
+">Estimated EBITDA {{meta.year}} · P50 · forecast<"
+],
+[
+"=\"Spá á móti raun síðustu þriggja mánaða\"",
+"=\"Forecast versus actual for the last three months\""
+],
+[
+"=\"Uppsöfnuð EBITDA, grunnur og sviðsmynd\"",
+"=\"Cumulative EBITDA, base and scenario\""
+],
+[
+"' <span class=\"pill i\">ófullbókað</span>'",
+"' <span class=\"pill i\">not fully posted</span>'"
+],
+[
+"`Vantar <b>${fmt(need - p.pr)} pp</b>.`",
+"`Short by <b>${fmt(need - p.pr)} pp</b>.`"
+],
+[
+">til að halda EBITDA-hlutfalli grunns<",
+">to keep the base EBITDA margin<"
+],
+[
+"'Allar forsendur eins og í spánni.'",
+"'All assumptions as in the forecast.'"
+],
+[
+">{{meta.short}} spágerð og hermir<",
+">{{meta.short}} forecasting and simulator<"
+],
+[
+"'grunnur × verðbólga × eldsneyti'",
+"'base × inflation × fuel'"
+],
+[
+"'Nýjar tekjur án kostnaðar, frá '",
+"'New revenue without cost, from '"
+],
+[
+">{{meta.py}}, meðaltal á mánuði<",
+">{{meta.py}}, monthly average<"
+],
+[
+"'BC: sölupantanir, verkáætlanir'",
+"'BC: sales orders, job plans'"
+],
+[
+">Ófullbókað (bókað hingað til)<",
+">Not fully posted (posted so far)<"
+],
+[
+"'Breyting í hermi tekur gildi '",
+"'A change in the simulator takes effect '"
+],
+[
+">Mánaðarleg þróun: raun → spá<",
+">Monthly trend: actual → forecast<"
+],
+[
+">á hagnað fyrir skatta, m.kr.<",
+">on profit before tax, ISK m<"
+],
+[
+">EBITDA {{meta.year}}, m.kr.<",
+">EBITDA {{meta.year}}, ISK m<"
+],
+[
+"'Stýrivextir (meginvextir)'",
+"'Policy rate (key rate)'"
+],
+[
+">útskýranleg drifþáttaspá<",
+">explainable driver-based forecast<"
+],
+[
+"'Verðbólga (VNV, 12 mán.)'",
+"'Inflation (CPI, 12 mo.)'"
+],
+[
+"'Þekktar pantanir og verk'",
+"'Known orders and jobs'"
+],
+[
+"'grunnur × stýrivextir / '",
+"'base × policy rate / '"
+],
+[
+">m.kr. · P50 með P10–P90<",
+">ISK m · P50 with P10–P90<"
+],
+[
+">sóttar {{meta.fetched}}<",
+">retrieved {{meta.fetched}}<"
+],
+[
+"=\"Mælikvarði bakprófunar\"",
+"=\"Backtest metric\""
+],
+[
+"'Tekjuspáin er traustari'",
+"'The revenue forecast is more reliable'"
+],
+[
+"'Virðisauki á launakrónu'",
+"'Value added per payroll króna'"
+],
+[
+">Áhrif hverrar forsendu<",
+">Effect of each assumption<"
+],
+[
+"'Breyting á fjölda frá '",
+"'Change in headcount from '"
+],
+[
+"'Stillt verðskrá dugar.'",
+"'The price list set is enough.'"
+],
+[
+">. Aðeins lesið úr BC.<",
+">. Read only from BC.<"
+],
+[
+"'Sveiflukennd framlegð'",
+"'Volatile margin'"
+],
+[
+"'Efni og innkaup, frá '",
+"'Materials and purchases, from '"
+],
+[
+"'Umfram kjarasamninga.'",
+"'Above collective agreements.'"
+],
+[
+"'Hagnaður fyrir skatta'",
+"'Profit before tax'"
+],
+[
+"'EBITDA, breyting frá '",
+"'EBITDA, change from '"
+],
+[
+"> {{text.warn}}, sjá <",
+"> {{text.warn}}, see <"
+],
+[
+"'Ófullbókaðir mánuðir'",
+"'Months not fully posted'"
+],
+[
+"'. Forsenda: óbreytt.'",
+"'. Assumption: unchanged.'"
+],
+[
+"'Magn, árleg breyting'",
+"'Volume, annual change'"
+],
+[
+"'Hærri samningar: 6% '",
+"'Higher settlements: 6% '"
+],
+[
+"'Aðföng og yfirfærsla'",
+"'Inputs and pass-through'"
+],
+[
+">Spá næstu 12 mánuði<",
+">Forecast for the next 12 months<"
+],
+[
+">Forsendur spárinnar<",
+">Forecast assumptions<"
+],
+[
+">Verðhækkun sem þarf<",
+">Price increase needed<"
+],
+[
+"'grunnur × verðbólga'",
+"'base × inflation'"
+],
+[
+">Tengt BC · Bifröst<",
+">Connected to BC · Bifröst<"
+],
+[
+">Raun {{meta.year}}<",
+">Actual {{meta.year}}<"
+],
+[
+">Árið {{meta.year}}<",
+">Year {{meta.year}}<"
+],
+[
+"'Hagnaður f. skatta'",
+"'Profit before tax'"
+],
+[
+"'Seðlabanki Íslands'",
+"'Central Bank of Iceland'"
+],
+[
+"'Verðskrá félagsins'",
+"'Company price list'"
+],
+[
+"'Stöðugildi og laun'",
+"'Headcount and payroll'"
+],
+[
+"`${INC.length} mán.`",
+"`${INC.length} mo.`"
+],
+[
+"' og 2% launaskrið.'",
+"' and 2% wage drift.'"
+],
+[
+"'Framlegðarhlutfall'",
+"'Gross margin %'"
+],
+[
+"'Ófullbókað, bókað'",
+"'Not fully posted, posted'"
+],
+[
+"'Notandi / birgjar'",
+"'User / suppliers'"
+],
+[
+"'Einskiptissala í '",
+"'One-off sale in '"
+],
+[
+"'Ný gjöld á mánuði'",
+"'New fees per month'"
+],
+[
+"'Yfirfærsla í verð'",
+"'Pass-through to prices'"
+],
+[
+"'Núllpunktur tekna'",
+"'Break-even revenue'"
+],
+[
+">Óvissubil ársins<",
+">Uncertainty range for the year<"
+],
+[
+">Uppsöfnuð EBITDA<",
+">Cumulative EBITDA<"
+],
+[
+">eftir mánuðum, %<",
+">by month, %<"
+],
+[
+"'Hagstofa Íslands'",
+"'Statistics Iceland'"
+],
+[
+"'Launaskrið á ári'",
+"'Wage drift per year'"
+],
+[
+"'EBITDA-hlutfall '",
+"'EBITDA margin '"
+],
+[
+">Spá, ekki raun.<",
+">A forecast, not actuals.<"
+],
+[
+">Spá bakprófunar<",
+">Backtest forecast<"
+],
+[
+">Grunnur P10–P90<",
+">Base P10–P90<"
+],
+[
+">Stillt verðskrá<",
+">Price list set<"
+],
+[
+"'EBITDA-hlutfall'",
+"'EBITDA margin'"
+],
+[
+"'Einskiptisliðir'",
+"'One-off items'"
+],
+[
+"'Gengi (EUR/ISK)'",
+"'Exchange rate (EUR/ISK)'"
+],
+[
+"'Grunnstig tekna'",
+"'Revenue base level'"
+],
+[
+"'Kjarasamningar '",
+"'Collective agreements '"
+],
+[
+"'næstu 12 mánuði'",
+"'the next 12 months'"
+],
+[
+"`Sviðsmynd ${SC}`",
+"`Scenario ${SC}`"
+],
+[
+"'Eigin sviðsmynd'",
+"'Custom scenario'"
+],
+[
+">Rekstrarhermir<",
+">Business simulator<"
+],
+[
+">Laun af tekjum<",
+">Payroll to revenue<"
+],
+[
+"'EBITDA á móti '",
+"'EBITDA versus '"
+],
+[
+"'Kjarasamningar'",
+"'Collective agreements'"
+],
+[
+"'Magn og leitni'",
+"'Volume and trend'"
+],
+[
+"'Engar árstíðir'",
+"'No seasonality'"
+],
+[
+"'Fjármagnsliðir'",
+"'Net finance costs'"
+],
+[
+">Næstu 12 mán.<",
+">Next 12 mo.<"
+],
+[
+"'Annar rekstur'",
+"'Other operating costs'"
+],
+[
+"=\"Leiðarstika\"",
+"=\"Breadcrumb\""
+],
+[
+"=\"Sviðsmyndir\"",
+"=\"Scenarios\""
+],
+[
+"=\"Mælikvarði\"",
+"=\"Metric\""
+],
+[
+"'engir í spá'",
+"'none in forecast'"
+],
+[
+"'Aðfangaverð'",
+"'Input prices'"
+],
+[
+"'BC, lykill '",
+"'BC, account '"
+],
+[
+"'Sveifla (σ)'",
+"'Volatility (σ)'"
+],
+[
+"'Stýrivextir'",
+"'Policy rate'"
+],
+[
+"> mælaborða<",
+"> dashboards<"
+],
+[
+"'Vörunotkun'",
+"'Cost of materials'"
+],
+[
+"'Afskriftir'",
+"'Depreciation'"
+],
+[
+"'Stöðugildi'",
+"'Headcount'"
+],
+[
+"'Öryggisbil'",
+"'Safety margin'"
+],
+[
+">← Miðstöð<",
+">← Hub<"
+],
+[
+">Forsendur<",
+">Assumptions<"
+],
+[
+">Spá (P50)<",
+">Forecast (P50)<"
+],
+[
+"'Spá (P50)'",
+"'Forecast (P50)'"
+],
+[
+">Bakprófun<",
+">Backtest<"
+],
+[
+">Sviðsmynd<",
+">Scenario<"
+],
+[
+"'Sviðsmynd'",
+"'Scenario'"
+],
+[
+"' meðaltal'",
+"' average'"
+],
+[
+"'óstaðfest'",
+"'unconfirmed'"
+],
+[
+"'Eldsneyti'",
+"'Fuel'"
+],
+[
+"'Saga í BC'",
+"'History in BC'"
+],
+[
+"'< 13 mán.'",
+"'< 13 mo.'"
+],
+[
+"'Verðbólga'",
+"'Inflation'"
+],
+[
+"'næst ekki'",
+"'not achievable'"
+],
+[
+">Heimild:<",
+">Source:<"
+],
+[
+">Forsenda<",
+">Assumption<"
+],
+[
+"'Forsenda'",
+"'Assumption'"
+],
+[
+"=\"Tímabil\"",
+"=\"Period\""
+],
+[
+"'staðfest'",
+"'confirmed'"
+],
+[
+"'forsenda'",
+"'assumption'"
+],
+[
+"'Verðskrá'",
+"'Price list'"
+],
+[
+"'Umhverfi'",
+"'Environment'"
+],
+[
+"'Svartsýn'",
+"'Pessimistic'"
+],
+[
+"'grunnur '",
+"'base '"
+],
+[
+">Spágerð<",
+">Forecasting<"
+],
+[
+">Líkanið<",
+">The model<"
+],
+[
+">Grunnur<",
+">Base<"
+],
+[
+"'Grunnur'",
+"'Base'"
+],
+[
+"=\"Flipar\"",
+"=\"Tabs\""
+],
+[
+"'Tekjur '",
+"'Revenue '"
+],
+[
+"'notandi'",
+"'user'"
+],
+[
+"'óbreytt'",
+"'unchanged'"
+],
+[
+"'Notandi'",
+"'User'"
+],
+[
+"' m/mán.'",
+"' m/mo.'"
+],
+[
+"'Húsnæði'",
+"'Premises'"
+],
+[
+"'Samspil'",
+"'Interaction'"
+],
+[
+"', m.kr.'",
+"', ISK m'"
+],
+[
+">Staða <",
+">As of <"
+],
+[
+">EBITDA<",
+">EBITDA<"
+],
+[
+"'EBITDA'",
+"'EBITDA'"
+],
+[
+">Tekjur<",
+">Revenue<"
+],
+[
+"'Tekjur'",
+"'Revenue'"
+],
+[
+"'Leitni'",
+"'Trend'"
+],
+[
+"'Aðföng'",
+"'Inputs'"
+],
+[
+"'flatt'",
+"'flat'"
+],
+[
+"'árið '",
+"'the year '"
+],
+[
+"'Hermt'",
+"'Simulated'"
+],
+[
+">Raun<",
+">Actual<"
+],
+[
+"'Raun'",
+"'Actual'"
+],
+[
+">Þarf<",
+">Needed<"
+],
+[
+"'saga'",
+"'history'"
+],
+[
+"'Laun'",
+"'Payroll'"
+],
+[
+"'Frá '",
+"'From '"
+],
+[
+"'Sókn'",
+"'Growth'"
+],
+[
+">Spá<",
+">Forecast<"
+],
+[
+"'Spá'",
+"'Forecast'"
+],
+[
+"const MATL = JOBS ? { nf: 'efnishlutfall', tgf: 'efnishlutfalli', f: 'efnishlutfall', cap: 'Efnishlutfall' } : { nf: 'hlutfall vörunotkunar', tgf: 'hlutfalli vörunotkunar', f: 'hlutfall vörunotkunar', cap: 'Hlutfall vörunotkunar' };",
+"const MATL = JOBS ? { nf: 'the materials ratio', tgf: 'the materials ratio', f: 'materials ratio', cap: 'Materials ratio' } : { nf: 'the cost-of-goods ratio', tgf: 'the cost-of-goods ratio', f: 'cost-of-goods ratio', cap: 'Cost-of-goods ratio' };"
+],
+[
+"HAS_MAT ? `${MATL.nf} hefur verið ${rr(matR)} og laun ${rr(wageR)}` : `laun hafa verið ${rr(wageR)}`",
+"HAS_MAT ? `${MATL.nf} has been ${rr(matR)} and payroll ${rr(wageR)}` : `payroll has been ${rr(wageR)}`"
+],
+[
+"`<b>Einföld spá:</b> aðeins ${F.n} fullbókaðir mánuðir, svo spáin er meðaltal síðustu mánaða án leitni og árstíða, með víðara óvissubili. `",
+"`<b>Simple forecast:</b> only ${F.n} fully posted months, so the forecast is an average of recent months without trend or seasonality, with a wider uncertainty range. `"
+],
+[
+"`<b>Árið ${{{js.year}}} stefnir í ${m1(Y26.ebitda)} m.kr. EBITDA</b> (bil ${m1(Y26.p10)}–${m1(Y26.p90)} m.kr.) og ${m1(Y26.tekjur)} m.kr. tekjur. `",
+"`<b>The year ${{{js.year}}} is heading for ISK ${m1(Y26.ebitda)}m EBITDA</b> (range ISK ${m1(Y26.p10)}–${m1(Y26.p90)}m) and ISK ${m1(Y26.tekjur)}m revenue. `"
+],
+[
+"`Stærsti óvissuþátturinn er framlegðin: ${costTxt} af tekjum eftir mánuðum. Hvert prósentustig í ${MAT_DRIVER ? MATL.tgf : 'launahlutfalli'} ${{{js.fc_short}}} jafngildir um ${fmt(per1pp, 1)} m.kr. í EBITDA.`",
+"`The largest source of uncertainty is the margin: ${costTxt} of revenue by month. Each percentage point in ${MAT_DRIVER ? MATL.tgf : 'the payroll ratio'} ${{{js.fc_short}}} is worth about ISK ${fmt(per1pp, 1)}m in EBITDA.`"
+],
+[
+"`Framlegðin hefur verið stöðug (EBITDA-hlutfall ${rr(ebR)} eftir mánuðum), svo stærsti óvissuþátturinn er tekjustigið. Hvert 1% í tekjum ${{{js.fc_short}}} jafngildir um ${fmt(per1pp * (1 - (F.mat || 0)), 1)} m.kr. í EBITDA.`",
+"`The margin has been stable (EBITDA margin ${rr(ebR)} by month), so the largest source of uncertainty is the revenue level. Each 1% of revenue ${{{js.fc_short}}} is worth about ISK ${fmt(per1pp * (1 - (F.mat || 0)), 1)}m in EBITDA.`"
+],
+[
+"`<div><span><i style=\"background:var(--s1)\"></i>Raun ${{{js.act_short}}}</span><b>${m1(Y.raun_ebitda)}</b></div><div><span><i style=\"background:var(--gold-3)\"></i>Spá ${{{js.fc_short}}}</span><b>${m1(Y.spa_ebitda)}</b></div>`",
+"`<div><span><i style=\"background:var(--s1)\"></i>Actual ${{{js.act_short}}}</span><b>${m1(Y.raun_ebitda)}</b></div><div><span><i style=\"background:var(--gold-3)\"></i>Forecast ${{{js.fc_short}}}</span><b>${m1(Y.spa_ebitda)}</b></div>`"
+],
+[
+"`<div><span><i style=\"background:var(--warn)\"></i>Þar af einskipti í raun</span><b>${m1(ONE)}</b></div>`",
+"`<div><span><i style=\"background:var(--warn)\"></i>Of which one-off in actuals</span><b>${m1(ONE)}</b></div>`"
+],
+[
+"`${sg(p.breyting * 100)}% frá ${BF.date(p.fra)}`",
+"`${sg(p.breyting * 100)}% from ${BF.date(p.fra)}`"
+],
+[
+"`${chg(A.adfangaverd)} · yfirfærsla ${pct(A.yfirfaersla_efnis, 0)}`",
+"`${chg(A.adfangaverd)} · pass-through ${pct(A.yfirfaersla_efnis, 0)}`"
+],
+[
+"} · ${m1(F.fixed.laun)} m.kr./mán.`",
+"} · ISK ${m1(F.fixed.laun)}m/mo.`"
+],
+[
+"`${sg(F.g * 100)}% á mán., demping ${fmt(A.demping_leitni, 2)}`",
+"`${sg(F.g * 100)}% per mo., damping ${fmt(A.demping_leitni, 2)}`"
+],
+[
+"'Engin leitni: of fáir fullbókaðir mánuðir (einföld spá).'",
+"'No trend: too few fully posted months (simple forecast).'"
+],
+[
+"'Leitni metin úr sögunni, takmörkuð við ±1,5% á mán.'",
+"'Trend estimated from history, capped at ±1.5% per mo.'"
+],
+[
+"'Þekktar pantanir'",
+"'Known orders'"
+],
+[
+"'BC: sölupantanir'",
+"'BC: sales orders'"
+],
+[
+"`<p class=\"sub\">Bakprófun ekki gerð: hún þarf a.m.k. 8 fullbókaða mánuði (nú ${F.n ?? ACT.length}).</p>`",
+"`<p class=\"sub\">Backtest not run: it needs at least 8 fully posted months (currently ${F.n ?? ACT.length}).</p>`"
+],
+[
+"`${HAS_MAT ? `${MATL.cap} ${rr(matR)} og laun ${rr(wageR)}` : `Laun ${rr(wageR)}`} af tekjum eftir mánuðum. ${{{js.why1_tail}}}`",
+"`${HAS_MAT ? `${MATL.cap} ${rr(matR)} and payroll ${rr(wageR)}` : `Payroll ${rr(wageR)}`} of revenue by month. ${{{js.why1_tail}}}`"
+],
+[
+"'Stutt saga'",
+"'Short history'"
+],
+[
+"`Aðeins ${F.n} fullbókaðir mánuðir. Spáin er meðaltal síðustu þriggja mánaða án leitni og árstíða, og óvissubilið er víkkað.`",
+"`Only ${F.n} fully posted months. The forecast is an average of the last three months without trend or seasonality, and the uncertainty range is widened.`"
+],
+[
+"`${F.n} mán.`",
+"`${F.n} mo.`"
+],
+[
+"`${m1(ONE)} m.kr. á lykli ${{{js.oneoff_acc}}} er tekin úr tekjugrunni.`",
+"`ISK ${m1(ONE)}m on account ${{{js.oneoff_acc}}} is removed from the revenue base.`"
+],
+[
+"` Í bakprófuninni er hún dregin frá tekjum en ekki frá raun-EBITDA; leiðrétt fyrir henni er MAPE EBITDA um ${pct(mapeAdj, 0)}, ${mapeAdj > .25 ? 'enn yfir 25%' : 'innan 25%'}.`",
+"` In the backtest it is deducted from revenue but not from actual EBITDA; adjusted for it, MAPE EBITDA is about ${pct(mapeAdj, 0)}, ${mapeAdj > .25 ? 'still above 25%' : 'within 25%'}.`"
+],
+[
+"'<p class=\"sub\">Engir sérstakir óvissuþættir greindust í gögnunum.</p>'",
+"'<p class=\"sub\">No specific sources of uncertainty were found in the data.</p>'"
+],
+[
+"'%/mán.'",
+"'%/mo.'"
+],
+[
+"'grunnstig (meðaltal síðustu 3 mán.) × magn × verðskrá + þekktar pantanir'",
+"'base level (average of last 3 mo.) × volume × price list + known orders'"
+],
+[
+"'tekjur × ' + MATL.f + ' (6 mán.) × aðfangaverð'",
+"'revenue × ' + MATL.f + ' (6 mo.) × input prices'"
+],
+[
+"'Verkefnastaða og sala.'",
+"'Order book and sales.'"
+],
+[
+"'Sala og eftirspurn.'",
+"'Sales and demand.'"
+],
+[
+"' Forsenda: '",
+"' Assumption: '"
+],
+[
+"`<section class=\"card\"><div class=\"ch\"><h2>Spá ekki gerð: of fáir fullbókaðir mánuðir</h2><span class=\"sub\">${n} af a.m.k. 3</span></div>`",
+"`<section class=\"card\"><div class=\"ch\"><h2>Forecast not made: too few fully posted months</h2><span class=\"sub\">${n} of at least 3</span></div>`"
+],
+[
+"`<p>Spálíkanið þarf a.m.k. 3 fullbókaða mánuði fyrir einfalda spá og 6 fyrir fullt líkan með leitni og bakprófun. Nú ${n === 1 ? 'er 1 mánuður fullbókaður' : `eru ${n} mánuðir fullbókaðir`}, svo engin spá, óvissubil eða hermir er sýndur.</p>`",
+"`<p>The forecast model needs at least 3 fully posted months for a simple forecast and 6 for the full model with trend and backtest. Currently ${n === 1 ? '1 month is fully posted' : `${n} months are fully posted`}, so no forecast, uncertainty range or simulator is shown.</p>`"
+],
+[
+"`<p class=\"sub\">Raun ársins í fullbókuðum mánuðum: tekjur ${m1(Y.raun_tekjur)} m.kr., EBITDA ${m1(Y.raun_ebitda)} m.kr. Spáin verður gerð þegar fleiri mánuðir hafa verið gerðir upp í BC.</p></section>`",
+"`<p class=\"sub\">Actuals for the year in fully posted months: revenue ISK ${m1(Y.raun_tekjur)}m, EBITDA ISK ${m1(Y.raun_ebitda)}m. The forecast will be made once more months have been closed in BC.</p></section>`"
+],
+[
+"'Innkaupsverð, frá '",
+"'Purchase prices, from '"
+]
+]

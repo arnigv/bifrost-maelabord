@@ -9,7 +9,7 @@ Inntak (eitt eða fleiri):
 
 Formerki: tekjur sem jákvæð tala, kostnaður sem jákvæð tala. Fjárhæðir í kr.
 """
-import argparse, json, re, statistics
+import argparse, json, os, re, statistics, sys
 from collections import defaultdict
 
 CATS = ['tekjur', 'vorunotkun', 'laun', 'husnaedi', 'annar_rekstur', 'afskriftir', 'fjarmagn', 'oreglulegt', 'skattar']
@@ -19,28 +19,48 @@ LABEL = {'tekjur': 'Tekjur', 'vorunotkun': 'Vörunotkun og aðföng', 'laun': 'L
 
 RULES = [  # (flokkur, regex á nafn + undirflokk), fyrsta samsvörun ræður
     ('afskriftir', r'afskrift|depreciat'),
-    ('skattar', r'skattar ársins|tekjuskatt|income tax'),
+    ('skattar', r'skattar ársins|(?<!fjármagns)tekjuskatt|income tax'),
     ('fjarmagn', r'arðstekj|arður|arðgreiðsl|hlutdeild í afkomu|dividend|vaxta|vextir|vaxtakostn|gengis|fjármagnstekju|dráttarvext|interest|exchange'),
     ('oreglulegt', r'óreglul|aðrar tekjur og útgjöld'),
-    ('laun', r'laun|lífeyri|tryggingargjald|orlof|starfsm|dagpening|bifreiðahlunn|bifreiðastyrk|félagsgjöld|salar|payroll|wage'),
-    ('husnaedi', r'húsaleig|húsnæð|^hiti|hiti |rafmagn(?!.*rafbíl)|þrif|fasteignagj|leigukostn'),
-    ('vorunotkun', r'vörukaup|vöruinnkaup|orkukaup|kaup á |kostnaðarverð|innkaup|birgð|flutningskostn|flutningur|aðflutn|hráefni|efni|aðföng|framleiðslukostn|verkkostn|kostnað(ur|ar) verka|seldar vörur|cost of goods|purchase'),
+    ('laun', r'laun|lífeyri|tryggingargjald|orlof|starfsm|dagpening|bifreiðahlunn|bifreiðastyrk|félagsgjöld|salar|payroll|wage|employee|personnel|pension|social security|staff'),
+    ('husnaedi', r'húsaleig|húsnæð|^hiti|hiti |rafmagn(?!.*rafbíl)|þrif|fasteignagj|leigukostn|\brent\b|building|premises|electricity|heating|utilities|cleaning|property tax'),
+    ('vorunotkun', r'vörukaup|vöruinnkaup|orkukaup|kaup á |kostnaðarverð|innkaup|birgð|flutningskostn|flutningur|aðflutn|hráefni|efni|aðföng|framleiðslukostn|verkkostn|kostnað(ur|ar) verka|seldar vörur|cost of goods|purchase|cost of sales|materials|freight|cogs'),
     ('tekjur', r'^sala|sala |tekjur|veittur afsl|seld verk|sales|revenue|income'),
 ]
 
-def categorize(name, sub, total):
+# Flokkur lykils í BC (Account Category) er óháður tungumáli: notaður þegar heitið segir ekki til.
+BC_INCOME = ('income', '4')
+BC_COGS = ('cost of goods sold', '5')
+BC_EXPENSE = ('expense', '6')
+
+
+def categorize(name, sub, total, bccat=''):
     s = f'{name} | {sub}'.lower()
+    bc = (bccat or '').strip().lower()
     first = [r for r in RULES if r[0] in ('afskriftir', 'skattar', 'fjarmagn', 'oreglulegt')]
     rest = [r for r in RULES if r[0] not in ('afskriftir', 'skattar', 'fjarmagn', 'oreglulegt')]
     for cat, rx in first:
         if re.search(rx, s):
             return cat
-    # kreditstaða á rekstrarlykli = tekjur, nema mótfærslur á kostnað (fenginn afsláttur, mótreikningar, leiðréttingar)
-    if total < 0 and not re.search(r'fengin|mótreikn|leiðrétt|endurgreidd|afsláttur af (vöru)?kaup', s):
+    # Sala/leiðréttingar sölu eru tekjur óháð formerki
+    if re.search(r'sölu verka|sala verka|seld verk|leiðrétting sölu|mótreikningur sölu', s):
+        return 'tekjur'
+    # Heiti sem segir kostnaðarflokk ræður óháð formerki (t.d. bakfærð laun eða birgðaleiðrétting í kredit)
+    for cat, rx in rest:
+        if cat != 'tekjur' and re.search(rx, s):
+            return cat
+    # kreditstaða á óflokkuðum rekstrarlykli = tekjur, nema mótfærslur á kostnað
+    if total < 0 and bc not in BC_EXPENSE + BC_COGS and not re.search(r'fengin|mótreikn|leiðrétt|endurgreidd|afsláttur af (vöru)?kaup', s):
         return 'tekjur'
     for cat, rx in rest:
+        if cat == 'tekjur' and bc in BC_EXPENSE + BC_COGS:
+            continue   # kostnaðarlykill í BC getur ekki verið tekjur þótt heitið nefni sölu
         if re.search(rx, s):
             return cat
+    if bc in BC_COGS:
+        return 'vorunotkun'
+    if bc in BC_INCOME:
+        return 'tekjur'
     return 'annar_rekstur'
 
 def ym_of(rng):
@@ -61,9 +81,10 @@ def main():
     ap.add_argument('--env', default='')
     ap.add_argument('--asof', required=True, help='YYYY-MM-DD')
     ap.add_argument('--out', default='dataset.json')
+    ap.add_argument('--lang', choices=['is', 'en'], help='þvinga tungumál; annars greint af heitum lykla')
     a = ap.parse_args()
 
-    sub = {}
+    sub, bccat = {}, {}
     if a.accounts:
         acc = load(a.accounts)
         recs = acc['results'][0]['records'] if 'results' in acc else acc.get('records', acc)
@@ -71,6 +92,7 @@ def main():
             no = r['primaryKey']['No_'] if 'primaryKey' in r else r['no']
             f = r.get('fields', r)
             sub[no] = f.get('AccountSubcategoryDescript_', '') or ''
+            bccat[no] = str(f.get('AccountCategory', f.get('Account_Category', f.get('Account Category', ''))) or '')
 
     acct = {}  # no -> {name, months{ym:amount}}
     for p in a.pl:
@@ -91,7 +113,7 @@ def main():
     accounts = []
     for no, e in sorted(acct.items()):
         tot = sum(e['months'].values())
-        cat = categorize(e['name'], sub.get(no, ''), tot)
+        cat = categorize(e['name'], sub.get(no, ''), tot, bccat.get(no, ''))
         accounts.append({'no': no, 'name': e['name'], 'subcategory': sub.get(no, ''), 'cat': cat,
                          'months': {m: round(e['months'].get(m, 0.0), 2) for m in months if e['months'].get(m)}})
 
@@ -140,10 +162,13 @@ def main():
     # efnahagur: staða í lok mánaðar = upphafsstaða (bil "..") + uppsöfnuð hreyfing
     balance = None
     if a.bs:
-        BSR = [('fastafjarmunir', r'land|bygging|tækjab|tæki og|innrétt|bifreiðar$|^bifreiðar|uppsafnaðar afskr|fastafj|hugbúnaður \(eign'),
-               ('birgdir', r'birgð'), ('krofur', r'viðskiptam|kröfur|fyrirframgr'), ('handbaert_fe', r'banki|bankareikn|sjóður|handbært|veltureikn|sparireikn'),
-               ('eigid_fe', r'hlutafé|eigið fé|óráðstaf|varasjóð|lögbundinn'), ('langtimaskuldir', r'langtíma|skuldabréf'),
-               ('skammtimaskuldir', r'vsk|virðisauka|staðgreiðsl|ógreitt|ógreidd|lánardrott|kreditkort|skammtíma')]
+        # Íslensk og ensk heiti (CRONUS og staðlaðir undirflokkar BC: Cash, Receivables, Inventory, Fixed Assets …)
+        BSR = [('fastafjarmunir', r'land|bygging|tækjab|tæki og|innrétt|bifreiðar$|^bifreiðar|uppsafnaðar afskr|fastafj|hugbúnaður \(eign|fixed asset|equipment|machinery|vehicles|accum\w*\.? deprec|leasehold'),
+               ('birgdir', r'birgð|inventor|(?<!capital )\bstock\b|finished goods|raw material|\bwip\b'), ('krofur', r'viðskiptam|kröfur|fyrirframgr|receivable|customers|prepa'),
+               ('handbaert_fe', r'^(?!.*(lán|loan|langtíma|long.term|ógreit|orlof|starfsmanna|payable|owed)).*(banki|bankareikn|sjóður|handbært|veltureikn|sparireikn|\bcash\b|\bbank|petty|liquid)'),
+               ('eigid_fe', r'hlutafé|eigið fé|óráðstaf|varasjóð|lögbundinn|equity|share capital|capital stock|retained|reserve'),
+               ('langtimaskuldir', r'langtíma|skuldabréf|long.term|mortgage|bonds'),
+               ('skammtimaskuldir', r'vsk|virðisauka|staðgreiðsl|ógreitt|ógreidd|lánardrott|kreditkort|skammtíma|payable|vendors|\bvat\b|sales tax|accrued|current liabil|withholding')]
         bacct = {}
         for pth in a.bs:
             d = load(pth)
@@ -161,15 +186,20 @@ def main():
         balance = {'months': months, 'accounts': []}
         cats = defaultdict(lambda: [0.0] * len(months))
         for no, e in sorted(bacct.items()):
-            s = e['name'].lower(); cat = None
+            s = f"{e['name']} | {sub.get(no, '')}".lower(); cat = None
             for c, rx in BSR:
                 if re.search(rx, s): cat = c; break
             lvl = e['open'] + sum(v for m, v in e['mv'].items() if m < first)
             levels = []
             for m in months:
                 lvl += e['mv'].get(m, 0.0); levels.append(round(lvl, 2))
+            last_lvl = levels[-1] if levels else e['open']
             if cat is None:
-                cat = 'skammtimaskuldir' if (levels[-1] if levels else e['open']) < 0 else 'adrar_eignir'
+                cat = 'skammtimaskuldir' if last_lvl < 0 else 'adrar_eignir'
+            elif cat in ('langtimaskuldir', 'skammtimaskuldir') and last_lvl > 0 and re.search(r'skuldabréf|bonds|hlutabréf|shares', s):
+                cat = 'adrar_eignir'   # skuldabréf/hlutabréf í debetstöðu eru eign (verðbréfaeign), ekki skuld
+            elif cat == 'skammtimaskuldir' and last_lvl > 0 and re.search(r'kreditkort|debetkort|kortauppgj|greiðslukort|card', s):
+                cat = 'krofur'         # kortauppgjör í debetstöðu (verslun) er krafa á færsluhirði, ekki kortaskuld
             balance['accounts'].append({'no': no, 'name': e['name'], 'cat': cat, 'levels': levels})
             for i, v in enumerate(levels): cats[cat][i] += v
         # eigið fé fær uppsafnaða afkomu ársins (rekstrarreikningur ekki lokaður)
@@ -217,9 +247,26 @@ def main():
         'profile': load(a.profile) if a.profile else None,
         'balance': balance,
     }
+    # Tungumál grunngagna: íslensk lyklaheiti → 'is', annars 'en'. Mælaborðin opnast á þessu máli.
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'bifrost-maelabord', 'scripts'))
+    try:
+        import i18n as I
+        out['lang'] = a.lang or I.detect_lang({'a': [x['name'] for x in accounts], 'c': a.company})
+    except ImportError:
+        out['lang'] = a.lang or 'is'
+    n_moves = sum(len(x['months']) for x in accounts)
+    out['n_complete'] = len(cy)
+    if n_moves == 0:
+        out['empty'] = True
+        json.dump(out, open(a.out, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+        print(f'TÓMT: {a.company} hefur engar bókaðar hreyfingar á tímabilinu. Ekki smíða mælaborð; segðu notandanum frá því '
+              '(t.d. nýtt félag, rangt félag eða rangt umhverfi).')
+        raise SystemExit(2)
+    if len(cy) < 3:
+        print(f'AÐVÖRUN: aðeins {len(cy)} fullbókaðir mánuðir {year}. Mælaborðin sýna „ónóg gögn“ þar sem samanburð vantar; spá krefst 6 mánaða.')
     json.dump(out, open(a.out, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     y = out['ytd']
-    print(f"OK {a.company}: {len(accounts)} lyklar, {len(rows)} mánuðir, fullbókað {len(cy)} í {year}. "
+    print(f"OK {a.company} [{out['lang']}]: {len(accounts)} lyklar, {len(rows)} mánuðir, fullbókað {len(cy)} í {year}. "
           f"Tekjur {y['tekjur']/1e6:.1f} m, EBITDA {y['ebitda']/1e6:.1f} m. Ófullbókað: {[i['ym'] for i in out['incomplete']]}. Einskipti: {len(oneoffs)}.")
     unk = [x['no'] + ' ' + x['name'] for x in accounts if x['cat'] == 'annar_rekstur' and not x['subcategory']]
     if unk:

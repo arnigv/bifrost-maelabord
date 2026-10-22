@@ -15,7 +15,7 @@ Sterkasta „wow“-mælaborðið: það finnur krónur sem viðskiptavinurinn v
 2. Sæktu eftir þörf (sjá töflu í `bifrost-gogn`, kafla 6):
    - **Ef verk:** `Job`, `Job Task`, `Job Planning Line`; notkun og sala á verk sem samtölur (`Data.Totals.Get` á `Job Ledger Entry`, `groupBy` `Job No.`). Notkun á 0 kr.: sæktu aðeins færslur með `Total Price=CONST(0)` og `Entry Type=CONST(Usage)`.
    - **Alltaf:** `aging` fyrir viðskiptamenn (`as_of_date` = í dag), og opnar `Cust. Ledger Entry`.
-   - **Ef vörur:** sölufærslur í `Value Entry` (vara, magn, söluupphæð, afsláttur) síðustu 6 mánuði.
+   - **Ef vörur:** sölufærslur í `Value Entry` (vara, magn, söluupphæð, afsláttur) síðustu 6 mánuði. Samtölur fyrst: `Data.Totals.Get` á `Value Entry` (`Item Ledger Entry Type=CONST(Sale)`, `groupBy` `Item No.`) fyrir `Sales Amount (Actual)`, `Cost Amount (Actual)`, `Discount Amount`, `Invoiced Quantity`. Færslur aðeins fyrir frávikin: 0 kr. sölulínur (`Sales Invoice Line` með `Type=CONST(Item)` og `Amount=CONST(0)`) og línur með `Line Discount %` yfir viðmiði. Listaverð úr `Item` (`Unit Price`, `Unit Cost`) og `Price List Line` ef verðlistar eru notaðir.
    - Tekjur á viðskiptamann á mánuði síðustu 12 mánuði, til að finna rof: `Data.Totals.Get` á `Cust. Ledger Entry` (`groupBy` `Customer No.`), eitt kall á mánuð.
 
 ## 2. Athuganir
@@ -34,6 +34,17 @@ Reiknaðu hverja athugun, skráðu **fjárhæð án VSK**, **vissu** (Staðfest 
 | H | **Samkeyrsla við ytri kerfi** | Aðeins ef notandi hefur tengt annað kerfi (t.d. mæla, áskriftir): notkun þar sem enginn reikningur er í BC. | Eftir gögnum |
 
 Slepptu athugunum sem eiga ekki við og segðu það í *Aðferð* í fæti („Engin verk í BC, verkathuganir eiga ekki við“).
+
+**Félag án verka (verslun, heildsala).** A, C og G eiga ekki við (staða `Á ekki við`, niðurstaða „Engin verk í BC.“); `leakJobs`/`openJobs` = `null`. Athuganirnar á vörusölu:
+
+| # | Athugun á vörusölu | Hvernig | Vissa | `src.g` |
+|---|---|---|---|---|
+| B | **0 kr. sölulínur** | Reikningslínur á vöru (`Type=Item`) með upphæð 0 þar sem varan hefur listaverð > 0 í `Item`/`Price List Line`. Fjárhæð = magn × listaverð. Sleppa línum merktum gjöf/kynningu ef lýsing segir það. | Líklegt | `zero` |
+| E | **Afsláttur umfram venju** | `Line Discount %` á línu meira en 10 prósentustigum yfir miðgildi viðskiptavinar (eða vöruflokks). Fjárhæð = munur á móti venjulegum afslætti. | Athuga | `price` |
+| E | **Verð undir kostnaði eða verðskrá** | Einingarverð undir `Unit Cost` vörunnar, eða meira en 15% undir listaverði án skráðs afsláttar. Fjárhæð = munur. | Athuga | `price` |
+| F | **Rof í endurteknum reikningum** | Eins og að ofan (á líka við um áskriftir og fasta viðskiptavini heildsölu). Staðgreiðsluviðskiptavinum (`pos`) er sleppt. | Athuga | `rof` |
+
+Í mælaborðinu birtast þá síurnar *Allt · 0 kr. sölulínur · Verð og afslættir · Rof í reikningum*, dálkurinn Klst. fellur út, og hero tekjuleka telur upp þær athuganir sem eiga ekki við. *Sækjanlegt strax* = B (staðfest og líklegt); E og F eru *til athugunar*.
 
 **Tvítalning:** gjaldfallnar kröfur (D) eru *innheimta*, ekki leki. Sýndu þær sér og teldu þær ekki með í „sækjanlegt strax“ nema notandi biðji um það.
 

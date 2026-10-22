@@ -1,0 +1,470 @@
+[
+[
+">Heimild: fjárhagsfærslur (lyklar {{text.acc_range}}, {{text.period}} {{meta.year}}), lánardrottnabók, innkaupareikningar og samþykktarfærslur {{meta.company_gen}} í Business Central (Bifröst), sótt {{text.fetched}}. Aðeins lesið, ekkert skrifað í BC. Samþykkjendur og greiðslukort eru sýnd sem hlutverk og númer. {{text.incomplete_sentence}} Sparnaður er mat og þarf að staðfesta.<",
+">Source: G/L entries (accounts {{text.acc_range}}, {{text.period}} {{meta.year}}), supplier ledger, purchase invoices and approval entries of {{meta.company_gen}} in Business Central (Bifröst), retrieved {{text.fetched}}. Read only, nothing written to BC. Approvers and payment cards are shown as roles and numbers. {{text.incomplete_sentence}} Savings are estimates and need to be confirmed.<"
+],
+[
+"`<div class=\"prow\"><span class=\"av\">S${k.replace(/\\D/g, '') || ''}</span><div style=\"min-width:0\"><div class=\"nm\">${esc(k)}</div><div class=\"sub\">${v.n} reikningar</div><div class=\"bar\"><span style=\"width:${(100 * v.amt / A[0][1].amt).toFixed(1)}%\"></span></div></div><span class=\"n\">${fmt(100 * v.amt / TOT, 0)}%<small>af upphæð</small></span></div>`",
+"`<div class=\"prow\"><span class=\"av\">S${k.replace(/\\D/g, '') || ''}</span><div style=\"min-width:0\"><div class=\"nm\">${esc(k)}</div><div class=\"sub\">${v.n} invoices</div><div class=\"bar\"><span style=\"width:${(100 * v.amt / A[0][1].amt).toFixed(1)}%\"></span></div></div><span class=\"n\">${fmt(100 * v.amt / TOT, 0)}%<small>of amount</small></span></div>`"
+],
+[
+"`Reikningar ${{{js.year}}} með VSK: ${fmt(v.tot / 1e6)} m.kr.${v.open ? ` · opið ${fmt(v.open / 1e6, 2)} m` : ''}${v.od ? ` · gjaldfallið ${fmt(v.od / 1e6, 2)} m` : ''}${v.samt ? ` · í samþykkt ${fmt(v.samt / 1e6, 2)} m` : ''}`",
+"`Invoices ${{{js.year}}} incl. VAT: ISK ${fmt(v.tot / 1e6)}m${v.open ? ` · open ${fmt(v.open / 1e6, 2)}m` : ''}${v.od ? ` · overdue ${fmt(v.od / 1e6, 2)}m` : ''}${v.samt ? ` · awaiting approval ${fmt(v.samt / 1e6, 2)}m` : ''}`"
+],
+[
+"`Færslur ${{{js.period}}} ${{{js.year}}} · ${a.n} færslur · ${fmt(a.v / 1e6)} m.kr. án VSK${growing(a) && a.py8 ? ` · ${{{js.full_period}}} ${sg(100 * (a.v8 / a.py8 - 1), 0)}% á móti sama tíma ${{{js.py}}}` : ''}`",
+"`Entries ${{{js.period}}} ${{{js.year}}} · ${a.n} entries · ISK ${fmt(a.v / 1e6)}m excl. VAT${growing(a) && a.py8 ? ` · ${{{js.full_period}}} ${sg(100 * (a.v8 / a.py8 - 1), 0)}% versus the same period ${{{js.py}}}` : ''}`"
+],
+[
+"`<span>${r.length} af ${a.n} færslum sýndar${a.rest[0] ? ` · aðrar færslur (${a.rest[0]}): <b>${kr(a.rest[1])}</b>` : ''}</span><span>Samtals sýnt <b>${kr(sum(r, x => x.amt))}</b> kr.</span>`",
+"`<span>${r.length} of ${a.n} entries shown${a.rest[0] ? ` · other entries (${a.rest[0]}): <b>${kr(a.rest[1])}</b>` : ''}</span><span>Total shown <b>${kr(sum(r, x => x.amt))}</b> ISK</span>`"
+],
+[
+"`Innkaupareikningar sem bíða samþykkis. Stærsti einstaki reikningurinn (${big.vendor}) er á gjalddaga ${date(big.due)} og sá elsti hefur beðið í ${Math.max(...I.map(i => i.days))} daga.`",
+"`Purchase invoices awaiting approval. The largest single invoice (${big.vendor}) is due ${date(big.due)} and the oldest has waited ${Math.max(...I.map(i => i.days))} days.`"
+],
+[
+"`<span>${r.length} skjöl · kreditreikningar með mínus</span><span>Samtals <b>${kr(sum(r, x => x.amt))}</b> kr. · eftirstöðvar <b>${kr(sum(r, x => x.rem))}</b> kr.</span>`",
+"`<span>${r.length} documents · credit memos negative</span><span>Total <b>${kr(sum(r, x => x.amt))}</b> ISK · remaining <b>${kr(sum(r, x => x.rem))}</b> ISK</span>`"
+],
+[
+"`${DATA.accs.length} lyklar með ${sum(DATA.accs, a => a.n)} færslum. Upphæðir án VSK. Samtala lykla stemmir við fjárhag upp á krónu.`",
+"`${DATA.accs.length} accounts with ${sum(DATA.accs, a => a.n)} entries. Amounts excl. VAT. The account total agrees with the ledger to the króna.`"
+],
+[
+"'Allir reikningar fara í gegnum einn samþykkjanda. Varamaður í fjarveru minnkar hættu á töfum og dráttarvöxtum.'",
+"'All invoices go through a single approver. A deputy for absences reduces the risk of delays and late-payment interest.'"
+],
+[
+">Gjaldfallið og opið er úr lánardrottnabók. Reikningar sem bíða samþykkis eru taldir sér.<",
+">Overdue and open amounts are from the supplier ledger. Invoices awaiting approval are counted separately.<"
+],
+[
+"`<tr><td colspan=\"${C.length}\" class=\"sub\">Engin færsla passar við leitina.</td></tr>`",
+"`<tr><td colspan=\"${C.length}\" class=\"sub\">No entry matches the search.</td></tr>`"
+],
+[
+"`${{{js.incomplete_lead}}} (${Object.values(DATA.incomplete)[0]}) og sýndir daufir.`",
+"`${{{js.incomplete_lead}}} (${Object.values(DATA.incomplete)[0]}) and shown faded.`"
+],
+[
+"'<tr><td colspan=\"7\" class=\"sub\">Enginn reikningur passar við leitina.</td></tr>'",
+"'<tr><td colspan=\"7\" class=\"sub\">No invoice matches the search.</td></tr>'"
+],
+[
+">Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.<",
+">Prepared with the help of AI (Claude). Review before relying on the figures.<"
+],
+[
+"`<span class=\"delta eq\" style=\"color:var(--warn)\">á gjalddaga í vikunni</span>`",
+"`<span class=\"delta eq\" style=\"color:var(--warn)\">due this week</span>`"
+],
+[
+"=\"Rekstrarkostnaður á mánuði eftir flokki, {{text.period_long}} {{meta.year}}\"",
+"=\"Monthly operating costs by category, {{text.period_long}} {{meta.year}}\""
+],
+[
+"`${S.length} tækifæri · allt að ${mkr(t)} m.kr. á ári ef öll nást · mat`",
+"`${S.length} opportunities · up to ISK ${mkr(t)}m a year if all are achieved · estimate`"
+],
+[
+">reikningar {{meta.year}} með VSK · smelltu til að sjá reikninga<",
+">invoices {{meta.year}} incl. VAT · click to see invoices<"
+],
+[
+"`<span style=\"color:var(--dn)\">gjaldfallið ${mkr(v.od)} m</span>`",
+"`<span style=\"color:var(--dn)\">overdue ${mkr(v.od)}m</span>`"
+],
+[
+">{{text.period}} {{meta.year}} · smelltu á flokk, svo á lykil<",
+">{{text.period}} {{meta.year}} · click a category, then an account<"
+],
+[
+"`<span class=\"delta dn\">${i.overdue} d. yfir gjalddaga</span>`",
+"`<span class=\"delta dn\">${i.overdue} d. past due</span>`"
+],
+[
+"`tekjur ${sg(100 * DATA.revg, 0)}% á móti ${{{js.py}}}`",
+"`revenue ${sg(100 * DATA.revg, 0)}% versus ${{{js.py}}}`"
+],
+[
+"'<p class=\"sub\">Enginn birgir passar við leitina.</p>'",
+"'<p class=\"sub\">No supplier matches the search.</p>'"
+],
+[
+"' <span class=\"pill i\">utan rekstrarkostnaðar</span>'",
+"' <span class=\"pill i\">outside operating costs</span>'"
+],
+[
+">smelltu á birgi til að sjá alla reikninga hans<",
+">click a supplier to see all its invoices<"
+],
+[
+"=\"Upphæð reikninga í samþykkt eftir gjalddaga\"",
+"=\"Amount of invoices awaiting approval by due date\""
+],
+[
+"' <span class=\"pill i\">tengdur aðili</span>'",
+"' <span class=\"pill i\">related party</span>'"
+],
+[
+"'Engir innkaupareikningar bíða samþykkis.'",
+"'No purchase invoices are awaiting approval.'"
+],
+[
+"` ${c.dataset.label}: ${fmt(c.raw)} m.kr.`",
+"` ${c.dataset.label}: ISK ${fmt(c.raw)}m`"
+],
+[
+">{{meta.company}} · staða {{meta.as_of}}<",
+">{{meta.company}} · as of {{meta.as_of}}<"
+],
+[
+"'<span class=\"pill h\">gjaldfallið</span>'",
+"'<span class=\"pill h\">overdue</span>'"
+],
+[
+">gjalddagar reikninga í samþykkt, m.kr.<",
+">due dates of invoices awaiting approval, ISK m<"
+],
+[
+"'<span class=\"pill m\">í samþykkt</span>'",
+"'<span class=\"pill m\">awaiting approval</span>'"
+],
+[
+"`á gjalddaga í vikunni (${WK.length})`",
+"`due this week (${WK.length})`"
+],
+[
+"`<span class=\"delta up\">í lagi</span>`",
+"`<span class=\"delta up\">ok</span>`"
+],
+[
+"`${DATA.cats[a.cat]} · lykill ${a.no}`",
+"`${DATA.cats[a.cat]} · account ${a.no}`"
+],
+[
+"'<span class=\"pill i\">inneign</span>'",
+"'<span class=\"pill i\">credit</span>'"
+],
+[
+"'<span class=\"pill l\">greitt</span>'",
+"'<span class=\"pill l\">paid</span>'"
+],
+[
+"`komnir á gjalddaga (${OD.length})`",
+"`past due (${OD.length})`"
+],
+[
+"'<span class=\"sub\">Bókað á:</span>'",
+"'<span class=\"sub\">Posted to:</span>'"
+],
+[
+"`þar af gjaldfallið ${mkr(vOd)} m`",
+"`of which overdue ${mkr(vOd)}m`"
+],
+[
+"'<span class=\"pill i\">opið</span>'",
+"'<span class=\"pill i\">open</span>'"
+],
+[
+">Kostnaður á mánuði eftir flokki<",
+">Monthly costs by category<"
+],
+[
+"'Liðir sem vaxa hraðar en tekjur'",
+"'Lines growing faster than revenue'"
+],
+[
+"'<span class=\"sub\">dagbók</span>'",
+"'<span class=\"sub\">journal</span>'"
+],
+[
+"=\"Leita í reikningum í samþykkt\"",
+"=\"Search invoices awaiting approval\""
+],
+[
+"=\"Opna reikninga ${esc(v.name)}\"",
+"=\"Open invoices ${esc(v.name)}\""
+],
+[
+">Bíður samþykkis · kr. með VSK<",
+">Awaiting approval · ISK incl. VAT<"
+],
+[
+"=\"Opna færslur á lykli ${a.no}\"",
+"=\"Open entries on account ${a.no}\""
+],
+[
+"'Fyrirtækjakort · kortayfirlit'",
+"'Company card · card statement'"
+],
+[
+"i[6] === 'bok').length} reikn.`",
+"i[6] === 'bok').length} inv.`"
+],
+[
+"`Sýna alla ${L.length} birgja`",
+"`Show all ${L.length} suppliers`"
+],
+[
+">Allir reikningar í samþykkt<",
+">All invoices awaiting approval<"
+],
+[
+"`í samþykkt ${mkr(v.samt)} m`",
+"`awaiting approval ${mkr(v.samt)}m`"
+],
+[
+"=\"Leita að skjali eða birgi\"",
+"=\"Search for a document or supplier\""
+],
+[
+">Birgjar og kostnaðarliðir<",
+">Suppliers and cost lines<"
+],
+[
+">í bið eftir samþykkjanda<",
+">waiting for an approver<"
+],
+[
+"'Opnar skuldir við birgja'",
+"'Open payables to suppliers'"
+],
+[
+"`opið ${mkr(v.open)} m`",
+"`open ${mkr(v.open)}m`"
+],
+[
+">Kostnaður og innkaup<",
+">Costs and purchasing<"
+],
+[
+"'fullbókaðir mánuðir'",
+"'closed months'"
+],
+[
+">Tengt BC · Bifröst<",
+">Connected to BC · Bifröst<"
+],
+[
+">Samþykkt reikninga<",
+">Invoice approval<"
+],
+[
+">Hvenær á að greiða<",
+">When to pay<"
+],
+[
+">Komnir á gjalddaga<",
+">Past due<"
+],
+[
+"'Rekstrarkostnaður '",
+"'Operating costs '"
+],
+[
+">Sparnaðartækifæri<",
+">Savings opportunities<"
+],
+[
+">Flokkur / lykill<",
+">Category / account<"
+],
+[
+"=\"Leita í færslum\"",
+"=\"Search entries\""
+],
+[
+"'reikningar í bið'",
+"'invoices waiting'"
+],
+[
+"'Birgir / uppruni'",
+"'Supplier / source'"
+],
+[
+"' · tengdur aðili'",
+"' · related party'"
+],
+[
+"=\"Leita að birgi\"",
+"=\"Search for a supplier\""
+],
+[
+">Í þessari viku<",
+">This week<"
+],
+[
+">Kostnaðarliðir<",
+">Cost lines<"
+],
+[
+"'Yfir gjalddaga'",
+"'Past due'"
+],
+[
+">Samþykkjandi<",
+">Approver<"
+],
+[
+"=\"Leiðarstika\"",
+"=\"Breadcrumb\""
+],
+[
+"'Eftirstöðvar'",
+"'Remaining'"
+],
+[
+">Hjá hverjum<",
+">With whom<"
+],
+[
+">Dagar í bið<",
+">Days waiting<"
+],
+[
+"'gjaldfallið'",
+"'overdue'"
+],
+[
+"> mælaborða<",
+"> dashboards<"
+],
+[
+"'Af tekjum '",
+"'Of revenue '"
+],
+[
+"'Sýna færri'",
+"'Show fewer'"
+],
+[
+"'Þessi vika'",
+"'This week'"
+],
+[
+"'Næsta vika'",
+"'Next week'"
+],
+[
+"'Fylgiskjal'",
+"'Document'"
+],
+[
+"'í samþykkt'",
+"'awaiting approval'"
+],
+[
+">← Miðstöð<",
+">← Hub<"
+],
+[
+">Gjalddagi<",
+">Due date<"
+],
+[
+"'Gjalddagi'",
+"'Due date'"
+],
+[
+">Hlutdeild<",
+">Share<"
+],
+[
+"'% á móti '",
+"'% versus '"
+],
+[
+"'nýr liður'",
+"'new line'"
+],
+[
+"'meðalbið'",
+"'average wait'"
+],
+[
+">Færslur<",
+">Entries<"
+],
+[
+">Birgjar<",
+">Suppliers<"
+],
+[
+"=\"Flipar\"",
+"=\"Tabs\""
+],
+[
+"'Fjárhæð'",
+"'Amount'"
+],
+[
+"'Birgir '",
+"'Supplier '"
+],
+[
+">Staða <",
+">As of <"
+],
+[
+">Birgir<",
+">Supplier<"
+],
+[
+">Upphæð<",
+">Amount<"
+],
+[
+"'lyklar'",
+"'accounts'"
+],
+[
+"'Lýsing'",
+"'Description'"
+],
+[
+"'greitt'",
+"'paid'"
+],
+[
+">Allir<",
+">All<"
+],
+[
+">Skjal<",
+">Document<"
+],
+[
+"'Skjal'",
+"'Document'"
+],
+[
+">Staða<",
+">Status<"
+],
+[
+"'Staða'",
+"'Status'"
+],
+[
+"=\"Loka\"",
+"=\"Close\""
+],
+[
+"'Síðar'",
+"'Later'"
+],
+[
+"'Dags.'",
+"'Date'"
+],
+[
+"=\"Sía\"",
+"=\"Filter\""
+],
+[
+"'opið'",
+"'open'"
+]
+]

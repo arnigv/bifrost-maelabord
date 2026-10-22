@@ -1,8 +1,12 @@
 # Framlegð og verk: gagnalýsing (`DATA`)
 
-Sniðmát: `template.html`. Smíða: `render.py --dashboard framlegd --data framlegd.json --out build/framlegd.html`. Allir lyklar í `example.json` eru **skylda**. Fjárhæðir í **krónum**, tekjur og kostnaður **jákvæð**. Lesköll eingöngu (`bifrost-gogn` kafli 0).
+Sniðmát: `template.html`. Smíða: `render.py --dashboard framlegd --data framlegd.json --out build/framlegd.html`. Allir lyklar í `example.json` eru **skylda**; lyklarnir í kaflanum *Valfrjálst* hér að neðan eru það ekki (vanti þá er viðkomandi hluti falinn). Fjárhæðir í **krónum**, tekjur og kostnaður **jákvæð**. Lesköll eingöngu (`bifrost-gogn` kafli 0).
 
 **Ekkert er harðkóðað:** verk, hópar smáverka, verk með föstu gjaldi, aðfangalyklar í brú og athugasemdalistar koma úr `js` (sjá neðst). Verk eða lykill í `js` sem er ekki til í gögnunum er sleppt, og tómir listar fela viðkomandi spjald í stað þess að síðan stöðvist.
+
+## Flipar eftir gögnum
+
+Mest fjórir flipar. **Yfirsýn** (með spjaldinu *Gæði gagna* neðst), **Verk** (aðeins ef `jobs` er ekki tómt), **Vörur og ABC**, **Herming**. Án verka fellur flipinn Verk brott, ásamt lykilmælinum *Samningsvirði opinna verka* (í staðinn *Birgðir á kostnaðarverði* ef birgðir eru til, annars þrír mælar), spjaldinu *Staða verka*, ABC-víddinni *Verk* og atriðum í `js.risks`/`js.quality` sem eru merkt `"job"` (sjá `js`). Textar í hermi um vinnu og verk breytast í sölu og magn þegar hvorki eru verk né forðar.
 
 ## Fjárhagur (flipi Yfirsýn og Herming)
 
@@ -51,6 +55,25 @@ Sniðmát: `template.html`. Smíða: `render.py --dashboard framlegd --data fram
 |---|---|---|---|
 | `cust[]` | `{no, name, sales, jobs, job_contract, job_margin}` | Reikningsfærð sala ársins á viðskiptavin (lækkandi), verk hans, samningsvirði og framlegð þeirra | Sala (SGM, 62) á `Customer` með Date Filter, eða `Data.Totals.Get` á `Cust. Ledger Entry` |
 | `items[]` | `{no, name, price, cost, inv}` | Vörur: einingarverð, kostnaðarverð, birgðir (magn) | `Item` (Unit Price, Unit Cost, Birgðir 68) |
+
+## Valfrjálst: vörusala, vöruflokkar, staðsetningar, birgðir og afsláttur
+
+Fyrir verslun og heildsölu (eða hvaða félag sem selur vörur). Ekki í `example.json` (DT selur engar vörur með söluverði). Fjárhæðir í krónum, jákvæðar, fyrir **sama tímabil og fullbókuðu mánuðirnir** (`text.period`) svo þær stemmi við `months`. Ef einhver vara hefur `sales` er vörusýnin notuð: ABC eftir sölu (sjálfgefin vídd), framlegð eftir vöruflokki (eða söluhæstu vörum), vörutafla með raunsölu og hægfara vörur.
+
+| Lykill | Tegund | Merking | Úr BC |
+|---|---|---|---|
+| `items[].sales` | tala, kr. | Sala vöru á tímabilinu | `Value Entry`: summa `Sales Amount (Actual)`, groupBy `Item No.`, `Item Ledger Entry Type`=Sale |
+| `items[].cogs` | tala, kr. | Kostnaðarverð seldra vara (jákvætt) | sama kall: −summa `Cost Amount (Actual)` |
+| `items[].group` | texti | Vöruflokkur (kóði, sama og `item_groups[].code`) | `Item` → `Item Category Code` |
+| `items[].stock_value` | tala, kr. | Birgðavirði vöru á stöðudegi; vanti það er notað `inv × cost` | `Value Entry`: summa `Cost Amount (Actual)` + `Cost Amount (Expected)` til stöðudags, groupBy `Item No.` |
+| `items[].last_sale` | `ÁÁÁÁ-MM-DD` | Síðasti söludagur (hægfara vörur: 90 og 180 dagar). Vanti það telst vara með birgðir og enga sölu á tímabilinu hægfara | `Item Ledger Entry` (Sale), hæsti `Posting Date` á vöru; aðeins fyrir vörur með birgðir |
+| `item_totals` | `{sales, cogs, n}` | Heild **allra** vara og fjöldi vara með sölu, ef `items` nær aðeins yfir söluhæstu vörurnar. ABC-hlutdeild reiknast af þessari heild; afgangurinn birtist sem „Annað (n)“ | `Data.Totals.Get` á `Value Entry` án groupBy, og fjöldi hópa úr groupBy-kallinu |
+| `item_groups[]` | `{code, name, sales, cogs, stock_value?}` | Sala, kostnaðarverð seldra vara og birgðir á vöruflokk (heild allra vara í flokki, ekki aðeins þeirra sem eru í `items`) | Samtölur á vöru úr `Value Entry` lagðar saman eftir `Item."Item Category Code"`; heiti úr `Item Category` |
+| `stores[]` | `{code, name, sales, cogs, stock_value?}` | Sala og framlegð á staðsetningu (verslun, birgðageymslu eða vídd). Spjaldið *Framlegð eftir staðsetningu* birtist ef listinn er ekki tómur | `Value Entry` groupBy `Location Code` (eða `Global Dimension 1/2 Code` ef verslanir eru vídd); `stock_value` eins og fyrir vöru |
+| `birgdir` | tala, kr. | Birgðir í efnahag á stöðudegi (lykilmælir og birgðadagar þegar engin verk eru). Vanti það er summa birgðavirðis vara notuð | Staða birgðalykla í `G/L Account` (flokkur birgðir) á stöðudegi |
+| `disc` | tala, kr. | Veittur söluafsláttur á tímabilinu. Sýnt við afsláttarstiku í hermi („veittur afsláttur …“ eða, ef 0, „enginn afsláttur skráður“); vanti það er aðeins „prósentustig af verði“ sýnt | −summa `Discount Amount` á `Value Entry` (Sale), eða afsláttarlyklar fjárhags |
+
+Birgðadagar = birgðir ÷ vörunotkun fullbókaðra mánaða × fjöldi mánaða × 365/12.
 ## Reglur um `meta`, `text` og `js`
 
 - **Hvar gildin lenda.** `meta.*` og `text.*` fara aðeins í HTML (HTML-sloppin). `html.*` fer óbreytt í HTML (aðeins `<b>` og `<a href="x.html">`). `js.*` fer inn í JavaScript sem JSON-bókstafur (`json.dumps`), svo þar má vera hvaða texti sem er, líka gæsalappir, `'`, `` ` `` og `\`; tölur, listar og hlutir eru settir inn sem slíkir (ekki sem texti). Textar í `js` eru birtir sem HTML (innerHTML) þar sem þeir lenda í töflum og spjöldum: aðeins `<b>` og `<a href="x.html">`. Lykill sem er bæði í `meta` og `js` (t.d. `year`, `py`) á að hafa sama gildi í báðum. Valfrjálsir listar mega vera tómir (`[]`): þá er hlutinn falinn eða sýnir „Á ekki við“/„engin“ í stað villu.
@@ -85,10 +108,21 @@ Sniðmát: `template.html`. Smíða: `render.py --dashboard framlegd --data fram
 | `js.risks` | `[["h", "!", "titill", "lýsing", "41,0 m"], …]` | Helstu áhættur (Yfirsýn): `[alvarleiki h/m/l, tákn, titill, lýsing, fjárhæð eða ""]`; `[]` → spjaldið falið |
 | `js.job_flags` | sama snið | Þarf athygli (Verk) |
 | `js.item_flags` | sama snið | Þarf athygli (Vörur) |
-| `js.quality` | sama snið | Gæði gagna; `[]` → „Engar athugasemdir um gæði gagna.“ |
-| `js.ins_tail` | Aðföng sem hlutfall af tekjum eru 5,1 pp lægri … | lokasetning innsýnar á Yfirsýn |
+| `js.quality` | sama snið | Gæði gagna (spjald neðst á Yfirsýn); `[]` → „Engar athugasemdir um gæði gagna.“ |
+| (sjötta stak, valfrjálst) | `"job"` | Í `js.risks` og `js.quality`: atriði sem á aðeins við verk, t.d. `["m", "i", "titill", "lýsing", "", "job"]`. Falið ef `jobs` er tómt |
+| `js.ins_tail` | Aðföng sem hlutfall af tekjum eru 5,1 pp lægri … | lokasetning innsýnar á Yfirsýn (án verka: eina setningin, á eftir ABC-setningu vara ef vörusala er til) |
 | `js.abc_cust_mid` | Svarfaðarver eitt er | á undan hlutdeild stærsta viðskiptavinar (%) |
 | `js.abc_job_tail` | V-2601 og S-2601 bera reksturinn; tíu D-verk eru samtals | á eftir ABC verka; hlutdeild fyrsta hóps (`job_groups`) er skeytt aftan við ef hópur er til |
 | `js.v1_note`, `js.dept_note`, `js.res_note_tail` | S-2601 sem ársáætlun … | skýringar á lykilmæli verka, deildum og forðum |
 
 **Reiknað úr gögnum:** fjöldi mánaða og ársuppfærsla í hermi (úr fullbókuðum mánuðum), tímalína (ár úr `js.year`, dagurinn í dag úr `as_of`), lágmark á ás framlegðarhlutfalls (úr gögnum, ekki fast 40%), „talin saman“-texti hópa.
+
+## Tungumál (`lang`, `i18n`)
+
+| Lykill | Dæmi | Skýring |
+|---|---|---|
+| `lang` | `"is"` | tungumál grunngagna (úr `dataset.json`). Ræður hvaða mál opnast fyrst. Vanti það er það greint úr heitum í gögnunum. |
+| `i18n.en` (eða `i18n.is`) | `{"meta": {...}, "text": {...}, "html": {...}, "js": {...}, "names": {...}}` | yfirlag fyrir hitt málið. Sömu lyklar og að ofan, aðeins þeir sem breytast. Dagsetningar á ensku `17 Oct 2026`, tölur `1,234.5`. |
+| `i18n.<lang>.names` | `{"Áætlun 2026": "Budget 2026"}` | þýðir heila strengi hvar sem er í gögnunum (heiti lykla utan staðaltöflu, áætlana, flokka, stöðu). |
+
+Sjá `example.json` (yfirlagið `i18n.en`) og `bifrost-maelabord/SKILL.md`, kaflann *Tungumál*.

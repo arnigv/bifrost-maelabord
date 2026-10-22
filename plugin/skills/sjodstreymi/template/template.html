@@ -127,6 +127,7 @@ td.mono{font-family:var(--f-mono);font-size:.8rem;white-space:nowrap}
     <section class="card">
       <div class="ch"><h2>Stærstu skuldarar</h2><span class="sub">gjaldfallið · elsti gjalddagi · töf greiddra reikninga</span></div>
       <div class="plist" id="debtors"></div>
+      <p class="note" id="debtors-note" hidden></p>
     </section>
   </section>
 
@@ -149,6 +150,10 @@ const SJ = (() => {
   const PROB = [0.9, 0.7, 0.5, 0.25, 0.25];           // 0–30, 31–60, 61–90, 91–120, >120 d.
   const SPREAD = [[0, 3], [1, 5], [2, 8], [3, 12], [3, 12]]; // vikur sem innheimta dreifist á
   const N = 13;
+  /* Bankalínur: fyrirtækjakort eru skuld; kortauppgjör (krafa á færsluhirði) er fé á leiðinni inn, ekki handbært fé */
+  const CARD_TEG = ['Grei\u00f0slukort', 'Payment cards'], ACQ_TEG = ['Kortauppgj\u00f6r', 'Card settlement'];  /* gildi `teg` úr gögnum (óþýdd) */
+  const isAcq = b => b.kind === 'acquirer' || ACQ_TEG.includes(b.teg);
+  const isCard = b => !isAcq(b) && (b.kind === 'card' || CARD_TEG.includes(b.teg));
   function weeks(D) { return Array.from({ length: N }, (_, i) => { const s = add(D.start, 7 * i); return { i, from: s, to: add(s, 6), wk: isoWeek(s) }; }); }
   function forecast(D, p) {
     const W = weeks(D).map(w => ({ ...w, inn: 0, laun: 0, lan: 0, ann: 0, innC: {}, outC: { laun: 0, skattar: 0, vsk: 0, lanardr: 0, osamth: 0, lan: 0 } }));
@@ -162,9 +167,11 @@ const SJ = (() => {
       if (cust) w.innC[cust] = (w.innC[cust] || 0) + amt;
     };
     const sh = Math.round(p.speed / 7), f = p.od / 100;
-    const top = D.custs.map(c => ({ no: c.no, od: c.b.slice(1).reduce((a, b) => a + b, 0) })).sort((a, b) => b.od - a.od).slice(0, p.topN || 0).map(c => c.no);
+    const top = D.custs.filter(c => !c.pos).map(c => ({ no: c.no, od: c.b.slice(1).reduce((a, b) => a + b, 0) })).sort((a, b) => b.od - a.od).slice(0, p.topN || 0).map(c => c.no);
     /* innborganir: ógjaldfallnar kröfur á gjalddaga + sögulega töf */
     D.nyd.forEach(([no, due, amt]) => { const c = D.custs.find(x => x.no === no); put(add(due, (c && c.delay > 0 ? c.delay : 0) + p.speed), amt * Math.min(1, 0.9 * f), 'inn', null, no); });
+    /* kortauppgjör: staða hjá færsluhirði berst inn eftir lag_days (sjálfgefið 2 d.) */
+    (D.banks || []).forEach(b => { if (isAcq(b) && b.bal > 0) put(add(D.today, b.lag_days == null ? 2 : +b.lag_days), b.bal, 'inn', null, 'kort'); });
     /* gjaldfallnar kröfur eftir aldri */
     D.custs.forEach(c => c.b.slice(1).forEach((v, j) => {
       if (!v) return;
@@ -191,7 +198,7 @@ const SJ = (() => {
     const low = W.reduce((m, w) => (w.end < m.end ? w : m), W[0]);
     return { W, low, end: bal, beyondIn, beyondOut, top };
   }
-  return { forecast, weeks, add, isoWeek, PROB };
+  return { forecast, weeks, add, isoWeek, PROB, isAcq, isCard };
 })();
 if (typeof module !== 'undefined') module.exports = SJ;
 
@@ -214,6 +221,9 @@ const VEN_OD = DATA.vend_open.filter(v => v.due < DATA.today).reduce((s, v) => s
 const INV_OD = DATA.inv.filter(v => v.due < DATA.today);
 const INV_OD_SUM = INV_OD.reduce((s, v) => s + v.amt, 0);
 const INV_TOT = DATA.inv.reduce((s, v) => s + v.amt, 0);
+const ACQ_B = DATA.banks.filter(SJ.isAcq), N_ACQ = ACQ_B.length, ACQ = ACQ_B.reduce((s, b) => s + b.bal, 0);
+const ACQ_LBL = 'Kortauppgjör';
+const POS_C = DATA.custs.filter(c => c.pos), POS_SUM = POS_C.reduce((s, c) => s + c.b.reduce((a, v) => a + v, 0), 0);
 const wkLabel = w => `v. ${w.wk}`;
 const run = q => SJ.forecast(DATA, q);
 const params = () => ({ ...P, unb: $('unb').checked, inv: $('incinv').checked, topN: 0 });
@@ -225,16 +235,17 @@ document.addEventListener('click', e => { const a = e.target.closest && e.target
 /* ---------- STAÐA Í BÖNKUM ---------- */
 function bank() {
   const Bk = DATA.banks, sumf = f => Bk.filter(f).reduce((s, b) => s + b.bal, 0);
-  const bk = sumf(b => b.teg !== 'Greiðslukort'), kort = sumf(b => b.teg === 'Greiðslukort'), G = DATA.banks_gl;
-  const ok = Math.abs(bk - G.bankar) < 1 && Math.abs(kort - G.kort) < 1;
+  const bk = sumf(b => !SJ.isCard(b) && !SJ.isAcq(b)), kort = sumf(SJ.isCard), nCard = Bk.filter(SJ.isCard).length, G = DATA.banks_gl;
+  const ok = Math.abs(bk - G.bankar) < 1 && Math.abs(kort - (G.kort || 0)) < 1 && (G.uppgjor == null || Math.abs(ACQ - G.uppgjor) < 1);
   const H = DATA.cash_hist, mx = Math.max(...H), mi = H.indexOf(mx);
   $('b-big').innerHTML = `${m(bk)}<small>m.kr.</small>`;
   $('b-txt').textContent = `${{{js.bank_txt}}}`;
-  $('b-row').innerHTML = [[m(kort) + ' m', 'ógreidd kortaskuld'], [sg((bk - mx) / 1e6) + ' m', `frá hámarki í ${MON[+DATA.months[mi].slice(5) - 1]}`], [({{js.days_since_rec}} + ' d.'), 'frá síðustu afstemmingu'], [ok ? 'Stemmir' : 'Munur ' + m(bk - G.bankar), ('bankar = fjárhagur (' + {{js.bank_gl_accounts}} + ')')]]
+  $('b-row').innerHTML = [(nCard || !N_ACQ ? [m(kort) + ' m', 'ógreidd kortaskuld'] : [m(ACQ) + ' m', 'kortauppgjör á leiðinni']), [sg((bk - mx) / 1e6) + ' m', `frá hámarki í ${MON[+DATA.months[mi].slice(5) - 1]}`], [({{js.days_since_rec}} + ' d.'), 'frá síðustu afstemmingu'], [ok ? 'Stemmir' : 'Munur ' + m(bk - G.bankar), ('bankar = fjárhagur (' + {{js.bank_gl_accounts}} + ')')]]
     .map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join('');
   $('bank-sub').textContent = `${Bk.length} reikningar · staða í BC ${date(DATA.today)}`;
   $('bank-t').innerHTML = `<thead><tr><th>Reikningur</th><th>Tegund</th><th class="n">Staða í BC</th><th>Síðasta afstemming</th><th class="n">Óafstemmt þá</th><th>Staða</th></tr></thead><tbody>` +
-    Bk.map(b => `<tr><td>${b.name}</td><td class="sub">${b.teg}</td><td class="n">${m(b.bal)}</td><td>${date(b.stmt_date)} · yfirlit ${b.stmt_no}</td><td class="n">${b.outst ? m(b.outst) : '–'}</td><td>${{{js.unrec_period}} ? `<span class="pill m">${{{js.unrec_period}}} óafstemmt</span>` : '<span class="pill l">Afstemmt</span>'}</td></tr>`).join('') +
+    Bk.map(b => `<tr><td>${b.name}</td><td class="sub">${SJ.isAcq(b) ? ACQ_LBL : b.teg}</td><td class="n">${m(b.bal)}</td><td>${date(b.stmt_date)} · yfirlit ${b.stmt_no}</td><td class="n">${b.outst ? m(b.outst) : '–'}</td><td>${{{js.unrec_period}} ? `<span class="pill m">${{{js.unrec_period}}} óafstemmt</span>` : '<span class="pill l">Afstemmt</span>'}</td></tr>`).join('') +
+    (N_ACQ ? `<tr class="sum"><td>Kortauppgjör á leiðinni</td><td class="sub">krafa á færsluhirði, ekki í handbæru fé</td><td class="n">${m(ACQ)}</td><td></td><td></td><td></td></tr>` : '') +
     `<tr class="sum"><td>Nettó</td><td class="sub">innstæður − kort</td><td class="n">${m(bk + kort)}</td><td></td><td class="n">${m(Bk.reduce((s, b) => s + b.outst, 0))}</td><td></td></tr></tbody>`;
   $('bank-note').textContent = {{js.bank_note}};
   $('hist-note').textContent = `Lok hvers mánaðar skv. bankabók í BC; ${{{js.cur_month}}} er staða ${date(DATA.today)}. ${{{js.hist_inc}}}`;
@@ -246,18 +257,18 @@ function spa() {
   const osamth = R.W.reduce((s, w) => s + w.outC.osamth, 0);
   $('h-scen').textContent = SCEN[scen] && matches(scen) ? SCEN[scen].label : 'Eigin forsendur';
   $('h-big').innerHTML = `${m(low.end)}<small>m.kr.</small>`;
-  $('h-txt').textContent = `Sjóður fer lægst í viku ${low.wk} (${date(low.from)}–${date(low.to)}). Spáin tekur með innheimtu krafna, nýja sölu, laun, skatta, VSK, lánardrottna og reikninga sem bíða samþykkis. Breyttu forsendum hér að neðan.`;
+  $('h-txt').textContent = `Sjóður fer lægst í viku ${low.wk} (${date(low.from)}–${date(low.to)}). Spáin tekur með innheimtu krafna${N_ACQ ? ', kortauppgjör á leiðinni' : ''}, nýja sölu, laun, skatta, VSK, lánardrottna og reikninga sem bíða samþykkis. Breyttu forsendum hér að neðan.`;
   $('h-row').innerHTML = [[m(R.end) + ' m', ('staða ' + {{js.fc_to}})], [`${under} af 13`, `vikur undir ${m(min, 0)} m lágmarki`], [m(UNB + VEN_OD + INV_OD_SUM) + ' m', 'gjaldfallið ógreitt'], [m(osamth) + ' m', 'reikningar í samþykkt í spánni']]
     .map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join('');
   const lift = q => run({ ...params(), ...q }).low.end - low.end;
   const t3 = run({ ...params(), topN: 3 });
   const acts = [
-    ['h', 'Innheimta hjá þremur stærstu skuldurunum', `${t3.top.map(n => (NAME[n] || n).replace(' ehf.', '')).join(', ')}: ${m(t3.top.reduce((s, n) => s + odSum(DATA.custs.find(c => c.no === n)), 0))} m.kr. gjaldfallið. Símtal og greiðsluáætlun í þessari viku.`, lift({ topN: 3 })],
-    ['h', {{js.act2_title}}, {{js.act2_text}}, null],
-    ['m', 'Semja um 30 daga greiðslufrest við lánardrottna', {{js.act3_text}}, lift({ defer: 30 })],
-    ['m', 'Samþykkja reikninga á réttum tíma', `${INV_OD.length} reikningar (${m(INV_OD_SUM)} m.kr.) eru komnir fram yfir gjalddaga án samþykkis.`, null],
-  ];
-  $('first').innerHTML = acts.map(([s, t, d, v], i) => `<div class="d-item"><span class="d-ico ${s}">${i + 1}</span><div><b>${t}</b><p>${d}</p></div><span class="amt">${v ? sg(v / 1e6) + ' m' : '–'}</span></div>`).join('');
+    t3.top.length ? ['h', t3.top.length === 3 ? 'Innheimta hjá þremur stærstu skuldurunum' : 'Innheimta hjá stærstu skuldurum', `${t3.top.map(n => (NAME[n] || n).replace(/ (ehf|hf|slf|ses)\.$/, '')).join(', ')}: ${m(t3.top.reduce((s, n) => s + odSum(DATA.custs.find(c => c.no === n)), 0))} m.kr. gjaldfallið. Símtal og greiðsluáætlun í þessari viku.`, lift({ topN: 3 })] : null,
+    {{js.act2_title}} ? ['h', {{js.act2_title}}, {{js.act2_text}}, null] : null,
+    {{js.act3_title}} && (DATA.vend_open.length || DATA.inv.length) ? ['m', {{js.act3_title}}, {{js.act3_text}}, {{js.act3_defer}} ? lift({ defer: {{js.act3_defer}} }) : null] : null,
+    INV_OD.length ? ['m', 'Samþykkja reikninga á réttum tíma', `${INV_OD.length} reikningar (${m(INV_OD_SUM)} m.kr.) eru komnir fram yfir gjalddaga án samþykkis.`, null] : null,
+  ].filter(Boolean);
+  $('first').innerHTML = acts.length ? acts.map(([s, t, d, v], i) => `<div class="d-item"><span class="d-ico ${s}">${i + 1}</span><div><b>${t}</b><p>${d}</p></div><span class="amt">${v ? sg(v / 1e6) + ' m' : '–'}</span></div>`).join('') : '<p class="note">Engar brýnar aðgerðir út frá gögnunum.</p>';
   const W = R.W, tr = w => `<tr><td>${wkLabel(w)} <span class="sub">${date(w.from).slice(0, 5)}–${date(w.to).slice(0, 5)}</span></td><td class="n">${m(w.start)}</td><td class="n pos">${m(w.inn)}</td><td class="n">${m(-w.laun)}</td><td class="n">${m(-(w.lan - w.outC.osamth))}</td><td class="n">${m(-w.outC.osamth)}</td><td class="n">${m(-w.ann)}</td><td class="n ${w.end < min ? 'neg' : ''}"><b>${m(w.end)}</b>${w === low ? ' <span class="pill h">lágpunktur</span>' : ''}</td></tr>`;
   const S = k => W.reduce((s, w) => s + k(w), 0);
   $('wk').innerHTML = `<thead><tr><th>Vika</th><th class="n">Upphafsstaða</th><th class="n">Innborganir</th><th class="n">Laun og launat.</th><th class="n">Lánardrottnar</th><th class="n">Í samþykkt</th><th class="n">VSK, lán o.fl.</th><th class="n">Lokastaða</th></tr></thead><tbody>${W.map(tr).join('')}
@@ -286,8 +297,11 @@ function innh() {
   $('ag-leg').innerHTML = tot.map((v, j) => `<div><span><i style="background:var(${CL[j]})"></i>${LB[j]}</span><b>${m(v)}</b><span>${fmt(100 * v / DATA.ag_total, 0)}%</span></div>`).join('');
   $('ag-note').textContent = `Fjárhagur sýnir ${m(DATA.krofur_gl)} m.kr. í kröfum; mismunurinn við viðskiptamannabók er skoðaður í Mánaðarlokum. ${AGI >= 0 ? {{js.ag_trend_pre}} + m(DATA.krofur_hist[AGI]) + {{js.ag_trend_post}} : ''}`;
   const oldest = c => { const j = c.b.slice(1).map((v, i) => (v ? i : -1)).filter(i => i >= 0).pop(); return j == null ? '–' : LB[j + 1]; };
-  const rows = DATA.custs.filter(c => odSum(c) > 0).sort((a, b) => odSum(b) - odSum(a)), mx = rows.length ? odSum(rows[0]) : 1;
+  const rows = DATA.custs.filter(c => !c.pos && odSum(c) > 0).sort((a, b) => odSum(b) - odSum(a)), mx = rows.length ? odSum(rows[0]) : 1;
   $('debtors').innerHTML = rows.map(c => `<div class="prow"><span class="av">${c.name.split(' ').slice(0, 2).map(w => w[0]).join('')}</span><div style="min-width:0"><div class="nm">${c.name}</div><div class="bar"><span style="width:${(100 * odSum(c) / mx).toFixed(1)}%"></span></div></div><div class="n">${m(odSum(c))}<small>elst ${oldest(c)} · töf ${c.delay == null ? 'engin greiðsla' : fmt(c.delay, 0) + ' d.'}</small></div></div>`).join('');
+  if (!rows.length) $('debtors').innerHTML = '<p class="note">Engar gjaldfallnar kröfur.</p>';
+  $('debtors-note').hidden = !POS_C.length;
+  $('debtors-note').textContent = POS_C.length ? `${POS_C.length} staðgreiðslu- og kassaviðskiptamenn (${m(POS_SUM)} m.kr. opið) eru taldir með í aldursgreiningu en ekki með stærstu skuldurum.` : '';
   topN();
 }
 function topN() {
@@ -325,12 +339,14 @@ function update() {
   document.querySelectorAll('#presets button').forEach(b => b.setAttribute('aria-pressed', matches(b.dataset.s)));
   spa(); topN(); charts();
 }
+const MIN0 = DATA.min_m == null ? 30 : Math.max(0, Math.round(DATA.min_m / 5) * 5);
+if (DATA.min_m != null) { const e = $('s-min'); e.max = Math.max(100, MIN0 * 3); e.value = MIN0; }
 const SL = bindSliders({
   speed: { fmt: v => (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v) + ' d.', good: -1 },
   od: { fmt: v => v + '%', good: 1, zero: 100 },
   nw: { fmt: v => v + '%', good: 1, zero: BASE_NW },
   defer: { fmt: v => '+' + v + ' d.', good: 1 },
-  min: { fmt: v => v + ' m', good: 1, zero: 30 },
+  min: { fmt: v => v + ' m', good: 1, zero: MIN0 },
 }, () => update());
 $('s-nw').value = BASE_NW;
 document.querySelectorAll('#presets button').forEach(b => b.onclick = () => { scen = b.dataset.s; SL.set(SCEN[scen]); });

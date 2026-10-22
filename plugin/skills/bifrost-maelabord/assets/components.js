@@ -1,20 +1,23 @@
-/* Bifröst mælaborð · íhlutir 1.0 (með farsímareglum) — settu inn í script-tagi á eftir Chart.js 4.4.1 (cdnjs) */
+/* Bifröst mælaborð · íhlutir 1.0 (með farsímareglum og tungumálum) — settu inn í script-tagi á eftir Chart.js 4.4.1 (cdnjs) */
+/* Tungumál síðunnar: render.py setur gildið ('is' eða 'en'). */
+const BF_LANG = 'is';
 const BF = (() => {
+  const EN = BF_LANG === 'en';
   const $ = id => document.getElementById(id);
   const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-  /* Íslenskt talnasnið án toLocaleString */
+  /* Talnasnið án toLocaleString: íslenska 1.234,5 · enska 1,234.5 */
   const fmt = (n, d = 1) => {
-    if (n == null || isNaN(n)) return '–';
+    if (n == null || !isFinite(n)) return '–';   // líka ±Infinity (deilt með 0 hjá félagi með litlar tölur)
     const neg = n < 0 && Math.abs(n) >= Math.pow(10, -d) / 2;
     let [i, f] = Math.abs(n).toFixed(d).split('.');
-    i = i.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    return (neg ? '−' : '') + i + (f ? ',' + f : '');
+    i = i.replace(/\B(?=(\d{3})+(?!\d))/g, EN ? ',' : '.');
+    return (neg ? '−' : '') + i + (f ? (EN ? '.' : ',') + f : '');
   };
-  const sg = (n, d = 1) => (n > 1e-9 ? '+' : '') + fmt(n, d);
+  const sg = (n, d = 1) => (n == null || !isFinite(n)) ? '–' : (n > 1e-9 ? '+' : '') + fmt(n, d);
   const mkr = (kr, d = 1) => fmt(kr / 1e6, d);
-  const MON = ['jan', 'feb', 'mar', 'apr', 'maí', 'jún', 'júl', 'ágú', 'sep', 'okt', 'nóv', 'des'];
+  const MON = EN ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] : ['jan', 'feb', 'mar', 'apr', 'maí', 'jún', 'júl', 'ágú', 'sep', 'okt', 'nóv', 'des'];
   const monLabel = ym => MON[+ym.slice(5, 7) - 1];
-  const date = iso => iso ? `${iso.slice(8, 10)}.${iso.slice(5, 7)}.${iso.slice(0, 4)}` : '–';
+  const date = iso => iso ? (EN ? `${+iso.slice(8, 10)} ${MON[+iso.slice(5, 7) - 1]} ${iso.slice(0, 4)}` : `${iso.slice(8, 10)}.${iso.slice(5, 7)}.${iso.slice(0, 4)}`) : '–';
   const alpha = (c, a) => { const h = c.replace('#', ''); if (h.length !== 6) return c; const n = parseInt(h, 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; };
   /* Farsími: true undir 640px. Gröf og útlit lesa þetta við hverja teikningu. */
   const MQ = window.matchMedia ? matchMedia('(max-width:640px)') : { matches: false };
@@ -48,7 +51,7 @@ const BF = (() => {
   /* Lykilmælir: el = .kpi element með .v, .d og valfrjálst canvas */
   function kpi(el, { value, base, delta, goodWhenUp = true, deltaText, series, baseSeries }) {
     el.querySelector('.v').textContent = value;
-    el.querySelector('.d').innerHTML = (base != null ? `grunnur ${base} ` : '') + (delta != null ? chip(delta, goodWhenUp, deltaText) : '');
+    el.querySelector('.d').innerHTML = (base != null ? `${EN ? 'base' : 'grunnur'} ${base} ` : '') + (delta != null ? chip(delta, goodWhenUp, deltaText) : '');
     const c = el.querySelector('canvas'); if (c && series) spark(c, baseSeries, series);
   }
 
@@ -70,7 +73,7 @@ const BF = (() => {
     return { grid: css('--line'), m, ticks: m ? 6 : 12 }; }
 
   /* Lína: grunnur strikaður, raun heil, bilið litað. unit: ' m.kr.' eða '%' */
-  function lineCompare(key, canvas, { labels, base: b, cur, baseLabel = 'Grunnur', curLabel = 'Raun', unit = ' m.kr.', d = 1, fillGap = true, goodWhenUp = true }) {
+  function lineCompare(key, canvas, { labels, base: b, cur, baseLabel = EN ? 'Base' : 'Grunnur', curLabel = EN ? 'Actual' : 'Raun', unit = EN ? ' ISK m' : ' m.kr.', d = 1, fillGap = true, goodWhenUp = true }) {
     if (!window.Chart) return; const { grid, m, ticks } = base(); const up = css('--up'), dn = css('--dn');
     return upsert(key, canvas, { type: 'line', data: { labels, datasets: [
       ...(b ? [{ label: baseLabel, data: b, borderColor: css('--base'), borderDash: [6, 4], borderWidth: 2, pointRadius: 0, tension: .3 }] : []),
@@ -82,7 +85,7 @@ const BF = (() => {
   }
 
   /* Brú: steps [{label, value, total?:true}] — total teiknast frá 0 */
-  function bridge(key, canvas, steps, { unit = ' m.kr.', d = 1 } = {}) {
+  function bridge(key, canvas, steps, { unit = EN ? ' ISK m' : ' m.kr.', d = 1 } = {}) {
     if (!window.Chart) return; const { grid, m } = base();
     let run = 0; const data = [], col = [];
     steps.forEach(s => { if (s.total) { data.push([0, s.value]); run = s.value; col.push(css('--brand')); } else { data.push([run, run + s.value]); run += s.value; col.push(s.value >= 0 ? css('--up') : css('--dn')); } });
@@ -110,22 +113,24 @@ const BF = (() => {
 
   /* Félagsval fyrir samstæðu: el = tómt div, names = ['Samstæða','Félag A',…], onPick(index) */
   function entityPicker(el, names, onPick) {
-    el.className = 'seg'; el.setAttribute('role', 'group'); el.setAttribute('aria-label', 'Félag');
+    el.className = 'seg'; el.setAttribute('role', 'group'); el.setAttribute('aria-label', EN ? 'Company' : 'Félag');
     el.innerHTML = names.map((n, i) => `<button type="button" aria-pressed="${i === 0}">${n}</button>`).join('');
     const bs = [...el.querySelectorAll('button')];
     bs.forEach((b, i) => b.onclick = () => { bs.forEach((x, j) => x.setAttribute('aria-pressed', j === i)); onPick(i); });
   }
 
   /* Litaþemu: Ljóst og Dökkt (Bifröst), Blátt og Jörð (úr grunnpallettu). Vistar val í localStorage. onChange() teiknar gröf upp á nýtt. */
-  const THEMES = [['light', 'Ljóst', '#957f41'], ['dark', 'Dökkt', '#1e1e22'], ['blue', 'Blátt', '#326fa0'], ['earth', 'Jörð', '#6f743f']];
+  const THEMES = EN ? [['light', 'Light', '#957f41'], ['dark', 'Dark', '#1e1e22'], ['blue', 'Blue', '#326fa0'], ['earth', 'Earth', '#6f743f']]
+    : [['light', 'Ljóst', '#957f41'], ['dark', 'Dökkt', '#1e1e22'], ['blue', 'Blátt', '#326fa0'], ['earth', 'Jörð', '#6f743f']];
+  const TH_L = EN ? 'Colour theme' : 'Litaþema';
   function applyTheme(m) {
     const t = THEMES.some(x => x[0] === m) ? m : 'light', r = document.documentElement;
     r.setAttribute('data-bf', t === 'dark' ? 'dark' : 'light'); r.setAttribute('data-pal', t === 'blue' || t === 'earth' ? t : 'bifrost'); return t;
   }
   function themeToggle(el, onChange) {
     const set = m => { m = applyTheme(m); [...el.querySelectorAll('button')].forEach(b => b.setAttribute('aria-pressed', b.dataset.m === m)); try { localStorage.setItem('bf-theme-v5', m); } catch (e) {} };
-    el.className = 'mode'; el.setAttribute('role', 'group'); el.setAttribute('aria-label', 'Litaþema');
-    el.innerHTML = THEMES.map(([k, l, c]) => `<button type="button" data-m="${k}" title="Litaþema: ${l}" aria-label="Litaþema: ${l}"><i class="th-dot" style="background:${c}"></i><span class="th-l">${l}</span></button>`).join('');
+    el.className = 'mode'; el.setAttribute('role', 'group'); el.setAttribute('aria-label', TH_L);
+    el.innerHTML = THEMES.map(([k, l, c]) => `<button type="button" data-m="${k}" title="${TH_L}: ${l}" aria-label="${TH_L}: ${l}"><i class="th-dot" style="background:${c}"></i><span class="th-l">${l}</span></button>`).join('');
     let m = 'light'; try { m = localStorage.getItem('bf-theme-v5') || 'light'; } catch (e) {}
     set(m);
     el.querySelectorAll('button').forEach(b => b.onclick = () => { set(b.dataset.m); Object.keys(CH).forEach(k => { CH[k].destroy(); delete CH[k]; }); onChange && onChange(); });
@@ -135,7 +140,7 @@ const BF = (() => {
     let d = document.getElementById('bf-sheet');
     if (!d) { d = document.createElement('dialog'); d.id = 'bf-sheet'; d.className = 'sheet'; d.setAttribute('aria-labelledby', 'bf-sheet-t'); document.body.appendChild(d);
       d.addEventListener('click', e => { if (e.target === d) d.close(); }); }
-    d.innerHTML = `<div class="sh-h"><b id="bf-sheet-t">${title}</b><button type="button" class="sh-x" aria-label="Loka">✕</button></div><div class="sh-b">${html}</div>`;
+    d.innerHTML = `<div class="sh-h"><b id="bf-sheet-t">${title}</b><button type="button" class="sh-x" aria-label="${EN ? 'Close' : 'Loka'}">✕</button></div><div class="sh-b">${html}</div>`;
     d.querySelector('.sh-x').onclick = () => d.close();
     d.querySelectorAll('table').forEach(t => { t.classList.add('m-cards'); cardify(t); });
     if (d.showModal) d.showModal(); else d.setAttribute('open', '');
@@ -155,7 +160,7 @@ const BF = (() => {
   /* Hallalitur undir línu: backgroundColor: BF.grad(BF.css('--s1')) */
   const grad = (c, a1 = .32, a2 = 0) => ctx => { const ch = ctx.chart, ar = ch.chartArea; if (!ar) return alpha(c, a1); const g = ch.ctx.createLinearGradient(0, ar.top, 0, ar.bottom); g.addColorStop(0, alpha(c, a1)); g.addColorStop(1, alpha(c, a2)); return g; };
 
-  return { $, css, mobile, sheet, cardify, fmt, sg, mkr, MON, monLabel, date, alpha, chip, tabs, spark, kpi, hbars, lineCompare, bridge, sortable, bindSliders, entityPicker, themeToggle, grad };
+  return { LANG: BF_LANG, $, css, mobile, sheet, cardify, fmt, sg, mkr, MON, monLabel, date, alpha, chip, tabs, spark, kpi, hbars, lineCompare, bridge, sortable, bindSliders, entityPicker, themeToggle, grad };
 })();
 
 /* Tenglar milli mælaborða (data-nav): sama flipi ef leyft, annars nýr */

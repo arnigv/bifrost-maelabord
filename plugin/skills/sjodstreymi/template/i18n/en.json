@@ -1,0 +1,486 @@
+[
+[
+"`<thead><tr><th>Vika</th><th class=\"n\">Upphafsstaða</th><th class=\"n\">Innborganir</th><th class=\"n\">Laun og launat.</th><th class=\"n\">Lánardrottnar</th><th class=\"n\">Í samþykkt</th><th class=\"n\">VSK, lán o.fl.</th><th class=\"n\">Lokastaða</th></tr></thead><tbody>${W.map(tr).join('')}\n    <tr class=\"sum\"><td>Samtals 13 vikur</td><td></td><td class=\"n\">${m(S(w => w.inn))}</td><td class=\"n\">${m(-S(w => w.laun))}</td><td class=\"n\">${m(-S(w => w.lan - w.outC.osamth))}</td><td class=\"n\">${m(-S(w => w.outC.osamth))}</td><td class=\"n\">${m(-S(w => w.ann))}</td><td></td></tr></tbody>`",
+"`<thead><tr><th>Week</th><th class=\"n\">Opening</th><th class=\"n\">Receipts</th><th class=\"n\">Payroll and related</th><th class=\"n\">Suppliers</th><th class=\"n\">Awaiting approval</th><th class=\"n\">VAT, loans etc.</th><th class=\"n\">Closing</th></tr></thead><tbody>${W.map(tr).join('')}\n    <tr class=\"sum\"><td>Total 13 weeks</td><td></td><td class=\"n\">${m(S(w => w.inn))}</td><td class=\"n\">${m(-S(w => w.laun))}</td><td class=\"n\">${m(-S(w => w.lan - w.outC.osamth))}</td><td class=\"n\">${m(-S(w => w.outC.osamth))}</td><td class=\"n\">${m(-S(w => w.ann))}</td><td></td></tr></tbody>`"
+],
+[
+"`<div class=\"prow\"><span class=\"av\">${c.name.split(' ').slice(0, 2).map(w => w[0]).join('')}</span><div style=\"min-width:0\"><div class=\"nm\">${c.name}</div><div class=\"bar\"><span style=\"width:${(100 * odSum(c) / mx).toFixed(1)}%\"></span></div></div><div class=\"n\">${m(odSum(c))}<small>elst ${oldest(c)} · töf ${c.delay == null ? 'engin greiðsla' : fmt(c.delay, 0) + ' d.'}</small></div></div>`",
+"`<div class=\"prow\"><span class=\"av\">${c.name.split(' ').slice(0, 2).map(w => w[0]).join('')}</span><div style=\"min-width:0\"><div class=\"nm\">${c.name}</div><div class=\"bar\"><span style=\"width:${(100 * odSum(c) / mx).toFixed(1)}%\"></span></div></div><div class=\"n\">${m(odSum(c))}<small>oldest ${oldest(c)} · delay ${c.delay == null ? 'no payment' : fmt(c.delay, 0) + ' d.'}</small></div></div>`"
+],
+[
+"`<tr><td>${b.name}</td><td class=\"sub\">${SJ.isAcq(b) ? ACQ_LBL : b.teg}</td><td class=\"n\">${m(b.bal)}</td><td>${date(b.stmt_date)} · yfirlit ${b.stmt_no}</td><td class=\"n\">${b.outst ? m(b.outst) : '–'}</td><td>${{{js.unrec_period}} ? `<span class=\"pill m\">${{{js.unrec_period}}} óafstemmt</span>` : '<span class=\"pill l\">Afstemmt</span>'}</td></tr>`",
+"`<tr><td>${b.name}</td><td class=\"sub\">${SJ.isAcq(b) ? ACQ_LBL : b.teg}</td><td class=\"n\">${m(b.bal)}</td><td>${date(b.stmt_date)} · statement ${b.stmt_no}</td><td class=\"n\">${b.outst ? m(b.outst) : '–'}</td><td>${{{js.unrec_period}} ? `<span class=\"pill m\">${{{js.unrec_period}}} unreconciled</span>` : '<span class=\"pill l\">Reconciled</span>'}</td></tr>`"
+],
+[
+">Heimild: Business Central (Bifröst), {{meta.company}}, gögn sótt {{meta.fetched}}: fjárhagur, banka-, viðskiptamanna- og lánardrottnafærslur, bankareikningar, aldursgreining og innkaupareikningar í samþykkt. Aðeins lesið, ekkert skrifað í BC.<",
+">Source: Business Central (Bifröst), {{meta.company}}, data retrieved {{meta.fetched}}: general ledger, bank, customer and supplier entries, bank accounts, ageing and purchase invoices awaiting approval. Read only, nothing written to BC.<"
+],
+[
+"`Sjóður fer lægst í viku ${low.wk} (${date(low.from)}–${date(low.to)}). Spáin tekur með innheimtu krafna${N_ACQ ? ', kortauppgjör á leiðinni' : ''}, nýja sölu, laun, skatta, VSK, lánardrottna og reikninga sem bíða samþykkis. Breyttu forsendum hér að neðan.`",
+"`Cash is lowest in week ${low.wk} (${date(low.from)}–${date(low.to)}). The forecast includes collection of receivables${N_ACQ ? ', card settlements in transit' : ''}, new sales, payroll, taxes, VAT, suppliers and invoices awaiting approval. Change the assumptions below.`"
+],
+[
+"`${t3.top.map(n => (NAME[n] || n).replace(/ (ehf|hf|slf|ses)\\.$/, '')).join(', ')}: ${m(t3.top.reduce((s, n) => s + odSum(DATA.custs.find(c => c.no === n)), 0))} m.kr. gjaldfallið. Símtal og greiðsluáætlun í þessari viku.`",
+"`${t3.top.map(n => (NAME[n] || n).replace(/ (ehf|hf|slf|ses)\\.$/, '')).join(', ')}: ISK ${m(t3.top.reduce((s, n) => s + odSum(DATA.custs.find(c => c.no === n)), 0))}m overdue. Call and agree a payment plan this week.`"
+],
+[
+"`Fjárhagur sýnir ${m(DATA.krofur_gl)} m.kr. í kröfum; mismunurinn við viðskiptamannabók er skoðaður í Mánaðarlokum. ${AGI >= 0 ? {{js.ag_trend_pre}} + m(DATA.krofur_hist[AGI]) + {{js.ag_trend_post}} : ''}`",
+"`The ledger shows ISK ${m(DATA.krofur_gl)}m in receivables; the difference to the customer ledger is reviewed in Month-end. ${AGI >= 0 ? {{js.ag_trend_pre}} + m(DATA.krofur_hist[AGI]) + {{js.ag_trend_post}} : ''}`"
+],
+[
+"`<tr class=\"sum\"><td>Nettó</td><td class=\"sub\">innstæður − kort</td><td class=\"n\">${m(bk + kort)}</td><td></td><td class=\"n\">${m(Bk.reduce((s, b) => s + b.outst, 0))}</td><td></td></tr></tbody>`",
+"`<tr class=\"sum\"><td>Net</td><td class=\"sub\">deposits − cards</td><td class=\"n\">${m(bk + kort)}</td><td></td><td class=\"n\">${m(Bk.reduce((s, b) => s + b.outst, 0))}</td><td></td></tr></tbody>`"
+],
+[
+"`Utan 13 vikna: innborganir ${m(R.beyondIn)} m.kr. (m.a. ${{{js.beyond_sale}}}) og útgreiðslur ${m(R.beyondOut)} m.kr. Fyrsta vika tekur við öllu sem þegar er gjaldfallið.`",
+"`Beyond 13 weeks: receipts ISK ${m(R.beyondIn)}m (incl. ${{{js.beyond_sale}}}) and payments ISK ${m(R.beyondOut)}m. The first week absorbs everything already overdue.`"
+],
+[
+"`<thead><tr><th>Reikningur</th><th>Tegund</th><th class=\"n\">Staða í BC</th><th>Síðasta afstemming</th><th class=\"n\">Óafstemmt þá</th><th>Staða</th></tr></thead><tbody>`",
+"`<thead><tr><th>Account</th><th>Type</th><th class=\"n\">BC balance</th><th>Last reconciliation</th><th class=\"n\">Unreconciled then</th><th>Status</th></tr></thead><tbody>`"
+],
+[
+"`${r.top.map(k => NAME[k] || k).join(', ')} greiða allt gjaldfallið í vikunni ${date(R.W[0].from)}–${date(R.W[0].to)}, í stað þess að innheimtast að hluta eftir aldri.`",
+"`${r.top.map(k => NAME[k] || k).join(', ')} pay their full overdue balance in the week ${date(R.W[0].from)}–${date(R.W[0].to)}, instead of being collected partly by age.`"
+],
+[
+"`${DATA.inv.length} reikningar · ${m(INV_TOT)} m.kr. · ${inc ? 'greiddir á gjalddaga í spánni' : 'ekki í spánni'}${P && P.defer ? ` (+${P.defer} d.)` : ''}`",
+"`${DATA.inv.length} invoices · ISK ${m(INV_TOT)}m · ${inc ? 'paid on due date in the forecast' : 'not in the forecast'}${P && P.defer ? ` (+${P.defer} d.)` : ''}`"
+],
+[
+"`Hlutfall nýrrar sölu (${m(DATA.sala_vsk_m)} m.kr. á mánuði með VSK) sem greiðist. ${{{js.base_period}}} ${BASE_NW}%, ${{{js.slow_period}}} ${SLOW_NW}%.`",
+"`Share of new sales (ISK ${m(DATA.sala_vsk_m)}m a month incl. VAT) that is paid. ${{{js.base_period}}} ${BASE_NW}%, ${{{js.slow_period}}} ${SLOW_NW}%.`"
+],
+[
+"`Lok hvers mánaðar skv. bankabók í BC; ${{{js.cur_month}}} er staða ${date(DATA.today)}. ${{{js.hist_inc}}}`",
+"`End of each month per the bank ledger in BC; ${{{js.cur_month}}} is the balance on ${date(DATA.today)}. ${{{js.hist_inc}}}`"
+],
+[
+"`${INV_OD.length} reikningar (${m(INV_OD_SUM)} m.kr.) eru komnir fram yfir gjalddaga án samþykkis.`",
+"`${INV_OD.length} invoices (ISK ${m(INV_OD_SUM)}m) are past due without approval.`"
+],
+[
+"`${m(DATA.ag_total)} m.kr. · ${fmt(100 * CUST_OD / DATA.ag_total, 0)}% gjaldfallið`",
+"`ISK ${m(DATA.ag_total)}m · ${fmt(100 * CUST_OD / DATA.ag_total, 0)}% overdue`"
+],
+[
+">Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.<",
+">Prepared with the help of AI (Claude). Review before relying on the figures.<"
+],
+[
+"> Draga frá gjaldfallnar greiðslur sem vantar í bókhald (sjá viðvörun efst)<",
+"> Deduct overdue payments missing from the ledger (see warning at the top)<"
+],
+[
+"'Dragðu stikuna til að sjá áhrif þess að stærstu skuldarar greiði strax.'",
+"'Drag the slider to see the effect of the largest debtors paying now.'"
+],
+[
+">Á við lánardrottna og reikninga í samþykkt, ekki laun, skatta og VSK.<",
+">Applies to suppliers and invoices awaiting approval, not payroll, taxes or VAT.<"
+],
+[
+">100% = 90/70/50/25% eftir aldri (0–30 / 31–60 / 61–90 / &gt; 90 d.).<",
+">100% = 90/70/50/25% by age (0–30 / 31–60 / 61–90 / &gt; 90 d.).<"
+],
+[
+"=\"Spáð sjóðstaða í lok hverrar viku næstu 13 vikur, með lágmarksstöðu\"",
+"=\"Forecast cash at the end of each week for the next 13 weeks, with minimum balance\""
+],
+[
+"=\"Útgreiðslur á viku eftir flokki, þar með reikningar í samþykkt\"",
+"=\"Weekly payments out by category, including invoices awaiting approval\""
+],
+[
+">Dagar fyrr (−) eða seinna (+) en gjalddagi og söguleg töf.<",
+">Days earlier (−) or later (+) than due date, plus historical delay.<"
+],
+[
+">Spá, ekki loforð. Forsendur: {{{html.footer_assumptions}}}<",
+">A forecast, not a promise. Assumptions: {{{html.footer_assumptions}}}<"
+],
+[
+"=\"Bankainnstæður í lok hvers mánaðar {{text.hist_period}}\"",
+"=\"Bank balances at the end of each month {{text.hist_period}}\""
+],
+[
+"`${Bk.length} reikningar · staða í BC ${date(DATA.today)}`",
+"`${Bk.length} accounts · BC balance ${date(DATA.today)}`"
+],
+[
+">{{meta.company}} · spá {{meta.fc_from}}–{{meta.fc_to}}<",
+">{{meta.company}} · forecast {{meta.fc_from}}–{{meta.fc_to}}<"
+],
+[
+">gjaldfallið · elsti gjalddagi · töf greiddra reikninga<",
+">overdue · oldest due date · delay on paid invoices<"
+],
+[
+"`frá hámarki í ${MON[+DATA.months[mi].slice(5) - 1]}`",
+"`from peak in ${MON[+DATA.months[mi].slice(5) - 1]}`"
+],
+[
+"${date(w.from).slice(0, 5)}–${date(w.to).slice(0, 5)}",
+"${date(w.from).replace(/ \\d{4}$/, '')}–${date(w.to).replace(/ \\d{4}$/, '')}"
+],
+[
+">Handbært fé í bönkum · staða í BC {{meta.as_of}}<",
+">Cash in banks · BC balance {{meta.as_of}}<"
+],
+[
+"> Greiða reikninga sem bíða samþykkis á gjalddaga<",
+"> Pay invoices awaiting approval on their due date<"
+],
+[
+"${od(v) > 0 ? od(v) + ' yfir' : -od(v) + ' eftir'}",
+"${od(v) > 0 ? od(v) + ' over' : -od(v) + ' left'}"
+],
+[
+">Fjöldi stærstu skuldara sem greiða gjaldfallið<",
+">Number of largest debtors paying their overdue balance<"
+],
+[
+"' <span class=\"pill i\">tengdur aðili</span>'",
+"' <span class=\"pill i\">related party</span>'"
+],
+[
+">Ef stærstu skuldarar greiða í næstu viku<",
+">If the largest debtors pay next week<"
+],
+[
+"'Innheimta hjá þremur stærstu skuldurunum'",
+"'Collect from the three largest debtors'"
+],
+[
+"' <span class=\"pill h\">lágpunktur</span>'",
+"' <span class=\"pill h\">low point</span>'"
+],
+[
+">Innheimtuhlutfall gjaldfallinna krafna<",
+">Collection rate on overdue receivables<"
+],
+[
+"'<span class=\"pill i\">utan spár</span>'",
+"'<span class=\"pill i\">outside forecast</span>'"
+],
+[
+"`vikur undir ${m(min, 0)} m lágmarki`",
+"`weeks below the ISK ${m(min, 0)}m minimum`"
+],
+[
+">Lágpunktur sjóðs næstu 13 vikur · <",
+">Cash low point in the next 13 weeks · <"
+],
+[
+">Frestun greiðslna til lánardrottna<",
+">Deferring payments to suppliers<"
+],
+[
+"'Samþykkja reikninga á réttum tíma'",
+"'Approve invoices on time'"
+],
+[
+"const wkLabel = w => `v. ${w.wk}`;",
+"const wkLabel = w => `wk ${w.wk}`;"
+],
+[
+">Bankareikningar og greiðslukort<",
+">Bank accounts and payment cards<"
+],
+[
+"'reikningar í samþykkt í spánni'",
+"'invoices awaiting approval in the forecast'"
+],
+[
+">Reikningar sem bíða samþykkis<",
+">Invoices awaiting approval<"
+],
+[
+">Greiðsluhraði viðskiptavina<",
+">Customer payment speed<"
+],
+[
+">Innheimta nýrra reikninga<",
+">Collection of new invoices<"
+],
+[
+">Sjóðstaða viku fyrir viku<",
+">Cash week by week<"
+],
+[
+">Sjóðstaða í lok mánaðar<",
+">Month-end cash<"
+],
+[
+"'frá síðustu afstemmingu'",
+"'since last reconciliation'"
+],
+[
+">Bankainnstæður skv. BC<",
+">Bank balances per BC<"
+],
+[
+">Útgreiðslur eftir viku<",
+">Payments out by week<"
+],
+[
+">Sjóðstreymi og bankar<",
+">Cash flow and banks<"
+],
+[
+">Aldursgreining krafna<",
+">Receivables ageing<"
+],
+[
+">Lokastaða viku (spá)<",
+">Week-end balance (forecast)<"
+],
+[
+"'bankar = fjárhagur ('",
+"'banks = ledger ('"
+],
+[
+"'Breyting á lágpunkti'",
+"'Change in low point'"
+],
+[
+"'Breyting á lokastöðu'",
+"'Change in closing balance'"
+],
+[
+">Lágmarksstaða sjóðs<",
+">Minimum cash balance<"
+],
+[
+">Undir lágmarksstöðu<",
+">Below minimum<"
+],
+[
+"'gjaldfallið ógreitt'",
+"'overdue unpaid'"
+],
+[
+">Tengt BC · Bifröst<",
+">Connected to BC · Bifröst<"
+],
+[
+">Afstemmingar: sjá <",
+">Reconciliations: see <"
+],
+[
+"'ógreidd kortaskuld'",
+"'unpaid card balance'"
+],
+[
+"'Staðgr. og launat.'",
+"'Withholding and payroll taxes'"
+],
+[
+">Stærstu skuldarar<",
+">Largest debtors<"
+],
+[
+"'Lágpunktur verður'",
+"'Low point becomes'"
+],
+[
+">Átak í innheimtu<",
+">Collection drive<"
+],
+[
+"'Átak í innheimtu'",
+"'Collection drive'"
+],
+[
+">áhrif á lágpunkt<",
+">effect on low point<"
+],
+[
+"'Ekki gjaldfallið'",
+"'Not yet due'"
+],
+[
+">Vika fyrir viku<",
+">Week by week<"
+],
+[
+"'Eigin forsendur'",
+"'Custom assumptions'"
+],
+[
+">Staða í bönkum<",
+">Bank balances<"
+],
+[
+"`${under} af 13`",
+"`${under} of 13`"
+],
+[
+"'Greitt í viku '",
+"'Paid in week '"
+],
+[
+"'Bankainnstæður'",
+"'Bank balances'"
+],
+[
+">Hæg innheimta<",
+">Slow collections<"
+],
+[
+"'Hæg innheimta'",
+"'Slow collections'"
+],
+[
+">Fyrst að gera<",
+">Do first<"
+],
+[
+">Lágmarksstaða<",
+">Minimum balance<"
+],
+[
+"'Lágmarksstaða'",
+"'Minimum balance'"
+],
+[
+"'Lánardrottnar'",
+"'Suppliers'"
+],
+[
+">13 vikna spá<",
+">13-week forecast<"
+],
+[
+"=\"Leiðarstika\"",
+"=\"Breadcrumb\""
+],
+[
+"`${n} stærstu`",
+"`${n} largest`"
+],
+[
+">m.kr. · spá<",
+">ISK m · forecast<"
+],
+[
+"'eftir 13 v.'",
+"'after 13 wk'"
+],
+[
+"'Lán og fast'",
+"'Loans and fixed'"
+],
+[
+"> mælaborða<",
+"> dashboards<"
+],
+[
+">Mánaðarlok<",
+">Month-end<"
+],
+[
+"'Í samþykkt'",
+"'Awaiting approval'"
+],
+[
+">← Miðstöð<",
+">← Hub<"
+],
+[
+">Innheimta<",
+">Collections<"
+],
+[
+">Forsendur<",
+">Assumptions<"
+],
+[
+"'Sjóðstaða'",
+"'Cash'"
+],
+[
+">Gjalddagi<",
+">Due date<"
+],
+[
+">Grunnur<",
+">Base<"
+],
+[
+"'Grunnur'",
+"'Base'"
+],
+[
+">Fjárhæð<",
+">Amount<"
+],
+[
+"'Stemmir'",
+"'Reconciled'"
+],
+[
+">Staða <",
+">As of <"
+],
+[
+">Birgir<",
+">Supplier<"
+],
+[
+"'staða '",
+"'balance '"
+],
+[
+"'Munur '",
+"'Difference '"
+],
+[
+">Dagar<",
+">Days<"
+],
+[
+">Í spá<",
+">In forecast<"
+],
+[
+"'í dag'",
+"'today'"
+],
+[
+">Skjal<",
+">Document<"
+],
+[
+"'Laun'",
+"'Payroll'"
+],
+[
+"const ACQ_LBL = 'Kortauppgjör';",
+"const ACQ_LBL = 'Card settlement';"
+],
+[
+"'kortauppgjör á leiðinni'",
+"'card settlements in transit'"
+],
+[
+"<td>Kortauppgjör á leiðinni</td><td class=\"sub\">krafa á færsluhirði, ekki í handbæru fé</td>",
+"<td>Card settlements in transit</td><td class=\"sub\">receivable from card acquirer, not cash</td>"
+],
+[
+"'Innheimta hjá stærstu skuldurum'",
+"'Collect from the largest debtors'"
+],
+[
+"'<p class=\"note\">Engar brýnar aðgerðir út frá gögnunum.</p>'",
+"'<p class=\"note\">No urgent actions based on the data.</p>'"
+],
+[
+"'<p class=\"note\">Engar gjaldfallnar kröfur.</p>'",
+"'<p class=\"note\">No overdue receivables.</p>'"
+],
+[
+"`${POS_C.length} staðgreiðslu- og kassaviðskiptamenn (${m(POS_SUM)} m.kr. opið) eru taldir með í aldursgreiningu en ekki með stærstu skuldurum.`",
+"`${POS_C.length} cash and point-of-sale customers (ISK ${m(POS_SUM)}m open) are included in the ageing but not among the largest debtors.`"
+]
+]

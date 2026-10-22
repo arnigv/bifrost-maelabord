@@ -37,7 +37,28 @@
    "25",
    "28",
    "33"
-  ]
+  ],
+  "en": {
+   "heiti": "Jobs and tenders",
+   "flokkur": "Contractors and construction",
+   "daemi": "Building contractors, groundworks, electrical contractors, project-based machine shops",
+   "kpi": [
+    "Tender win rate",
+    "Tender margin versus actual",
+    "Progress versus cost",
+    "Unbilled work (WIP)",
+    "Variations",
+    "Retentions and performance bonds",
+    "Indexation (building cost index)",
+    "Equipment utilisation"
+   ],
+   "flipar": [
+    "Overview",
+    "Tenders",
+    "Jobs and progress",
+    "Bonds and indexation"
+   ]
+  }
  },
  {
   "id": "serfraedi",
@@ -71,7 +92,26 @@
    "72",
    "73",
    "74"
-  ]
+  ],
+  "en": {
+   "heiti": "Utilisation and billing",
+   "flokkur": "Professional services",
+   "daemi": "Engineering firms, law firms, audit, consulting, advertising agencies",
+   "kpi": [
+    "Billable share of hours",
+    "Realised rate versus rate card",
+    "Unbilled hours",
+    "Written-off hours",
+    "Revenue per employee",
+    "Margin by customer"
+   ],
+   "flipar": [
+    "Overview",
+    "Utilisation",
+    "Billing",
+    "Customers"
+   ]
+  }
  },
  {
   "id": "saas",
@@ -102,7 +142,27 @@
    "58.2",
    "62.01",
    "63.1"
-  ]
+  ],
+  "en": {
+   "heiti": "Subscription revenue",
+   "flokkur": "SaaS and software",
+   "daemi": "Subscription software, hosting, managed services",
+   "kpi": [
+    "MRR/ARR",
+    "Churn",
+    "NRR",
+    "Renewals in the next 90 days",
+    "Deferred revenue",
+    "Revenue in foreign currency",
+    "Capitalised development costs"
+   ],
+   "flipar": [
+    "Overview",
+    "MRR and churn",
+    "Renewals",
+    "Deferred revenue"
+   ]
+  }
  },
  {
   "id": "heildsala",
@@ -134,7 +194,27 @@
   ],
   "isat": [
    "46"
-  ]
+  ],
+  "en": {
+   "heiti": "Inventory and stock",
+   "flokkur": "Wholesale and import",
+   "daemi": "Groceries, building materials, technology, pharmaceuticals",
+   "kpi": [
+    "Turnover and days of inventory",
+    "Slow-moving and expired stock",
+    "Margin by product group and supplier",
+    "Exchange-rate effect on purchase prices",
+    "Goods in transit",
+    "Fill rate",
+    "Price lists to update"
+   ],
+   "flipar": [
+    "Overview",
+    "Inventory",
+    "Margin by product group",
+    "Purchasing and FX"
+   ]
+  }
  },
  {
   "id": "smasala",
@@ -163,7 +243,26 @@
   ],
   "isat": [
    "47"
-  ]
+  ],
+  "en": {
+   "heiti": "Stores and basket",
+   "flokkur": "Retail",
+   "daemi": "Stores, online shops, pharmacies",
+   "kpi": [
+    "Sales per m² and by store",
+    "Average basket",
+    "Shrinkage",
+    "Payroll ratio",
+    "Seasonality",
+    "Card versus invoice sales"
+   ],
+   "flipar": [
+    "Overview",
+    "Stores",
+    "Basket and products",
+    "Shrinkage and payroll"
+   ]
+  }
  },
  {
   "id": "ferda",
@@ -196,7 +295,28 @@
    "56",
    "79",
    "93"
-  ]
+  ],
+  "en": {
+   "heiti": "Occupancy and bookings",
+   "flokkur": "Tourism and hospitality",
+   "daemi": "Hotels, guesthouses, activities, restaurants",
+   "kpi": [
+    "Occupancy",
+    "ADR",
+    "RevPAR",
+    "Bookings on the books",
+    "Prepayments",
+    "Food and payroll ratios",
+    "Accommodation tax",
+    "Revenue in EUR"
+   ],
+   "flipar": [
+    "Overview",
+    "Occupancy and rates",
+    "Bookings",
+    "Cost ratios"
+   ]
+  }
  },
  {
   "id": "sjavarutvegur",
@@ -227,7 +347,27 @@
   "isat": [
    "03",
    "10.2"
-  ]
+  ],
+  "en": {
+   "heiti": "Catch, products and FX",
+   "flokkur": "Fishing and fish processing",
+   "daemi": "Fishing companies, processing plants, aquaculture",
+   "kpi": [
+    "Catch value",
+    "Raw material yield",
+    "Product prices in EUR/USD",
+    "Fishing fees",
+    "Fuel costs",
+    "Product inventory",
+    "EBITDA sensitivity to FX"
+   ],
+   "flipar": [
+    "Overview",
+    "Catch and yield",
+    "Products and prices",
+    "FX sensitivity"
+   ]
+  }
  },
  {
   "id": "framleidsla",
@@ -272,7 +412,26 @@
    "29",
    "31",
    "32"
-  ]
+  ],
+  "en": {
+   "heiti": "Production and unit cost",
+   "flokkur": "Manufacturing and industry",
+   "daemi": "Food production, metalworking, plastics, printing",
+   "kpi": [
+    "Cost per unit",
+    "Variance from bill of materials",
+    "Waste",
+    "Energy costs",
+    "Raw material prices",
+    "Machine utilisation"
+   ],
+   "flipar": [
+    "Overview",
+    "Unit cost",
+    "Variances and waste",
+    "Energy and materials"
+   ]
+  }
  },
  {
   "id": "fasteignir",
@@ -302,7 +461,27 @@
   ],
   "isat": [
    "68"
-  ]
+  ],
+  "en": {
+   "heiti": "Lease portfolio",
+   "flokkur": "Real estate and leasing",
+   "daemi": "Property companies, landlords",
+   "kpi": [
+    "Occupancy rate",
+    "Rental income by property",
+    "Lease indexation",
+    "Tenant arrears",
+    "Expiring leases",
+    "Operating cost per m²",
+    "Loan-to-value and interest cover"
+   ],
+   "flipar": [
+    "Overview",
+    "Properties",
+    "Leases",
+    "Financing"
+   ]
+  }
  },
  {
   "id": "samstaeda",
@@ -330,7 +509,25 @@
    "64.2",
    "64.3",
    "70.1"
-  ]
+  ],
+  "en": {
+   "heiti": "Group",
+   "flokkur": "Holding companies and groups",
+   "daemi": "Parent companies, investment companies",
+   "kpi": [
+    "Intercompany transactions and eliminations",
+    "Dividends",
+    "Shareholdings",
+    "Assets at fair value",
+    "Intercompany loans"
+   ],
+   "flipar": [
+    "Overview",
+    "Companies",
+    "Intercompany",
+    "Shareholdings and loans"
+   ]
+  }
  },
  {
   "id": "flutningar",
@@ -361,7 +558,25 @@
    "51",
    "52",
    "53"
-  ]
+  ],
+  "en": {
+   "heiti": "Fleet and routes",
+   "flokkur": "Transport and distribution",
+   "daemi": "Freight, couriers, coaches",
+   "kpi": [
+    "Cost per km or shipment",
+    "Fuel",
+    "Vehicle utilisation",
+    "Maintenance",
+    "Damage"
+   ],
+   "flipar": [
+    "Overview",
+    "Fleet",
+    "Unit cost",
+    "Maintenance and damage"
+   ]
+  }
  },
  {
   "id": "opinbert",
@@ -391,6 +606,23 @@
    "87",
    "88",
    "94"
-  ]
+  ],
+  "en": {
+   "heiti": "Appropriations",
+   "flokkur": "Non-profits and public sector",
+   "daemi": "Self-governing institutions, municipal companies, healthcare",
+   "kpi": [
+    "Actual versus appropriation",
+    "Contracts (e.g. with health insurance)",
+    "Cost per service user",
+    "Grants"
+   ],
+   "flipar": [
+    "Overview",
+    "Actual versus appropriation",
+    "Contracts and grants",
+    "Cost per service user"
+   ]
+  }
  }
 ]

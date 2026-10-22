@@ -16,6 +16,9 @@ Stjórn þarf að sjá á 30 sekúndum hvort reksturinn er á réttri leið, hva
 - `dataset.json` úr `bifrost-gogn` (í ár og fyrra ár).
 - Efnahagur: `period_breakdown` á `G/L Account` með `field_type:"balance"` og `Income/Balance=CONST(Balance Sheet)`, staða í lok hvers mánaðar. Flokkaðu í handbært fé, kröfur, birgðir, fastafjármuni, skammtímaskuldir, langtímaskuldir og eigið fé eftir undirflokki og nafni.
 - `aging` fyrir viðskiptamenn og lánardrottna.
+- **Birgðir og aðrar eignir:** `build_dataset.py` skilar `balance.categories.birgdir` (birgðalyklar) og `adrar_eignir` (eignalyklar sem falla ekki í aðra flokka) þegar slíkir lyklar eru til. Settu þá óbreytta í gögnin; sniðmátið sýnir línurnar Birgðir/Aðrar eignir, breytingu birgða í sjóðstreymi og telur birgðir með í veltufé aðeins ef staðan er > 0. Vanti lyklana er allt eins og áður.
+- **Staðgreiðslu- og kassaviðskiptavinir:** merktu `aging.rows[].pos: true` á viðskiptamenn sem eru safnreikningar fyrir staðgreiðslu, kassa eða kortasölu (heiti, `Customer Posting Group` eða `Customer Price Group` í `Customer`). Þeir teljast ekki til samþjöppunar. Heiti sem byrja á „Staðgreiðsl“ eða „Cash“ eru sjálfkrafa talin slík; `pos: false` hnekkir því.
+- **Mánaðartölur fyrra árs:** síðan notar ársuppgjör fyrra árs × n/12. Ef fyrra ár er bókað mánaðarlega í BC (`period_breakdown` skilar hreyfingu á mánuði fyrra árs), settu `py_monthly_in_bc: true` svo textinn segi „ekki í gögnum mælaborðsins“ en ekki „ekki í BC“.
 - Samþjöppun viðskiptavina og „hvað breyttist mest“ á lykil: samtölur (`Data.Totals.Get`), ekki færslur. Drill-down í Rekstri er óbreytt: liður → lyklar (úr `dataset.json`, alltaf heilt) → færslur, **sama drill-down og áður** (sjá `bifrost-gogn`, kafli 0: allar færslur ef þær eru ≤ 5.000 á tímabilinu, annars færslur stærstu liðanna).
 - Ef verk: fjöldi opinna verka, óreikningsfært (úr `tekjuleki` ef keyrt).
 

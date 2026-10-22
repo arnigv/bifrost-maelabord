@@ -128,7 +128,43 @@ Ef `dataset.json` er samstæða (`consolidated: true`):
 - Hlutdeild minnihluta sýnd sér ef eignarhlutur er undir 100%.
 - Ófullbókaður mánuður hjá einu félagi gerir mánuðinn ófullbókaðan í samstæðu. Segðu hjá hvaða félagi.
 
+## Tungumál: íslenska og enska (útgáfa 1.0)
+
+Öll mælaborð, miðstöðin og Sjálfvirknivæðing eru til **á íslensku og ensku**, með rofanum **IS | EN** efst á hverri síðu.
+
+**Hvaða mál opnast fyrst (skylda):** tungumál **grunngagnanna** í BC ræður.
+- Heiti lykla, viðskiptavina, birgja og félags á íslensku → mælaborðin opnast **á íslensku**.
+- Heiti á ensku **eða öðru máli en íslensku** (t.d. CRONUS, sænskur eða danskur lyklarammi) → mælaborðin opnast **á ensku**.
+- Greiningin er `i18n.detect_lang()` (íslenskir stafir og orð í ≥ 25% heita; stafir eins og ø, å, ä, ü teljast ekki íslenska). `bifrost-gogn` skrifar niðurstöðuna í `dataset.json` sem `lang`; settu sama `lang` í gögn hvers mælaborðs og í `hub.json`. Notandi getur þvingað mál („hafðu þetta á ensku“) með `lang` eða `bundle.py --lang en`.
+
+**Hvernig það virkar:**
+- Sniðmátin eru á íslensku. Enska er orðabók með hráum bútum úr hverju sniðmáti, `skills/<mælaborð>/template/i18n/en.json`, auk sameiginlegrar `assets/i18n/en.json` (components, leiðarstika) og `assets/i18n/accounts.en.json` (staðalheiti lykla og aldursbil).
+- Orðabókin er **ströng**: ef bútur finnst ekki lengur í sniðmátinu stöðvast smíðin. Þegar sniðmáti er breytt þarf að uppfæra orðabókina í sömu breytingu (`scripts/test/i18n_units.py` og `i18n_build.py`).
+- `components.js` fær `BF_LANG` ('is'/'en'): á ensku eru tölur `1,234.5`, dagsetningar `16 Oct 2026` og fjárhæðir `ISK m`. Notaðu alltaf `fmt()`, `BF.date` o.s.frv., ekki eigið snið.
+- **Textar sem þú skrifar** (`meta`, `text`, `html`, `js`) eru á tungumáli gagnanna. Hitt málið fer í yfirlagið `i18n.<lang>` í sama JSON: `{"meta": {...}, "text": {...}, "html": {...}, "js": {...}, "names": {"íslenskur strengur": "translation"}}`. Aðeins lyklar sem breytast eru í yfirlaginu. `names` þýðir heila strengi hvar sem er í gögnunum (heiti áætlana, flokka, stöður), umfram staðaltöfluna.
+- Staða sem sniðmátið ber saman við (t.d. `'já'/'að hluta'/'nei'`, `'Gert'`) má vera á ensku í yfirlaginu (`'yes'/'partly'/'no'`, `'Done'`); sniðmátin þekkja bæði.
+- `bundle.py` smíðar **bæði málin**: aðalmálið í `<síða>.html` (og `index.html`) og hitt í `<síða>.<lang>.html`, t.d. `stjorn.en.html` eða `stjorn.is.html`. Tenglar halda sér innan málsins. Vanti yfirlag prentar `bundle.py` viðvörun og síðan sýnir textann á aðalmálinu.
+- Birtu **allar skrár beggja mála** í `files` (þær sem `bundle.py` prentar).
+
+**Prófun:** `node scripts/test/runtest.js build/<síða>.en.html` og `python3 scripts/test/i18n_check.py build/<síða>.en.html --dash <mælaborð>` (finnur íslensku sem varð eftir, utan sérnafna).
+
+**Eigin mælaborð og sérmælaborð:** settu `const BF_LANG = '<mál>';` í síðuna, skrifaðu á tungumáli gagnanna, smíðaðu hina útgáfuna sem `<síða>.<lang>.html` og bættu rofanum við (`i18n.inject_switch`).
+
+## Óháð félagi og rekstri (skylda)
+
+Sniðmátin eru óháð viðskiptavini og BC-umhverfi. Hvað birtist ræðst **af gögnunum**, aldrei af heiti félags:
+- **Verk:** verkaflipar, verkavísar og verkatengdar athuganir birtast aðeins ef verk eru í BC (`jobs`, `jobs_n`). Annars sýna Tekjur og Framlegð vörur, vöruflokka og verslanir (`items`, `item_groups`, `stores`).
+- **Birgðir:** `birgdir` > 0 bætir birgðum við efnahag, veltufé, sjóðstreymi og mánaðarlok.
+- **Kort:** fyrirtækjakort (kreditstaða) eru skuld; kortauppgjör færsluhirðis (`teg: "Kortauppgjör"`, debetstaða) er krafa á leiðinni.
+- **Staðgreiðsluviðskiptamenn** (`pos: true`) teljast ekki til samþjöppunar eða stærstu skuldara.
+- **Ónóg gögn:** færri en 3 fullbókaðir mánuðir (Spágerð: 6) gefa sjálfkrafa tilkynningu efst á síðunni; enginn fullbókaður mánuður sýnir bráðabirgðatölur. Gagnalagið stöðvar alveg tóm félög (`build_dataset.py`, útgangskóði 2).
+- **Valfrjálsir lyklar:** `_optional` í `example.json` (á hvaða stigi sem er) segir hvaða lyklar sýnidæmisins mega vanta hjá öðrum félögum. Yfirlagið `i18n` er aldrei skylda.
+
+**Þolpróf fyrir hverja útgáfu:** `scripts/test/robust.py` smíðar hvert mælaborð á afbrigðum (fullt sýnidæmi, einn mánuður, enginn mánuður, tómir listar, núll) á báðum málum og fellur á JS-villum eða `undefined/NaN/Infinity`. Með `--baseline DIR` / `--compare DIR` sannar það að sýnilegur texti sýnidæmisins breytist ekki.
+
 ## Íslenskt snið
+
+(Á ensku: sjá kaflann á undan; `fmt()` skiptir sjálft um snið eftir `BF_LANG`.)
 
 - Tölur: `1.234.567` og `1.234,5`. Notaðu `fmt()` úr `components.js`, ekki `toLocaleString` (sumir vafrar hafa ekki `is-IS`).
 - Fjárhæðir á mælaborðum í **m.kr.** með einum aukastaf, í töflum í kr. án aukastafa.
@@ -224,6 +260,9 @@ Prófaðu alltaf á **375 px** breidd áður en birt er: ekkert lárétt skrun �
 - `assets/template.html`: grunnsíða fyrir sérmælaborð og eigin mælaborð.
 - `scripts/render.py`, `scripts/render_hub.py`, `scripts/bundle.py`: smíða föstu mælaborðin og miðstöðina úr gögnum (`--example` sýnir gullútgáfuna, `--check-golden` ber saman).
 - `scripts/test/runtest.js`: keyrir síðu án vafra og tilkynnir JS-villur.
+- `scripts/i18n.py`: tungumálagreining, orðabækur, yfirlög, rofinn IS | EN. `assets/i18n/`: sameiginlegar enskar orðabækur.
+- `scripts/test/i18n_units.py`, `i18n_build.py`, `i18n_check.py`: smíða og prófa orðabækur sniðmáta.
+- `scripts/test/robust.py`: þolpróf á afbrigðum gagna og samanburður við grunn.
 
 ## Leiðir milli mælaborða
 

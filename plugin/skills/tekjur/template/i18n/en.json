@@ -1,0 +1,986 @@
+[
+[
+"`<div class=\"prow click\" data-c=\"${c.no}\" tabindex=\"0\" role=\"button\" aria-label=\"Opna reikninga ${esc(x.name)}\"><span class=\"av\">${c.no}</span><div style=\"min-width:0\"><div class=\"nm\">${esc(x.name)}${tags}</div><div class=\"sub\">${c.docs.size} reikn. á tímabilinu · fyrsti reikningur ${{{js.year}}} ${date(x.first)}</div>\n      <div class=\"trend\" aria-hidden=\"true\">${mo.map((v, i) => `<i class=\"${v ? '' : 'z'}${INC[M[i]] ? ' inc' : ''}\" style=\"height:${v ? Math.max(8, 100 * v / mxAll).toFixed(0) : 6}%\" title=\"${MON[i]}: ${m1(v)} m\"></i>`).join('')}</div>\n      <div class=\"bar\"><span style=\"width:${(100 * c.v / mx).toFixed(1)}%\"></span></div></div><span class=\"n\">${m1(c.v)}<small>m.kr.</small></span></div>`",
+"`<div class=\"prow click\" data-c=\"${c.no}\" tabindex=\"0\" role=\"button\" aria-label=\"Open invoices ${esc(x.name)}\"><span class=\"av\">${c.no}</span><div style=\"min-width:0\"><div class=\"nm\">${esc(x.name)}${tags}</div><div class=\"sub\">${c.docs.size} inv. in the period · first invoice ${{{js.year}}} ${date(x.first)}</div>\n      <div class=\"trend\" aria-hidden=\"true\">${mo.map((v, i) => `<i class=\"${v ? '' : 'z'}${INC[M[i]] ? ' inc' : ''}\" style=\"height:${v ? Math.max(8, 100 * v / mxAll).toFixed(0) : 6}%\" title=\"${MON[i]}: ${m1(v)} m\"></i>`).join('')}</div>\n      <div class=\"bar\"><span style=\"width:${(100 * c.v / mx).toFixed(1)}%\"></span></div></div><span class=\"n\">${m1(c.v)}<small>ISK m</small></span></div>`"
+],
+[
+"`<div class=\"stack\" role=\"img\" aria-label=\"Samþjöppun sölu á viðskiptamannabók\"><span style=\"width:${(100 * p1).toFixed(1)}%;background:var(--s1)\"></span><span style=\"width:${(100 * p3).toFixed(1)}%;background:var(--s2)\"></span><span style=\"width:${(100 * Math.max(0, pr)).toFixed(1)}%;background:var(--s6)\"></span></div>\n      <div class=\"lg\"><span><i style=\"background:var(--s1)\"></i>Stærsti</span><span><i style=\"background:var(--s2)\"></i>Næstu tveir</span><span><i style=\"background:var(--s6)\"></i>Aðrir (${Math.max(0, C.length - 3)})</span></div>`",
+"`<div class=\"stack\" role=\"img\" aria-label=\"Concentration of sales on the customer ledger\"><span style=\"width:${(100 * p1).toFixed(1)}%;background:var(--s1)\"></span><span style=\"width:${(100 * p3).toFixed(1)}%;background:var(--s2)\"></span><span style=\"width:${(100 * Math.max(0, pr)).toFixed(1)}%;background:var(--s6)\"></span></div>\n      <div class=\"lg\"><span><i style=\"background:var(--s1)\"></i>Largest</span><span><i style=\"background:var(--s2)\"></i>Next two</span><span><i style=\"background:var(--s6)\"></i>Others (${Math.max(0, C.length - 3)})</span></div>`"
+],
+[
+">Heimild: fjárhagsfærslur á tekjulyklum {{meta.rev_accounts}} ({{meta.py}}–{{meta.year}}), viðskiptamannafærslur, bókaðir sölureikningar og reikningslínur, verk og verkfærslur {{meta.company_gen}} í Business Central (Bifröst, umhverfi {{meta.bc_env}}), sótt {{meta.fetched}}. Aðeins lesið, ekkert skrifað í BC. Fjárhæðir án VSK.<",
+">Source: G/L entries on revenue accounts {{meta.rev_accounts}} ({{meta.py}}–{{meta.year}}), customer entries, posted sales invoices and invoice lines, jobs and job entries of {{meta.company_gen}} in Business Central (Bifröst, environment {{meta.bc_env}}), retrieved {{meta.fetched}}. Read only, nothing written to BC. Amounts excl. VAT.<"
+],
+[
+"`<span><i style=\"background:var(--s1)\"></i>Tekjur ${{{js.year}}}</span><span><i style=\"background:var(--warn)\"></i>Einskipti 1×</span><span><i class=\"dash\" style=\"color:var(--base)\"></i>${{{js.py}}}, meðaltal á mánuði</span><span><i class=\"dash\" style=\"color:var(--s2)\"></i>${esc(DATA.bud_name)} (drög)</span>`",
+"`<span><i style=\"background:var(--s1)\"></i>Revenue ${{{js.year}}}</span><span><i style=\"background:var(--warn)\"></i>One-off 1×</span><span><i class=\"dash\" style=\"color:var(--base)\"></i>${{{js.py}}}, monthly average</span><span><i class=\"dash\" style=\"color:var(--s2)\"></i>${esc(DATA.bud_name)} (draft)</span>`"
+],
+[
+"`<label class=\"act\"><input type=\"checkbox\" data-i=\"${i}\"><div><b>${esc(a.t)}</b><p><span class=\"pill ${SEV[a.v][1]}\">${SEV[a.v][0]}</span> · átak: ${esc(a.eff)} · ${esc(a.next)}</p></div><div class=\"n\">${a.once ? m1(a.once) : '–'}<small>${a.yr ? m1(a.yr) + ' á ári' : 'einskiptis'}</small></div></label>`",
+"`<label class=\"act\"><input type=\"checkbox\" data-i=\"${i}\"><div><b>${esc(a.t)}</b><p><span class=\"pill ${SEV[a.v][1]}\">${SEV[a.v][0]}</span> · effort: ${esc(a.eff)} · ${esc(a.next)}</p></div><div class=\"n\">${a.once ? m1(a.once) : '–'}<small>${a.yr ? m1(a.yr) + ' a year' : 'one-off'}</small></div></label>`"
+],
+[
+"`<span class=\"av\">–</span><div style=\"min-width:0\"><div class=\"nm\">Óskráð á viðskiptavin</div><div class=\"sub\">${{{js.unreg_desc}}} · ${nJ} færslur · <button class=\"linkbtn\" id=\"unreg-open\">sjá færslur</button></div></div><span class=\"n\">${m1(unreg)}<small>m.kr. · ${pct(unreg / P.rev)}</small></span>`",
+"`<span class=\"av\">–</span><div style=\"min-width:0\"><div class=\"nm\">Not recorded to a customer</div><div class=\"sub\">${{{js.unreg_desc}}} · ${nJ} entries · <button class=\"linkbtn\" id=\"unreg-open\">see entries</button></div></div><span class=\"n\">${m1(unreg)}<small>ISK m · ${pct(unreg / P.rev)}</small></span>`"
+],
+[
+"`Valið tímabil er í fullum lit. ${{{js.inc_note}}} ${{{js.py}}} var ${m1(DATA.py)} m.kr., eða ${m1(DATA.py / 12)} m.kr. á mánuði að meðaltali. Áætlunin er ${m1(DATA.bud[M[0]])} m.kr. á mánuði (${esc(DATA.bud_desc)}).`",
+"`The selected period is in full colour. ${{{js.inc_note}}} ${{{js.py}}} was ISK ${m1(DATA.py)}m, or ISK ${m1(DATA.py / 12)}m a month on average. The budget is ISK ${m1(DATA.bud[M[0]])}m a month (${esc(DATA.bud_desc)}).`"
+],
+[
+"`${esc(P.label)}: ${I.length} reikningar · ${m1(sum(I, i => i.net))} m.kr. án VSK · allt ${{{js.year}}}: ${all.length} reikn., ${m1(sum(all, i => i.net))} m.kr. Smelltu á reikning til að sjá línurnar.`",
+"`${esc(P.label)}: ${I.length} invoices · ISK ${m1(sum(I, i => i.net))}m excl. VAT · all of ${{{js.year}}}: ${all.length} inv., ISK ${m1(sum(all, i => i.net))}m. Click an invoice to see its lines.`"
+],
+[
+"`Hlutdeild ${{{js.py}}} ${{{js.py_share_src}}} ${m1(DATA.py)} m.kr.).${big ? ` Mesta breyting á samsetningu: ${SN[big.s.k].toLowerCase()} ${sg(100 * big.d)} pp.` : ''} ${{{js.py_share_tail}}}`",
+"`Share ${{{js.py}}} ${{{js.py_share_src}}} ISK ${m1(DATA.py)}m).${big ? ` Largest change in mix: ${SN[big.s.k].toLowerCase()} ${sg(100 * big.d)} pp.` : ''} ${{{js.py_share_tail}}}`"
+],
+[
+"`${afsl ? P.E.filter(e => e.s === 'afsl').map(e => `${e.doc} ${date(e.d)}, ${esc(e.desc)}`).join('; ') : ('enginn á lykil ' + {{js.disc_account}})} · ${ldisc} línur með línuafslætti`",
+"`${afsl ? P.E.filter(e => e.s === 'afsl').map(e => `${e.doc} ${date(e.d)}, ${esc(e.desc)}`).join('; ') : ('none on account ' + {{js.disc_account}})} · ${ldisc} lines with line discount`"
+],
+[
+"` Í tímabilinu ${P.inc.length === 1 ? 'er bráðabirgðamánuður' : 'eru bráðabirgðamánuðir'}: ${P.inc.map(m => `${MF[mi(m)]} (${INC[m]})`).join('; ')}. Tekjur þar eru því vanmetnar.`",
+"` The period includes ${P.inc.length === 1 ? 'a preliminary month' : 'preliminary months'}: ${P.inc.map(m => `${MF[mi(m)]} (${INC[m]})`).join('; ')}. Revenue there is therefore understated.`"
+],
+[
+"`<tr class=\"sum\"><td></td><td>Samtals</td><td></td><td></td>${HASJOBS ? `<td class=\"n\">${fmt(sum(R, x => x.h || 0), 0)}</td>` : ''}<td class=\"n\">${kr(sum(R, x => x.amt))}</td><td></td></tr>`",
+"`<tr class=\"sum\"><td></td><td>Total</td><td></td><td></td>${HASJOBS ? `<td class=\"n\">${fmt(sum(R, x => x.h || 0), 0)}</td>` : ''}<td class=\"n\">${kr(sum(R, x => x.amt))}</td><td></td></tr>`"
+],
+[
+"`${i.lines.length} ${i.lines.length === 1 ? 'lína' : 'línur'} · ${m1(i.net)} m.kr. án VSK${i.fx ? ` · reikningur í ${i.fx}, fjárhæð í kr. á gengi bókunar` : ''}`",
+"`${i.lines.length} ${i.lines.length === 1 ? 'line' : 'lines'} · ISK ${m1(i.net)}m excl. VAT${i.fx ? ` · invoice in ${i.fx}, amount in ISK at the posting rate` : ''}`"
+],
+[
+"`<b>${esc(P.label)}</b>. Viðmið ${{{js.py}}}: ársheild ${m1(DATA.py)} m.kr. × ${P.ms.length}/12, sama aðferð og í Stjórn (árstíðasveiflur koma ekki fram).`",
+"`<b>${esc(P.label)}</b>. Comparison ${{{js.py}}}: full year ISK ${m1(DATA.py)}m × ${P.ms.length}/12, the same method as in Board (seasonality is not reflected).`"
+],
+[
+"`<p class=\"note\">${{{js.price_note}}} 0 kr. línur og vinna utan samnings: sjá <button class=\"linkbtn\" data-go=\"t-leki\">flipann Tekjuleki</button>.</p>`",
+"`<p class=\"note\">${{{js.price_note}}} ISK 0 lines and work outside the contract: see <button class=\"linkbtn\" data-go=\"t-leki\">the Revenue leakage tab</button>.</p>`"
+],
+[
+"'<span><i style=\"background:var(--s2)\"></i>Reikningar á viðskiptavin</span><span><i style=\"background:var(--s6)\"></i>Dagbók án viðskiptavinar</span>'",
+"'<span><i style=\"background:var(--s2)\"></i>Customer invoices</span><span><i style=\"background:var(--s6)\"></i>Journal without customer</span>'"
+],
+[
+"`<span>${r.length} færslur · tekjur jákvæðar, afsláttur og bakfærslur neikvæð</span><span>Samtals <b>${kr(sum(r, x => x.amt))}</b> kr.</span>`",
+"`<span>${r.length} entries · revenue positive, discounts and reversals negative</span><span>Total <b>${kr(sum(r, x => x.amt))}</b> ISK</span>`"
+],
+[
+"`<tr class=\"sum\"><td>Samtals tekjur</td><td class=\"n\">${m1(P.rev)}</td><td></td><td class=\"n\">100%</td><td class=\"n\">${P.E.length}</td></tr>`",
+"`<tr class=\"sum\"><td>Total revenue</td><td class=\"n\">${m1(P.rev)}</td><td></td><td class=\"n\">100%</td><td class=\"n\">${P.E.length}</td></tr>`"
+],
+[
+"> (A–H). Fjárhæðir án VSK á verðskrá; árleg áhrif eru mat. Gögn: verk, verkfærslur og áætlunarlínur í BC, sótt {{meta.leak_fetched}}.<",
+"> (A–H). Amounts excl. VAT at list price; annual effects are estimates. Data: jobs, job entries and planning lines in BC, retrieved {{meta.leak_fetched}}.<"
+],
+[
+"` Allt árið til dags (${{{js.ytd_short}}}) eru ${m1(allInv)} af ${m1(allRev)} m.kr. (${pct(allInv / allRev)}) á viðskiptamannabók.`",
+"` Year to date (${{{js.ytd_short}}}), ISK ${m1(allInv)}m of ISK ${m1(allRev)}m (${pct(allInv / allRev)}) is on the customer ledger.`"
+],
+[
+"`${f.length} reikningar ${ml(f[0].i.d.slice(0, 7))}–${ml(f.at(-1).i.d.slice(0, 7))}; tímar umfram gjaldið eru í flipanum Tekjuleki`",
+"`${f.length} invoices ${ml(f[0].i.d.slice(0, 7))}–${ml(f.at(-1).i.d.slice(0, 7))}; hours above the fee are in the Revenue leakage tab`"
+],
+[
+"const MF = ['janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 'júlí', 'ágúst', 'september', 'október', 'nóvember', 'desember'];",
+"const MF = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];"
+],
+[
+"`<span>${r.length} reikningar · staða úr viðskiptamannabók</span><span>Samtals <b>${kr(sum(r, i => i.net))}</b> kr. án VSK</span>`",
+"`<span>${r.length} invoices · balance from the customer ledger</span><span>Total <b>${kr(sum(r, i => i.net))}</b> ISK excl. VAT</span>`"
+],
+[
+"`<span>Línur á fjárhagslykil (tegund G/L Account)</span><span>Samtals <b>${kr(sum(r, x => x.amt))}</b> kr. án VSK</span>`",
+"`<span>Lines on G/L account (type G/L Account)</span><span>Total <b>${kr(sum(r, x => x.amt))}</b> ISK excl. VAT</span>`"
+],
+[
+"`${esc(P.label)} · ${{{js.unreg_drawer}}} Handfærðar tekjur: sjá <a href=\"manadarlok.html\">Mánaðarlok</a>.`",
+"`${esc(P.label)} · ${{{js.unreg_drawer}}} Manual revenue entries: see <a href=\"manadarlok.html\">Month-end</a>.`"
+],
+[
+"`Viðskiptavinur ${no}${x.ic ? ' · tengdur aðili' : ''}${x.new ? (' · nýr ' + {{js.year}}) : ''}`",
+"`Customer ${no}${x.ic ? ' · related party' : ''}${x.new ? (' · new ' + {{js.year}}) : ''}`"
+],
+[
+"`${esc(DATA.bud_name)} <span class=\"pill m\">drög</span> ${sg(100 * (P.rev / P.bud - 1))}%`",
+"`${esc(DATA.bud_name)} <span class=\"pill m\">draft</span> ${sg(100 * (P.rev / P.bud - 1))}%`"
+],
+[
+"'Allar línur úr verkum í BC. Línur merktar Athuga eru ekki taldar með í sækjanlegu strax.'",
+"'All lines from jobs in BC. Lines marked Check are not counted in recoverable now.'"
+],
+[
+"`<tr><td colspan=\"${C.length}\" class=\"sub\">Engin færsla passar við leitina.</td></tr>`",
+"`<tr><td colspan=\"${C.length}\" class=\"sub\">No entry matches the search.</td></tr>`"
+],
+[
+">Unnið með aðstoð gervigreindar (Claude). Yfirfarið áður en byggt er á tölunum.<",
+">Prepared with the help of AI (Claude). Review before relying on the figures.<"
+],
+[
+"`${esc(P.label)} · ${X.length} færslur · ${m1(sum(X, e => e.amt))} m.kr. án VSK`",
+"`${esc(P.label)} · ${X.length} entries · ISK ${m1(sum(X, e => e.amt))}m excl. VAT`"
+],
+[
+"`Tekjur eru ${sg(100 * (P.rev / P.py - 1))}% á móti sama tímabili ${{{js.py}}}`",
+"`Revenue is ${sg(100 * (P.rev / P.py - 1))}% versus the same period ${{{js.py}}}`"
+],
+[
+"=\"Tekjur á mánuði: reikningar á viðskiptavin á móti dagbók án viðskiptavinar\"",
+"=\"Revenue by month: customer invoices versus journal entries without a customer\""
+],
+[
+"', og bráðabirgðamánuðir eru vanmetnir þar til söludagbók hefur verið bókuð'",
+"', and preliminary months are understated until the sales journal has been posted'"
+],
+[
+"`af sölu á viðskiptamannabók (${byC.slice(0, 3).map(c => c.no).join(', ')})`",
+"`of sales on the customer ledger (${byC.slice(0, 3).map(c => c.no).join(', ')})`"
+],
+[
+"=\"Tekjur á mánuði {{meta.year}} á móti meðaltali {{meta.py}} og áætlun\"",
+"=\"Revenue by month {{meta.year}} against {{meta.py}} average and budget\""
+],
+[
+">{{meta.company}} · sala, viðskiptavinir og tekjuleki · m.kr. án VSK<",
+">{{meta.company}} · sales, customers and revenue leakage · ISK m excl. VAT<"
+],
+[
+"`þar af ${nNew} nýir á árinu${nIC ? ` · ${nIC} tengdir aðilar` : ''}`",
+"`of which ${nNew} new this year${nIC ? ` · ${nIC} related parties` : ''}`"
+],
+[
+"'<p class=\"sub\">Enginn reikningur á viðskiptavin á tímabilinu.</p>'",
+"'<p class=\"sub\">No customer invoices in the period.</p>'"
+],
+[
+"`meðalreikningur ${m1(sum(invP, i => i.net) / invP.length)} m.kr.`",
+"`average invoice ISK ${m1(sum(invP, i => i.net) / invP.length)}m`"
+],
+[
+"`${none} viðskiptavinir eru ekki með reikning á völdu tímabili. `",
+"`${none} customers have no invoice in the selected period. `"
+],
+[
+">smelltu á stoð til að opna lyklana, á lykil til að sjá færslur<",
+">click a stream to open its accounts, an account to see entries<"
+],
+[
+"`${t.i.doc} ${date(t.i.d)}, lykill ${x.acc}, einskiptissala 1×`",
+"`${t.i.doc} ${date(t.i.d)}, account ${x.acc}, one-off sale 1×`"
+],
+[
+"`${kr(r.l[3])} klst. á ${r.i.doc} (${date(r.i.d)}), á verðskrá`",
+"`${kr(r.l[3])} hrs on ${r.i.doc} (${date(r.i.d)}), at list price`"
+],
+[
+"`á móti ${{{js.py}}} × ${P.ms.length}/12 (${m1(P.py)} m.kr.)`",
+"`versus ${{{js.py}}} × ${P.ms.length}/12 (ISK ${m1(P.py)}m)`"
+],
+[
+"${DATA.leak.leakJobs}<small>af ${DATA.leak.openJobs}</small>",
+"${DATA.leak.leakJobs}<small>of ${DATA.leak.openJobs}</small>"
+],
+[
+">reikningar án VSK · smelltu til að sjá reikninga og línur<",
+">invoices excl. VAT · click to see invoices and lines<"
+],
+[
+">Tekjuleki · sækjanlegt strax · staða {{meta.leak_as_of}}<",
+">Revenue leakage · recoverable now · as of {{meta.leak_as_of}}<"
+],
+[
+"` <span class=\"sub\">+${i.lines.length - 1} línur</span>`",
+"` <span class=\"sub\">+${i.lines.length - 1} lines</span>`"
+],
+[
+"`${pct(onJob / P.rev, 1)} tekna · ${{{js.onjob_note}}}`",
+"`${pct(onJob / P.rev, 1)} of revenue · ${{{js.onjob_note}}}`"
+],
+[
+"`Reikningar urðu stærri en dagbókin í ${MF[mi(sw)]}. `",
+"`Invoices overtook the journal in ${MF[mi(sw)]}. `"
+],
+[
+"'<tr><td colspan=\"7\">Engin frávik fundust.</td></tr>'",
+"'<tr><td colspan=\"7\">No exceptions found.</td></tr>'"
+],
+[
+">valið tímabil · smelltu á stoð til að sjá færslur<",
+">selected period · click a stream to see entries<"
+],
+[
+">samningur og reikningsfært {{meta.year}} til dags<",
+">contract and invoiced {{meta.year}} to date<"
+],
+[
+"`Tekjustoð · ${SN[k]}${a ? '' : ' · allir lyklar'}`",
+"`Revenue stream · ${SN[k]}${a ? '' : ' · all accounts'}`"
+],
+[
+"`${pct(P.inv / P.rev)} af tekjum tímabilsins`",
+"`${pct(P.inv / P.rev)} of revenue in the period`"
+],
+[
+"'<span class=\"pill i\">tengdur aðili</span>'",
+"'<span class=\"pill i\">related party</span>'"
+],
+[
+">. Innheimta og gjaldfallnar kröfur: sjá <",
+">. Collections and overdue receivables: see <"
+],
+[
+"` ${c.dataset.label}: ${fmt(c.raw)} m.kr.`",
+"` ${c.dataset.label}: ISK ${fmt(c.raw)}m`"
+],
+[
+"'kr./klst. án VSK · verðskrá forða í BC'",
+"'ISK/hr excl. VAT · resource price list in BC'"
+],
+[
+"'<span class=\"sub\">innra verk</span>'",
+"'<span class=\"sub\">internal job</span>'"
+],
+[
+"'Veldu aðgerðir · samtalan uppfærist'",
+"'Select actions · the total updates'"
+],
+[
+"${nonGL}<small>af ${L.length}</small>",
+"${nonGL}<small>of ${L.length}</small>"
+],
+[
+"'<span class=\"sub\">bakfærsla</span>'",
+"'<span class=\"sub\">reversal</span>'"
+],
+[
+"`Reikningur ${i.doc} · ${date(i.d)}`",
+"`Invoice ${i.doc} · ${date(i.d)}`"
+],
+[
+"'<span class=\"pill l\">greitt</span>'",
+"'<span class=\"pill l\">paid</span>'"
+],
+[
+">Framlegð og framvinda verka: sjá <",
+">Job margin and progress: see <"
+],
+[
+"'tekjuleki · sjá flipann Tekjuleki'",
+"'revenue leakage · see the Revenue leakage tab'"
+],
+[
+"'<span class=\"pill i\">opið</span>'",
+"'<span class=\"pill i\">open</span>'"
+],
+[
+"`besti mánuður, ${m1(best[1])} m`",
+"`best month, ${m1(best[1])}m`"
+],
+[
+"'Reikningslínur á vöru eða forða'",
+"'Invoice lines on item or resource'"
+],
+[
+"'<span class=\"sub\">dagbók</span>'",
+"'<span class=\"sub\">journal</span>'"
+],
+[
+"'enginn reikningur á tímabilinu'",
+"'no invoice in the period'"
+],
+[
+"=\"Opna færslur: ${esc(SN[s.k])}\"",
+"=\"Open entries: ${esc(SN[s.k])}\""
+],
+[
+"${c === 'up' ? 'yfir' : 'undir'}",
+"${c === 'up' ? 'above' : 'below'}"
+],
+[
+">af reikningslínum og verðskrá<",
+">from invoice lines and price list<"
+],
+[
+">Athuganirnar fylgja skillinu <",
+">The checks follow the skill <"
+],
+[
+"'Dagbókarfærslur á tekjulyklum'",
+"'Journal entries on revenue accounts'"
+],
+[
+">{{meta.company_short}} tekjur<",
+">{{meta.company_short}} revenue<"
+],
+[
+"'Þrír stærstu viðskiptavinir'",
+"'Three largest customers'"
+],
+[
+"'Viðskiptavinir með reikning'",
+"'Customers with an invoice'"
+],
+[
+"'veldu aðgerðir hér að neðan'",
+"'select actions below'"
+],
+[
+">Tekjur eftir stoð og lykli<",
+">Revenue by stream and account<"
+],
+[
+"'Verk og samningar með leka'",
+"'Jobs and contracts with leakage'"
+],
+[
+"=\"Opna færslur á lykli ${a}\"",
+"=\"Open entries on account ${a}\""
+],
+[
+"'<span class=\"pill l\">nýr '",
+"'<span class=\"pill l\">new '"
+],
+[
+"'Reikningar á viðskiptavin'",
+"'Customer invoices'"
+],
+[
+"`${kr(f[0].l[4])} kr./mán.`",
+"`ISK ${kr(f[0].l[4])}/month`"
+],
+[
+"${s === 'Gert' ? 'l' : 'i'}",
+"${[\"Gert\", \"Done\"].includes(s) ? \"l\" : \"i\"}"
+],
+[
+"`Ár til dags, ${span(ms)}`",
+"`Year to date, ${span(ms)}`"
+],
+[
+"'Dagbók án viðskiptavinar'",
+"'Journal without customer'"
+],
+[
+"'Viðskiptavinur / uppruni'",
+"'Customer / source'"
+],
+[
+">Handfærðar tekjur: sjá <",
+">Manual revenue entries: see <"
+],
+[
+"`${DATA.bud_name} (drög)`",
+"`${DATA.bud_name} (draft)`"
+],
+[
+">Hvernig salan er skráð<",
+">How sales are recorded<"
+],
+[
+">← Til baka í reikninga<",
+">← Back to invoices<"
+],
+[
+"'Stærsti viðskiptavinur'",
+"'Largest customer'"
+],
+[
+">Sjóðstreymi og bankar<",
+">Cash flow and banks<"
+],
+[
+">Hlutdeild {{meta.py}}<",
+">Share {{meta.py}}<"
+],
+[
+"'Óskráð á viðskiptavin'",
+"'Not recorded to a customer'"
+],
+[
+"'Vöxtur án einskiptis'",
+"'Growth excl. one-offs'"
+],
+[
+"'Endurtekur sig á ári'",
+"'Recurs annually'"
+],
+[
+">Sala á viðskiptavin<",
+">Sales by customer<"
+],
+[
+">Aðferð og athuganir<",
+">Method and checks<"
+],
+[
+"`Tekjur · ${P.label}`",
+"`Revenue · ${P.label}`"
+],
+[
+"'á viðskiptamannabók'",
+"'on the customer ledger'"
+],
+[
+"'Á viðskiptamannabók'",
+"'On the customer ledger'"
+],
+[
+"'Hvaðan lekinn kemur'",
+"'Where the leakage comes from'"
+],
+[
+">Tengt BC · Bifröst<",
+">Connected to BC · Bifröst<"
+],
+[
+">Vörur og þjónusta<",
+">Products and services<"
+],
+[
+">Verð og afslættir<",
+">Prices and discounts<"
+],
+[
+"'Verð og afslættir'",
+"'Prices and discounts'"
+],
+[
+"'meðaltal á mánuði'",
+"'monthly average'"
+],
+[
+"'án einskiptissölu'",
+"'excluding one-off sales'"
+],
+[
+"` · ${s.n} færslur`",
+"` · ${s.n} entries`"
+],
+[
+"'enginn reikningur'",
+"'no invoice'"
+],
+[
+"'Á ári, endurtekið'",
+"'Per year, recurring'"
+],
+[
+">Framlegð og verk<",
+">Margin and jobs<"
+],
+[
+"=\"Tegund tímabils\"",
+"=\"Period type\""
+],
+[
+"=\"Leita í færslum\"",
+"=\"Search entries\""
+],
+[
+"'Sækjanlegt strax'",
+"'Recoverable now'"
+],
+[
+">Tekjur á mánuði<",
+">Revenue by month<"
+],
+[
+"'aðgerðir valdar'",
+"'actions selected'"
+],
+[
+">Viðskiptavinir<",
+">Customers<"
+],
+[
+">Viðskiptavinur<",
+">Customer<"
+],
+[
+"=\"Veldu tímabil\"",
+"=\"Select period\""
+],
+[
+"' (bráðabirgða)'",
+"' (preliminary)'"
+],
+[
+"' · bráðabirgða'",
+"' · preliminary'"
+],
+[
+"'Verðskrá vinnu'",
+"'Labour price list'"
+],
+[
+">Ársfjórðungur<",
+">Quarter<"
+],
+[
+"'Ársfjórðungur'",
+"'Quarter'"
+],
+[
+">Stoð / lykill<",
+">Stream / account<"
+],
+[
+">Reikningsfært<",
+">Invoiced<"
+],
+[
+"=\"Sía á tegund\"",
+"=\"Filter by type\""
+],
+[
+"'breyting frá '",
+"'change from '"
+],
+[
+"'Á móti áætlun'",
+"'Versus budget'"
+],
+[
+"'Til athugunar'",
+"'To review'"
+],
+[
+"'Verk og tímar'",
+"'Jobs and hours'"
+],
+[
+">Fjárhæð, kr.<",
+">Amount, ISK<"
+],
+[
+"=\"Leiðarstika\"",
+"=\"Breadcrumb\""
+],
+[
+"'Einskipti 1×'",
+"'One-off 1×'"
+],
+[
+"'Bókað á verk'",
+"'Posted to jobs'"
+],
+[
+"'aðgerð valin'",
+"'action selected'"
+],
+[
+"'0 kr. notkun'",
+"'ISK 0 usage'"
+],
+[
+"'Einingarverð'",
+"'Unit price'"
+],
+[
+">Ár til dags<",
+">Year to date<"
+],
+[
+">Tekjustoðir<",
+">Revenue streams<"
+],
+[
+"'Upphæð, kr.'",
+"'Amount, ISK'"
+],
+[
+"> mælaborða<",
+"> dashboards<"
+],
+[
+">Mánaðarlok<",
+">Month-end<"
+],
+[
+">Niðurstaða<",
+">Finding<"
+],
+[
+"', meðaltal'",
+"', average'"
+],
+[
+"'Reikningar'",
+"'Invoices'"
+],
+[
+"'Einskiptis'",
+"'One-off'"
+],
+[
+"'Fylgiskjal'",
+"'Document'"
+],
+[
+"'Reikningur'",
+"'Invoice'"
+],
+[
+">← Miðstöð<",
+">← Hub<"
+],
+[
+">Tekjuleki<",
+">Revenue leakage<"
+],
+[
+">Valið bil<",
+">Custom range<"
+],
+[
+">Hlutdeild<",
+">Share<"
+],
+[
+">Samningur<",
+">Contract<"
+],
+[
+"'Afslættir'",
+"'Discounts'"
+],
+[
+">Hlutfall<",
+">Ratio<"
+],
+[
+">Aðgerðir<",
+">Actions<"
+],
+[
+"'Staðfest'",
+"'Confirmed'"
+],
+[
+">Yfirsýn<",
+">Overview<"
+],
+[
+">Tímabil<",
+">Period<"
+],
+[
+">Mánuður<",
+">Month<"
+],
+[
+"'Mánuður'",
+"'Month'"
+],
+[
+">Færslur<",
+">Entries<"
+],
+[
+">Uppruni<",
+">Source<"
+],
+[
+">Athugun<",
+">Check<"
+],
+[
+"=\"Flipar\"",
+"=\"Tabs\""
+],
+[
+"'Tekjur '",
+"'Revenue '"
+],
+[
+"'Líklegt'",
+"'Likely'"
+],
+[
+"'Fjárhæð'",
+"'Amount'"
+],
+[
+"'Með VSK'",
+"'Incl. VAT'"
+],
+[
+"'Afsl. %'",
+"'Disc. %'"
+],
+[
+">Tekjur<",
+">Revenue<"
+],
+[
+">Staða <",
+">As of <"
+],
+[
+">Lýsing<",
+">Description<"
+],
+[
+"'Lýsing'",
+"'Description'"
+],
+[
+">Tegund<",
+">Type<"
+],
+[
+"'Athuga'",
+"'Check'"
+],
+[
+"'Lykill'",
+"'Account'"
+],
+[
+"'Án VSK'",
+"'Excl. VAT'"
+],
+[
+">Veldu<",
+">Select<"
+],
+[
+">Klst.<",
+">Hrs<"
+],
+[
+">Vissa<",
+">Confidence<"
+],
+[
+">Staða<",
+">Status<"
+],
+[
+"'Staða'",
+"'Status'"
+],
+[
+"=\"Loka\"",
+"=\"Close\""
+],
+[
+"'Dags.'",
+"'Date'"
+],
+[
+">Verk<",
+">Jobs<"
+],
+[
+"'Verk'",
+"'Jobs'"
+],
+[
+"=\"Sýn\"",
+"=\"View\""
+],
+[
+"'Allt'",
+"'All'"
+],
+[
+"'opið'",
+"'open'"
+],
+[
+"'Lína'",
+"'Line'"
+],
+[
+"'Magn'",
+"'Quantity'"
+],
+[
+">Frá<",
+">From<"
+],
+[
+">Til<",
+">To<"
+],
+[
+"', og bráðabirgðamánuðir eru vanmetnir þar til þeir hafa verið fullbókaðir'",
+"', and preliminary months are understated until they have been fully posted'"
+],
+[
+"('viðmið ' + ",
+"('baseline ' + "
+],
+[
+"'af tekjum tímabilsins eru reikningar á viðskiptavin'",
+"'of revenue in the period is invoiced to customers'"
+],
+[
+"`af reikningssölu utan staðgreiðslu (${byC.slice(0, 3).map(c => c.no).join(', ')})`",
+"`of invoiced sales excl. cash sales (${byC.slice(0, 3).map(c => c.no).join(', ')})`"
+],
+[
+"'<span class=\"pill m\">staðgreiðsla</span>'",
+"'<span class=\"pill m\">cash sale</span>'"
+],
+[
+"` · auk ${nPos} staðgreiðslureikn.`",
+"` · plus ${nPos} cash sale accounts`"
+],
+[
+"' · af sölu utan staðgreiðslu'",
+"' · of sales excl. cash sales'"
+],
+[
+"`${R.length} ${R.length === 1 ? 'staðsetning' : 'staðsetningar'} · samtals ${m1(tot)} m.kr. á tímabilinu.`",
+"`${R.length} ${R.length === 1 ? 'location' : 'locations'} · total ISK ${m1(tot)}m in the period.`"
+],
+[
+"' Staðgreiðsluviðskiptavinir eru í listanum að ofan en ekki taldir með í samþjöppun og stærstu viðskiptavinum.'",
+"' Cash sale accounts are in the list above but are not counted in concentration or largest customers.'"
+],
+[
+">Sala eftir verslun<",
+">Sales by store<"
+],
+[
+">staðgreiðsla og kortasala eftir staðsetningu eða vídd · valið tímabil<",
+">cash and card sales by location or dimension · selected period<"
+],
+[
+"'Framlegð af vörusölu'",
+"'Margin on product sales'"
+],
+[
+"`${m1(iRev - iCost)} af ${m1(iRev)} m.kr. vörusölu · kostnaðarverð seldra vara`",
+"`ISK ${m1(iRev - iCost)}m of ISK ${m1(iRev)}m product sales · cost of goods sold`"
+],
+[
+"'Stærsti vöruflokkur'",
+"'Largest product group'"
+],
+[
+"`${esc(IS[0].name)} · ${IS.length} ${IS.length === 1 ? 'flokkur' : 'flokkar'} alls`",
+"`${esc(IS[0].name)} · ${IS.length} ${IS.length === 1 ? 'group' : 'groups'} in total`"
+],
+[
+"'Reikningslínur á vöru'",
+"'Invoice lines on items'"
+],
+[
+">Vörur og vöruflokkar<",
+">Products and product groups<"
+],
+[
+"'valið tímabil'",
+"'selected period'"
+],
+[
+"('ár til dags ' + ",
+"('year to date ' + "
+],
+[
+"} · sala og framlegð<",
+"} · sales and margin<"
+],
+[
+">Vara / flokkur<",
+">Item / group<"
+],
+[
+">Sala<",
+">Sales<"
+],
+[
+">Framlegð<",
+">Margin<"
+],
+[
+">Framlegð %<",
+">Margin %<"
+],
+[
+"<td>Samtals${IS.length > 15 ? ` (${IS.length} flokkar)` : ''}</td>",
+"<td>Total${IS.length > 15 ? ` (${IS.length} groups)` : ''}</td>"
+],
+[
+">Sala og kostnaðarverð seldra vara úr birgðafærslum í BC. Framlegð á vöru og ABC-flokkun: sjá <",
+">Sales and cost of goods sold from item entries in BC. Margin by item and ABC classification: see <"
+],
+[
+"`${f.length} reikningar ${ml(f[0].i.d.slice(0, 7))}–${ml(f.at(-1).i.d.slice(0, 7))}`",
+"`${f.length} invoices ${ml(f[0].i.d.slice(0, 7))}–${ml(f.at(-1).i.d.slice(0, 7))}`"
+],
+[
+"'stk.'",
+"'pcs'"
+],
+[
+"`${kr(r.l[4])} kr./${U}`",
+"`${kr(r.l[4])} ISK/${U}`"
+],
+[
+"`${fmt(r.l[3], 0)} ${U} á ${r.i.doc} (${date(r.i.d)})${r.l[5] ? ` · ${fmt(r.l[5], 1)}% afsláttur` : ''}`",
+"`${fmt(r.l[3], 0)} ${U} on ${r.i.doc} (${date(r.i.d)})${r.l[5] ? ` · ${fmt(r.l[5], 1)}% discount` : ''}`"
+],
+[
+"`<p class=\"note\">${{{js.price_note}}} 0 kr. sölulínur, afslættir umfram venju og verð undir kostnaði: sjá <button class=\"linkbtn\" data-go=\"t-leki\">flipann Tekjuleki</button>.</p>`",
+"`<p class=\"note\">${{{js.price_note}}} ISK 0 sales lines, discounts above normal and prices below cost: see <button class=\"linkbtn\" data-go=\"t-leki\">the Revenue leakage tab</button>.</p>`"
+],
+[
+"'Athuganir gerðar'",
+"'Checks done'"
+],
+[
+"`af þeim sem eiga við${NA.length ? ` · ${NA.length} eiga ekki við` : ''}${HASJOBS ? '' : ' (engin verk í BC)'}`",
+"`of those that apply${NA.length ? ` · ${NA.length} do not apply` : ''}${HASJOBS ? '' : ' (no jobs in BC)'}`"
+],
+[
+"`<br><span class=\"sub\">Á ekki við hér: ${NA.map(r => esc(r[0])).join(', ')}. Sjá Aðferð og athuganir neðst.</span>`",
+"`<br><span class=\"sub\">Not applicable here: ${NA.map(r => esc(r[0])).join(', ')}. See Method and checks below.</span>`"
+],
+[
+"const ST_OK = ['Gert'], ST_NA = ['Á ekki við'];",
+"const ST_OK = ['Gert', 'Done'], ST_NA = ['Á ekki við', 'Not applicable'];"
+],
+[
+"'Gögn: verk, verkfærslur og áætlunarlínur í BC', 'Gögn: reikningslínur, birgðafærslur og viðskiptamannafærslur í BC'",
+"'Data: jobs, job entries and planning lines in BC', 'Data: invoice lines, item entries and customer entries in BC'"
+],
+[
+"'Skjal / vara'",
+"'Document / item'"
+],
+[
+"'0 kr. sölulínur'",
+"'ISK 0 sales lines'"
+],
+[
+"'Rof í reikningum'",
+"'Invoice breaks'"
+],
+[
+"'Allar línur úr reikningslínum og birgðafærslum í BC. Línur merktar Athuga eru ekki taldar með í sækjanlegu strax.'",
+"'All lines from invoice lines and item entries in BC. Lines marked Check are not counted in recoverable now.'"
+],
+[
+"`<span>${r.length} reikningslínur</span><span>Samtals <b>${kr(sum(r, x => x.amt))}</b> kr. án VSK</span>`",
+"`<span>${r.length} invoice lines</span><span>Total <b>${kr(sum(r, x => x.amt))}</b> ISK excl. VAT</span>`"
+],
+[
+"', verk og verkfærslur'",
+"', jobs and job entries'"
+],
+[
+"'Öll sala er reikningsfærð á viðskiptavini; engin sala er bókuð með dagbók. '",
+"'All sales are invoiced to customers; no sales are posted through the journal. '"
+],
+[
+"${MT.filter(r => ST_OK.includes(r[1])).length}<small>af ${MT.length - NA.length}</small>",
+"${MT.filter(r => ST_OK.includes(r[1])).length}<small>of ${MT.length - NA.length}</small>"
+]
+]

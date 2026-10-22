@@ -795,6 +795,53 @@
   "slow_period": "júl–ágú",
   "unrec_period": "sep–okt",
   "warn_post": " m.kr. Hvort sem þetta er greitt eða ógreitt lækkar það sjóðinn, og spáin dregur það frá í fyrstu viku.",
-  "warn_pre": "<b>September og október eru ófullbókaðir.</b> Laun september, staðgreiðsla 15.09. og 15.10., VSK 05.10. og afborganir lána vantar í bankabók, samtals um "
+  "warn_pre": "<b>September og október eru ófullbókaðir.</b> Laun september, staðgreiðsla 15.09. og 15.10., VSK 05.10. og afborganir lána vantar í bankabók, samtals um ",
+  "act3_title": "Semja um 30 daga greiðslufrest við lánardrottna",
+  "act3_defer": 30
+ },
+ "i18n": {
+  "en": {
+   "meta": {
+    "fc_from": "19 Oct 2026",
+    "fc_to": "17 Jan 2027",
+    "as_of": "16 Oct 2026",
+    "fetched": "16–17 Oct 2026"
+   },
+   "text": {
+    "hist_period": "January to October 2026"
+   },
+   "html": {
+    "ap_note": "Prompt-payment discounts: none are recorded on open entries or invoices awaiting approval. Check the terms of the largest suppliers.",
+    "footer_assumptions": "average payroll Jan–Aug (51% paid on the last working day, 45% on the 15th of the following month, ratios from bank entries), VAT from average turnover, new sales at the Jan–Aug average due on the 20th of the following month, recurring purchases from bank entries Jan–Aug, and invoices awaiting approval on their due date. September is not fully posted. Approvers and cardholders are shown as roles and numbers."
+   },
+   "js": {
+    "act2_text": "The payments are missing from the bank ledger. If paid, the actual bank balance is lower; if unpaid, late-payment interest accrues.",
+    "act2_title": "Confirm whether payroll, withholding tax and VAT for Sep–Oct were paid",
+    "act3_text": "Stálvogur is owed ISK 31.6m overdue since 20 Sep. Defer suppliers and invoices awaiting approval.",
+    "ag_trend_post": "m in June, which explains the fall in cash.",
+    "ag_trend_pre": "Receivables have risen from ISK ",
+    "bank_note": "Unreconciled at 31 Aug are salaries paid on 31 Aug at Landsbankinn. September and October payments are missing from the bank ledger (see warning at the top), so the actual bank balance is probably lower than the balance in BC. Cardholders are not named.",
+    "bank_txt": "Three bank accounts and three company cards. Balances have fallen quickly since the summer due to rising receivables and unposted payments. All accounts were last reconciled to bank statements on 31 Aug 2026.",
+    "base_period": "Jan–Aug",
+    "beyond_sale": "December sales due 20 Jan 2027",
+    "cur_month": "October",
+    "fc_to": "17 Jan 2027",
+    "hist_inc": "Sep–Oct are not fully posted.",
+    "slow_period": "Jul–Aug",
+    "unrec_period": "Sep–Oct",
+    "warn_post": "m. Whether paid or unpaid, this lowers cash, and the forecast deducts it in the first week.",
+    "warn_pre": "<b>September and October are not fully posted.</b> September payroll, withholding tax due 15 Sep and 15 Oct, VAT due 5 Oct and loan repayments are missing from the bank ledger, about ISK ",
+    "act3_title": "Negotiate 30-day payment terms with suppliers"
+   },
+   "names": {
+    "Starfsmaður, útlagður kostnaður": "Employee, expenses",
+    "VSK júlí–ágúst": "VAT July–August",
+    "Gjalddagi 05.10.2026. Engin greiðsla bókuð.": "Due 5 Oct 2026. No payment posted.",
+    "Staðgreiðsla, lífeyrir og tryggingagjald vegna ágúst": "Withholding tax, pensions and social security tax for August",
+    "Stendur ógreitt á skuldalyklum 9710–9740.": "Unpaid on liability accounts 9710–9740.",
+    "Útborguð laun september (áætlað)": "September net salaries (estimated)",
+    "Laun september eru ekki bókuð.": "September payroll is not posted."
+   }
+  }
  }
 }

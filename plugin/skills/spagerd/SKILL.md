@@ -19,6 +19,8 @@ Fylgdu `bifrost-maelabord` og `bifrost-gogn`. Aðeins lesið úr BC.
 - Einskiptisliðir (`oneoffs`) eru teknir út úr grunni spárinnar.
 - **Þekktar pantanir og verk:** opnar sölupantanir (`Sales Header`/`Sales Line`, tegund pöntun) eftir afhendingarmánuði, og eftirstöðvar samningsvirðis verka (`Job Planning Line`, reikningshæft ekki reikningsfært) eftir áætlunardegi. Fara í `thekktar_pantanir`.
 - **Stöðugildi:** ef forðar eða launagögn eru til, fjöldi síðustu mánaða; annars notað hlutfall launa.
+- **Rekstrarsnið:** settu `dataset.profile` (`profile.json` úr `bifrost-gogn`, kafli 2) í `profile`. Síðan velur orðalag eftir `profile.jobs` (verk: „efnishlutfall“, „pantanir og verk“; annars „hlutfall vörunotkunar“, „pantanir“). Kostnaðarhlutföll (vörunotkun/tekjur, laun/tekjur) koma alltaf úr gögnunum, aldrei föstum stuðlum: félag með mikla vörunotkun fær hátt `fit.mat`, þjónustufélag lágt.
+- **Eldsneyti:** `eldsneyti_hlutur` er sjálfgefið 5% af öðrum rekstri. Ef eldsneytislyklar eru í lyklaskrá skaltu reikna hlutinn úr hreyfingu þeirra (síðustu 12 mán.) og merkja „saga“; annars er gildið merkt forsenda (t.d. 0 fyrir þjónustu án bíla).
 
 ## 2. Forsendur — sóttar fyrir hverja keyrslu
 
@@ -48,7 +50,11 @@ Líkanið (útskýranlegt):
 - **Húsnæði og annar rekstur** = grunnur × verðbólga (mánaðarleg uppsöfnun).
 - **Fjármagnsliðir** = grunnur × (stýrivextir / stýrivextir í grunni).
 - **Óvissubil:** P10 / P50 / P90 út frá sveiflu sögunnar, vex með √tíma.
-- **Bakprófun:** líkanið metið án síðustu 3 mánaða og borið saman við raun. MAPE er sýnt í mælaborðinu. Ef MAPE á EBITDA er yfir 25%: segðu að spáin sé óviss og af hverju (t.d. sveiflukennd framlegð eða ófullbókaðir mánuðir).
+- **Stutt saga** (fjöldi fullbókaðra mánaða n, einskiptistekjur frádregnar):
+  - n ≥ 6: fullt líkan eins og að ofan.
+  - 3 ≤ n < 6: **einföld spá (run-rate)**: grunnstig = meðaltal síðustu 3 mánaða, engin leitni, engar árstíðir, óvissubil víkkað (σ = max(10%, 1,5 × σ sögunnar)), engin bakprófun. `forecast.py` prentar „EINFÖLD SPÁ“ og skrifar `model.adferd = "runrate"`. Segðu notanda að spáin sé einföld og óvissan meiri.
+  - n < 3: **spá ekki gerð**. `forecast.py` prentar „SPÁ EKKI GERÐ“, skrifar `forecast.json` með `stada: "engin_spa"` og tómri spá (útgangskóði 0). Smíðaðu samt mælaborðið (`fit.mode = "none"`, `fc: []`, sjá `schema.md`): það sýnir „Spá ekki gerð: of fáir fullbókaðir mánuðir“ og raun ársins, ekki tóm gröf.
+- **Bakprófun** (þarf ≥ 8 fullbókaða mánuði): líkanið metið án síðustu 3 mánaða og borið saman við raun. MAPE er sýnt í mælaborðinu. Ef MAPE á EBITDA er yfir 25%: segðu að spáin sé óviss og af hverju (t.d. sveiflukennd framlegð eða ófullbókaðir mánuðir).
 
 ## 4. Flipar
 

@@ -20,6 +20,10 @@ Fylgdu `bifrost-maelabord` og `bifrost-gogn`. Aðeins lesið.
 - **Reikningar í samþykkt:** innkaupareikningar sem bíða samþykkis (sjá `kostnadur`) eru ekki enn í lánardrottnabók en eru væntanlegar greiðslur á gjalddaga. Taktu þá með í spánni sem sér lið.
 - **Laun og fast:** meðaltal síðustu þriggja fullbókaðra mánaða af launum, launatengdum gjöldum (staðgreiðsla, lífeyrir, tryggingargjald), húsaleigu og afborgunum lána úr `dataset.json`. Laun greidd síðasta virka dag mánaðar, launatengd gjöld 15. næsta mánaðar.
 - **VSK:** ef VSK-lyklar eru í efnahag, áætla greiðslu á gjalddögum (5. næsta mánaðar eftir tveggja mánaða tímabil).
+- **Kortauppgjör (verslun, veitingar, þjónusta með posa):** bankareikningar eða fjárhagslyklar fyrir uppgjör færsluhirða (heiti eins og „Kreditkort“, „Debetkort“, „Kortauppgjör“, „Valitor“, „Rapyd“, „Teya“, „Borgun“, „SaltPay“, „Adyen“) með **debetstöðu** eru krafa á færsluhirði, ekki fyrirtækjakort. Skráðu þá í `banks[]` með `teg: "Kortauppgjör"` (eða `kind: "acquirer"`) og `lag_days` (dagar frá sölu til innborgunar, úr bankafærslum; sjálfgefið 2). Staðan fyrst úr samtölum (`Bank Account`, Balance at Date / `period_breakdown` á lyklinum). Fyrirtækjakort eru með **kreditstöðu** (skuld) og fá `teg: "Greiðslukort"`. Kortauppgjör fer ekki í `cash` né `banks_gl.bankar`/`kort`; gefðu `banks_gl.uppgjor` ef það á sér fjárhagslykil.
+- **Staðgreiðsluviðskiptamenn:** viðskiptamenn sem halda utan um kassa- eða posasölu (t.d. „Staðgreiðsla <verslun>“, „Kassi“, „POS“, „Ýmsir viðskiptamenn“) fá `pos: true` í `custs[]`. Þeir eru ekki taldir stærstu skuldarar.
+- **Aðgerðir í „Fyrst að gera“:** `js.act2_*` og `js.act3_*` eru skrifaðar út frá gögnunum (ekki afrita DT-textann). Ef ekkert réttlætir aðgerð (allt fullbókað, engar gjaldfallnar skuldir), settu titilinn `""`.
+- **Lágmarksstaða:** `min_m` (m.kr.), u.þ.b. hálfs mánaðar útgreiðslur; vanti = 30.
 - **Söguleg greiðsluhegðun:** meðaltöf viðskiptavina frá gjalddaga til greiðslu, úr lokuðum færslum síðustu 6 mánuði.
 
 ## 2. Spáin
@@ -32,7 +36,7 @@ Fylgdu `bifrost-maelabord` og `bifrost-gogn`. Aðeins lesið.
 ## 3. Flipar (þrír)
 
 **Staða í bönkum**
-- Hver bankareikningur og greiðslukort með stöðu í dag (`Bank Account` reitir 1, 2, 22, 41, 58), síðasta yfirlit og hvort bankar stemma við bankalykla. Sjóðstaða í lok mánaðar. Korthafar sem „Greiðslukort 1, 2…“.
+- Hver bankareikningur og greiðslukort með stöðu í dag (`Bank Account` reitir 1, 2, 22, 41, 58), síðasta yfirlit og hvort bankar stemma við bankalykla. Sjóðstaða í lok mánaðar. Korthafar sem „Greiðslukort 1, 2…“. Kortauppgjör (krafa á færsluhirði) er sér lína „Kortauppgjör á leiðinni“, utan handbærs fjár.
 
 **13 vikna spá**
 - Lína: sjóðstaða viku fyrir viku (vika byrjar á mánudegi) með lágpunkti og rauðu svæði undir lágmarksstöðu.

@@ -505,5 +505,70 @@
   "why2_mid": "laun og vörunotkun ekki bókuð. Síðasti fullbókaði mánuður er ágúst",
   "why4_text": "Mánaðarskipting 2025 er ekki í gögnunum (aðeins ársheild), svo jól og sumarleyfi koma ekki fram í spánni.",
   "year": 2026
+ },
+ "i18n": {
+  "en": {
+   "meta": {
+    "as_of": "16 Oct 2026",
+    "fetched": "16–17 Oct 2026"
+   },
+   "text": {
+    "warn": "Actuals run to 31 Aug 2026. September and October are not fully posted (payroll and materials missing) and are therefore forecast. The one-off sale of ISK 31.0m in August is removed from the forecast base. The EBITDA forecast is uncertain (backtest error 48%)",
+    "spa_note": "The monthly split of 2025 is not in the data, only full-year totals. 2025 is therefore shown as a monthly average and the forecast does not use seasonality.",
+    "bt_months": "Jun–Aug",
+    "why_h": "Why is the EBITDA forecast uncertain?",
+    "why_sub": "MAPE above 25%",
+    "footer_src": "general ledger 1 Jan–16 Oct 2026; actuals to 31 Aug 2026. 2025: full-year totals from the ledger. Assumptions: Statistics Iceland (CPI, Sep 2026), Central Bank of Iceland (rate decision 7 Oct 2026), SA/ASÍ collective agreements 2024–2028 (unconfirmed). Forecast model: spagerd/forecast.py."
+   },
+   "js": {
+    "act_long": "January–August",
+    "act_short": "Jan–Aug",
+    "as_cpi_date": "Sep 2026",
+    "as_cpi_st": "confirmed",
+    "as_fx_note": "Not retrieved; imported inputs are not separated.",
+    "as_fx_src": "Bifröst, exchange rate table",
+    "as_fx_st": "missing",
+    "as_fx_val": "not used",
+    "as_kj_date": "1 Jan 2027",
+    "as_kj_note": "Private-sector agreements 2024–2028: 3.5% or at least ISK 23,750. Confirm.",
+    "as_kj_st": "unconfirmed",
+    "as_of": "16 Oct 2026",
+    "as_ord_note": "Open orders and unbilled job contract value not retrieved.",
+    "as_ord_st": "missing",
+    "as_ord_val": "none in forecast",
+    "as_rate_date": "7 Oct 2026",
+    "as_rate_note": "Next decision 18 Nov 2026. Finance costs follow proportionally.",
+    "as_rate_st": "confirmed",
+    "base3": "Jun–Aug 2026",
+    "bt_eb_chip": "above 25%: uncertain",
+    "bt_rev_chip": "within 25%",
+    "cpi_desc": "Statistics Iceland: 5.9% (Sep 2026).",
+    "decide_date": "1 Nov 2026",
+    "fc_long": "September–December",
+    "fc_short": "Sep–Dec",
+    "fuel_desc": "5% of other operating costs.",
+    "hist_period": "Jan–Aug 2026",
+    "inc_tip": "Month not fully posted: payroll and materials missing.",
+    "kj_desc": "SA/ASÍ: 3.5% (unconfirmed).",
+    "need_fail": "A price increase over two months is not enough.",
+    "oneoff_month": "August",
+    "oneoff_month_cap": "August",
+    "oneoff_note": "Sales, VAT exempt, removed from the forecast revenue base.",
+    "oneoff_period": "08.2026",
+    "rate_base": "8.0%",
+    "rate_desc": "Central Bank: 8.0% (7 Oct 2026).",
+    "why1_tail": "The model uses averages, but the margin improved sharply in Jun–Aug, so the backtest underestimated EBITDA.",
+    "why2_mid": "payroll and materials not posted. The last fully posted month is August",
+    "why4_text": "The monthly split of 2025 is not in the data (only the full year), so Christmas and summer holidays are not reflected in the forecast."
+   },
+   "names": {
+    "laun vantar, vörunotkun vantar": "payroll missing, materials missing",
+    "laun vantar, vörunotkun vantar, yfirstandandi mánuður": "payroll missing, materials missing, current month",
+    "Sjálfgefnar forsendur. Uppfæra ALLTAF fyrir keyrslu (sjá SKILL.md, kafli 2). Gildi og heimildir miðast við 16.10.2026.": "Default assumptions. ALWAYS update before a run (see SKILL.md, section 2). Values and sources as of 16 Oct 2026.",
+    "Hagstofa Íslands, 12 mánaða breyting VNV í september 2026 (5,9%). Staðfesta nýjustu mælingu og verðbólguspá Seðlabankans.": "Statistics Iceland, 12-month change in CPI in September 2026 (5.9%). Confirm the latest reading and the Central Bank inflation forecast.",
+    "Seðlabanki Íslands, ákvörðun peningastefnunefndar 7.10.2026: meginvextir 8,0%. Næsta ákvörðun 18.11.2026.": "Central Bank of Iceland, monetary policy committee decision 7 Oct 2026: key rate 8.0%. Next decision 18 Nov 2026.",
+    "Kjarasamningar á almennum markaði 2024–2028: 3,5% eða að lágmarki 23.750 kr. 1.1.2027. Staðfesta hjá SA/ASÍ eða viðkomandi stéttarfélagi.": "Private-sector collective agreements 2024–2028: 3.5% or at least ISK 23,750 on 1 Jan 2027. Confirm with SA/ASÍ or the relevant union."
+   }
+  }
  }
 }

@@ -1026,5 +1026,308 @@
  "_maps": [
   "js.dept_names",
   "js.overruns"
+ ],
+ "i18n": {
+  "en": {
+   "meta": {
+    "as_of": "17 Oct 2026",
+    "as_of_dm": "17 Oct"
+   },
+   "text": {
+    "period": "Jan–Aug",
+    "line_note": "Sep and Oct are not fully posted (materials and payroll missing) and are not included.",
+    "cogs_note": "Inputs fall from 42.9% of revenue in 2025 to 37.8% this year. The explanation is not in the books, see Data quality. It needs to be confirmed whether this is real.",
+    "verk_note": "S-2601 is based on the annual plan at list price (ISK 112.4m). The D jobs are combined.",
+    "gantt_note": "Stripes show work after the contract end date (S-2602: work posted in October after the contract ended on 31 Aug).",
+    "items_note": "DT does almost everything through jobs (15 open jobs, 6 resources). There are 13 items in the system but no item sales are posted at a sales price (Value Entry), so this shows the price list, not actual sales. Inventory is not posted to an inventory account in the balance sheet.",
+    "cost_examples": "steel, piping, freight, subcontractors",
+    "source": "Source: Business Central (Bifröst), DT Vélsmiðjan ehf., retrieved 17 Oct 2026 through Bifröst: general ledger (dataset), Job, Job Planning Line (79 lines), Job Ledger Entry (51 entries), Cust. Ledger Entry and Item. Read only.",
+    "caveats": "Caveats: Gross margin = revenue − materials and inputs (accounts 2010, 2040, 2050, 2120). Revenue is mostly posted through a journal to 1110, not from sales invoices, so sales by customer cover only 32% of revenue. Job margin is estimated at completion (billable − estimated total cost). Contract value = billable job lines; for S-2601 the annual plan at list price is used (ISK 112.4m). Invoicing to jobs is linked by customer and amount. One-off sale in August ISK 31.0m (account 1130). 2025 exists only as a full year. Resources are shown by code."
+   },
+   "js": {
+    "abc_cust_mid": "Svarfaðarver alone is",
+    "abc_job_tail": "V-2601 and S-2601 carry the business; the ten D jobs together are",
+    "cogs_bridge": [
+     {
+      "no": "2010",
+      "label": "Purchases"
+     },
+     {
+      "no": "2050",
+      "label": "Freight"
+     },
+     {
+      "no": "2120",
+      "label": "Other COGS"
+     }
+    ],
+    "dept_names": {
+     "THJONUSTA": "Service",
+     "VERKST": "Workshop",
+     "UPPSETN": "Installation"
+    },
+    "dept_note": "Only work posted to jobs (13,610 hours). Value at list price is not the same as invoiced; e.g. the contract price of S-2602 is 38% below the price list. Installation has the lowest mark-up, mostly because of design hours on V-2601.",
+    "ins_tail": "Inputs as a share of revenue are 5.1 pp lower than 2025 and explain the rise in the gross margin; this needs to be confirmed.",
+    "item_flags": [
+     [
+      "h",
+      "!",
+      "1080 Temperature sensor below cost",
+      "List price ISK 44,000 but cost ISK 46,000. Each unit sold loses ISK 2,000. 45 units in stock.",
+      "−4.5%"
+     ],
+     [
+      "m",
+      "i",
+      "No item sales in BC",
+      "Items are used on jobs (L-2601) but not sold through sales invoices. Margin on items arises in the jobs.",
+      "–"
+     ],
+     [
+      "l",
+      "kr",
+      "Capital tied up in items",
+      "Inventory at cost per item cards; not posted to an inventory account in the balance sheet.",
+      "17.8m"
+     ]
+    ],
+    "job_flags": [
+     [
+      "h",
+      "!",
+      "S-2602 · Kaldhreinsun: 8.2% margin",
+      "Contract price ISK 45.0m for 5,000 hours (ISK 9,000/hr) against a list price of 14,600. The job is flagged over budget and work continued after the contract ended on 31 Aug.",
+      "5.2m"
+     ],
+     [
+      "h",
+      "!",
+      "V-2601 · billed ahead of progress",
+      "Billed 148.0m against about 107.0m earned (cost ratio 72%). SR00089 and SR00110 are both 50.0m, same day 23 Aug.",
+      "41.0m"
+     ],
+     [
+      "m",
+      "↓",
+      "V-2601 · margin falls to 21.5%",
+      "Was 23.2%. A new materials line of ISK 2.5m added on 8 Oct and design ran 90 hours over. No variation recorded against it.",
+      "−1.7 pp"
+     ],
+     [
+      "m",
+      "↓",
+      "S-2603 · hours above fixed fee",
+      "The fixed fee of ISK 1.2m a month covers about 63 hours at list price. September had 106 hours. September margin about 13%.",
+      "41.6% yr"
+     ],
+     [
+      "l",
+      "·",
+      "L-2601 · stock fabrication without revenue",
+      "ISK 10.7m cost. Margin is decided at sale; a quote of ISK 28.4m has been open since 28 Aug. Outside the margin figures.",
+      "10.7m"
+     ]
+    ],
+    "job_groups": [
+     {
+      "prefix": "D-",
+      "no": "D-01–D-10",
+      "desc": "Ten time jobs, August",
+      "cust": "5 customers",
+      "start": "2026-08-01",
+      "end": "2026-08-31",
+      "label": "D jobs"
+     }
+    ],
+    "job_rows": [
+     {
+      "no": "V-2601",
+      "s": "bad",
+      "lbl": "Behind",
+      "prog": "cost",
+      "basis": "cost",
+      "prev": 0.232,
+      "note": "Milestone 4 (32.0m) was due on 30 Sep; installation about 40% done. Billed 41.0m ahead of progress. Margin was 23.2% before the new materials line on 8 Oct."
+     },
+     {
+      "no": "L-2601",
+      "s": "bad",
+      "lbl": "Behind",
+      "prog": "cost",
+      "basis": "cost",
+      "prev": null,
+      "note": "Stock fabrication without revenue. Testing and finishing (350 hours) was due to start on 7 Sep and has not started. End date 30 Oct."
+     },
+     {
+      "no": "S-2602",
+      "s": "bad",
+      "lbl": "Over",
+      "prog": "value",
+      "basis": "cost",
+      "prev": null,
+      "note": "Flagged over budget. Contract labour price 38% below the price list. The contract ended on 31 Aug but work was posted in October. Renegotiate.",
+      "pv": 1
+     },
+     {
+      "no": "S-2603",
+      "s": "warn",
+      "lbl": "Over fee",
+      "prog": "value",
+      "basis": "hours/fee",
+      "prev": null,
+      "note": "664 hours against about 571 covered by the fee Jan–Sep. 106 hours in September.",
+      "pv": 1.162
+     },
+     {
+      "no": "S-2601",
+      "s": "ok",
+      "lbl": "On plan",
+      "prog": "hrs",
+      "basis": "hours",
+      "prev": null,
+      "note": "Usage as needed, below the annual plan."
+     },
+     {
+      "no": "D-01–D-10",
+      "s": "ok",
+      "lbl": "Done",
+      "prog": "hrs",
+      "basis": "hours",
+      "prev": null,
+      "note": "All completed in August. Billable is based on estimated hours."
+     }
+    ],
+    "period": "Jan–Aug",
+    "quality": [
+     [
+      "h",
+      "!",
+      "Sales mostly posted through a journal",
+      "Revenue is posted in monthly totals to account 1110, not from sales invoices. Only 32% of revenue (417.1 of 1,295.6m) is on customers, so sales and margin by customer are incomplete.",
+      "32%"
+     ],
+     [
+      "h",
+      "!",
+      "Sales posted to only one job",
+      "Only S-2603 has sales entries on the job (9 × 1.2m). Other sales go through the journal on 1110, so job accounting shows neither invoiced nor actual job margin. Job margin is therefore estimated at completion.",
+      "14 jobs"
+     ],
+     [
+      "h",
+      "!",
+      "V-2601 fully billed at 72% progress",
+      "Four invoices to Svarfaðarver, total 148.0m (SR00108 22.0 · SR00109 26.0 · SR00089 50.0 · SR00110 50.0). Milestone 3 appears to have been billed twice on 23 Aug, and milestones 4–5 (50.0m) are not complete.",
+      "50.0m"
+     ],
+     [
+      "m",
+      "%",
+      "Materials posted as a fixed ratio",
+      "Purchases are posted as a fixed share of revenue. The fall in inputs from 42.9% to 37.8% of revenue is therefore not visible in the underlying entries and needs to be confirmed.",
+      "−5.1 pp"
+     ],
+     [
+      "m",
+      "∑",
+      "Hours in summary entries",
+      "S-2602: 5,000 hours in one entry on 30 Jun. V-2601: 700, 1,280 and 560 hours in single entries. Progress cannot be traced by month.",
+      "5,000 hrs"
+     ],
+     [
+      "m",
+      "⏱",
+      "Open job after end date",
+      "S-2602 ended on 31 Aug but is open, flagged over budget, and work was posted on 5–6 Oct.",
+      "1.5m"
+     ],
+     [
+      "m",
+      "·",
+      "D jobs without dates",
+      "Ten jobs created on 7 Sep without start and end dates. Billable lines are based on estimated hours (9.9m) but hours used are worth 8.3m.",
+      "1.5m"
+     ],
+     [
+      "m",
+      "Σ",
+      "WIP not calculated",
+      "All jobs use the WIP method “cost value” but WIP has never been posted. Work in progress and advance billing (V-2601) do not show in the balance sheet.",
+      "–"
+     ],
+     [
+      "l",
+      "i",
+      "Months not fully posted and 2025 as a full year",
+      "Sep and Oct lack materials and payroll and are outside the margin figures. 2025 exists only as a full year, so monthly comparison is against the average.",
+      "2 mo."
+     ],
+     [
+      "l",
+      "i",
+      "Billable lines on a cost account",
+      "S-2602: two billable lines on account 2190 (0.65m net). They should be on a revenue account.",
+      "0.65m"
+     ],
+     [
+      "l",
+      "i",
+      "Internal job on a customer",
+      "L-2601 is stock fabrication but recorded on K10 Svarfaðarver. Open quote of 28.4m to Grenivíkurver since 28 Aug.",
+      "28.4m"
+     ]
+    ],
+    "res_note_tail": "The lowest mark-up is on design hours; review the price list or cost.",
+    "risks": [
+     [
+      "h",
+      "!",
+      "V-2601 · billed 41.0m ahead of progress",
+      "The whole contract (148.0m) has been invoiced at 72% progress. Milestone 4 is behind and margin at completion has fallen to 21.5%.",
+      "41.0m"
+     ],
+     [
+      "h",
+      "!",
+      "S-2602 · Kaldhreinsun: 8.2% margin",
+      "Contract labour price 38% below the price list, flagged over budget, and work continued after the contract ended on 31 Aug.",
+      "5.2m"
+     ],
+     [
+      "m",
+      "↓",
+      "L-2601 · stock fabrication behind and without revenue",
+      "ISK 10.7m cost; testing not started. Margin is decided at sale (quote of 28.4m open since 28 Aug).",
+      "10.7m"
+     ],
+     [
+      "m",
+      "↓",
+      "S-2603 · hours above fixed fee",
+      "The fixed fee of ISK 1.2m a month covers about 63 hours; 106 hours in September.",
+      "41.6%"
+     ],
+     [
+      "l",
+      "·",
+      "1080 Temperature sensor below cost",
+      "List price ISK 44,000 against ISK 46,000 cost.",
+      "−4.5%"
+     ]
+    ],
+    "v1_note": "S-2601 as the annual plan"
+   },
+   "names": {
+    "Tilboðsverk": "Tender job",
+    "Lagersmíði": "Stock fabrication",
+    "Þjónustusamningur": "Service contract",
+    "Rammasamningur": "Framework agreement",
+    "Tímaverk": "Time job"
+   }
+  }
+ },
+ "disc": 0,
+ "_optional": [
+  "disc"
  ]
 }
